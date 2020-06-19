@@ -1,7 +1,7 @@
 InstallMethod(
 	ComponentsOfCommutativityRelationsOfSba,
 	"for special biserial algebras",
-	[IsSpecialBiserialAlgebra],
+	[ IsSpecialBiserialAlgebra ],
 	function ( sba )
 		local
 			is2nomialgens,	# Local function testing for 2-nomiality of
@@ -56,6 +56,54 @@ InstallMethod(
 			Apply( list, x -> CoefficientsAndMagmaElements( x ){ [1,3] } );
 			
 			return Immutable( list );
+		fi;
+	end
+);
+
+InstallMethod(
+	ComponentExchangeMapOfSba,
+	"for special biserial algebras"
+	[ IsSpecialBiserialAlgebra ],
+	function( sba )
+		local
+			complist,	# List of components of commutativity relations of
+						#  <sba>
+			func;		# Function variable
+		
+		if HasComponentExchangeMapOfSba( sba ) then
+			return ComponentExchangeMapOfSba( sba );
+
+		else
+			complist := ComponentsOfCommutativityRelationsOfSba( sba );
+			
+			func := function( elt )
+				local
+					found,
+					k,
+					pair;
+
+				found := false;
+				k := 1;
+				while ( (found = false) and ( k <= Length( complist ) ) ) do
+					if elt in complist[ k ] then
+						found := true;
+					else
+						k := k+1;
+					fi;
+				od;
+				
+				if found = false then
+					Print( "The given element\n", elt, "\nis not a component of a commutativity relation of the special biserial algebra\n", sba );
+					return fail;
+				else
+					pair := ShallowCopy( complist[ k ] );
+					Remove( pair, Position( pair, elt ) );
+				fi;
+				
+				return pair[ 1 ];
+			end;
+			
+			return func;
 		fi;
 	end
 );

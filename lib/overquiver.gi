@@ -110,12 +110,12 @@ InstallMethod(
 			
         quiver := QuiverOfQuiverPath( x );
 		
-		# Test first argument <x>
+        # Test first argument <x>
         if not Is1RegularQuiver( quiver ) then
             Error( "The given quiver\n", quiver, "\nis not 1-regular!" );
 			
         else
-			# Apply appropriate Z-action function
+            # Apply appropriate Z-action function
             func := 1RegQuivIntActFunc( quiver );
             return func( x, k );
         fi;
@@ -123,8 +123,138 @@ InstallMethod(
 );
 
 InstallMethod(
-    
+    2RegAugmentationOfQuiver,
+    "for connected special biserial (aka sub-2-regular) quivers",
+    [ IsQuiver ],
+    function( ground_quiv )
+    	local
+            arr_data,   # Arrow data, originally of <ground_quiv>
+            is2reg,     # Local function testing for 2-regularity
+            k,          # Integer variable
+            new_quiv    # Quiver variable
+            s,          # String variable
+            u, v        # Vertex variables
+            vert_data;  # Vertex data, originally of <ground_quiv>
+            
+        if Has2RegAugmentationOfQuiver( ground_quiv ) then
+            return 2RegAugmentationOfQuiver( ground_quiv );
+            
+        # Test input quiver
+        elif not IsSpecialBiserialQuiver( ground_quiv ) then
+            Error( "The given quiver\n", ground_quiv, "\nis not special ",
+             "biserial (ie, some vertex has in- or outdegree exceeding 2)");
+        elif not IsConnectedQuiver( ground_quiv ) then
+            Error( "The given quiver\n", ground_quiv, "\nis not connected" );
+            
+        else
+            # Write local function testing for 2-regularity
+            is2reg := function( Q )
+                local
+                    ans,        # Whether <Q> is 2-regular?; true until false
+                    x;          # Vertex variable
+
+                ans := true;
+                for x in VerticesOfQuiver( Q ) do
+                    if ( (InDegreeOfVertex(x) <> 2) or
+                     (OutDegreeOfVertex(x) <> 2) ) then
+                        ans := false;
+                    fi;
+                 od;
+                 return ans;
+            end;
+            
+            # Store data of <ground_quiv>
+            vert_data := List(
+                VerticesOfQuiver( ground_quiv ),
+                x -> String( x )
+            );
+            arr_data := List(
+                ArrowsOfQuiver( ground_quiv ),
+                x -> [ String( SourceOfPath(x) ), String( TargetOfPath(x) ),
+                    String( a ) ]
+            );
+           
+            # Iteratively augment quiver until 2-regular
+            new_quiv := ground_quiv;
+            k := 0;
+            
+            while not is2reg( new_quiv ) do
+                # Track how many arrows are being added
+                k := k + 1;
+                # Find first vertex with outdeg < 2
+                u := String(
+                 First(
+                  VerticesOfQuiver( new_quiv ),
+                  x -> OutDegreeOfVertex(x) <> 2
+                 )
+                );
+                # Find first vertex with indeg < 2
+                v := String(
+                 First(
+                  VerticesOfQuiver( new_quiv ),
+                  x -> InDegreeOfVertex(x) <> 2
+                 )
+                );
+                # Write name for augmenting arrow
+                s := Concatenation(
+                    [ "augarr", String( k ) ]
+                );
+                # Record data for new arrow
+                Append( arr_data, [ [ x, y, s ] ] );
+                # Construct augmented quiver
+                new_quiv := Quiver( vert_data, arr_data );
+            od;
+            
+            # Make <new_quiv> remember it is a 2-regular augmentation (and of
+            #  whom)
+            SetIs2RegAugmentationOfSbQuiver( new_quiv, true );
+            SetOriginalSbQuiverOf2RegAugmentation( new_quiv, ground_quiv );
+
+            # Make vertices of <new_quiv> aware of their counterparts in
+            # <ground_quiv>, and vice versa
+            k := 1;
+            while k <= Length( VerticesOfQuiver( ground_quiv ) ) do
+                VerticesOfQuiver( new_quiv )[k]!.2RegAugPathOf :=
+                 VerticesOfQuiver( ground_quiv )[k];
+                VerticesOfQuiver( ground_quiv )[k].2RegAugPath :=
+                 VerticesOfQuiver( new_quiv )[k];
+                k := k + 1;
+            od;
+            
+            # Make arrows of <new_quiv> aware of their counterparts in
+            #  <ground_ground>, and vice versa
+            k := 1;
+            while k <= Length( ArrowsOfQuiver( ground_quiv ) ) do
+                ArrowsOfQuiver( new_quiv )[k]!.2RegAugPathOf :=
+                 ArrowsOfQuiver( ground_quiv )[k];
+                ArrowsOfQuiver( ground_quiv )[k]!.2RegAugPath :=
+                 ArrowsOfQuiver( new_quiv )[k];
+                k := k + 1;
+            od;
+            
+            # Make augmented arrows know they have no counterpart in
+            #  <ground_quiv>
+            while k <= Length( ArrowsOfQuiver( new_quiv ) ) do
+                ArrowsOfQuiver( new_quiv )[k].2RegAugPathOf :=
+                 Zero( ground_quiv );
+                k := k + 1;
+            od;
+            
+            # Make zero path of <new_quiv> know its counterpart in
+            #  <ground_quiv>, and vice versa
+            Zero( new_quiv )!.2RegAugPathOf := Zero( ground_quiv );
+            Zero( ground_quiv )!.2RegAugPath := Zero( new_quiv );
+            
+            # Return 2-regular augmentation <new_quiv> of <ground_quiv>. Note
+            #  that if <ground_quiv> was 2-regular already then <new_quiv>
+            #  and <ground_quiv> are identical.
+            return new_quiv;
+        fi;
+    end
 );
-										
+
+# Is2RegAugmentationOfSbQuiver
+# OriginalSbQuiverOf2RegAugmentation
+
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

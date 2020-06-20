@@ -263,10 +263,12 @@ InstallMethod(
         
         # When not already decided, print message and return <false>
         else
-            Print( "This property only recognizes 2-regular augmentations ",
-             "constructed using the <2RegAugmentationOfQuiver> operation. ",
+#########1#########2#########3#########4#########5#########6#########7#########
+            Print( "The property <Is2RegAugmentationOfSbQuiver> only",
+             " recognizes 2-regular augmentations constructed using the",
+             " <2RegAugmentationOfQuiver> operation.\n",
              "Contact the maintainer of the <sbstrips> package if you believe",
-             " there is an error here.\n");
+             " there is an error here.\n" );
             return false;
         fi;
     end;
@@ -280,8 +282,8 @@ InstallMethod(
         if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
             return OriginalSbQuiverOf2RegAugmentation( quiver );
         else
-            Print( "This attribute only recogniszes 2-regular augmentations ",
-             "constructing using the <2RegAugmentationOfQuiver> operation. ",
+            Print( "This attribute only recognizes 2-regular augmentations ",
+             "constructing using the <2RegAugmentationOfQuiver> operation.\n",
              "Contact the maintainer of the <sbstrips> package if you believe",
              " there is an error here.\n" );
             return fail;
@@ -289,8 +291,59 @@ InstallMethod(
     end
 );
 
-# Is2RegAugmentationOfSbQuiver
-# OriginalSbQuiverOf2RegAugmentation
+InstallMethod(
+    RetractionOf2RegAugmentation,
+    "for 2-regular augmentations of special biserial quivers",
+    [ IsSpecialBiserialQuiver ],
+    function( quiver )
+        local
+            func,       # Function variable
+            orig_quiv;  # Quiver of which <quiver> is the 2-reg augmentation
+
+        if HasRetractionOf2RegAugmentation( quiver ) then
+            return RetractionOf2RegAugmentation( quiver );
+
+        # Test validity of <quiver>; if found wanting then return a function
+        #  that returns a warning message each time alongside <fail>
+        elif not Is2RegAugmentationOfSbQuiver( quiver ) then
+            Print( "The given quiver\n", quiver, "\nhas not been constructed"
+             " using the <2RegAugmentationOfQuiver> operation.\n");
+             
+             func := function( input )
+                Print( "You are calling the retraction of a 2-regular",
+                 " augmentation map that doesn't exist; something's gone"
+                 " wrong!\n" )
+                return fail
+             end;
+             
+             return func;
+
+        else
+            # Construct retraction function
+            func := function( path )
+                local
+                    walk;   #
+                # Check input
+                if not path in quiver then
+                    Error( "The given path\n", path, "\n does not belong to",
+                     " the 2-regular augmentation\n", quiver );
+
+                # Zero or trivial paths know which ground path they lift
+                elif path = Zero( quiver ) or IsQuiverVertex( path ) then
+                    return path!.2RegAugPathOf;
+
+                # Paths of positive lengths have walks, each constituent arrow
+                #  of which knows the ground arrow it lifts
+                else
+                    walk := List( WalkOfPath( path ), x -> x!.2RegAugPathOf );
+                    return Product( walk );
+                fi;
+            end;
+            
+            return func;
+        fi;
+    end
+);
 
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

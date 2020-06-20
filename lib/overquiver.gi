@@ -253,6 +253,42 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    Is2RegAugmentationOfSbQuiver,
+    "for 2-regular augmentation",
+    [ IsSpecialBiserialQuiver ]
+    function( quiver )
+        if HasIs2RegAugmentationOfSbQuiver( quiver ) then
+            return Is2RegAugmentationOfSbQuiver( quiver );
+        
+        # When not already decided, print message and return <false>
+        else
+            Print( "This property only recognizes 2-regular augmentations ",
+             "constructed using the <2RegAugmentationOfQuiver> operation. ",
+             "Contact the maintainer of the <sbstrips> package if you believe",
+             " there is an error here.\n");
+            return false;
+        fi;
+    end;
+);
+
+InstallMethod(
+    OriginalSbQuiverOf2RegAugmentation,
+    "for 2-regular augmentations of special biserial quivers",
+    [ IsSpecialBiserialQuiver ],
+    function( quiver )
+        if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
+            return OriginalSbQuiverOf2RegAugmentation( quiver );
+        else
+            Print( "This attribute only recogniszes 2-regular augmentations ",
+             "constructing using the <2RegAugmentationOfQuiver> operation. ",
+             "Contact the maintainer of the <sbstrips> package if you believe",
+             " there is an error here.\n" );
+            return fail;
+        fi;
+    end
+);
+
 # Is2RegAugmentationOfSbQuiver
 # OriginalSbQuiverOf2RegAugmentation
 

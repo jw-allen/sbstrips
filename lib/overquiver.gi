@@ -263,7 +263,7 @@ InstallMethod(
         
         # When not already decided, print message and return <false>
         else
-#########1#########2#########3#########4#########5#########6#########7#########
+
             Print( "The property <Is2RegAugmentationOfSbQuiver> only",
              " recognizes 2-regular augmentations constructed using the",
              " <2RegAugmentationOfQuiver> operation.\n",
@@ -341,6 +341,65 @@ InstallMethod(
             end;
             
             return func;
+        fi;
+    end
+);
+
+InstallMethod(
+    CompatibleTrackPermutationOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            2reg,                   # 2-regular augmentation of the ground
+                                    #  quiver of <sba>
+            ideal,                  # Defining ideal of <sba>
+            in1, in2, out1, out2,   # Arrow variables
+            list,                   # List variable
+            pa,                     # Path algebra of which <sba> is a quotient
+            v;                      # Vertex variable
+
+        if HasCompatibleTrackPermutationOfSbAlg( sba ) then
+            return CompatibleTrackPermutationOfSbAlg( sba );
+
+        else
+            # Write local function that turns a path of the 2-regular
+            #  augmentation into its residue in <sba>
+            pa := OriginalPathAlgebra( sba );
+            2reg := 2RegAugmentationOfSbQuiver( QuiverOfPathAlgebra( pa ) );
+            in_pa := function( path )
+                return ElementOfPathAlgebra(
+                 pa,
+                 RetractionOf2RegAugmentation( path )
+                 );
+            end;
+
+            # For each vertex in turn, exhaust the arrows incident to that
+            #  vertex using a pair of paths of length 2. There are only two
+            #  possible pairs to chose from for each vertex. Use <list> to keep
+            #  track of (the walks of) those length 2 paths chosen.
+
+            list := [];
+            ideal := IdealOfQuotient( sba );
+
+            for v in verts do
+                in1 := IncomingArrowsOfVertex( v )[1];
+                in2 := IncomingArrowsOfVertex( v )[2];
+                out1 := OutgoingArrowsOfVertex( v )[1];
+                out2 := OutgoingArrowsOfVertex( v )[2];
+
+                if not ( in_pa( in1 ) * in_pa( out1 ) ) in ideal then
+                    Append( list,
+                     [ Immutable( [ in1, out1 ] ), Immutable( [ in2, out2 ] ) ]
+                     );
+                 else
+                    Append( list,
+                     [ Immutable( [ in1, out2 ] ), Immutable( [ in2, out1 ] ) ]
+                     );
+                 fi;
+            od;
+            
+            return Immutable( list );
         fi;
     end
 );

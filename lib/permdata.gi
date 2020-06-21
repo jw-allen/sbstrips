@@ -93,7 +93,9 @@ InstallMethod(
 				od;
 				
 				if found = false then
-					Print( "The given element\n", elt, "\nis not a component of a commutativity relation of the special biserial algebra\n", sba );
+					Print( "The given element\n", elt, "\nis not a component",
+                     " of a commutativity relation of the special biserial",
+                     " algebra\n", sba );
 					return fail;
 				else
 					pair := ShallowCopy( complist[ k ] );
@@ -107,5 +109,18 @@ InstallMethod(
 		fi;
 	end
 );
+
+# Permissible data
+#  LinDepofSbAlg
+#  LinIndOfSbAlg
+
+# Source encoding
+#  Integer sequence } can also be inferred as quotient and remainder modulo 2
+#  Bit sequence     }  of some integer
+#
+# Target encoding
+#  Integer sequence } can also be inferred as quotient and remainder modulo 2
+#  Bit sequence     }  of some integer
+
 
 #########1#########2#########3#########4#########5#########6#########7#########

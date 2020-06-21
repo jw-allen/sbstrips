@@ -404,5 +404,107 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    OverquiverOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            2reg,           # 2-regular augmentation of <ground_quiv>
+            2reg_arrs,      # Arrows of <2reg>
+            a,              # Arrow variable
+            arr_data,       # Data yielding arrows of <oquiv>
+            ground_quiv,    # Ground quiver of <sba>
+            in_arr_pos,     # Local function
+            k, N,           # Integer variables
+            oarr_str,       # Naming function
+            oarrs,          # Arrows of <oquiv>
+            oquiv,          # Overquiver
+            overts,         # Vertices of <oquiv>
+            out_arr_pos,    # Local function
+            part;           # Compatible track permutation of <sba>
+        if HasOverquiverOfSbAlg( sba ) then
+            return OverquiverOfSbAlg( sba );
+
+        else
+            part := CompatibleTrackPermutationOfSbAlg( sba );
+            N := Length( part );
+            
+            ground_quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+            2reg := 2RegAugmentationOfQuiver( ground_quiv );
+            2reg_arrs := ArrowsOfQuiver( 2reg );
+
+            # Vertices of overquiver correspond to entries of <part>. For
+            #  convenience, entries of <part> will be identified with their
+            #  indices
+
+            # <arr> is the incoming arrow in some path in <part>. Write a local
+            #  function finding the entry index of that path in <part>
+            in_arr_pos := function( arr )
+                local
+                    k;  integer variable
+                if part[k][1] = arr then
+                    return k;
+                else
+                    k := k + 1;
+                fi;
+            end;
+
+            # Similarly but for outcoming arrow
+            out_arr_pos := function( arr )
+                local
+                    k;  integer variable
+                if part[k][2] = arr then
+                    return k;
+                else
+                    k := k + 1;
+                fi;
+            end;
+
+            # Write function that names lifts of arrows
+            oarr_str := function( arr )
+                return Concatenation( [ String( arr ), "_over" ] );
+            end;
+            
+            # Arrows of <2reg> lift to arrows of the overquiver. An arrow <a>
+            #  points from [?,a] to [a,?] (or, rather, the vertices
+            #  corresponding to those length 2 paths)
+
+            arr_data := [];
+            for a in 2reg_arrs do
+                Append( arr_data,
+                 [ [ out_arr_pos( a ), in_arr_pos( a ), oarr_str( a ) ] ]
+                 );
+            od;
+            
+            # Create overquiver <oquiv>
+            oquiv := Quiver( N, arr_data );
+            
+            # Load vertices with data
+            k := 1;
+            overts := VerticesOfQuiver( oquiv );
+            while k <= N do
+                overts[k]!.LiftOf := TargetOfPath( parts[k][1] );
+                k := k + 1;
+            od;
+            
+            # Load arrows with data
+            k := 1;
+            oarrs := ArrowsOfQuiver( oquiv );
+            while k <= Length( oarrs ) do
+                oarrs[k]!.LiftOf ArrowsOfQuiver( ground_quiv )[k];
+                k := k+1;
+            od;
+            
+            # Load quiver with data
+            SetIsOverquiver( oquiv, true );
+            SetSbAlgOfOverquiver( oquiv, sba );
+            
+            # Return <oquiv>
+            return over_quiv;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

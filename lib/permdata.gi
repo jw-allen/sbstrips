@@ -1,5 +1,5 @@
 InstallMethod(
-	ComponentsOfCommutativityRelationsOfSba,
+	ComponentsOfCommutativityRelationsOfSbAlg,
 	"for special biserial algebras",
 	[ IsSpecialBiserialAlgebra ],
 	function ( sba )
@@ -12,8 +12,8 @@ InstallMethod(
 			list,			# List of components of commutativity relations
 			rels;			# Defining relations of <sba>
 			
-		if HasComponentsOfCommutativityRelationsOfSba( sba ) then
-			return ComponentsOfCommutativityRelationsOfSba( sba );
+		if HasComponentsOfCommutativityRelationsOfSbAlg( sba ) then
+			return ComponentsOfCommutativityRelationsOfSbAlg( sba );
 			
 		else
 			# Write functions answering whether an element of a path algebra is
@@ -74,7 +74,7 @@ InstallMethod(
 			return ComponentExchangeMapOfSba( sba );
 
 		else
-			complist := ComponentsOfCommutativityRelationsOfSba( sba );
+			complist := ComponentsOfCommutativityRelationsOfSbAlg( sba );
 			
 			func := function( elt )
 				local
@@ -110,8 +110,41 @@ InstallMethod(
 	end
 );
 
+InstallMethod(
+    LinDepOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            a,      # Arrow variable
+            comps,  # Components of commutativity relations defining <sba>
+            k,      # Integer variable
+            list,   # List of linearly-dependent paths
+            oarrs,  # Arrows of the overquiver of <sba>
+            p,      # Path variable
+            walk;   # List variable for walks of paths
+        if HasLinDepOfSbAlg( sba ) then
+            return LinDepOfSbAlg( sba );
+        else
+            comps := ComponentsOfCommutativityRelationsOfSbAlg( sba );
+            oarrs := ArrowsOfQuiver( OverquiverOfSbAlg( sba ) );
+            
+            list := [];
+            for p in comps do
+                walk := ShallowCopy( WalkOfPath( p ) );
+                for k in [1..Length( walk )] do
+                    walk[k] := First( oarrs, x -> x!.LiftOf = walk[k] );
+                od;
+                Append( list, Product( walk ) );
+            od;
+            
+            return list;
+        fi;
+    end
+);
+
 # Permissible data
-#  LinDepofSbAlg
+#  LinDepofSbAlg -- DONE
 #  LinIndOfSbAlg
 
 # Source encoding

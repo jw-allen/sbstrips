@@ -40,7 +40,7 @@ InstallMethod(
             #   i+1 --> i
             # and arrows are like
             #   --{a+1}--> vertex --{a}-->
-            func := function( x, K );
+            func := function( x, K )
                 local
                     k,	# Integer variable
                     y;	# Quiver generator variable
@@ -125,7 +125,7 @@ InstallMethod(
         elif len = 0 then
             return vert;
         else
-            a := IncomingArrowsOfVertex( vert )[1]
+            a := IncomingArrowsOfVertex( vert )[1];
             walk := List( [1..len], x -> 1RegQuivIntAct( a, -1*x ) );
             return Product( walk );
         fi;

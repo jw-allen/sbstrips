@@ -395,6 +395,7 @@ InstallMethod(
             # Load quiver with data
             SetIsOverquiver( oquiv, true );
             SetSbAlgOfOverquiver( oquiv, sba );
+            oquiv!.2Reg := 2reg;
 
             # Return <oquiv>
             return over_quiv;

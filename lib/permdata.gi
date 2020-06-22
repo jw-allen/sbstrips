@@ -194,9 +194,19 @@ InstallMethod(
     end
 );
 
-# Permissible data
-#  LinDepofSbAlg -- DONE
-#  LinIndOfSbAlg -- DONE
+InstallMethod(
+    PermDataOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        if HasPermDataOfSbAlg( sba ) then
+            return PermDataOfSbAlg( sba );
+        else
+            return Immutable( [ LinIndOfSbAlg( sba ), LinDepOfSbAlg( sba ) ] );
+        fi;
+    end
+);
+
 
 # Source encoding
 #  Integer sequence } can also be inferred as quotient and remainder modulo 2
@@ -207,5 +217,6 @@ InstallMethod(
 #  Bit sequence     }  of some integer
 
 
+#########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

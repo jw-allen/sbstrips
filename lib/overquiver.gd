@@ -1,12 +1,12 @@
-DeclareProperty( "Is1RegularQuiver", IsQuiver );
+# DeclareProperty( "Is1RegularQuiver", IsQuiver );
 
 DeclareOperation( "QuiverOfQuiverPath", [ IsPath ] );
 
-DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
+# DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 
-DeclareOperation( "1RegQuivIntAct" [ IsPath, IsInt ] );
+# DeclareOperation( "1RegQuivIntAct" [ IsPath, IsInt ] );
 
-DeclareAttribute( "2RegAugmentationOfQuiver" IsQuiver );
+DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 
 DeclareProperty( "Is2RegAugmentationOfSbQuiver", IsQuiver );
 

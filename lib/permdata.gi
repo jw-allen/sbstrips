@@ -207,6 +207,25 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    SourceEncodingOfPermDataOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            overts,     # Vertices of the overquiver of <sba>
+            perm_data;  # Permissible data of <sba>
+
+        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
+            return SourceEncodingOfPermDataOfSbAlg( sba );
+        else
+            perm_data := PermDataOfSbAlg( sba );
+            overts := VerticesOfQuiver( OverquiveOfSba( sba ) );
+            
+            #### RESUME FROM HERE
+        fi;
+    end;
+);
 
 # Source encoding
 #  Integer sequence } can also be inferred as quotient and remainder modulo 2

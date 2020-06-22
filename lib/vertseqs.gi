@@ -11,9 +11,14 @@ InstallMethod(
         else
             pfn := FamilyObj( Zero( quiver ) )!.NAME;
             if Length( pfn ) < 20 then
-                Print( "The path family for this quiver\n", quiver, "\nhas an unexpected name!\n Please contact the maintainer of the sbstrips package.\n" );
+
+                Print( "The path family for this quiver\n", quiver, "\nhas an",
+                 " unexpected name!\n Please contact the maintainer of the",
+                 " sbstrips package.\n" );
             elif not pfn{[1..19]} = "FamilyOfPathsWithin" then
-                Print( "The path family for this quiver\n", quiver, "\nhas an unexpected name!\n Please contact the maintainer of the sbstrips package.\n" );
+                Print( "The path family for this quiver\n", quiver, "\nhas an",
+                " unexpected name!\n Please contact the maintainer of the",
+                " sbstrips package.\n" );
             else
                 fam := NewFamily(
                  Concatenation(
@@ -43,3 +48,5 @@ InstallMethod(
         od;
     end
 );
+
+#########1#########2#########3#########4#########5#########6#########7#########

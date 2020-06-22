@@ -4,13 +4,13 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function ( sba )
         local
-            is2nomialgens,	# Local function testing for 2-nomiality of
+            is2nomialgens,  # Local function testing for 2-nomiality of
                             #  presentation
-            iscommurel,		# Local function testing for a commutativity
+            iscommurel,     # Local function testing for a commutativity
                             #  relation
-            ismonrel,		# Local function testing for a monomial relation
-            list,			# List of components of commutativity relations
-            rels;			# Defining relations of <sba>
+            ismonrel,       # Local function testing for a monomial relation
+            list,           # List of components of commutativity relations
+            rels;           # Defining relations of <sba>
 
         if HasComponentsOfCommutativityRelationsOfSbAlg( sba ) then
             return ComponentsOfCommutativityRelationsOfSbAlg( sba );
@@ -66,9 +66,9 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            complist,	# List of components of commutativity relations of
+            complist,   # List of components of commutativity relations of
                         #  <sba>
-            func;		# Function variable
+            func;       # Function variable
 
         if HasComponentExchangeMapOfSba( sba ) then
             return ComponentExchangeMapOfSba( sba );

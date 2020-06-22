@@ -1,5 +1,5 @@
 InstallMethod(
-    Is1RegularQuiver,
+    Is1RegQuiver,
     "for quivers",
     [IsQuiver],
     function( quiver )
@@ -32,7 +32,7 @@ InstallMethod(
             return 1RegQuivIntActionFunction( quiver );
 		
         # Test input
-        elif not Is1RegularQuiver( quiver ) then
+        elif not Is1RegQuiver( quiver ) then
             Error( "The given quiver\n", quiver, "\nis not 1-regular!" );
 
         else
@@ -97,7 +97,7 @@ InstallMethod(
         quiver := QuiverOfQuiverPath( x );
 		
         # Test first argument <x>
-        if not Is1RegularQuiver( quiver ) then
+        if not Is1RegQuiver( quiver ) then
             Error( "The given quiver\n", quiver, "\nis not 1-regular!" );
 			
         else
@@ -117,7 +117,7 @@ InstallMethod(
             a,      # Arrow variable
             l,      # Integer variable
             walk;   # List
-        if not Is1RegularQuiver( QuiverOfQuiverQuiverPath( vert ) ) then
+        if not Is1RegQuiver( QuiverOfQuiverQuiverPath( vert ) ) then
             Error( "The given vertex\n", vert, "\ndoes not belong to a 1-",
              "regular quiver!\n" );
         elif len < 0 then

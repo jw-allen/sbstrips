@@ -1,2 +1,2 @@
 DeclareRepresentation( "IsVertexIndexedSequenceRep", IsAttributeStoringRep,
- [ indices, kind_of_seq, terms ] );
+ [ "indices", "kind_of_seq", "terms" ] );

@@ -1,6 +1,6 @@
 # DeclareProperty( "Is1RegularQuiver", IsQuiver );
 
-DeclareOperation( "QuiverOfQuiverPath", [ IsPath ] );
+# DeclareOperation( "QuiverOfQuiverPath", [ IsPath ] );
 
 # DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 
@@ -8,7 +8,7 @@ DeclareOperation( "QuiverOfQuiverPath", [ IsPath ] );
 
 DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 
-DeclareProperty( "Is2RegAugmentationOfSbQuiver", IsQuiver );
+DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
 
 DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 
@@ -20,6 +20,8 @@ DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
 DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareProperty( "IsOverquiver", IsQuiver );
+
+DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 
 DeclareAttribute( "SbAlgOfOverquiver", IsSpecialBiserialAlgebra );
 

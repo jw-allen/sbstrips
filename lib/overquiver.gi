@@ -1,18 +1,4 @@
 InstallMethod(
-    QuiverOfQuiverPath,
-    "for paths in a quiver",
-    [IsPath],
-    function( path )
-
-    # Access original quiver from <path>'s family
-    # We isolate this utility from other functions in case future versions of
-    #  QPA operate differently
-
-    return FamilyObj( path )!.quiver;
-    end
-);
-
-InstallMethod(
     2RegAugmentationOfQuiver,
     "for connected special biserial (aka sub-2-regular) quivers",
     [ IsQuiver ],

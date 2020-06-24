@@ -7,9 +7,9 @@ InstallMethod(
             arr_data,   # Arrow data, originally of <ground_quiv>
             is2reg,     # Local function testing for 2-regularity
             k,          # Integer variable
-            new_quiv    # Quiver variable
+            new_quiv,   # Quiver variable
             s,          # String variable
-            u, v        # Vertex variables
+            u, v,       # Vertex variables
             vert_data;  # Vertex data, originally of <ground_quiv>
 
         if Has2RegAugmentationOfQuiver( ground_quiv ) then
@@ -47,7 +47,7 @@ InstallMethod(
             arr_data := List(
                 ArrowsOfQuiver( ground_quiv ),
                 x -> [ String( SourceOfPath(x) ), String( TargetOfPath(x) ),
-                    String( a ) ]
+                    String( x ) ]
             );
 
             # Iteratively augment quiver until 2-regular
@@ -57,14 +57,14 @@ InstallMethod(
             while not is2reg( new_quiv ) do
                 # Track how many arrows are being added
                 k := k + 1;
-                # Find first vertex with outdeg < 2
+                # Find first vertex with outdegree < 2
                 u := String(
                  First(
                   VerticesOfQuiver( new_quiv ),
                   x -> OutDegreeOfVertex(x) <> 2
                  )
                 );
-                # Find first vertex with indeg < 2
+                # Find first vertex with indegree < 2
                 v := String(
                  First(
                   VerticesOfQuiver( new_quiv ),
@@ -76,14 +76,14 @@ InstallMethod(
                     [ "augarr", String( k ) ]
                 );
                 # Record data for new arrow
-                Append( arr_data, [ [ x, y, s ] ] );
+                Append( arr_data, [ [ u, v, s ] ] );
                 # Construct augmented quiver
                 new_quiv := Quiver( vert_data, arr_data );
             od;
 
             # Make <new_quiv> remember it is a 2-regular augmentation (and of
             #  whom)
-            SetIs2RegAugmentationOfSbQuiver( new_quiv, true );
+            SetIs2RegAugmentationOfQuiver( new_quiv, true );
             SetOriginalSbQuiverOf2RegAugmentation( new_quiv, ground_quiv );
 
             # Make vertices of <new_quiv> aware of their counterparts in
@@ -92,7 +92,7 @@ InstallMethod(
             while k <= Length( VerticesOfQuiver( ground_quiv ) ) do
                 VerticesOfQuiver( new_quiv )[k]!.2RegAugPathOf :=
                  VerticesOfQuiver( ground_quiv )[k];
-                VerticesOfQuiver( ground_quiv )[k].2RegAugPath :=
+                VerticesOfQuiver( ground_quiv )[k]!.2RegAugPath :=
                  VerticesOfQuiver( new_quiv )[k];
                 k := k + 1;
             od;
@@ -111,7 +111,7 @@ InstallMethod(
             # Make augmented arrows know they have no counterpart in
             #  <ground_quiv>
             while k <= Length( ArrowsOfQuiver( new_quiv ) ) do
-                ArrowsOfQuiver( new_quiv )[k].2RegAugPathOf :=
+                ArrowsOfQuiver( new_quiv )[k]!.2RegAugPathOf :=
                  Zero( ground_quiv );
                 k := k + 1;
             od;
@@ -130,30 +130,30 @@ InstallMethod(
 );
 
 InstallMethod(
-    Is2RegAugmentationOfSbQuiver,
+    Is2RegAugmentationOfQuiver,
     "for 2-regular augmentation",
-    [ IsSpecialBiserialQuiver ]
+    [ IsQuiver ],
     function( quiver )
-        if HasIs2RegAugmentationOfSbQuiver( quiver ) then
-            return Is2RegAugmentationOfSbQuiver( quiver );
+        if HasIs2RegAugmentationOfQuiver( quiver ) then
+            return Is2RegAugmentationOfQuiver( quiver );
 
         # When not already decided, print message and return <false>
         else
 
-            Print( "The property <Is2RegAugmentationOfSbQuiver> only",
+            Print( "The property <Is2RegAugmentationOfQuiver> only",
              " recognizes 2-regular augmentations constructed using the",
              " <2RegAugmentationOfQuiver> operation.\n",
              "Contact the maintainer of the <sbstrips> package if you believe",
              " there is an error here.\n" );
             return false;
         fi;
-    end;
+    end
 );
 
 InstallMethod(
     OriginalSbQuiverOf2RegAugmentation,
     "for 2-regular augmentations of special biserial quivers",
-    [ IsSpecialBiserialQuiver ],
+    [ IsQuiver ],
     function( quiver )
         if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
             return OriginalSbQuiverOf2RegAugmentation( quiver );
@@ -170,7 +170,7 @@ InstallMethod(
 InstallMethod(
     RetractionOf2RegAugmentation,
     "for 2-regular augmentations of special biserial quivers",
-    [ IsSpecialBiserialQuiver ],
+    [ IsQuiver ],
     function( quiver )
         local
             func,       # Function variable
@@ -181,15 +181,15 @@ InstallMethod(
 
         # Test validity of <quiver>; if found wanting then return a function
         #  that returns a warning message each time, alongside <fail>
-        elif not Is2RegAugmentationOfSbQuiver( quiver ) then
-            Print( "The given quiver\n", quiver, "\nhas not been constructed"
+        elif not Is2RegAugmentationOfQuiver( quiver ) then
+            Print( "The given quiver\n", quiver, "\nhas not been constructed",
              " using the <2RegAugmentationOfQuiver> operation.\n");
 
              func := function( input )
                 Print( "You are calling the retraction of a 2-regular",
-                 " augmentation map that doesn't exist; something's gone"
-                 " wrong!\n" )
-                return fail
+                 " augmentation map that doesn't exist; something's gone",
+                 " wrong!\n" );
+                return fail;
              end;
 
              return func;
@@ -206,7 +206,7 @@ InstallMethod(
                      " the 2-regular augmentation\n", quiver );
 
                 # Zero or trivial paths know which ground path they lift
-                elif path = Zero( quiver ) or IsQuiverVertex( path ) then
+                elif ( path = Zero( quiver ) ) or ( IsQuiverVertex( path ) ) then
                     return path!.2RegAugPathOf;
 
                 # Paths of positive lengths have walks, each constituent arrow
@@ -232,6 +232,7 @@ InstallMethod(
                                     #  quiver of <sba>
             ideal,                  # Defining ideal of <sba>
             in1, in2, out1, out2,   # Arrow variables
+            in_pa,                  # Local function
             list,                   # List variable
             pa,                     # Path algebra of which <sba> is a quotient
             v;                      # Vertex variable
@@ -243,11 +244,11 @@ InstallMethod(
             # Write local function that turns a path of the 2-regular
             #  augmentation into its residue in <sba>
             pa := OriginalPathAlgebra( sba );
-            2reg := 2RegAugmentationOfSbQuiver( QuiverOfPathAlgebra( pa ) );
+            2reg := 2RegAugmentationOfQuiver( QuiverOfPathAlgebra( pa ) );
             in_pa := function( path )
                 return ElementOfPathAlgebra(
                  pa,
-                 RetractionOf2RegAugmentation( path )
+                 RetractionOf2RegAugmentation( 2reg )( path )
                  );
             end;
 
@@ -259,7 +260,7 @@ InstallMethod(
             list := [];
             ideal := IdealOfQuotient( sba );
 
-            for v in verts do
+            for v in VerticesOfQuiver( 2reg ) do
                 in1 := IncomingArrowsOfVertex( v )[1];
                 in2 := IncomingArrowsOfVertex( v )[2];
                 out1 := OutgoingArrowsOfVertex( v )[1];
@@ -275,6 +276,8 @@ InstallMethod(
                      );
                  fi;
             od;
+            
+            Sort( list );
 
             return Immutable( list );
         fi;
@@ -299,7 +302,7 @@ InstallMethod(
             oquiv,          # Overquiver
             overts,         # Vertices of <oquiv>
             out_arr_pos,    # Local function
-            part;           # Compatible track permutation of <sba>
+            part,           # Compatible track permutation of <sba>
             ret;            # Retraction of <2reg> to <ground_quiv>
         if HasOverquiverOfSbAlg( sba ) then
             return OverquiverOfSbAlg( sba );
@@ -321,23 +324,29 @@ InstallMethod(
             #  function finding the entry index of that path in <part>
             in_arr_pos := function( arr )
                 local
-                    k;  integer variable
-                if part[k][1] = arr then
-                    return k;
-                else
-                    k := k + 1;
-                fi;
+                    k;  #integer variable
+                k := 1;
+                for k in [1..Length( part )] do
+                    if part[k][1] = arr then
+                        return k;
+                    else
+                        k := k + 1;
+                    fi;
+                od;
             end;
 
             # Similarly but for outcoming arrow
             out_arr_pos := function( arr )
                 local
-                    k;  integer variable
-                if part[k][2] = arr then
-                    return k;
-                else
-                    k := k + 1;
-                fi;
+                    k;  # integer variable
+                k := 1;
+                for k in [1..Length( part )] do
+                    if part[k][2] = arr then
+                        return k;
+                    else
+                        k := k + 1;
+                    fi;
+                od;
             end;
 
             # Write function that names lifts of arrows
@@ -363,7 +372,7 @@ InstallMethod(
             k := 1;
             overts := VerticesOfQuiver( oquiv );
             while k <= N do
-                overts[k]!.LiftOf := TargetOfPath( parts[k][1] );
+                overts[k]!.LiftOf := TargetOfPath( part[k][1] );
                 k := k + 1;
             od;
 
@@ -384,7 +393,7 @@ InstallMethod(
             oquiv!.2Reg := 2reg;
 
             # Return <oquiv>
-            return over_quiv;
+            return oquiv;
         fi;
     end
 );
@@ -422,7 +431,7 @@ InstallMethod(
                     return fail;
                     
                 # Zero or stationary paths know the ground paths they lift
-                elif path = Zero( oquiv ) or IsVertex( path ) then
+                elif path = Zero( oquiv ) or IsQuiverVertex( path ) then
                     return Zero( oquiv )!.LiftOf;
                     
                 # Paths of positive length lift the product of the paths lifted
@@ -435,7 +444,7 @@ InstallMethod(
             
             return cont;
         fi;
-    end;
+    end
 );
 
 #########1#########2#########3#########4#########5#########6#########7#########

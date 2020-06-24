@@ -2,10 +2,10 @@ DeclareProperty( "Is1RegQuiver", IsQuiver );
 
 DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 
-DeclareGlobalFunction( "1RegQuivIntAct" );
+DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 
-DeclareGlobalFunction( "PathBySourceAndLength" );
+DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 
-DeclareGlobalFunction( "PathByTargetAndLength" );
+DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 
 #########1#########2#########3#########4#########5#########6#########7#########

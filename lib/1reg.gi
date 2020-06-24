@@ -52,31 +52,31 @@ InstallMethod(
                 elif not IsInt( K ) then
                     Error( "The second argument\n", K,
                      "\nmust be an integer" );
-            	 
+
                 else
-                    x := y;
+                    y := x;
                     k := K;
 					
                     while k <> 0 do
-                        if IsQuiverVertex( x ) and k > 0 then
-                            x := TargetOfPath( OutgoingArrowsOfVertex(x)[1] );
+                        if IsQuiverVertex( y ) and k < 0 then
+                            y := TargetOfPath( OutgoingArrowsOfVertex(y)[1] );
+                            k := k + 1;
+							
+                        elif IsQuiverVertex( y ) and k > 0 then
+                            y := SourceOfPath( IncomingArrowsOfVertex(y)[1] );
                             k := k - 1;
 							
-                        elif IsQuiverVertex( x ) and k < 0 then
-                            x := SourceOfPath( IncomingArrowsOfVertex(x)[1] );
+                        elif IsArrow( y ) and k < 0 then
+                            y := OutgoingArrowsOfVertex( TargetOfPath(y) )[1];
                             k := k + 1;
 							
-                        elif IsArrow( x ) and k > 0 then
-                            x := OutgoingArrowsOfVertex( TargetOfPath(x) )[1];
-                            k := k-1;
-							
-                        elif IsArrow( x ) and k < 0 then
-                            x := IncomingArrowsOfVertex( SourceOfPath(x) )[1];
-                            k := k + 1;
+                        elif IsArrow( y ) and k > 0 then
+                            y := IncomingArrowsOfVertex( SourceOfPath(y) )[1];
+                            k := k - 1;
                         fi;
                     od;
 					
-                    return x;
+                    return y;
                 fi;
             end;
 			
@@ -91,10 +91,10 @@ InstallMethod(
     [ IsPath, IsInt ],
     function( x, k )
         local
-            func,	# Z-action function of <quiver>
-            quiver;	# Quiver to which <x> belongs
+            func,   # Z-action function of <quiver>
+            quiver; # Quiver to which <x> belongs
 			
-        quiver := QuiverOfQuiverPath( x );
+        quiver := QuiverContainingPath( x );
 		
         # Test first argument <x>
         if not Is1RegQuiver( quiver ) then
@@ -102,7 +102,7 @@ InstallMethod(
 			
         else
             # Apply appropriate Z-action function
-            func := 1RegQuivIntActFunc( quiver );
+            func := 1RegQuivIntActionFunction( quiver );
             return func( x, k );
         fi;
     end
@@ -117,7 +117,7 @@ InstallMethod(
             a,      # Arrow variable
             l,      # Integer variable
             walk;   # List
-        if not Is1RegQuiver( QuiverOfQuiverQuiverPath( vert ) ) then
+        if not Is1RegQuiver( QuiverContainingPath( vert ) ) then
             Error( "The given vertex\n", vert, "\ndoes not belong to a 1-",
              "regular quiver!\n" );
         elif len < 0 then
@@ -142,4 +142,5 @@ InstallMethod(
          );
     end
 );
+
 #########1#########2#########3#########4#########5#########6#########7#########

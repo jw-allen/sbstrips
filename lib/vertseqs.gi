@@ -75,7 +75,7 @@ InstallMethod(
             fi;
 
             # Output
-            return Objectify( type, data_rec );
+            return Immutable( Objectify( type, data_rec ) );
         fi;
     end
 );

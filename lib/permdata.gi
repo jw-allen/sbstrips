@@ -215,34 +215,109 @@ InstallMethod(
     end
 );
 
-#InstallMethod(
-#    SourceEncodingOfPermDataOfSbAlg,
-#    "for special biserial algebras",
-#    [ IsSpecialBiserialAlgebra ],
-#    function( sba )
-#        local
-#            overts,     # Vertices of the overquiver of <sba>
-#            perm_data;  # Permissible data of <sba>
+InstallMethod(
+    SourceEncodingOfPermDataOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            a, b,           # 
+            a_data, b_data, # Information 
+            comp_sources,   #
+            k,              # Integer variable
+            lindep,         #
+            linind,         #
+            oquiv,          # Overquiver of <sba>
+            overts,         # Vertices of <oquiv>
+            paths,          # List variable 
+            perm_data,      # Permissible data of <sba>
+            pos,            #
+            v;              # Vertex variable
 
-#        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
-#            return SourceEncodingOfPermDataOfSbAlg( sba );
-#        else
-#            perm_data := PermDataOfSbAlg( sba );
-#            overts := VerticesOfQuiver( OverquiverOfSba( sba ) );
-#            
-#            #### RESUME FROM HERE
-#        fi;
-#    end;
-#);
+        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
+            return SourceEncodingOfPermDataOfSbAlg( sba );
+        else
+            oquiv := OverquiverOfSbAlg( sba );
+            overts := VerticesOfQuiver( oquiv );
+            lindep := LinDepOfSbAlg( sba );
+            linind := LinIndOfSbAlg( sba );
 
-# Source encoding
-#  Integer sequence } can also be inferred as quotient and remainder modulo 2
-#  Bit sequence     }  of some integer
-#
-# Target encoding
-#  Integer sequence } can also be inferred as quotient and remainder modulo 2
-#  Bit sequence     }  of some integer
+            comp_sources := List( lindep, SourceOfPath );
 
+            a_data := List( [1..Length(overts)], x -> 0 );
+            b_data := List( [1..Length(overts)], x -> 1 );
+
+            for k in [1..Length( overts )] do
+                v := overts[k];
+                if v in comp_sources then
+                    pos := Position( comp_sources, v );
+                    a_data[k] := LengthOfPath( lindep[pos] ); 
+                    b_data[k] := 0;
+                else
+                    paths := Filtered( linind, x -> SourceOfPath( x ) = v );
+                    a_data[k] := Maximum( List( paths, LengthOfPath ) );
+                fi;
+            od;
+            
+            a := VISify( oquiv, a_data, "integer" );
+            b := VISify( oquiv, b_data, "bit" );
+            
+            return Immutable( [ a, b ] );
+        fi;
+    end
+);
+
+InstallMethod(
+    TargetEncodingOfPermDataOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            c, d,           # 
+            c_data, d_data, # Information 
+            comp_sources,   #
+            k,              # Integer variable
+            lindep,         #
+            linind,         #
+            oquiv,          # Overquiver of <sba>
+            overts,         # Vertices of <oquiv>
+            paths,          # List variable 
+            perm_data,      # Permissible data of <sba>
+            pos,            #
+            v;              # Vertex variable
+
+        if HasTargetEncodingOfPermDataOfSbAlg( sba ) then
+            return TargetEncodingOfPermDataOfSbAlg( sba );
+        else
+            oquiv := OverquiverOfSbAlg( sba );
+            overts := VerticesOfQuiver( oquiv );
+            lindep := LinDepOfSbAlg( sba );
+            linind := LinIndOfSbAlg( sba );
+
+            comp_sources := List( lindep, TargetOfPath );
+
+            c_data := List( [1..Length(overts)], x -> 0 );
+            d_data := List( [1..Length(overts)], x -> 1 );
+
+            for k in [1..Length( overts )] do
+                v := overts[k];
+                if v in comp_sources then
+                    pos := Position( comp_sources, v );
+                    c_data[k] := LengthOfPath( lindep[pos] ); 
+                    d_data[k] := 0;
+                else
+                    paths := Filtered( linind, x -> TargetOfPath( x ) = v );
+                    c_data[k] := Maximum( List( paths, LengthOfPath ) );
+                fi;
+            od;
+            
+            c := VISify( oquiv, c_data, "integer" );
+            d := VISify( oquiv, d_data, "bit" );
+            
+            return Immutable( [ c, d ] );
+        fi;
+    end
+);
 
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

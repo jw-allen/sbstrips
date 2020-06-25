@@ -380,12 +380,12 @@ InstallMethod(
             k := 1;
             oarrs := ArrowsOfQuiver( oquiv );
             while k <= Length( oarrs ) do
-                oarrs[k]!.LiftOf := ret( 2reg_arrs[k] );
+                oarrs[k]!.LiftOf := 2reg_arrs[k] ;
                 k := k+1;
             od;
             
             # Load zero path with data
-                Zero( oquiv )!.LiftOf := Zero( ground_quiv );
+                Zero( oquiv )!.LiftOf := Zero( 2reg );
 
             # Load quiver with data
             SetIsOverquiver( oquiv, true );
@@ -432,7 +432,7 @@ InstallMethod(
                     
                 # Zero or stationary paths know the ground paths they lift
                 elif path = Zero( oquiv ) or IsQuiverVertex( path ) then
-                    return Zero( oquiv )!.LiftOf;
+                    return path!.LiftOf;
                     
                 # Paths of positive length lift the product of the paths lifted
                 #  by their constituent arrows

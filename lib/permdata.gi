@@ -62,7 +62,7 @@ InstallMethod(
 
 InstallMethod(
     ComponentExchangeMapOfSba,
-    "for special biserial algebras"
+    "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
@@ -133,15 +133,16 @@ InstallMethod(
             #  constituent arrow (in the ground quiver to one in the over-
             #  -quiver and then multiplying them together.
             list := [];
-            for p in comps do
+            for p in Flat( comps ) do
                 walk := ShallowCopy( WalkOfPath( p ) );
                 for k in [1..Length( walk )] do
-                    walk[k] := First( oarrs, x -> x!.LiftOf = walk[k] );
+                    walk[k] := First( oarrs, x -> ( x!.LiftOf!.2RegAugPathOf = ( walk[k] ) ) );
                 od;
-                Append( list, Product( walk ) );
+                Append( list, [ Product( walk ) ] );
             od;
 
             # Return the resulting list (of paths in the overquiver)
+            Sort( list );
             return Immutable( list );
         fi;
     end
@@ -153,6 +154,7 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
+            2reg,   # 2-regular augmentation of ground quiver of <sba>
             cont,   # Contaction of overquiver of <sba>
             ideal,  # Defining ideal of <sba>
             in_pa,  # Local function
@@ -162,19 +164,22 @@ InstallMethod(
             oquiv,  # Overquiver of <sba>
             p,      # Path variable
             pa,     # Original path algebra of <sba>
+            ret,    # Retraction of <2reg>
             v;      # Vertex variable
         if HasLinIndOfSbAlg( sba ) then
             return LinIndOfSbAlg( sba );
         else
             pa := OriginalPathAlgebra( sba );
             ideal := IdealOfQuotient( sba );
+            2reg := 2RegAugmentationOfQuiver( QuiverOfPathAlgebra( pa ) );
             oquiv := OverquiverOfSbAlg( sba );
             cont := ContractionOfOverquiver( oquiv );
+            ret := RetractionOf2RegAugmentation( 2reg );
 
             # Write local function that turns a path in the overquiver into the
             #  corresponding one in <pa>
             in_pa := function( path )
-                return ElementOfPathAlgebra( pa, cont( path ) );
+                return ElementOfPathAlgebra( pa, ret( cont( path ) ) );
             end;
             
             lindep := LinDepOfSbAlg( sba );
@@ -185,8 +190,11 @@ InstallMethod(
                 while not ( ( in_pa(p) in ideal ) or ( p in lindep ) ) do
                     Append( list, [ p ] );
                     l := l + 1;
+                    p := PathBySourceAndLength( v, l );
                 od;
             od;
+            
+            Sort( list );
             
             # Return the resulting list (of paths in the overquiver)
             return Immutable( list );
@@ -207,25 +215,25 @@ InstallMethod(
     end
 );
 
-InstallMethod(
-    SourceEncodingOfPermDataOfSbAlg,
-    "for special biserial algebras",
-    [ IsSpecialBiserialAlgebra ],
-    function( sba )
-        local
-            overts,     # Vertices of the overquiver of <sba>
-            perm_data;  # Permissible data of <sba>
+#InstallMethod(
+#    SourceEncodingOfPermDataOfSbAlg,
+#    "for special biserial algebras",
+#    [ IsSpecialBiserialAlgebra ],
+#    function( sba )
+#        local
+#            overts,     # Vertices of the overquiver of <sba>
+#            perm_data;  # Permissible data of <sba>
 
-        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
-            return SourceEncodingOfPermDataOfSbAlg( sba );
-        else
-            perm_data := PermDataOfSbAlg( sba );
-            overts := VerticesOfQuiver( OverquiveOfSba( sba ) );
-            
-            #### RESUME FROM HERE
-        fi;
-    end;
-);
+#        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
+#            return SourceEncodingOfPermDataOfSbAlg( sba );
+#        else
+#            perm_data := PermDataOfSbAlg( sba );
+#            overts := VerticesOfQuiver( OverquiverOfSba( sba ) );
+#            
+#            #### RESUME FROM HERE
+#        fi;
+#    end;
+#);
 
 # Source encoding
 #  Integer sequence } can also be inferred as quotient and remainder modulo 2

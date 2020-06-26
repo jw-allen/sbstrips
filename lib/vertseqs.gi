@@ -26,6 +26,8 @@ InstallMethod(
                     pfn{[20..Length( pfn )]}
                   )
                  );
+                 
+                 fam!.quiver := quiver;
             fi;
 
             return fam;

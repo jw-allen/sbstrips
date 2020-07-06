@@ -4,7 +4,7 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            fam;    #
+            fam;    # Family variable
 
         if HasSyllableFamilyOfSbAlg( sba ) then
             return SyllableFamilyOfSbAlg( sba );
@@ -71,6 +71,95 @@ InstallMethod(
             
             return [ i1, len1, ep1 ] < [ i2, len2, ep2 ];
         fi;
+);
+
+InstallMethod(
+    SyllableSetOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
+            a_seq, b_seq,   # Integer and bit sequences of <source_enc>
+            ep,             # Bit variable for perturbation
+            i,              # Vertex variable
+            l,              # Length variable
+            obj,            # Object to be made into a syllable, or data therof
+            oquiv,          # Overquiver of <sba>
+            set,            # List variable
+            source_enc,     # Source encoding of permissible data of <sba>
+            type;           # Type variable
+
+        if HasSyllableSetOfSbAlg( sba ) then
+            return SyllableSetOfSbAlg( sba );
+        else
+            oquiv := OverquiverOfSbAlg( sba );
+            type := NewType(
+             SyllableFamilyOfSbAlg( sba ),
+             IsComponentObjectRep and IsSyllableRep
+             );
+             
+            set := Set( [ ] );
+
+            # Create zero syllable
+            obj := rec(
+             path := Zero( oquiv ),
+             perturbation := fail,
+             sb_alg := sba
+            );
+            
+            ObjectifyWithAttributes(
+             obj, type,
+             IsZeroSyllable, true,
+             IsStableSyllable, fail,
+             SbAlgOfSyllable, sba
+            );
+            
+            AddSet( list, obj );
+            
+            # Create nonzero syllables
+            source_enc := SourceEncodingOfPermData( sba );
+            a_seq := source_enc[1];
+            b_seq := source_enc[2];
+
+            # Nonzero syllables correspond to tuples [ i, l, ep ] satisfying
+            #      0 < l + ep < a_i + b_i + ep,
+            #  where a_i and b_i are the <i>th terms of <a_seq> and <b_seq>.
+            #  Such tuples can be enumerated. The variables <i> and <ep> have
+            #  finite ranges so we can range over them first, and then range
+            #  over values of <l> that do not exceed the upper inequality.
+            for i in VerticesOfQuiver( oquiv ) do
+                a_i := a_seq.( String( i ) );
+                b_i := b_seq.( String( i ) );
+
+                for ep in [ 0, 1 ] do
+                    l := 0;
+
+                    while l + ep < a_i + b_i + ep do
+                        if 0 < l + ep then
+                            obj := rec(
+                             path := PathBySourceAndLength( i, l ),
+                             perturbation := ep,
+                             sb_alg := sba
+                             );
+                            ObjectifyWithAttributes(
+                             obj, type,
+                             IsZeroSyllable, false,
+                             IsStableSyllable, ( ep = 0 ),
+                             SbAlgOfSyllable, sba
+                             );
+                            MakeImmutable( obj );
+                            AddSet( set, obj );
+                        fi;
+                        l := l + 1;
+                    od;
+                od;
+            od;
+            
+            MakeImmutable( set );
+            return set;
+        fi;
+    end
 );
 
 #########1#########2#########3#########4#########5#########6#########7#########

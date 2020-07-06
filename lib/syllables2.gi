@@ -192,4 +192,17 @@ InstallMethod(
     end
 );
 
+InstallOtherMethod(
+    Syllabify,
+    "for the zero path and the boolean <fail>",
+    [ IsZeroPath, IsBool ]
+    function( zero, bool )
+        if not ( bool = fail ) then
+            TryNextMethod();
+        else
+            return Syllabify( zero, bool );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

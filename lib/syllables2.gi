@@ -205,4 +205,17 @@ InstallOtherMethod(
     end
 );
 
+InstallMethod(
+    ZeroSyllableOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        if HasZeroSyllableOfSbAlg( sba ) then
+            return ZeroSyllableOfSbAlg( sba );
+        else
+            return Syllabify( Zero( OverquiverOfSbAlg( sba ) ), fail );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

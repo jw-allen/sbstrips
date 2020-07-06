@@ -131,10 +131,9 @@ InstallMethod(
             for i in VerticesOfQuiver( oquiv ) do
                 a_i := a_seq.( String( i ) );
                 b_i := b_seq.( String( i ) );
-
+                
                 for ep in [ 0, 1 ] do
                     l := 0;
-
                     while l + ep < a_i + b_i + ep do
                         if 0 < l + ep then
                             obj := rec(
@@ -158,6 +157,37 @@ InstallMethod(
             
             MakeImmutable( set );
             return set;
+        fi;
+    end
+);
+
+InstallMethod(
+    Syllabify,
+    "for a path and a perturbation term",
+    [ IsPath, IsInt ],
+    function( path, int )
+        local
+            matches,    # List variable
+            oquiv,      # Quiver containing <path>
+            sba,        # SB algebra of which <oquiv> is (hopefully) overquiver
+            syll_set;   # Syllable family of <sba>
+        
+        oquiv := QuiverContainingPath( path );
+        if not IsOverquiver( oquiv ) then
+            TryNextMethod();
+        elif not ( int in [ 0,1 ] ) then
+            TryNextMethod();
+        else
+            sba := SbAlgebraOfOverquiver( oquiv );
+            syll_set := SyllableSetOfSbAlg( sba );
+            matches := Filtered( syll_set,
+             x -> (x!.path = path) and (x!.perturbation = int)
+             );
+            if Length( matches ) <> 1 then
+                Error( "No syllables match this description!" );
+            else
+                return matches[1];
+            fi;
         fi;
     end
 );

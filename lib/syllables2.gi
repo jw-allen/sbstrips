@@ -218,4 +218,21 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsStableSyllable,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        if HasIsStableSyllable( sy ) then
+            return IsStableSyllable( sy );
+        else
+            if sy!.perturbation = fail then
+                return fail;
+            else
+                return ( sy!.perturbation = 0 );
+            fi;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

@@ -1,5 +1,5 @@
 DeclareRepresentation( "IsVertexIndexedSequenceRep", IsAttributeStoringRep,
- [ "indices", "terms", "kind_of_seq" ] );
+ [ "quiver", "indices", "terms", "kind_of_seq" ] );
 
 DeclareAttribute( "VertexIndexedSequenceFamilyOfQuiver", IsQuiver );
 

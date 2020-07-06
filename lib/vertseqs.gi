@@ -9,29 +9,10 @@ InstallMethod(
         if HasVertexIndexedSequenceFamilyOfQuiver( quiver ) then
             return VertexIndexedSequenceFamilyOfQuiver( quiver );
         else
-            pfn := FamilyObj( Zero( quiver ) )!.NAME;
-            if Length( pfn ) < 20 then
+            fam := NewFamily( "VertexIndexedSequenceFamily" );
+            fam!.quiver := quiver;
 
-                Print( "The path family for this quiver\n", quiver, "\nhas an",
-                 " unexpected name!\n Please contact the maintainer of the",
-                 " sbstrips package.\n" );
-            elif not pfn{[1..19]} = "FamilyOfPathsWithin" then
-                Print( "The path family for this quiver\n", quiver, "\nhas an",
-                " unexpected name!\n Please contact the maintainer of the",
-                " sbstrips package.\n" );
-            else
-                fam := NewFamily(
-                 Concatenation(
-                    "VertexIndexedSequenceFamilyOf",
-                    pfn{[20..Length( pfn )]}
-                  )
-                 );
-                 
-                 fam!.quiver := quiver;
-            fi;
-
-            return fam;
-        fi;
+        return fam;
     end
 );
 

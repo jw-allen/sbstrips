@@ -153,6 +153,28 @@ InstallMethod(
     end
 );
 
-#########1#########2#########3#########4#########5#########6#########7#########
+InstallMethod(
+    \.,
+    "for vertex-indexed sequences",
+    [ IsVertexIndexedSequenceRep, IsPosInt ],
+    function( vis, int )
+        return vis!.terms.( NameRNam(int) );
+    end
+);
 
-# Install a method for \= for VISs!
+InstallMethod(
+    \=,
+    "for vertex-indexed sequences",
+    [ IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep ],
+    function( vis1, vis2 )
+        if ( vis1!.quiver = vis2!.quiver and
+         vis1!.indices = vis2!.indices and
+         vis1!.terms = vis2!.terms ) then
+            return true;
+        else
+            return false;
+        fi;
+    end
+);
+
+#########1#########2#########3#########4#########5#########6#########7#########

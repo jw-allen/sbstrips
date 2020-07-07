@@ -118,7 +118,7 @@ InstallMethod(
             AddSet( list, obj );
             
             # Create nonzero syllables
-            source_enc := SourceEncodingOfPermData( sba );
+            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
             a_seq := source_enc[1];
             b_seq := source_enc[2];
 
@@ -259,7 +259,8 @@ InstallMethod(
     [ IsSyllableRep ],
     function( sy )
         local
-            path;
+            path;   # Underlying path of <sy>
+            
         if HasIsSyllableWithStableSource( sy ) then
             return IsSyllableWithStableSource( sy );
         elif IsZeroSyllable( sy ) then
@@ -267,6 +268,77 @@ InstallMethod(
         else
             path := UnderlyingPathOfSyllable( sy );
             return IsRepresentativeOfCommuRelSource( SourceOfPath( path ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    DescentFunctionOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            desc;   # Function variable
+        if HasDescentFunctionOfSbAlg( sba ) then
+            return DescentFunctionOfSbAlg( sba );
+        else
+            desc := function( sy )
+                local
+                    a_i1, b_i1,     # <i1>th terms of <a_i1> and <b_i1>
+                    a_i2, b_i2,     # <i2>th terms of <a_i2> and <b_i2>
+                    a_seq, b_seq,   # Integer and bit sequences of permissible
+                                    #  data of <sba>
+                    ep1, ep2,       # Bit variables
+                    i1, i2,         # Vertex variables
+                    l1, l2,         # Length variables
+                    path1, path2;   # Path variables
+
+                if not ( sba = FamilyObj( sy )!.sb_alg ) then
+                    TryNextMethod();
+                else
+                    if IsZeroSyllable( sy ) then
+                        return sy;
+                    else
+                        # Write <sy> as tuple [ i1, l1, ep1 ]
+                        path1 := UnderlyingPathOfSyllable( sy );
+                        i1 := SourceOfPath( path1 );
+                        l1 := LengthOfPath( path1 );
+                        ep1 := PerturbationTermOfSyllable( sy );
+                        
+                        # Obtain <i1>th terms in permissble data of <sba>
+                        a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
+                        b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+                        
+                        a_i1 := a_seq.( String( i1 ) );
+                        b_i1 := b_seq.( String( i2 ) );
+                        
+                        # Descent sends [ i1, l1, ep1 ] to
+                        #  [ i1 - ( l1 + ep1 ),  a_i1 - ( l1 + ep1 ),  b_i1 ]
+                        #  provided that this latter tuple is a syllable. We
+                        #  calculate these three values -- respectively call
+                        #  them <i2>, <l2> and <ep2> -- and verify that they
+                        #  specify a syllable
+                        
+                        i2 := 1RegQuivIntAct( i1, -(l1 + ep1) );
+                        l2 := a_i1 - ( l1 + ep1 );
+                        ep2 := b_i2;
+                        
+                        a_i2 := a_seq.( String( i2 ) );
+                        b_i2 := b_seq.( String( i2 ) );
+                        
+                        if ( 0 < l2 + ep2 ) and
+                         ( l2 + ep2 < a_i2 + b_i2 + ep2 ) then
+                            path2 := PathBySourceAndLength( i2, l2 );
+                            return Syllabify( path2, ep2 );
+                        else
+                            return ZeroSyllableOfSbAlg( sba );
+                        fi;                        
+                        
+                    fi;
+                fi;
+            end;
+            
+            return desc;
         fi;
     end
 );

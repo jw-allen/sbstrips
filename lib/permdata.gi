@@ -320,5 +320,32 @@ InstallMethod(
 );
 
 #########1#########2#########3#########4#########5#########6#########7#########
+
+InstallMethod(
+    IsRepresentativeOfCommuRelSource,
+    "for vertices of overquivers",
+    [ IsQuiverVertex ],
+    function( vert )
+        local
+            b_seq,      #
+            oquiv,      #
+            sba,        #
+            source_enc; #
+        if HasIsRepresentativeOfCommuRelSource( vert ) then
+            return IsRepresentativeOfCommuRelSource( vert );
+        else
+            oquiv := QuiverContainingPath( vert );
+            if not IsOverquiver( oquiv ) then
+                TryNextMethod();
+            else
+                sba := SbAlgOfOverquiver( oquiv );
+                source_enc := SourceEncodingOfPermData( sba );
+                b_seq := source_enc[2];
+                return ( b_seq.( String(vert) ) = 0 );
+            fi;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

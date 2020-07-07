@@ -219,6 +219,24 @@ InstallMethod(
 );
 
 InstallMethod(
+    UnderlyingPathOfSyllable,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        return sy!.path;
+    end
+);
+
+InstallMethod(
+    PerturbationTermOfSyllable,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        return sy!.perturbation;
+    end
+);
+
+InstallMethod(
     IsStableSyllable,
     "for syllables",
     [ IsSyllableRep ],
@@ -226,11 +244,29 @@ InstallMethod(
         if HasIsStableSyllable( sy ) then
             return IsStableSyllable( sy );
         else
-            if sy!.perturbation = fail then
+            if PerturbationTermOfSyllable( sy ) = fail then
                 return fail;
             else
-                return ( sy!.perturbation = 0 );
+                return ( PerturbationTermOfSyllable( sy ) = 0 );
             fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsSyllableWithStableSource,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        local
+            path;
+        if HasIsSyllableWithStableSource( sy ) then
+            return IsSyllableWithStableSource( sy );
+        elif IsZeroSyllable( sy ) then
+            return fail;
+        else
+            path := UnderlyingPathOfSyllable( sy );
+            return IsRepresentativeOfCommuRelSource( SourceOfPath( path ) );
         fi;
     end
 );

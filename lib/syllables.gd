@@ -5,6 +5,10 @@ DeclareAttribute( "SyllableFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareAttribute( "SyllableSetOfSbAlg", IsSpecialBiserialAlgebra );
 
+DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
+DeclareOperation( "UnderlyingPathOfSyllable", [ IsSyllableRep ] );
+DeclareOperation( "PertubationTermOfSyllable", [ IsSyllableRep ] );
+
 DeclareAttribute( "ZeroSyllableOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareProperty( "IsZeroSyllable", IsSyllableRep );

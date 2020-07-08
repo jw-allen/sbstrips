@@ -3,8 +3,8 @@ InstallOperation(
     [ IsObject, IsFunction ],
     function( obj, func )
         local
-            latest,
-            orbit;
+            latest, # Last entry of <orbit>
+            orbit;  # Forward orbit sequence of <obj> under <func> 
 
         orbit := [ obj ];
         while IsDuplicateFreeList( orbit ) do
@@ -21,6 +21,24 @@ InstallOperation(
         od;
         
         return orbit;
+    end
+);
+
+InstallOperation(
+    IsTransientUnderFunctionNC,
+    [ IsObject, IsFunction, IsObject ],
+    function( obj, func, zero )
+        local
+            latest, # Last entry of <orbit>
+            orbit;  # Forward orbit of <obj> under <func>
+
+        orbit := ForwardOrbitNC( obj, func );
+        latest := orbit[ Length( orbit ) ];
+        
+        # If the <func>-orbit of <obj> ends in <zero>, then we call <obj>
+        #  "transient with respect to <func>". Otherwise, it is "preperiodic
+        #  with respect to <func>".
+        return ( latest = zero );
     end
 );
 

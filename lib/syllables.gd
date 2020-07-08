@@ -20,4 +20,6 @@ DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] )
 DeclareAttribute( "DescentFunctionOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "SidestepFunctionOfSbAlg", IsSpecialBiserialAlgebra );
 
+DeclareProperty( "IsUltimatelyDescentStableSyllable", IsSyllableRep );
+
 #########1#########2#########3#########4#########5#########6#########7#########

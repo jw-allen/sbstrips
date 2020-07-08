@@ -343,4 +343,44 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    SidestepFunctionOfSbAlg,
+    "for special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            sidestep,   # Function variable
+
+        if HasSidestepFunctionOfSbAlg( sba ) then
+            return SidestepFunctionOfSbAlg( sba );
+        else
+            sidestep := function( sy )
+                local
+                    i, i_dagger;    # Vertex variable 
+
+                # Verify that input <sy> is a syllable
+                if not IsSyllableRep( sy ) then
+                    TryNextMethod();
+                    
+                # The zero syllable is a fixpoint of the function
+                elif IsZeroSyllable( sy ) then
+                    return sy;
+
+                # The source of a the underlying path of a nonzero input
+                #  syllable determines what its sidestep image is
+                else
+                    i := SourceOfPath( UnderlyingPathOfSyllable( sy ) );
+                    i_dagger := ExchangePartnerOfVertex( i );
+                    return Syllabify(
+                     PathBySourceAndLength( i_dagger , 0 ),
+                     1
+                     );
+                fi;
+            end;
+            
+            return sidestep;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

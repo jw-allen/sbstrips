@@ -465,5 +465,37 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    ExchangePartnerOfVertex,
+    "for vertices of overquivers",
+    [ IsQuiverVertex ],
+    function( v )
+        local
+            cont,   # Contraction of <oquiv>
+            oquiv,  # Overquiver to which <overt> belongs
+            images, # Vertices of <oquiv>
+            k;      # Position variable
+
+        if HasExchangePartnerOfVertex( overt ) then
+            return ExchangePartnerOfVertex( v );
+        else
+            oquiv := QuiverContainingPath( v );
+            if not IsOverquiver( oquiv ) then
+                TryNextMethod();
+            else
+                cont := ContractionOfOverquiver( oquiv );
+                
+                # Search for the vertex <u>, distinct from <v>, that has the
+                #  same image in <cont> as <v> does
+                images := List( VerticesOfQuiver( v ), cont );
+                Unbind( images, Position( VerticesOfQuiver( v ), v ) );
+                k := Position( images, cont( v ) );
+                
+                return VerticesOfQuiver( oquiv )[k];
+            fi;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

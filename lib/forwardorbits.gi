@@ -1,5 +1,5 @@
 InstallMethod(
-    ForwardOrbitNC,
+    ForwardOrbitUnderFunctionNC,
     [ IsObject, IsFunction ],
     function( obj, func )
         local
@@ -27,30 +27,53 @@ InstallMethod(
 InstallMethod(
     IsTransientUnderFunctionNC,
     [ IsObject, IsFunction, IsObject ],
-    function( obj, func, zero )
+    function( obj, func, fixpt )
         local
             latest, # Last entry of <orbit>
             orbit;  # Forward orbit of <obj> under <func>
 
-        orbit := ForwardOrbitNC( obj, func );
+        orbit := ForwardOrbitUnderFunction( obj, func );
         latest := orbit[ Length( orbit ) ];
         
-        # If the <func>-orbit of <obj> ends in <zero>, then we call <obj>
+        # If the <func>-orbit of <obj> ends in <fixpt>, then we call <obj>
         #  "transient with respect to <func>". Otherwise, it is "preperiodic
         #  with respect to <func>".
-        return ( latest = zero );
+        return ( latest = fixpt );
     end
 );
 
 InstallMethod(
     IsPreperiodicUnderFunctionNC,
     [ IsObject, IsFunction, IsObject ],
-    function( obj, func, zero )
+    function( obj, func, fixpt )
         # <obj> is "periodic with respect to <func>" iff it is not "transient
-        #  with respect to <func>". Here, <zero> is the distinguished fixpoint
+        #  with respect to <func>". Here, <fixpt> is the distinguished fixpoint
         #  of func in which all <func>-transient orbits terminate.
 
-        return not IsTransientUnderFunctionNC( obj, func, zero );
+        return not IsTransientUnderFunctionNC( obj, func, fixpt );
+    end
+);
+
+InstallMethod(
+    IsPeriodicUnderFunctionNC,
+    [ IsObject, IsFunction, IsObject ],
+    function( obj, func, fixpt )
+    # <obj> is "periodic with respect to <func>" if <func>, or some repeated
+    #  composition of <func> with itself, fixes <obj>. The only exception is
+    #  the distinguished fixpoint <fixpt> of <func>: by fiat, we impose that
+    #  <fixpt> is "transient with respect to <func>", as are all objects whose
+    #  <func>-orbit contains (and therefore stabilises at) <fixpt>
+    
+    local
+        latest, # Last entry of <orbit>
+        orbit;  # Forward orbit of <obj> under <func>
+    
+    if IsTransientUnderFunctionNC( obj, func, fixpt ) then
+        return false;
+    else
+        orbit := ForwardOrbitUnderFunction( obj, func );
+        latest := orbit[ Length( orbit ) ];
+        return ( obj = latest );
     end
 );
 

@@ -112,15 +112,13 @@ InstallMethod(
              obj, type,
              IsZeroSyllable, true,
              IsStableSyllable, fail,
-             SbAlgOfSyllable, sba
+             SbAlgOfSyllable, sba,
+             IsUltimatelyDescentStableSyllable, false
             );
             
             AddSet( list, obj );
             
             # Create nonzero syllables
-            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
-            a_seq := source_enc[1];
-            b_seq := source_enc[2];
 
             # Nonzero syllables correspond to tuples [ i, l, ep ] satisfying
             #      0 < l + ep < a_i + b_i + ep,
@@ -128,6 +126,11 @@ InstallMethod(
             #  Such tuples can be enumerated. The variables <i> and <ep> have
             #  finite ranges so we can range over them first, and then range
             #  over values of <l> that do not exceed the upper inequality.
+
+            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
+            a_seq := source_enc[1];
+            b_seq := source_enc[2];
+            
             for i in VerticesOfQuiver( oquiv ) do
                 a_i := a_seq.( String( i ) );
                 b_i := b_seq.( String( i ) );
@@ -403,6 +406,75 @@ InstallMethod(
             return Concatenation(
              "( ",  String( path ), ", " String( pert ), " )"
              );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsUltimatelyDescentStableSyllable,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        local
+            desc,       # Descent function of <sba>
+            latest,     # Latest term of <orbit>
+            next,       # Next term of <orbit>
+            orbit,      # <desc>-orbit of <sy>
+            s,          # Syllable variable
+            sba,        # SB algebra for which <sy> is a syllable
+            tail,       # Periodic tail of <orbit>
+            tail_start, # Index at which repeated syllable first appears
+            value,      # Value of property for another syllable
+            zero_syll;  # Zero syllable of <sba>
+
+        # Remember that for zero syllables that this property is set (to
+        #  <false>) at creation
+        if HasIsUltimatelyDescentStableSyllable( sy ) then
+            return IsUltimatelyDescentStableSyllable( sy );
+
+        else
+            sba := sy!.sb_alg;
+            desc := DescentFunctionOfSbAlg( sba );
+            zero_syll := ZeroSyllableOfSbAlg( sba );
+            orbit := [ sy ];
+            
+            # This property is constant along <desc>-orbits. So calculate the
+            #  <desc>-orbit of <sy> until either you find a syllable for which
+            #  this property has been set -- in which case you return that
+            #  answer -- or you find a repeat in the orbit. Remember that one 
+            #  of these possibilities is bound to happen because that there are
+            #  only finitely many syllables for <sba>!
+
+            while IsDuplicateFreeList( orbit ) do
+                latest := orbit[ Length( orbit ) ];
+                next := desc( latest );
+
+                # If the value of <IsUltimatelyDescentStableSyllable> is known
+                #  for some later term in the <desc>-orbit of <sy>, then before
+                #  you return this value for <sy> itself, set this value of the
+                #  property for the other terms in the orbit.
+
+                if HasIsUltimatelyDescentStableSyllable( latest ) then
+                    value := IsUltimatelyDescentStableSyllable( latest );
+                    for s in Filtered( orbit, x -> x <> sy ) do
+                        SetIsUltimatelyDescentStableSyllable( s, value );
+                    od;
+                    
+                    return value;
+                fi;
+            od;
+
+            # The above case will catch all <desc>-transient syllables (see the
+            #  above remark about the zero syllable), and so by now <sy> must
+            #  be <desc>-preperiodic. We thus restrict our attention to the
+            #  periodic part of the forward orbit of <sy> and look for any
+            #  unstable syllables.
+
+            latest := orbit( Length( orbit ) );
+            tail_start := Position( orbit, latest );
+            tail := orbit{ [ tail_start..Length( orbit ) ] };
+
+            return not ( false in List( tail, IsStableSyllable ) );
         fi;
     end
 );

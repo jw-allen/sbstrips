@@ -447,5 +447,23 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    SbAlgOfOverquiver,
+    "for overquivers",
+    [ IsQuiver ],
+    function( quiv )
+        if HasSbAlgOfOverquiver( quiv ) then
+            return SbAlgOfOverquiver( quiv );
+        elif not IsOverquiver( quiv ) then
+            return fail;
+        else
+            Error( "Somehow the given quiver\n", quiv, "\nis an overquiver \
+             that doesn't know the special biserial algebra to which it \
+             belongs! Please contact the maintainer of the sbstrips package."
+             );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########
 #########1#########2#########3#########4#########5#########6#########7#########

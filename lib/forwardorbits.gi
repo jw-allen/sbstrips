@@ -1,4 +1,4 @@
-InstallOperation(
+InstallMethod(
     ForwardOrbitNC,
     [ IsObject, IsFunction ],
     function( obj, func )
@@ -24,7 +24,7 @@ InstallOperation(
     end
 );
 
-InstallOperation(
+InstallMethod(
     IsTransientUnderFunctionNC,
     [ IsObject, IsFunction, IsObject ],
     function( obj, func, zero )
@@ -39,6 +39,18 @@ InstallOperation(
         #  "transient with respect to <func>". Otherwise, it is "preperiodic
         #  with respect to <func>".
         return ( latest = zero );
+    end
+);
+
+InstallMethod(
+    IsPreperiodicUnderFunctionNC,
+    [ IsObject, IsFunction, IsObject ],
+    function( obj, func, zero )
+        # <obj> is "periodic with respect to <func>" iff it is not "transient
+        #  with respect to <func>". Here, <zero> is the distinguished fixpoint
+        #  of func in which all <func>-transient orbits terminate.
+
+        return not IsTransientUnderFunctionNC( obj, func, zero );
     end
 );
 

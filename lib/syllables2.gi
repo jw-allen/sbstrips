@@ -383,4 +383,36 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    String,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        local
+            path,           # Underlying path of <sy>
+            pert;           # Perturbation term of <sy>
+
+        if IsZeroSyllable( sy ) then
+            return "( )";
+
+        else
+            # The returned string should look something like "( p, ep )"
+            path := UnderlyingPathOfSyllable( sy );
+            pert := PerturbationTermOfSyllable( sy );
+
+            return Concatenation(
+             "( ",  String( path ), ", " String( pert ), " )"
+             );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########
+
+
+
+
+
+
+
+

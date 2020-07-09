@@ -20,7 +20,7 @@ InstallMethod(
 InstallMethod(
     \=,
     "for syllables",
-    =,
+    \=,
     [ IsSyllableRep, IsSyllableRep ],
     function( sy1, sy2 )
         if ( sy1!.path = sy2!.path and
@@ -36,7 +36,7 @@ InstallMethod(
 InstallMethod(
     \<,
     "for syllables",
-    =,
+    \=,
     [ IsSyllableRep, IsSyllableRep ],
     function( sy1, sy2 )
         local
@@ -71,6 +71,7 @@ InstallMethod(
             
             return [ i1, len1, ep1 ] < [ i2, len2, ep2 ];
         fi;
+    end
 );
 
 InstallMethod(
@@ -116,7 +117,7 @@ InstallMethod(
              IsUltimatelyDescentStableSyllable, false
             );
             
-            AddSet( list, obj );
+            AddSet( set, obj );
             
             # Create nonzero syllables
 
@@ -181,7 +182,7 @@ InstallMethod(
         elif not ( int in [ 0,1 ] ) then
             TryNextMethod();
         else
-            sba := SbAlgebraOfOverquiver( oquiv );
+            sba := SbAlgOfOverquiver( oquiv );
             syll_set := SyllableSetOfSbAlg( sba );
             matches := Filtered( syll_set,
              x -> (x!.path = path) and (x!.perturbation = int)
@@ -198,7 +199,7 @@ InstallMethod(
 InstallOtherMethod(
     Syllabify,
     "for the zero path and the boolean <fail>",
-    [ IsZeroPath, IsBool ]
+    [ IsZeroPath, IsBool ],
     function( zero, bool )
         if not ( bool = fail ) then
             TryNextMethod();
@@ -352,7 +353,7 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            sidestep,   # Function variable
+            sidestep;   # Function variable
 
         if HasSidestepFunctionOfSbAlg( sba ) then
             return SidestepFunctionOfSbAlg( sba );
@@ -404,7 +405,7 @@ InstallMethod(
             pert := PerturbationTermOfSyllable( sy );
 
             return Concatenation(
-             "( ",  String( path ), ", " String( pert ), " )"
+             "( ",  String( path ), ", ", String( pert ), " )"
              );
         fi;
     end

@@ -11,6 +11,7 @@ InstallMethod(
         else
             fam := NewFamily( "VertexIndexedSequenceFamily" );
             fam!.quiver := quiver;
+        fi;
 
         return fam;
     end

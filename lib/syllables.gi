@@ -112,8 +112,8 @@ InstallMethod(
             ObjectifyWithAttributes(
              obj, type,
              IsZeroSyllable, true,
-             IsStableSyllable, fail,
-             SbAlgOfSyllable, sba,
+             IsStableSyllable, false,
+             IsSyllableWithStableSource, false,
              IsUltimatelyDescentStableSyllable, false
             );
             
@@ -149,7 +149,6 @@ InstallMethod(
                              obj, type,
                              IsZeroSyllable, false,
                              IsStableSyllable, ( ep = 0 ),
-                             SbAlgOfSyllable, sba
                              );
                             MakeImmutable( obj );
                             AddSet( set, obj );
@@ -162,6 +161,15 @@ InstallMethod(
             MakeImmutable( set );
             return set;
         fi;
+    end
+);
+
+InstallMethod(
+    SbAlgOfSyllable,
+    "for syllables",
+    [ IsSyllableRep ],
+    function( sy )
+        return FamilyObj( sy )!.sb_alg;
     end
 );
 

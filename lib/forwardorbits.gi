@@ -32,7 +32,7 @@ InstallMethod(
             latest, # Last entry of <orbit>
             orbit;  # Forward orbit of <obj> under <func>
 
-        orbit := ForwardOrbitUnderFunction( obj, func );
+        orbit := ForwardOrbitUnderFunctionNC( obj, func );
         latest := orbit[ Length( orbit ) ];
         
         # If the <func>-orbit of <obj> ends in <fixpt>, then we call <obj>
@@ -71,7 +71,7 @@ InstallMethod(
     if IsTransientUnderFunctionNC( obj, func, fixpt ) then
         return false;
     else
-        orbit := ForwardOrbitUnderFunction( obj, func );
+        orbit := ForwardOrbitUnderFunctionNC( obj, func );
         latest := orbit[ Length( orbit ) ];
         return ( obj = latest );
     end

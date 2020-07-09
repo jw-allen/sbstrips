@@ -69,7 +69,7 @@ InstallMethod(
             ep1 := sy1!.perturbation;
             ep2 := sy2!.perturbation;
             
-            return [ i1, len1, ep1 ] < [ i2, len2, ep2 ];
+            return [ len1, i1, ep1 ] < [ len2, i2, ep2 ];
         fi;
     end
 );
@@ -117,6 +117,8 @@ InstallMethod(
              IsUltimatelyDescentStableSyllable, false
             );
             
+            SetZeroSyllableOfSbAlg( sba, obj );
+            
             AddSet( set, obj );
             
             # Create nonzero syllables
@@ -148,7 +150,7 @@ InstallMethod(
                             ObjectifyWithAttributes(
                              obj, type,
                              IsZeroSyllable, false,
-                             IsStableSyllable, ( ep = 0 ),
+                             IsStableSyllable, ( ep = 0 )
                              );
                             MakeImmutable( obj );
                             AddSet( set, obj );
@@ -209,10 +211,22 @@ InstallOtherMethod(
     "for the zero path and the boolean <fail>",
     [ IsZeroPath, IsBool ],
     function( zero, bool )
+        local
+            oquiv,      # Overquiver to which <zero> belongs
+            sba,        # SB algebra for which <oquiv> is overquiver
+            syll_set;   # Syllable set of <sba>
+
         if not ( bool = fail ) then
             TryNextMethod();
         else
-            return Syllabify( zero, bool );
+            oquiv := QuiverContainingPath( zero );
+            if not IsOverquiver( oquiv ) then
+                Error( "The given zero path is not the zero path of an over\
+                quiver!\n" );
+            else
+                sba := SbAlgOfOverquiver( oquiv );
+                return ZeroSyllableOfSbAlg( sba );
+            fi;
         fi;
     end
 );
@@ -222,10 +236,13 @@ InstallMethod(
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
+        local
+            syll_set;   # Syllable set of <sba>
         if HasZeroSyllableOfSbAlg( sba ) then
             return ZeroSyllableOfSbAlg( sba );
         else
-            return Syllabify( Zero( OverquiverOfSbAlg( sba ) ), fail );
+            syll_set := SyllableSetOfSbAlg( sba );
+            return Filtered( syll_set, IsZeroSyllable )[1];
         fi;
     end
 );
@@ -256,11 +273,7 @@ InstallMethod(
         if HasIsStableSyllable( sy ) then
             return IsStableSyllable( sy );
         else
-            if PerturbationTermOfSyllable( sy ) = fail then
-                return fail;
-            else
-                return ( PerturbationTermOfSyllable( sy ) = 0 );
-            fi;
+            return ( PerturbationTermOfSyllable( sy ) = 0 );
         fi;
     end
 );
@@ -276,7 +289,7 @@ InstallMethod(
         if HasIsSyllableWithStableSource( sy ) then
             return IsSyllableWithStableSource( sy );
         elif IsZeroSyllable( sy ) then
-            return fail;
+            return false;
         else
             path := UnderlyingPathOfSyllable( sy );
             return IsRepresentativeOfCommuRelSource( SourceOfPath( path ) );

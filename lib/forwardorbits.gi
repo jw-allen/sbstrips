@@ -74,6 +74,8 @@ InstallMethod(
         orbit := ForwardOrbitUnderFunctionNC( obj, func );
         latest := orbit[ Length( orbit ) ];
         return ( obj = latest );
+    fi;
+
     end
 );
 

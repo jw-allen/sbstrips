@@ -339,7 +339,7 @@ InstallMethod(
                 TryNextMethod();
             else
                 sba := SbAlgOfOverquiver( oquiv );
-                source_enc := SourceEncodingOfPermData( sba );
+                source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
                 b_seq := source_enc[2];
                 return ( b_seq.( String(vert) ) = 0 );
             fi;

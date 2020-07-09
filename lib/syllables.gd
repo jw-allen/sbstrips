@@ -15,7 +15,7 @@ DeclareProperty( "IsZeroSyllable", IsSyllableRep );
 
 DeclareProperty( "IsStableSyllable", IsSyllableRep );
 
-DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] )
+DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] );
 
 DeclareAttribute( "DescentFunctionOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "SidestepFunctionOfSbAlg", IsSpecialBiserialAlgebra );

@@ -12,7 +12,7 @@ InstallMethod(
             latest := orbit[ Length( orbit ) ];
             
             # Apply <func> to <latest>; append this to <orbit>
-            Add( orbit, func( obj ) );
+            Add( orbit, func( latest ) );
             
             # Repeat until <orbit> contains a duplicate entry. BE WARNED that
             #  this function does not check whether higher iterates of <func>

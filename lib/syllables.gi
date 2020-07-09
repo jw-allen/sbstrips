@@ -318,8 +318,10 @@ InstallMethod(
                     l1, l2,         # Length variables
                     path1, path2;   # Path variables
 
-                if not ( sba = FamilyObj( sy )!.sb_alg ) then
+                if not IsSyllableRep( sy ) then
                     TryNextMethod();
+                elif not ( SbAlgOfSyllable( sy ) = sba ) then
+                    return fail;
                 else
                     if IsZeroSyllable( sy ) then
                         return sy;
@@ -335,7 +337,7 @@ InstallMethod(
                         b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
                         
                         a_i1 := a_seq.( String( i1 ) );
-                        b_i1 := b_seq.( String( i2 ) );
+                        b_i1 := b_seq.( String( i1 ) );
                         
                         # Descent sends [ i1, l1, ep1 ] to
                         #  [ i1 - ( l1 + ep1 ),  a_i1 - ( l1 + ep1 ),  b_i1 ]
@@ -346,7 +348,7 @@ InstallMethod(
                         
                         i2 := 1RegQuivIntAct( i1, -(l1 + ep1) );
                         l2 := a_i1 - ( l1 + ep1 );
-                        ep2 := b_i2;
+                        ep2 := b_i1;
                         
                         a_i2 := a_seq.( String( i2 ) );
                         b_i2 := b_seq.( String( i2 ) );
@@ -383,10 +385,12 @@ InstallMethod(
                 local
                     i, i_dagger;    # Vertex variable 
 
-                # Verify that input <sy> is a syllable
+                # Verify that input <sy> is a syllable of <sba>
                 if not IsSyllableRep( sy ) then
                     TryNextMethod();
-                    
+                elif not SbAlgOfSyllable( sy ) = sba then
+                    return fail;
+                
                 # The zero syllable is a fixpoint of the function
                 elif IsZeroSyllable( sy ) then
                     return sy;
@@ -455,7 +459,7 @@ InstallMethod(
             return IsUltimatelyDescentStableSyllable( sy );
 
         else
-            sba := sy!.sb_alg;
+            sba := SbAlgOfSyllable( sy );
             desc := DescentFunctionOfSbAlg( sba );
             zero_syll := ZeroSyllableOfSbAlg( sba );
             orbit := [ sy ];
@@ -483,6 +487,8 @@ InstallMethod(
                     od;
                     
                     return value;
+                else
+                    Add( orbit, next );
                 fi;
             od;
 
@@ -492,7 +498,7 @@ InstallMethod(
             #  periodic part of the forward orbit of <sy> and look for any
             #  unstable syllables.
 
-            latest := orbit( Length( orbit ) );
+            latest := orbit[ Length( orbit ) ];
             tail_start := Position( orbit, latest );
             tail := orbit{ [ tail_start..Length( orbit ) ] };
 

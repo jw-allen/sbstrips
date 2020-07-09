@@ -487,10 +487,12 @@ InstallMethod(
     [ IsQuiverVertex ],
     function( v )
         local
-            cont,   # Contraction of <oquiv>
-            oquiv,  # Overquiver to which <overt> belongs
-            images, # Vertices of <oquiv>
-            k;      # Position variable
+            cont,           # Contraction of <oquiv>
+            oquiv,          # Overquiver to which <v> belongs
+            images,         # Apply <cont> to <overts>
+            overts,         # Vertices of <oquiv>
+            u,              # Vertex
+            u_pos, v_pos;   # Positions of <u> and <v>
 
         if HasExchangePartnerOfVertex( v ) then
             return ExchangePartnerOfVertex( v );
@@ -500,17 +502,23 @@ InstallMethod(
                 TryNextMethod();
             else
                 cont := ContractionOfOverquiver( oquiv );
+                overts := VerticesOfQuiver( oquiv );
                 
                 # Search for the vertex <u>, distinct from <v>, that has the
                 #  same image in <cont> as <v> does
-                images := List( VerticesOfQuiver( v ), cont );
-                Unbind(
-                 images,
-                 Position( VerticesOfQuiver( v ), v )
-                 );
-                k := Position( images, cont( v ) );
+                v_pos := Position( overts, v );
+                images := List( overts, cont );
+                Unbind( images[ v_pos ] );
+                u_pos := Position( images, cont( v ) );
+                u := overts[ u_pos ];
                 
-                return VerticesOfQuiver( oquiv )[k];
+                # <ExchangePartnerOfVertex> represents an involution and we're
+                #  about to say "<v> goes to <u>". While we're here, let's
+                #  commit to memory that "<u> goes to <v>".
+                
+                SetExchangePartnerOfVertex( u, v );
+                
+                return u;
             fi;
         fi;
     end

@@ -7,13 +7,14 @@ DeclareAttribute( "SyllableSetOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
 DeclareOperation( "UnderlyingPathOfSyllable", [ IsSyllableRep ] );
-DeclareOperation( "PertubationTermOfSyllable", [ IsSyllableRep ] );
+DeclareOperation( "PerturbationTermOfSyllable", [ IsSyllableRep ] );
 
 DeclareAttribute( "ZeroSyllableOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareProperty( "IsZeroSyllable", IsSyllableRep );
 
 DeclareProperty( "IsStableSyllable", IsSyllableRep );
+DeclareProperty( "IsSyllableWithStableSource", IsSyllableRep );
 
 DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] );
 

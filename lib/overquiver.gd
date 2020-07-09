@@ -15,7 +15,7 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 
-DeclareAttribute( "SbAlgOfOverquiver", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 
 DeclareAttribute( "ExchangePartnerOfVertex", IsQuiverVertex );
 

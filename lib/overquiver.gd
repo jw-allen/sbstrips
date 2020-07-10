@@ -1,11 +1,3 @@
-# DeclareProperty( "Is1RegularQuiver", IsQuiver );
-
-# DeclareOperation( "QuiverOfQuiverPath", [ IsPath ] );
-
-# DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
-
-# DeclareOperation( "1RegQuivIntAct" [ IsPath, IsInt ] );
-
 DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 
 DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
@@ -23,6 +15,8 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 
-DeclareAttribute( "SbAlgOfOverquiver", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
+
+DeclareAttribute( "ExchangePartnerOfVertex", IsQuiverVertex );
 
 #########1#########2#########3#########4#########5#########6#########7#########

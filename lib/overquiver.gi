@@ -17,8 +17,8 @@ InstallMethod(
 
         # Test input quiver
         elif not IsSpecialBiserialQuiver( ground_quiv ) then
-            Error( "The given quiver\n", ground_quiv, "\nis not special ",
-             "biserial (ie, some vertex has in- or outdegree exceeding 2)");
+            Error( "The given quiver\n", ground_quiv, "\nis not special bi\
+            serial (ie, some vertex has in- or outdegree exceeding 2)" );
         elif not IsConnectedQuiver( ground_quiv ) then
             Error( "The given quiver\n", ground_quiv, "\nis not connected" );
 
@@ -140,11 +140,10 @@ InstallMethod(
         # When not already decided, print message and return <false>
         else
 
-            Print( "The property <Is2RegAugmentationOfQuiver> only",
-             " recognizes 2-regular augmentations constructed using the",
-             " <2RegAugmentationOfQuiver> operation.\n",
-             "Contact the maintainer of the <sbstrips> package if you believe",
-             " there is an error here.\n" );
+            Print( "The property <Is2RegAugmentationOfQuiver> only recognizes \
+             2-regular augmentations constructed using the <2RegAugmentationOf\
+             Quiver> operation.\n Contact the maintainer of the <sbstrips> \
+             package if you believe there is an error here.\n" );
             return false;
         fi;
     end
@@ -158,10 +157,10 @@ InstallMethod(
         if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
             return OriginalSbQuiverOf2RegAugmentation( quiver );
         else
-            Print( "This attribute only recognizes 2-regular augmentations ",
-             "constructing using the <2RegAugmentationOfQuiver> operation.\n",
-             "Contact the maintainer of the <sbstrips> package if you believe",
-             " there is an error here.\n" );
+            Print( "This attribute only recognizes 2-regular augmentations con\
+             structed using the <2RegAugmentationOfQuiver> operation.\n\
+             Contact the maintainer of the <sbstrips> package if you believe \
+             there is an error here.\n" );
             return fail;
         fi;
     end
@@ -182,13 +181,13 @@ InstallMethod(
         # Test validity of <quiver>; if found wanting then return a function
         #  that returns a warning message each time, alongside <fail>
         elif not Is2RegAugmentationOfQuiver( quiver ) then
-            Print( "The given quiver\n", quiver, "\nhas not been constructed",
-             " using the <2RegAugmentationOfQuiver> operation.\n");
+            Print( "The given quiver\n", quiver, "\nhas not been constructed \
+             using the <2RegAugmentationOfQuiver> operation.\n");
 
              func := function( input )
-                Print( "You are calling the retraction of a 2-regular",
-                 " augmentation map that doesn't exist; something's gone",
-                 " wrong!\n" );
+                Print( "You are calling the retraction of a 2-regular augmenta\
+                 tion map that doesn't exist; something's gone wrong! Please \
+                 contact the maintainer of the sbstrips package.\n" );
                 return fail;
              end;
 
@@ -202,8 +201,8 @@ InstallMethod(
 
                 # Check input
                 if not path in quiver then
-                    Error( "The given path\n", path, "\n does not belong to",
-                     " the 2-regular augmentation\n", quiver );
+                    Error( "The given path\n", path, "\n does not belong to \
+                     the 2-regular augmentation\n", quiver );
 
                 # Zero or trivial paths know which ground path they lift
                 elif ( path = Zero( quiver ) ) or ( IsQuiverVertex( path ) ) then
@@ -399,6 +398,23 @@ InstallMethod(
 );
 
 InstallMethod(
+    IsOverquiver,
+    "for quivers",
+    [ IsQuiver ],
+    function( quiv )
+        if HasIsOverquiver( quiv ) then
+            return IsOverquiver( quiv );
+        else
+            # Overquivers are exactly those quivers constructed using the
+            #  <OverquiverOfSbAlg> command. Such quivers have this property set
+            #  (to <true>) at creation. Therefore any quiver for which this
+            #  property has not been set must not have been so constructed.
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
     ContractionOfOverquiver,
     "for overquivers",
     [ IsQuiver ],
@@ -426,10 +442,10 @@ InstallMethod(
                     
                 # Test input path
                 if not path in oquiv then
-                    Print( "The given path\n", path, "\ndoes not belong to",
-                     " the given overquiver\n", oquiv);
+                    Print( "The given path\n", path, "\ndoes not belong to the\
+                     given overquiver\n", oquiv);
                     return fail;
-                    
+  
                 # Zero or stationary paths know the ground paths they lift
                 elif path = Zero( oquiv ) or IsQuiverVertex( path ) then
                     return path!.LiftOf;
@@ -443,6 +459,67 @@ InstallMethod(
             end;
             
             return cont;
+        fi;
+    end
+);
+
+InstallMethod(
+    SbAlgOfOverquiver,
+    "for overquivers",
+    [ IsQuiver ],
+    function( quiv )
+        if HasSbAlgOfOverquiver( quiv ) then
+            return SbAlgOfOverquiver( quiv );
+        elif not IsOverquiver( quiv ) then
+            return fail;
+        else
+            Error( "Somehow the given quiver\n", quiv, "\nis an overquiver \
+             that doesn't know the special biserial algebra to which it \
+             belongs! Please contact the maintainer of the sbstrips package."
+             );
+        fi;
+    end
+);
+
+InstallMethod(
+    ExchangePartnerOfVertex,
+    "for vertices of overquivers",
+    [ IsQuiverVertex ],
+    function( v )
+        local
+            cont,           # Contraction of <oquiv>
+            oquiv,          # Overquiver to which <v> belongs
+            images,         # Apply <cont> to <overts>
+            overts,         # Vertices of <oquiv>
+            u,              # Vertex
+            u_pos, v_pos;   # Positions of <u> and <v>
+
+        if HasExchangePartnerOfVertex( v ) then
+            return ExchangePartnerOfVertex( v );
+        else
+            oquiv := QuiverContainingPath( v );
+            if not IsOverquiver( oquiv ) then
+                TryNextMethod();
+            else
+                cont := ContractionOfOverquiver( oquiv );
+                overts := VerticesOfQuiver( oquiv );
+                
+                # Search for the vertex <u>, distinct from <v>, that has the
+                #  same image in <cont> as <v> does
+                v_pos := Position( overts, v );
+                images := List( overts, cont );
+                Unbind( images[ v_pos ] );
+                u_pos := Position( images, cont( v ) );
+                u := overts[ u_pos ];
+                
+                # <ExchangePartnerOfVertex> represents an involution and we're
+                #  about to say "<v> goes to <u>". While we're here, let's
+                #  commit to memory that "<u> goes to <v>".
+                
+                SetExchangePartnerOfVertex( u, v );
+                
+                return u;
+            fi;
         fi;
     end
 );

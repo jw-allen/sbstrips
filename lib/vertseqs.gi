@@ -9,27 +9,11 @@ InstallMethod(
         if HasVertexIndexedSequenceFamilyOfQuiver( quiver ) then
             return VertexIndexedSequenceFamilyOfQuiver( quiver );
         else
-            pfn := FamilyObj( Zero( quiver ) )!.NAME;
-            if Length( pfn ) < 20 then
-
-                Print( "The path family for this quiver\n", quiver, "\nhas an",
-                 " unexpected name!\n Please contact the maintainer of the",
-                 " sbstrips package.\n" );
-            elif not pfn{[1..19]} = "FamilyOfPathsWithin" then
-                Print( "The path family for this quiver\n", quiver, "\nhas an",
-                " unexpected name!\n Please contact the maintainer of the",
-                " sbstrips package.\n" );
-            else
-                fam := NewFamily(
-                 Concatenation(
-                    "VertexIndexedSequenceFamilyOf",
-                    pfn{[20..Length( pfn )]}
-                  )
-                 );
-            fi;
-
-            return fam;
+            fam := NewFamily( "VertexIndexedSequenceFamily" );
+            fam!.quiver := quiver;
         fi;
+
+        return fam;
     end
 );
 
@@ -148,6 +132,30 @@ InstallMethod(
             Print( "\"", seqrep!.kind_of_seq, "\"" );
         fi;
         Print( " );" ); 
+    end
+);
+
+InstallMethod(
+    \.,
+    "for vertex-indexed sequences",
+    [ IsVertexIndexedSequenceRep, IsPosInt ],
+    function( vis, int )
+        return vis!.terms.( NameRNam(int) );
+    end
+);
+
+InstallMethod(
+    \=,
+    "for vertex-indexed sequences",
+    [ IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep ],
+    function( vis1, vis2 )
+        if ( vis1!.quiver = vis2!.quiver and
+         vis1!.indices = vis2!.indices and
+         vis1!.terms = vis2!.terms ) then
+            return true;
+        else
+            return false;
+        fi;
     end
 );
 

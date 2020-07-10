@@ -298,6 +298,52 @@ InstallMethod(
 );
 
 InstallMethod(
+    IsPinBoundarySyllable,
+    "for special biserial algebras",
+    [ IsSyllableRep ],
+    function( sy )
+        local
+            a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
+            a_seq, b_seq,   # Integer and bit sequences of source_encoding of
+                            #  permissible data of <sba>
+            ep,             # Perturbation term of <sy>
+            i,              # Source of underlying path of <sy>
+            len,            # Length of underlying path of <sy>
+            sba,            # SB algebra to which <sy> belongs
+            sy_set;         # Syllable set of <sba>
+
+        if HasIsPinBoundarySyllable( sy ) then
+            return IsPinBoundarySyllable( sy );
+
+        # Zero syllables are not pin-boundary syllables
+        elif IsZeroSyllable( sy ) then
+            return false;
+
+        else
+            sba := SbAlgOfSyllable( sy );
+            a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+
+            i := SourceOfPath( UnderlyingPathOfSyllable( sy ) );
+            len := LengthOfPath( UnderlyingPathOfSyllable( sy ) );
+            ep := PerturbationTermOfSyllable( sy );
+
+            a_i := a_seq.( String( i ) );
+            b_i := b_seq.( String( i ) );
+
+            # A syllable with data [ i, len, ep ] is "pin boundary" iff b_i = 1
+            #  and
+            #       [ len, ep ] = [ a_i - 1, 1 ],
+            #  ie, iff it's an unstable syllable that is the longest prefix of a
+            #  representative of a commutativity relation.
+
+            return ( ( b_i = 0 ) and ( ep = 1 ) and ( len + 1 = a_i ) );
+        fi;
+    end
+);
+
+
+InstallMethod(
     DescentFunctionOfSbAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
@@ -508,11 +554,3 @@ InstallMethod(
 );
 
 #########1#########2#########3#########4#########5#########6#########7#########
-
-
-
-
-
-
-
-

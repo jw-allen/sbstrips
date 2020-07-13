@@ -327,10 +327,11 @@ InstallMethod(
     [ IsQuiverVertex ],
     function( vert )
         local
-            b_seq,      #
-            oquiv,      #
-            sba,        #
-            source_enc; #
+            b_seq,      # Bit sequence of <source_enc>
+            oquiv,      # Overquiver to which <vert> belongs
+            sba,        # SB algebra of which <oquiv> is overquiver
+            source_enc; # Source encoding of permissible data of <sba>
+
         if HasIsRepresentativeOfCommuRelSource( vert ) then
             return IsRepresentativeOfCommuRelSource( vert );
         else
@@ -341,7 +342,36 @@ InstallMethod(
                 sba := SbAlgOfOverquiver( oquiv );
                 source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
                 b_seq := source_enc[2];
+
                 return ( b_seq.( String(vert) ) = 0 );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsRepresentativeOfCommuRelTarget,
+    "for vertices of overquivers",
+    [ IsQuiverVertex ],
+    function( vert )
+        local
+            d_seq,      # Bit sequence of <target_enc>
+            oquiv,      # Overquiver to which <vert> belongs
+            sba,        # SB algebra of which <oquiv> is overquiver
+            target_enc; # Target encoding of permissible data of <sba>
+
+        if HasIsRepresentativeOfCommuRelTarget( vert ) then
+            return IsRepresentativeOfCommuRelTarget( vert );
+        else
+            oquiv := QuiverContainingPath( vert );
+            if not IsOverquiver( oquiv ) then
+                TryNextMethod();
+            else
+                sba := SbAlgOfOverquiver( oquiv );
+                target_enc := TargetEncodingOfPermDataOfSbAlg( sba );
+                d_seq := target_enc[2];
+
+                return ( d_seq.( String(vert) ) = 0 );
             fi;
         fi;
     end

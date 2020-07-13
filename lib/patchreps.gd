@@ -4,6 +4,7 @@ DeclareRepresentation( "IsPatchRep", IsAttributeStoringRep,
 
 DeclareAttribute( "PatchFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "PatchSetOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ZeroPatchOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareAttribute( "IsZeroPatch", IsPatchRep );
 DeclareAttribute( "IsPatchOfStringProjective", IsPatchRep );

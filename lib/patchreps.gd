@@ -2,6 +2,8 @@ DeclareRepresentation( "IsPatchRep", IsAttributeStoringRep,
  [ "NW", "NE", "SW", "SE" ]
  );
 
+DeclareAttribute( "PatchSetOfSbAlg", IsSpecialBiserialAlgebra );
+
 DeclareAttribute( "IsZeroPatch", IsPatchRep );
 DeclareAttribute( "IsPatchOfStringProjective", IsPatchRep );
 DeclareAttribute( "IsPatchOfPinModule", IsPatchRep );

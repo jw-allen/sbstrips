@@ -2,6 +2,7 @@ DeclareRepresentation( "IsPatchRep", IsAttributeStoringRep,
  [ "NW", "NE", "SW", "SE" ]
  );
 
+DeclareAttribute( "PatchFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "PatchSetOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareAttribute( "IsZeroPatch", IsPatchRep );

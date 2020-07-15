@@ -414,4 +414,13 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    ViewObj,
+    "for patch reps",
+    [ IsPatchRep ],
+    function( patch )
+        Print( "<patch>" );
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

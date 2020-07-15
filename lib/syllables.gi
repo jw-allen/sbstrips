@@ -82,6 +82,7 @@ InstallMethod(
         local
             a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
             a_seq, b_seq,   # Integer and bit sequences of <source_enc>
+            d_i,            # <i>th term <d_seq>
             d_seq,          # Bit sequence of <target_enc>
             ep,             # Bit variable for perturbation
             i,              # Vertex variable

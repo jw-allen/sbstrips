@@ -473,7 +473,7 @@ InstallMethod(
 
 InstallMethod(
     Patchify,
-    "for a 4-tuple of syllables",
+    "for a list of 4 syllables",
     \=,
     [ IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep ],
     function( sy_NW, sy_NE, sy_SW, sy_SE )
@@ -520,5 +520,30 @@ InstallMethod(
         fi;
     end
 );
+InstallMethod(
+    PatchifyByTop,
+    "for a list of 2 syllables",
+    \=,
+    [ IsSyllableRep, IsSyllableRep ],
+    function( sy_NW, sy_NE )
+        local
+            matches,    # List of patches matching this description 
+            patch_set,  # Patch set of <sba>
+            sba;        # SB algebra of which <sy_NW> etc are syllables
+
+        sba := FamilyObj( sy_NW )!.sb_alg;
+        patch_set := PatchSetOfSbAlg( sba );
+        matches := Filtered(
+         patchset,
+         x -> [ x!.NW, x!.NE ] = [ sy_NW, sy_NE ]
+         );
+        if Length( matches ) <> 1 then
+            Error( "No patch matches that description!" );
+        else
+            return matches[1];
+        fi;
+    end;
+);
+
 
 #########1#########2#########3#########4#########5#########6#########7#########

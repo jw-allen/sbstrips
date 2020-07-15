@@ -501,10 +501,22 @@ InstallMethod(
     "for a patch rep",
     [ IsPatchRep ],
     function( patch )
+        local
+            refl;   # Reflection of <patch>
+
         if HasReflectionOfPatch then
             return ReflectionOfPatch( patch );
+
+        # Reflection is an involution (on the patch set of an SB algebra) whose
+        #  unique fixpoint is the zero patch
+        elif IsZeroPatch( patch ) then
+            return patch;
         else
-            return Patchify( patch!.NE, patch!.NW, patch!.SE, patch!.SW );
+            refl := Patchify( patch!.NE, patch!.NW, patch!.SE, patch!.SW );
+
+            SetReflectionOfPatch( refl, patch );
+
+            return refl;
         fi;
     end
 );

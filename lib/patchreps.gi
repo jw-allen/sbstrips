@@ -124,6 +124,8 @@ InstallMethod(
             SetZeroPatchOfSbAlg( sba, obj );
             Add( set, obj );
 
+            Info( InfoDebug, 1, "Made zero patch" );
+
             # Create the "virtual" patches. These correspond to targets of
             #  (overquiver representatives of) components of commuativity
             #  relations. On one side (east or west), these have as northern
@@ -172,6 +174,8 @@ InstallMethod(
                 Add( set, obj );
             od;
 
+            Info( InfoDebug, 1, "Made virtual patches" );
+
             # With the zero and virtual patches done, we now turn to patches
             #  corresponding to pin (= projective-injective nonuniserial)
             #  modules. We could call these 'pin patches'.
@@ -194,15 +198,24 @@ InstallMethod(
                     #  <i_dagger> or similar. Here, solely in order to save
                     #  space, we use <j>.)
                     j := ExchangePartnerOfVertex( i );
-                    a_j := a_seq.( String( i ) );
-                    n1_sy :=
-                     Syllabify( PathBySourceAndLength( i, a_i - 1  ), 1 );
-                    s1_sy :=
-                     Syllabify( PathBySourceAndLength( i, 0 ), 0 );
-                    n2_sy :=
-                     Syllabify( PathBySourceAndLength( j, a_j - 1 ), 1 );
-                    s2_sy :=
-                     Syllabify( PathBySourceAndLength( j, 0 ), 0 );
+                    a_j := a_seq.( String( j ) );
+
+                    n1_sy := Syllabify( 
+                     PathBySourceAndLength( i, a_i - 1  ),
+                     1
+                     );
+                    s1_sy := Syllabify(
+                     PathBySourceAndLength( 1RegQuivIntAct( i, -a_i ), 0 ),
+                     0
+                     );
+                    n2_sy := Syllabify( 
+                     PathBySourceAndLength( j, a_j - 1 ),
+                     1
+                     );
+                    s2_sy := Syllabify(
+                     PathBySourceAndLength( 1RegQuivIntAct( j, -a_j ), 0 ),
+                     0
+                     );
                      
                     obj := rec(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
@@ -217,6 +230,8 @@ InstallMethod(
                     Add( set, obj );
                 fi;
             od;
+
+            Info( InfoDebug, 1, "Made patches with two pin boundaries" );
 
             # Second, we create those featuring exactly one 'pin boundary'.
             #  These also deserve special treatment, as any southern entry on
@@ -237,7 +252,7 @@ InstallMethod(
                 if b_i = 0 then
                     # Create syllables <n1_sy> and <s1_sy> to go on the 'pin'
                     #  boundary side
-                    a_i := b_seq.( String( i ) );
+                    a_i := a_seq.( String( i ) );
                     n1_sy := Syllabify(
                      PathBySourceAndLength( i, a_i -1 ), 1
                      );
@@ -291,6 +306,8 @@ InstallMethod(
                 fi;
             od;
 
+            Info( InfoDebug, 1, "Made patches with one pin boundary" );
+
             # Third, we create the pin patches with no 'pin boundaries'. The
             #  southern entry on each side is just the descent-image of the
             #  northern entry above.
@@ -329,20 +346,36 @@ InstallMethod(
                      IsVirtualPatch, false
                      );
                     Add( set, obj );
+                    Info( InfoDebug, 2, "made patchrep",
+                     "\n",
+                     "\n#I  ", obj!.NW,
+                     "\n#I    ", obj!.NE,
+                     "\n#I  ", obj!.SW,
+                     "\n#I    ", obj!.SE,
+                     "\n" );
                     
-                    obj := rec(
-                     NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
-                     );
-                    ObjectifyWithAttributes(
-                     obj, type,
-                     IsZeroPatch, false,
-                     IsPatchOfStringProjective, ( b_i = 1 ),
-                     IsPatchOfPinModule, ( b_i = 0 ),
-                     IsVirtualPatch, false
-                     );
-                    Add( set, obj );
+#                    obj := rec(
+#                     NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
+#                     );
+#                    ObjectifyWithAttributes(
+#                     obj, type,
+#                     IsZeroPatch, false,
+#                     IsPatchOfStringProjective, ( b_i = 1 ),
+#                     IsPatchOfPinModule, ( b_i = 0 ),
+#                     IsVirtualPatch, false
+#                     );
+#                    Add( set, obj );
+#                    Info( InfoDebug, 2, "made patchrep",
+#                     "\n",
+#                     "\n#I  ", obj!.NW,
+#                     "\n#I    ", obj!.NE,
+#                     "\n#I  ", obj!.SW,
+#                     "\n#I    ", obj!.SE,
+#                     "\n" );
                 od;
             od;
+
+            Info( InfoDebug, 1, "Made patches with no pin boundaries" );
 
             # Lastly, create the patches that have exactly one "northern" comp-
             #  -onent featuring <zero_sy>. These syllables can be constructed
@@ -407,6 +440,8 @@ InstallMethod(
                 fi;
             od;
             
+            Info( InfoDebug, 1, "Made \"replacement\" patches" );
+            
             Append( set, triv_list );
             
             return Immutable( Set( set ) );
@@ -419,13 +454,23 @@ InstallMethod(
     "for patch reps",
     [ IsPatchRep ],
     function( patch )
+        local
+            ne, nw, se, sw; # Cardinal directions
+
         if IsZeroPatch( patch ) then
             Print( "<zero patch>" );
         elif IsVirtualPatch( patch ) then
             Print( "virtual patch>" );
         else
-            Print( "<patch>" );
+            nw := patch!.NW;
+            ne := patch!.NE;
+            sw := patch!.SW;
+            se := patch!.SE;
+            Print( nw, "\n", "  ", ne, "\n", sw, "\n", "  ", se, "\n" );
+        fi;
     end
 );
+
+
 
 #########1#########2#########3#########4#########5#########6#########7#########

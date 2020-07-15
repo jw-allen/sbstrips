@@ -128,11 +128,12 @@ InstallMethod(
             # Create nonzero syllables
 
             # Nonzero syllables correspond to tuples [ i, l, ep ] satisfying
-            #      0 < l + ep < a_i + b_i + ep,
-            #  where a_i and b_i are the <i>th terms of <a_seq> and <b_seq>.
-            #  Such tuples can be enumerated. The variables <i> and <ep> have
-            #  finite ranges so we can range over them first, and then range
-            #  over values of <l> that do not exceed the upper inequality.
+            #      d_i <= l + ep < a_i + b_i + ep,
+            #  where a_i, b_i and d_i are the <i>th terms of <a_seq> and
+            #  <b_seq>. Such tuples can be enumerated. The variables <i> and
+            #  <ep> have finite ranges so we can range over them first, and
+            #  then range over values of <l> that do not exceed the upper
+            #  inequality.
 
             source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
             target_enc := TargetEncodingOfPermDataOfSbAlg( sba );
@@ -149,7 +150,7 @@ InstallMethod(
                 for ep in [ 0, 1 ] do
                     l := 0;
                     while l + ep < a_i + b_i + ep do
-                        if d_i < l + ep then
+                        if d_i <= l + ep then
                             obj := rec(
                              path := PathBySourceAndLength( i, l ),
                              perturbation := ep,

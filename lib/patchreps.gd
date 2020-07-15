@@ -13,7 +13,8 @@ DeclareAttribute( "IsVirtualPatch", IsPatchRep );
 DeclareAttribute( "ReflectionOfPatch", IsPatchRep );
 
 DeclareOperation( "Patchify",
- [ IsPatchRep, IsPatchRep, IsPatchRep, IsPatchRep ]
+ [ IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep ]
  );
+DeclareOperation( "PatchifyByTop", [ IsSyllableRep, IsSyllableRep ] );
 
 #########1#########2#########3#########4#########5#########6#########7#########

@@ -506,7 +506,7 @@ InstallMethod(
         local
             refl;   # Reflection of <patch>
 
-        if HasReflectionOfPatch then
+        if HasReflectionOfPatch( patch ) then
             return ReflectionOfPatch( patch );
 
         # Reflection is an involution (on the patch set of an SB algebra) whose

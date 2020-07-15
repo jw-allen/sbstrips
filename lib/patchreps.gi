@@ -94,7 +94,7 @@ InstallMethod(
             overts := VerticesOfQuiver( oquiv );
             zero_sy := ZeroSyllableOfSbAlg( sba );
             
-            source_enc := SourceEncodingOfSbAlg( sba );
+            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
             a_seq := source_enc[1];
             b_seq := source_enc[2];
 
@@ -208,11 +208,11 @@ InstallMethod(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
                      );
                     ObjectifyWithAttributes(
-                     obj, data,
+                     obj, type,
                      IsZeroPatch, false,
                      IsPatchOfStringProjective, false,
                      IsPatchOfPinModule, true,
-                     IsVirtualPatch, false,
+                     IsVirtualPatch, false
                      );
                     Add( set, obj );
                 fi;
@@ -248,10 +248,10 @@ InstallMethod(
                     #  syllable satisfying <check>
                     j := ExchangePartnerOfVertex( i );
                     check := function( x )
-                        return
-                         ( (SourceOfPath(UnderlyingPathOfSyllable(x))=j) and
-                          (not IsPinBoundarySyllable(x))
-                          )
+                        return (
+                         ( SourceOfPath( UnderlyingPathOfSyllable( x ) ) = j )
+                         and
+                         ( not IsPinBoundarySyllable( x ) )
                          );
                     end;
 
@@ -268,7 +268,7 @@ InstallMethod(
                          NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
                          );
                         ObjectifyWithAttributes(
-                         obj, type
+                         obj, type,
                          IsZeroPatch, false,
                          IsPatchOfStringProjective, false,
                          IsPatchOfPinModule, true,
@@ -280,7 +280,7 @@ InstallMethod(
                          NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
                          );
                         ObjectifyWithAttributes(
-                         obj, type
+                         obj, type,
                          IsZeroPatch, false,
                          IsPatchOfStringProjective, false,
                          IsPatchOfPinModule, true,
@@ -295,7 +295,9 @@ InstallMethod(
             #  southern entry on each side is just the descent-image of the
             #  northern entry above.
 
-            for n1_sy in Filtered( proper_sylls, x -> not IsPinBoundary(x) ) do
+            for n1_sy in
+             Filtered( proper_sylls, x -> not IsPinBoundarySyllable(x) )
+             do
                 s1_sy := desc( n1_sy );
                 i := SourceOfPath( UnderlyingPathOfSyllable( n1_sy ) );
                 b_i := b_seq.( String( i ) );
@@ -304,9 +306,13 @@ InstallMethod(
                 check := function( x )
                     local
                         source; # Source of underlying path of <x>
-                    
+
                     source := SourceOfPath( UnderlyingPathOfSyllable( x ) );
-                    return ( (source = j) and (not IsPinBoundary(x)) );
+                    return (
+                     ( source = j )
+                     and
+                     ( not IsPinBoundarySyllable( x ) )
+                     );
                 end;
                 
                 for n2_sy in Filtered( proper_sylls, check ) do

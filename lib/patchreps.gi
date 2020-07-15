@@ -496,5 +496,17 @@ InstallMethod(
     end;
 );
 
+InstallMethod(
+    ReflectionOfPatch,
+    "for a patch rep",
+    [ IsPatchRep ],
+    function( patch )
+        if HasReflectionOfPatch then
+            return ReflectionOfPatch( patch );
+        else
+            return Patchify( patch!.NE, patch!.NW, patch!.SE, patch!.SW );
+        fi;
+    end
+);
 
 #########1#########2#########3#########4#########5#########6#########7#########

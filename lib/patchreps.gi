@@ -450,6 +450,33 @@ InstallMethod(
 );
 
 InstallMethod(
+    Patchify,
+    "for a list of 4 syllables",
+    function( f1, f2, f3, f4 )
+        return [ f1, f2, f3 ] = [ f2, f3, f4 ];
+    end,
+    [ IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep ],
+    function( sy_NW, sy_NE, sy_SW, sy_SE )
+        local
+            matches,    # List of patches matching this description 
+            patch_set,  # Patch set of <sba>
+            sba;        # SB algebra of which <sy_NW> etc are syllables
+
+        sba := FamilyObj( sy_NW )!.sb_alg;
+        patch_set := PatchSetOfSbAlg( sba );
+        matches := Filtered(
+         patch_set,
+         x -> [ x!.NW, x!.NE, x!.SW, x!.SE ] = [ sy_NW, sy_NE, sy_SW, sy_SE ]
+         );
+        if Length( matches ) <> 1 then
+            Error( "No patch matches that description!" );
+        else
+            return matches[1];
+        fi;
+    end
+);
+
+InstallMethod(
     ViewObj,
     "for patch reps",
     [ IsPatchRep ],
@@ -469,31 +496,6 @@ InstallMethod(
             Print( nw, "\n", "  ", ne, "\n", sw, "\n", "  ", se, "\n" );
         fi;
     end
-);
-
-InstallMethod(
-    Patchify,
-    "for a list of 4 syllables",
-    \=,
-    [ IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep ],
-    function( sy_NW, sy_NE, sy_SW, sy_SE )
-        local
-            matches,    # List of patches matching this description 
-            patch_set,  # Patch set of <sba>
-            sba;        # SB algebra of which <sy_NW> etc are syllables
-
-        sba := FamilyObj( sy_NW )!.sb_alg;
-        patch_set := PatchSetOfSbAlg( sba );
-        matches := Filtered(
-         patchset,
-         x -> [ x!.NW, x!.NE, x!.SW, x!.SE ] = [ sy_NW, sy_NE, sy_SW, sy_SE ]
-         );
-        if Length( matches ) <> 1 then
-            Error( "No patch matches that description!" );
-        else
-            return matches[1];
-        fi;
-    end;
 );
 
 InstallMethod(
@@ -520,6 +522,7 @@ InstallMethod(
         fi;
     end
 );
+
 InstallMethod(
     PatchifyByTop,
     "for a list of 2 syllables",
@@ -534,7 +537,7 @@ InstallMethod(
         sba := FamilyObj( sy_NW )!.sb_alg;
         patch_set := PatchSetOfSbAlg( sba );
         matches := Filtered(
-         patchset,
+         patch_set,
          x -> [ x!.NW, x!.NE ] = [ sy_NW, sy_NE ]
          );
         if Length( matches ) <> 1 then
@@ -542,7 +545,7 @@ InstallMethod(
         else
             return matches[1];
         fi;
-    end;
+    end
 );
 
 

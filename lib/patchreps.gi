@@ -419,7 +419,12 @@ InstallMethod(
     "for patch reps",
     [ IsPatchRep ],
     function( patch )
-        Print( "<patch>" );
+        if IsZeroPatch( patch ) then
+            Print( "<zero patch>" );
+        elif IsVirtualPatch( patch ) then
+            Print( "virtual patch>" );
+        else
+            Print( "<patch>" );
     end
 );
 

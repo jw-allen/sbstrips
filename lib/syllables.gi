@@ -693,4 +693,41 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of syllables",
+    \=,
+    [ IsSyllableRep, IsSyllableRep ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Targets of underlying paths of <sy1> and <sy2>
+
+        # Delegate to other methods when called on a pair of zero or virtual
+        #  syllables
+        if IsZeroSyllable( sy1 ) or IsZeroSyllable( sy2 ) then
+            TryNextMethod();
+        elif IsVirtualSyllable( sy1 ) and IsVirtualSyllable( sy2 ) then
+            TryNextMethod();
+
+        # If exactly one input syllable is virtual, then the pair will not
+        #  satisfy the preceding boolean test but will satisfy the following
+        #  one, and we reject them
+        elif IsVirtualSyllable( sy1 ) or IsVirtualSyllable( sy2 ) then
+            return false;
+            
+        # If none of the above tests are satisfied, then <sy1> and <sy2> are
+        #  "proper" syllables. In this case, we test that they are both stable
+        #  and that their targets are exchange partners. 
+        else
+            i1 := TargetOfPath( UnderlyingPathOfSyllable( sy1 ) );
+            i2 := TargetOfPath( UnderlyingPathOfSyllable( sy2 ) );
+            
+            return
+             ( i1 = ExchangePartnerOfVertex( i2 ) )
+             and
+             ( IsStableSyllable( sy1 ) and IsStableSyllable( sy2 ) );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

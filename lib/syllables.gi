@@ -597,6 +597,7 @@ InstallMethod(
 InstallMethod(
     IsPeakCompatiblePairOfSyllables,
     "for a pair of syllables",
+    \=,
     [ IsSyllableRep, IsSyllableRep ],
     function( sy1, sy2 )
         local
@@ -610,6 +611,16 @@ InstallMethod(
             
             return ( i1 = ExchangePartnerOfVertex( i2 ) );
         fi;
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of zero syllables",
+    \=,
+    [ IsZeroSyllable, IsZeroSyllable ],
+    function( sy1, sy2 )
+        return true;
     end
 );
 

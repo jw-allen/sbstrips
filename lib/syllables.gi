@@ -638,19 +638,41 @@ InstallMethod(
     end
 );
 
-# >> Deal with virtual syllables above first; revisit this
-#InstallMethod(
-#    IsValleyCompatiblePairOfSyllables,
-#    "for a zero syllable and a (not necessarily zero) syllable",
-#    \=,
-#    [ IsZeroSyllable, IsSyllableRep ],
-#    function( zero_sy, sy )
-#        if IsZeroSyllable( sy ) then
-#            TryNextMethod();
-#        else
-#            return IsBoundary
-#        fi;
-#    end
-#);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a zero syllable and a (not necessarily zero) syllable",
+    \=,
+    [ IsZeroSyllable, IsSyllableRep ],
+    function( zero_sy, sy )
+        if IsZeroSyllable( sy ) then
+            TryNextMethod();
+        else
+            # (Recall that virtual syllables have perturbation term 0 and so
+            #  are stable syllables. This means they will (rightly) return
+            #  <false> in the call below.)
+
+            return ( not IsStableSyllable( sy ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a (not necessarily zero) syllable and a zero syllable",
+    \=,
+    [ IsSyllableRep, IsZeroSyllable ],
+    function( sy, zero_sy )
+        if IsZeroSyllable( sy ) then
+            TryNextMethod();
+        else
+            # (Recall that virtual syllables have perturbation term 0 and so
+            #  are stable syllables. This means they will (rightly) return
+            #  <false> in the call below.)
+
+            return ( not IsStableSyllable( sy ) );
+        fi;
+    end
+);
 
 #########1#########2#########3#########4#########5#########6#########7#########

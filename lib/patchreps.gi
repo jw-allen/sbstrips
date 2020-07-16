@@ -503,7 +503,7 @@ InstallMethod(
             # Despite escaping the backslashes below, these strings still
             #  produce double backslashes :(
             return Concatenation(
-             [ "/ ", nw, " | ", ne, " \\", ", " , " \\ ", sw, " | ", se, " /" ]
+             [ "/ ", nw, " | ", ne, " \\", ", " , "\\ ", sw, " | ", se, " /" ]
              );
          fi;
     end

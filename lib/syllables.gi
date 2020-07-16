@@ -568,8 +568,28 @@ InstallMethod(
     IsPeakCompatiblePairOfSyllables,
     "for two copies of the zero syllable",
     \=,
-    [ IsZeroSyllable, IsZeroSyllable ]
+    [ IsZeroSyllable, IsZeroSyllable ],
     function( sy1, sy2 )
+        return true;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a zero syllable and a nonzero syllable",
+    \=,
+    [ IsZeroSyllable, IsSyllableRep ],
+    function( zero_sy, sy )
+        return true;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a nonzero syllable and a zero syllable",
+    \=,
+    [ IsSyllableRep, IsZeroSyllable ],
+    function( sy, zero_sy )
         return true;
     end
 );

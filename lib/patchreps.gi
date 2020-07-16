@@ -493,7 +493,10 @@ InstallMethod(
             ne := patch!.NE;
             sw := patch!.SW;
             se := patch!.SE;
-            Print( nw, "\n", "  ", ne, "\n", sw, "\n", "  ", se, "\n" );
+
+            Print( "/ ", nw, " | ", ne, " \\" );
+            Print( ", " );
+            Print( "\\ ", sw, " | ", se, " /" );
         fi;
     end
 );

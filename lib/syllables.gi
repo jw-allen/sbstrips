@@ -594,4 +594,23 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a pair of syllables",
+    [ IsSyllableRep, IsSyllableRep ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Sources of underlying paths of <sy1> and <sy2>
+
+        if IsZeroSyllable( sy1 ) or IsZeroSyllable( sy2 ) then
+            TryNextMethod();
+        else
+            i1 := SourceOfPath( UnderlyingPathOfSyllable( sy1 ) );
+            i2 := SourceOfPath( UnderlyingPathOfSyllable( sy2 ) );
+            
+            return ( i1 = ExchangePartnerOfVertex( i2 ) );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

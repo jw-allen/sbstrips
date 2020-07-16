@@ -564,4 +564,14 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for two copies of the zero syllable",
+    \=,
+    [ IsZeroSyllable, IsZeroSyllable ]
+    function( sy1, sy2 )
+        return true;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

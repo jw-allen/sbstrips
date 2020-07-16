@@ -382,6 +382,8 @@ InstallMethod(
                 else
                     if IsZeroSyllable( sy ) then
                         return sy;
+                    elif IsVirtualSyllable( sy ) then
+                        return ZeroSyllableOfSbAlg( sba );
                     else
                         # Write <sy> as tuple [ i1, l1, ep1 ]
                         path1 := UnderlyingPathOfSyllable( sy );

@@ -82,6 +82,8 @@ InstallMethod(
         local
             a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
             a_seq, b_seq,   # Integer and bit sequences of <source_enc>
+            d_i,            # <i>th term <d_seq>
+            d_seq,          # Bit sequence of <target_enc>
             ep,             # Bit variable for perturbation
             i,              # Vertex variable
             l,              # Length variable
@@ -89,6 +91,7 @@ InstallMethod(
             oquiv,          # Overquiver of <sba>
             set,            # List variable
             source_enc,     # Source encoding of permissible data of <sba>
+            target_enc,     # Target encoding of permissible data of <sba>
             type;           # Type variable
 
         if HasSyllableSetOfSbAlg( sba ) then
@@ -112,6 +115,7 @@ InstallMethod(
             ObjectifyWithAttributes(
              obj, type,
              IsZeroSyllable, true,
+             IsVirtualSyllable, false,
              IsStableSyllable, false,
              IsSyllableWithStableSource, false,
              IsUltimatelyDescentStableSyllable, false
@@ -124,24 +128,29 @@ InstallMethod(
             # Create nonzero syllables
 
             # Nonzero syllables correspond to tuples [ i, l, ep ] satisfying
-            #      0 < l + ep < a_i + b_i + ep,
-            #  where a_i and b_i are the <i>th terms of <a_seq> and <b_seq>.
-            #  Such tuples can be enumerated. The variables <i> and <ep> have
-            #  finite ranges so we can range over them first, and then range
-            #  over values of <l> that do not exceed the upper inequality.
+            #      d_i <= l + ep < a_i + b_i + ep,
+            #  where a_i, b_i and d_i are the <i>th terms of <a_seq> and
+            #  <b_seq>. Such tuples can be enumerated. The variables <i> and
+            #  <ep> have finite ranges so we can range over them first, and
+            #  then range over values of <l> that do not exceed the upper
+            #  inequality.
 
             source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
+            target_enc := TargetEncodingOfPermDataOfSbAlg( sba );
+            
             a_seq := source_enc[1];
             b_seq := source_enc[2];
+            d_seq := target_enc[2];
             
             for i in VerticesOfQuiver( oquiv ) do
                 a_i := a_seq.( String( i ) );
                 b_i := b_seq.( String( i ) );
+                d_i := d_seq.( String( i ) );
                 
                 for ep in [ 0, 1 ] do
                     l := 0;
                     while l + ep < a_i + b_i + ep do
-                        if 0 < l + ep then
+                        if d_i <= l + ep then
                             obj := rec(
                              path := PathBySourceAndLength( i, l ),
                              perturbation := ep,
@@ -150,7 +159,9 @@ InstallMethod(
                             ObjectifyWithAttributes(
                              obj, type,
                              IsZeroSyllable, false,
-                             IsStableSyllable, ( ep = 0 )
+                             IsStableSyllable, ( ep = 0 ),
+                             IsVirtualSyllable, ( l + ep = 0 ),
+                             IsSyllableWithStableSource, ( b_i = 1 )
                              );
                             MakeImmutable( obj );
                             AddSet( set, obj );

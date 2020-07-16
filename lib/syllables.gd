@@ -11,6 +11,7 @@ DeclareOperation( "UnderlyingPathOfSyllable", [ IsSyllableRep ] );
 DeclareOperation( "PerturbationTermOfSyllable", [ IsSyllableRep ] );
 
 DeclareProperty( "IsZeroSyllable", IsSyllableRep );
+DeclareProperty( "IsVirtualSyllable", IsSyllableRep );
 DeclareProperty( "IsStableSyllable", IsSyllableRep );
 DeclareProperty( "IsSyllableWithStableSource", IsSyllableRep );
 DeclareProperty( "IsUltimatelyDescentStableSyllable", IsSyllableRep );

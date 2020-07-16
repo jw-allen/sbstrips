@@ -502,6 +502,37 @@ InstallMethod(
 );
 
 InstallMethod(
+    Display,
+    "for patch reps",
+    [ IsPatchRep ],
+    function( patch )
+        local
+            len_east, len_west, # Character length of strings of components
+            ne, nw, se, sw;     # Cardinal directions
+
+        nw := String( patch!.NW );
+        ne := String( patch!.NE );
+        sw := String( patch!.SW );
+        se := String( patch!.SE );
+        
+        # The output should look like
+        #       / nw | ne \
+        #       \ sw | se /
+        #  with each syllable justified towards the centre
+
+        len_east := Maximum( List( [ ne, se ], Length ) );
+        len_west := Maximum( List( [ nw, sw ], Length ) );
+ 
+        Print( "/ ",
+         PrintString( nw, len_west ), " | ", PrintString( ne, -len_east ),
+         " \\", "\n" );
+        Print( "\\ ",
+         PrintString( sw, len_west ), " | ", PrintString( se, -len_east ),
+         " /", "\n" );
+    end
+);
+
+InstallMethod(
     ReflectionOfPatch,
     "for a patch rep",
     [ IsPatchRep ],

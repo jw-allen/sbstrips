@@ -675,4 +675,22 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of virtual syllables",
+    \=,
+    [ IsVirtualSyllable, IsVirtualSyllable ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Sources of underlying paths of <sy1>
+        
+        # The underlying path of a virtual syllable is stationary (ie, a
+        #  vertex), and so calling <SourceOfPath> would be redundant.
+        i1 := UnderlyingPathOfSyllable( sy1 );
+        i2 := UnderlyingPathOfSyllable( sy2 );
+        
+        return ( i1 = ExchangePartnerOfVertex( i2 ) );
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

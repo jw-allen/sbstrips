@@ -580,6 +580,8 @@ InstallMethod(
     \=,
     [ IsZeroSyllable, IsSyllableRep ],
     function( zero_sy, sy )
+        # All syllables -- zero, virtual or otherwise -- are peak compatible
+        #  with the zero syllable.
         return true;
     end
 );
@@ -590,6 +592,8 @@ InstallMethod(
     \=,
     [ IsSyllableRep, IsZeroSyllable ],
     function( sy, zero_sy )
+        # All syllables -- zero, virtual or otherwise -- are peak compatible
+        #  with the zero syllable.
         return true;
     end
 );
@@ -603,8 +607,18 @@ InstallMethod(
         local
             i1, i2; # Sources of underlying paths of <sy1> and <sy2>
 
+        # Defer to other methods if either input syllable is zero
         if IsZeroSyllable( sy1 ) or IsZeroSyllable( sy2 ) then
             TryNextMethod();
+
+        # If neither input syllable is zero, but either is virtual, then return
+        #  <false>
+        elif IsVirtualSyllable( sy1 ) or IsVirtualSyllable( sy2 ) then
+            return false;
+
+        # If neither syllable is zero or virtual then we are dealing with
+        #  "proper syllables", and so may just check whether the sources of the
+        #  underlying paths are exchange partners
         else
             i1 := SourceOfPath( UnderlyingPathOfSyllable( sy1 ) );
             i2 := SourceOfPath( UnderlyingPathOfSyllable( sy2 ) );
@@ -623,5 +637,20 @@ InstallMethod(
         return true;
     end
 );
+
+# >> Deal with virtual syllables above first; revisit this
+#InstallMethod(
+#    IsValleyCompatiblePairOfSyllables,
+#    "for a zero syllable and a (not necessarily zero) syllable",
+#    \=,
+#    [ IsZeroSyllable, IsSyllableRep ],
+#    function( zero_sy, sy )
+#        if IsZeroSyllable( sy ) then
+#            TryNextMethod();
+#        else
+#            return IsBoundary
+#        fi;
+#    end
+#);
 
 #########1#########2#########3#########4#########5#########6#########7#########

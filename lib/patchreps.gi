@@ -124,7 +124,7 @@ InstallMethod(
             SetZeroPatchOfSbAlg( sba, obj );
             Add( set, obj );
 
-            Info( InfoDebug, 1, "Made zero patch" );
+            Info( InfoDebug, 2, "Made zero patch" );
 
             # Create the "virtual" patches. These correspond to targets of
             #  (overquiver representatives of) components of commuativity
@@ -174,7 +174,7 @@ InstallMethod(
                 Add( set, obj );
             od;
 
-            Info( InfoDebug, 1, "Made virtual patches" );
+            Info( InfoDebug, 2, "Made virtual patches" );
 
             # With the zero and virtual patches done, we now turn to patches
             #  corresponding to pin (= projective-injective nonuniserial)
@@ -231,7 +231,7 @@ InstallMethod(
                 fi;
             od;
 
-            Info( InfoDebug, 1, "Made patches with two pin boundaries" );
+            Info( InfoDebug, 2, "Made patches with two pin boundaries" );
 
             # Second, we create those featuring exactly one 'pin boundary'.
             #  These also deserve special treatment, as any southern entry on
@@ -306,7 +306,7 @@ InstallMethod(
                 fi;
             od;
 
-            Info( InfoDebug, 1, "Made patches with one pin boundary" );
+            Info( InfoDebug, 2, "Made patches with one pin boundary" );
 
             # Third, we create the pin patches with no 'pin boundaries'. The
             #  southern entry on each side is just the descent-image of the
@@ -353,29 +353,10 @@ InstallMethod(
                      "\n#I  ", obj!.SW,
                      "\n#I    ", obj!.SE,
                      "\n" );
-                    
-#                    obj := rec(
-#                     NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
-#                     );
-#                    ObjectifyWithAttributes(
-#                     obj, type,
-#                     IsZeroPatch, false,
-#                     IsPatchOfStringProjective, ( b_i = 1 ),
-#                     IsPatchOfPinModule, ( b_i = 0 ),
-#                     IsVirtualPatch, false
-#                     );
-#                    Add( set, obj );
-#                    Info( InfoDebug, 2, "made patchrep",
-#                     "\n",
-#                     "\n#I  ", obj!.NW,
-#                     "\n#I    ", obj!.NE,
-#                     "\n#I  ", obj!.SW,
-#                     "\n#I    ", obj!.SE,
-#                     "\n" );
                 od;
             od;
 
-            Info( InfoDebug, 1, "Made patches with no pin boundaries" );
+            Info( InfoDebug, 2, "Made patches with no pin boundaries" );
 
             # Lastly, create the patches that have exactly one "northern" comp-
             #  -onent featuring <zero_sy>. These syllables can be constructed
@@ -440,7 +421,7 @@ InstallMethod(
                 fi;
             od;
             
-            Info( InfoDebug, 1, "Made \"replacement\" patches" );
+            Info( InfoDebug, 2, "Made \"replacement\" patches" );
             
             Append( set, triv_list );
             

@@ -483,6 +483,33 @@ InstallMethod(
 );
 
 InstallMethod(
+    String,
+    "for patch reps",
+    [ IsPatchRep ],
+    function( patch )
+        local
+            ne, nw, se, sw; # Cardinal directions
+        
+        if IsZeroPatch( patch ) then
+            PrintString( "<zero patch>" );
+        elif IsVirtualPatch( patch ) then
+            PrintString( "virtual patch>" );
+        else
+            nw := String( patch!.NW );
+            ne := String( patch!.NE );
+            sw := String( patch!.SW );
+            se := String( patch!.SE );
+
+            # Despite escaping the backslashes below, these strings still
+            #  produce double backslashes :(
+            return Concatenation(
+             [ "/ ", nw, " | ", ne, " \\", ", " , " \\ ", sw, " | ", se, " /" ]
+             );
+         fi;
+    end
+);
+
+InstallMethod(
     Display,
     "for patch reps",
     [ IsPatchRep ],

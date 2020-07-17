@@ -6,7 +6,7 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
 
-DeclareOperation( "Stripify", [ IsList, IsMultiplicativeElement ] );
+DeclareOperation( "Stripify", [ IsList ] );
 
 DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );

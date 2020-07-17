@@ -182,4 +182,61 @@ InstallGlobalFunction(
     end
 );
 
+InstallGlobalFunction(
+    Stripify,
+    "for a list, alternately of syllables and their orientations",
+    [ IsList ],
+    function( list )
+        local
+            fam,        # Family of a test syllable
+            indices,    # List of
+            k,          # Index variable
+            len,        # Length of <list>
+            sublist;    # Particular part of <list>
+
+        # We perform some checks on <list> before delegating to the global
+        #  function <StripifyFromSyllablesAndOrientationsNC>
+        if IsEmpty( list ) then
+            TryNextMethod();
+        elif not IsEvenInt( Length( list ) ) then
+            TryNextMethod();
+        else
+            len := Length( list );
+            
+            # Check all entries in odd positions of <list> are syllables, all
+            #  from the same family
+            indices := List( [1..len], IsOddInt );
+            sublist := list{ indices };
+            if false in List( sublist, IsSyllableRep ) then
+                TryNextMethod();
+            else
+                fam := FamilyObj( ( sublist )[1] );
+                if false in List( sublist, x -> FamilyObj( x ) = fam ) then
+                    TryNextMethod();
+                fi;
+            fi;
+            
+            # Check all entries in even positions of <list> are alternately
+            #  either 1 or -1
+            indices := List( [1..len], x -> IsEvenInt );
+            sublist := list{ indices };
+            if false in List( sublist, x -> ( x in [ 1, -1 ] ) ) then
+                TryNextMethod();
+            else
+                for k in [ 1..( Length( sublist ) ) ] do
+                    if IsBound( sublist[k+1] ) then
+                        if sublist[k]*sublist[k+1] <> -1 then
+                            TryNextMethod();
+                        fi;
+                    fi;
+                od;
+            fi;
+            
+            # PICK UP FROM HERE!
+            #  NEXT CHECK: PEAK AND VALLEY COMPATIBILITY!
+        fi;
+        
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

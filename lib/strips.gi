@@ -65,4 +65,121 @@ InstallGlobalFunction(
     end
 );
 
+InstallGlobalFunction(
+    StripifyFromSbAlgPathNC,
+    "for a nonstationary path in an SB algebra between two lists of integers",
+    function( left_list, path, right_list )
+        local
+            1_sba,      # Multiplicative unit of <sba>
+            2reg,       # 2-regular augmention of <quiv>
+            cont,       # Contraction of <oquiv> (function <oquiv> --> <2reg>)
+            i,          # Vertex variable (for source/target of a path)
+            k,          # Integer variable (for entries of <left_list> or
+                        #  <right_list>)
+            len,        # Integer variable (for length of a path)
+            linind,     # Set of <oquiv> paths with linearly independent res-
+                        #  -idue in <sba>
+            list,       # List variable, to store syllables and orientations
+            matches,    # List of paths in <lin_ind> that lift <path>
+            oquiv,      # Overquiver of <sba>
+            over_path,  # Lift <path> to overquiver
+            p,          # Path variable
+            quiv,       # Ground quiver of <sba>
+            ret,        # Retraction of <2reg> (function <2reg> --> <quiv> )
+            sba;        # SB algebra to which <path> belongs
+        
+        sba := PathAlgebraContainingElement( path );
+        1_sba := One( sba );
+        
+        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+        2reg := 2RegAugmentationOfQuiver( quiv );
+        ret := RetractionOf2RegAugmentation( 2reg );
+        oquiv := OverquiverOfSbAlg( sba );
+        cont := ContractionOfOverquiver( oquiv );
+
+        linind := LinIndOfSbAlg( sba );
+        
+        # Find the path <over_path> in <oquiv> whose <sba>-residue is <path>.
+        #  (Recall that entries of <linind> are paths in <oquiv>. Applying
+        #  <cont> and then <ret> turns them into entries of <quiv>. Multiplying
+        #  by <1_sba> subsequently makes elements of <sba>.)
+        matches := Filtered( linind, x -> ( 1_sba * ret( cont( x ) ) ) = path );
+        if Length( matches ) <> 1 then
+            Error( "I cannot find an overquiver path that lifts the given \
+             path ", path, "! Contact the maintainer of the sbstrips package."
+             );
+        else
+            over_path := matches[1];
+        fi;
+        
+        # First, we normalise. If <left_list> has a last entry <l1> that is
+        #  negative and/or <right_list> has a first entry <r1> that is pos-
+        #  -itive, then we "absorb" them both into <over_path>, remove them
+        #  from their respective lists, and call the function again.
+        # (We need to be careful as <left_list> or <right_list> may be empty.
+        
+        if Length( left_list ) > 0 then
+            l := left_list[ Length( left_list ) ]
+            if l < 0 then
+                i := TargetOfPath( over_path );
+                len := LengthOfPath( over_path );
+                over_path := PathByTargetAndLength( i, len - l );
+
+                path := ret( cont( over_path ) )*1_sba;
+                left_list := left_list{ [ 1..( Length( left_list ) - 1 ) ] };
+                return StripifyFromSbAlgPathNC( left_list, path, right_list );
+            fi;
+        elif Length( right_list ) > 0 then
+            r := right_list[1];
+            if r > 0
+                i := SourceOfPath( over_path );
+                len := LengthOfPath( over_path );
+                over_path := PathBySourceAndLength( i, len+l );
+                
+                path := ret( cont( over_path ) )*1_sba;
+                right_list := right_list{ [ 2..( Length( right_list ) ) ] };
+                return StripifyFromSbAlgPathNC( left_list, path, right_list  );
+            fi;
+        fi;
+        
+        # Now <left_list> is either empty or ends in a positive integer, and
+        #  <right_list> is either empty or begins with a negative integer. We
+        #  can turn the input into a syllable-and-orientation list to be
+        #  handled by <StripifyFromSyllablesAndOrientationsNC>.
+        
+        list := [ overpath, 1 ]
+
+        # Develop <list> on the right
+        i := ExchangePartnerOfVertex( TargetOfPath( overpath ) );
+        for k in [ 1..Length( right_list ) ] do
+            if right_list[k] < 0 then
+                p := PathByTargetAndLength( i, -( right_list[k] ) );
+                list := Concatenation( list, [ p, -1 ] );
+                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+            elif
+                right_list[k] > 0 then
+                p := PathBySourceAndLength( i, right_list[k] );
+                list := Concatenation( list, [ p, 1 ] );
+                i := ExchangePartnerOfVertex( TargetOfPath( p ) );
+            fi;
+        od;
+        
+        # Develop <list> on the left
+        i := ExchangePartnerOfVertex( SourceOfPath( overpath ) );
+        for k in [ 1..Length( left_list ) ] do
+            if Reversed( left_list )[k] < 0 then
+                p := PathByTargetAndLength( i, -( Reversed( left_list )[k] ) );
+                list := Concatenation( [p, 1], list );
+                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+            elif Reversed( left_list )[k] > 0 then
+                p := PathBySourceAndLength( i, Reversed( left_list )[k] ) );
+                i := ExchangePartnerOfVertex( TargetOfPath( p ) );
+            fi;
+        od;
+        
+        # Pass <list> to StripifyFromSyllablesAndOrientationsNC
+        return StripifyFromSyllablesAndOrientationsNC( list );
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

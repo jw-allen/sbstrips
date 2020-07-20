@@ -17,6 +17,43 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    ReflectionOfStrip,
+    "for a strip rep",
+    function( strip )
+        local
+            data,       # Defining data of <strip>
+            k, l,       # Integer variables 
+            list,       # List variable (for the output)
+            ori_list,   # Sublist of orientations in <data>
+            syll_list;  # Sublist of syllables in <data>
+            
+        data := strip![1];
+        l := Length( data );
+        
+        # The syllables are in the odd positions of <data>; the orientations in
+        #  the even positions.
+        syll_list := data{ Filtered( [ 1..l ], IsOddInt ) };
+        ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
+        
+        # <syll_list> and <ori_list> need to be reversed individually and then
+        #  interwoven
+        syll_list := Reversed( syll_list );
+        ori_list := Reversed( ori_list );
+        
+        list := [1..l];
+        for k in list do
+            if IsOddInt( k ) then
+                list[ k ] := syll_list[ Floor( k/2 ) ];
+            elif IsEvenInt( k ) then
+                list[ k ] := ori_list[ Floor( k/2 ) ];
+            fi;
+        od;
+        
+        return list;
+    end
+);
+
 InstallGlobalFunction(
     StripifyFromSyllablesAndOrientationsNC,
     "for a list of syllables and alternating orientations,

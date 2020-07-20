@@ -121,7 +121,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[1] );
             norm_arg := Concatenation( [ norm_sy, -1 ], arg );
             
-            Info( InfoDebug, 1, "Normalising on left, calling again..." );
+            Info( InfoDebug, 2, "Normalising on left, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -131,7 +131,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[ len - 1 ] );
             norm_arg := Concatenation( arg, [ norm_sy, 1 ] );
             
-            Info( InfoDebug, 1, "Normalising on right, calling again..." );
+            Info( InfoDebug, 2, "Normalising on right, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -141,7 +141,7 @@ InstallGlobalFunction(
         
         # Now we create the <IsStripRep> object.
         
-        Info( InfoDebug, 1, "no normalisation needed, creating object..." );
+        Info( InfoDebug, 2, "no normalisation needed, creating object..." );
         
         data := arg;
         fam := StripFamilyOfSbAlg( sba );
@@ -198,7 +198,6 @@ InstallGlobalFunction(
             over_path := matches[1];
         fi;
 
-#########1#########2#########3#########4#########5#########6#########7#########
         # First, we normalise. If <left_list> has a last entry that is negative
         #  and/or <right_list> has a first entry that is positive, then we
         #  "absorb" those entries into <over_path>, remove them from their res-
@@ -315,64 +314,183 @@ InstallMethod(
     end
 );
 
-#####
-##### TESTED UP TO HERE IN GAP
-#####
+InstallMethod(
+    ViewObj,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            2reg,           # 2-regular augmentaion of <quiv>
+            as_quiv_path,   # Local function that turns a syllable into the 
+                            #  <quiv>-path that it represents
+            cont,           # Contraction of <oquiv>
+            data,           # Defining data of <strip>
+            k,              # Integer variable
+            quiv,           # Original quiver of <sba>
+            oquiv,          # Overquiver of <sba>
+            ret,            # Retraction of <2reg>
+            sba,            # SB alg to which <strip> belongs
+            sy;             # Syllable variable
+    
+        sba := FamilyObj( strip )!.sb_alg;
+        
+        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+        2reg := 2RegAugmentationOfQuiver( quiv );
+        ret := RetractionOf2RegAugmentation( 2reg );
+        
+        oquiv := OverquiverOfSbAlg( sba );
+        cont := ContractionOfOverquiver( oquiv );
 
-InstallGlobalFunction(
+        # Each syllable of <sba> represents a path of <sba>: this is the
+        #  function that will tell you which
+        as_quiv_path := function( sy )
+            return ret( cont( UnderlyingPathOfSyllable( sy ) ) );
+        end;
+        
+        # Print the strip so it looks something like
+        #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
+        data := strip![1];
+        for k in [ 1..Length( data ) ] do
+            if IsOddInt( k ) then
+                sy := data[k];
+                Print( "(", as_quiv_path( sy ), ")" );
+                if data[k+1] = -1 then
+                    Print( "^-1" );
+                elif (data[k+1] = 1) and (IsBound( data[k+2] )) then
+                    Print( " " );
+                fi;
+            fi;
+        od;
+    end
+);
+
+# <Stripify> has several methods. Ultimately, it will delegate to other
+#  functions for all the hard work. Prior to delegation, it must check that its
+#  input is in a legal format.
+# In the first case, it will be given a list of syllables and orientations alt-
+#  -ernately. This list must be nonempty and have even length for starters. The
+#  syllables must alternately be peak and valley neighbours. The only boundary
+#  syllables must appear at the boundary of the string; ie in the leftmost
+#  position (which must have orientation -1) or the rightmost position (orien-
+#  -tation 1). Further, the orientations must be alternately 1 and -1. 
+
+InstallMethod(
     Stripify,
     "for a list, alternately of syllables and their orientations",
     [ IsList ],
     function( list )
         local
             fam,        # Family of a test syllable
-            indices,    # List of
+            indices,    # List variable (for indices of interest)
             k,          # Index variable
             len,        # Length of <list>
-            sublist;    # Particular part of <list>
+            pert,       # Variable for perturbation term of a syllable
+            sublist;    # Particular part of <list> (indexed by <indices>)
 
         # We perform some checks on <list> before delegating to the global
-        #  function <StripifyFromSyllablesAndOrientationsNC>
+        #  function <StripifyFromSyllablesAndOrientationsNC>, namely verifying
+        #  that <list> has even but nonzero length
         if IsEmpty( list ) then
+            Info( InfoDebug, 2, "Input list is empty!" );
             TryNextMethod();
         elif not IsEvenInt( Length( list ) ) then
+            Info( InfoDebug, 2, "Input list has odd length!" );
             TryNextMethod();
         else
             len := Length( list );
             
             # Check all entries in odd positions of <list> are syllables, all
             #  from the same family
-            indices := List( [1..len], IsOddInt );
+            indices := Filtered( [1..len], IsOddInt );
             sublist := list{ indices };
             if false in List( sublist, IsSyllableRep ) then
+                Info( InfoDebug, 2, "Input list contains a non-syllable!" );
                 TryNextMethod();
             else
-                fam := FamilyObj( ( sublist )[1] );
+                fam := FamilyObj( sublist[1] );
                 if false in List( sublist, x -> FamilyObj( x ) = fam ) then
+                    Info( InfoDebug, 2, "Input syllable families disagree!" );
                     TryNextMethod();
                 fi;
             fi;
+            Info( InfoDebug, 2, "Syllables entered correctly" );
             
             # Check all entries in even positions of <list> are alternately
             #  either 1 or -1
-            indices := List( [1..len], x -> IsEvenInt );
+            indices := Filtered( [1..len], IsEvenInt );
             sublist := list{ indices };
             if false in List( sublist, x -> ( x in [ 1, -1 ] ) ) then
+                Info( InfoDebug, 2, "Orientations must be 1 or -1!" );
                 TryNextMethod();
             else
                 for k in [ 1..( Length( sublist ) ) ] do
                     if IsBound( sublist[k+1] ) then
                         if sublist[k]*sublist[k+1] <> -1 then
+                            Info( InfoDebug, 2, "Orientations must alternate!"
+                             );
                             TryNextMethod();
                         fi;
                     fi;
                 od;
             fi;
+            Info( InfoDebug, 2, "Orientations entered correctly" );
             
-            # PICK UP FROM HERE!
-            #  NEXT CHECK: PEAK AND VALLEY COMPATIBILITY!
+            # Check that all pairs
+            #      (p_i)^-1(q_i)
+            #  of consecutive syllables are peak neighbors and all pairs
+            #      (q_i)(p_{i+1})
+            #  are valley neighbours
+            indices := Filtered( [1..len], IsOddInt );
+            for k in indices do
+                if IsBound( list[k+2] ) then
+                    if list[k+1] = -1 then
+                        if ( not
+                         IsPeakCompatiblePairOfSyllables( list[k], list[k+2] )
+                         ) then
+                            Info( InfoDebug, 2, "Peak compatibility failure!");
+                            TryNextMethod();
+                        fi;
+                    elif list[k+1] = 1 then
+                        if ( not
+                         IsValleyCompatiblePairOfSyllables(list[k], list[k+2])
+                         ) then
+                            Info( InfoDebug, 2,
+                             "Valley compatibility failure!" );
+                            TryNextMethod();
+                        fi;
+                    fi;
+                fi;
+            od;
+            Info( InfoDebug, 2, "Peak and valley-compatibility holds!" );
         fi;
+
+        # A nonzero syllable must be boundary iff it is either the leftmost
+        #  syllable and has orientation -1 or the rightmost syllable and has
+        #  orientation 1. Check this.
+        indices := Filtered( [1..len], IsOddInt );
+        for k in indices do
+            pert := PerturbationTermOfSyllable( list[k] );
+            if ( k = 1 and list[k+1] = -1 ) or
+             ( k = Maximum( indices ) and list[k+1] = 1 )
+             then
+                if pert = 0 then
+                    Info( InfoDebug, 2, "Interior syllable at boundary!" );
+                    TryNextMethod();
+                fi;
+            else
+                if pert = 1 then
+                    Info( InfoDebug, 2, "Boundary syllable at interior!" );
+                fi;
+            fi;
+        od;
+        Info( InfoDebug, 2, "Interior/boundary syllables appropriate!" );
         
+        # All checks are complete; we delegate to another function for the hard
+        #  work!
+        return CallFuncList(
+         StripifyFromSyllablesAndOrientationsNC,
+         list
+        );
     end
 );
 

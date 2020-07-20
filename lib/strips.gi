@@ -160,7 +160,7 @@ InstallGlobalFunction(
             2reg,       # 2-regular augmention of <quiv>
             cont,       # Contraction of <oquiv> (function <oquiv> --> <2reg>)
             i,          # Vertex variable (for source/target of a path)
-            k,          # Integer variable (for entries of <left_list> or
+            k, l, r,    # Integer variable (for entries of <left_list> or
                         #  <right_list>)
             len,        # Integer variable (for length of a path)
             linind,     # Set of <oquiv> paths with linearly independent res-
@@ -197,15 +197,16 @@ InstallGlobalFunction(
         else
             over_path := matches[1];
         fi;
-        
-        # First, we normalise. If <left_list> has a last entry <l1> that is
-        #  negative and/or <right_list> has a first entry <r1> that is pos-
-        #  -itive, then we "absorb" them both into <over_path>, remove them
-        #  from their respective lists, and call the function again.
+
+#########1#########2#########3#########4#########5#########6#########7#########
+        # First, we normalise. If <left_list> has a last entry that is negative
+        #  and/or <right_list> has a first entry that is positive, then we
+        #  "absorb" those entries into <over_path>, remove them from their res-
+        #  -pective lists, and call the function again.
         # (We need to be careful as <left_list> or <right_list> may be empty.
         
         if Length( left_list ) > 0 then
-            l := left_list[ Length( left_list ) ]
+            l := left_list[ Length( left_list ) ];
             if l < 0 then
                 i := TargetOfPath( over_path );
                 len := LengthOfPath( over_path );
@@ -222,7 +223,7 @@ InstallGlobalFunction(
             if r > 0 then
                 i := SourceOfPath( over_path );
                 len := LengthOfPath( over_path );
-                over_path := PathBySourceAndLength( i, len+l );
+                over_path := PathBySourceAndLength( i, len+r );
                 
                 path := ret( cont( over_path ) )*1_sba;
                 right_list := right_list{ [ 2..( Length( right_list ) ) ] };

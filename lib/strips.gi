@@ -59,7 +59,7 @@ InstallMethod(
     \=,
     "for strips",
     \=,
-    [ IsStripRep ],
+    [ IsStripRep, IsStripRep ],
     function( strip1, strip2 )
         local
             data1, data2,           # Defining data of <strip1> and <strip2>
@@ -74,16 +74,16 @@ InstallMethod(
             return false;
         else
             l := Length( data1 );
-            sy_list1 := data{ Filtered( [ 1..l ], IsOddInt ) };
-            ori_list1 := data{ Filtered( [ 1..l ], IsEvenInt ) };
-            sy_list2 := data{ Filtered( [ 1..l ], IsOddInt ) };
-            ori_list2 := data{ Filtered( [ 1..l ], IsEvenInt ) };
+            sy_list1 := data1{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list1 := data1{ Filtered( [ 1..l ], IsEvenInt ) };
+            sy_list2 := data2{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list2 := data2{ Filtered( [ 1..l ], IsEvenInt ) };
             
             if ( sy_list1 = sy_list2 ) and ( ori_list1 = ori_list2 ) then
                 return true;
             elif ( sy_list1 = Reversed( sy_list2 ) ) and
              ( sy_list1 = Reversed( sy_list2 ) ) then
-                retrun true;
+                return true;
             else
                 return false;
             fi;
@@ -93,7 +93,7 @@ InstallMethod(
 
 InstallGlobalFunction(
     StripifyFromSyllablesAndOrientationsNC,
-    "for a list of syllables and alternating orientations,
+    "for a list of syllables and alternating orientations",
     function( arg )
         local
             data,       # Defining data of the strip to output
@@ -105,7 +105,7 @@ InstallGlobalFunction(
             type;       # Type variable
         
         len := Length( arg );
-        sba := SbAlgebraOfSyllable( arg[1] );
+        sba := SbAlgOfSyllable( arg[1] );
         
         # This is an NC function, so we can assume that the arguments are
         #      sy1, or1, sy2, or2, sy3, or3, ..., syN, orN
@@ -118,24 +118,36 @@ InstallGlobalFunction(
         #  end if necessary and calling the function again
         
         if arg[2] <> -1 then
-            norm_sy := SidestepFunctionOfSbAlg( arg[1] );
+            norm_sy := SidestepFunctionOfSbAlg( sba )( arg[1] );
             norm_arg := Concatenation( [ norm_sy, -1 ], arg );
-            return StripifyFromSyllablesAndOrientationsNC( norm_arg );
+            
+            Info( InfoDebug, 1, "Normalising on left, calling again..." );
+            
+            return CallFuncList(
+            StripifyFromSyllablesAndOrientationsNC,
+             norm_arg
+             );
         elif arg[ len ] <> 1 then
-            norm_sy := SidestepFunctionOfSbAlg( arg[ len - 1 ] );
+            norm_sy := SidestepFunctionOfSbAlg( sba )( arg[ len - 1 ] );
             norm_arg := Concatenation( arg, [ norm_sy, 1 ] );
-            return StripifyFromSyllablesAndOrientationsNC( norm_arg );
+            
+            Info( InfoDebug, 1, "Normalising on right, calling again..." );
+            
+            return CallFuncList(
+            StripifyFromSyllablesAndOrientationsNC,
+             norm_arg
+             );
         fi;
         
         # Now we create the <IsStripRep> object.
+        
+        Info( InfoDebug, 1, "no normalisation needed, creating object..." );
         
         data := arg;
         fam := StripFamilyOfSbAlg( sba );
         type := NewType( fam, IsStripRep );
         
-        Objectify( type, [ data ] );
-        
-        return data;
+        return Objectify( type, [ data ] );
     end
 );
 
@@ -203,9 +215,11 @@ InstallGlobalFunction(
                 left_list := left_list{ [ 1..( Length( left_list ) - 1 ) ] };
                 return StripifyFromSbAlgPathNC( left_list, path, right_list );
             fi;
-        elif Length( right_list ) > 0 then
+        fi;
+        
+        if Length( right_list ) > 0 then
             r := right_list[1];
-            if r > 0
+            if r > 0 then
                 i := SourceOfPath( over_path );
                 len := LengthOfPath( over_path );
                 over_path := PathBySourceAndLength( i, len+l );
@@ -221,10 +235,10 @@ InstallGlobalFunction(
         #  can turn the input into a syllable-and-orientation list to be
         #  handled by <StripifyFromSyllablesAndOrientationsNC>.
         
-        list := [ overpath, 1 ]
+        list := [ over_path, 1 ];
 
         # Develop <list> on the right
-        i := ExchangePartnerOfVertex( TargetOfPath( overpath ) );
+        i := ExchangePartnerOfVertex( TargetOfPath( over_path ) );
         for k in [ 1..Length( right_list ) ] do
             if right_list[k] < 0 then
                 p := PathByTargetAndLength( i, -( right_list[k] ) );
@@ -239,22 +253,47 @@ InstallGlobalFunction(
         od;
         
         # Develop <list> on the left
-        i := ExchangePartnerOfVertex( SourceOfPath( overpath ) );
+        i := ExchangePartnerOfVertex( SourceOfPath( over_path ) );
         for k in [ 1..Length( left_list ) ] do
             if Reversed( left_list )[k] < 0 then
                 p := PathByTargetAndLength( i, -( Reversed( left_list )[k] ) );
                 list := Concatenation( [p, 1], list );
                 i := ExchangePartnerOfVertex( SourceOfPath( p ) );
             elif Reversed( left_list )[k] > 0 then
-                p := PathBySourceAndLength( i, Reversed( left_list )[k] ) );
+                p := PathBySourceAndLength( i, Reversed( left_list )[k] );
+                list := Concatenation( [p, - 1], list );
                 i := ExchangePartnerOfVertex( TargetOfPath( p ) );
+            fi;
+        od;
+
+        # This gives a list paths in <oquiv> and orientations. Now we turn each
+        #  path into a syllable. Almost all syllables are interior (ie, have
+        #  pertubation term 0). The only exceptions are: the first syllable
+        #  only if its orientation is -1 and; the last syllable only if its
+        #  orientation is 1.
+        for k in [ 1..Length( list ) ] do
+            if IsOddInt( k ) then
+                if ( (k = 1) and (list[k+1] = -1) ) then
+                    list[k] := Syllabify( list[k], 1 );
+                elif ( (k+1 = Length( list )) and (list[k+1] = 1) ) then
+                    list[k] := Syllabify( list[k], 1 );
+                else
+                    list[k] := Syllabify( list[k], 0 );
+                fi;
             fi;
         od;
         
         # Pass <list> to StripifyFromSyllablesAndOrientationsNC
-        return StripifyFromSyllablesAndOrientationsNC( list );
+        return CallFuncList(
+         StripifyFromSyllablesAndOrientationsNC,
+         list
+         );
     end
 );
+
+#####
+##### TESTED UP TO HERE IN GAP
+#####
 
 InstallGlobalFunction(
     Stripify,

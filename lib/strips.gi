@@ -292,6 +292,29 @@ InstallGlobalFunction(
     end
 );
 
+InstallMethod(
+    Display,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,   # Defining data of <strip>
+            k;      # Integer variable
+        
+        data := strip![1];
+        for k in [ 1..Length( data ) ] do
+            if IsOddInt( k ) then
+                if data[k+1] = -1 then
+                    Print( data[k], "^-1" );
+                elif data[k+1] = 1 then
+                    Print( data[k] );
+                fi;
+            fi;
+        od;
+        Print( "\n" );
+    end
+);
+
 #####
 ##### TESTED UP TO HERE IN GAP
 #####

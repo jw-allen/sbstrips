@@ -20,37 +20,74 @@ InstallMethod(
 InstallMethod(
     ReflectionOfStrip,
     "for a strip rep",
+    [ IsStripRep ],
     function( strip )
         local
             data,       # Defining data of <strip>
             k, l,       # Integer variables 
             list,       # List variable (for the output)
             ori_list,   # Sublist of orientations in <data>
-            syll_list;  # Sublist of syllables in <data>
+            sy_list;    # Sublist of syllables in <data>
             
         data := strip![1];
         l := Length( data );
         
         # The syllables are in the odd positions of <data>; the orientations in
         #  the even positions.
-        syll_list := data{ Filtered( [ 1..l ], IsOddInt ) };
+        sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
         ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
         
-        # <syll_list> and <ori_list> need to be reversed individually and then
+        # <sy_list> and <ori_list> need to be reversed individually and then
         #  interwoven
-        syll_list := Reversed( syll_list );
+        sy_list := Reversed( sy_list );
         ori_list := Reversed( ori_list );
         
         list := [1..l];
         for k in list do
             if IsOddInt( k ) then
-                list[ k ] := syll_list[ Floor( k/2 ) ];
+                list[ k ] := sy_list[ Floor( k/2 ) ];
             elif IsEvenInt( k ) then
                 list[ k ] := ori_list[ Floor( k/2 ) ];
             fi;
         od;
         
         return list;
+    end
+);
+
+InstallMethod(
+    \=,
+    "for strips",
+    \=,
+    [ IsStripRep ],
+    function( strip1, strip2 )
+        local
+            data1, data2,           # Defining data of <strip1> and <strip2>
+            l,                      # Integer variable (for a length of a list)
+            ori_list1, ori_list2,   # Orientation list of <data1> and <data2>
+            sy_list1, sy_list2;     # Syllable list of <data1> and <data2>
+            
+        data1 := strip1![1];
+        data2 := strip2![1];
+        
+        if Length( data1 ) <> Length( data2 ) then
+            return false;
+        else
+            l := Length( data1 );
+            sy_list1 := data{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list1 := data{ Filtered( [ 1..l ], IsEvenInt ) };
+            sy_list2 := data{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list2 := data{ Filtered( [ 1..l ], IsEvenInt ) };
+            
+            if ( sy_list1 = sy_list2 ) and ( ori_list1 = ori_list2 ) then
+                return true;
+            elif ( sy_list1 = Reversed( sy_list2 ) ) and
+             ( sy_list1 = Reversed( sy_list2 ) ) then
+                retrun true;
+            else
+                return false;
+            fi;
+        fi;
     end
 );
 

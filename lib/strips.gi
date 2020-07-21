@@ -576,4 +576,17 @@ InstallMethod(
     end
 );
 
+InstallOtherMethod(
+    SyzygyOfStrip,
+    "for a list of strips",
+    [ IsList ],
+    function( list )
+        if false in List( list, IsStripRep ) then
+            TryNextMethod();
+        else
+            return List( list, SyzygyOfStrip );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

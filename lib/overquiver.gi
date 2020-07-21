@@ -526,8 +526,6 @@ InstallMethod(
 
 InstallGlobalFunction(
     SbAlgResidueOfOverquiverPathNC,
-    "for an overquiver path",
-    [ IsPath ],
     function( path )
         local
             1_sba,  # Multiplicative unit of <sba>

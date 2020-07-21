@@ -291,7 +291,7 @@ InstallGlobalFunction(
     end
 );
 
-InstallMethod(
+InstallGlobalFunction(
     StripifyVirtualStripNC,
     [ IsList ],
     function( list )
@@ -515,10 +515,11 @@ InstallMethod(
                 Info( InfoDebug, 2,
                  "There are virtual syllables among nonvirtual ones!"
                  );
+            fi;
             if Length( sublist ) <> 2 then
                 Info( InfoDebug, 2,
                  "There are too many virtual syllables!"
-                 ):
+                 );
                 TryNextMethod();
             fi;
             if not ( list[2] = 1 and list[4] = -1 ) then
@@ -528,9 +529,7 @@ InstallMethod(
                 TryNextMethod();
             fi;
             
-            #
-            # MAKE SOME "StripifyVirtualStripNC" FUNCTION OR SOMETHING!
-            #
+            return StripifyVirtualStripNC( list );
         fi;
         
         # All checks are complete; we delegate to another function for the hard

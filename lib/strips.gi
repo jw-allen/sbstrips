@@ -494,4 +494,53 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    SyzygyOfStrip,
+    "for a strip",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,       # Underlying data of strip
+            indices,    # List variable, for indices of interest
+            j, k,       # Integer variables, for indices
+            len,        # Length of <data>
+            patch,      # Patch variable
+            patch_list, # List variable, for patches
+            sba,        # SB algebra of which <strip> is a strip
+            summands,   # Integer variable
+            sy_list,    # Syllable (sub)list of <data>
+            syz_list,   # 
+            zero_patch, # Zero patch of <sba>
+            
+        data := strip![1];
+        len := Length( data );
+        indices := Filtered( [1..len], IsOddInt );
+        sy_list := data{ indices };
+        
+        # We use <sy_list> to specify a list of patches, sandwiched between two
+        #  copies of the zero patch of <sba>.
+        
+        sba := FamilyObj( strip )!.sb_alg
+        zero_patch := ZeroPatchOfSbAlg( sba );
+        patch_list := [ zero_patch ];
+        
+        indices := [ 1..Length( sy_list ) ];
+        for k in indices do
+            if IsOddInt( k ) then
+                patch := PatchifyByTop( sy_list[k], sy_list[k+1] );
+                Add( patch_list, patch );
+            fi;
+        od;
+        Add( patch_list, patch );
+        
+        
+        ###
+        ### PICK UP FROM HERE
+        ###
+        # We now read off the bottom row to give us ....
+        summands := 1 + Number( patch_list, IsPatchOfStringProjective );
+        
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

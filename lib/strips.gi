@@ -529,6 +529,7 @@ InstallMethod(
                 TryNextMethod();
             fi;
             
+            Info( InfoDebug, 2, "Returning virtual strip" );
             return StripifyVirtualStripNC( list );
         fi;
         
@@ -558,7 +559,7 @@ InstallMethod(
             sy_list,    # Syllable (sub)list of <data>
             syz_list,   # List whose entries are the defining data lists of
                         #  strips
-            zero_patch, # Zero patch of <sba>
+            zero_patch; # Zero patch of <sba>
 
         data := strip![1];
         len := Length( data );
@@ -597,7 +598,7 @@ InstallMethod(
                 if not IsZeroSyllable( patch_list[k]!.SE ) then
                     Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
                 fi;
-            elif IsPatchOfPinModule( patch_list[k] ) then
+            else
                 if not IsZeroSyllable( patch_list[k]!.SW ) then
                     Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
                 fi;
@@ -615,11 +616,14 @@ InstallMethod(
                 Remove( syz_list, j );
             else
                 syz_list[j] := Stripify( syz_list[j] );
+                if IsVirtualStripRep( syz_list[j] ) then
+                    syz_list[j] := SyzygyOfStrip( syz_list[j] )[1];
+                fi;
                 j := j + 1;
             fi;
         od;
         
-        return syz_list;
+        return Flat( syz_list );
     end
 );
 
@@ -631,7 +635,7 @@ InstallOtherMethod(
         if false in List( list, IsStripRep ) then
             TryNextMethod();
         else
-            return List( list, SyzygyOfStrip );
+            return Flat( List( list, SyzygyOfStrip ) );
         fi;
     end
 );

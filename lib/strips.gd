@@ -7,7 +7,7 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareOperation( "Stripify", [ IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 DeclareOperation( "SyzygyOfStrip", [ IsStripRep ] );
-DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep ] );
+DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );

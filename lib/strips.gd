@@ -11,6 +11,7 @@ DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep ] );
 
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
+DeclareGlobalFunction( "StripifyVirtualStripNC" );
 
 DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );

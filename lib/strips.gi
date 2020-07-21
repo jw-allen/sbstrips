@@ -292,6 +292,26 @@ InstallGlobalFunction(
 );
 
 InstallMethod(
+    StripifyVirtualStripNC,
+    [ IsList ],
+    function( list )
+        local
+            fam,        # Syllable family to which syllables in <list> belong
+            sba,        # SB algebra to which syllables in <list> belong
+            type,       # Type variable
+            zero_sy;    # Zero syllable of <sba>
+                    
+        fam := FamilyObj( list[1] );
+        sba := fam!.sb_alg;
+        zero_sy := ZeroSyllableOfSbAlg( sba );
+        
+        list := [ zero_sy, -1, list[1], 1, list[3], -1, zero_sy, 1 ];
+        type := NewType( fam, IsVirtualStripRep );
+        return Objectify( type, [ list ] );
+    end
+);
+#########1#########2#########3#########4#########5#########6#########7#########
+InstallMethod(
     Display,
     "for a strip rep",
     [ IsStripRep ],

@@ -1,4 +1,5 @@
 DeclareRepresentation( "IsStripRep", IsPositionalObjectRep, [] );
+DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
 DeclareAttribute( "StripFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );

@@ -548,17 +548,18 @@ InstallOtherMethod(
     [ IsList, IsMultiplicativeElement, IsList ],
     function( left_list, path, right_list )
         local
-#########1#########2#########3#########4#########5#########6#########7#########
             i,          # Vertex variable (for testing legality of <left_list>
                         #  and <right_list>)
             k, l,       # Integer variables (for testing legality of
                         #  <left_list> and <right_list>
-            lindep,     # Paths in the overquiver of <sba> whose residues in
+            linind,     # Paths in the overquiver of <sba> whose residues in
                         #  <sba> are linearly independent of all other paths
             matches,    # List of path(s) in <lindep> whose residue(s) in
                         #  <sba> equal(s) <path>
-            overpath,   # Path in <lindep> whose residue in <sba> equals <path>
+            over_path,  # Path in <lindep> whose residue in <sba> equals <path>
             perm_data,  # Permissible data of <sba>
+            test_left,  # 
+            test_right, #
             sba;        # SB algebra to which <path> belongs
 
         # <path> must be a path in some special biserial algebra <sba>, and
@@ -573,21 +574,20 @@ InstallOtherMethod(
         Info( InfoDebug, 2, "The given path belongs to a SB algebra!" );
         
         sba := PathAlgebraContainingElement( path );
-        lindep := LinDepOfSbAlg( sba );
+        linind := LinIndOfSbAlg( sba );
         matches := Filtered(
-         lindep,
+         linind,
          x -> ( path = SbAlgResidueOfOverquiverPathNC( x ) )
         );
         if Length( matches ) <> 1 then
             Error( "The given path does not lift!" );
         fi;
         
-        overpath := matches[1];
+        over_path := matches[1];
         Info( InfoDebug, 2, "The given path lifts to the overquiver!" );
         
         # Both <left_list> and <right_list> must be lists of integers of alter-
-        #  -nating signs. Relative to <path>, the integers in these lists must
-        #  specify <sba> paths having lifts in <LinDepOfSbAlg( sba )>.
+        #  -nating signs
         
         if false in List( Concatenation( left_list, right_list ), IsInt ) then
             Error( "<left_list> and <right_list> must be lists of integers!" );
@@ -607,58 +607,91 @@ InstallOtherMethod(
             fi;
         od;
         Info( InfoDebug, 2, "<right_list>'s integers alternate in sign>" );
-        
+
+        # Relative to <path>, the integers in these lists must specify <sba>
+        #  paths having lifts in <LinDepOfSbAlg( sba )>. If the last entry of
+        #  <left_list> is negative and/or the first entry of <right_list> is
+        #  positive then absorb them into the central path and omit them from
+        #  testing. Use <test_left> and <test_right> to store those number
+        #  lists we will check.
+
+        # Absorb if necessary
         i := SourceOfPath( over_path );
         l := LengthOfPath( over_path );
+        test_left := left_list;
+        test_right := right_list;
         if not IsEmpty( left_list ) then
             k := left_list[ Length( left_list ) ];
             if k < 0 then
                 i := 1RegQuivIntAct( i, -k );
-                l := len - k;
+                l := l - k;
+                test_left := left_list{ [ 1..( Length( left_list )-1 ) ] };
             fi;
         fi;
         if not IsEmpty( right_list ) then
             k := right_list[1];
             if k > 0 then
                 i := 1RegQuivIntAct( i, -k );
-                l := len + k;
+                l := l + k;
+                test_right := right_list{ [ 2..Length( right_list ) ] };
             fi;
         fi;
         over_path := PathBySourceAndLength( i, l );
         
-        if not over_path in lindep then
+        # Test absorbed path belongs to <lindep> and therefore lifts
+        if not over_path in linind then
             Error( "The central path does not lift to the overquiver!" );
         else
             Info( InfoDebug, 2, "The central path lifts to the overquiver!" );
         fi;
         
-        # Test that <left_list> specifies paths in <lindep>
-        for k in [ 1 .. Length( left_list ) ] do
+        # Test that <test_left> specifies paths in <lindep>, relative to
+        #  <over_path>
+        for k in [ 1 .. Length( test_left ) ] do
             i := ExchangePartnerOfVertex( i );
-            l := left_list[ Length( left_list )-k ];
+            l := test_left[ (Length( test_left )+1-k) ];
             if l > 0 then
-                if not ( PathBySourceAndLength( i, l ) in lindep ) then
-                    Error( "The ", Ordinal( Length( left_list )-k ) ), " path\
-                     of <left_list> does not lift to the overquiver! );
+                if not ( PathBySourceAndLength( i, l ) in linind ) then
+                    Error( "A paths in <left_list> does not lift!" );
                 else
                     i := 1RegQuivIntAct( i, -l );
                 fi;
             elif l < 0 then
-                if not ( PathByTargetAndLength( i, -l ) in lindep ) then
-                    Error( "The ", Ordinal( Length( left_list )-k ) ), "path\
-                     of <left_list> does not lift to the overquiver! );
+                if not ( PathByTargetAndLength( i, -l ) in linind ) then
+                    Error( "A path in <left_list> does not lift" );
                 else
                     i := 1RegQuivIntAct( i, -l );
                 fi;
             fi;
-            Info( InfoDebug, 2, "Paths in <left_list> lift correctly!" );
+        od;
+        Info( InfoDebug, 2, "Paths in <left_list> lift correctly!" );
+                
+        # Test that <test_right> specifies paths in <lindep>, relative to
+        #  <over_path>
+        i := TargetOfPath( over_path );
+
+        for k in [ 1.. Length( test_right ) ] do
+            i := ExchangePartnerOfVertex( i );
+            l := test_right[ k ];
+            if l > 0 then
+                if not ( PathBySourceAndLength( i, l ) in linind ) then
+                    Error( "A paths in <right_list> does not lift!" );
+                else
+                    i := 1RegQuivIntAct( i, -l );
+                fi;
+            elif l < 0 then
+                if not ( PathByTargetAndLength( i, -l ) in linind ) then
+                    Error( "A path in <right_list> does not lift" );
+                else
+                    i := 1RegQuivIntAct( i, -l );
+                fi;
+            fi;
         od;
         
-        # Test that <right_list> specifies paths in <lindep>
+        Info( InfoDebug, 2, "Paths in <right_list> lift correctly!" );
         
-        ##
-        ##  PICK UP FROM HERE
-        ##
+        # Tests complete! Delegate to <StripifyFromSbAlgPathNC>
+        return StripifyFromSbAlgPathNC( left_list, path, right_list );
     end
 );
 

@@ -3,11 +3,13 @@ DeclareRepresentation( "IsStripRep", IsPositionalObjectRep, [] );
 DeclareAttribute( "StripFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 
-DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
-DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
-
 DeclareOperation( "Stripify", [ IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
+DeclareOperation( "SyzygyOfStrip", [ IsStripRep ] );
+DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep ] );
+
+DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
+DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
 
 DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );

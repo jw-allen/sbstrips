@@ -458,6 +458,20 @@ InstallMethod(
 );
 
 InstallMethod(
+    ZeroPatchOfSbAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        if HasZeroPatchOfSbAlg( sba ) then
+            return ZeroPatchOfSbAlg( sba );
+        else
+            PatchSetOfSbAlg( sba );;
+            return ZeroPatchOfSbAlg( sba );
+        fi;
+    end
+);
+
+InstallMethod(
     ViewObj,
     "for patch reps",
     [ IsPatchRep ],

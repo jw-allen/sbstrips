@@ -509,9 +509,10 @@ InstallMethod(
             sba,        # SB algebra of which <strip> is a strip
             summands,   # Integer variable
             sy_list,    # Syllable (sub)list of <data>
-            syz_list,   # 
+            syz_list,   # List whose entries are the defining data lists of
+                        #  strips
             zero_patch, # Zero patch of <sba>
-            
+
         data := strip![1];
         len := Length( data );
         indices := Filtered( [1..len], IsOddInt );
@@ -520,7 +521,7 @@ InstallMethod(
         # We use <sy_list> to specify a list of patches, sandwiched between two
         #  copies of the zero patch of <sba>.
         
-        sba := FamilyObj( strip )!.sb_alg
+        sba := FamilyObj( strip )!.sb_alg;
         zero_patch := ZeroPatchOfSbAlg( sba );
         patch_list := [ zero_patch ];
         
@@ -531,15 +532,47 @@ InstallMethod(
                 Add( patch_list, patch );
             fi;
         od;
-        Add( patch_list, patch );
+        Add( patch_list, zero_patch );
+
+        # We now read the syzygy strips off of the southern parts of
+        #  <patch_list>, separating them at patches of string projectives
         
+        syz_list := [ [ ] ];
+        j := 1;
         
-        ###
-        ### PICK UP FROM HERE
-        ###
-        # We now read off the bottom row to give us ....
-        summands := 1 + Number( patch_list, IsPatchOfStringProjective );
+        for k in [ 2 .. ( Length( patch_list ) - 1 ) ] do
+            if IsPatchOfStringProjective( patch_list[k] ) then
+                if not IsZeroSyllable( patch_list[k]!.SW ) then
+                    Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
+                fi;
+                Add( syz_list, [] );
+                j := j + 1;
+                if not IsZeroSyllable( patch_list[k]!.SE ) then
+                    Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
+                fi;
+            elif IsPatchOfPinModule( patch_list[k] ) then
+                if not IsZeroSyllable( patch_list[k]!.SW ) then
+                    Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
+                fi;
+                if not IsZeroSyllable( patch_list[k]!.SE ) then
+                    Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
+                fi;
+            fi;
+        od;
         
+        # Each entry of <syz_list> is a list of syllables and orientations.
+        #  Remove the empty ones and <Stripify> the nonempty ones.
+        j := 1;
+        while j <= Length( syz_list ) do
+            if IsEmpty( syz_list[j] ) then
+                Remove( syz_list, j );
+            else
+                syz_list[j] := Stripify( syz_list[j] );
+                j := j + 1;
+            fi;
+        od;
+        
+        return syz_list;
     end
 );
 

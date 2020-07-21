@@ -485,6 +485,34 @@ InstallMethod(
         od;
         Info( InfoDebug, 2, "Interior/boundary syllables appropriate!" );
         
+        # Check for virtual syllables. The only permitted appearance of virtual
+        #  syllables is if <list> looks like
+        #      [ <virtual syllable>, 1, <virtual syllable>, -1 ]
+        indices := Filtered( [1..len], IsOddInt );
+        sublist := list{ indices };
+        if true in List( sublist, IsVirtualSyllable ) then
+            if false in List( sublist, IsVirtualSyllable ) then
+                Info( InfoDebug, 2,
+                 "There are virtual syllables among nonvirtual ones!"
+                 );
+            if Length( sublist ) <> 2 then
+                Info( InfoDebug, 2,
+                 "There are too many virtual syllables!"
+                 ):
+                TryNextMethod();
+            fi;
+            if not ( list[2] = 1 and list[4] = -1 ) then
+                Info( InfoDebug, 2,
+                 "These virtual syllables have the wrong orientation!"
+                 );
+                TryNextMethod();
+            fi;
+            
+            #
+            # MAKE SOME "StripifyVirtualStripNC" FUNCTION OR SOMETHING!
+            #
+        fi;
+        
         # All checks are complete; we delegate to another function for the hard
         #  work!
         return CallFuncList(

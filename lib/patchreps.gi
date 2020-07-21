@@ -468,7 +468,7 @@ InstallMethod(
         if IsZeroPatch( patch ) then
             Print( "<zero patch>" );
         elif IsVirtualPatch( patch ) then
-            Print( "virtual patch>" );
+            Print( "<virtual patch>" );
         else
             nw := patch!.NW;
             ne := patch!.NE;

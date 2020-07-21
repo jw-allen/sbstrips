@@ -793,4 +793,29 @@ InstallOtherMethod(
     end
 );
 
+InstallMethod(
+    NthSyzygyOfStrip,
+    "for a strip",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        local
+            k,      # Integer variable (indexing the syzygy to be determined)
+            syz;    # Variable to iteratively store syzygies
+
+        if N < 0 then
+            Error( "<N> must be a nonnegative integer!" );
+        elif N = 0 then
+            return strip;
+        else
+            syz := strip;
+            for k in [1..N] do
+                Info( InfoDebug, 2, "Calculated ", Ordinal( k ), " syzygy!" );
+                syz := SyzygyOfStrip( syz );
+            od;
+            
+            return syz;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

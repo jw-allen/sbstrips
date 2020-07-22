@@ -1,6 +1,17 @@
 ##  In this example, we create the path algebra kQ/J^4, where Q is the 1-
 ##   regular quiver with 3 vertices (v1, v2, v3) and 3 arrows (a: v1 -> v2,
-##   b: v2 -> v3, c: v3 -> v1) and J is the arrow ideal.
+##   b: v2 -> v3, c: v3 -> v1) and J is the arrow ideal. The given relations
+##   mean that the indecomposable projective right modules have the following
+##   structure.
+##
+##    (P_1)     (P_2)     (P_3)
+##     v1        v2        v3
+##     |         |         |
+##     a         b         c
+##     |         |         |
+##     ab        bc        ca
+##     |         |         |
+##     abc       bca       cab
 
 # Construct the quiver
 q1 := Quiver(

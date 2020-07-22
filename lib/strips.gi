@@ -652,7 +652,7 @@ InstallOtherMethod(
             l := test_left[ (Length( test_left )+1-k) ];
             if l > 0 then
                 if not ( PathBySourceAndLength( i, l ) in linind ) then
-                    Error( "A paths in <left_list> does not lift!" );
+                    Error( "A path in <left_list> does not lift!" );
                 else
                     i := 1RegQuivIntAct( i, -l );
                 fi;
@@ -675,7 +675,7 @@ InstallOtherMethod(
             l := test_right[ k ];
             if l > 0 then
                 if not ( PathBySourceAndLength( i, l ) in linind ) then
-                    Error( "A paths in <right_list> does not lift!" );
+                    Error( "A path in <right_list> does not lift!" );
                 else
                     i := 1RegQuivIntAct( i, -l );
                 fi;

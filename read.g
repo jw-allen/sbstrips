@@ -1,1 +1,9 @@
-# THIS SHOULD CALL ALL THE IMPLEMENTATIONS
+Read( "sbstrips/lib/1reg.gi" );
+Read( "sbstrips/lib/forwardorbits.gi" );
+Read( "sbstrips/lib/overquiver.gi" );
+Read( "sbstrips/lib/patchreps.gi" );
+Read( "sbstrips/lib/permdata.gi" );
+Read( "sbstrips/lib/strips.gi" );
+Read( "sbstrips/lib/syllables.gi" );
+Read( "sbstrips/lib/util.gi" );
+Read( "sbstrips/lib/vertseqs.gi" );

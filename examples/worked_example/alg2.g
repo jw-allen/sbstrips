@@ -1,4 +1,3 @@
-#########1#########2#########3#########4#########5#########6#########7#########
 ##  In this example, we create the path algebra
 ##       kQ/< a^2, bd, cb, dc, abc-cba, cab, d^4 >
 ##   where Q is the 2-regular quiver with 2 vertices (v1 and v2) and 4 arrows
@@ -6,6 +5,7 @@
 ##   mean that the indecomposable projective right modules have the following
 ##   structure
 ##
+##         (P_1)               (P_2)
 ##          v1                  v2
 ##        /    \              /    \
 ##       a      b            c      d
@@ -35,5 +35,5 @@ gb2 := GBNPGroebnerBasis( rels2, kq2 );
 ideal2 := Ideal( kq2, gb2 );
 GroebnerBasis( ideal2,gb2 );
 
-# Construc the algebra
+# Construct the algebra
 alg2 := kq2/ideal2;

@@ -382,6 +382,8 @@ InstallMethod(
                 else
                     if IsZeroSyllable( sy ) then
                         return sy;
+                    elif IsVirtualSyllable( sy ) then
+                        return ZeroSyllableOfSbAlg( sba );
                     else
                         # Write <sy> as tuple [ i1, l1, ep1 ]
                         path1 := UnderlyingPathOfSyllable( sy );
@@ -560,6 +562,172 @@ InstallMethod(
             tail := orbit{ [ tail_start..Length( orbit ) ] };
 
             return not ( false in List( tail, IsStableSyllable ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for two copies of the zero syllable",
+    \=,
+    [ IsZeroSyllable, IsZeroSyllable ],
+    function( sy1, sy2 )
+        return true;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a zero syllable and a nonzero syllable",
+    \=,
+    [ IsZeroSyllable, IsSyllableRep ],
+    function( zero_sy, sy )
+        # All syllables -- zero, virtual or otherwise -- are peak compatible
+        #  with the zero syllable.
+        return true;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a nonzero syllable and a zero syllable",
+    \=,
+    [ IsSyllableRep, IsZeroSyllable ],
+    function( sy, zero_sy )
+        # All syllables -- zero, virtual or otherwise -- are peak compatible
+        #  with the zero syllable.
+        return true;
+    end
+);
+
+InstallMethod(
+    IsPeakCompatiblePairOfSyllables,
+    "for a pair of syllables",
+    \=,
+    [ IsSyllableRep, IsSyllableRep ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Sources of underlying paths of <sy1> and <sy2>
+
+        # Defer to other methods if either input syllable is zero
+        if IsZeroSyllable( sy1 ) or IsZeroSyllable( sy2 ) then
+            TryNextMethod();
+
+        # If neither input syllable is zero, but either is virtual, then return
+        #  <false>
+        elif IsVirtualSyllable( sy1 ) or IsVirtualSyllable( sy2 ) then
+            return false;
+
+        # If neither syllable is zero or virtual then we are dealing with
+        #  "proper syllables", and so may just check whether the sources of the
+        #  underlying paths are exchange partners
+        else
+            i1 := SourceOfPath( UnderlyingPathOfSyllable( sy1 ) );
+            i2 := SourceOfPath( UnderlyingPathOfSyllable( sy2 ) );
+            
+            return ( i1 = ExchangePartnerOfVertex( i2 ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of zero syllables",
+    \=,
+    [ IsZeroSyllable, IsZeroSyllable ],
+    function( sy1, sy2 )
+        return true;
+    end
+);
+
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a zero syllable and a (not necessarily zero) syllable",
+    \=,
+    [ IsZeroSyllable, IsSyllableRep ],
+    function( zero_sy, sy )
+        if IsZeroSyllable( sy ) then
+            TryNextMethod();
+        else
+            # (Recall that virtual syllables have perturbation term 0 and so
+            #  are stable syllables. This means they will (rightly) return
+            #  <false> in the call below.)
+
+            return ( not IsStableSyllable( sy ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a (not necessarily zero) syllable and a zero syllable",
+    \=,
+    [ IsSyllableRep, IsZeroSyllable ],
+    function( sy, zero_sy )
+        if IsZeroSyllable( sy ) then
+            TryNextMethod();
+        else
+            # (Recall that virtual syllables have perturbation term 0 and so
+            #  are stable syllables. This means they will (rightly) return
+            #  <false> in the call below.)
+
+            return ( not IsStableSyllable( sy ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of virtual syllables",
+    \=,
+    [ IsVirtualSyllable, IsVirtualSyllable ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Sources of underlying paths of <sy1>
+        
+        # The underlying path of a virtual syllable is stationary (ie, a
+        #  vertex), and so calling <SourceOfPath> would be redundant.
+        i1 := UnderlyingPathOfSyllable( sy1 );
+        i2 := UnderlyingPathOfSyllable( sy2 );
+        
+        return ( i1 = ExchangePartnerOfVertex( i2 ) );
+    end
+);
+
+InstallMethod(
+    IsValleyCompatiblePairOfSyllables,
+    "for a pair of syllables",
+    \=,
+    [ IsSyllableRep, IsSyllableRep ],
+    function( sy1, sy2 )
+        local
+            i1, i2; # Targets of underlying paths of <sy1> and <sy2>
+
+        # Delegate to other methods when called on a pair of zero or virtual
+        #  syllables
+        if IsZeroSyllable( sy1 ) or IsZeroSyllable( sy2 ) then
+            TryNextMethod();
+        elif IsVirtualSyllable( sy1 ) and IsVirtualSyllable( sy2 ) then
+            TryNextMethod();
+
+        # If exactly one input syllable is virtual, then the pair will not
+        #  satisfy the preceding boolean test but will satisfy the following
+        #  one, and we reject them
+        elif IsVirtualSyllable( sy1 ) or IsVirtualSyllable( sy2 ) then
+            return false;
+            
+        # If none of the above tests are satisfied, then <sy1> and <sy2> are
+        #  "proper" syllables. In this case, we test that they are both stable
+        #  and that their targets are exchange partners. 
+        else
+            i1 := TargetOfPath( UnderlyingPathOfSyllable( sy1 ) );
+            i2 := TargetOfPath( UnderlyingPathOfSyllable( sy2 ) );
+            
+            return
+             ( i1 = ExchangePartnerOfVertex( i2 ) )
+             and
+             ( IsStableSyllable( sy1 ) and IsStableSyllable( sy2 ) );
         fi;
     end
 );

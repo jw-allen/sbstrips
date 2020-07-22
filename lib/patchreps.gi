@@ -142,8 +142,8 @@ InstallMethod(
                 s2_sy := zero_sy;
                 
                 # Create virtual patch that looks like
-                #    [  i,0,0  | zero_sy ]
-                #    [  i,0,1  | zero_sy ]
+                #    /  i,0,0  | zero_sy \
+                #    \  i,0,1  | zero_sy /
                 
                 obj := rec(
                  NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
@@ -158,8 +158,8 @@ InstallMethod(
                 Add( set, obj );
 
                 # Create virtual patch that looks like
-                #    [ zero_sy |  i,0,0  ]
-                #    [ zero_sy |  i,0,1  ]
+                #    / zero_sy |  i,0,0  \
+                #    \ zero_sy |  i,0,1  /
                 
                 obj := rec(
                  NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
@@ -458,6 +458,20 @@ InstallMethod(
 );
 
 InstallMethod(
+    ZeroPatchOfSbAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        if HasZeroPatchOfSbAlg( sba ) then
+            return ZeroPatchOfSbAlg( sba );
+        else
+            PatchSetOfSbAlg( sba );;
+            return ZeroPatchOfSbAlg( sba );
+        fi;
+    end
+);
+
+InstallMethod(
     ViewObj,
     "for patch reps",
     [ IsPatchRep ],
@@ -468,7 +482,7 @@ InstallMethod(
         if IsZeroPatch( patch ) then
             Print( "<zero patch>" );
         elif IsVirtualPatch( patch ) then
-            Print( "virtual patch>" );
+            Print( "<virtual patch>" );
         else
             nw := patch!.NW;
             ne := patch!.NE;
@@ -567,7 +581,7 @@ InstallMethod(
 
 InstallMethod(
     PatchifyByTop,
-    "for a list of 2 syllables",
+    "for two syllables",
     \=,
     [ IsSyllableRep, IsSyllableRep ],
     function( sy_NW, sy_NE )
@@ -590,5 +604,14 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    OverlapFunctionNC,
+    "for two patches",
+    \=,
+    [ IsPatchRep, IsPatchRep ],
+    function( patch1, patch2 )
+        return PatchifyByTop( patch1!.SE, patch2!.SW );
+    end
+);
 
 #########1#########2#########3#########4#########5#########6#########7#########

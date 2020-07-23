@@ -1,11 +1,10 @@
-LoadPackage( "qpa" );
+ReadPackage( "sbstrips", "lib/1reg.gd" );
+ReadPackage( "sbstrips", "lib/forwardorbits.gd" );
+ReadPackage( "sbstrips", "lib/overquiver.gd" );
+ReadPackage( "sbstrips", "lib/permdata.gd" );
+ReadPackage( "sbstrips", "lib/strips.gd" );
+ReadPackage( "sbstrips", "lib/syllables.gd" );
+ReadPackage( "sbstrips", "lib/util.gd" );
+ReadPackage( "sbstrips", "lib/vertseqs.gd" );
 
-Read( "sbstrips/lib/1reg.gd" );
-Read( "sbstrips/lib/forwardorbits.gd" );
-Read( "sbstrips/lib/overquiver.gd" );
-Read( "sbstrips/lib/patchreps.gd" );
-Read( "sbstrips/lib/permdata.gd" );
-Read( "sbstrips/lib/strips.gd" );
-Read( "sbstrips/lib/syllables.gd" );
-Read( "sbstrips/lib/util.gd" );
-Read( "sbstrips/lib/vertseqs.gd" );
+ReadPackage( "sbstrips", "lib/patchreps.gd" );

@@ -16,7 +16,9 @@ SetPackageInfo( rec(
    FirstNames := "Joe",
    IsAuthor := true,
    IsMaintainer := true,
-   Email := "joe.allen@bristol.ac.uk",
+   Email := Concatenation( [
+    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk" 
+    ]),
    WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
    PostalAddress := Concatenation( [
     "School of Mathematics,\n",

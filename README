@@ -4,7 +4,7 @@
 |                                                        |       [he/him/his] |
 +--------------------------------------------------------+--------------------+
 
-This is the README file for the SBStrips package for GAP 4.5.
+This is the README file for SBStrips (v0.5.2), which is a package for GAP 4.5.
 
 +--+ About +------------------------------------------------------------------+
 The SBStrips package models 'strings', namely the decorated graphs used in
@@ -61,13 +61,16 @@ This version of SBStrips includes the following files
         The version number
         
 +--+ Contact +----------------------------------------------------------------+
-If you use SBStrips at all then please send me a email. You can reach me at:
+If you use SBStrips at all then please let me know! You can reach me at:
 
     joe.allen [at] bristol [dot] ac [dot] uk
     
-My pronouns are he/him/his. Please just call me Joe (not "Mr Allen", etc). You
+(My pronouns are he/him/his; please just call me Joe and not anything super
+formal like "Mr Allen".) I'd be very interest to hear of any applications you
+may find.
 
-If you have any issues with this package then you can email me directly at the
-above address or you can log it online at:
+I'd also like to hear if you encounter any bugs/issues, or have any
+recommendations/suggestions. You can email me directly at the above address or
+you can log your thoughts on the GitHub issues page at:
 
     https://github.com/jw-allen/sbstrips/issues

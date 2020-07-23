@@ -4,9 +4,9 @@
 
 ##  There are three SB algebras defined in other folders. We read them into GAP
 ##  here.
-Read( "sbstrips/examples/worked_example/alg1.g" );
-Read( "sbstrips/examples/worked_example/alg2.g" );
-Read( "sbstrips/examples/worked_example/alg3.g" );
+# Read( "sbstrips/examples/worked_example/alg1.g" );
+# Read( "sbstrips/examples/worked_example/alg2.g" );
+# Read( "sbstrips/examples/worked_example/alg3.g" );
 
 ##  The above documents bind certain variables. For example, the second binds
 q2;
@@ -38,7 +38,7 @@ q1.v1 * q1.v1;
     # The stationary path at v1 in q1
 q1.a * q1.b * q1.c;
     # The path abc in q1
-q2.a^3 * q1.v1 * q2.b;
+q2.a^3 * q2.v1 * q2.b;
     # The path aaab in q2
 
 ##  If a quiver is used to construct a path algebra (as <q1> was used for <kq1>
@@ -181,8 +181,8 @@ alg2.v1 * alg2.a;
 ##  You two new friends are the functions <SyzygyOfStrip> and
 ##  <NthSyzygyOfStrip>. These are called as
 ##
-##      gap> SyzygyOfStrip( str );
-##      gap> NthSyzygyOfStrip( str, N );
+##      SyzygyOfStrip( str );
+##      NthSyzygyOfStrip( str, N );
 ##
 ##  where <str> is a strip or list of strips, and <N> is a nonnegative integer.
 ##  Both of these operations return a list of strips, namely the strips index-

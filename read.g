@@ -1,9 +1,9 @@
-Read( "sbstrips/lib/1reg.gi" );
-Read( "sbstrips/lib/forwardorbits.gi" );
-Read( "sbstrips/lib/overquiver.gi" );
-Read( "sbstrips/lib/patchreps.gi" );
-Read( "sbstrips/lib/permdata.gi" );
-Read( "sbstrips/lib/strips.gi" );
-Read( "sbstrips/lib/syllables.gi" );
-Read( "sbstrips/lib/util.gi" );
-Read( "sbstrips/lib/vertseqs.gi" );
+ReadPackage( "sbstrips", "lib/1reg.gi" );
+ReadPackage( "sbstrips", "lib/forwardorbits.gi" );
+ReadPackage( "sbstrips", "lib/overquiver.gi" );
+ReadPackage( "sbstrips", "lib/patchreps.gi" );
+ReadPackage( "sbstrips", "lib/permdata.gi" );
+ReadPackage( "sbstrips", "lib/strips.gi" );
+ReadPackage( "sbstrips", "lib/syllables.gi" );
+ReadPackage( "sbstrips", "lib/util.gi" );
+ReadPackage( "sbstrips", "lib/vertseqs.gi" );

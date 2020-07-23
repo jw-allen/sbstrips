@@ -21,7 +21,7 @@ q2 := Quiver(
  );
 
 # Construct the path algebra
-kq2 := PathAlgebra( Rationals, quiv2 );
+kq2 := PathAlgebra( Rationals, q2 );
 
 # Construct the ideal
 rels2 := [ kq2.a * kq2.a,
@@ -33,7 +33,7 @@ rels2 := [ kq2.a * kq2.a,
            kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];
 gb2 := GBNPGroebnerBasis( rels2, kq2 );
 ideal2 := Ideal( kq2, gb2 );
-GroebnerBasis( ideal2,gb2 );
+GroebnerBasis( ideal2, gb2 );
 
 # Construct the algebra
 alg2 := kq2/ideal2;

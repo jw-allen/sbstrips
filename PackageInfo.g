@@ -4,9 +4,9 @@ SetPackageInfo( rec(
  
  Subtitle := "strips for special biserial algebras",
  
- Version := "v0.5.1",
+ Version := "v0.5.2",
  
- Date := "17/07/2020",
+ Date := "23/07/2020",
  
  License := "GPL-2.0-or-later",
  

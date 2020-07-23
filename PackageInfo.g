@@ -1,4 +1,3 @@
-#########1#########2#########3#########4#########5#########6#########7#########
 SetPackageInfo( rec(
 
  PackageName := "SBStrips",
@@ -39,9 +38,7 @@ SetPackageInfo( rec(
 
  IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
  
- PackageWWWHome := Concatenation(
- ~.SourceRepository.URL
- ),
+ PackageWWWHome := ~.SourceRepository.URL,
  
  ArchiveURL := Concatenation(
   ~.SourceRepository.URL,
@@ -54,7 +51,8 @@ SetPackageInfo( rec(
  README_URL := 
   Concatenation( ~.PackageWWWHome, "/README.md" ),
 
- PackageInfoURL := 
+ PackageInfoURL :=
+  "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
 
  AbstractHTML :=
   "The <span class=\"pkgname\">SBstrips</span> package models 'strings' -- \
@@ -64,6 +62,8 @@ SetPackageInfo( rec(
   hence syzygy-taking is essentially a one-to-many operation on strings. \
   <span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
   data structure called 'strips', and performs this syzygy calculation.",
+ 
+ # PackageDoc := ......   # Documentation still in development!
 
  Dependencies := rec(
   GAP := ">=4.5",

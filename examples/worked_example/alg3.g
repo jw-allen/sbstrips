@@ -66,7 +66,7 @@ rels3 := [ kq3.Al * kq3.Ch,
            kq3.Ps * kq3.Al,
            kq3.Al * kq3.Be * kq3.Ga * kq3.De * kq3.Al -
             ( kq3.Ph * kq3.Ch * kq3.Ps )^2 * kq3.Ph,
-           kq3.De * kq3.Al * kq3.Be * kq3.Ga - ( kq3.Ep )^3
+           kq3.De * kq3.Al * kq3.Be * kq3.Ga - ( kq3.Ep )^3,
            kq3.Ga * kq3.De * kq3.Al * kq3.Be * kq3.Ga,
            ( kq3.Ps * kq3.Ph * kq3.Ch )^2 * kq3.Ps,
 ];

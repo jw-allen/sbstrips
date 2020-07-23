@@ -1,0 +1,73 @@
++--------------------------------------------------------+--------------------+
+|                                                        | Copyright (C) 2020 |
+|                        SBStrips                        |          Joe Allen |
+|                                                        |       [he/him/his] |
++--------------------------------------------------------+--------------------+
+
+This is the README file for the SBStrips package for GAP 4.5.
+
++--+ About +------------------------------------------------------------------+
+The SBStrips package models 'strings', namely the decorated graphs used in
+representation theory. These graphs are known to describe a type of module for
+a special biserial algebra called a string module. The syzygy of a string
+module is a direct sum of string modules; hence syzygy-taking is essentially a
+one-to-many operation on strings. The SBStrips package implements 'strings' as
+a data structure called 'strips', and performs this syzygy calculation.
+
+The SBStrips package is designed for version >=4.5.x of GAP, requiring version
+>=1.27 of QPA (another package for GAP).
+
+The SBStrips is being written by me, Joe Allen, during my doctoral studies at
+the University of Bristol. In my thesis, I am developing a combinatorial model
+of special biserial modules and their string modules and implementing it in
+GAP; that's what this package is!
+
++--+ Installation +-----------------------------------------------------------+
+The SBStrips can be installed just like many other GAP packages by following
+these steps.
+
+    1. Download the archive file 
+            sbstrips/archive/v0.5.1.tar.gz
+       from
+            https://github.com/jw-allen/sbstrips/archive/v0.5.1.tar.gz
+        
+    2. Unpack it into your  pkg  directory. It will create a subdirectory
+       called  sbstrips.
+    
+    3. Run GAP as normal and type
+            LoadPackage( "sbstrips" );
+       at the GAP prompt.
+       
++--+ Contents +---------------------------------------------------------------+
+This version of SBStrips includes the following files
+
+    LICENSE
+        Details of the GNU General Public Licence v2.0, under which this code
+        is released
+        
+    PackageInfo.g
+        Meta-information about this package
+        
+    README
+        This file!
+        
+    init.g
+        Package initialisation
+        
+    read.g
+        Package initialisation
+        
+    version
+        The version number
+        
++--+ Contact +----------------------------------------------------------------+
+If you use SBStrips at all then please send me a email. You can reach me at:
+
+    joe.allen [at] bristol [dot] ac [dot] uk
+    
+My pronouns are he/him/his. Please just call me Joe (not "Mr Allen", etc). You
+
+If you have any issues with this package then you can email me directly at the
+above address or you can log it online at:
+
+    https://github.com/jw-allen/sbstrips/issues

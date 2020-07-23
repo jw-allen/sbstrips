@@ -2,7 +2,7 @@ SetPackageInfo( rec(
 
  PackageName := "SBStrips",
  
- Subtitle := "strips for special biserial algebras",
+ Subtitle := "strips and strings for special biserial algebras",
  
  Version := "v0.5.2",
  

@@ -845,4 +845,48 @@ InstallOtherMethod(
     end
 );
 
+InstallMethod(
+    SimpleStripsOfSbAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            list,       # List variable (for the output)
+            make_strip, # Local function, that takes an exchange pair of vert-
+                        #  -ices of <oquiv> into a simple string
+            olift,      # Local function, that lifts a vertex of <quiv> to (a
+                        #  list of) vertices of <oquiv>
+            oquiv,      # Overquiver of <sba>
+            overts,     # Vertices of <oquiv>
+            quiv,       # Ground quiver of <sba>
+            u, v,       # Vertex variable
+            verts;      # Vertices of <quiv>
+            
+        if HasSimpleStripsOfSbAlg( sba ) then
+            return SimpleStripsOfSbAlg( sba );
+        else
+            oquiv := OverquiverOfSbAlg( sba );
+            overts := VerticesOfQuiver( oquiv );
+        
+            quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+            verts := VerticesOfQuiver( quiv );
+            
+            olift := function( v )
+                return Filtered(
+                 overts,
+                 u -> GroundPathOfOverquiverPathNC( u ) = v
+                 );
+            end;
+            
+            make_strip := function( x )
+                return StripifyFromSyllablesAndOrientationsNC(
+                 Syllabify( x[1], 1 ), -1, Syllabify( x[2], 1 ), 1
+                 );
+            end;
+            
+            return List( verts, v -> make_strip( olift( v ) ) );
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

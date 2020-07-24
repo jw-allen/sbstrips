@@ -954,4 +954,88 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    InjectiveStripsOfSbAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            c_seq, c_i, c_j,    # Integer sequence in the target encoding of
+                                #  permissible data of <sba>, and its <i>th and
+                                #  <j>th terms
+            d_seq, d_i, d_j,    # Bit sequence in the target encoding of perm-
+                                #  -issible data of <sba>, and its <i>th and
+                                #  <j>th terms
+            i, j,               # Vertex variable (for vertices of <oquiv>)
+            k,                  # Integer variable (for indices of <list>
+            list,               # List variable (for the output)
+            olift,              # Local function, that lifts a vertex of <quiv>
+                                #  to (a list of) vertices of <oquiv>
+            p, q,               # Path/syllable variables
+            oquiv,              # Overquiver of <sba>
+            overts,             # Vertices of <oquiv>
+            quiv;               # Ground quiver of <sba>
+
+        if HasInjectiveStripsOfSbAlg( sba ) then
+            return InjectiveStripsOfSbAlg( sba );
+        else
+            quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+            list := ShallowCopy( VerticesOfQuiver( quiv ) );
+
+            c_seq := TargetEncodingOfPermDataOfSbAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSbAlg( sba )[2];
+
+            oquiv := OverquiverOfSbAlg( sba );
+            overts := VerticesOfQuiver( oquiv );
+
+            olift := function( v )
+                return Filtered(
+                 overts,
+                 u -> GroundPathOfOverquiverPathNC( u ) = v
+                 );
+            end;
+            
+            Apply( list, olift );
+            
+            for k in [ 1..( Length( list ) ) ] do
+                i := list[k][1];
+                j := list[k][2];
+                d_i := d_seq.( String( i ) );
+                if d_i = 0 then
+                    list[k] := fail;
+                else
+                    c_i := c_seq.( String( i ) );
+                    c_j := c_seq.( String( j ) );
+                    d_j := d_seq.( String( j ) );
+                    
+                    p := PathByTargetAndLength( i, c_i );
+                    q := PathByTargetAndLength( j, c_j );
+                    
+                    if ( c_i = 0 and c_j = 0 ) then
+                        p := Syllabify( p, 1 );
+                        q := Syllabify( q, 1 );
+                        list[k] :=
+                         StripifyFromSyllablesAndOrientationsNC( p, -1, q, 1 );
+                    elif ( c_i > 0 and c_j = 0 ) then
+                        p := Syllabify( p, 1 );
+                        list[k] :=
+                         StripifyFromSyllablesAndOrientationsNC( p, 1 );
+                    elif ( c_i = 0 and c_j > 0 ) then
+                        q := Syllabify( q, 1 );
+                        list[k] :=
+                         StripifyFromSyllablesAndOrientationsNC( q, -1 );
+                    else
+                        p := Syllabify( p, 0 );
+                        q := Syllabify( q, 0 );
+                        list[k] :=
+                         StripifyFromSyllablesAndOrientationsNC( p, 1, q, -1 );
+                    fi;
+                fi;
+            od;
+            
+            return list;
+        fi;
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

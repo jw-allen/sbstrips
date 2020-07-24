@@ -4,7 +4,7 @@ SetPackageInfo( rec(
  
  Subtitle := "strips and strings for special biserial algebras",
  
- Version := "v0.5.2",
+ Version := "v0.6.0",
  
  Date := "23/07/2020",
  

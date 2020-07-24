@@ -17,14 +17,14 @@ a data structure called 'strips', and performs this syzygy calculation.
 The SBStrips package is designed for version >=4.5.x of GAP, requiring version
 >=1.27.x of QPA (another package for GAP).
 
-The SBStrips is being written by me, Joe Allen, during my doctoral studies at
-the University of Bristol. In my thesis, I am developing a combinatorial model
-of special biserial modules and their string modules and implementing it in
-GAP. That's what this package is!
+The SBStrips package is being written by me, Joe Allen, during my doctoral
+studies at the University of Bristol. In my thesis, I am developing a
+combinatorial model of special biserial algebras and their string modules.
+This package is the implementation in GAP of (aspects of) that model.
 
 +--+ Installation +-----------------------------------------------------------+
-The SBStrips can be installed just like many other GAP packages by following
-these steps.
+The SBStrips can be installed by following these steps (assuming you already
+have GAP installed.)
 
     1. Download the archive file 
             sbstrips/archive/v0.6.0.tar.gz

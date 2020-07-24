@@ -11,6 +11,7 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 
+DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );
 DeclareGlobalFunction( "SbAlgResidueOfOverquiverPathNC" );
 
 DeclareAttribute( "ExchangePartnerOfVertex", IsQuiverVertex );

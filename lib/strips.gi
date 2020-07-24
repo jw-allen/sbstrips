@@ -851,7 +851,6 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            list,       # List variable (for the output)
             make_strip, # Local function, that takes an exchange pair of vert-
                         #  -ices of <oquiv> into a simple string
             olift,      # Local function, that lifts a vertex of <quiv> to (a
@@ -859,7 +858,6 @@ InstallMethod(
             oquiv,      # Overquiver of <sba>
             overts,     # Vertices of <oquiv>
             quiv,       # Ground quiver of <sba>
-            u, v,       # Vertex variable
             verts;      # Vertices of <quiv>
             
         if HasSimpleStripsOfSbAlg( sba ) then
@@ -884,7 +882,74 @@ InstallMethod(
                  );
             end;
             
-            return List( verts, v -> make_strip( olift( v ) ) );
+            return Immutable( List( verts, v -> make_strip( olift( v ) ) ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    ProjectiveStripsOfSbAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            a_seq, a_i, a_j,    # Integer sequence in the source encoding of
+                                #  permissible data of <sba>, and its <i>th and
+                                #  <j>th terms
+            b_seq, b_i, b_j,    # Bit sequence in the source encoding of perm-
+                                #  -issible data of <sba>, and its <i>th and
+                                #  <j>th terms
+            i, j,               # Vertex variable (for vertices of <oquiv>)
+            k,                  # Integer variable (for indices of <list>
+            list,                # List variable (for the output)
+            olift,              # Local function, that lifts a vertex of <quiv>
+                                #  to (a list of) vertices of <oquiv>
+            p, q,               # Path variables
+            oquiv,              # Overquiver of <sba>
+            overts,             # Vertices of <oquiv>
+            quiv;               # Ground quiver of <sba>
+
+        if HasProjectiveStripsOfSbAlg( sba ) then
+            return ProjectiveStripsOfSbAlg( sba );
+        else
+            quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+            list := ShallowCopy( VerticesOfQuiver( quiv ) );
+
+            a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+
+            oquiv := OverquiverOfSbAlg( sba );
+            overts := VerticesOfQuiver( oquiv );
+
+            olift := function( v )
+                return Filtered(
+                 overts,
+                 u -> GroundPathOfOverquiverPathNC( u ) = v
+                 );
+            end;
+            
+            Apply( list, olift );
+            
+            for k in [ 1..( Length( list ) ) ] do
+                i := list[k][1];
+                j := list[k][2];
+                b_i := b_seq.( String( i ) );
+                if b_i = 0 then
+                    list[k] := fail;
+                else
+                    a_i := a_seq.( String( i ) );
+                    a_j := a_seq.( String( j ) );
+                    b_j := b_seq.( String( j ) );
+                    
+                    p := Syllabify( PathBySourceAndLength( i, a_i ), 1 );
+                    q := Syllabify( PathBySourceAndLength( j, a_j ), 1 );
+                    
+                    list[k] :=
+                     StripifyFromSyllablesAndOrientationsNC( p, -1, q, 1 );
+                fi;
+            od;
+            
+            return list;
         fi;
     end
 );

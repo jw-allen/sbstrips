@@ -1,10 +1,10 @@
 +--------------------------------------------------------+--------------------+
 |                                                        | Copyright (C) 2020 |
-|                   SBStrips  (v0.5.2)                   |          Joe Allen |
+|                   SBStrips  (v0.6.0)                   |          Joe Allen |
 |                                                        |       [he/him/his] |
 +--------------------------------------------------------+--------------------+
 
-This is the README file for SBStrips (v0.5.2), which is a package for GAP 4.5.
+This is the README file for SBStrips (v0.6.0), which is a package for GAP 4.5.
 
 +--+ About +------------------------------------------------------------------+
 The SBStrips package models 'strings', namely the decorated graphs used in
@@ -15,23 +15,23 @@ one-to-many operation on strings. The SBStrips package implements 'strings' as
 a data structure called 'strips', and performs this syzygy calculation.
 
 The SBStrips package is designed for version >=4.5.x of GAP, requiring version
->=1.27 of QPA (another package for GAP).
+>=1.27.x of QPA (another package for GAP).
 
 The SBStrips is being written by me, Joe Allen, during my doctoral studies at
 the University of Bristol. In my thesis, I am developing a combinatorial model
 of special biserial modules and their string modules and implementing it in
-GAP; that's what this package is!
+GAP. That's what this package is!
 
 +--+ Installation +-----------------------------------------------------------+
 The SBStrips can be installed just like many other GAP packages by following
 these steps.
 
     1. Download the archive file 
-            sbstrips/archive/v0.5.2.tar.gz
+            sbstrips/archive/v0.6.0.tar.gz
        from
-            https://github.com/jw-allen/sbstrips/archive/v0.5.2.tar.gz
+            https://github.com/jw-allen/sbstrips/archive/v0.6.0.tar.gz
         
-    2. Unpack it into your  pkg  directory. It will create a subdirectory
+    2. Unpack it into your  pkg  directory. It should create a subdirectory
        called  sbstrips.
     
     3. Run GAP as normal and type
@@ -66,8 +66,8 @@ If you use SBStrips at all then please let me know! You can reach me at:
     joe.allen [at] bristol [dot] ac [dot] uk
     
 (My pronouns are he/him/his; please just call me Joe and not anything super
-formal like "Mr Allen".) I'd be very interest to hear of any applications you
-may find.
+formal like "Mr Allen".) I'd be very interested to hear of any applications
+you may find.
 
 I'd also like to hear if you encounter any bugs/issues, or have any
 recommendations/suggestions. You can email me directly at the above address or

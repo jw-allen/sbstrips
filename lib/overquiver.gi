@@ -525,10 +525,9 @@ InstallMethod(
 );
 
 InstallGlobalFunction(
-    SbAlgResidueOfOverquiverPathNC,
+    GroundPathOfOverquiverPathNC,
     function( path )
         local
-            1_sba,  # Multiplicative unit of <sba>
             2reg,   # 2-regular augmentation of <quiv>
             cont,   # Contraction of <oquiv>
             oquiv,  # Overquiver to which <path> belongs
@@ -540,13 +539,24 @@ InstallGlobalFunction(
         cont := ContractionOfOverquiver( oquiv );
         
         sba := SbAlgOfOverquiver( oquiv );
-        1_sba := One( sba );
         
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         2reg := 2RegAugmentationOfQuiver( quiv );
         ret := RetractionOf2RegAugmentation( 2reg );
         
-        return ret( cont( path ) )*1_sba;
+        return ret( cont( path ) );
+    end
+);
+
+InstallGlobalFunction(
+    SbAlgResidueOfOverquiverPathNC,
+    function( path )
+        local
+            1_sba;  # Multiplicative unit of <sba>
+
+        1_sba := One( SbAlgOfOverquiver( oquiv ) );
+        
+        return GroundPathOfOverquiverPathNC( path ) * 1_sba;
     end
 );
 

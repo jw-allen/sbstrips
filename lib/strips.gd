@@ -17,4 +17,9 @@ DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 
+DeclareOperation(
+ "TestStripForFiniteSyzygyTypeAtMost",
+ [ IsStripRep, IsInt ]
+ );
+
 #########1#########2#########3#########4#########5#########6#########7#########

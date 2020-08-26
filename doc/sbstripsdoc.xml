@@ -1,0 +1,44 @@
+#########1#########2#########3#########4#########5#########6#########7#########
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Documentation for the SbStrips package of Gap -->
+<!-- written by Joe Allen as part of his PhD thesis -->
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<Book Name="SbStrips">
+  
+  <TitlePage>
+    <Title>
+      <Package>SbStrips</Package>
+    </Title>
+    
+    <Subtitle>
+      discrete models of special biserial (SB) algebras, string modules and
+      their syzygies
+    </Subtitle>
+    
+    <Version>
+      version 0.6.0
+    </Version>
+    
+    <Author>
+      Joe Allen
+    </Author>
+    
+    <Copyright>
+      Joe Allen &copyright; 2020
+    </Copyright>
+  </TitlePage>
+  
+  <TableOfContents/>
+  
+  <Body>
+    <!-- Add the body here! -->
+  </Body>
+  
+  <Bibliography Databases="sbstripsdoc.bib" Style="Alpha" />
+  
+  <TheIndex/>
+  
+</Book>

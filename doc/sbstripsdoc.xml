@@ -37,7 +37,7 @@
     <!-- Add the body here! -->
   </Body>
   
-  <Bibliography Databases="sbstripsdoc.bib" Style="Alpha" />
+  <Bibliography Databases="sbstripsbib.bib" Style="Alpha" />
   
   <TheIndex/>
   

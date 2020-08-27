@@ -312,7 +312,7 @@ InstallMethod(
 
 InstallMethod(
     IsPinBoundarySyllable,
-    "for special biserial algebras",
+    "for syllables",
     [ IsSyllableRep ],
     function( sy )
         local
@@ -355,6 +355,22 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsStationarySyllable,
+    "for a syllable",
+    [ IsSyllableRep ],
+    function( sy )
+        local
+            ;
+        if HasIsStationarySyllable( sy ) then
+            return StationarySyllable( sy );
+        elif IsVirtualSyllable( sy ) or IsZeroSyllable( sy ) then
+            return false;
+        else
+            return LengthOfPath( UnderlyingPathOfSyllable( sy ) ) = 0;
+        fi;
+    end
+);
 
 InstallMethod(
     DescentFunctionOfSbAlg,

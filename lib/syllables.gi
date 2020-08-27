@@ -118,7 +118,8 @@ InstallMethod(
              IsVirtualSyllable, false,
              IsStableSyllable, false,
              IsSyllableWithStableSource, false,
-             IsUltimatelyDescentStableSyllable, false
+             IsUltimatelyDescentStableSyllable, false,
+             IsStationarySyllable, false
             );
             
             SetZeroSyllableOfSbAlg( sba, obj );
@@ -161,7 +162,8 @@ InstallMethod(
                              IsZeroSyllable, false,
                              IsStableSyllable, ( ep = 0 ),
                              IsVirtualSyllable, ( l + ep = 0 ),
-                             IsSyllableWithStableSource, ( b_i = 1 )
+                             IsSyllableWithStableSource, ( b_i = 1 ),
+                             IsStationarySyllable, ( l = 0 and ep = 1 ),
                              );
                             MakeImmutable( obj );
                             AddSet( set, obj );

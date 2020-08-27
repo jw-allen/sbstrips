@@ -61,7 +61,7 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 
-DeclareProperty( "IsZeroStrip", [IsStripRep] );
+DeclareProperty( "IsZeroStrip", IsStripRep );
 
 ##  <#GAPDoc Label="DocIsPeriodicStripByNthSyzygy">
 ##    <ManSection>

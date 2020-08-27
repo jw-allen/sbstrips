@@ -1086,12 +1086,22 @@ InstallOtherMethod(
     [ IsStripRep, IsStripRep ],
     function( strip1, strip2 )
         local
-            sy_list_1, sy_list_2;   # Syllable lists of <strip1> and <strip2>
-            sy_list_r1, sy_list
-        
-        # In essence, this method is length-lexicographical.
+            list1, list2,           # Whichever of <sy_list_1> and <sy_list_r1>
+                                    #  comes first, ordered lexicographically,
+                                    #  and similarly for <sy_list_2> and
+                                    #  <sy_list_r2>
+            sy_list_1, sy_list_2,   # Syllable lists of <strip1> and <strip2>
+            sy_list_r1, sy_list_r2; # Syllable lists of the reflections of
+                                    #  <strip1> and <strip2>
+                                    
+        # In essence, this method is length-lexicographical. The zero strip
+        #  is the minimal element, followed by the virtual strips; these extra-
+        #  ordinary strips have width <-infinity> so are dealt with separately.
+        #  Once they are out of the way, the length-lexicographical ordering
+        #  kicks in.
 
-        # We first compare the widths of <strip1> and <strip2>
+        # We first compare the widths of <strip1> and <strip2>. This will dis-
+        #  -tinguish a strip that is zero or virtual from one that is neither.
         if WidthOfStrip( strip1 ) < WidthOfStrip( strip2 ) then
             return true;
 
@@ -1100,7 +1110,52 @@ InstallOtherMethod(
 
         # If both of the above fail, <strip1> and <strip2> have the same width.
         else
-            sy_list_1 := SyllabeListOf
+        
+            # If that width is <-infinity> then <strip1> and <strip2> are zero
+            #  or virtual. In that case, if one is zero and the other isn't
+            #  then the zero strip is less (in the sense of <\<>).
+            if
+             IsZeroSyllable( strip1 ) and ( not IsZeroSyllable( strip2 ) )
+             then
+                return true;
+            elif
+             ( not IsZeroSyllable( strip1 ) ) and IsZeroSyllable( strip2 )
+             then
+                return false;
+            elif IsZeroSyllable( strip1 ) and IsZeroSyllable( strip2 ) then
+                return false;
+
+            # If none of the above cases are met, then neither <strip1> nor
+            #  <strip2> is a zero strip. In this case, the lexicographical
+            #  order we define below will distinguish between strips of the
+            #  same width. (This includes width <-infinity>, in which case we
+            #  must be distinguishing between virtual strips.)
+            else
+
+                # Recall that any strip is equal (ie, \= returns true) to its
+                #  reflection. This means that we don't just compare strips, we
+                #  compare "reflection"-classes of strips. In practice, we come
+                #  up with a "dictionary" version of each strip and use this as
+                #  the basis for our comparison. We write out the syllable list
+                #  of the strip and write out that of its reflection, compare
+                #  the two lexicographically (via the \< ordering on syll-
+                #  -ables); whichever of this is least, is the "dictionary"
+                #  version of the input strip.
+            
+                sy_list_1  := SyllableListOfStripNC( strip1 );
+                sy_list_r1 := SyllableListOfStripNC(
+                 ReflectionOfStrip( strip1 )
+                 );
+                list1 := Minimum( sy_list_1, sy_list_r1 );
+
+                sy_list_2  := SyllableListOfStripNC( strip2 );
+                sy_list_r2 := SyllableListOfStripNC(
+                 ReflectionOfStrip( strip2 )
+                 );
+                list2 := Minimum( sy_list_2, sy_list_r2 );
+                
+                return list1 < list2;
+            fi;
         fi;
     end
 );

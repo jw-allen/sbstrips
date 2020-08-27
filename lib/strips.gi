@@ -1160,4 +1160,30 @@ InstallOtherMethod(
     end
 );
 
+InstallMethod(
+    IsPeriodicStripByNthSyzygy,
+    "for a strip and a positive integer",
+    [ IsStripRep, IsPosInt ],
+    function( strip, N )
+        local
+            found_yet,  # Boolean, storing whether a repeat has been found
+            j,          # Integer variable
+            syz;        # List variable
+
+        found_yet := false;
+        j := 0;
+        syz := Set( [ strip ] );
+        while found_yet = false and j < N do
+            j := j + 1;
+            syz := Set( SyzygyOfStrip( syz ) );
+            if strip in syz then
+                found_yet := true;
+                Print( "The given strip appears in its own ", Ordinal( j ),
+                 " syzygy");
+            fi;
+        od;
+        return found_yet;        
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

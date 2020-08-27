@@ -22,4 +22,21 @@ DeclareOperation(
  [ IsStripRep, IsInt ]
  );
 
+##  <#GAPDoc Label="DocWidthOfStrip">
+##    <ManSection>
+##      <Oper Name="WidthOfStrip" Arg="strip">
+##        <Description>
+##          Argument: <A>strip</A>, a strip
+##          <Br />
+##        </Description>
+##        <Returns>
+##          a nonnegative integer, counting the number (with multiplicity) of
+##          syllables of <A>strip</A> are nonstationary.
+##        </Returns>
+##      </Oper>
+##    </ManSection>
+##  <#/GAPDoc>
+
+DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
+
 #########1#########2#########3#########4#########5#########6#########7#########

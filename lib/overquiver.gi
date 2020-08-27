@@ -552,8 +552,10 @@ InstallGlobalFunction(
     SbAlgResidueOfOverquiverPathNC,
     function( path )
         local
+            oquiv,  # Overquiver to which <path> belongs
             1_sba;  # Multiplicative unit of <sba>
 
+        oquiv := QuiverContainingPath( path );
         1_sba := One( SbAlgOfOverquiver( oquiv ) );
         
         return GroundPathOfOverquiverPathNC( path ) * 1_sba;

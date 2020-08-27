@@ -41,4 +41,26 @@ DeclareOperation(
 
 DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 
+##  <#GAPDoc Label="DocIsZeroStrip">
+##    <ManSection>
+##      <Prop Name="IsZeroStrip" Arg="strip">
+##        <Description>
+##          Argument: <A>strip</A>, a strip
+##          <Br />
+##        </Description>
+##        <Returns>
+##          &true; if <A>strip</A> is the zero strip of some SB algebra,
+##          and &false; otherwise.
+##        </Returns>
+##        <Description>
+##          Note that &sbstrips; knows which SB algebra <A>strip</A> belongs
+##          to.
+##          <Br />
+##        </Description>
+##      </Prop>
+##    </ManSection>
+##  <#/GAPDoc>
+
+DeclareProperty( "IsZeroStrip", [IsStripRep] );
+
 #########1#########2#########3#########4#########5#########6#########7#########

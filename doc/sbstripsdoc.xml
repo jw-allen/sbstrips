@@ -4,7 +4,23 @@
 <!-- Documentation for the SbStrips package of Gap -->
 <!-- written by Joe Allen as part of his PhD thesis -->
 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+  [ <!ENTITY true "<C>true</C>"> ]
+  [ <!ENTITY false "<C>false</C>"> ]
+  [ <!ENTITY fail "<C>fail</C>"> ]
+  >
+
+<!--
+I'm not sure whether I declare multiple additional entities as above or as
+
+  <!DOCTYPE Book SYSTEM "gapdoc.dtd"
+    [ <!ENTITY true "<C>true</C>">
+      <!ENTITY false "<C>false</C>">
+      <!ENTITY fail "<C>fail</C>"> ]
+    >
+
+instead. Suppose I'll find out...
+-->
 
 <Book Name="SbStrips">
   

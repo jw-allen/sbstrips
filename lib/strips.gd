@@ -1,7 +1,7 @@
 DeclareRepresentation( "IsStripRep", IsPositionalObjectRep, [] );
 DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
-DeclareGlobalFunction( "SyllableListOfStripNC" );
+DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 
 DeclareAttribute( "StripFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );

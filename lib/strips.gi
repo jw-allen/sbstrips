@@ -1105,7 +1105,7 @@ InstallOtherMethod(
         if WidthOfStrip( strip1 ) < WidthOfStrip( strip2 ) then
             return true;
 
-        elif WidthOfStrip( strip1 ) > WidthOfStrip( strip 2 ) then
+        elif WidthOfStrip( strip1 ) > WidthOfStrip( strip2 ) then
             return false;
 
         # If both of the above fail, <strip1> and <strip2> have the same width.

@@ -163,7 +163,7 @@ InstallMethod(
                              IsStableSyllable, ( ep = 0 ),
                              IsVirtualSyllable, ( l + ep = 0 ),
                              IsSyllableWithStableSource, ( b_i = 1 ),
-                             IsStationarySyllable, ( l = 0 and ep = 1 ),
+                             IsStationarySyllable, ( l = 0 and ep = 1 )
                              );
                             MakeImmutable( obj );
                             AddSet( set, obj );

@@ -1048,12 +1048,39 @@ InstallMethod(
             sy_list;    # List of syllables of <strip>
         
         # Once the zero strip of a SB algebra is implemented, <WidthOfStrip>
-        # must return <-infinity> for it.
+        #  must return <-infinity> for it.
         
         data := strip![1];
         sy_list := data{ Filtered( [ 1..Length( data ) ], IsOddInt ) };
         
         return Number( sy_list, x -> not IsStationarySyllable( x ) );
+    end
+);
+
+InstallOtherMethod(
+    \<,
+    "for two strip reps",
+    \=,
+    [ IsStripRep, IsStripRep ],
+    function( strip1, strip2 )
+        local
+            sy_list_1, sy_list_2;   # Syllable lists of <strip1> and <strip2>
+            sy_list_r1, sy_list
+        
+        # In essence, this method is length-lexicographical.
+
+        # We first compare the widths of <strip1> and <strip2>
+        if WidthOfStrip( strip1 ) < WidthOfStrip( strip2 ) then
+            return true;
+
+        elif WidthOfStrip( strip1 ) > WidthOfStrip( strip 2 ) then
+            return false;
+
+        # If both of the above fail, <strip1> and <strip2> have the same width.
+        else
+            strip1![1]
+            #### NOT FINISHED!!!!!
+        fi;
     end
 );
 

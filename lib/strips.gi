@@ -55,7 +55,7 @@ InstallMethod(
     end
 );
 
-InstallMethod(
+InstallOtherMethod(
     \=,
     "for strips",
     \=,

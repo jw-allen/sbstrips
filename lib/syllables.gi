@@ -360,10 +360,8 @@ InstallMethod(
     "for a syllable",
     [ IsSyllableRep ],
     function( sy )
-        local
-            ;
         if HasIsStationarySyllable( sy ) then
-            return StationarySyllable( sy );
+            return IsStationarySyllable( sy );
         elif IsVirtualSyllable( sy ) or IsZeroSyllable( sy ) then
             return false;
         else

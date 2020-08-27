@@ -696,6 +696,21 @@ InstallOtherMethod(
 );
 
 InstallMethod(
+    SyllableListOfStripNC,
+    "for a strip",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,       # Defining data of <strip>
+            indices;    # Odd indices of <data>
+
+        data := strip![1];
+        indices := Filtered( [1..Length( data )], IsOddInt );
+        return data{ indices };
+    end
+);
+
+InstallMethod(
     SyzygyOfStrip,
     "for a strip",
     [ IsStripRep ],

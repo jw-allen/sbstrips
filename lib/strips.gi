@@ -1038,4 +1038,23 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    WidthOfStrip,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,       # Defining data of <strip>
+            sy_list;    # List of syllables of <strip>
+        
+        # Once the zero strip of a SB algebra is implemented, <WidthOfStrip>
+        # must return <-infinity> for it.
+        
+        data := strip![1];
+        sy_list := data{ Filtered( [ 1..Length( data ) ], IsOddInt ) };
+        
+        return Number( sy_list, x -> not IsStationarySyllable( x ) );
+    end
+);
+
 #########1#########2#########3#########4#########5#########6#########7#########

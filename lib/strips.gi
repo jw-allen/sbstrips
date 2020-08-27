@@ -1065,10 +1065,17 @@ InstallMethod(
         # Once the zero strip of a SB algebra is implemented, <WidthOfStrip>
         #  must return <-infinity> for it.
         
-        data := strip![1];
-        sy_list := data{ Filtered( [ 1..Length( data ) ], IsOddInt ) };
-        
-        return Number( sy_list, x -> not IsStationarySyllable( x ) );
+        # Virtual strips have width <-infinity>
+        if IsVirtualStripRep( strip ) then
+            return -infinity;
+
+        # Remaining strips (neither zero nor virtual) have a nonnegative width,
+        #  namely the number of nonstationary syllables they contain.
+        else
+            sy_list := SyllableListOfStripNC( strip );
+
+            return Number( sy_list, x -> not IsStationarySyllable( x ) );
+        fi;
     end
 );
 
@@ -1093,8 +1100,7 @@ InstallOtherMethod(
 
         # If both of the above fail, <strip1> and <strip2> have the same width.
         else
-            strip1![1]
-            #### NOT FINISHED!!!!!
+            sy_list_1 := SyllabeListOf
         fi;
     end
 );

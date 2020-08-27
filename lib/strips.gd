@@ -63,4 +63,27 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 
 DeclareProperty( "IsZeroStrip", [IsStripRep] );
 
+##  <#GAPDoc Label="DocIsPeriodicStripByNthSyzygy">
+##    <ManSection>
+##      <Oper Name="IsPeriodicStripByNthSyzygy" Arg="strip, N">
+##        <Description>
+##          Argument: <A>strip</A>, a strip; <A>N</A>, a positive integer
+##          <Br />
+##        </Description>
+##        <Returns>
+##          &true; if <A>strip</A> is appears among its own first <A>N</A>
+##          syzygies, and &false; otherwise.
+##        </Returns>
+##        <Description>
+##          If <Ref Oper="DocIsPeriodicStripByNthSyzygy"> returns &true;, then
+##          it will also print the index of the syzygy at which <A>strip</A>
+##          first appears.
+##          <Br />
+##        </Description>
+##      </Oper>
+##    </ManSection>
+##  <#/GAPDoc>
+
+DeclareOperation( "IsPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ] );
+
 #########1#########2#########3#########4#########5#########6#########7#########

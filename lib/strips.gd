@@ -108,5 +108,8 @@ DeclareOperation(
  "IsFiniteSyzygyTypeStripByNthSyzygy",
  [ IsStripRep, IsPosInt ]
  );
+ 
+# This is a temporary, informal function I intend to remove
+DeclareGlobalFunction( "TestInjectivesUpToNthSyzygy" );
 
 #########1#########2#########3#########4#########5#########6#########7#########

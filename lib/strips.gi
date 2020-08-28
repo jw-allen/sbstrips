@@ -1221,9 +1221,16 @@ InstallMethod(
             SubtractSet( new_syz_set, old_syz_set );
 
             # Whatever is left is new at this stage. If nothing is new at this
-            #  stage, then <strip> has syzygy type <j> and we can stop.
+            #  stage, then <strip> has finite syzygy type of degree at most <j>
+            #  and we can stop.
             if IsEmpty( new_syz_set ) then
-                Print( "The given strip has syzygy type ", j, "\n" );
+                Print(
+                 "The given strip has syzygy type at most",
+                 Size( old_syz_set )
+                 " of degree ",
+                 j,
+                 ".\n"
+                 );
                 return true;
             fi;
         od;

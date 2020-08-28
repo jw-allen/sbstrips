@@ -134,17 +134,30 @@ InstallMethod(
     "for 2-regular augmentation",
     [ IsQuiver ],
     function( quiver )
-        if HasIs2RegAugmentationOfQuiver( quiver ) then
-            return Is2RegAugmentationOfQuiver( quiver );
+        # A problem arose when evalutating the property
+        #  <Is2RegAugmentationOfQuiver> of a 2-regular quiver, say <Q>, before
+        #  evaluating the attribute <2RegAugmentationOfQuiver>. This attribute
+        #  of <Q> wants to have value <Q>, causing the property to be <true>.
+        #  If the property is tested first, then it will have value <false>,
+        #  which causes problems since the attribute wants to set the property
+        #  to <true>. The code below is a workaround for this problem.
 
-        # When not already decided, print message and return <false>
-        else
-
-            Print( "The property <Is2RegAugmentationOfQuiver> only recognizes \
-             2-regular augmentations constructed using the <2RegAugmentationOf\
-             Quiver> operation.\n Contact the maintainer of the <sbstrips> \
-             package if you believe there is an error here.\n" );
+        if not IsSpecialBiserialQuiver( quiver ) then
             return false;
+        else
+            2RegAugmentationOfQuiver( quiver );
+            if HasIs2RegAugmentationOfQuiver( quiver ) then
+                return Is2RegAugmentationOfQuiver( quiver );
+
+            # When not already decided, print message and return <false>
+            else
+
+                Print( "The property <Is2RegAugmentationOfQuiver> only recognizes \
+                 2-regular augmentations constructed using the <2RegAugmentationOf\
+                 Quiver> operation.\n Contact the maintainer of the <sbstrips> \
+                 package if you believe there is an error here.\n" );
+                return false;
+            fi;
         fi;
     end
 );

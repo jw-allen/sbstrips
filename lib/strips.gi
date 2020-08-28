@@ -1226,7 +1226,7 @@ InstallMethod(
             if IsEmpty( new_syz_set ) then
                 Print(
                  "The given strip has syzygy type at most",
-                 Size( old_syz_set )
+                 Size( old_syz_set ),
                  " of degree ",
                  j,
                  ".\n"

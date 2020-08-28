@@ -44,8 +44,7 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 
 ##  <#GAPDoc Label="Doc1RegQuivIntAct">
 ##  <ManSection>
-##    <Oper Name="1RegQuivIntAct" Arg="x,
-k">
+##    <Oper Name="1RegQuivIntAct" Arg="x, k">
 ##      <Description>
 ##        Arguments: <A>x</A>, which is either a vertex or an arrow of a
 ##        <M>1</M>-regular quiver; <A>k</A>, an integer.

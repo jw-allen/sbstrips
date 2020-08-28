@@ -44,7 +44,8 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 
 ##  <#GAPDoc Label="Doc1RegQuivIntAct">
 ##  <ManSection>
-##    <Oper Name="1RegQuivIntAct" Arg="x k">
+##    <Oper Name="1RegQuivIntAct" Arg="x,
+k">
 ##      <Description>
 ##        Arguments: <A>x</A>, which is either a vertex or an arrow of a
 ##        <M>1</M>-regular quiver; <A>k</A>, an integer.
@@ -69,6 +70,21 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 ##  <#/GAPDoc>  
 DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 
+##  <#GAPDoc Label="DocPathBySourceAndLength">
+##  <ManSection>
+##    <Oper Name="PathBySourceAndLength" Arg="vert, len">
+##      <Description>
+##        Arguments: <A>vert</A>, a vertex of a <M>1</M>-regular quiver
+##        <M>Q</M>; <A>len</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the unique path in <M>Q</M> which has source <A>vert</A> and length
+##        <A>len</A>.
+##      </Returns>
+##    </Oper>
+##  </ManSection>
+##  <#/GAPDoc>  
 DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 
 DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );

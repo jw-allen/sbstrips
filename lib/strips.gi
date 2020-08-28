@@ -1114,15 +1114,11 @@ InstallOtherMethod(
             # If that width is <-infinity> then <strip1> and <strip2> are zero
             #  or virtual. In that case, if one is zero and the other isn't
             #  then the zero strip is less (in the sense of <\<>).
-            if
-             IsZeroSyllable( strip1 ) and ( not IsZeroSyllable( strip2 ) )
-             then
+            if IsZeroStrip( strip1 ) and ( not IsZeroStrip( strip2 ) ) then
                 return true;
-            elif
-             ( not IsZeroSyllable( strip1 ) ) and IsZeroSyllable( strip2 )
-             then
+            elif ( not IsZeroStrip( strip1 ) ) and IsZeroStrip( strip2 ) then
                 return false;
-            elif IsZeroSyllable( strip1 ) and IsZeroSyllable( strip2 ) then
+            elif IsZeroStrip( strip1 ) and IsZeroStrip( strip2 ) then
                 return false;
 
             # If none of the above cases are met, then neither <strip1> nor
@@ -1183,6 +1179,48 @@ InstallMethod(
             fi;
         od;
         return found_yet;        
+    end
+);
+
+InstallMethod(
+    IsFiniteSyzygyTypeStripByNthSyzygy,
+    "for a strip and a positive integer",
+    [ IsStripRep, IsPosInt ],
+    function( strip, N )
+        local
+            j,              # Integer variable, storing which "stage" our cal-
+                            #  -culation is at
+            new_syz_set,    # Set variable, storing those strips "new" at stage
+                            #  <j>
+            old_syz_set;    # Set variable, storing those strips "old" at stage
+                            #  <j> (ie, seen strictly before)
+                            
+        j := 0;
+        new_syz_set := Set( [ strip ] );
+        old_syz_set := Set( [] );
+
+        while j < N  do
+            # Increment the stage number
+            j := j + 1;
+
+            # All strips new at the previous stage are old at the current one
+            UniteSet( old_syz_set, new_syz_set );
+
+            # Take syzygies of the strips that were new at the previous stage
+            new_syz_set := Set( SyzygyOfStrip( new_syz_set ) );
+
+            # Remove from the syzygies the strips that are old at this stage
+            SubtractSet( new_syz_set, old_syz_set );
+
+            # Whatever is left is new at this stage. If nothing is new at this
+            #  stage, then <strip> has syzygy type <j> and we can stop.
+            if IsEmpty( new_syz_set ) then
+                Print( "The given strip has syzygy type ", j, "\n" );
+                return true;
+            fi;
+        od;
+        
+        return false;
     end
 );
 

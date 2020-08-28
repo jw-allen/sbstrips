@@ -1207,7 +1207,7 @@ InstallMethod(
         new_syz_set := Set( [ strip ] );
         old_syz_set := Set( [] );
 
-        while j < N  do
+        while j <= N  do
             # Increment the stage number
             j := j + 1;
 
@@ -1225,10 +1225,10 @@ InstallMethod(
             #  and we can stop.
             if IsEmpty( new_syz_set ) then
                 Print(
-                 "The given strip has syzygy type at most",
+                 "The given strip has syzygy type at most ",
                  Size( old_syz_set ),
                  " of degree ",
-                 j,
+                 j - 1 ,
                  ".\n"
                  );
                 return true;

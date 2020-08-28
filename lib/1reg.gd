@@ -87,6 +87,21 @@ DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 ##  <#/GAPDoc>  
 DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 
+##  <#GAPDoc Label="DocPathBySourceAndLength">
+##  <ManSection>
+##    <Oper Name="PathByTargetAndLength" Arg="vert, len">
+##      <Description>
+##        Arguments: <A>vert</A>, a vertex of a <M>1</M>-regular quiver
+##        <M>Q</M>; <A>len</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the unique path in <M>Q</M> which has target <A>vert</A> and length
+##        <A>len</A>.
+##      </Returns>
+##    </Oper>
+##  </ManSection>
+##  <#/GAPDoc>  
 DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 
 #########1#########2#########3#########4#########5#########6#########7#########

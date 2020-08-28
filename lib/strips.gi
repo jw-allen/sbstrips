@@ -310,7 +310,7 @@ InstallGlobalFunction(
         return Objectify( type, [ list ] );
     end
 );
-#########1#########2#########3#########4#########5#########6#########7#########
+
 InstallMethod(
     Display,
     "for a strip rep",
@@ -693,6 +693,15 @@ InstallOtherMethod(
         # Tests complete! Delegate to <StripifyFromSbAlgPathNC>
         return StripifyFromSbAlgPathNC( left_list, path, right_list );
     end
+);
+
+InstallMethod(
+    IsZeroStrip,
+    "for a strip rep",
+    [ IsStripRep ],
+    
+    # THIS IS A TEMPORARY METHOD AND MUST BE CORRECTED!
+    ReturnFalse
 );
 
 InstallMethod(

@@ -49,8 +49,8 @@ InstallMethod(
                 list[ k ] := ori_list[ k/2 ];
             fi;
         od;
-        
-        return StripifyFromSyllablesAndOrientationsNC( list );
+
+        return CallFuncList( StripifyFromSyllablesAndOrientationsNC, list );
     end
 );
 

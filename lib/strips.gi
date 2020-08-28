@@ -1244,15 +1244,15 @@ InstallGlobalFunction(
     "for a SB algebra and a positive integer",
     function( sba, N )
         local
-            non_pin_proj_list,  # <proj_list>, with all <fail>s removed
-            proj_list,          # The projective strips of <sba>
+            non_pin_inj_list,   # <inj_list>, with all <fail>s removed
+            inj_list,           # The pinjective strips of <sba>
             test_list;          # Results of testing the entries of
-                                #  <non_pin_proj_list> up to degree <N>
+                                #  <non_pin_inj_list> up to degree <N>
             
-        proj_list := ProjectiveStripsOfSbAlg( sba );
-        non_pin_proj_list := Filtered( proj_list, x -> not ( x = fail ) );
+        inj_list := InjectiveStripsOfSbAlg( sba );
+        non_pin_inj_list := Filtered( inj_list, x -> not ( x = fail ) );
         test_list := List(
-         non_pin_proj_list,
+         non_pin_inj_list,
          x -> IsFiniteSyzygyTypeStripByNthSyzygy( x, N )
          );
         

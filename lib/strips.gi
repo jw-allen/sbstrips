@@ -36,22 +36,21 @@ InstallMethod(
         #  the even positions.
         sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
         ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
-        
-        # <sy_list> and <ori_list> need to be reversed individually and then
-        #  interwoven
+
+        # <sy_list> needs to be reversed individually and then interwoven with
+        #  <ori_list>
         sy_list := Reversed( sy_list );
-        ori_list := Reversed( ori_list );
         
         list := [1..l];
         for k in list do
             if IsOddInt( k ) then
-                list[ k ] := sy_list[ Floor( k/2 ) ];
+                list[ k ] := sy_list[ (k+1)/2  ];
             elif IsEvenInt( k ) then
-                list[ k ] := ori_list[ Floor( k/2 ) ];
+                list[ k ] := ori_list[ k/2 ];
             fi;
         od;
         
-        return list;
+        return StripifyFromSyllablesAndOrientationsNC( list );
     end
 );
 

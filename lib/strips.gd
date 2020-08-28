@@ -75,15 +75,38 @@ DeclareProperty( "IsZeroStrip", IsStripRep );
 ##          syzygies, and &false; otherwise.
 ##        </Returns>
 ##        <Description>
-##          If <Ref Oper="DocIsPeriodicStripByNthSyzygy"> returns &true;, then
-##          it will also print the index of the syzygy at which <A>strip</A>
-##          first appears.
+##          If the call to this function returns &true;, then it will also
+##          print the index of the syzygy at which <A>strip</A> first appears.
 ##          <Br />
 ##        </Description>
 ##      </Oper>
 ##    </ManSection>
 ##  <#/GAPDoc>
-
 DeclareOperation( "IsPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ] );
+
+##  <#GAPDoc Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
+##    <ManSection>
+##      <Oper Name="IsFiniteSyzygyTypeStripByNthSyzygy" Arg="strip, N">
+##        <Description>
+##          Argument: <A>strip</A>, a strip; <A>N</A>, a positive integer
+##          <Br />
+##        </Description>
+##        <Returns>
+##          &true; if the strips appearing in the <A>N</A>th syzygy of
+##          <A>strip</A> have all appeared among earlier syzygies, and &false;
+##          otherwise.
+##        </Returns>
+##        <Description>
+##          If the call to this function returns &true;, then it will also
+##          print the smallest <A>N</A> for which it would return &true;.
+##          <Br />
+##        </Description>
+##      </Oper>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation(
+ "IsFiniteSyzygyTypeStripByNthSyzygy",
+ [ IsStripRep, IsPosInt ]
+ );
 
 #########1#########2#########3#########4#########5#########6#########7#########

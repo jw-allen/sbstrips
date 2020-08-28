@@ -1259,7 +1259,7 @@ InstallGlobalFunction(
         if false in test_list then
             Print( "The given SB algebra has failed the test.\n" );
         else
-            Print( "The given SB algebra hs passed the test!\n" );
+            Print( "The given SB algebra has passed the test!\n" );
         fi;
         
         return;

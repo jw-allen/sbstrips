@@ -1227,7 +1227,7 @@ InstallMethod(
                 Print(
                  "The given strip has syzygy type at most ",
                  Size( old_syz_set ),
-                 " of degree ",
+                 ", of degree ",
                  j - 1 ,
                  ".\n"
                  );
@@ -1236,6 +1236,33 @@ InstallMethod(
         od;
         
         return false;
+    end
+);
+
+InstallGlobalFunction(
+    TestInjectivesUpToNthSyzygy,
+    "for a SB algebra and a positive integer",
+    function( sba, N )
+        local
+            non_pin_proj_list,  # <proj_list>, with all <fail>s removed
+            proj_list,          # The projective strips of <sba>
+            test_list;          # Results of testing the entries of
+                                #  <non_pin_proj_list> up to degree <N>
+            
+        proj_list := ProjectiveStripsOfSbAlg( sba );
+        non_pin_proj_list := Filtered( proj_list, x -> not ( x = fail ) );
+        test_list := List(
+         non_pin_proj_list,
+         x -> IsFiniteSyzygyTypeStripByNthSyzygy( x, N )
+         );
+        
+        if false in test_list then
+            Print( "The given SB algebra has failed the test.\n" );
+        else
+            Print( "The given SB algebra hs passed the test!\n" );
+        fi;
+        
+        return;
     end
 );
 

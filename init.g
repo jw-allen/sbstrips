@@ -8,3 +8,4 @@ ReadPackage( "sbstrips", "lib/util.gd" );
 ReadPackage( "sbstrips", "lib/vertseqs.gd" );
 
 ReadPackage( "sbstrips", "lib/patchreps.gd" );
+ReadPackage( "sbstrips", "lib/panels.gd" );

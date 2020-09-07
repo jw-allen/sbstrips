@@ -30,9 +30,9 @@ InstallMethod(
     [ IsSyllableRep ],
     function( sy )
         local
-            branch_left_index, branch_right_index,
-                        # Left and right column indices demarcating branches in
-                        #  <next_row>
+            add_zero,   # Local function, adding copies of <zero> to rows 
+            branch_left_index,
+                        # Left column index demarcating branches in <next_row>
             branch_list,
                         # List variable, storing branches at the bottom of
                         #  <panel>
@@ -49,7 +49,8 @@ InstallMethod(
             orbit,      # <sprawl>-orbit of <sy>
             panel,      # List variable
             parity,     # Integer variable, either +1 or -1
-            patch,      # Patch variable
+            patch, this_patch, that_patch,
+                        # Patch variables
             sba,        # SB algebra to which <sy> belongs
             sidestep,   # Sidestep function of <sba>
             sprawl,     # Local function
@@ -57,16 +58,18 @@ InstallMethod(
             test_row,   # Row to be tested for cut-off threshold
             this_syll;  # <[row][col]>th entry of <panel>
             threshold;  # Threshold for terminating an unbounded panel
+            zero_syll;  # Zero syllable of <sba>
             
-        # Test for, and reject, syllables beside unstable ones
+        # Test for, and reject, syllables beside unstable ones.
         if IsZeroSyllable( sy ) then
             Error( "Cannot panellify from a zero syllable" );
         elif PerturbationTermOfSyllable( sy ) = 0 then
             Error( "Cannot panellify from a stable syllable" );
             
-        # Otherwise, proceed
+        # Otherwise, proceed.
         else
             sba := FamilyObj( sy )!.sb_alg;
+            zero_syll := ZeroSyllableOfSbAlg( sba );
             fam := PanelFamilyOfSbAlg( sba );
             
             descent := DescentFunctionOfSbAlg( sba );
@@ -76,12 +79,15 @@ InstallMethod(
             end;
             
             orbit := ForwardOrbitUnderFunctionNC( sy, sprawl );
-            
-            panel := [ [ sy ] ];
-            row := 1;
-            
-            go := true;
-            threshold := infinity;
+
+            add_zero := function( pnl )
+                local
+                    r,  # Row variable
+                
+                for r in [1..Length( pnl )] do
+                    Add( pnl[r], zero_syll );
+                od;
+            end;
 
             # The length <L> of <orbit> is the column component of the
             #  repetition vector. We then calculate the number of distinct
@@ -90,34 +96,60 @@ InstallMethod(
             #  -able). Let <max> be the maximum of all these numbers. We stop
             #  after <max + L> rows.
             
+            # Initialize row iteration
+            go := true;
+            threshold := infinity;
+
+            panel := [ [ sy ] ];
+            row := 1;
+
+            # Iteration over rows
             while go = true and row < threshold do
+                # "Pad out" <panel> to a <row>-by-<row+1> matrix by adding
+                #  <zero> in the final column.
+                add_zero( panel );
+                
+                # Initialise column iteration
                 col := 1;
                 next_row := [];
                 branch_list := [];
                 
+                if IsOddInt( row ) then
+                    branch_left_index := 0;
+                else
+                    branch_left_index := 1;
+                fi;
+                branch_right_index := branch_left_index + 1;
+                
+                # Iteration over columns
                 while col <= row do
-                    parity := (-1)^( row + col )
+                    parity := (-1)^( row + col );
                     nbr_col := col - parity;
                     this_syll := panel[row][col];
                     
-                    if col = 1 and nbr_col=0 then
+                    if col = 1 and nbr_col = 0 then
                         nbr_syll := sidestep( this_syll );
                     else
                         nbr_syll := panel[row][nbr_col];
                     fi;
                     
                     if parity = 1 then
-                        patch := PatchifyByTop( nbr_syll, this_syll );
+                        this_patch := PatchifyByTop( nbr_syll, this_syll );
                         next_row[col] := patch!.SE;
                     else
                         patch := PatchifyByTop( this_syll, nbr_syll );
                         next_row[col] := patch!.SW;
                     fi;
                     
-                    if
-                     ( IsPatchOfStringProjective( patch ) and ( go = true ) )
-                     then;
-                        go := false;
+                    if IsPatchOfStringProjective( patch ) then
+                        if go = true then
+                            go := false;
+                        fi;
+                        
+                        if parity = -1 then
+                            Add( branch_list, [ branch_left_index .. col ] );
+                            branch_left_index := col + 1;
+                        fi;
                     fi;
                     
                     col := col + 1;

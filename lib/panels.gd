@@ -15,7 +15,7 @@ DeclareOperation( "PanellifyNC", [ IsList ] );
 ##  <ManSection>
 ##    <Attr Name="StationaryPanelsOfSbAlg" Arg="sba">
 ##      <Description>
-##        Argument: <A>sba</A>, a special biserial algebra
+##        Argument: <A>sba</A>, a SB algebra
 ##      </Description>
 ##      <Returns>
 ##        the stationary panels of <A>sba</A>; that is, the list of panels
@@ -28,5 +28,23 @@ DeclareOperation( "PanellifyNC", [ IsList ] );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "StationaryPanelsOfSbAlg", IsSpecialBiserialAlgebra );
+
+
+##  <#GAPDoc Label="DocIsUnboundedPanel">
+##  <ManSection>
+##    <Prop Name="IsUnboundedPanel" Arg="panel">
+##      <Description>
+##        Argument: <A>panel</A>, a panel for a SB algebra
+##      </Description>
+##      <Returns>
+##        &false; if the construction of <A>panel</A> was halted due to
+##        branching, and &true; if it was terminated ahead of an infinite loop.
+##      </Returns>
+##      <!-- Only when this returns &false; does <A>panel</A> have "aileron
+##      segments" of whatever I'm calling them. -->
+##    </Prop>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsUnboundedPanel", IsPanelRep );
 
 #########1#########2#########3#########4#########5#########6#########7#########

@@ -9,6 +9,20 @@
 ##  <#/GAPDoc>
 DeclareRepresentation( "IsPanelRep", IsAttributeStoringRep, [ "panel" ] );
 
+##  <#GAPDoc Label="DocPanelFamilyOfSbAlg">
+##  <ManSection>
+##    <Attr Name="PanelFamilyOfSbAlg" Arg="sba">
+##      <Description>
+##        Argument: <A>sba</A>, a SB algebra
+##      </Description>
+##      <Returns>
+##        the family to which all panels of <A>sba</A> belong.
+##      </Returns>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "PanelFamilyOfSbAlg", IsSpecialBiserialAlgebra );
+
 DeclareOperation( "PanellifyNC", [ IsList ] );
 
 ##  <#GAPDoc Label="DocStationaryPanelsOfSbAlg">

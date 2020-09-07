@@ -1,0 +1,1 @@
+# Declaration file for panels

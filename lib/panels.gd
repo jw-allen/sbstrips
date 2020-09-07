@@ -9,4 +9,6 @@
 ##  <#/GAPDoc>
 DeclareRepresentation( "IsPanelRep", IsAttributeStoringRep, [ "panel" ] );
 
+DeclareOperation( "PanellifyNC", [ IsList ] );
+
 #########1#########2#########3#########4#########5#########6#########7#########

@@ -1,4 +1,21 @@
-# InstallMethod for "PanelFamilyOfSbAlg" attribute of IsSpecialBiserialAlgebra
+InstallMethod(
+    PanelFamilyOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            fam;    # Family variable
+        
+        if HasPanelFamilyOfSbAlg( sba ) then
+            return PanelFamilyOfSbAlg( sba );
+        else
+            fam := NewFamily( "PanelFamilyForSbAlg" );
+            fam!.sb_alg := sba;
+            
+            return fam;
+        fi;
+    end
+);
 
 # InstallMethod for "PanellifyNC" operation, which is like Objectify for panels
 

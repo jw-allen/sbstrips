@@ -27,7 +27,7 @@ DeclareAttribute( "PanelFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 #  <ObjectifyWithAttributes> rather than just <Objectify>?
 DeclareOperation( "PanellifyNC", [ IsList ] );
 
-DeclareOperation( "PanelOfBoundarySyllable", [ IsSyllableRep ] );
+DeclareOperation( "PanellifyFromBoundarySyllable", [ IsSyllableRep ] );
 
 ##  <#GAPDoc Label="DocStationaryPanelsOfSbAlg">
 ##  <ManSection>

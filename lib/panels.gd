@@ -23,7 +23,11 @@ DeclareRepresentation( "IsPanelRep", IsAttributeStoringRep, [ "panel" ] );
 ##  <#/GAPDoc>
 DeclareAttribute( "PanelFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 
+# Maybe I don't need this? I feel as though I'll always want to use
+#  <ObjectifyWithAttributes> rather than just <Objectify>?
 DeclareOperation( "PanellifyNC", [ IsList ] );
+
+DeclareOperation( "PanelOfBoundarySyllable", [ IsSyllableRep ] );
 
 ##  <#GAPDoc Label="DocStationaryPanelsOfSbAlg">
 ##  <ManSection>

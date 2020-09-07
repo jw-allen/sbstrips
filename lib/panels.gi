@@ -1,4 +1,8 @@
+# InstallMethod for "PanelFamilyOfSbAlg" attribute of IsSpecialBiserialAlgebra
+
 # InstallMethod for "PanellifyNC" operation, which is like Objectify for panels
+
+# InstallMethod for "Display", "ViewObj", "String" operations for IsPanelRep
 
 # InstallMethod for "PanelOfBoundarySyllable" operation
 

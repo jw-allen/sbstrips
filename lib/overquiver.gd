@@ -164,7 +164,7 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##  <#/GAPDoc>
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 
-##  <#GAPDoc Label="SbAlgOfOverquiver">
+##  <#GAPDoc Label="DocSbAlgOfOverquiver">
 ##  <ManSection>
 ##    <Attr Name="SbAlgOfOverquiver" Arg="quiver">
 ##      <Description>
@@ -211,6 +211,29 @@ DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );
 DeclareGlobalFunction( "SbAlgResidueOfOverquiverPathNC" );
 
+##  <#GAPDoc Label="DocExchangePartnerOfVertex">
+##  <ManSection>
+##    <Attr Name="ExchangePartnerOfVertex" Arg="v">
+##      <Description>
+##        Argument: <A>v</A>, a vertex of an overquiver <C>oquiv</C> (as
+##        constructed by <Ref Label="DocOverquiverOfSbAlg" />)
+##        <Br />
+##      </Description>
+##      <Returns>
+##        The unique other vertex of <C>oquiv</C> that represents the same
+##        vertex as <v>
+##      </Returns>
+##      <Description>
+##        Suppose that <A>v</A> belongs to <C>oquiv</C> and <C>oquiv</C> is the
+##        overquiver of the special biserial algebra <C>sba</C>. The vertices
+##        of <C>oquiv</C> map onto the vertices of <C>sba</C> exactly
+##        two-to-one. This attribute exchanges the two vertices with common
+##        image.
+##        <Br />
+##      </Description>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ExchangePartnerOfVertex", IsQuiverVertex );
 
 #########1#########2#########3#########4#########5#########6#########7#########

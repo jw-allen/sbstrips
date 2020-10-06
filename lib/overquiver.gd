@@ -58,6 +58,24 @@ DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
+
+##  <#GAPDoc Label="DocRetractionOf2RegAugmentation">
+##  <ManSection>
+##    <Attr Name="RetractionOf2RegAugmentation" Arg="quiver">
+##      <Description>
+##        Argument: <A>quiver</A>, a quiver constructed using <C>2RegAugmentationOfQuiver</C>
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a function <C>ret</C>, which accepts paths in <A>quiver</A> as input and which outputs paths in <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C> <Ref Label="Doc2RegAugmentationOfQuiver"/>.
+##      </Returns>
+##      <Description>
+##        One can identify <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C> with a subquiver of <A>quiver</A>. Some paths in <A>quiver</A> lie wholly in that subquiver, some do not. This function <C>ret</C> takes those that do to the corresponding path of <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>, and those that do not to the zero path of <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>.
+##        <Br />
+##      </Description>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "RetractionOf2RegAugmentation", IsQuiver );
 
 DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",

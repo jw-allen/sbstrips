@@ -39,6 +39,24 @@ DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
+
+##  <#GAPDoc Label="DocOriginalSbQuiverOf2RegAugmentation">
+##  <ManSection>
+##    <Attr Name="OriginalSbQuiverOf2RegAugmentation" Arg="quiver">
+##      <Description>
+##        Argument: <A>quiver</A>, a quiver
+##        <Br />
+##      </Description>
+##      <Returns>
+##        The sub-<M>2</M>-regular quiver of which <A>quiver</A> is the <M>2</M>-regular augmentation.
+##      </Returns>
+##      <Description>
+##        Informally speaking, this attribute is the "inverse" to <C>2RegAugmentationOfQuiver</C>.
+##        <Br />
+##      </Description>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 DeclareAttribute( "RetractionOf2RegAugmentation", IsQuiver );
 

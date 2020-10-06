@@ -156,6 +156,27 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
+
+##  <#GAPDoc Label="SbAlgOfOverquiver">
+##  <ManSection>
+##    <Attr Name="SbAlgOfOverquiver" Arg="quiver">
+##      <Description>
+##        Argument: <A>quiver</A>, an overquiver (as constructed by
+##        <Ref Label="DocOverquiverOfSbAlg" />)
+##        <Br />
+##      </Description>
+##      <Returns>
+##        The special biserial algebra from which <A>quiver</A> was
+##        constructed.
+##      </Returns>
+##      <Description>
+##        Informally speaking, this attribute is the "inverse" to
+##        <C>OverquiverOfSbAlg</C>.
+##        <Br />
+##      </Description>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 
 DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );

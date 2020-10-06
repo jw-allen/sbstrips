@@ -125,6 +125,36 @@ DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "IsOverquiver", IsQuiver );
+
+##  <#GAPDoc Label="DocContractionOfOverquiver">
+##  <ManSection>
+##    <Attr Name="ContractionOfOverquiver" Arg="oquiv">
+##      <Description>
+##        Argument: <A>oquiv</A>, an overquiver (as constructed by
+##        <Ref Label="DocOverquiverOfSbAlg" />)
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a function <C>cont</C>, which takes a path in <A>oquiv</A> as input.
+##      </Returns>
+##      <Description>
+##        Recall that <A>oquiv</A> was the overquiver of some special biserial
+##        algebra, say <C>sba</C>, defined over some original quiver, say
+##        <C>orig_quiv</C>. Also recall that <A>oquiv</A> was constructed using
+##        <Ref Label="DocOverquiverOfSbAlg" />.
+##        <Br />
+##        When <Ref Label="DocOverquiverOfSbAlg" /> is called on <C>sba</C>, it
+##        creates the <M>2</M>-regular augmentation <C>orig_quiv</C>. Call the
+##        augmentation <C>2reg</C>. Notice that <C>orig_quiv</C> can be
+##        identified with a subquiver of <C>2reg</C>, and that <C>2reg</C> can
+##        be viewed as a quotient quiver of <A>oquiv</A>. Using that quotient
+##        map, paths in <A>oquiv</A> can be viewed as paths in <C>2reg</C>. That
+##        is what <C>cont</C> does: given any path in <A>oquiv</A>, <C>cont</C>
+##        returns the corresponding path in <A>2reg</A>.
+##      </Description>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 

@@ -90,7 +90,14 @@ DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 ##  <#/GAPDoc>
 DeclareAttribute( "RetractionOf2RegAugmentation", IsQuiver );
 
-##  This attribute only belongs behind the scenes; no documentation provided.
+##  (This belongs behind the scenes only. We provide no formal documentation.)
+##
+##  Let <sba> be a special biserial algebra (as judged by the QPA property
+##   <IsSpecialBiserialAlgebra>). Mathematically speaking, there are several
+##   possible overquivers for <sba>. Each possibility corresponds to a simul-
+##   -taneous choice, for each vertex of the quiver of <sba>, out of two
+##   options. This attribute picks one such possibility, and so "the" over-
+##   -quiver for <sba> is the overquiver corresponding to this choice.
 DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
  IsSpecialBiserialAlgebra );
 
@@ -179,6 +186,28 @@ DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 ##  <#/GAPDoc>
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 
+##  (These belong behind the scenes only. We provide no formal documentation.)
+##
+##  Let <oquiv> be the overquiver of the special biserial algebra <sba>, and
+##   suppose that <sba> is originally defined over the quiver <quiver>. An
+##   intermediate step in the construction of <oquiv> is the construction of
+##   <2reg>, the 2-regular augmentation of <quiver>.
+##  There is a diagram of maps of quivers as follows.
+##
+##      <quiver>  >--->  <2reg>  <<---  <oquiv>
+##
+##   This diagram induces a map on paths as follows.
+##
+##      {paths in <quiver>}  >--->  {paths in <2reg>}  <<-- {paths in <oquiv>}
+##
+##   The (injective) lefthand map has a retraction (also called a left inverse).
+##
+##      {paths in <quiver>}  <----  {paths in <2reg>}  <<-- {paths in <oquiv>}
+##
+##   This latter concatenation, which takes a path in <oquiv> as input and
+##   gives a (possibly zero) path in <quiver> as output, is
+##   <GroundPathOfOverquiverPathNC>. If you further view that resulting path in
+##   <quiver> as a path in <sba>, you've used <SbAlgResidueOfOverquiverPathNC>. 
 DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );
 DeclareGlobalFunction( "SbAlgResidueOfOverquiverPathNC" );
 

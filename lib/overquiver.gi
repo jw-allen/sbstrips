@@ -415,8 +415,8 @@ InstallMethod(
     "for quivers",
     [ IsQuiver ],
     function( quiv )
-        if HasIsOverquiver( quiv ) then
-            return IsOverquiver( quiv );
+        if HasIsOverquiver( quiver ) then
+            return IsOverquiver( quiver );
         else
             # Overquivers are exactly those quivers constructed using the
             #  <OverquiverOfSbAlg> command. Such quivers have this property set
@@ -480,13 +480,13 @@ InstallMethod(
     SbAlgOfOverquiver,
     "for overquivers",
     [ IsQuiver ],
-    function( quiv )
-        if HasSbAlgOfOverquiver( quiv ) then
-            return SbAlgOfOverquiver( quiv );
-        elif not IsOverquiver( quiv ) then
+    function( quiver )
+        if HasSbAlgOfOverquiver( quiver ) then
+            return SbAlgOfOverquiver( quiver );
+        elif not IsOverquiver( quiver ) then
             return fail;
         else
-            Error( "Somehow the given quiver\n", quiv, "\nis an overquiver \
+            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver \
              that doesn't know the special biserial algebra to which it \
              belongs! Please contact the maintainer of the sbstrips package."
              );

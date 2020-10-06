@@ -48,10 +48,12 @@ DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        The sub-<M>2</M>-regular quiver of which <A>quiver</A> is the <M>2</M>-regular augmentation.
+##        The sub-<M>2</M>-regular quiver of which <A>quiver</A> is the
+##        <M>2</M>-regular augmentation.
 ##      </Returns>
 ##      <Description>
-##        Informally speaking, this attribute is the "inverse" to <C>2RegAugmentationOfQuiver</C>.
+##        Informally speaking, this attribute is the "inverse" to
+##        <C>2RegAugmentationOfQuiver</C>.
 ##        <Br />
 ##      </Description>
 ##    </Attr>
@@ -63,14 +65,24 @@ DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 ##  <ManSection>
 ##    <Attr Name="RetractionOf2RegAugmentation" Arg="quiver">
 ##      <Description>
-##        Argument: <A>quiver</A>, a quiver constructed using <C>2RegAugmentationOfQuiver</C>
+##        Argument: <A>quiver</A>, a quiver constructed using
+##        <C>2RegAugmentationOfQuiver</C>
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a function <C>ret</C>, which accepts paths in <A>quiver</A> as input and which outputs paths in <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C> <Ref Label="Doc2RegAugmentationOfQuiver"/>.
+##        a function <C>ret</C>, which accepts paths in <A>quiver</A> as input
+##        and which outputs paths in
+##        <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>
+##        <Ref Label="Doc2RegAugmentationOfQuiver"/>.
 ##      </Returns>
 ##      <Description>
-##        One can identify <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C> with a subquiver of <A>quiver</A>. Some paths in <A>quiver</A> lie wholly in that subquiver, some do not. This function <C>ret</C> takes those that do to the corresponding path of <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>, and those that do not to the zero path of <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>.
+##        One can identify <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>
+##        with a subquiver of <A>quiver</A>. Some paths in <A>quiver</A> lie
+##        wholly in that subquiver, some do not. This function <C>ret</C> takes
+##        those that do to the corresponding path of
+##        <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>, and those that
+##        do not to the zero path of
+##        <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>.
 ##        <Br />
 ##      </Description>
 ##    </Attr>
@@ -78,10 +90,26 @@ DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 ##  <#/GAPDoc>
 DeclareAttribute( "RetractionOf2RegAugmentation", IsQuiver );
 
+##  This attribute only belongs behind the scenes; no documentation provided.
 DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
  IsSpecialBiserialAlgebra );
- 
+
+##  <#GAPDoc Label="DocOverquiverOfSbAlg">
+##  <ManSection>
+##    <Attr Name="OverquiverOfSbAlg" Arg="sba">
+##      <Description>
+##        Argument: <A>sba</A>, a special biserial algebra
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a quiver <C>oquiv</C> with which uniserial <A>sba</A>-modules can be
+##        conveniently (and unambiguously) represented.
+##      </Returns>
+##    </Attr>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
+
 DeclareProperty( "IsOverquiver", IsQuiver );
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );

@@ -110,6 +110,20 @@ DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
 ##  <#/GAPDoc>
 DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
 
+##  <#GAPDoc Label="DocIsOverquiver">
+##  <ManSection>
+##    <Prop Name="IsOverquiver" Arg="quiver">
+##      <Description>
+##        Argument: <A>quiver</A>, a quiver
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if <A>quiver</A> was constructed by
+##        <Ref Label="DocOverquiverOfSbAlg"/>, and &false; otherwise.
+##      </Returns>
+##    </Prop>
+##  </ManSection>
+##  <#/GAPDoc>
 DeclareProperty( "IsOverquiver", IsQuiver );
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );

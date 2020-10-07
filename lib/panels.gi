@@ -33,6 +33,7 @@ InstallMethod(
             branches,   #
             col,        #
             descent,    #
+            edge_func,  #
             edges,      #
             fam,        #
             branch_func,
@@ -42,6 +43,7 @@ InstallMethod(
             panel,      #
             parity,     #
             patch,      #
+            row,        #
             sba,        #
             sidestep,   #
             sprawl,     #
@@ -86,7 +88,7 @@ InstallMethod(
                 local
                     pos;
                 
-                pos := 
+                # pos := 
             end;
             
             # Initialize
@@ -160,7 +162,7 @@ InstallMethod(
                     Apply( branches, branch_func );
                     
                 # It is possible that the row has all zeros
-                elif not false in List( panel[row], IsZeroSyllable );
+                elif not false in List( panel[row], IsZeroSyllable ) then;
                     Error( "alarm bells ringing!!!!!" );
 
                 # If no branching has occured, then sort out <edges>

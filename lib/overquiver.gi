@@ -414,7 +414,7 @@ InstallMethod(
     IsOverquiver,
     "for quivers",
     [ IsQuiver ],
-    function( quiv )
+    function( quiver )
         if HasIsOverquiver( quiver ) then
             return IsOverquiver( quiver );
         else

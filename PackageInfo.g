@@ -65,11 +65,20 @@ SetPackageInfo( rec(
   <span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
   data structure called 'strips', and performs this syzygy calculation.",
  
- # PackageDoc := ......   # Documentation still in development!
+ PackageDoc := rec(
+   BookName := ~.PackageName,
+   ArchiveURLSubset := ["doc"],
+   HTMLStart := "doc/chap0.html",
+   PDFFile := "doc/manual.pdf",
+   SixFile := "doc/manual.six",
+   LongTitle := ~.Subtitle
+  ),
 
  Dependencies := rec(
   GAP := ">=4.5",
-  NeededOtherPackages := [["qpa", ">=1.27"]],
+  NeededOtherPackages := [
+   ["qpa", "1.27"], ["GAPDoc", ">=1.6"], ["AutoDoc", "2017.09.08"]
+   ],
   SuggestedOtherPackages := [],
   ExternalConditions := []
   ),

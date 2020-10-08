@@ -21,7 +21,7 @@ InstallGlobalFunction(
 
         # Define input to <ComposedDocument>
         path := Directory( "./gap4r8/pkg/sbstrips/doc" );
-        main := "sbstripsdoc.xml";
+        main := "main.xml";
         files := [ "../lib/1reg.gd",
                    "../lib/forwardorbits.gd",
                    "../lib/overquiver.gd",
@@ -33,11 +33,11 @@ InstallGlobalFunction(
                    "../lib/util.gd",
                    "../lib/vertseqs.gd"
                    ];
-        bookname := "sbstrips";
+        bookname := "sbstripsdoc";
         doc := ComposedDocument("GAPDoc", path, main, files, true);
         
         # Make GAPDoc tree
-        r := ParseTreeXMLString(doc[1], doc[2]);
+        r := ParseTreeXMLString( doc[1], doc[2] );
         CheckAndCleanGapDocTree(r);
         
         return [ r, path, main, files, bookname, doc ];
@@ -88,6 +88,7 @@ InstallGlobalFunction(
         path := list[2];
         bookname := list[5];
         
+        # Add page number information to Six file
         AddPageNumbersToSix(
          r,
          Filename(

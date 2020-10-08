@@ -23,16 +23,16 @@ I'm not sure whether I declare multiple additional entities as above or as
 instead. Suppose I'll find out...
 -->
 
-<Book Name="SbStrips">
+<Book Name="SBStrips">
   
   <TitlePage>
     <Title>
-      <Package>SbStrips</Package>
+      <Package>SBStrips</Package>
     </Title>
-    
+
     <Subtitle>
-      discrete models of special biserial (SB) algebras, string modules and
-      their syzygies
+      discrete models of special biserial algebras, string modules and their
+      syzygies
     </Subtitle>
     
     <Version>
@@ -51,7 +51,76 @@ instead. Suppose I'll find out...
   <TableOfContents/>
   
   <Body>
-    <!-- Add the body here! -->
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Introduction                                                      +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    
+    <Chapter>
+      <Heading>Introduction</Heading>
+      
+      <Section>
+        <Heading>Aims</Heading>
+      </Section>
+      
+      <Section>
+        <Heading>Installation</Heading>
+      </Section>
+    </Chapter>
+
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Worked example                                                    +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Worked example</Heading>
+      
+      <!-- SEC: Strips, aka "strings for special biserial algebras"         -->
+      <Section>
+        <Heading>Strips, aka "strings for special biserial algebras"</Heading>
+      </Section>
+      
+      <!-- SEC: Calculations with strips                                    -->
+      <Section>
+        <Heading>Calculations with strips</Heading>
+      </Section>
+      
+      <!-- SEC: Under the bonnet                                            -->
+      <Section>
+        <Heading>Under the bonnet</Heading>
+      </Section>
+    </Chapter>
+
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Quivers and special biserial algebras                             +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Quivers and special biserial algebras</Heading>
+    </Chapter>
+    
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Permissible data                                                  +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Permissible data</Heading>
+    </Chapter>
+
+    
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Syllables                                                         +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Syllables</Heading>
+    </Chapter>
+    
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    + CHAP: Patches                                                           +
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Patches</Heading>
+    </Chapter>
   </Body>
   
   <Bibliography Databases="sbstripsbib.bib" Style="Alpha" />

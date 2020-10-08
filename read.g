@@ -1,5 +1,4 @@
 ReadPackage( "sbstrips", "lib/1reg.gi" );
-ReadPackage( "sbstrips", "lib/forwardorbits.gi" );
 ReadPackage( "sbstrips", "lib/makesbstripsdoc.gi" );
 ReadPackage( "sbstrips", "lib/overquiver.gi" );
 ReadPackage( "sbstrips", "lib/patchreps.gi" );

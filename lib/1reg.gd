@@ -86,7 +86,7 @@ DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 ##  <#/GAPDoc>  
 DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 
-##  <#GAPDoc Label="DocPathBySourceAndLength">
+##  <#GAPDoc Label="DocPathByTargetAndLength">
 ##  <ManSection>
 ##    <Oper Name="PathByTargetAndLength" Arg="vert, len">
 ##      <Description>

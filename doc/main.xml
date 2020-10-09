@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Documentation for the SbStrips package of Gap -->
-<!-- written by Joe Allen as part of his PhD thesis -->
-
 <!--
+Documentation for the SBStrips package of GAP, written by Joe Allen as part of
+his PhD thesis.
+-->
+
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
-  [ <!ENTITY fail "<C>fail</C>"> ]
-  [ <!ENTITY false "<C>false</C>"> ]
-  [ <!ENTITY qpa "<Package>QPA</Package>"> ]
-  [ <!ENTITY sbstrips "<Package>SBStrips</Package>"> ]
-  [ <!ENTITY true "<C>true</C>"> ]
+  [ <!ENTITY fail "<C>fail</C>">
+    <!ENTITY false "<C>false</C>">
+    <!ENTITY QPA "<Package>QPA</Package>">
+    <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
+    <!ENTITY true "<C>true</C>">
+    ]
   >
--->
-
-<!--
-I'm not sure whether I declare multiple additional entities as above or as
--->
-  <!DOCTYPE Book SYSTEM "gapdoc.dtd"
-    [ <!ENTITY fail "<C>fail</C>">
-      <!ENTITY false "<C>false</C>">
-      <!ENTITY QPA "<Package>QPA</Package>">
-      <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
-      <!ENTITY true "<C>true</C>"> ]
-    >
-<!--
-instead. Suppose I'll find out...
--->
 
 <Book Name="SBStrips">
   

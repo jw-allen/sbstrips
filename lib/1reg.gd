@@ -18,7 +18,7 @@ DeclareProperty( "Is1RegQuiver", IsQuiver );
 ##    <Attr Name="1RegQuivIntActionFunction" Arg="quiver"/>
 ##    <Description>
 ##      Argument: <A>quiver</A>, a <M>1</M>-regular quiver (as tested by
-##      <Ref Prop="DocIs1RegQuiver"/>)
+##      <Ref Prop="Is1RegQuiver"/>)
 ##      <Br />
 ##    </Description>
 ##    <Returns>
@@ -33,7 +33,7 @@ DeclareProperty( "Is1RegQuiver", IsQuiver );
 ##      vertices and ``<M>s</M> then <M>t^{-1}</M>'' on arrows.
 ##      <Br />
 ##      In practice you will probably want to use
-##      <Ref Oper="Doc1RegQuivIntAct"/>, since it saves you having to remind
+##      <Ref Oper="1RegQuivIntAct"/>, since it saves you having to remind
 ##      &SBStrips; which quiver you intend to act on.
 ##    </Description>
 ##  </ManSection>

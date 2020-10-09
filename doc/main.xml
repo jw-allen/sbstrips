@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-Documentation for the SBStrips package of GAP, written by Joe Allen as part of
-his PhD thesis.
--->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Documentation for the SBStrips package of GAP, written by Joe Allen as part +
++ of his PhD thesis.                                                          +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
   [ <!ENTITY fail "<C>fail</C>">
@@ -43,14 +43,52 @@ his PhD thesis.
   
   <Body>
 
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Introduction                                                      +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->    
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Introduction                                                          +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Introduction</Heading>
       
+<!-- SEC: Why "strips", not "strings"? ++++++++++++++++++++++++++++++++++++ -->
+      <Section>
+        <Heading>Why "strips", not "strings"?</Heading>
+      </Section>
+
+      First, some context. Representation theorists use the word <E>string</E>
+      to mean a decorated graph that, in a particular fashion, describes a
+      module; it is accordingly called a <E>string module</E>. Liu and Morin
+      <Cite Key="LM04"/> showed that the syzygy of a string module over a
+      special biserial (SB) algebra is a direct sum of string modules. Their
+      proof is constructive, detailing how to obtain the strings indexing the
+      syzygy summands from the string indexing the original module. Their
+      language explains how to spot patterns appearing "from one syzygy to the
+      next", but it does not scale in a particularly transparent way. For
+      example, I believe it does not lend itself to clearly seeing asymptotic
+      behaviour of syzygies of string modules. My research has aimed, in part,
+      to provide a more robust language: one which lays bare more patterns in
+      the syzygies of string modules over SB algebras.
+      <P />
+
+      One key ingredient is a slight refinement of the definition of a string.
+      Really, this differs from the established definition only in technical
+      ways, the effect being to disambiguate how the graph is decorated so that
+      the syzygy calculation is streamlined. In my thesis, I propose the term
+      <E>strip</E> for this refined notion of a string. A happy side-effect of
+      this name change is that it avoids the clash with what &GAP; already
+      thinks "string" means.
+      <P />
+
+      <E>
+        In brief: if whenever you read the word "strip" here, you imagine that
+        it means the kind of decorated graph that representation theorists call
+        a "string", then you won't go too far wrong.
+      </E>
+      <P />
+      
       <Section>
         <Heading>Aims</Heading>
+        
+        
       </Section>
       
       <Section>
@@ -59,32 +97,32 @@ his PhD thesis.
     </Chapter>
 
 
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Worked example                                                    +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Worked example                                                        +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Worked example</Heading>
-      
-      <!-- SEC: Strips, aka "strings for special biserial algebras"         -->
+
+<!-- SEC: Strips ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Strips, aka "strings for special biserial algebras"</Heading>
       </Section>
       
-      <!-- SEC: Calculations with strips                                    -->
+<!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Calculations with strips</Heading>
       </Section>
       
-      <!-- SEC: Under the bonnet                                            -->
+<!-- SEC: A look under the bonnet +++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
-        <Heading>Under the bonnet</Heading>
+        <Heading>A look under the bonnet</Heading>
       </Section>
     </Chapter>
 
 
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Quivers and special biserial algebras                             +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Quivers and special biserial algebras                                 +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Quivers and special biserial algebras</Heading>
       
@@ -146,27 +184,46 @@ his PhD thesis.
     </Chapter>
     
 
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Permissible data                                                  +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Permissible data                                                      +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Permissible data</Heading>
     </Chapter>
 
-    
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Syllables                                                         +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Syllables                                                             +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Syllables</Heading>
     </Chapter>
     
 
-    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    + CHAP: Patches                                                           +
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Patches                                                               +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Patches</Heading>
+    </Chapter>
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ CHAP: Strips                                                                +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <Chapter>
+      <Heading>Strips</Heading>
+      
+<!-- SEC: Introduction ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+      <Section>
+        <Heading>Introduction</Heading>
+      </Section>
+      
+      <Section>
+        <Heading>
+          Constructing strips
+        </Heading>
+      </Section>
     </Chapter>
   </Body>
   

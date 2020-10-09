@@ -138,6 +138,8 @@ instead. Suppose I'll find out...
       <Section>
         <Heading>New attributes of quivers</Heading>
         
+        <#Include Label="Doc1RegQuivIntActionFunction">
+        
         <#Include Label="Doc1RegQuivIntAct">
       </Section>
       

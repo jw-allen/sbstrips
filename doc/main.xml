@@ -6,11 +6,11 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
-  [ <!ENTITY fail "<C>fail</C>">
-    <!ENTITY false "<C>false</C>">
+  [ <!ENTITY fail "<K>fail</K>">
+    <!ENTITY false "<K>false</K>">
     <!ENTITY QPA "<Package>QPA</Package>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
-    <!ENTITY true "<C>true</C>">
+    <!ENTITY true "<K>true</K>">
     ]
   >
 

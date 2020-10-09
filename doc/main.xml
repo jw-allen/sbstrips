@@ -114,6 +114,7 @@ instead. Suppose I'll find out...
         <M>KQ</M> by some (frequently admissible) ideal <M>I</M> -- are a very
         important class of rings, whose representation theory has been much
         studied.
+        <Br />
 
         The excellent &QPA; package implements these objects in &GAP;. The (far
         more humdrum) &SBStrips; package extends &QPA;'s functionality. Quivers
@@ -123,6 +124,7 @@ instead. Suppose I'll find out...
         those quiver algebras for which the property
         <C>IsSpecialBiserialAlgebra</C> <Ref Prop="IsSpecialBiserialAlgebra"
         BookName="QPA"/> returns &true;.
+        <Br />
         
         In this section, we explain some added functionality for quivers and
         special biserial algebras.

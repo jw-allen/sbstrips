@@ -19,7 +19,8 @@ I'm not sure whether I declare multiple additional entities as above or as
   <!DOCTYPE Book SYSTEM "gapdoc.dtd"
     [ <!ENTITY fail "<C>fail</C>">
       <!ENTITY false "<C>false</C>">
-      <!ENTITY sbstrips "<Package>SBStrips</Package>"> 
+      <!ENTITY QPA "<Package>QPA</Package>"
+      <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
       <!ENTITY true "<C>true</C>"> ]
     >
 <!--

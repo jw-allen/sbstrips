@@ -23,7 +23,6 @@ InstallGlobalFunction(
         path := Directory( "./gap4r8/pkg/sbstrips/doc" );
         main := "main.xml";
         files := [ "../lib/1reg.gd",
-                   "../lib/forwardorbits.gd",
                    "../lib/overquiver.gd",
                    "../lib/panels.gd",
                    "../lib/patchreps.gd",

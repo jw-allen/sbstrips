@@ -59,7 +59,7 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 ##      vertices and ``<M>s</M> then <M>t^{-1}</M>'' on arrows.
 ##      <Br />
 ##      This operation figures out from <A>x</A> the quiver to which <A>x</A>
-##      belongs and applies <Ref Attr="Doc1RegQuivIntActionFunction"/> of that
+##      belongs and applies <Ref Attr="1RegQuivIntActionFunction"/> of tha
 ##      quiver. For this reason, it is more user-friendly.
 ##    </Description>
 ##  </ManSection>

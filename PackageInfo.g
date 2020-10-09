@@ -66,7 +66,7 @@ SetPackageInfo( rec(
   data structure called 'strips', and performs this syzygy calculation.",
  
  PackageDoc := rec(
-   BookName := sbstripsdoc,
+   BookName := "sbstripsdoc",
    ArchiveURLSubset := ["doc"],
    HTMLStart := "doc/chap0.html",
    PDFFile := "doc/sbstripsdoc.pdf",

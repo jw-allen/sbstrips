@@ -155,12 +155,14 @@
       </Section>
       
       <Section>
+<!-- SEC: New property of quivers ++++++++++++++++++++++++++++++++++++++++ -->
         <Heading>New property of quivers</Heading>
         
         <#Include Label="DocIs1RegQuiver">
       </Section>
       
       <Section>
+<!-- SEC: New attributes of quivers ++++++++++++++++++++++++++++++++++++++ -->
         <Heading>New attributes of quivers</Heading>
         
         <#Include Label="Doc1RegQuivIntActionFunction">
@@ -168,6 +170,7 @@
         <#Include Label="Doc1RegQuivIntAct">
       </Section>
       
+<!-- SEC: New operations on vertices and arrows of quivers +++++++++++++++ -->
       <Section>
         <Heading>Operations on vertices and arrows of quivers</Heading>
         
@@ -178,8 +181,22 @@
         <#Include Label="DocPathByTargetAndLength">
       </Section>
       
+<!-- SEC: New attributes for special biserial algebras ++++++++++++++++++++ -->
       <Section>
-        <Heading>Attributes for special biserial algebras</Heading>
+        <Heading>New attributes for special biserial algebras</Heading>
+        
+        <#Include Label="DocSimpleStripsOfSbAlg">
+          
+        <#Include Label="DocProjectiveStripsOfSbAlg">
+          
+        <#Include Label="DocInjectiveStripsOfSbAlg">
+      </Section>
+          
+<!-- SEC: New function for special biserial algebras ++++++++++++++++++++++ -->
+      <Section>
+        <Heading>New function for special biserial algebras</Heading>
+        
+      <#Include Label="DocTestInjectivesStripsUpToNthSyzygy">
       </Section>
     </Chapter>
     
@@ -219,10 +236,18 @@
         <Heading>Introduction</Heading>
       </Section>
       
+<!-- SEC: Constructing strips +++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>
           Constructing strips
         </Heading>
+      </Section>
+
+<!-- SEC: Operation on strips +++++++++++++++++++++++++++++++++++++++++++++ -->
+      <Section>
+        <Heading>Operation on strips</Heading>
+        
+        <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
       </Section>
     </Chapter>
   </Body>

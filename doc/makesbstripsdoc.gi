@@ -44,7 +44,7 @@ InstallGlobalFunction(
 );
 
 InstallGlobalFunction(
-    MakeSBStripsDocumentationTextAndLaTeXFiles,
+    MakeSBStripsDoc1,
     function()
         local
             bookname,   # What the created documents should be called
@@ -73,7 +73,7 @@ InstallGlobalFunction(
 );
 
 InstallGlobalFunction(
-    MakeSBStripsDocumentationSixAndHTMLFiles,
+    MakeSBStripsDoc2,
     function()
         local
             bookname,   # What the created documents should be called

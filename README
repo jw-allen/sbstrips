@@ -15,7 +15,7 @@ one-to-many operation on strings. The SBStrips package implements 'strings' as
 a data structure called 'strips', and performs this syzygy calculation.
 
 The SBStrips package is designed for version >=4.5.x of GAP, requiring version
->=1.27.x of QPA (another package for GAP).
+>=1.27.x of QPA. (QPA is another package for GAP.)
 
 The SBStrips package is being written by me, Joe Allen, during my doctoral
 studies at the University of Bristol. In my thesis, I am developing a
@@ -36,7 +36,7 @@ have GAP installed.)
     
     3. Run GAP as normal and type
             LoadPackage( "sbstrips" );
-       at the GAP prompt.
+       at the GAP prompt (ie, when you see "gap>" in your terminal).
        
 +--+ Contents +---------------------------------------------------------------+
 This version of SBStrips includes the following files

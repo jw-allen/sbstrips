@@ -21,6 +21,7 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list <C>simple_list</C>, whose <M>j</M>th entry is the simple strip
@@ -41,6 +42,7 @@ DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list <C>proj_list</C>, whose entry are either strips or the boolean
@@ -67,6 +69,7 @@ DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list <C>inj_list</C>, whose entry are either strips or the boolean
@@ -87,11 +90,6 @@ DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##  <#/GAPDoc>
 DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 
-DeclareOperation(
- "TestStripForFiniteSyzygyTypeAtMost",
- [ IsStripRep, IsInt ]
- );
-
 ##  <#GAPDoc Label="DocWidthOfStrip">
 ##    <ManSection>
 ##      <Oper Name="WidthOfStrip" Arg="strip"/>
@@ -105,7 +103,6 @@ DeclareOperation(
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-
 DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 
 ##  <#GAPDoc Label="DocIsZeroStrip">
@@ -125,7 +122,6 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-
 DeclareProperty( "IsZeroStrip", IsStripRep );
 
 ##  <#GAPDoc Label="DocIsPeriodicStripByNthSyzygy">

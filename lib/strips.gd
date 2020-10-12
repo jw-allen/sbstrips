@@ -17,7 +17,7 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 
 ##  <#GAPDoc Label="DocSimpleStripsOfSbAlg">
 ##    <ManSection>
-##      <Attr Name="SimpleStripsOfSbAlg", Arg="sba"/>
+##      <Attr Name="SimpleStripsOfSbAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -38,7 +38,7 @@ DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocProjectiveStripsOfSbAlg">
 ##    <ManSection>
-##      <Attr Name="ProjectiveStripsOfSbAlg", Arg="sba"/>
+##      <Attr Name="ProjectiveStripsOfSbAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -65,7 +65,7 @@ DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocInjectiveStripsOfSbAlg">
 ##    <ManSection>
-##      <Attr Name="InjectiveStripsOfSbAlg", Arg="sba"/>
+##      <Attr Name="InjectiveStripsOfSbAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -165,8 +165,7 @@ DeclareOperation(
  [ IsStripRep, IsPosInt ]
  );
  
-# This is a temporary, informal function I intend to remove (or rename?)
-##  <GAPDoc Label="DocTestInjectiveStripsUpToNthSyzygy">
+##  <#GAPDoc Label="DocTestInjectiveStripsUpToNthSyzygy">
 ##    <ManSection>
 ##      <Func Name="TestInjectiveStripsUpToNthSyzygy" Arg="sba, N"/>
 ##      <Description>

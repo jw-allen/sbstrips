@@ -15,6 +15,26 @@ DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
 DeclareGlobalFunction( "StripifyVirtualStripNC" );
 
+##  <#GAPDoc Label="DocSimpleStripsOfSbAlg">
+##    <ManSection>
+##      <Attr Name="SimpleStripsOfSbAlg", Arg="IsSpecialBiserialAlgebra"/>
+##      <Description>
+##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
+##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##      </Description>
+##      <Returns>
+##        a list <C>simple_list</C>, whose entries are the strips corresponding
+##        to the simple modules.
+##      </Returns>
+##      <Description>
+##        The <M>j</M>th entry of <C>simple_list</C> corresponds to the
+##        <M>j</M>th vertex of <A>sba</A>. In other words, if you described
+##        <A>sba</A> to &GAP; using the quiver <C>quiver</C>, and the vertex
+##        list of <C>quiver</C> is <C>vert_list</C>, then <C>simple_list[j]</C>
+##        corresponds to <C>vert_list[j]</C> for each <C>j</C>.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
@@ -26,7 +46,7 @@ DeclareOperation(
 
 ##  <#GAPDoc Label="DocWidthOfStrip">
 ##    <ManSection>
-##    <Oper Name="WidthOfStrip" Arg="strip"/>
+##      <Oper Name="WidthOfStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
 ##        <Br />

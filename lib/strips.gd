@@ -60,6 +60,31 @@ DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
+
+##  <#GAPDoc Label="DocInjectiveStripsOfSbAlg">
+##    <ManSection>
+##      <Attr Name="InjectiveStripsOfSbAlg", Arg="sba"/>
+##      <Description>
+##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
+##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##      </Description>
+##      <Returns>
+##        a list <C>inj_list</C>, whose entry are either strips or the boolean
+##        &fail;. 
+##      </Returns>
+##      <Description>
+##        You will have specified <A>sba</A> to &GAP; via some quiver. The
+##        vertices of that quiver are ordered; <C>InjectiveStripsOfSbAlg</C>
+##        adopts that order for strips of projective modules.
+##        <P/>
+##
+##        If the injective module corresponding to the <C>j</C>th vertex of
+##        <A>sba</A> is a string module, then
+##        <C>InjectiveStripsOfSbAlg( sba )[j]</C> returns the strip describing
+##        that string module. If not, then it returns &fail;.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareOperation(

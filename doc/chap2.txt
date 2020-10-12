@@ -1,0 +1,12 @@
+  
+  [1X2 [33X[0;0YWorked example[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YStrips, aka "strings for special biserial algebras"[133X[101X
+  
+  
+  [1X2.2 [33X[0;0YCalculations with strips[133X[101X
+  
+  
+  [1X2.3 [33X[0;0YA look under the bonnet[133X[101X
+  

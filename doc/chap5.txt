@@ -1,0 +1,18 @@
+  
+  [1X5 [33X[0;0YSyllables[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X5.2 [33X[0;0YProperties of syllables[133X[101X
+  
+  [1X5.2-1 IsStationarySyllable[101X
+  
+  [33X[1;0Y[29X[2XIsStationarySyllable[102X( [3Xsy[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xsy[103X, a syllable[133X
+  
+  [6XReturns:[106X  [33X[0;10Yeither  [10Xtrue[110X  or [10Xfalse[110X, depending on whether or not the underlying
+            path of [3Xsy[103X is a stationary path.[133X
+  

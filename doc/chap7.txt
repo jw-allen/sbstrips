@@ -1,0 +1,48 @@
+  
+  [1X7 [33X[0;0YStrips[133X[101X
+  
+  
+  [1X7.1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X7.2 [33X[0;0YConstructing strips[133X[101X
+  
+  
+  [1X7.3 [33X[0;0YAttributes of strips[133X[101X
+  
+  [1X7.3-1 WidthOfStrip[101X
+  
+  [33X[1;0Y[29X[2XWidthOfStrip[102X( [3Xstrip[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  nonnegative integer, counting the number (with multiplicity) of
+            syllables of [3Xstrip[103X are nonstationary.[133X
+  
+  
+  [1X7.4 [33X[0;0YOperation on strips[133X[101X
+  
+  [1X7.4-1 IsFiniteSyzygyTypeStripByNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XIsFiniteSyzygyTypeStripByNthSyzygy[102X( [3Xstrip[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  the strips appearing in the [3XN[103Xth syzygy of [3Xstrip[103X have all
+            appeared among earlier syzygies, and [9Xfalse[109X otherwise.[133X
+  
+  [33X[0;0YIf  the  call  to  this  function  returns [9Xtrue[109X, then it will also print the
+  smallest [3XN[103X for which it would return [9Xtrue[109X.[133X
+  
+  [1X7.4-2 IsPeriodicStripByNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XIsPeriodicStripByNthSyzygy[102X( [3Xstrip[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if [3Xstrip[103X is appears among its own first [3XN[103X syzygies, and [9Xfalse[109X
+            otherwise.[133X
+  
+  [33X[0;0YIf the call to this function returns [9Xtrue[109X, then it will also print the index
+  of the syzygy at which [3Xstrip[103X first appears.[133X
+  

@@ -76,7 +76,7 @@
       <E>strip</E> for this refined notion of a string. A happy side-effect of
       this name change is that it avoids the clash with what &GAP; already
       thinks "string" means.
-      <P />
+      <P /> <P />
 
       <E>
         In brief: if whenever you read the word "strip" here, you imagine that
@@ -126,6 +126,7 @@
     <Chapter>
       <Heading>Quivers and special biserial algebras</Heading>
       
+<!-- SEC: Introduction ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Introduction</Heading>
 
@@ -159,15 +160,20 @@
         <Heading>New property of quivers</Heading>
         
         <#Include Label="DocIs1RegQuiver">
+
+
+        <#Include Label="DocIsOverquiver">
       </Section>
       
       <Section>
 <!-- SEC: New attributes of quivers ++++++++++++++++++++++++++++++++++++++ -->
         <Heading>New attributes of quivers</Heading>
         
-        <#Include Label="Doc1RegQuivIntActionFunction">
-        
         <#Include Label="Doc1RegQuivIntAct">
+
+        <#Include Label="Doc1RegQuivIntActionFunction">
+
+        <#Include Label="Doc2RegAugmentationOfQuiver">
       </Section>
       
 <!-- SEC: New operations on vertices and arrows of quivers +++++++++++++++ -->
@@ -184,6 +190,8 @@
 <!-- SEC: New attributes for special biserial algebras ++++++++++++++++++++ -->
       <Section>
         <Heading>New attributes for special biserial algebras</Heading>
+
+        <#Include Label="DocOverquiverOfSbAlg">
         
         <#Include Label="DocSimpleStripsOfSbAlg">
           
@@ -215,7 +223,18 @@
     <Chapter>
       <Heading>Syllables</Heading>
     </Chapter>
-    
+
+    <Section>
+<!-- SEC: Introduction ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+      <Heading>Introduction</Heading>
+    </Section>
+
+    <Section>
+<!-- SEC: Properties of syllables +++++++++++++++++++++++++++++++++++++++++ -->
+      <Heading>Properties of syllables</Heading>
+
+      <#Include Label="DocIsStationarySyllable">
+    </Section>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 + CHAP: Patches                                                               +
@@ -243,11 +262,19 @@
         </Heading>
       </Section>
 
+      <Section>
+        <Heading>Attributes of strips</Heading>
+
+        <#Include Label="DocWidthOfStrip">
+      </Section>
+
 <!-- SEC: Operation on strips +++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Operation on strips</Heading>
         
         <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
+
+        <#Include Label="DocIsPeriodicStripByNthSyzygy">
       </Section>
     </Chapter>
   </Body>

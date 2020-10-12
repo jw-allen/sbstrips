@@ -19,19 +19,17 @@ DeclareProperty( "IsPinBoundarySyllable", IsSyllableRep );
 
 ##  <#GAPDoc Label="DocIsStationarySyllable">
 ##    <ManSection>
-##      <Prop Name="IsStationarySyllable" Arg="sy">
-##        <Description>
-##          Argument: <A>sy</A>, a syllable
-##          <Br />
-##        </Description>
-##        <Returns>
-##          either <C>true</C> or <C>false</C>, depending on whether or not the
-##          underlying path of <A>sy</A> is a stationary path.
-##        </Returns>
-##      </Prop>
+##      <Prop Name="IsStationarySyllable" Arg="sy"/>
+##      <Description>
+##        Argument: <A>sy</A>, a syllable
+##        <Br />
+##      </Description>
+##      <Returns>
+##        either <C>true</C> or <C>false</C>, depending on whether or not the
+##        underlying path of <A>sy</A> is a stationary path.
+##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-
 DeclareProperty( "IsStationarySyllable", IsSyllableRep );
 
 DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] );

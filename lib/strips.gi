@@ -1240,7 +1240,7 @@ InstallMethod(
 );
 
 InstallGlobalFunction(
-    TestInjectivesUpToNthSyzygy,
+    TestInjectiveStripsUpToNthSyzygy,
     "for a SB algebra and a positive integer",
     function( sba, N )
         local

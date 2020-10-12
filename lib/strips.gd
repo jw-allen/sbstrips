@@ -17,25 +17,48 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 
 ##  <#GAPDoc Label="DocSimpleStripsOfSbAlg">
 ##    <ManSection>
-##      <Attr Name="SimpleStripsOfSbAlg", Arg="IsSpecialBiserialAlgebra"/>
+##      <Attr Name="SimpleStripsOfSbAlg", Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
 ##      </Description>
 ##      <Returns>
-##        a list <C>simple_list</C>, whose entries are the strips corresponding
-##        to the simple modules.
+##        a list <C>simple_list</C>, whose <M>j</M>th entry is the simple strip
+##        corresponding to the <M>j</M>th vertex of <A>sba</A>.
 ##      </Returns>
 ##      <Description>
-##        The <M>j</M>th entry of <C>simple_list</C> corresponds to the
-##        <M>j</M>th vertex of <A>sba</A>. In other words, if you described
-##        <A>sba</A> to &GAP; using the quiver <C>quiver</C>, and the vertex
-##        list of <C>quiver</C> is <C>vert_list</C>, then <C>simple_list[j]</C>
-##        corresponds to <C>vert_list[j]</C> for each <C>j</C>.
+##        You will have specified <A>sba</A> to &GAP; via some quiver. The
+##        vertices of that quiver are ordered; <C>SimpleStripsOfSbAlg</C>
+##        adopts that order for strips of simple modules.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
+
+##  <#GAPDoc Label="DocProjectiveStripsOfSbAlg">
+##    <ManSection>
+##      <Attr Name="ProjectiveStripsOfSbAlg", Arg="sba"/>
+##      <Description>
+##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
+##        Label="IsSpecialBiserialAlgebra" Book="QPA"/> returs &true;)
+##      </Description>
+##      <Returns>
+##        a list <C>proj_list</C>, whose entry are either strips or the boolean
+##        &fail;. 
+##      </Returns>
+##      <Description>
+##        You will have specified <A>sba</A> to &GAP; via some quiver. The
+##        vertices of that quiver are ordered; <C>ProjectiveStripsOfSbAlg</C>
+##        adopts that order for strips of projective modules.
+##        <P/>
+##
+##        If the projective module corresponding to the <C>j</C>th vertex of
+##        <A>sba</A> is a string module, then
+##        <C>ProjectiveStripsOfSbAlg( sba )[j]</C> returns the strip describing
+##        that string module. If not, then it returns &fail;.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 

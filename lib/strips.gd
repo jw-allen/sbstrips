@@ -166,9 +166,9 @@ DeclareOperation(
  );
  
 # This is a temporary, informal function I intend to remove (or rename?)
-##  <GAPDoc Label="DocTestInjectivesStripsUpToNthSyzygy">
+##  <GAPDoc Label="DocTestInjectiveStripsUpToNthSyzygy">
 ##    <ManSection>
-##      <Func Name="TestInjectivesStripsUpToNthSyzygy" Arg="sba, N"/>
+##      <Func Name="TestInjectiveStripsUpToNthSyzygy" Arg="sba, N"/>
 ##      <Description>
 ##        Arguments: <A>sba</A> a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;);
@@ -195,6 +195,6 @@ DeclareOperation(
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareGlobalFunction( "TestInjectivesStripsUpToNthSyzygy" );
+DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 
 #########1#########2#########3#########4#########5#########6#########7#########

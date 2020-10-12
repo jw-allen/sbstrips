@@ -196,7 +196,7 @@
       <Section>
         <Heading>New function for special biserial algebras</Heading>
         
-      <#Include Label="DocTestInjectivesStripsUpToNthSyzygy">
+      <#Include Label="DocTestInjectiveStripsUpToNthSyzygy">
       </Section>
     </Chapter>
     

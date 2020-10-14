@@ -1,8 +1,3 @@
-##  We break the compilation of SBStrips' documentation into three functions.
-##   The first creates a list that the other two call. The second uses this
-##   list to create the text and LaTeX files of the documentation (after which
-##   I then compile the TEX files outside of GAP to get the PNR file). The
-##   third uses the list to create the Six and HTML files.
 ##  These functions only exist for the convenience of the author, Joe Allen.
 ##   The end user should not need them (and, indeed, they're unlikely to work
 ##   on your device). 

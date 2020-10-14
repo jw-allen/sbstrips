@@ -14,6 +14,14 @@
     ]
   >
 
+<?LaTeX ExtraPreamble="
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\tikzset{>=to}
+"?>
+
 <Book Name="SBStrips">
   
   <TitlePage>
@@ -106,6 +114,27 @@
 <!-- SEC: Strips ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Strips, aka "strings for special biserial algebras"</Heading>
+
+        Here is some text that sandwiches a Display element<Alt
+        Only="LaTeX, HTML MathJax">
+          <Display>
+            \begin{tikzcd}[sep=small]
+                    1
+              &amp; 1 \ar[l, "a"'] \ar[r, "b"]
+              &amp; 2 \ar[r, "c"]
+              &amp; 1
+              &amp; 1 \ar[l, "a"'] \ar[r, "b"]
+              &amp; 2
+              &amp; 2 \ar[l, "d"'] \ar[r, "c"]
+              &amp; 1
+              &amp; 1 \ar[l, "a"']
+              &amp; 2 \ar[l, "c"'] \ar[r, "d"]
+              &amp; 2
+            \end{tikzcd}
+          </Display>
+        </Alt>but where I didn't precede the Display environment with a
+        Paragraph element! Can you imagine!
+        <P />
       </Section>
       
 <!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->

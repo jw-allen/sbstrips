@@ -81,6 +81,92 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsCollectedList,
+    "for lists",
+    [ IsList ],
+    function( list )
+        local
+            mults,  # List of multiplicities
+            objs;   # List of objects
+            
+        if HasIsCollectedList( list ) then
+            return IsCollectedList( list );
+
+        else
+            if not ( ForAll( list, IsList ) ) then
+                return false;
+            elif not( ForAll( list, x -> Length( x ) = 2 ) ) then
+                return false;
+            else
+                mults := List( list, x -> x[2] );
+                
+                if not ( ForAll( mults, IsPosInt ) ) then
+                    return false;
+                else
+                    return true;
+                fi;
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsCollectedHomogeneousList,
+    "for lists",
+    [ IsList ],
+    function( clist )
+        local
+            mults,  # List of multiplicities
+            objs;   # List of objects
+
+        if HasIsCollectedHomogeneousList( clist ) then
+            return IsCollectedHomogeneousList( clist );
+        else
+            if not IsCollectedList( clist ) then
+                return false;
+            else
+                objs := List( clist, x -> x[1] );
+                
+                return IsHomogeneousList( objs );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    Recollected,
+    "for collected lists",
+    [ IsList ],
+    function( clist )
+        local
+            j, k,   # Integer variable
+            list,   # List variable
+            mults,  # List of multiplicities
+            objs;   # List of objects
+            
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            objs := List( clist, x -> x[1] );
+            mults := List( clist, x -> x[2] );
+            
+            list := [];
+            
+            ## Unpack <clist> into a single list, then apply <Collected>
+            for k in [ 1..Length( clist ) ] do
+                j := 1;
+                while j <= mults[k] do
+                    Add( list, objs[k] );
+                    j := j + 1;
+                od;
+            od;
+            
+            return Collected( list );
+        fi;
+    end
+);
 
 # Useful functions for QPA
 

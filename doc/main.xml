@@ -9,6 +9,8 @@
   [ <!ENTITY fail "<K>fail</K>">
     <!ENTITY false "<K>false</K>">
     <!ENTITY QPA "<Package>QPA</Package>">
+    <!ENTITY seeclist "see <Ref Prop="IsCollectedList"/>">
+    <!ENTITY seeconc "see <Ref Func="Concatenation" BookName="Reference"/>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">
     ]

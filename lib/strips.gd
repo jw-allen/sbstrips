@@ -8,8 +8,141 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 
 DeclareOperation( "Stripify", [ IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
+
+##	<#GAPDoc Label="DocSyzygyOfStrip">
+##	  <ManSection>
+##      <Oper Name="SyzygyOfStrip" Arg="strip_or_list" />
+##      <Description>
+##        This operation calculates syzygies of strips. It has different
+##        methods, depending on whether its input is a single strip or a list
+##        of strips.
+##      </Description>
+##		<Meth Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##		<Meth Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
+##		<Description>
+##		  Argument: <A>strip</A>, a strip (in the first method); <A>list</A>, a
+##        list of strips (in the second method)
+##		</Description>
+##		<Returns>
+##		  a list of strips
+##		</Returns>
+##		<Description>
+##		  In the first method, the syzygy of the strip <A>strip</A> is
+##        calculated and its summands are returned in a list. In the second
+##        method, the syzygy of each strip in <A>list</A> is calculated and
+##        their summands returned in a single list.
+##        <P />
+##
+##        These calculations can be iterated using <Ref
+##        Oper="NthSyzygyOfStrip"/> and performed more efficiently using <Ref
+##        Oper="CollectedSyzygyOfStrip"/> or <Ref
+##        Oper="CollectedNthSyzygyOfStrip"/>.
+##		</Description>
+##	  </ManSection>
+##	<#/GAPDoc>
 DeclareOperation( "SyzygyOfStrip", [ IsStripRep ] );
+
+##	<#GAPDoc Label="DocNthSyzygyOfStrip">
+##	  <ManSection>
+##      <Oper Name="NthSyzygyOfStrip" Arg="strip_or_list, N"/>
+##      <Description>
+##        This operation calculates <A>N</A>th syzygies of strips. It has
+##        different methods, depending on whether its input is a single strip
+##        or a list of strips.
+##      </Description>
+##		<Meth Name="NthSyzygyOfStrip" Label="for strips" Arg="strip, N"/>
+##		<Meth Name="NthSyzygyOfStrip" Label="for lists of strips"
+##      Arg="list, N"/>
+##		<Description>
+##		  Argument: <A>strip</A>, a strip (in the first method), or
+##        <A>list</A>, a list of strips (in the second method); <A>N</A>, a
+##        nonnegative integer
+##		</Description>
+##		<Returns>
+##		  a list of strips
+##		</Returns>
+##		<Description>
+##		  In the first method, the <A>N</A>th syzygy of <A>strip</A> is
+##        calculated and its summands are returned in a list. In the second
+##        method, the <A>N</A>th syzygy of <A>strip</A> is calculated and their
+##        symmands are returned in a single list.
+##        <P />
+##
+##        This operation iterates <Ref Oper="SyzygyOfStrip"/>. When the result
+##        has a lot of summands, as is often the case for large <A>N</A>, <Ref
+##        Oper="CollectedNthSyzygyOfStrip"/> is more efficient.
+##		</Description>
+##	  </ManSection>
+##	<#/GAPDoc>
 DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
+
+##	<#GAPDoc Label="DocCollectedSyzygyOfStrip">
+##	  <ManSection>
+##      <Oper Name="CollectedSyzygyOfStrip" Arg="strip_or_list_or_clist"/>
+##      <Description>
+##        This operation calculates syzygies, and then collects the result into
+##        a multiset-like list, using <Ref Oper="Collected"
+##        BookName="Reference"/>. It has different methods, depending on
+##        whether its input is a single strip, a (flat) list of strips or a
+##        collected list of strips.
+##      </Description>
+##		<Meth Name="CollectedSyzygyOfStrip" Label="for strips" Arg="strip"/>
+##      <Meth Name="CollectedSyzygyOfStrip" Label="for flat lists of strips"
+##      Arg="list"/>
+##      <Meth Name="CollectedSyzygyOfStrip"
+##      Label="for collected lists of strips" Arg="clist"/>
+##		<Description>
+##		  Argument: <A>strip</A>, a strip (in the first method), or
+##        <A>list</A>, a (flat) list of strips (in the second method), or
+##        <A>clist</A>, a collected list of strips (in the third method)
+##		</Description>
+##		<Returns>
+##		  a collected list of strips
+##		</Returns>
+##	  </ManSection>
+##	<#/GAPDoc>
+DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
+
+##  <#GAPDoc Label="DocCollectedNthSyzygyOfStrip">
+##    <ManSection>
+##      <Oper Name="CollectedNthSyzygyOfStrip"
+##      Arg="strip_or_list_or_clist, N"/>
+##      <Description>
+##        This operation calculates <A>N</A>th syzygies of strips, and collects
+##        the result into a multiset-like list, using <Ref Oper="Collected"
+##        BookName="Reference"/>. It has different methods, depending on
+##        whether its input is a single strip, a (flat) list of strips or a
+##        collected list of strips.
+##      </Description>
+##		<Meth Name="CollectedNthSyzygyOfStrip" Label="for strips"
+##      Arg="strip, N"/>
+##      <Meth Name="CollectedNthSyzygyOfStrip"
+##      Label="for flat lists of strips, N"
+##      Arg="list, N"/>
+##      <Meth Name="CollectedNthSyzygyOfStrip"
+##      Label="for collected lists of strips" Arg="clist"/>
+##		<Description>
+##		  Argument: <A>strip</A>, a strip (in the first method), or
+##        <A>list</A>, a (flat) list of strips (in the second method), or
+##        <A>clist</A>, a collected list of strips (in the third method);
+##        <A>N</A> a nonnegative integer
+##		</Description>
+##		<Returns>
+##		  a collected list of strips
+##		</Returns>
+##      <Description>
+##        The input to each method gives rise to a collected list of strips:
+##        respectively, <C>Collected( [ strip ] )</C>, <C>Collected( list )</C>
+##        or <C>clist</C>. Once the input strips have been collected in this
+##        manner, &GAP; only needs to calculate the syzygy of each unique input
+##        strip once and then multiply the frequency of each syzygy summand by
+##        the number of instances of the input strip. This eliminates much of
+##        the duplicated effort to which <Ref Oper="NthSyzygyOfStrip"/> is
+##        liable.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "CollectedNthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );

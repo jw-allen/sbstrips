@@ -869,6 +869,108 @@ InstallOtherMethod(
 );
 
 InstallMethod(
+    CollectedSyzygyOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        return Collected( SyzygyOfStrip( strip ) );
+    end
+);
+
+InstallOtherMethod(
+    CollectedSyzygyOfStrip,
+    "for a list of strip-reps",
+    [ IsList ],
+    function( list )
+        if not ( ForAll( list, IsStripRep ) ) then
+            TryNextMethod();
+            
+        else
+            return CollectedSyzygyOfStrip( Collected( list ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    CollectedNthSyzygyOfStrip,
+    "for a strip and a positive integer",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        return CollectedNthSyzygyOfStrip( [ [ strip, 1 ] ], N );
+    end
+);
+
+InstallOtherMethod(
+    CollectedNthSyzygyOfStrip,
+    "for a (flat) list and a positive integer",
+    [ IsList, IsInt ],
+    function( list, N )
+        if IsCollectedList( list ) then
+            TryNextMethod();
+        elif not ForAll( list, IsStripRep ) then
+            Error( "The first argument\n", list, "\nmust be a list of strips!"
+             );
+        else
+            return CollectedNthSyzygyOfStrip( Collected( list ), N );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    CollectedNthSyzygyOfStrip,
+    "for a collected list and a positive integer",
+    [ IsList, IsInt ],
+    function( clist, N )
+        local
+            ans,    # Collected list variable (for the output)
+            k;      # Integer variable (for counting up to N)
+            
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        elif IsPosInt( -N ) then
+            Error( "The second argument, ", N, " must be a nonnegative integer"
+             );
+        elif N = 0 then
+            return clist;
+        else
+            ans := clist;
+            for k in [ 1..N ] do
+                ans := CollectedSyzygyOfStrip( ans );
+            od;
+            
+            return ans;
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    CollectedSyzygyOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            j, k,       # Integer variables
+            list,       # List variable (for object to be returned)
+            syz_list;   # List variable (for list of syzygies)
+            
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            list := [];
+            for k in [ 1..Length( clist ) ] do
+                syz_list := SyzygyOfStrip( clist[k][1] );
+                for j in [ 1.. clist[k][2] ] do
+                    Append( list, syz_list );
+                od;
+            od;
+            
+            return Collected( list );
+        fi;
+    end
+);
+
+InstallMethod(
     SimpleStripsOfSbAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],

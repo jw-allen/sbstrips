@@ -1,4 +1,5 @@
 ReadPackage( "sbstrips", "lib/1reg.gd" );
+ReadPackage( "sbstrips", "lib/info.gd" );
 ReadPackage( "sbstrips", "lib/overquiver.gd" );
 ReadPackage( "sbstrips", "lib/permdata.gd" );
 ReadPackage( "sbstrips", "lib/strips.gd" );

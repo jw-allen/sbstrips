@@ -120,7 +120,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[1] );
             norm_arg := Concatenation( [ norm_sy, -1 ], arg );
             
-            Info( InfoDebug, 2, "Normalising on left, calling again..." );
+            Info( InfoSBStrips, 2, "Normalising on left, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -130,7 +130,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[ len - 1 ] );
             norm_arg := Concatenation( arg, [ norm_sy, 1 ] );
             
-            Info( InfoDebug, 2, "Normalising on right, calling again..." );
+            Info( InfoSBStrips, 2, "Normalising on right, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -140,7 +140,7 @@ InstallGlobalFunction(
         
         # Now we create the <IsStripRep> object.
         
-        Info( InfoDebug, 2, "no normalisation needed, creating object..." );
+        Info( InfoSBStrips, 2, "no normalisation needed, creating object..." );
         
         data := arg;
         fam := StripFamilyOfSbAlg( sba );
@@ -691,6 +691,246 @@ InstallOtherMethod(
         
         # Tests complete! Delegate to <StripifyFromSbAlgPathNC>
         return StripifyFromSbAlgPathNC( left_list, path, right_list );
+    end
+);
+
+InstallOtherMethod(
+    Stripify,
+    "for an arrow of a special biserial algebra, +/-1 and a list of integers",
+    [ IsMultiplicativeElement, IsInt, IsList ],
+    function( arr, N, int_list )
+        local
+            1_sba,      # Unity of <sba>
+            a_seq, a_i, # Integer sequence in the source encoding of perm-
+                        #  -issible data of <sba>, and its <i>th term
+            b_seq, b_i, # Bit sequence in the source encoding of permissible
+                        # data of <sba>, and its <i>th term
+            c_seq, c_i, # Integer sequence in the target encoding of perm-
+                        #  -issible data of <sba>, and its <i>th term
+            d_seq, d_i, # Bit sequence in the target encoding of permissible
+                        #  data of <sba>, and its <i>th term
+            i,          # Vertex variable (to be used when inferring
+                        #  <syll_list> from the input
+            k,          # Integer variable (indexing entries of <int_list>)
+            oarr,       # Arrow of <sba> which represents <arr>
+            opath,      # Path variable (for paths in <oquiv>)
+            oquiv,      # Overquiver of <sba>
+            oquiv_arrs, # Arrows of <oquiv>
+            quiv,       # Original quiver of <sba>
+            r,          # Integer variable (for entries of <int_list>)
+            s,          # Integer variable, either 0 or 1 (depending on whether
+                        #  <arr> should point with the first syllable specified
+                        #  by <int_list> or against it
+            sba,        # SB algebra to which <arr> belongs
+            sba_arrs,   # "Arrows" of <sba>
+            syll,       # Syllable variable
+            syll_list,  # List of syllables, to be inferred from input
+            test_alt;   # Local function, testing that the entries of
+                        #  <int_list> alternate in sign 
+        
+        # Write testing function
+        test_alt := function( list )
+            local
+                m;  # Integer variable (indexing the entries of <list>
+            
+            # Consecutive entries alternate in sign iff their product is
+            #  negative
+            for m in [ 1 .. ( Length( list ) - 1 ) ] do
+                if list[m] * list[m+1] >= 0 then
+                    return false;
+                fi;
+            od;
+            
+            return true;
+        end;
+        
+        # Name the algebra to which <arr> belongs
+        sba := PathAlgebraContainingElement( arr );
+        
+        # First round of testing on inputs
+        if not N in [ 1, -1 ] then
+            Error( "The second argument\n", N, "\nshould be 1 or -1!" );
+            
+        elif not ForAll( int_list, IsInt ) then
+            Error( "The third argument\n", int_list,
+             "\nshould be a list of integers!" );
+             
+        elif not test_alt( int_list ) then
+            Error( "The entries of the third argument\n", int_list,
+            "\nshould alternate in sign!" );
+            
+        elif not IsSpecialBiserialAlgebra( sba ) then
+            Error( "The first argument\n", sba,
+             "\nshould be a special biserial algebra!" );
+             
+        else
+            # Test that <arr> is an "arrow" of <sba>
+            oquiv := OverquiverOfSbAlg( sba );
+            oquiv_arrs := ArrowsOfQuiver( oquiv );
+            sba_arrs := List(
+             oquiv_arrs,
+             SbAlgResidueOfOverquiverPathNC
+             );
+             
+            if not arr in sba_arrs then
+                Error( "The first argument\n", arr,
+                "\n should be an arrow of a special biserial algebra!" );
+                
+            else
+                # Represent <arr> as an arrow of <oquiv>
+                oarr := First(
+                 oquiv_arrs,
+                 x -> SbAlgResidueOfOverquiverPathNC( x ) = arr
+                 );
+                
+                # If <int_list> is empty, then our task is easy
+                if IsEmpty( int_list ) then
+                    opath := oarr;
+                    syll := Syllabify( oarr, 1 );
+                    return StripifyFromSyllablesAndOrientationsNC( syll, N );
+                fi;
+                
+                # Otherwise, <int_list> is nonempty. We construct the syllables
+                #  in turn. We'll need the permissible data of <sba>.
+                a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
+                b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+                c_seq := TargetEncodingOfPermDataOfSbAlg( sba )[1];
+                d_seq := TargetEncodingOfPermDataOfSbAlg( sba )[2];
+                syll_list := [];
+                
+                # The first syllable must be constructed with care. We'll
+                #  proceed case by case.
+                # In the first two cases, the strip begins with an immediate
+                #  alternation: ie
+                #       o --> o <--<--<-- ...
+                #  or
+                #       o <-- o -->-->--> ...
+                #  Here, the first syllable is really just <oarr>. (We already
+                #  know that this is a syllable, as <oarr> has a residue in
+                #  <sba>.)
+                if N = 1 and int_list[1] < 0 then
+                    syll := Syllabify( oarr, 0 );
+                    i := ExchangePartnerOfVertex( TargetOfPath( oarr ) );
+                    s := 0;
+                    
+                elif N = -1 and int_list[1] > 0 then
+                    syll := Syllabify( oarr, 1 );
+                    i := ExchangePartnerOfVertex( SourceOfPath( oarr ) );
+                    s := 0;
+                
+                # In the remaining two cases, <oarr> is the first or last arrow
+                #  of some longer equioriented interval in the string: ie
+                #       o --> -->-->--> ...
+                #  or
+                #       o <-- <--<--<-- ...
+                #  Here, we must verify that that equioriented interval is not
+                #  "too long". (The verifications are mutually dual.)
+                # If the verification passes, we create the syllable. This
+                #  "uses" up the first entry of <int_list>, which we may sub-
+                #  -sequently <Remove>.
+                elif N = 1 and int_list[1] > 0 then
+                    i := SourceOfPath( oarr );
+                    r := int_list[1];
+                    a_i := a_seq.( String( i ) );
+                    b_i := b_seq.( String( i ) );
+                    
+                    if r+1 < a_i + b_i then
+                        opath := PathBySourceAndLength( i, r+1 );
+                        
+                        if Length( int_list ) = 1 then
+                            syll := Syllabify( opath, 1 );
+                            
+                        else
+                            syll := Syllabify( opath, 0 );
+                        fi;
+                        
+                        Remove( int_list, 1 );
+                        i := ExchangePartnerOfVertex( TargetOfPath( opath ) );
+                        s := 1;
+                        
+                    else
+                        Error( "The 1st entry of\n", int_list,
+                         "\ndoes not specify a valid syllable! ",
+                         "(Combining with the first input arrow\n", arr,
+                         "\nit made too long a path!)" );
+                    fi;
+                    
+                elif N = -1 and int_list[1] < 0 then
+                    i := TargetOfPath( oarr );
+                    r := - int_list[1];
+                    c_i := c_seq.( String( i ) );
+                    d_i := d_seq.( String( i ) );
+                    
+                    if r+1 < c_i + d_i then
+                        opath := PathByTargetAndLength( i, r+1 );
+                        syll := Syllabify( opath, 1 );
+                        Remove( int_list, 1 );
+                        i := ExchangePartnerOfVertex( SourceOfPath( opath ) );
+                        s := 1;
+                        
+                    else
+                        Error( "The 1st entry of\n", int_list,
+                         "\ndoes not specify a valid syllable! ",
+                         "(Combining with first input arrow\n", arr,
+                         "\nit made too long a path!)" );
+                     fi;
+                fi;
+                Append( syll_list, [ syll, N ] );
+                
+                # With the first syllable out of the way, we read along
+                #  <int_list> (or what's left of it). For each, we add to the
+                #  end of the syllable list, provided that the data do correct-
+                #  -ly specify a syllable.
+                for k in [ 1 .. Length( int_list ) ] do
+                    r := AbsInt( int_list[k] );
+                    
+                    if int_list[k] > 0 then
+                        a_i := a_seq.( String( i ) );
+                        b_i := b_seq.( String( i ) );
+                        
+                        if r < a_i + b_i then
+                            opath := PathBySourceAndLength( i, r );
+                            
+                            if k = Length( int_list ) then
+                                syll := Syllabify( opath, 1 );
+                                
+                            else
+                                syll := Syllabify( opath, 0 );
+                            fi;
+                            i := ExchangePartnerOfVertex( TargetOfPath( i ) );
+                            
+                        else
+                            Error( "The ", Ordinal( k+s ), " entry of\n",
+                             int_list, "\ndoes not specify a syllable! ",
+                             "(It is too long!)" );
+                        fi;
+                        
+                    else
+                        c_i := c_seq.( String( i ) );
+                        d_i := d_seq.( String( i ) );
+                        
+                        if r < c_i + d_i then
+                            opath := PathByTargetAndLength( i, r );
+                            syll := Syllabify( opath, 0 );
+                            i := ExchangePartnerOfVertex(
+                             SourceOfPath( opath )
+                             );
+                            
+                        else
+                            Error( "The ", Ordinal( k+s ), " entry of\n",
+                             int_list, "\ndoes not specify a syllable! ",
+                             "(It is too long!)" );
+                        fi;
+                    fi;
+                    Append( syll_list, [ syll, SignInt( int_list[k] ) ] );
+                od;
+                
+                return CallFuncList(
+                 StripifyFromSyllablesAndOrientationsNC,
+                 syll_list
+                 );
+            fi;
+        fi;
     end
 );
 

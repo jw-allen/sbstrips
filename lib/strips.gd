@@ -6,10 +6,100 @@ DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 DeclareAttribute( "StripFamilyOfSbAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 
-DeclareOperation( "Stripify", [ IsList ] );
+##  <#GAPDoc Label="DocStripify">
+##    <ManSection>
+##      <Meth Name="Stripify" Label="for an arrow, +/-1 and a list of integers"
+##      Arg="arr, N, int_list"/>
+##      <Description>
+##        Arguments: <A>arr</A>, the residue of an arrow in a special biserial
+##        algebra (see below); <A>N</A>, an integer which is either <C>1</C> or
+##        <C>-1</C>; <A>int_list</A>, a (possibly empty) list of integers whose
+##        entries alternate in sign (meaning they are alternately positive and
+##        negative).
+##        <P />
+##        (Remember that residues of arrows in an quiver algebra can be easily
+##        accessed using the <C>\.</C> operation. See <Ref Oper="."
+##        Label="for a path algebra" BookName="QPA"/> for details.)
+##        <P />
+##      </Description>
+##      <Returns>
+##        the strip specified by this data
+##      </Returns>
+##      <Description>
+##        Recall that &SBStrips; uses strip objects to represent the kind of
+##        decorated graph that representation theorists call "strings". Suppose
+##        you draw that string on the page as a linear graph with some arrows
+##        pointing to the right (the "positive" direction) and some to the left
+##        (the "negative" direction). See further below for examples.
+##        <P />
+##        (Of course, this method assumes that the string contains at least one
+##        arrow. There is a different, easier, method for strings comprising
+##        only a single vertex. Namely <Ref Meth="Stripify"
+##        Label="for paths of a special biserial algebra"/> called with the
+##        residue of a vertex.)
+##        <P />
+##        The first arrow (ie, the leftmost one drawn on the page) is
+##        <A>arr</A>. If it points to the right (the "positive" direction),
+##        then set <A>N</A> to be <C>1</C>. If it points to the left (the
+##        "negative" direction), then set <A>N</A> to be <C>-1</C>.
+##        <P />
+##        Now, ignore that first arrow <A>arr</A> and look at the rest of the
+##        graph. It is made up of several paths that alternately point
+##        rightward and leftward. Each path has a <E>length</E>; that is, the
+##        total number of arrows in it. Enter the lengths of these paths to
+##        <A>int_list</A> in the order you read them, using positive numbers
+##        for paths pointing rightwards and negative numbers for paths pointing
+##        leftwards.
+##        <P />
+##        &SBStrips; will check that your data validily specify a strip. If it
+##        doesn't think they do, then it will throw up an Error message.
+##        <P />
+##      </Description>
+##    </ManSection>
+##
+##    <ManSection>
+##      <Meth Name="Stripify" Label="for paths of a special biserial algebra"
+##      Arg="path"/>
+##      <Description>
+##        Arguments: <A>path</A>, the residue (in a special biserial algebra)
+##        of some path.
+##        <P />
+##        (Remember that residues of vertices and arrows can be easily accessed
+##        using <Ref Oper="." Label="for a path algebra" BookName="QPA"/>, and
+##        that these can be multiplied together using <Ref Oper="\*"
+##        BookName="Reference"/> to make a path.
+##        <P />
+##      </Description>
+##      <Returns>
+##        The strip corresponding to <A>path</A>
+##      </Returns>
+##      <Description>
+##        Recall that uniserial modules are string modules. The uniserial
+##        modules of a SB algebra are in <M>1</M>-to-<M>1</M> correspondence
+##        with the paths <M>p</M> linearly independent from all other paths.
+##        Therefore, this path is all you need to specify the strip.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "Stripify", [ IsMultiplicativeElement, IsInt, IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 
 ##	<#GAPDoc Label="DocSyzygyOfStrip">
+##    <ManSection>
+##		<Meth Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##      <Description>
+##		  Argument: <A>strip</A>, a strip
+##        <P />
+##      </Description>
+##      <Returns>
+##        a list of strips, corresponding to the indecomposable direct summands
+##        of the syzygy of <A>strips</A>
+##      </Returns>
+##    </ManSection>
+##
+############### COLLECT THESE METHODS INTO INDIVIDUAL MANSECTIONS
+
+
 ##	  <ManSection>
 ##      <Oper Name="SyzygyOfStrip" Arg="strip_or_list" />
 ##      <Description>

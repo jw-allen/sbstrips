@@ -291,7 +291,21 @@
         <Heading>
           Constructing strips
         </Heading>
+        
+        <#Include Label="DocStripify">
+        
+        <Example>
+          <![CDATA[
+gap> # Include an example here!
+          ]]>
+        </Example>
       </Section>
+
+<!-- SEC: Calculating syzygies of strips ++++++++++++++++++++++++++++++++++ -->
+      <Section>
+        <Heading>Calculating syzygies of strips</Heading>
+      </Section>
+      
 
       <Section>
         <Heading>Attributes of strips</Heading>

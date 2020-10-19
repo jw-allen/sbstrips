@@ -33,7 +33,7 @@ InstallGlobalFunction(
         
         # Make GAPDoc tree
         r := ParseTreeXMLString( doc[1], doc[2] );
-        CheckAndCleanGapDocTree(r);
+        CheckAndCleanGapDocTree( r );
         
         return [ r, path, main, files, bookname, doc ];
     end

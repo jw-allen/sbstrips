@@ -204,4 +204,38 @@ InstallMethod(
     end
 );
 
-#########1#########2#########3#########4#########5#########6#########7#########
+InstallMethod(
+    ArrowsOfQuiverAlgebra,
+    "for a quiver algebra",
+    [ IsQuiverAlgebra ],
+    function( alg )
+        local
+            1_alg,  # Multiplicative identity of <alg>
+            arrs,   # Arrows of <quiv>
+            quiv;   # Original quiver of <alg>
+        
+        1_alg := One( alg );
+        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
+        arrs := ArrowsOfQuiver( quiv );
+        
+        return List( arrs, x -> x*1_alg );
+    end
+);
+
+InstallMethod(
+    VerticesOfQuiverAlgebra,
+    "for a quiver algebra",
+    [ IsQuiverAlgebra ],
+    function( alg )
+        local
+            1_alg,  # Multiplicative identity of <alg>
+            verts,   # Arrows of <quiv>
+            quiv;   # Original quiver of <alg>
+        
+        1_alg := One( alg );
+        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
+        verts := VerticesOfQuiver( quiv );
+        
+        return List( verts, x -> x*1_alg );
+    end
+);

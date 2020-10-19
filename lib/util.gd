@@ -1,5 +1,7 @@
 # Some functionalities that could be present in GAP or QPA but are not
 
+##  For GAP
+
 DeclareOperation( "ForwardOrbitUnderFunctionNC", [ IsObject, IsFunction ] );
 
 DeclareOperation( "IsTransientUnderFunctionNC",
@@ -80,4 +82,8 @@ DeclareProperty( "IsCollectedHomogeneousList", IsList );
 ##  <#/GAPDoc>
 DeclareOperation( "Recollected", [ IsList ] );
 
-#########1#########2#########3#########4#########5#########6#########7#########
+
+##  For QPA
+
+DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
+DeclareOperation( "VerticesOfQuiverAlgebra", [ IsQuiverAlgebra ] );

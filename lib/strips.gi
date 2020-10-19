@@ -383,318 +383,170 @@ InstallMethod(
     end
 );
 
-# <Stripify> has several methods. Ultimately, it will delegate to other
-#  functions for all the hard work. Prior to delegation, it must check that its
-#  input is in a legal format.
-# In the first case, it will be given a list of syllables and orientations alt-
-#  -ernately. This list must be nonempty and have even length for starters. The
-#  syllables must alternately be peak and valley neighbours. The only boundary
-#  syllables must appear at the boundary of the string; ie in the leftmost
-#  position (which must have orientation -1) or the rightmost position (orien-
-#  -tation 1). Further, the orientations must be alternately 1 and -1. 
+## +--------------------------------------------------------------------------+
+##  CAN THE FOLLOWING BE REMOVED?
+
+# # <Stripify> has several methods. Ultimately, it will delegate to other
+# #  functions for all the hard work. Prior to delegation, it must check that its
+# #  input is in a legal format.
+# # In the first case, it will be given a list of syllables and orientations alt-
+# #  -ernately. This list must be nonempty and have even length for starters. The
+# #  syllables must alternately be peak and valley neighbours. The only boundary
+# #  syllables must appear at the boundary of the string; ie in the leftmost
+# #  position (which must have orientation -1) or the rightmost position (orien-
+# #  -tation 1). Further, the orientations must be alternately 1 and -1. 
+
+# InstallOtherMethod(
+    # Stripify,
+    # "for a list, alternately of syllables and their orientations",
+    # [ IsList ],
+    # function( list )
+        # local
+            # fam,        # Family of a test syllable
+            # indices,    # List variable (for indices of interest)
+            # k,          # Index variable
+            # len,        # Length of <list>
+            # pert,       # Variable for perturbation term of a syllable
+            # sublist;    # Particular part of <list> (indexed by <indices>)
+
+        # # We perform some checks on <list> before delegating to the global
+        # #  function <StripifyFromSyllablesAndOrientationsNC>, namely verifying
+        # #  that <list> has even but nonzero length
+        # if IsEmpty( list ) then
+            # Info( InfoDebug, 2, "Input list is empty!" );
+            # TryNextMethod();
+        # elif not IsEvenInt( Length( list ) ) then
+            # Info( InfoDebug, 2, "Input list has odd length!" );
+            # TryNextMethod();
+        # else
+            # len := Length( list );
+            
+            # # Check all entries in odd positions of <list> are syllables, all
+            # #  from the same family
+            # indices := Filtered( [1..len], IsOddInt );
+            # sublist := list{ indices };
+            # if false in List( sublist, IsSyllableRep ) then
+                # Info( InfoDebug, 2, "Input list contains a non-syllable!" );
+                # TryNextMethod();
+            # else
+                # fam := FamilyObj( sublist[1] );
+                # if false in List( sublist, x -> FamilyObj( x ) = fam ) then
+                    # Info( InfoDebug, 2, "Input syllable families disagree!" );
+                    # TryNextMethod();
+                # fi;
+            # fi;
+            # Info( InfoDebug, 2, "Syllables entered correctly" );
+            
+            # # Check all entries in even positions of <list> are alternately
+            # #  either 1 or -1
+            # indices := Filtered( [1..len], IsEvenInt );
+            # sublist := list{ indices };
+            # if false in List( sublist, x -> ( x in [ 1, -1 ] ) ) then
+                # Info( InfoDebug, 2, "Orientations must be 1 or -1!" );
+                # TryNextMethod();
+            # else
+                # for k in [ 1..( Length( sublist ) ) ] do
+                    # if IsBound( sublist[k+1] ) then
+                        # if sublist[k]*sublist[k+1] <> -1 then
+                            # Info( InfoDebug, 2, "Orientations must alternate!"
+                             # );
+                            # TryNextMethod();
+                        # fi;
+                    # fi;
+                # od;
+            # fi;
+            # Info( InfoDebug, 2, "Orientations entered correctly" );
+            
+            # # Check that all pairs
+            # #      (p_i)^-1(q_i)
+            # #  of consecutive syllables are peak neighbors and all pairs
+            # #      (q_i)(p_{i+1})
+            # #  are valley neighbours
+            # indices := Filtered( [1..len], IsOddInt );
+            # for k in indices do
+                # if IsBound( list[k+2] ) then
+                    # if list[k+1] = -1 then
+                        # if ( not
+                         # IsPeakCompatiblePairOfSyllables( list[k], list[k+2] )
+                         # ) then
+                            # Info( InfoDebug, 2, "Peak compatibility failure!");
+                            # TryNextMethod();
+                        # fi;
+                    # elif list[k+1] = 1 then
+                        # if ( not
+                         # IsValleyCompatiblePairOfSyllables(list[k], list[k+2])
+                         # ) then
+                            # Info( InfoDebug, 2,
+                             # "Valley compatibility failure!" );
+                            # TryNextMethod();
+                        # fi;
+                    # fi;
+                # fi;
+            # od;
+            # Info( InfoDebug, 2, "Peak and valley-compatibility holds!" );
+        # fi;
+
+        # # A nonzero syllable must be boundary iff it is either the leftmost
+        # #  syllable and has orientation -1 or the rightmost syllable and has
+        # #  orientation 1. Check this.
+        # indices := Filtered( [1..len], IsOddInt );
+        # for k in indices do
+            # pert := PerturbationTermOfSyllable( list[k] );
+            # if ( k = 1 and list[k+1] = -1 ) or
+             # ( k = Maximum( indices ) and list[k+1] = 1 )
+             # then
+                # if pert = 0 then
+                    # Info( InfoDebug, 2, "Interior syllable at boundary!" );
+                    # TryNextMethod();
+                # fi;
+            # else
+                # if pert = 1 then
+                    # Info( InfoDebug, 2, "Boundary syllable at interior!" );
+                # fi;
+            # fi;
+        # od;
+        # Info( InfoDebug, 2, "Interior/boundary syllables appropriate!" );
+        
+        # # Check for virtual syllables. The only permitted appearance of virtual
+        # #  syllables is if <list> looks like
+        # #      [ <virtual syllable>, 1, <virtual syllable>, -1 ]
+        # indices := Filtered( [1..len], IsOddInt );
+        # sublist := list{ indices };
+        # if true in List( sublist, IsVirtualSyllable ) then
+            # if false in List( sublist, IsVirtualSyllable ) then
+                # Info( InfoDebug, 2,
+                 # "There are virtual syllables among nonvirtual ones!"
+                 # );
+            # fi;
+            # if Length( sublist ) <> 2 then
+                # Info( InfoDebug, 2,
+                 # "There are too many virtual syllables!"
+                 # );
+                # TryNextMethod();
+            # fi;
+            # if not ( list[2] = 1 and list[4] = -1 ) then
+                # Info( InfoDebug, 2,
+                 # "These virtual syllables have the wrong orientation!"
+                 # );
+                # TryNextMethod();
+            # fi;
+            
+            # Info( InfoDebug, 2, "Returning virtual strip" );
+            # return StripifyVirtualStripNC( list );
+        # fi;
+        
+        # # All checks are complete; we delegate to another function for the hard
+        # #  work!
+        # return CallFuncList(
+         # StripifyFromSyllablesAndOrientationsNC,
+         # list
+        # );
+    # end
+# );
+
+## +--------------------------------------------------------------------------+
 
 InstallMethod(
-    Stripify,
-    "for a list, alternately of syllables and their orientations",
-    [ IsList ],
-    function( list )
-        local
-            fam,        # Family of a test syllable
-            indices,    # List variable (for indices of interest)
-            k,          # Index variable
-            len,        # Length of <list>
-            pert,       # Variable for perturbation term of a syllable
-            sublist;    # Particular part of <list> (indexed by <indices>)
-
-        # We perform some checks on <list> before delegating to the global
-        #  function <StripifyFromSyllablesAndOrientationsNC>, namely verifying
-        #  that <list> has even but nonzero length
-        if IsEmpty( list ) then
-            Info( InfoDebug, 2, "Input list is empty!" );
-            TryNextMethod();
-        elif not IsEvenInt( Length( list ) ) then
-            Info( InfoDebug, 2, "Input list has odd length!" );
-            TryNextMethod();
-        else
-            len := Length( list );
-            
-            # Check all entries in odd positions of <list> are syllables, all
-            #  from the same family
-            indices := Filtered( [1..len], IsOddInt );
-            sublist := list{ indices };
-            if false in List( sublist, IsSyllableRep ) then
-                Info( InfoDebug, 2, "Input list contains a non-syllable!" );
-                TryNextMethod();
-            else
-                fam := FamilyObj( sublist[1] );
-                if false in List( sublist, x -> FamilyObj( x ) = fam ) then
-                    Info( InfoDebug, 2, "Input syllable families disagree!" );
-                    TryNextMethod();
-                fi;
-            fi;
-            Info( InfoDebug, 2, "Syllables entered correctly" );
-            
-            # Check all entries in even positions of <list> are alternately
-            #  either 1 or -1
-            indices := Filtered( [1..len], IsEvenInt );
-            sublist := list{ indices };
-            if false in List( sublist, x -> ( x in [ 1, -1 ] ) ) then
-                Info( InfoDebug, 2, "Orientations must be 1 or -1!" );
-                TryNextMethod();
-            else
-                for k in [ 1..( Length( sublist ) ) ] do
-                    if IsBound( sublist[k+1] ) then
-                        if sublist[k]*sublist[k+1] <> -1 then
-                            Info( InfoDebug, 2, "Orientations must alternate!"
-                             );
-                            TryNextMethod();
-                        fi;
-                    fi;
-                od;
-            fi;
-            Info( InfoDebug, 2, "Orientations entered correctly" );
-            
-            # Check that all pairs
-            #      (p_i)^-1(q_i)
-            #  of consecutive syllables are peak neighbors and all pairs
-            #      (q_i)(p_{i+1})
-            #  are valley neighbours
-            indices := Filtered( [1..len], IsOddInt );
-            for k in indices do
-                if IsBound( list[k+2] ) then
-                    if list[k+1] = -1 then
-                        if ( not
-                         IsPeakCompatiblePairOfSyllables( list[k], list[k+2] )
-                         ) then
-                            Info( InfoDebug, 2, "Peak compatibility failure!");
-                            TryNextMethod();
-                        fi;
-                    elif list[k+1] = 1 then
-                        if ( not
-                         IsValleyCompatiblePairOfSyllables(list[k], list[k+2])
-                         ) then
-                            Info( InfoDebug, 2,
-                             "Valley compatibility failure!" );
-                            TryNextMethod();
-                        fi;
-                    fi;
-                fi;
-            od;
-            Info( InfoDebug, 2, "Peak and valley-compatibility holds!" );
-        fi;
-
-        # A nonzero syllable must be boundary iff it is either the leftmost
-        #  syllable and has orientation -1 or the rightmost syllable and has
-        #  orientation 1. Check this.
-        indices := Filtered( [1..len], IsOddInt );
-        for k in indices do
-            pert := PerturbationTermOfSyllable( list[k] );
-            if ( k = 1 and list[k+1] = -1 ) or
-             ( k = Maximum( indices ) and list[k+1] = 1 )
-             then
-                if pert = 0 then
-                    Info( InfoDebug, 2, "Interior syllable at boundary!" );
-                    TryNextMethod();
-                fi;
-            else
-                if pert = 1 then
-                    Info( InfoDebug, 2, "Boundary syllable at interior!" );
-                fi;
-            fi;
-        od;
-        Info( InfoDebug, 2, "Interior/boundary syllables appropriate!" );
-        
-        # Check for virtual syllables. The only permitted appearance of virtual
-        #  syllables is if <list> looks like
-        #      [ <virtual syllable>, 1, <virtual syllable>, -1 ]
-        indices := Filtered( [1..len], IsOddInt );
-        sublist := list{ indices };
-        if true in List( sublist, IsVirtualSyllable ) then
-            if false in List( sublist, IsVirtualSyllable ) then
-                Info( InfoDebug, 2,
-                 "There are virtual syllables among nonvirtual ones!"
-                 );
-            fi;
-            if Length( sublist ) <> 2 then
-                Info( InfoDebug, 2,
-                 "There are too many virtual syllables!"
-                 );
-                TryNextMethod();
-            fi;
-            if not ( list[2] = 1 and list[4] = -1 ) then
-                Info( InfoDebug, 2,
-                 "These virtual syllables have the wrong orientation!"
-                 );
-                TryNextMethod();
-            fi;
-            
-            Info( InfoDebug, 2, "Returning virtual strip" );
-            return StripifyVirtualStripNC( list );
-        fi;
-        
-        # All checks are complete; we delegate to another function for the hard
-        #  work!
-        return CallFuncList(
-         StripifyFromSyllablesAndOrientationsNC,
-         list
-        );
-    end
-);
-
-InstallOtherMethod(
-    Stripify,
-    "for a path in an SB algebra in between two lists of integers",
-    [ IsList, IsMultiplicativeElement, IsList ],
-    function( left_list, path, right_list )
-        local
-            i,          # Vertex variable (for testing legality of <left_list>
-                        #  and <right_list>)
-            k, l,       # Integer variables (for testing legality of
-                        #  <left_list> and <right_list>
-            linind,     # Paths in the overquiver of <sba> whose residues in
-                        #  <sba> are linearly independent of all other paths
-            matches,    # List of path(s) in <lindep> whose residue(s) in
-                        #  <sba> equal(s) <path>
-            over_path,  # Path in <lindep> whose residue in <sba> equals <path>
-            perm_data,  # Permissible data of <sba>
-            test_left,  # 
-            test_right, #
-            sba;        # SB algebra to which <path> belongs
-
-        # <path> must be a path in some special biserial algebra <sba>, and
-        #  there must be a nonstaionary path in <LinDepOfSbAlg( sba )> that
-        #  lifts it.
-        if
-         not IsSpecialBiserialAlgebra( PathAlgebraContainingElement( path ) )
-         then
-            Error( "The given path does not belong to a special biserial \
-             algebra!" );
-        fi;
-        Info( InfoDebug, 2, "The given path belongs to a SB algebra!" );
-        
-        sba := PathAlgebraContainingElement( path );
-        linind := LinIndOfSbAlg( sba );
-        matches := Filtered(
-         linind,
-         x -> ( path = SbAlgResidueOfOverquiverPathNC( x ) )
-        );
-        if Length( matches ) <> 1 then
-            Error( "The given path does not lift!" );
-        fi;
-        
-        over_path := matches[1];
-        Info( InfoDebug, 2, "The given path lifts to the overquiver!" );
-        
-        # Both <left_list> and <right_list> must be lists of integers of alter-
-        #  -nating signs
-        
-        if false in List( Concatenation( left_list, right_list ), IsInt ) then
-            Error( "<left_list> and <right_list> must be lists of integers!" );
-        fi;
-        Info( InfoDebug, 2, "Both lists are lists of integers!" );
-        
-        for k in [ 1 .. ( Length( left_list ) - 1 ) ] do
-            if SignInt( left_list[k]*left_list[k+1] ) <> -1 then
-                Error( "Integers in <left_list> must alternate in sign!" );
-            fi;
-        od;
-        Info( InfoDebug, 2, "<left_list>'s integers alternate in sign>" );
-        
-        for k in [ 1 .. ( Length( right_list ) - 1 ) ] do
-            if SignInt( right_list[k]*right_list[k+1] ) <> -1 then
-                Error( "Integers in <right_list> must alternate in sign!" );
-            fi;
-        od;
-        Info( InfoDebug, 2, "<right_list>'s integers alternate in sign>" );
-
-        # Relative to <path>, the integers in these lists must specify <sba>
-        #  paths having lifts in <LinDepOfSbAlg( sba )>. If the last entry of
-        #  <left_list> is negative and/or the first entry of <right_list> is
-        #  positive then absorb them into the central path and omit them from
-        #  testing. Use <test_left> and <test_right> to store those number
-        #  lists we will check.
-
-        # Absorb if necessary
-        i := SourceOfPath( over_path );
-        l := LengthOfPath( over_path );
-        test_left := left_list;
-        test_right := right_list;
-        if not IsEmpty( left_list ) then
-            k := left_list[ Length( left_list ) ];
-            if k < 0 then
-                i := 1RegQuivIntAct( i, -k );
-                l := l - k;
-                test_left := left_list{ [ 1..( Length( left_list )-1 ) ] };
-            fi;
-        fi;
-        if not IsEmpty( right_list ) then
-            k := right_list[1];
-            if k > 0 then
-                i := 1RegQuivIntAct( i, -k );
-                l := l + k;
-                test_right := right_list{ [ 2..Length( right_list ) ] };
-            fi;
-        fi;
-        over_path := PathBySourceAndLength( i, l );
-        
-        # Test absorbed path belongs to <lindep> and therefore lifts
-        if not over_path in linind then
-            Error( "The central path does not lift to the overquiver!" );
-        else
-            Info( InfoDebug, 2, "The central path lifts to the overquiver!" );
-        fi;
-        
-        # Test that <test_left> specifies paths in <lindep>, relative to
-        #  <over_path>
-        for k in [ 1 .. Length( test_left ) ] do
-            i := ExchangePartnerOfVertex( i );
-            l := test_left[ (Length( test_left )+1-k) ];
-            if l > 0 then
-                if not ( PathBySourceAndLength( i, l ) in linind ) then
-                    Error( "A path in <left_list> does not lift!" );
-                else
-                    i := 1RegQuivIntAct( i, -l );
-                fi;
-            elif l < 0 then
-                if not ( PathByTargetAndLength( i, -l ) in linind ) then
-                    Error( "A path in <left_list> does not lift" );
-                else
-                    i := 1RegQuivIntAct( i, -l );
-                fi;
-            fi;
-        od;
-        Info( InfoDebug, 2, "Paths in <left_list> lift correctly!" );
-                
-        # Test that <test_right> specifies paths in <lindep>, relative to
-        #  <over_path>
-        i := TargetOfPath( over_path );
-
-        for k in [ 1.. Length( test_right ) ] do
-            i := ExchangePartnerOfVertex( i );
-            l := test_right[ k ];
-            if l > 0 then
-                if not ( PathBySourceAndLength( i, l ) in linind ) then
-                    Error( "A path in <right_list> does not lift!" );
-                else
-                    i := 1RegQuivIntAct( i, -l );
-                fi;
-            elif l < 0 then
-                if not ( PathByTargetAndLength( i, -l ) in linind ) then
-                    Error( "A path in <right_list> does not lift" );
-                else
-                    i := 1RegQuivIntAct( i, -l );
-                fi;
-            fi;
-        od;
-        
-        Info( InfoDebug, 2, "Paths in <right_list> lift correctly!" );
-        
-        # Tests complete! Delegate to <StripifyFromSbAlgPathNC>
-        return StripifyFromSbAlgPathNC( left_list, path, right_list );
-    end
-);
-
-InstallOtherMethod(
     Stripify,
     "for an arrow of a special biserial algebra, +/-1 and a list of integers",
     [ IsMultiplicativeElement, IsInt, IsList ],
@@ -933,6 +785,106 @@ InstallOtherMethod(
         fi;
     end
 );
+
+InstallOtherMethod(
+    Stripify,
+    "for a path of a special biserial algebra",
+    [ IsMultiplicativeElement ],
+    function( path )
+        local
+            opath,          # Overquiver path that lifts <path>
+            opath_list,     # List of nonzero overpaths of <sba>
+            perm_data,      # Permissible data of <sba>
+            pos,            # Position of <path> in <residue_list>
+            residue_list,   # Residues of <opath_list> in <sba>
+            sba,            # Special biserial algebra to which <path> belongs
+            syll;           # Syllable representing <path>
+            
+        sba := PathAlgebraContainingElement( path );
+        
+        # Test input for validity
+        if not IsSpecialBiserialAlgebra( sba ) then
+            Error( "The input path\n", path,
+             "\nmust belong to a special biserial algebra" );
+        fi;
+        
+        perm_data := PermDataOfSbAlg( sba );
+        opath_list := perm_data[1];
+        residue_list := List(
+         opath_list,
+         SbAlgResidueOfOverquiverPathNC
+         );
+         
+        if not path in residue_list then
+            Error( "The input path\n", path,
+             "\nmust have nonzero residue in a special biserial algebra!" );
+        fi;
+        
+        pos := Position( residue_list, path );
+        opath := opath_list[ pos ];
+        syll := Syllabify( opath, 1 );
+        return StripifyFromSyllablesAndOrientationsNC( syll, -1 );
+    end
+);
+
+# InstallOtherMethod(
+    # Stripify,
+    # "for a vertex of a special biserial algebra",
+    # [ IsMultiplicativeElement ],
+    # function( vert )
+        # local
+            # pos,        # Position of <vert> in <sba_verts>
+            # sba,        # SB algebra to which <vert> belongs
+            # sba_verts,  # Vertices of <sba>
+            # simps;      # List of strips for simple modules of <sba> 
+            
+        # sba := PathAlgebraContainingElement( vert );
+        # sba_verts := ArrowsOfQuiverAlgebra( sba );
+        
+        # # Test input for validity
+        # if not IsSpecialBiserialAlgebra( sba ) then
+            # Error( "The input\n", vert,
+             # "\nmust belong to a special biserial algebra!" );
+             
+        # elif not vert in sba_verts then
+            # TryNextMethod();
+
+        # # Tests passed. Find position of <vert> in <sba_verts>. Return the
+        # #  strip of the corresponding simple module for <sba>.
+        # else
+            # pos := Position( sba_verts, vert );
+            # simps := SimpleStripsOfSbAlg( sba );
+            
+            # return simps[ pos ];
+        # fi;
+    # end
+# );
+
+# InstallOtherMethod(
+    # Stripify,
+    # "for an arrow of a special biserial algebra",
+    # [ IsMultiplicativeElement ],
+    # function( arr )
+        # local
+            # sba,
+            # sba_arrs;
+            
+        # sba := PathContainingElement( arr );
+        # sba_arrs := ArrowsOfQuiverAlgebra( sba );
+        
+        # # Test input for validity
+        # if not IsSpecialBiserialAlgebra( sba ) then
+            # Error( "The input\n", arr,
+             # "\nmust belong to a special biserial algebra!" );
+             
+        # elif not arr in sba_arrs then
+            # TryNextMethod();
+            
+        # else
+            # return Stripify( arr, -1, [] );
+        # fi;
+    # end
+# );
 
 InstallMethod(
     IsZeroStrip,

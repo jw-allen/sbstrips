@@ -26,7 +26,7 @@ InstallGlobalFunction(
                    "../lib/syllables.gd",
                    "../lib/util.gd",
                    "../lib/vertseqs.gd",
-                   "sbstripsbib.bib"
+                   "/sbstripsbib.xml"
                    ];
         bookname := "sbstripsdoc";
         doc := ComposedDocument("GAPDoc", path, main, files, true);

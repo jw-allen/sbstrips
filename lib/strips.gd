@@ -392,7 +392,7 @@ DeclareOperation(
 ##    <ManSection>
 ##      <Func Name="TestInjectiveStripsUpToNthSyzygy" Arg="sba, N"/>
 ##      <Description>
-##        Arguments: <A>sba</A> a special biserial algebra (ie, <Ref
+##        Arguments: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;);
 ##        <A>N</A>, a positive integer
 ##        <Br />
@@ -418,5 +418,30 @@ DeclareOperation(
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
+
+##  <#GAPDoc Label="DocModuleOfStrip">
+##    <ManSection>
+##      <Meth Name="ModuleOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument: <A>strip</A>, a strip
+##      </Description>
+##      <Returns>
+##        a right module for the SB algebra over which <A>strip</A> is defined
+##      </Returns>
+##      <Description>
+##        The indecomposable modules for a SB algebra come in two kinds (over
+##        an algebraically closed field, at least). One of those are <E>string
+##        modules</E>, so-called because they may be described by the decorated
+##        graphs that representation theorists call <E>strings</E> and which
+##        the &SBStrips; package calls <E>strips</E>.
+##        <P />
+##        This operation returns the string module corresponding to the strip 
+##        A>strip</A>. More specifically, it gives that module as a quiver,
+##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
+##        Label="with dimension vector" BookName="QPA"/>.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 
 #########1#########2#########3#########4#########5#########6#########7#########

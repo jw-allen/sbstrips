@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+  <string key="j" value="Important Journal"/> <!-- This is a test-->
+
+  <entry id="LM"><article>
+    <author><name><first>Shiping</first><last>Liu</last></name><name><first>Jean-Philippe</first><last>Morin</last></name></author>
+    <title>The strong no loop conjecture for special biserial algebras</title>
+    <journal>Proceedings of the American Mathematical Society</journal>
+    <year>2004</year>
+    <volume>132</volume>
+    <number>12</number>
+    <pages>3513-3523</pages>
+  </article></entry>
+</file>

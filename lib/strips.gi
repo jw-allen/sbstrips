@@ -1569,9 +1569,10 @@ InstallGlobalFunction(
 InstallMethod(
     ModuleOfStrip,
     "for a strip-rep",
+    [ IsStripRep ],
     function( strip )
         local
-            data        # Syllable and orientation list in <strip>
+            data,       # Syllable and orientation list in <strip>
             dim_vector, # Dimension vector of the output module
             expand_last_syll, expand_neg_syll, expand_pos_syll,
                         # Local functions which turn syllables into "expanded
@@ -1580,7 +1581,10 @@ InstallMethod(
             field,      # Ground field of <sba>
             gens,       # Arrow-indexed list of matrices corresponding to the
                         #  <field>-linear maps described by <strip>
-            get_field,  # Function that obtains the ground_field of <sba>
+            get_field,  # Local function that obtains the ground_field of <sba>
+            is_nonnull_mat,
+                        # Local function, to be used to filter out matrices of
+                        #  zeroes from output
             L_data, L_expanded,
                         # Integer variable (for the lengths of <data> and
                         #  <expanded> respectively)
@@ -1746,17 +1750,17 @@ InstallMethod(
         #
         # The basis of the resulting module is the coproduct (ie, disjoint
         #  union) of the bases at each vertex, but note that we take the basis
-        #  vectors of the module are taken in the order they appear in
-        #  <expanded>. When determining which basis vector is sent by a linear
-        #  map to which other vector (or rather, concretely, in which position
-        #  of the associated matrix to place a <one>), we need to know how many
-        #  other basis vector of *that vertex space* have appeared in the order
-        #  before it.
+        #  vectors of the module in the order they appear in <expanded>. When
+        #  determining which basis vector is sent by a linear map to which
+        #  other vector (or rather, concretely, in which position of the
+        #  associated matrix to place a <one>), we need to know how many other
+        #  basis vector of *that vertex space* have appeared in the order be-
+        #  -fore it.
         
         vertex_multiplicity_up_to := function( vertex, index )
             return Number(
              expanded{ [ 1 .. index ] },
-             x -> x = v
+             x -> x = vertex
              );
         end;
         
@@ -1789,7 +1793,7 @@ InstallMethod(
             
             matrix := NullMat( R, C, field );
             
-            for k in Filtered( [ 1 .. L_expanded ], IsOddInt ) do
+            for k in Filtered( [ 1 .. L_expanded ], IsEvenInt ) do
                 entry := expanded[ k ];
                 
                 if entry[1] = arrow then
@@ -1809,8 +1813,18 @@ InstallMethod(
             return matrix;
         end;
         
+        # We only need to tell GAP about matrices of nonzero linear maps. The
+        #  following function can detect them.
+        is_nonnull_mat := function( mat )
+            return not ForAll( Flat( mat ), x -> x = zero );
+        end;
+        
+        # We find the nonzero matrices and tell them to GAP.
         gens := List(
-         ArrowsOfQuiver( quiv ),
+         Filtered(
+          ArrowsOfQuiver( quiv ),
+          x -> is_nonnull_mat( matrix_of_arrow( x ) )
+          ),
          x -> [ String( x ), matrix_of_arrow( x ) ]
          );
          

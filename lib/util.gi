@@ -140,30 +140,34 @@ InstallMethod(
     [ IsList ],
     function( clist )
         local
-            j, k,   # Integer variable
-            list,   # List variable
-            mults,  # List of multiplicities
-            objs;   # List of objects
+            list,   # List variable (for the better-collected version of
+                    #  <clist>)
+            j, k,   # Integer variables
             
         if not IsCollectedList( clist ) then
             TryNextMethod();
         
         else
-            objs := List( clist, x -> x[1] );
-            mults := List( clist, x -> x[2] );
+            list := ShallowCopy( clist );
+            k := 1;
             
-            list := [];
-            
-            ## Unpack <clist> into a single list, then apply <Collected>
-            for k in [ 1..Length( clist ) ] do
+            while k <= Length( list ) do
                 j := 1;
-                while j <= mults[k] do
-                    Add( list, objs[k] );
-                    j := j + 1;
+                
+                while k+j <= Length( list ) do
+                    if list[k][1] = list[k+j][1] then
+                        list[k][2] := list[k][2] + list[k+j][2];
+                        Remove( list, k + j );
+                        
+                    else
+                        j := j + 1;
+                    fi;
                 od;
+                
+                k := k + 1;
             od;
             
-            return Collected( list );
+            return list;
         fi;
     end
 );

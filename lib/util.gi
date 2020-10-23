@@ -117,18 +117,43 @@ InstallMethod(
     [ IsList ],
     function( clist )
         local
-            mults,  # List of multiplicities
-            objs;   # List of objects
+            objs;   # First entries of entries of <clist>
 
         if HasIsCollectedHomogeneousList( clist ) then
             return IsCollectedHomogeneousList( clist );
+            
         else
             if not IsCollectedList( clist ) then
                 return false;
+                
             else
                 objs := List( clist, x -> x[1] );
                 
                 return IsHomogeneousList( objs );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsCollectedDuplicateFreeList,
+    "for lists",
+    [ IsList ],
+    function( clist )
+        local
+            objs;   # First entries of entries of <clist>
+
+        if HasIsCollectedDuplicateFreeList( clist ) then
+            return IsCollectedDuplicateFreeList( clist );
+            
+        else
+            if not IsCollectedList( clist ) then
+                return false;
+                
+            else
+                objs := List( clist, x -> x[1] );
+                
+                return IsDuplicateFreeList( objs );
             fi;
         fi;
     end
@@ -142,10 +167,13 @@ InstallMethod(
         local
             list,   # List variable (for the better-collected version of
                     #  <clist>)
-            j, k,   # Integer variables
+            j, k;   # Integer variables
             
         if not IsCollectedList( clist ) then
             TryNextMethod();
+            
+        elif IsCollectedDuplicateFreeList( clist ) then
+            return clist;
         
         else
             list := ShallowCopy( clist );
@@ -172,11 +200,36 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    Uncollected,
+    "for collected lists",
+    [ IsList ],
+    function( clist )
+        local
+            j, k,
+            list;
+        
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            list := [];
+            for k in [ 1 .. Length( clist ) ] do
+                for j in [ 1 .. clist[k][2] ] do
+                    Add( list, clist[k][1] );
+                od;
+            od;
+            
+            return list;
+        fi;
+    end
+);
+
 # Useful functions for QPA
 
 InstallMethod(
     String,
-    "for paths of positive length",
+    "for paths of length at least 2",
     [ IsPath ],
     function( path )
         local

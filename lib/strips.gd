@@ -421,7 +421,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 
 ##  <#GAPDoc Label="DocModuleOfStrip">
 ##    <ManSection>
-##      <Meth Name="ModuleOfStrip" Arg="strip"/>
+##      <Meth Name="ModuleOfStrip" Arg="strip" Label="for a strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
 ##      </Description>
@@ -442,6 +442,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
+DeclareOperation( "ModuleDataOfStrip", [ IsStripRep ] );
 DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 
 #########1#########2#########3#########4#########5#########6#########7#########

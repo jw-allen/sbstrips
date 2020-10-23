@@ -197,17 +197,19 @@ gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
         to an indecomposable module over <C>alg2</C>. In the literature they're
         called string modules, but maybe here we could call them strip modules?
         Whatever you want to call it, that module can be made in &GAP; using
-        the <C>SOMETHING</C> command <E>(which I haven't written yet, boo)</E>.
+        <Ref Meth="ModuleOfStrip" Label="for a strip"/>.
         <P />
         Something to bear in mind is that that module is implemented as a
         representation of the quiver over which <C>alg2</C> was defined. You'll
         find details about quiver representations in the &QPA; documentation.
         <Example>
 <![CDATA[
-gap> # Joe you still need to write this function!
-gap>
-gap> # (;  -__-)
-gap> # angry face
+gap> module := ModuleOfStrip( s );
+<[ 6, 5 ]>
+gap> Print( module );
+<Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/
+<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
+    , (7 generators)>> with dimension vector [ 6, 5 ]>
 ]]>
         </Example>
         Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or, rather, quiver representation).
@@ -403,6 +405,55 @@ gap> # Include an example here!
         <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 
         <#Include Label="DocIsPeriodicStripByNthSyzygy">
+      </Section>
+    </Chapter>
+    
+    <Chapter>
+      <Heading>Utilities</Heading>
+      
+      In this chapter, we document some additional functionalities that have
+      been implemented in &SBStrips; but which, really, can stand independently
+      of it. Others may find these useful without caring about SB algebras or
+      what-have-you. Among these, we include minor extensions of functionality
+      for &QPA;
+      
+      <Section>
+        <Heading>Collected lists</Heading>
+        
+        Sometimes it is important to know <E>where</E> in a list an element
+        appears. Sometimes, all that matters is <E>how often</E> it does. (In 
+        mathematical terms, these two ideas respectively correspond to a
+        <E>sequence</E> of elements and the multiset of values it takes.) One
+        can of course move from knowing the positions of elements to just
+        knowing their frequency, however this is a strict loss of information.
+        <P />
+        &GAP; implements this move using <Ref Oper="Collected"
+        BookName="Reference"/>. Calls to this operation yield lists that store
+        information in a more economical, if slightly less informative,
+        fashion, of which &SBStrips; makes great use.
+        <P />
+        It proved convenient to build some tools for working with such
+        "multisets". These tool are <E>collected</E> below (hurr durr durr).
+        
+        <#Include Label="DocIsCollectedList">
+        
+        <#Include Label="IsCollectedDuplicateFreeList">
+        
+        <#Include Label="DocIsCollectedHomogeneousList">
+        
+        <#Include Label="Recollected">
+        
+        <#Include Label="Uncollected">
+      </Section>
+      
+      <Section>
+        <Heading>Miscellaneous utilities for &QPA;</Heading>
+        
+        <#Include Label="DocStringMethodForPaths">
+        
+        <#Include Label="DocArrowsOfQuiverAlgebra">
+        
+        <#Include Label="DocVerticesOfQuiverAlgebra">
       </Section>
     </Chapter>
   </Body>

@@ -1089,6 +1089,72 @@ InstallOtherMethod(
     end
 );
 
+InstallOtherMethod(
+    CollectedSyzygyOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            # j, k,       # Integer variables
+            # list,       # List variable (for object to be returned)
+            # syz_list;   # List variable (for list of syzygies)
+            entry,      # List variable, for entries of <clist>
+            j, k,       # Integer variables, indexing entries of <syz_clist> 
+                        #  <clist> respectively 
+            list,       # List variable, for storing the output as it is being
+                        #  constructed
+            mult,       # Integer variable, for multiplicities in <clist>
+            strip,      # Strip variable, for strips in <clist>
+            syz_clist;  # List variable, for collected syzygies of entries of
+                        #  <clist>
+            
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            # Tidy up <clist>
+            clist := Recollected( clist );
+            
+            list := [];
+
+            # Work entry-by-entry of <clist>            
+            for k in [ 1 .. Length( clist ) ] do
+                entry := clist[k];
+                
+                # Say each entry is
+                #       [ strip, mult ]
+                #  We calculate the collected syzygy of <strip> then multiply
+                #  all multiplicities by <mult>. That gives us the collected
+                #  syzygy of the entry.
+                strip := entry[1];
+                mult := entry[2];
+                syz_clist := CollectedSyzygyOfStrip( strip );
+                
+                for j in [ 1 .. Length( syz_clist ) ] do
+                    syz_clist[j][2] := syz_clist[j][2] * mult;
+                od;
+                
+                # We record this in collected list <syz_clist>
+                Append( list, syz_clist );
+            od;
+            
+            # Once the collected syzygies for each entry of <clist> have been
+            #  calculated, we tidy up the answer            
+            return Recollected( list );
+        
+            # list := [];
+            # for k in [ 1..Length( clist ) ] do
+                # syz_list := SyzygyOfStrip( clist[k][1] );
+                # for j in [ 1.. clist[k][2] ] do
+                    # Append( list, syz_list );
+                # od;
+            # od;
+            
+            # return Collected( list );
+        fi;
+    end
+);
+
 InstallMethod(
     CollectedNthSyzygyOfStrip,
     "for a strip and a positive integer",
@@ -1137,33 +1203,6 @@ InstallOtherMethod(
             od;
             
             return ans;
-        fi;
-    end
-);
-
-InstallOtherMethod(
-    CollectedSyzygyOfStrip,
-    "for a collected list of strip-reps",
-    [ IsList ],
-    function( clist )
-        local
-            j, k,       # Integer variables
-            list,       # List variable (for object to be returned)
-            syz_list;   # List variable (for list of syzygies)
-            
-        if not IsCollectedList( clist ) then
-            TryNextMethod();
-        
-        else
-            list := [];
-            for k in [ 1..Length( clist ) ] do
-                syz_list := SyzygyOfStrip( clist[k][1] );
-                for j in [ 1.. clist[k][2] ] do
-                    Append( list, syz_list );
-                od;
-            od;
-            
-            return Collected( list );
         fi;
     end
 );
@@ -1567,7 +1606,7 @@ InstallGlobalFunction(
 );
 
 InstallMethod(
-    ModuleOfStrip,
+    ModuleDataOfStrip,
     "for a strip-rep",
     [ IsStripRep ],
     function( strip )
@@ -1828,8 +1867,18 @@ InstallMethod(
          x -> [ String( x ), matrix_of_arrow( x ) ]
          );
          
-        return RightModuleOverPathAlgebra( sba, dim_vector, gens );
+        return Immutable( [ sba, dim_vector, gens ] );
     end
 );
 
-#########1#########2#########3#########4#########5#########6#########7#########
+InstallMethod(
+    ModuleOfStrip,
+    "for strip-reps",
+    [ IsStripRep ],
+    function( strip )
+        return CallFuncList(
+         RightModuleOverPathAlgebra,
+         ModuleDataOfStrip( strip )
+         );
+     end
+);

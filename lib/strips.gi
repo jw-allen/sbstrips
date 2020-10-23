@@ -150,145 +150,149 @@ InstallGlobalFunction(
     end
 );
 
-InstallGlobalFunction(
-    StripifyFromSbAlgPathNC,
-    "for a nonstationary path in an SB algebra between two lists of integers",
-    function( left_list, path, right_list )
-        local
-            1_sba,      # Multiplicative unit of <sba>
-            2reg,       # 2-regular augmention of <quiv>
-            cont,       # Contraction of <oquiv> (function <oquiv> --> <2reg>)
-            i,          # Vertex variable (for source/target of a path)
-            k, l, r,    # Integer variable (for entries of <left_list> or
-                        #  <right_list>)
-            len,        # Integer variable (for length of a path)
-            linind,     # Set of <oquiv> paths with linearly independent res-
-                        #  -idue in <sba>
-            list,       # List variable, to store syllables and orientations
-            matches,    # List of paths in <lin_ind> that lift <path>
-            oquiv,      # Overquiver of <sba>
-            over_path,  # Lift <path> to overquiver
-            p,          # Path variable
-            quiv,       # Ground quiver of <sba>
-            ret,        # Retraction of <2reg> (function <2reg> --> <quiv> )
-            sba;        # SB algebra to which <path> belongs
-        
-        sba := PathAlgebraContainingElement( path );
-        1_sba := One( sba );
-        
-        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
-        2reg := 2RegAugmentationOfQuiver( quiv );
-        ret := RetractionOf2RegAugmentation( 2reg );
-        oquiv := OverquiverOfSbAlg( sba );
-        cont := ContractionOfOverquiver( oquiv );
+# +---------------------------------------------------------------------------+
+# CAN THE FOLLOWING BE REMOVED?
 
-        linind := LinIndOfSbAlg( sba );
+# InstallGlobalFunction(
+    # StripifyFromSbAlgPathNC,
+    # "for a nonstationary path in an SB algebra between two lists of integers",
+    # function( left_list, path, right_list )
+        # local
+            # 1_sba,      # Multiplicative unit of <sba>
+            # 2reg,       # 2-regular augmention of <quiv>
+            # cont,       # Contraction of <oquiv> (function <oquiv> --> <2reg>)
+            # i,          # Vertex variable (for source/target of a path)
+            # k, l, r,    # Integer variable (for entries of <left_list> or
+                        # #  <right_list>)
+            # len,        # Integer variable (for length of a path)
+            # linind,     # Set of <oquiv> paths with linearly independent res-
+                        # #  -idue in <sba>
+            # list,       # List variable, to store syllables and orientations
+            # matches,    # List of paths in <lin_ind> that lift <path>
+            # oquiv,      # Overquiver of <sba>
+            # over_path,  # Lift <path> to overquiver
+            # p,          # Path variable
+            # quiv,       # Ground quiver of <sba>
+            # ret,        # Retraction of <2reg> (function <2reg> --> <quiv> )
+            # sba;        # SB algebra to which <path> belongs
         
-        # Find the path <over_path> in <oquiv> whose <sba>-residue is <path>.
-        #  (Recall that entries of <linind> are paths in <oquiv>. Applying
-        #  <cont> and then <ret> turns them into entries of <quiv>. Multiplying
-        #  by <1_sba> subsequently makes elements of <sba>.)
-        matches := Filtered( linind, x -> ( 1_sba * ret( cont( x ) ) ) = path );
-        if Length( matches ) <> 1 then
-            Error( "I cannot find an overquiver path that lifts the given \
-             path ", path, "! Contact the maintainer of the sbstrips package."
-             );
-        else
-            over_path := matches[1];
-        fi;
+        # sba := PathAlgebraContainingElement( path );
+        # 1_sba := One( sba );
+        
+        # quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+        # 2reg := 2RegAugmentationOfQuiver( quiv );
+        # ret := RetractionOf2RegAugmentation( 2reg );
+        # oquiv := OverquiverOfSbAlg( sba );
+        # cont := ContractionOfOverquiver( oquiv );
 
-        # First, we normalise. If <left_list> has a last entry that is negative
-        #  and/or <right_list> has a first entry that is positive, then we
-        #  "absorb" those entries into <over_path>, remove them from their res-
-        #  -pective lists, and call the function again.
-        # (We need to be careful as <left_list> or <right_list> may be empty.
+        # linind := LinIndOfSbAlg( sba );
         
-        if Length( left_list ) > 0 then
-            l := left_list[ Length( left_list ) ];
-            if l < 0 then
-                i := TargetOfPath( over_path );
-                len := LengthOfPath( over_path );
-                over_path := PathByTargetAndLength( i, len - l );
+        # # Find the path <over_path> in <oquiv> whose <sba>-residue is <path>.
+        # #  (Recall that entries of <linind> are paths in <oquiv>. Applying
+        # #  <cont> and then <ret> turns them into entries of <quiv>. Multiplying
+        # #  by <1_sba> subsequently makes elements of <sba>.)
+        # matches := Filtered( linind, x -> ( 1_sba * ret( cont( x ) ) ) = path );
+        # if Length( matches ) <> 1 then
+            # Error( "I cannot find an overquiver path that lifts the given \
+             # path ", path, "! Contact the maintainer of the sbstrips package."
+             # );
+        # else
+            # over_path := matches[1];
+        # fi;
 
-                path := ret( cont( over_path ) )*1_sba;
-                left_list := left_list{ [ 1..( Length( left_list ) - 1 ) ] };
-                return StripifyFromSbAlgPathNC( left_list, path, right_list );
-            fi;
-        fi;
+        # # First, we normalise. If <left_list> has a last entry that is negative
+        # #  and/or <right_list> has a first entry that is positive, then we
+        # #  "absorb" those entries into <over_path>, remove them from their res-
+        # #  -pective lists, and call the function again.
+        # # (We need to be careful as <left_list> or <right_list> may be empty.
         
-        if Length( right_list ) > 0 then
-            r := right_list[1];
-            if r > 0 then
-                i := SourceOfPath( over_path );
-                len := LengthOfPath( over_path );
-                over_path := PathBySourceAndLength( i, len+r );
+        # if Length( left_list ) > 0 then
+            # l := left_list[ Length( left_list ) ];
+            # if l < 0 then
+                # i := TargetOfPath( over_path );
+                # len := LengthOfPath( over_path );
+                # over_path := PathByTargetAndLength( i, len - l );
+
+                # path := ret( cont( over_path ) )*1_sba;
+                # left_list := left_list{ [ 1..( Length( left_list ) - 1 ) ] };
+                # return StripifyFromSbAlgPathNC( left_list, path, right_list );
+            # fi;
+        # fi;
+        
+        # if Length( right_list ) > 0 then
+            # r := right_list[1];
+            # if r > 0 then
+                # i := SourceOfPath( over_path );
+                # len := LengthOfPath( over_path );
+                # over_path := PathBySourceAndLength( i, len+r );
                 
-                path := ret( cont( over_path ) )*1_sba;
-                right_list := right_list{ [ 2..( Length( right_list ) ) ] };
-                return StripifyFromSbAlgPathNC( left_list, path, right_list  );
-            fi;
-        fi;
+                # path := ret( cont( over_path ) )*1_sba;
+                # right_list := right_list{ [ 2..( Length( right_list ) ) ] };
+                # return StripifyFromSbAlgPathNC( left_list, path, right_list  );
+            # fi;
+        # fi;
         
-        # Now <left_list> is either empty or ends in a positive integer, and
-        #  <right_list> is either empty or begins with a negative integer. We
-        #  can turn the input into a syllable-and-orientation list to be
-        #  handled by <StripifyFromSyllablesAndOrientationsNC>.
+        # # Now <left_list> is either empty or ends in a positive integer, and
+        # #  <right_list> is either empty or begins with a negative integer. We
+        # #  can turn the input into a syllable-and-orientation list to be
+        # #  handled by <StripifyFromSyllablesAndOrientationsNC>.
         
-        list := [ over_path, 1 ];
+        # list := [ over_path, 1 ];
 
-        # Develop <list> on the right
-        i := ExchangePartnerOfVertex( TargetOfPath( over_path ) );
-        for k in [ 1..Length( right_list ) ] do
-            if right_list[k] < 0 then
-                p := PathByTargetAndLength( i, -( right_list[k] ) );
-                list := Concatenation( list, [ p, -1 ] );
-                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
-            elif
-                right_list[k] > 0 then
-                p := PathBySourceAndLength( i, right_list[k] );
-                list := Concatenation( list, [ p, 1 ] );
-                i := ExchangePartnerOfVertex( TargetOfPath( p ) );
-            fi;
-        od;
+        # # Develop <list> on the right
+        # i := ExchangePartnerOfVertex( TargetOfPath( over_path ) );
+        # for k in [ 1..Length( right_list ) ] do
+            # if right_list[k] < 0 then
+                # p := PathByTargetAndLength( i, -( right_list[k] ) );
+                # list := Concatenation( list, [ p, -1 ] );
+                # i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+            # elif
+                # right_list[k] > 0 then
+                # p := PathBySourceAndLength( i, right_list[k] );
+                # list := Concatenation( list, [ p, 1 ] );
+                # i := ExchangePartnerOfVertex( TargetOfPath( p ) );
+            # fi;
+        # od;
         
-        # Develop <list> on the left
-        i := ExchangePartnerOfVertex( SourceOfPath( over_path ) );
-        for k in [ 1..Length( left_list ) ] do
-            if Reversed( left_list )[k] < 0 then
-                p := PathByTargetAndLength( i, -( Reversed( left_list )[k] ) );
-                list := Concatenation( [p, 1], list );
-                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
-            elif Reversed( left_list )[k] > 0 then
-                p := PathBySourceAndLength( i, Reversed( left_list )[k] );
-                list := Concatenation( [p, - 1], list );
-                i := ExchangePartnerOfVertex( TargetOfPath( p ) );
-            fi;
-        od;
+        # # Develop <list> on the left
+        # i := ExchangePartnerOfVertex( SourceOfPath( over_path ) );
+        # for k in [ 1..Length( left_list ) ] do
+            # if Reversed( left_list )[k] < 0 then
+                # p := PathByTargetAndLength( i, -( Reversed( left_list )[k] ) );
+                # list := Concatenation( [p, 1], list );
+                # i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+            # elif Reversed( left_list )[k] > 0 then
+                # p := PathBySourceAndLength( i, Reversed( left_list )[k] );
+                # list := Concatenation( [p, - 1], list );
+                # i := ExchangePartnerOfVertex( TargetOfPath( p ) );
+            # fi;
+        # od;
 
-        # This gives a list paths in <oquiv> and orientations. Now we turn each
-        #  path into a syllable. Almost all syllables are interior (ie, have
-        #  pertubation term 0). The only exceptions are: the first syllable
-        #  only if its orientation is -1 and; the last syllable only if its
-        #  orientation is 1.
-        for k in [ 1..Length( list ) ] do
-            if IsOddInt( k ) then
-                if ( (k = 1) and (list[k+1] = -1) ) then
-                    list[k] := Syllabify( list[k], 1 );
-                elif ( (k+1 = Length( list )) and (list[k+1] = 1) ) then
-                    list[k] := Syllabify( list[k], 1 );
-                else
-                    list[k] := Syllabify( list[k], 0 );
-                fi;
-            fi;
-        od;
+        # # This gives a list paths in <oquiv> and orientations. Now we turn each
+        # #  path into a syllable. Almost all syllables are interior (ie, have
+        # #  pertubation term 0). The only exceptions are: the first syllable
+        # #  only if its orientation is -1 and; the last syllable only if its
+        # #  orientation is 1.
+        # for k in [ 1..Length( list ) ] do
+            # if IsOddInt( k ) then
+                # if ( (k = 1) and (list[k+1] = -1) ) then
+                    # list[k] := Syllabify( list[k], 1 );
+                # elif ( (k+1 = Length( list )) and (list[k+1] = 1) ) then
+                    # list[k] := Syllabify( list[k], 1 );
+                # else
+                    # list[k] := Syllabify( list[k], 0 );
+                # fi;
+            # fi;
+        # od;
         
-        # Pass <list> to StripifyFromSyllablesAndOrientationsNC
-        return CallFuncList(
-         StripifyFromSyllablesAndOrientationsNC,
-         list
-         );
-    end
-);
+        # # Pass <list> to StripifyFromSyllablesAndOrientationsNC
+        # return CallFuncList(
+         # StripifyFromSyllablesAndOrientationsNC,
+         # list
+         # );
+    # end
+# );
+# +---------------------------------------------------------------------------+
 
 InstallGlobalFunction(
     StripifyVirtualStripNC,
@@ -319,17 +323,21 @@ InstallMethod(
             data,   # Defining data of <strip>
             k;      # Integer variable
         
-        data := strip![1];
-        for k in [ 1..Length( data ) ] do
-            if IsOddInt( k ) then
-                if data[k+1] = -1 then
-                    Print( data[k], "^-1" );
-                elif data[k+1] = 1 then
-                    Print( data[k] );
+        if IsZeroStrip( strip ) then
+            Print( "<zero strip>\n" );
+        else
+            data := strip![1];
+            for k in [ 1..Length( data ) ] do
+                if IsOddInt( k ) then
+                    if data[k+1] = -1 then
+                        Print( data[k], "^-1" );
+                    elif data[k+1] = 1 then
+                        Print( data[k] );
+                    fi;
                 fi;
-            fi;
-        od;
-        Print( "\n" );
+            od;
+            Print( "\n" );
+        fi;
     end
 );
 
@@ -339,47 +347,60 @@ InstallMethod(
     [ IsStripRep ],
     function( strip )
         local
-            2reg,           # 2-regular augmentaion of <quiv>
+            # Outdated local variables
+            # 2reg,           # 2-regular augmentaion of <quiv>
+            # cont,           # Contraction of <oquiv>
+            # quiv,           # Original quiver of <sba>
+            # oquiv,          # Overquiver of <sba>
+            # ret,            # Retraction of <2reg>
+            # sba,            # SB alg to which <strip> belongs
+            
             as_quiv_path,   # Local function that turns a syllable into the 
                             #  <quiv>-path that it represents
-            cont,           # Contraction of <oquiv>
             data,           # Defining data of <strip>
             k,              # Integer variable
-            quiv,           # Original quiver of <sba>
-            oquiv,          # Overquiver of <sba>
-            ret,            # Retraction of <2reg>
-            sba,            # SB alg to which <strip> belongs
             sy;             # Syllable variable
     
-        sba := FamilyObj( strip )!.sb_alg;
+        # Outdated procedure
+        # # sba := FamilyObj( strip )!.sb_alg;
+        #
+        # # quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
+        # # 2reg := 2RegAugmentationOfQuiver( quiv );
+        # # ret := RetractionOf2RegAugmentation( 2reg );
+        #
+        # # oquiv := OverquiverOfSbAlg( sba );
+        # # cont := ContractionOfOverquiver( oquiv );
+        #
+        # # return ret( cont( UnderlyingPathOfSyllable( sy ) ) );
         
-        quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
-        2reg := 2RegAugmentationOfQuiver( quiv );
-        ret := RetractionOf2RegAugmentation( 2reg );
+        if IsZeroStrip( strip ) then
+            Print( "<zero strip>" );
+        else
         
-        oquiv := OverquiverOfSbAlg( sba );
-        cont := ContractionOfOverquiver( oquiv );
-
-        # Each syllable of <sba> represents a path of <sba>: this is the
-        #  function that will tell you which
-        as_quiv_path := function( sy )
-            return ret( cont( UnderlyingPathOfSyllable( sy ) ) );
-        end;
-        
-        # Print the strip so it looks something like
-        #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
-        data := strip![1];
-        for k in [ 1..Length( data ) ] do
-            if IsOddInt( k ) then
-                sy := data[k];
-                Print( "(", as_quiv_path( sy ), ")" );
-                if data[k+1] = -1 then
-                    Print( "^-1" );
-                elif (data[k+1] = 1) and (IsBound( data[k+2] )) then
-                    Print( " " );
+            # Each syllable of <sba> represents a path of <sba>: this is the
+            #  function that will tell you which
+            as_quiv_path := function( sy )
+                return GroundPathOfOverquiverPathNC(
+                 UnderlyingPathOfSyllable( sy )
+                 );
+                
+            end;
+            
+            # Print the strip so it looks something like
+            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
+            data := strip![1];
+            for k in [ 1..Length( data ) ] do
+                if IsOddInt( k ) then
+                    sy := data[k];
+                    Print( "(", as_quiv_path( sy ), ")" );
+                    if data[k+1] = -1 then
+                        Print( "^-1" );
+                    elif (data[k+1] = 1) and (IsBound( data[k+2] )) then
+                        Print( " " );
+                    fi;
                 fi;
-            fi;
-        od;
+            od;
+        fi;
     end
 );
 
@@ -889,12 +910,46 @@ InstallOtherMethod(
 # );
 
 InstallMethod(
+    ZeroStripOfSbAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            fam,        # Strip family of <sba>
+            obj,        # Object variable
+            type,       # Type variable
+            zero_sy;    # Zero syllable of <sba>
+        
+        fam := StripFamilyOfSbAlg( sba );
+        type := NewType( fam, IsStripRep );
+        zero_sy := ZeroSyllableOfSbAlg( sba );
+        obj := [ [ zero_sy, -1, zero_sy, 1 ] ];
+        
+        ObjectifyWithAttributes(
+         obj, type,
+         IsZeroStrip, true
+         );
+        
+        return obj;
+    end
+);
+
+InstallMethod(
     IsZeroStrip,
     "for a strip rep",
     [ IsStripRep ],
-    
-    # THIS IS A TEMPORARY METHOD AND MUST BE CORRECTED!
-    ReturnFalse
+    function( strip )
+        # Zero strips know at creation that they are zero strips. Consequently,
+        #  if <strip> is a zero strip, then <HasIsZeroStrip( strip )> will
+        #  return <true>. If it doesn't, then <strip> was created without being
+        #  a zero strip, and so is not ever going to be one.
+        if HasIsZeroStrip( strip ) then
+            return IsZeroStrip( strip );
+            
+        else
+            return false;
+        fi;
+    end
 );
 
 InstallMethod(
@@ -931,73 +986,78 @@ InstallMethod(
                         #  strips
             zero_patch; # Zero patch of <sba>
 
-        data := strip![1];
-        len := Length( data );
-        indices := Filtered( [1..len], IsOddInt );
-        sy_list := data{ indices };
+        if IsZeroStrip( strip ) then
+            return [];
         
-        # We use <sy_list> to specify a list of patches, sandwiched between two
-        #  copies of the zero patch of <sba>.
-        
-        sba := FamilyObj( strip )!.sb_alg;
-        zero_patch := ZeroPatchOfSbAlg( sba );
-        patch_list := [ zero_patch ];
-        
-        indices := [ 1..Length( sy_list ) ];
-        for k in indices do
-            if IsOddInt( k ) then
-                patch := PatchifyByTop( sy_list[k], sy_list[k+1] );
-                Add( patch_list, patch );
-            fi;
-        od;
-        Add( patch_list, zero_patch );
+        else
+            data := strip![1];
+            len := Length( data );
+            indices := Filtered( [1..len], IsOddInt );
+            sy_list := data{ indices };
+            
+            # We use <sy_list> to specify a list of patches, sandwiched between
+            #  two copies of the zero patch of <sba>.
+            
+            sba := FamilyObj( strip )!.sb_alg;
+            zero_patch := ZeroPatchOfSbAlg( sba );
+            patch_list := [ zero_patch ];
+            
+            indices := [ 1..Length( sy_list ) ];
+            for k in indices do
+                if IsOddInt( k ) then
+                    patch := PatchifyByTop( sy_list[k], sy_list[k+1] );
+                    Add( patch_list, patch );
+                fi;
+            od;
+            Add( patch_list, zero_patch );
 
-        # We now read the syzygy strips off of the southern parts of
-        #  <patch_list>, separating them at patches of string projectives
-        
-        syz_list := [ [ ] ];
-        j := 1;
-        
-        for k in [ 2 .. ( Length( patch_list ) - 1 ) ] do
-            if IsPatchOfStringProjective( patch_list[k] ) then
-                if not IsZeroSyllable( patch_list[k]!.SW ) then
-                    Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
+            # We now read the syzygy strips off of the southern parts of
+            #  <patch_list>, separating them at patches of string projectives
+            
+            syz_list := [ [ ] ];
+            j := 1;
+            
+            for k in [ 2 .. ( Length( patch_list ) - 1 ) ] do
+                if IsPatchOfStringProjective( patch_list[k] ) then
+                    if not IsZeroSyllable( patch_list[k]!.SW ) then
+                        Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
+                    fi;
+                    Add( syz_list, [] );
+                    j := j + 1;
+                    if not IsZeroSyllable( patch_list[k]!.SE ) then
+                        Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
+                    fi;
+                else
+                    if not IsZeroSyllable( patch_list[k]!.SW ) then
+                        Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
+                    fi;
+                    if not IsZeroSyllable( patch_list[k]!.SE ) then
+                        Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
+                    fi;
                 fi;
-                Add( syz_list, [] );
-                j := j + 1;
-                if not IsZeroSyllable( patch_list[k]!.SE ) then
-                    Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
+            od;
+            
+            # Each entry of <syz_list> is a list of syllables and orientations.
+            #  Remove the empty ones and <Stripify> the nonempty ones.
+            j := 1;
+            while j <= Length( syz_list ) do
+                if IsEmpty( syz_list[j] ) then
+                    Remove( syz_list, j );
+                else
+                    syz_list[j] := CallFuncList(
+                     StripifyFromSyllablesAndOrientationsNC,
+                     syz_list[j]
+                     );
+                    # Stripify( syz_list[j] );
+                    if IsVirtualStripRep( syz_list[j] ) then
+                        syz_list[j] := SyzygyOfStrip( syz_list[j] )[1];
+                    fi;
+                    j := j + 1;
                 fi;
-            else
-                if not IsZeroSyllable( patch_list[k]!.SW ) then
-                    Append( syz_list[j], [ patch_list[k]!.SW, 1 ] );
-                fi;
-                if not IsZeroSyllable( patch_list[k]!.SE ) then
-                    Append( syz_list[j], [ patch_list[k]!.SE, -1 ] );
-                fi;
-            fi;
-        od;
-        
-        # Each entry of <syz_list> is a list of syllables and orientations.
-        #  Remove the empty ones and <Stripify> the nonempty ones.
-        j := 1;
-        while j <= Length( syz_list ) do
-            if IsEmpty( syz_list[j] ) then
-                Remove( syz_list, j );
-            else
-                syz_list[j] := CallFuncList(
-                 StripifyFromSyllablesAndOrientationsNC,
-                 syz_list[j]
-                 );
-                # Stripify( syz_list[j] );
-                if IsVirtualStripRep( syz_list[j] ) then
-                    syz_list[j] := SyzygyOfStrip( syz_list[j] )[1];
-                fi;
-                j := j + 1;
-            fi;
-        od;
-        
-        return Flat( syz_list );
+            od;
+            
+            return Flat( syz_list );
+        fi;
     end
 );
 
@@ -1876,9 +1936,29 @@ InstallMethod(
     "for strip-reps",
     [ IsStripRep ],
     function( strip )
-        return CallFuncList(
-         RightModuleOverPathAlgebra,
-         ModuleDataOfStrip( strip )
-         );
+        local
+            get_sba,    # Local function that obtains <sba> from <strip>
+            sba;        # SB algebra to which <strip> belongs
+
+        if IsZeroStrip( strip ) then
+            # Accessing the components of <strip> is naughty, and may be
+            #  impacted by future changes to how this information is stored.
+            #  To minimise possible impact, I concentrate all the naughty
+            #  access into one local function.
+            
+            get_sba := function( s )
+                return FamilyObj( s )!.sb_alg;
+            end;
+            
+            sba := get_sba( strip );
+        
+            return ZeroModule( sba );
+            
+        else
+            return CallFuncList(
+             RightModuleOverPathAlgebra,
+             ModuleDataOfStrip( strip )
+             );
+        fi;
      end
 );

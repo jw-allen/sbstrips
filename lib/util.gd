@@ -30,7 +30,8 @@ DeclareOperation( "IsPeriodicUnderFunctionNC",
 ##      <Description>
 ##        This property will return &true; on lists returned from the &GAP;
 ##        operation <Ref Oper="Collected" BookName="Reference"/>, as well as on
-##        concatenations (&seeconc;) of such lists. This is the principal
+##        concatenations (<Ref Func="Concatenation" BookName="Reference"/>) of
+##        such lists. This is the principal
 ##        intended use of this property.
 ##        <P />
 ##
@@ -43,7 +44,7 @@ DeclareProperty( "IsCollectedList", IsList );
 
 ##  <#GAPDoc Label="DocIsCollectedDuplicateFreeList">
 ##    <ManSection>
-##      <Prop Name="IsCollectedDuplicateFreeList"/>
+##      <Prop Name="IsCollectedDuplicateFreeList" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>
 ##      </Description>
@@ -62,11 +63,11 @@ DeclareProperty( "IsCollectedList", IsList );
 ##  <#/GAPDoc>
 DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
 
-##  <#GAPDoc Label="DocIsCollectedHomogeneousList">
+##  <#GAPDoc Label="DocIsCollectedHomogeneousList" Arg="clist">
 ##    <ManSection>
 ##      <Prop Name="IsCollectedHomogeneousList" Arg="clist"/>
 ##      <Description>
-##        Argument: <A>clist</A>, a collected list (&seeclist;)
+##        Argument: <A>clist</A>, a collected list
 ##      </Description>
 ##      <Returns>
 ##        &true; if replacing each entry of <A>clist</A> by its respective
@@ -87,7 +88,7 @@ DeclareProperty( "IsCollectedHomogeneousList", IsList );
 ##    <ManSection>
 ##      <Oper Name="Recollected" Arg="clist"/>
 ##      <Description>
-##        Argument: <A>clist</A>, a collected list (&seeclist;)
+##        Argument: <A>clist</A>, a collected list
 ##      </Description>
 ##      <Returns>
 ##        a collected list whose entries all have distinct first entries.
@@ -96,7 +97,8 @@ DeclareProperty( "IsCollectedHomogeneousList", IsList );
 ##        If <A>clist</A> contains entries with matching first entries, say
 ##        <C>[ obj, n ]</C> and <C>[ obj, m ]</C>, then it will combine them
 ##        into a single entry <C>[ obj, n+m ]</C> with totalised multiplicity.
-##        This can be necessary when dealing with concatenations (&seeconc;) of
+##        This can be necessary when dealing with concatenations (<Ref
+##        Func="Concatenation" BookName="Reference"/>) of
 ##        collected lists.
 ##      </Description>
 ##    </ManSection>
@@ -107,7 +109,7 @@ DeclareOperation( "Recollected", [ IsList ] );
 ##    <ManSection>
 ##      <Oper Name="Uncollected" Arg="clist"/>
 ##      <Description>
-##        Argument: <A>clist</A>, a collected list (&seeclist;)
+##        Argument: <A>clist</A>, a collected list
 ##      </Description>
 ##      <Returns>
 ##        a (flat) list, where each (first entry of an) entry in <A>clist</A>
@@ -135,7 +137,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##        Methods for <Ref Attr="String" BookName="Reference"/> already exist
 ##        for vertices and arrows of a quiver; that is to say, paths of length
 ##        <M>0</M> or <M>1</M>. &QPA; forgets these for longer paths: at
-##        present, only the default answer <C>"<object>"</C> is returned.
+##        present, only the default answer <C>"&lt;object&gt;"</C> is returned.
 ##        <P />
 ##        A path in &QPA; is products of arrows. Accordingly, we write its
 ##        string as a <C>*</C>-separated sequences of its constituent arrows.
@@ -161,7 +163,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##  <#/GAPDoc>
 DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 
-##  <#GAPDoc Label="DocVerticessOfQuiverAlgebra">
+##  <#GAPDoc Label="DocVerticesOfQuiverAlgebra">
 ##    <ManSection>
 ##      <Oper Name="VerticesOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>

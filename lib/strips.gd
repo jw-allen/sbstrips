@@ -101,14 +101,14 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 
 
 ##	  <ManSection>
-##      <Oper Name="SyzygyOfStrip" Arg="strip_or_list" />
+##      <Heading>SyzygyOfStrip</Heading>
 ##      <Description>
 ##        This operation calculates syzygies of strips. It has different
 ##        methods, depending on whether its input is a single strip or a list
 ##        of strips.
 ##      </Description>
-##		<Meth Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
-##		<Meth Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
+##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
 ##		<Description>
 ##		  Argument: <A>strip</A>, a strip (in the first method); <A>list</A>, a
 ##        list of strips (in the second method)
@@ -130,7 +130,7 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##		</Description>
 ##	  </ManSection>
 ##	<#/GAPDoc>
-DeclareOperation( "SyzygyOfStrip", [ IsStripRep ] );
+DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 
 ##	<#GAPDoc Label="DocNthSyzygyOfStrip">
 ##	  <ManSection>
@@ -436,7 +436,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##        the &SBStrips; package calls <E>strips</E>.
 ##        <P />
 ##        This operation returns the string module corresponding to the strip 
-##        A>strip</A>. More specifically, it gives that module as a quiver,
+##        <A>strip</A>. More specifically, it gives that module as a quiver,
 ##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
 ##        Label="with dimension vector" BookName="QPA"/>.
 ##      </Description>

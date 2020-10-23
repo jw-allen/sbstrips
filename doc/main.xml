@@ -9,8 +9,6 @@
   [ <!ENTITY fail "<K>fail</K>">
     <!ENTITY false "<K>false</K>">
     <!ENTITY QPA "<Package>QPA</Package>">
-    <!ENTITY seeclist "see <Ref Prop="IsCollectedList"/>">
-    <!ENTITY seeconc "see <Ref Func="Concatenation" BookName="Reference"/>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">
     ]
@@ -177,7 +175,7 @@ gap> alg2 := kq2/ideal2;
           </Display>
         </Alt><Alt Not="LaTeX">
           <Display>
-          (a)^{-1}(b)(c)(a)^{-1}(b)(d)^{-1}(c)(a)^{-1}(c)^{-1}(d)
+          (a)^-1 (b) (c) (a)^-1 (b) (d)^-1 (c) (a)^-1 (c)^-1 (d)
           </Display>
         </Alt>
         Note in particular that the "first arrow" in this strip is <M>a</M> and
@@ -212,16 +210,28 @@ gap> Print( module );
     , (7 generators)>> with dimension vector [ 6, 5 ]>
 ]]>
         </Example>
-        Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or, rather, quiver representation).
+        Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function
+        <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then
+        you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or,
+        rather, quiver representation).
         <P />
         
-        Liu and Morin <Cite Key="LM"/> proved that the syzygy of a string module is a direct sum of string modules. Suppose we write this as <M>\Omega^1(X) = X_1 \oplus X_2 \oplus \cdots \oplus X_m</M>, and we say that the summands <M>X_1</M> through <M>X_m</M> are respectively described by the strips <C>s_1</C> through <C>s_n</C>. The operation <Ref Meth="SyzygyOfStrip"/> -- the most important function in the &SBStrips; package -- performs this syzygy calculation on strips. In other words, given <C>s</C> as input, it outputs <C>[ s_1, s_2, ..., s_n ]</C>
+        Liu and Morin <Cite Key="LM"/> proved that the syzygy of a string
+        module is a direct sum of string modules. Suppose we write this as
+        <M>\Omega^1(X) = X_1 \oplus X_2 \oplus \cdots \oplus X_m</M>, and we
+        say that the summands <M>X_1</M> through <M>X_m</M> are respectively
+        described by the strips <C>s_1</C> through <C>s_n</C>. The operation
+        <Ref Attr="SyzygyOfStrip"/> -- the most important function in the
+        &SBStrips; package -- performs this syzygy calculation on strips. In
+        other words, given <C>s</C> as input, it outputs
+        <C>[ s_1, s_2, ..., s_n ]</C>
         <Example>
 <![CDATA[
 gap> SyzygyOfStrip( s );
 [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
 ]]>
         </Example>
+        <Index><E>hello world</E></Index>
       </Section>
       
 <!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->
@@ -402,6 +412,8 @@ gap> # Include an example here!
       <Section>
         <Heading>Operation on strips</Heading>
         
+        <#Include Label="DocModuleOfStrip">
+        
         <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 
         <#Include Label="DocIsPeriodicStripByNthSyzygy">
@@ -437,13 +449,13 @@ gap> # Include an example here!
         
         <#Include Label="DocIsCollectedList">
         
-        <#Include Label="IsCollectedDuplicateFreeList">
+        <#Include Label="DocIsCollectedDuplicateFreeList">
         
         <#Include Label="DocIsCollectedHomogeneousList">
         
-        <#Include Label="Recollected">
+        <#Include Label="DocRecollected">
         
-        <#Include Label="Uncollected">
+        <#Include Label="DocUncollected">
       </Section>
       
       <Section>
@@ -458,7 +470,7 @@ gap> # Include an example here!
     </Chapter>
   </Body>
   
-  <Bibliography Databases="sbstripsbib.xml" Style="alpha" />
+  <Bibliography Databases="sbstripsbib.xml" Style="alpha"/>
   
   <TheIndex/>
 

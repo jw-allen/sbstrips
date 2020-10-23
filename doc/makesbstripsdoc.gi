@@ -15,7 +15,7 @@ InstallGlobalFunction(
             r;          # GAPDoc tree for SBStrips
 
         # Define input to <ComposedDocument>
-        path := Directory( "./gap4r8/pkg/sbstrips/doc" );
+        path := Directory( "./gap4r8/pkg/sbstrips/doc/" );
         main := "main.xml";
         files := [ "../lib/1reg.gd",
                    "../lib/overquiver.gd",
@@ -26,9 +26,9 @@ InstallGlobalFunction(
                    "../lib/syllables.gd",
                    "../lib/util.gd",
                    "../lib/vertseqs.gd",
-                   "/sbstripsbib.xml"
+                   "sbstripsbib.xml"
                    ];
-        bookname := "sbstripsdoc";
+        bookname := "manual";
         doc := ComposedDocument("GAPDoc", path, main, files, true);
         
         # Make GAPDoc tree

@@ -1,0 +1,44 @@
+<#GAPDoc>
+<Section>
+  <Heading>Introduction</Heading>
+  
+  Some introductory text here
+</Section>
+
+<!-- SEC: Constructing strips +++++++++++++++++++++++++++++++++++++++++++++ -->
+<Section>
+  <Heading>
+    Constructing strips
+  </Heading>
+
+  <#Include Label="DocStripify">
+
+<Example><![CDATA[
+gap> # Include an example here!
+]]></Example>
+</Section>
+
+<!-- SEC: Calculating syzygies of strips ++++++++++++++++++++++++++++++++++ -->
+<Section>
+  <Heading>Calculating syzygies of strips</Heading>
+</Section>
+
+  Ways to calculate syzygies of strips here.
+
+<Section>
+  <Heading>Attributes of strips</Heading>
+
+  <#Include Label="DocWidthOfStrip">
+</Section>
+
+<!-- SEC: Operation on strips +++++++++++++++++++++++++++++++++++++++++++++ -->
+<Section>
+  <Heading>Operation on strips</Heading>
+
+  <#Include Label="DocModuleOfStrip">
+
+  <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
+
+  <#Include Label="DocIsPeriodicStripByNthSyzygy">
+</Section>
+<#/GAPDoc>

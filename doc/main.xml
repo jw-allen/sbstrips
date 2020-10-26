@@ -57,51 +57,7 @@
     <Chapter>
       <Heading>Introduction</Heading>
       
-<!-- SEC: Why "strips", not "strings"? ++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Why "strips", not "strings"?</Heading>
-      </Section>
-
-      First, some context. Representation theorists use the word <E>string</E>
-      to mean a decorated graph that, in a particular fashion, describes a
-      module; it is accordingly called a <E>string module</E>. Liu and Morin
-      <Cite Key="LM"/> showed that the syzygy of a string module over a
-      special biserial (SB) algebra is a direct sum of string modules. Their
-      proof is constructive, detailing how to obtain the strings indexing the
-      syzygy summands from the string indexing the original module. Their
-      language explains how to spot patterns appearing "from one syzygy to the
-      next", but it does not scale in a particularly transparent way. For
-      example, I believe it does not lend itself to clearly seeing asymptotic
-      behaviour of syzygies of string modules. My research has aimed, in part,
-      to provide a more robust language: one which lays bare more patterns in
-      the syzygies of string modules over SB algebras.
-      <P />
-      
-      One key ingredient is a slight refinement of the definition of a string.
-      Really, this differs from the established definition only in technical
-      ways, the effect being to disambiguate how the graph is decorated so that
-      the syzygy calculation is streamlined. In my thesis, I propose the term
-      <E>strip</E> for this refined notion of a string. A happy side-effect of
-      this name change is that it avoids the clash with what &GAP; already
-      thinks "string" means.
-      <P /> <P />
-
-      <E>
-        In brief: if whenever you read the word "strip" here, you imagine that
-        it means the kind of decorated graph that representation theorists call
-        a "string", then you won't go too far wrong.
-      </E>
-      <P />
-      
-      <Section>
-        <Heading>Aims</Heading>
-        
-        
-      </Section>
-      
-      <Section>
-        <Heading>Installation</Heading>
-      </Section>
+      <#Include Label="ChapIntroduction">
     </Chapter>
 
 
@@ -110,130 +66,10 @@
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
     <Chapter>
       <Heading>Worked example</Heading>
-
-<!-- SEC: Strips ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Strips, aka "strings for special biserial algebras"</Heading>
-
-        This package is principally for "strings and their syzygies". Strings are defined over SB algebras. Our first job is to tell &GAP; about a special biserial algebra. We'll do this using tools from &QPA;. If the following doesn't make sense to you, then see the QPA documentation. <E>Add a reference!</E>
-<Example><![CDATA[
-gap> # Construct the quiver
-gap> q2 := Quiver(
- 2,                                             # Number of vertices = 2
- [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] # List of arrows
- );
-<quiver with 2 vertices and 4 arrows>
-gap> # Construct the path algebra
-gap> kq2 := PathAlgebra( Rationals, q2 );
-<Rationals[<quiver with 2 vertices and 4 arrows>]>
-gap> # Construct the ideal
-gap> rels2 := [ kq2.a * kq2.a,
->            kq2.b * kq2.d,
->            kq2.c * kq2.b,
->            kq2.d * kq2.c,
->            kq2.c * kq2.a * kq2.b,
->            (kq2.d)^4,
->            kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];
-[ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (1)*c*a*b, (1)*d^4,
-  (1)*a*b*c+(-1)*b*c*a ]
-gap> gb2 := GBNPGroebnerBasis( rels2, kq2 );
-[ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (-1)*a*b*c+(1)*b*c*a,
-  (1)*c*a*b, (1)*d^4 ]
-gap> ideal2 := Ideal( kq2, gb2 );
-<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
-    , (7 generators)>
-gap> GroebnerBasis( ideal2, gb2 );
-<complete two-sided Groebner basis containing 7 elements>
-gap> # Construct the algebra
-gap> alg2 := kq2/ideal2;
-<Rationals[<quiver with 2 vertices and 4 arrows>]/
-<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
-    , (7 generators)>>
-]]></Example>
-        The above defines a special biserial algebra <C>alg2</C>. The following
-        is what representation theorists call a string over <C>alg2</C>, but
-        which we'll call a <E>strip</E>. (For reasons why, see <E>SOMEWHERE
-        ELSE</E>.)
-        <Alt Only="LaTeX">
-          <Display>
-            \begin{tikzcd}[sep=small]
-                    1
-              &amp; 1 \ar[l, "a"'] \ar[r, "b"]
-              &amp; 2 \ar[r, "c"]
-              &amp; 1
-              &amp; 1 \ar[l, "a"'] \ar[r, "b"]
-              &amp; 2
-              &amp; 2 \ar[l, "d"'] \ar[r, "c"]
-              &amp; 1
-              &amp; 1 \ar[l, "a"']
-              &amp; 2 \ar[l, "c"'] \ar[r, "d"]
-              &amp; 2
-            \end{tikzcd}
-          </Display>
-        </Alt><Alt Not="LaTeX">
-          <Display>
-          (a)^-1 (b) (c) (a)^-1 (b) (d)^-1 (c) (a)^-1 (c)^-1 (d)
-          </Display>
-        </Alt>
-        Note in particular that the "first arrow" in this strip is <M>a</M> and
-        it has exponent <M>-1</M><Alt Only="LaTeX"> (which means it points to
-        the left)</Alt>. This information (plus a bit extra) gets used when
-        creating the strip in &GAP; via the operation <Ref Meth="Stripify"
-        Label="for an arrow, +/-1 and a list of integers"/>.
-<Example><![CDATA[
-gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
-(a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
-]]></Example>
-        Representation theorists will know that this strip <C>s</C> corresponds
-        to an indecomposable module over <C>alg2</C>. In the literature they're
-        called string modules, but maybe here we could call them strip modules?
-        Whatever you want to call it, that module can be made in &GAP; using
-        <Ref Meth="ModuleOfStrip" Label="for a strip"/>.
-        <P />
-        Something to bear in mind is that that module is implemented as a
-        representation of the quiver over which <C>alg2</C> was defined. You'll
-        find details about quiver representations in the &QPA; documentation.
-<Example><![CDATA[
-gap> module := ModuleOfStrip( s );
-<[ 6, 5 ]>
-gap> Print( module );
-<Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/
-<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
-    , (7 generators)>> with dimension vector [ 6, 5 ]>
-]]></Example>
-        Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function
-        <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then
-        you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or,
-        rather, quiver representation).
-        <P />
-        
-        Liu and Morin proved that the syzygy of a string module is a direct sum
-        of string modules. Suppose we write this as
-        <M>\Omega^1(X) = X_1 \oplus X_2 \oplus \cdots \oplus X_m</M>, and we
-        say that the summands <M>X_1</M> through <M>X_m</M> are respectively
-        described by the strips <C>s_1</C> through <C>s_n</C>. The operation
-        <Ref Attr="SyzygyOfStrip"/> -- the most important function in the
-        &SBStrips; package -- performs this syzygy calculation on strips. In
-        other words, given <C>s</C> as input, it outputs
-        <C>[ s_1, s_2, ..., s_n ]</C>
-<Example><![CDATA[
-gap> SyzygyOfStrip( s );
-[ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
-]]></Example>
-        <Index><E>hello world</E></Index>
--->
-      </Section>
-      
-<!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Calculations with strips</Heading>
-      </Section>
-      
-<!-- SEC: A look under the bonnet +++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>A look under the bonnet</Heading>
-      </Section>
+    
+      <#Include Label="ChapExample">
     </Chapter>
+    
 
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -367,99 +203,13 @@ gap> SyzygyOfStrip( s );
       <Heading>Strips</Heading>
       
 <!-- SEC: Introduction ++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Introduction</Heading>
-      </Section>
-      
-<!-- SEC: Constructing strips +++++++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>
-          Constructing strips
-        </Heading>
-        
-        <#Include Label="DocStripify">
-        
-<Example><![CDATA[
-gap> # Include an example here!
-]]></Example>
 
-      </Section>
-
-<!-- SEC: Calculating syzygies of strips ++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Calculating syzygies of strips</Heading>
-      </Section>
-      
-
-      <Section>
-        <Heading>Attributes of strips</Heading>
-
-        <#Include Label="DocWidthOfStrip">
-
-      </Section>
-
-<!-- SEC: Operation on strips +++++++++++++++++++++++++++++++++++++++++++++ -->
-      <Section>
-        <Heading>Operation on strips</Heading>
-       
-        <#Include Label="DocModuleOfStrip">
-        
-        <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
-
-        <#Include Label="DocIsPeriodicStripByNthSyzygy">
-
-      </Section>
     </Chapter>
     
     <Chapter>
       <Heading>Utilities</Heading>
       
-      In this chapter, we document some additional functionalities that have
-      been implemented in &SBStrips; but which, really, can stand independently
-      of it. Others may find these useful without caring about SB algebras or
-      what-have-you. Among these, we include minor extensions of functionality
-      for &QPA;
-      
-      <Section>
-        <Heading>Collected lists</Heading>
-       
-        Sometimes it is important to know <E>where</E> in a list an element
-        appears. Sometimes, all that matters is <E>how often</E> it does. (In 
-        mathematical terms, these two ideas respectively correspond to a
-        <E>sequence</E> of elements and the multiset of values it takes.) One
-        can of course move from knowing the positions of elements to just
-        knowing their frequency, however this is a strict loss of information.
-        <P />
-        &GAP; implements this move using <Ref Oper="Collected"
-        BookName="Reference"/>. Calls to this operation yield lists that store
-        information in a more economical, if slightly less informative,
-        fashion, of which &SBStrips; makes great use.
-        <P />
-        It proved convenient to build some tools for working with such
-        "multisets". These tool are <E>collected</E> below (hurr durr durr).
-        
-        <#Include Label="DocIsCollectedList">
-        
-        <#Include Label="DocIsCollectedDuplicateFreeList">
-        
-        <#Include Label="DocIsCollectedHomogeneousList">
-        
-        <#Include Label="DocRecollected">
-        
-        <#Include Label="DocUncollected">
-
-      </Section>
-      
-      <Section>
-        <Heading>Miscellaneous utilities for &QPA;</Heading>
-      
-        <#Include Label="DocStringMethodForPaths">
-        
-        <#Include Label="DocArrowsOfQuiverAlgebra">
-        
-        <#Include Label="DocVerticesOfQuiverAlgebra">
-
-      </Section>
+      <#Include Label="ChapUtilities"
     </Chapter>
   </Body>
   

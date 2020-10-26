@@ -1,0 +1,49 @@
+<#GAPDoc Label="ChapUtilities">
+In this chapter, we document some additional functionalities that have been
+implemented in &SBStrips; but which, really, can stand independently of it.
+Others may find these useful without caring about SB algebras or what-have-you.
+Among these, we include minor extensions of functionality for &QPA;
+
+<Section>
+  <Heading>Collected lists</Heading>
+
+  Sometimes it is important to know <E>where</E> in a list an element appears.
+  Sometimes, all that matters is <E>how often</E> it does. (In  mathematical
+  terms, these two ideas respectively correspond to a <E>sequence</E> of
+  elements and the multiset of values it takes.) One can of course move from knowing the positions of elements to just knowing their frequency, however
+  this is a strict loss of information.
+  <P />
+  
+  &GAP; implements this move using <Ref Oper="Collected"
+  BookName="Reference"/>. Calls to this operation yield lists that store
+  information in a more economical, if slightly less informative, fashion, of
+  which &SBStrips; makes great use.
+  <P />
+  
+  It proved convenient to build some tools for working with such "multisets".
+  These tools are <E>collected</E> below (ha ha).
+  
+  <#Include Label="DocIsCollectedList">
+
+  <#Include Label="DocIsCollectedDuplicateFreeList">
+
+  <#Include Label="DocIsCollectedHomogeneousList">
+
+  <#Include Label="DocRecollected">
+
+  <#Include Label="DocUncollected">
+</Section>
+
+<Section>
+  <Heading>Miscellaneous utilities for &QPA;</Heading>
+  
+  What follows are minor additional utilities for &QPA;. 
+
+  <#Include Label="DocStringMethodForPaths">
+
+  <#Include Label="DocArrowsOfQuiverAlgebra">
+
+  <#Include Label="DocVerticesOfQuiverAlgebra">
+
+</Section>
+<#/GAPDoc>

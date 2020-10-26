@@ -26,6 +26,10 @@ InstallGlobalFunction(
                    "../lib/syllables.gd",
                    "../lib/util.gd",
                    "../lib/vertseqs.gd",
+                   "example_chap.xml",
+                   "introduction_chap.xml",
+                   "strips_chap.xml",
+                   "utilities_chap.xml",
                    "sbstripsbib.xml"
                    ];
         bookname := "manual";

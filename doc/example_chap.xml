@@ -1,0 +1,73 @@
+<#GAPDoc Label="ChapExample">
+<Section>
+  <Heading>Strips, aka "strings for special biserial algebras"</Heading>
+
+  This package is principally for "strings and their syzygies". Strings are defined over SB algebras. Our first job is to tell &GAP; about a special biserial algebra. We'll do this using tools from &QPA;. If the following doesn't make sense to you, then see the QPA documentation <Cite Key="QPA"/>.
+<Example><![CDATA[
+gap> q2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;
+gap> kq2 := PathAlgebra( Rationals, q2 );;
+gap> rels2 := [ kq2.a * kq2.a, kq2.b * kq2.d, kq2.c * kq2.b,
+> kq2.d * kq2.c, kq2.c * kq2.a * kq2.b, (kq2.d)^4,
+> kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];;
+gap> gb2 := GBNPGroebnerBasis( rels2, kq2 );;
+gap> ideal2 := Ideal( kq2, gb2 );;
+gap> GroebnerBasis( ideal2, gb2 );;
+gap> alg2 := kq2/ideal2;
+<Rationals[<quiver with 2 vertices and 4 arrows>]/
+<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
+, (7 generators)>>
+]]></Example>
+  The above defines a special biserial algebra <C>alg2</C>. The following is what representation theorists call a string over <C>alg2</C>, but which we'll call a <E>strip</E>. (For reasons why, see <E>SOMEWHERE ELSE</E>.)
+  <Alt Only="LaTeX"><Display>
+    \begin{tikzcd}[sep=small]
+              1
+      &amp; 1 \ar[l, "a"'] \ar[r, "b"]
+      &amp; 2 \ar[r, "c"]
+      &amp; 1
+      &amp; 1 \ar[l, "a"'] \ar[r, "b"]
+      &amp; 2
+      &amp; 2 \ar[l, "d"'] \ar[r, "c"]
+      &amp; 1
+      &amp; 1 \ar[l, "a"']
+      &amp; 2 \ar[l, "c"'] \ar[r, "d"]
+      &amp; 2
+    \end{tikzcd}
+  </Display></Alt><Alt Not="LaTeX"><Display>
+    (a)^-1 (b) (c) (a)^-1 (b) (d)^-1 (c) (a)^-1 (c)^-1 (d)
+  </Display></Alt>
+  Note in particular that the "first arrow" in this strip is <M>a</M> and it has exponent <M>-1</M><Alt Only="LaTeX"> (which means it points to the left)</Alt>. This information (plus a bit extra) gets used when creating the strip in &GAP; via the operation <Ref Meth="Stripify" Label="for an arrow, +/-1 and a list of integers"/>.
+<Example><![CDATA[
+gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
+(a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
+]]></Example>
+  Representation theorists will know that this strip <C>s</C> corresponds to an indecomposable module over <C>alg2</C>. In the literature they're called string modules, but maybe here we could call them strip modules? Whatever you want to call it, that module can be made in &GAP; using <Ref Meth="ModuleOfStrip" Label="for a strip"/>.
+  <P />
+  
+  Something to bear in mind is that that module is implemented as a representation of the quiver over which <C>alg2</C> was defined. You'll find details about quiver representations in the &QPA; documentation.
+<Example><![CDATA[
+gap> module := ModuleOfStrip( s );
+<[ 6, 5 ]>
+gap> Print( module );
+<Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/
+<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
+, (7 generators)>> with dimension vector [ 6, 5 ]>
+]]></Example>
+  Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or, rather, quiver representation).
+  <P />
+  
+  Liu and Morin proved that the syzygy of a string module is a direct sum of string modules. Suppose we write this as <M>\Omega^1(X) = X_1 \oplus X_2 \oplus \cdots \oplus X_m</M>, and we say that the summands <M>X_1</M> through <M>X_m</M> are respectively described by the strips <C>s_1</C> through <C>s_m</C>. The operation <Ref Attr="SyzygyOfStrip"/> -- the most important function in the &SBStrips; package -- performs this syzygy calculation on strips. In other words, given <C>s</C> as input, it outputs <C>[ s_1, s_2, ..., s_m ]</C>
+<Example><![CDATA[
+gap> SyzygyOfStrip( s );
+[ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
+]]></Example>
+<Index><E>hello world</E></Index>
+
+</Section>
+
+<!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->
+<Section>
+  <Heading>Calculations with strips</Heading>
+  
+  Some text here.
+</Section>
+<#/GAPDoc>

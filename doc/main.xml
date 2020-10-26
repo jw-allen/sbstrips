@@ -76,7 +76,7 @@
       to provide a more robust language: one which lays bare more patterns in
       the syzygies of string modules over SB algebras.
       <P />
-
+      
       One key ingredient is a slight refinement of the definition of a string.
       Really, this differs from the established definition only in technical
       ways, the effect being to disambiguate how the graph is decorated so that
@@ -116,8 +116,7 @@
         <Heading>Strips, aka "strings for special biserial algebras"</Heading>
 
         This package is principally for "strings and their syzygies". Strings are defined over SB algebras. Our first job is to tell &GAP; about a special biserial algebra. We'll do this using tools from &QPA;. If the following doesn't make sense to you, then see the QPA documentation. <E>Add a reference!</E>
-        <Example>
-<![CDATA[
+<Example><![CDATA[
 gap> # Construct the quiver
 gap> q2 := Quiver(
  2,                                             # Number of vertices = 2
@@ -150,9 +149,7 @@ gap> alg2 := kq2/ideal2;
 <Rationals[<quiver with 2 vertices and 4 arrows>]/
 <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
     , (7 generators)>>
-]]>
-        </Example>
-        
+]]></Example>
         The above defines a special biserial algebra <C>alg2</C>. The following
         is what representation theorists call a string over <C>alg2</C>, but
         which we'll call a <E>strip</E>. (For reasons why, see <E>SOMEWHERE
@@ -183,14 +180,10 @@ gap> alg2 := kq2/ideal2;
         the left)</Alt>. This information (plus a bit extra) gets used when
         creating the strip in &GAP; via the operation <Ref Meth="Stripify"
         Label="for an arrow, +/-1 and a list of integers"/>.
-        <Example>
-<![CDATA[
+<Example><![CDATA[
 gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
 (a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
-]]>
-        </Example>
-        <P />
-        
+]]></Example>
         Representation theorists will know that this strip <C>s</C> corresponds
         to an indecomposable module over <C>alg2</C>. In the literature they're
         called string modules, but maybe here we could call them strip modules?
@@ -200,24 +193,22 @@ gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
         Something to bear in mind is that that module is implemented as a
         representation of the quiver over which <C>alg2</C> was defined. You'll
         find details about quiver representations in the &QPA; documentation.
-        <Example>
-<![CDATA[
+<Example><![CDATA[
 gap> module := ModuleOfStrip( s );
 <[ 6, 5 ]>
 gap> Print( module );
 <Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/
 <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
     , (7 generators)>> with dimension vector [ 6, 5 ]>
-]]>
-        </Example>
+]]></Example>
         Now, you can calculate the syzygy of <C>X</C> using &QPA;'s function
         <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C>. If you do, then
         you'll get given this syzygy <C>\Omega^1(X)</C> as another module (or,
         rather, quiver representation).
         <P />
         
-        Liu and Morin <Cite Key="LM"/> proved that the syzygy of a string
-        module is a direct sum of string modules. Suppose we write this as
+        Liu and Morin proved that the syzygy of a string module is a direct sum
+        of string modules. Suppose we write this as
         <M>\Omega^1(X) = X_1 \oplus X_2 \oplus \cdots \oplus X_m</M>, and we
         say that the summands <M>X_1</M> through <M>X_m</M> are respectively
         described by the strips <C>s_1</C> through <C>s_n</C>. The operation
@@ -225,13 +216,12 @@ gap> Print( module );
         &SBStrips; package -- performs this syzygy calculation on strips. In
         other words, given <C>s</C> as input, it outputs
         <C>[ s_1, s_2, ..., s_n ]</C>
-        <Example>
-<![CDATA[
+<Example><![CDATA[
 gap> SyzygyOfStrip( s );
 [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
-]]>
-        </Example>
+]]></Example>
         <Index><E>hello world</E></Index>
+-->
       </Section>
       
 <!-- SEC: Calculations with strips ++++++++++++++++++++++++++++++++++++++++ -->
@@ -276,7 +266,7 @@ gap> SyzygyOfStrip( s );
         algebras for which the property <Ref Prop="IsSpecialBiserialAlgebra"
         BookName="QPA"/> returns &true;.
         <P/>
-        
+       
         In this section, we explain some added functionality for quivers and
         special biserial algebras.<P/>
       </Section>
@@ -389,11 +379,10 @@ gap> SyzygyOfStrip( s );
         
         <#Include Label="DocStripify">
         
-        <Example>
-          <![CDATA[
+<Example><![CDATA[
 gap> # Include an example here!
-          ]]>
-        </Example>
+]]></Example>
+
       </Section>
 
 <!-- SEC: Calculating syzygies of strips ++++++++++++++++++++++++++++++++++ -->
@@ -406,17 +395,19 @@ gap> # Include an example here!
         <Heading>Attributes of strips</Heading>
 
         <#Include Label="DocWidthOfStrip">
+
       </Section>
 
 <!-- SEC: Operation on strips +++++++++++++++++++++++++++++++++++++++++++++ -->
       <Section>
         <Heading>Operation on strips</Heading>
-        
+       
         <#Include Label="DocModuleOfStrip">
         
         <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 
         <#Include Label="DocIsPeriodicStripByNthSyzygy">
+
       </Section>
     </Chapter>
     
@@ -431,7 +422,7 @@ gap> # Include an example here!
       
       <Section>
         <Heading>Collected lists</Heading>
-        
+       
         Sometimes it is important to know <E>where</E> in a list an element
         appears. Sometimes, all that matters is <E>how often</E> it does. (In 
         mathematical terms, these two ideas respectively correspond to a
@@ -456,16 +447,18 @@ gap> # Include an example here!
         <#Include Label="DocRecollected">
         
         <#Include Label="DocUncollected">
+
       </Section>
       
       <Section>
         <Heading>Miscellaneous utilities for &QPA;</Heading>
-        
+      
         <#Include Label="DocStringMethodForPaths">
         
         <#Include Label="DocArrowsOfQuiverAlgebra">
         
         <#Include Label="DocVerticesOfQuiverAlgebra">
+
       </Section>
     </Chapter>
   </Body>

@@ -28,6 +28,7 @@ InstallGlobalFunction(
                    "../lib/vertseqs.gd",
                    "example_chap.xml",
                    "introduction_chap.xml",
+                   "quivers_sbas_chap.xml",
                    "strips_chap.xml",
                    "utilities_chap.xml",
                    "sbstripsbib.xml"

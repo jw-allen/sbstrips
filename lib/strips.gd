@@ -58,7 +58,7 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 ##    </ManSection>
 ##
 ##    <ManSection>
-##      <Meth Name="Stripify" Label="for paths of a special biserial algebra"
+##      <Meth Name="Stripify" Label="for a path of a special biserial algebra"
 ##      Arg="path"/>
 ##      <Description>
 ##        Arguments: <A>path</A>, the residue (in a special biserial algebra)

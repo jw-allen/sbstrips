@@ -84,6 +84,8 @@ DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
 ##  <#/GAPDoc>
 DeclareProperty( "IsCollectedHomogeneousList", IsList );
 
+DeclareAttribute( "CollectedLength", IsList );
+
 ##  <#GAPDoc Label="DocRecollected">
 ##    <ManSection>
 ##      <Oper Name="Recollected" Arg="clist"/>

@@ -17,22 +17,29 @@ InstallGlobalFunction(
         # Define input to <ComposedDocument>
         path := Directory( "./gap4r8/pkg/sbstrips/doc/" );
         main := "main.xml";
-        files := [ "../lib/1reg.gd",
-                   "../lib/overquiver.gd",
-                   "../lib/panels.gd",
-                   "../lib/patchreps.gd",
-                   "../lib/permdata.gd",
-                   "../lib/strips.gd",
-                   "../lib/syllables.gd",
-                   "../lib/util.gd",
-                   "../lib/vertseqs.gd",
-                   "example_chap.xml",
-                   "introduction_chap.xml",
-                   "quivers_sbas_chap.xml",
-                   "strips_chap.xml",
-                   "utilities_chap.xml",
-                   "sbstripsbib.xml"
-                   ];
+        files := [
+         "../lib/1reg.gd",
+         "../lib/overquiver.gd",
+         "../lib/panels.gd",
+         "../lib/patchreps.gd",
+         "../lib/permdata.gd",
+         "../lib/strips.gd",
+         "../lib/syllables.gd",
+         "../lib/util.gd",
+         "../lib/vertseqs.gd",
+         "titlepage.xml",
+         "discrete_model_chap.xml",
+         "example_chap.xml",
+         "introduction_chap.xml",
+         "patches_chap.xml",
+         "permissible_data_chap.xml",
+         "quiver_utilities_overquiver_chap.xml",
+         "strips_syzygies_chap.xml",
+         "syllables_chap.xml",
+         "utilities_chap.xml",
+         "vis_encodings_chap.xml",
+         "sbstripsbib.xml"
+         ];
         bookname := "manual";
         doc := ComposedDocument("GAPDoc", path, main, files, true);
         
@@ -98,8 +105,8 @@ InstallGlobalFunction(
          );
         PrintSixFile( Filename( path, "manual.six" ), r, bookname );
         
-        h := GAPDoc2HTML(r, path);
-        GAPDoc2HTMLPrintHTMLFiles(h, path);
+        h := GAPDoc2HTML( r, path );
+        GAPDoc2HTMLPrintHTMLFiles( h, path );
     end
 );
 

@@ -1,0 +1,40 @@
+<#GAPDoc Label="TitlePage">
+
+<Title>
+  <Package>SBStrips</Package>
+</Title>
+
+<Version>
+  Version 0.6.0
+</Version>
+
+<TitleComment>
+  A discrete model of special biserial algebras, string modules and their
+  syzygies
+</TitleComment>
+
+<Author>
+  Joe Allen
+</Author>
+
+<Abstract>
+  We implement a discrete model of special biserial algebras and, more to the
+  point, their string modules. We represent string modules using new objects
+  that we call <E>strips</E>. Using these, we efficiently calculate syzygies of
+  string modules in terms of the strips that represent them.
+  <P />
+
+  This package builds on, an interfaces with, the &QPA; package.
+  
+  This package was created as part of the author's PhD thesis.
+</Abstract>
+
+<Copyright>
+  Joe Allen &copyright; 2020
+</Copyright>
+
+
+<Acknowledgements>
+  I thank my PhD supervisor Professor Jeremy Rickard, on whom I inflicted multiple early iterations of &SBStrips;, for his time and his comments. This package was much worse before his feedback. 
+</Acknowledgements>
+<#/GAPDoc>

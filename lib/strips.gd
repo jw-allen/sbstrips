@@ -346,9 +346,9 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##  <#/GAPDoc>
 DeclareProperty( "IsZeroStrip", IsStripRep );
 
-##  <#GAPDoc Label="DocIsPeriodicStripByNthSyzygy">
+##  <#GAPDoc Label="DocIsWeaklyPeriodicStripByNthSyzygy">
 ##    <ManSection>
-##      <Oper Name="IsPeriodicStripByNthSyzygy" Arg="strip, N"/>
+##      <Oper Name="IsWeaklyPeriodicStripByNthSyzygy" Arg="strip, N"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
 ##        <Br />
@@ -363,7 +363,8 @@ DeclareProperty( "IsZeroStrip", IsStripRep );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "IsPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ] );
+DeclareOperation( "IsWeaklyPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ]
+ );
 
 ##  <#GAPDoc Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 ##    <ManSection>

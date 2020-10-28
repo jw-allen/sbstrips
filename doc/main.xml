@@ -20,6 +20,8 @@
 \usepackage{tikz-cd}
 
 \tikzset{>=to}
+
+\DeclareMathOperator{\add}{add}
 "?>
 
 <Book Name="SBStrips">

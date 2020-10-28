@@ -1564,7 +1564,7 @@ InstallOtherMethod(
 );
 
 InstallMethod(
-    IsPeriodicStripByNthSyzygy,
+    IsWeaklyPeriodicStripByNthSyzygy,
     "for a strip and a positive integer",
     [ IsStripRep, IsPosInt ],
     function( strip, N )
@@ -1582,7 +1582,7 @@ InstallMethod(
             if strip in syz then
                 found_yet := true;
                 Print( "The given strip appears in its own ", Ordinal( j ),
-                 " syzygy");
+                 " syzygy\n");
             fi;
         od;
         return found_yet;        

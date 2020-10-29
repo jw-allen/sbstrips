@@ -225,6 +225,20 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    CollectedLength,
+    "for collected lists",
+    [ IsList ],
+    function( clist )
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            return Sum( clist, x -> x[2] );
+        fi;
+    end
+);
+
 # Useful functions for QPA
 
 InstallMethod(

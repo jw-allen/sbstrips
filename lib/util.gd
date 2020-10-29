@@ -21,6 +21,7 @@ DeclareOperation( "IsPeriodicUnderFunctionNC",
 ##      <Prop Name="IsCollectedList" Arg="list"/>
 ##      <Description>
 ##        Argument: <A>list</A>, a list
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if all entries of <A>list</A> are lists of length <M>2</M>
@@ -30,13 +31,13 @@ DeclareOperation( "IsPeriodicUnderFunctionNC",
 ##      <Description>
 ##        This property will return &true; on lists returned from the &GAP;
 ##        operation <Ref Oper="Collected" BookName="Reference"/>, as well as on
-##        concatenations (<Ref Func="Concatenation" BookName="Reference"/>) of
-##        such lists. This is the principal
-##        intended use of this property.
+##        combinations of such lists using <Ref Func="Concatenation"
+##        BookName="Reference"/> or <Ref Oper="Append" BookName="Reference"/>.
+##        This is the principal intended use of this property.
 ##        <P />
 ##
 ##        When this document refers to a <E>collected list</E>, it means a list
-##        for which <Ref Prop="IsCollectedList"/> returns &true;
+##        for which <Ref Prop="IsCollectedList"/> returns &true;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -47,33 +48,32 @@ DeclareProperty( "IsCollectedList", IsList );
 ##      <Prop Name="IsCollectedDuplicateFreeList" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        &true; if <A>clist</A> is a collected list (see <Ref
-##        Prop="IsCollectedList"/>, all first entries of which are distinct.
+##        &true; if <A>clist</A> is a collected list with no repeated elements
 ##      </Returns>
-##      <Returns>
+##      <Description>
 ##        In particular, if <A>clist</A> was created by applying <Ref
 ##        Oper="Collected" BookName="Reference"/> to a duplicate-free list (see
 ##        <Ref Filt="IsDuplicateFreeList" BookName="Reference"/>), then this
 ##        property will return &true;. This is the principal intended use of
 ##        this property.
-##      </Returns>
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
 
-##  <#GAPDoc Label="DocIsCollectedHomogeneousList" Arg="clist">
+##  <#GAPDoc Label="DocIsCollectedHomogeneousList">
 ##    <ManSection>
 ##      <Prop Name="IsCollectedHomogeneousList" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>, a collected list
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        &true; if replacing each entry of <A>clist</A> by its respective
-##        first element gives a homogeneous list (see <Ref
-##        Filt="IsHomogeneousList" BookName="Reference"/>), and &false;
-##        otherwise
+##        &true; if the elements of <C>clist</C> form a homogeneous list, and
+##        &false; otherwise
 ##      </Returns>
 ##      <Description>
 ##        If <C>obj</C> is the result of applying <Ref Oper="Collected"
@@ -84,6 +84,18 @@ DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
 ##  <#/GAPDoc>
 DeclareProperty( "IsCollectedHomogeneousList", IsList );
 
+##  <#GAPDoc Label="DocCollectedLength">
+##    <ManSection>
+##      <Attr Name="CollectedLength", Arg="clist"/>
+##      <Description>
+##        Argument: <A>clist</A>, a collected list
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the sum of the multiplicities in <A>clist</A>
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareAttribute( "CollectedLength", IsList );
 
 ##  <#GAPDoc Label="DocRecollected">
@@ -91,17 +103,18 @@ DeclareAttribute( "CollectedLength", IsList );
 ##      <Oper Name="Recollected" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>, a collected list
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a collected list whose entries all have distinct first entries.
+##        a collected list, removing repeated elements in <A>clist</A> and
+##        totalling their multiplicities.
 ##      </Returns>
 ##      <Description>
 ##        If <A>clist</A> contains entries with matching first entries, say
 ##        <C>[ obj, n ]</C> and <C>[ obj, m ]</C>, then it will combine them
 ##        into a single entry <C>[ obj, n+m ]</C> with totalised multiplicity.
 ##        This can be necessary when dealing with concatenations (<Ref
-##        Func="Concatenation" BookName="Reference"/>) of
-##        collected lists.
+##        Func="Concatenation" BookName="Reference"/>) of collected lists.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -112,10 +125,11 @@ DeclareOperation( "Recollected", [ IsList ] );
 ##      <Oper Name="Uncollected" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>, a collected list
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a (flat) list, where each (first entry of an) entry in <A>clist</A>
-##        appears with the appropriate multiplicity
+##        a (flat) list, where each element in <A>clist</A> appears with the
+##        appropriate multiplicity
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -131,6 +145,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##        Argument: <A>path</A>, a path of length at least <M>2</M> in a quiver
 ##        (see <Ref Filt="IsPath" BookName="QPA"/> and <Ref Attr="LengthOfPath"
 ##        BookName="QPA"/> for details)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a string describing <A>path</A>
@@ -156,6 +171,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##      <Description>
 ##        Argument: <A>alg</A>, a quiver algebra (see <Ref
 ##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        the residues of the arrows in the defining quiver of <A>alg</A>, 
@@ -171,6 +187,7 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##      <Description>
 ##        Argument: <A>alg</A>, a quiver algebra (see <Ref
 ##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        the residues of the vertices in the defining quiver of <A>alg</A>, 

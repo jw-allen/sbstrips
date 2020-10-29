@@ -10,18 +10,71 @@ Among these, we include minor extensions of functionality for &QPA;
   Sometimes it is important to know <E>where</E> in a list an element appears.
   Sometimes, all that matters is <E>how often</E> it does. (In  mathematical
   terms, these two ideas respectively correspond to a <E>sequence</E> of
-  elements and the multiset of values it takes.) One can of course move from knowing the positions of elements to just knowing their frequency, however
-  this is a strict loss of information.
+  elements and the multiset of values it takes.) One can of course move from
+  knowing the positions of elements to just knowing their frequency. This is a
+  strict loss of information, but usually not a loss of very important
+  information.
   <P />
   
-  &GAP; implements this move using <Ref Oper="Collected"
+  &GAP; implements this functionality using <Ref Oper="Collected"
   BookName="Reference"/>. Calls to this operation yield lists that store
   information in a more economical, if slightly less informative, fashion, of
-  which &SBStrips; makes great use.
+  which &SBStrips; makes great use. Using <C>Collected</C> on a list
+  <C>list</C> returns another list, detailing the different elements appearing
+  in <C>list</C> and their <E>multiplicity</E> (ie, number of instances) in
+  <C>list</C>.
+<Example><![CDATA[
+gap> list := [ "s", "b", "s", "t", "r", "i", "p", "s" ];
+[ "s", "b", "s", "t", "r", "i", "p", "s" ]
+gap> clist := Collected( list );
+[ [ "b", 1 ], [ "i", 1 ], [ "p", 1 ], [ "r", 1 ], [ "s", 3 ],
+  [ "t", 1 ] ]
+gap> elt := clist[5];
+[ "s", 3 ]
+]]></Example>
+  In the above example, the entry <C>[ "s", 3 ]</C> in <C>clist</C> tells us
+  that the element <C>"s"</C> appears <C>3</C> times in <C>list</C>. In other
+  words, <C>"s</C> has <E>multitplicity</E> <C>3</C> (in <C>list</C>).
   <P />
   
-  It proved convenient to build some tools for working with such "multisets".
-  These tools are <E>collected</E> below (ha ha).
+  In this documentation, we will use the terms <E>elements</E> and
+  <E>multiplicities</E> respectively to mean the first and second entries of
+  entries of a collected list. So, in the above example, the elements of
+  <C>clist</C> are <C>"b"</C>, <C>"i"</C>, <C>"p"</C>, <C>"r"</C>, <C>"s"</C>
+  and <C>"t"</C> and their respective multiplicities are <C>1</C>, <C>1</C>,
+  <C>1</C>, <C>1</C>, <C>3</C> and <C>1</C>.
+  <P/>
+  
+  What characterises a collected list is that all of its entries are lists of
+  length <M>2</M>, the second being a positive integer. Elements may be
+  repeated. This doesn't happen from simple uses of <C>Collected</C>, of
+  course, but can result from combining several collected lists, for instance
+  with <Ref Oper="Collected" BookName="Reference"/> or <Ref Oper="Append"
+  BookName="Reference"/>.
+<Example><![CDATA[
+gap> "hello" = [ 'h', 'e', 'l', 'l', 'o' ];
+true
+gap> hello := Collected( [ "h", "e", "l", "l", "o" ] );
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ] ]
+gap> world := Collected( [ "w", "o", "r", "l", "d" ] );
+[ [ "d", 1 ], [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
+gap> hello_world := Concatenation( hello, world );
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ], [ "d", 1 ],
+  [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
+gap> IsCollectedList( hello_world );
+true
+]]></Example>
+  Here, the element <C>"l"</C> appears twice in <C>hello_world</C>, first with
+  multiplicity <C>2</C> and then again with multiplicity <C>1</C>. The element
+  <C>"o"</C> also appears twice with multiplicity <C>1</C> each time. Despite
+  this repetition, <C>hello_world</C> is still a collected list. It may be
+  "tidied up" using <Ref Oper="Recollected"/>.
+<Example><![CDATA[
+gap> Recollected( hello_world );
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 3 ], [ "o", 2 ], [ "d", 1 ],
+  [ "r", 1 ], [ "w", 1 ] ]
+]]></Example>
+  <P />
   
   <#Include Label="DocIsCollectedList">
 

@@ -39,6 +39,6 @@ gap> # Include an example here!
 
   <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 
-  <#Include Label="DocIsPeriodicStripByNthSyzygy">
+  <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
 </Section>
 <#/GAPDoc>

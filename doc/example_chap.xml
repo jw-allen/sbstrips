@@ -142,7 +142,7 @@ gap> CollectedNthSyzygyOfStrip( s, 4 );
   (In the next section, we pause to discuss the efficiency of these "collected" methods.)
   <P />
   
-  We reiterate that the lists (resp. collected lists) of strips returned by <C>SyzygyOfStrip</C> (resp. <C>CollectedSyzygyOfStrip</C>) and its <C>NthSyzygy</C> variants may be turned into lists (resp. collected lists) of quiver representations using <C>ModuleOfStrip</C>. These may alternatively be turned into a single direct sum module using <C>DirectSumModuleOfStrips</C>.
+  We reiterate that the lists (resp. collected lists) of strips returned by <C>SyzygyOfStrip</C> (resp. <C>CollectedSyzygyOfStrip</C>) and its <C>Nth</C> variants may be turned into lists (resp. collected lists) of quiver representations using <C>ModuleOfStrip</C>. These may alternatively be turned into a single direct sum module using <C>DirectSumModuleOfStrips</C>.
 </Section>
   
 <Section>

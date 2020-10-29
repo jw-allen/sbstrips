@@ -10,4 +10,3 @@ ReadPackage( "sbstrips", "lib/util.gi" );
 ReadPackage( "sbstrips", "lib/vertseqs.gi" );
 
 # This file is for documentation purposes; we'll read it last
-ReadPackage( "sbstrips", "doc/makesbstripsdoc.gi" );

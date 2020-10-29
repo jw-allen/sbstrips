@@ -8,29 +8,33 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocStripify">
 ##    <ManSection>
+##      <Heading>
+##        Stripify
+##      </Heading>
+##
 ##      <Meth Name="Stripify" Label="for an arrow, +/-1 and a list of integers"
 ##      Arg="arr, N, int_list"/>
 ##      <Description>
 ##        Arguments: <A>arr</A>, the residue of an arrow in a special biserial
 ##        algebra (see below); <A>N</A>, an integer which is either <C>1</C> or
-##        <C>-1</C>; <A>int_list</A>, a (possibly empty) list of integers whose
-##        entries alternate in sign (meaning they are alternately positive and
-##        negative).
+##        <C>-1</C>; <A>int_list</A>, a (possibly empty) list of nonzero
+##        integers whose entries are alternately positive and negative).
 ##        <P />
 ##        (Remember that residues of arrows in an quiver algebra can be easily
 ##        accessed using the <C>\.</C> operation. See <Ref Oper="."
-##        Label="for a path algebra" BookName="QPA"/> for details.)
-##        <P />
+##        Label="for a path algebra" BookName="QPA"/> for details and see below
+##        for examples.)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        the strip specified by this data
 ##      </Returns>
 ##      <Description>
 ##        Recall that &SBStrips; uses strip objects to represent the kind of
-##        decorated graph that representation theorists call "strings". Suppose
-##        you draw that string on the page as a linear graph with some arrows
-##        pointing to the right (the "positive" direction) and some to the left
-##        (the "negative" direction). See further below for examples.
+##        decorated graph that representation theorists call "strings". Now,
+##        suppose you draw that string on the page as a linear graph with some
+##        arrows pointing to the right (the "positive" direction) and some to
+##        the left (the "negative" direction). See further below for examples.
 ##        <P />
 ##        (Of course, this method assumes that the string contains at least one
 ##        arrow. There is a different, easier, method for strings comprising
@@ -55,9 +59,7 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 ##        doesn't think they do, then it will throw up an Error message.
 ##        <P />
 ##      </Description>
-##    </ManSection>
 ##
-##    <ManSection>
 ##      <Meth Name="Stripify" Label="for a path of a special biserial algebra"
 ##      Arg="path"/>
 ##      <Description>
@@ -67,8 +69,8 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 ##        (Remember that residues of vertices and arrows can be easily accessed
 ##        using <Ref Oper="." Label="for a path algebra" BookName="QPA"/>, and
 ##        that these can be multiplied together using <Ref Oper="\*"
-##        BookName="Reference"/> to make a path.
-##        <P />
+##        BookName="Reference"/> to make a path.)
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        The strip corresponding to <A>path</A>
@@ -78,58 +80,43 @@ DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
 ##        modules of a SB algebra are in <M>1</M>-to-<M>1</M> correspondence
 ##        with the paths <M>p</M> linearly independent from all other paths.
 ##        Therefore, this path is all you need to specify the strip.
+##        <P />
 ##      </Description>
+##
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "Stripify", [ IsMultiplicativeElement, IsInt, IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 
-##	<#GAPDoc Label="DocSyzygyOfStrip">
+##  <#GAPDoc Label="DocSyzygyOfStrip">
 ##    <ManSection>
-##		<Meth Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##      <Heading>
+##        SyzygyOfStrip
+##      </Heading>
+##
+##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
 ##      <Description>
 ##		  Argument: <A>strip</A>, a strip
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list of strips, corresponding to the indecomposable direct summands
-##        of the syzygy of <A>strips</A>
+##        of the syzygy of <A>strip</A>
+##        <P />
+##      </Returns>
+##
+##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
+##      <Description>
+##        Argument: <A>list</A>, a list of strips
+##        <Br />
+##      </Description>
+##      <Returns>
+##        The syzygy of each strip in <A>list</A> is calculated, yielding a
+##        list, and then these lists are concatenated.
+##        <P />
 ##      </Returns>
 ##    </ManSection>
-##
-############### COLLECT THESE METHODS INTO INDIVIDUAL MANSECTIONS
-
-
-##	  <ManSection>
-##      <Heading>SyzygyOfStrip</Heading>
-##      <Description>
-##        This operation calculates syzygies of strips. It has different
-##        methods, depending on whether its input is a single strip or a list
-##        of strips.
-##      </Description>
-##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
-##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
-##		<Description>
-##		  Argument: <A>strip</A>, a strip (in the first method); <A>list</A>, a
-##        list of strips (in the second method)
-##		</Description>
-##		<Returns>
-##		  a list of strips
-##		</Returns>
-##		<Description>
-##		  In the first method, the syzygy of the strip <A>strip</A> is
-##        calculated and its summands are returned in a list. In the second
-##        method, the syzygy of each strip in <A>list</A> is calculated and
-##        their summands returned in a single list.
-##        <P />
-##
-##        These calculations can be iterated using <Ref
-##        Oper="NthSyzygyOfStrip"/> and performed more efficiently using <Ref
-##        Oper="CollectedSyzygyOfStrip"/> or <Ref
-##        Oper="CollectedNthSyzygyOfStrip"/>.
-##		</Description>
-##	  </ManSection>
-##	<#/GAPDoc>
+##  <#/GAPDoc>
 DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 
 ##	<#GAPDoc Label="DocNthSyzygyOfStrip">
@@ -425,6 +412,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##      <Meth Name="ModuleOfStrip" Arg="strip" Label="for a strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a right module for the SB algebra over which <A>strip</A> is defined

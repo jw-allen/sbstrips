@@ -71,13 +71,14 @@
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
 |   Strips and syzygies                                                       |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
     <Chapter>
-      <Heading>Strips</Heading>
+      <Heading>
+        Strips
+      </Heading>
 
       <#Include Label="ChapStripsSyzygies">
-
     </Chapter>
-
 
 
 <!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+

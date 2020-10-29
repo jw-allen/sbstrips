@@ -1,8 +1,9 @@
 <#GAPDoc Label="ChapIntroduction">
   
-<!-- SEC: Why "strips", not "strings"? ++++++++++++++++++++++++++++++++++++ -->
 <Section>
-  <Heading>Why "strips", not "strings"?</Heading>
+  <Heading>
+    Why "strips", not "strings"?
+  </Heading>
 
 
   First, some context. Representation theorists use the word <E>string</E> to
@@ -26,7 +27,7 @@
   <E>strip</E> for this refined notion of a string. A happy side-effect of
   this name change is that it avoids the clash with what &GAP; already thinks
   "string" means.
-  <P /> <P />
+  <P />
 
   <E>
     In brief: if whenever you read the word "strip" here, you imagine that it
@@ -37,13 +38,17 @@
 </Section>
 
 <Section>
-  <Heading>Aims</Heading>
+  <Heading>
+    Aims
+  </Heading>
 
   Some text to go here!
 </Section>
 
 <Section>
-  <Heading>Installation</Heading>
+  <Heading>
+    Installation
+  </Heading>
   
   Some text to go here!
 </Section>

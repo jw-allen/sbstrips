@@ -1,6 +1,8 @@
 <#GAPDoc Label="ChapExample">
 <Section>
-  <Heading>Strips, aka "strings for special biserial algebras"</Heading>
+  <Heading>
+    Strips, aka "strings for special biserial algebras"
+  </Heading>
 
   This package is principally for "strings and their syzygies". Strings are
   defined over special biserial (SB) algebras. Our first job is to tell &GAP; about a SB algebra. We'll do this using tools from &QPA;. If the following
@@ -234,7 +236,9 @@ true
 </Section>
 
 <Section>
-  <Heading>Tests with strips</Heading>
+  <Heading>
+    Tests with strips
+  </Heading>
   
   Now that we've implement strips, we should play around with them. Let's see some of the fun tests built into &SBStrips;!
   
@@ -254,20 +258,18 @@ true
                   ]
     \end{tikzcd}
     \text{,}
-  </Display></Alt>, where <M>J</M> is the <M>4</M>th power of the arrow ideal of <M>KQ</M>, and where <M>K=&QQ;</M> (but really <M>K</M> could be any field).
+  </Display></Alt>, where <M>J</M> is the <M>4</M>th power of the arrow ideal of <M>KQ</M>, and where <M>K=&QQ;</M>. (Really <M>K</M> could be any field.)
   <P />
   
   This algebra is chosen because it is much more boring than <C>alg2</C>. For instance, as a monomial algebra, <C>alg1</C> is <E>syzygy-finite</E>. Roughly, this means that the class of syzygies stabilizes. More precisely, it means that there is some integer <M>0 \leq m &lt; \infty </M> and a finite set <M>\mathcal{S}</M> of indecomposable modules such that, for any module <M>X</M>, the indecomposable summands of <M>\Omega^m( X )</M> belong to <M>\mathcal{S}</M>. (By a result of Zimmermann Huisgen <E>REFERENCE!</E>, <M>m=2</M> works.) But, in fact, we can say something stronger. Because <C>alg2</C> is a Nakayama algebra, it is <E>representation finite</E> (so, in fact, <M>m=0</M> works).
   
-  <!--
-  Things to test:
-    + Weakly periodic
-    + Finite syzygy type
-  -->
+  Things to test: weakly periodic; finite syzygy type
 </Section>
 
 <Section>
-  <Heading>Additional examples</Heading>
+  <Heading>
+    Additional examples
+  </Heading>
   
   Give some other sample algebras here, and do things with them.
 </Section>

@@ -1,23 +1,26 @@
 <#GAPDoc Label="ChapIntroduction">
   
-<Section>
+<Section Label="SecWhyStripsNotStrings">
   <Heading>
     Why "strips", not "strings"?
   </Heading>
 
 
   First, some context. Representation theorists use the word <E>string</E> to
-  mean a decorated graph that, in a particular fashion, describes a module; it
-  is accordingly called a <E>string module</E>. Liu and Morin <Cite Key="LM"/>
-  showed that the syzygy of a string module over a special biserial (SB)
-  algebra is a direct sum of string modules. Their proof is constructive,
-  detailing how to obtain the strings indexing the syzygy summands from the
-  string indexing the original module. Their language explains how to spot
+  mean a decorated graph that describes a module; fittingly, this module is
+  then  dubbed a <E>string module</E>. Liu and Morin <Cite Key="LM04"/> showed
+  that the syzygy of a string module over a special biserial (SB) algebra is a
+  direct sum of string modules. This means that, in essence, we can forget
+  about the modules <E>per se</E> and compute syzygies just at the level of
+  strings. Liu and Morin's proof is constructive, specifying how to obtain the
+  strings indexing the indecompsoable direct summands of syzygy from thae 
+  string indexing the original module. Their language sketches how to spot
   patterns appearing "from one syzygy to the next", but it does not scale in a
   particularly transparent way. For example, I believe it does not lend itself
   to clearly seeing asymptotic behaviour of syzygies of string modules. My
   research has aimed, in part, to provide a more robust language: one which
-  lays bare more patterns in the syzygies of string modules over SB algebras.
+  lays bare more patterns in the syzygies of string modules over SB algebras
+  in a manner amenable to computer calculation.
   <P />
 
   One key ingredient is a slight refinement of the definition of a string.

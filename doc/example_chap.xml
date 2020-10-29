@@ -27,7 +27,8 @@ gap> alg2 := kq2/ideal2;
 ]]></Example>
   This defines a special biserial algebra <C>alg2</C>. The following is
   what representation theorists call a string over <C>alg2</C>, but which we'll
-  try to call a <E>strip</E>. (For reasons why, see <E>SOMEWHERE ELSE</E>.)
+  prefer to call a <E>strip</E>. (For reasons why, see Section <Ref
+  Sect="SecWhyStripsNotStrings" Style="Number"/>.)
   <Alt Only="LaTeX"><Display>
     \begin{tikzcd}[sep=small]
             1

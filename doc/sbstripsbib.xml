@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE file SYSTEM "bibxmlext.dtd">
 <file>
-  <entry id="LM"><article>
+  <entry id="All21"><phdthesis>
+    <author>
+      <name><first>Joe</first><last>Allen</last></name>
+    </author>
+    <title>
+      PhD thesis (title TBC)
+    </title>
+    <school>
+      School of Mathematics, University of Bristol
+    </school>
+    <year>
+      2021
+    </year>
+    <note>(work in progress)</note>
+  </phdthesis></entry>
+
+  <entry id="LM04"><article>
     <author>
       <name><first>Shiping</first><last>Liu</last></name>
       <name><first>Jean-Philippe</first><last>Morin</last></name>

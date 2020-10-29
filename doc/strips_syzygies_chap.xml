@@ -21,6 +21,12 @@ gap> # Include an example here!
   <Heading>Calculating syzygies of strips</Heading>
 
   <#Include Label="DocSyzygyOfStrip">
+  
+  <#Include Label="DocNthSyzygyOfStrip">
+  
+  <#Include Label="DocCollectedSyzygyOfStrip">
+  
+  <#Include Label="DocCollectedNthSyzygyOfStrip">
 </Section>
 
 <Section>

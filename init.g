@@ -10,3 +10,7 @@ ReadPackage( "sbstrips", "lib/vertseqs.gd" );
 # For dependency reasons, these must be read second
 ReadPackage( "sbstrips", "lib/patchreps.gd" );
 ReadPackage( "sbstrips", "lib/panels.gd" );
+
+# Read examples
+ReadPackage( "sbstrips", "examples/exmplalg.gd" );
+ReadPackage( "sbstrips", "examples/exmplalg.gi" );

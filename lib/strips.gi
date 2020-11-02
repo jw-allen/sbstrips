@@ -990,10 +990,7 @@ InstallMethod(
             return [];
         
         else
-            data := strip![1];
-            len := Length( data );
-            indices := Filtered( [1..len], IsOddInt );
-            sy_list := data{ indices };
+            sy_list := SyllableListOfStripNC( strip );
             
             # We use <sy_list> to specify a list of patches, sandwiched between
             #  two copies of the zero patch of <sba>.
@@ -1038,19 +1035,33 @@ InstallMethod(
             od;
             
             # Each entry of <syz_list> is a list of syllables and orientations.
-            #  Remove the empty ones and <Stripify> the nonempty ones.
+            #  If it's empty, remove it. If it gives a virtual strip, make
+            #  that virtual strip and then take its syzygy again. If it doesn't
+            #  give a virtual strip, <Stripify> it.
             j := 1;
             while j <= Length( syz_list ) do
+            
+                # If the list is empty, remove it
                 if IsEmpty( syz_list[j] ) then
                     Remove( syz_list, j );
+                    
                 else
-                    syz_list[j] := CallFuncList(
-                     StripifyFromSyllablesAndOrientationsNC,
-                     syz_list[j]
+                # If the list features virtual syllables, make the associated
+                #  virtual strip and then take its syzygy.
+                    indices := Filtered(
+                     [ 1 .. Length( syz_list[j] ) ],
+                     IsOddInt
                      );
-                    # Stripify( syz_list[j] );
-                    if IsVirtualStripRep( syz_list[j] ) then
+                    data := syz_list[j]{ indices };
+                    if ForAny( data, IsVirtualSyllable ) then
+                        syz_list[j] := StripifyVirtualStripNC( syz_list[j] );
                         syz_list[j] := SyzygyOfStrip( syz_list[j] )[1];
+                        
+                    else
+                        syz_list[j] := CallFuncList(
+                         StripifyFromSyllablesAndOrientationsNC,
+                         syz_list[j]
+                        );
                     fi;
                     j := j + 1;
                 fi;

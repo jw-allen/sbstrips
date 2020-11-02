@@ -8,7 +8,7 @@ files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
  "ch_introduction.xml", "ch_patches.xml", "ch_permissible_data.xml",
  "ch_quiver_utilities_overquiver.xml", "ch_strips_syzygies.xml",
  "ch_syllables.xml", "ch_utilities.xml", "ch_vis_encodings.xml",
- "ap_example_sbas.xml"
+ "ap_example_sbas.xml",
  "sbstripsbib.xml"
  ];
 bookname := "manual";

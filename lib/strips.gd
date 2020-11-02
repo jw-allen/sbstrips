@@ -99,7 +99,6 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##        syzygies, <Ref Oper="NthSyzygyOfStrip" Label="for strips"/> may be
 ##        more convenient while <Ref Oper="CollectedNthSyzygyOfStrip"
 ##        Label="for strips"/> may be more efficient.)
-##        <P />
 ##      </Description>
 ##
 ##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
@@ -110,7 +109,6 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##      <Returns>
 ##        a list of strips, corresponding to the indecomposable direct summands
 ##        of the syzygy of <A>strip</A>
-##        <P />
 ##      </Returns>
 ##
 ##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
@@ -125,7 +123,6 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##      <Description>
 ##        The syzygy of each strip in <A>list</A> is calculated. This gives
 ##        several lists of strips, which are then concatenated.
-##        <P />
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>

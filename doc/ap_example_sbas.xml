@@ -55,11 +55,6 @@ gap> pa := PathAlgebra( Rationals, quiv );
 gap> rels := NthPowerOfArrowIdeal( pa, 4 );
 [ (1)*a*b*c*a, (1)*b*c*a*b, (1)*c*a*b*c ]
 ]]></Example>
-    (In other words, this quiver is the <M>3</M>-cycle quiver, and the
-    relations are the paths of length <M>4</M>.) The nonzero paths of length
-    <M>2</M> are: <C>a*b</C>, <C>b*c</C>, <C>c*a</C>.
-    <P />
-    
     <Alt Only="LaTeX">
       Here is a picture of the quiver.
       <Display>
@@ -79,6 +74,10 @@ gap> rels := NthPowerOfArrowIdeal( pa, 4 );
       </Display>
       <P />
     </Alt>
+    (In other words, this quiver is the <M>3</M>-cycle quiver, and the
+    relations are the paths of length <M>4</M>.) The nonzero paths of length
+    <M>2</M> are: <C>a*b</C>, <C>b*c</C>, <C>c*a</C>.
+    <P />
     
     This algebra is a Nakayama algebra, and so has finite representation type.
     <E>A fortiori</E>, it is syzygy-finite.
@@ -106,6 +105,16 @@ gap> rels := [
 [ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (1)*c*a*b,
   (1)*d^4, (1)*a*b*c+(-1)*b*c*a ]
 ]]></Example>
+    <Alt Only="LaTeX">
+      Here is a picture of the quiver.
+      <Display>
+        \begin{tikzcd}
+                1 \ar[loop left, "a"] \ar[r, bend left, "b"]
+          &amp; 2 \ar[l, bend left, "c"] \ar[loop right, "d"]
+        \end{tikzcd}
+      </Display>
+      <P />
+    </Alt>
     The relations of this algebra are chosen so that the nonzero paths of
     length <M>2</M> are: <C>a*b</C>, <C>b*c</C>, <C>c*a</C>, <C>d*d</C>.
     <P />
@@ -140,6 +149,20 @@ gap> rels := [
   (1)*h*a, (1)*a*b*c*d*a+(-1)*f*g*h*f*g*h*f, (-1)*e^3+(1)*d*a*b*c,
   (1)*c*d*a*b*c, (1)*h*f*g*h*f*g*h ]
 ]]></Example>
+    <Alt Only="LaTeX">
+      Here is a picture of the quiver.
+      <Display>
+        \begin{tikzcd}
+                1 \ar[r, bend left, "a"] \ar[r, "f"']
+          &amp; 2 \ar[d, bend left, "b"] \ar[d, "g"']
+                \\
+                4 \ar[u, bend left, "d"] \ar[loop left, "e"]
+          &amp; 3 \ar[l, bend left, "c"] \ar[ul, "h"]
+        \end{tikzcd}
+      </Display>
+      <P />
+    </Alt>
+
     The relations of this algebra are chosen so that the nonzero paths of
     length <M>2</M> are: <C>a*b</C>, <C>b*c</C>, <C>c*d</C>, <C>d*a</C>,
     <C>e*e</C>, <C>f*g</C>, <C>g*h</C> and <C>h*f</C>.

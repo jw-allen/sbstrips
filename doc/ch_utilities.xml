@@ -52,8 +52,6 @@ gap> elt := clist[5];
   with <Ref Oper="Collected" BookName="Reference"/> or <Ref Oper="Append"
   BookName="Reference"/>.
 <Example><![CDATA[
-gap> "hello" = [ 'h', 'e', 'l', 'l', 'o' ];
-true
 gap> hello := Collected( [ "h", "e", "l", "l", "o" ] );
 [ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ] ]
 gap> world := Collected( [ "w", "o", "r", "l", "d" ] );

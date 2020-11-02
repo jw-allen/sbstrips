@@ -1,12 +1,14 @@
 # Set up
 path := Directory( "./gap4r8/pkg/sbstrips/doc/" );
+main := "main.xml";
 files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
  "../lib/patchreps.gd", "../lib/permdata.gd", "../lib/strips.gd",
  "../lib/syllables.gd", "../lib/util.gd", "../lib/vertseqs.gd",
- "titlepage.xml", "discrete_model_chap.xml", "example_chap.xml",
- "introduction_chap.xml", "patches_chap.xml", "permissible_data_chap.xml",
- "quiver_utilities_overquiver_chap.xml", "strips_syzygies_chap.xml",
- "syllables_chap.xml", "utilities_chap.xml", "vis_encodings_chap.xml",
+ "titlepage.xml", "ch_discrete_model.xml", "ch_example.xml",
+ "ch_introduction.xml", "ch_patches.xml", "ch_permissible_data.xml",
+ "ch_quiver_utilities_overquiver.xml", "ch_strips_syzygies.xml",
+ "ch_syllables.xml", "ch_utilities.xml", "ch_vis_encodings.xml",
+ "ap_example_sbas.xml"
  "sbstripsbib.xml"
  ];
 bookname := "manual";

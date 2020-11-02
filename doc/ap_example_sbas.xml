@@ -1,0 +1,17 @@
+<#GAPDoc Label="AppExampleAlgebras">
+
+For your convenience, &SBStrips; comes bundled with <M>6</M> SB algebras built in. We detail these algebras in this appendix. They may be obtained by calling <Ref Func="SBStripsExampleAlgebra"/>.
+<P />
+
+<ManSection>
+  <Func Name="SBStripsExampleAlgebra" Arg="n"/>
+  <Description>
+    Arguments: <A>n</A>, an integer between <C>1</C> and <C>6</C> inclusive
+    <P />
+  </Description>
+  <Returns>
+    a SB algebra
+  </Returns>
+</ManSection>
+
+<#/GAPDoc>

@@ -1627,11 +1627,17 @@ InstallMethod(
             syz := Set( SyzygyOfStrip( syz ) );
             if strip in syz then
                 found_yet := true;
-                Print( "The given strip appears in its own ", Ordinal( j ),
-                 " syzygy\n");
+                Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
+                Info( InfoSBStrips, 2, "This strip first appears as a direct", 
+                 "summand of its ", Ordinal( j ), " syzygy" );
+                return true;
             fi;
         od;
-        return found_yet;        
+        
+        Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
+        Info( InfoSBStrips, 2, "This strip does not occur as a summand of ",
+         "its first ", String( N ), "syzygies" );
+        return false;        
     end
 );
 

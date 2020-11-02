@@ -120,7 +120,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[1] );
             norm_arg := Concatenation( [ norm_sy, -1 ], arg );
             
-            Info( InfoSBStrips, 2, "Normalising on left, calling again..." );
+            Info( InfoSBStrips, 4, "Normalizing on left, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -130,7 +130,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSbAlg( sba )( arg[ len - 1 ] );
             norm_arg := Concatenation( arg, [ norm_sy, 1 ] );
             
-            Info( InfoSBStrips, 2, "Normalising on right, calling again..." );
+            Info( InfoSBStrips, 4, "Normalizing on right, calling again..." );
             
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -140,7 +140,7 @@ InstallGlobalFunction(
         
         # Now we create the <IsStripRep> object.
         
-        Info( InfoSBStrips, 2, "no normalisation needed, creating object..." );
+        Info( InfoSBStrips, 4, "no normalisation needed, creating object..." );
         
         data := arg;
         fam := StripFamilyOfSbAlg( sba );
@@ -346,33 +346,13 @@ InstallMethod(
     "for a strip rep",
     [ IsStripRep ],
     function( strip )
-        local
-            # Outdated local variables
-            # 2reg,           # 2-regular augmentaion of <quiv>
-            # cont,           # Contraction of <oquiv>
-            # quiv,           # Original quiver of <sba>
-            # oquiv,          # Overquiver of <sba>
-            # ret,            # Retraction of <2reg>
-            # sba,            # SB alg to which <strip> belongs
-            
+        local         
             as_quiv_path,   # Local function that turns a syllable into the 
                             #  <quiv>-path that it represents
             data,           # Defining data of <strip>
             k,              # Integer variable
             sy;             # Syllable variable
-    
-        # Outdated procedure
-        # # sba := FamilyObj( strip )!.sb_alg;
-        #
-        # # quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
-        # # 2reg := 2RegAugmentationOfQuiver( quiv );
-        # # ret := RetractionOf2RegAugmentation( 2reg );
-        #
-        # # oquiv := OverquiverOfSbAlg( sba );
-        # # cont := ContractionOfOverquiver( oquiv );
-        #
-        # # return ret( cont( UnderlyingPathOfSyllable( sy ) ) );
-        
+            
         if IsZeroStrip( strip ) then
             Print( "<zero strip>" );
         else
@@ -400,6 +380,61 @@ InstallMethod(
                     fi;
                 fi;
             od;
+        fi;
+    end
+);
+
+InstallMethod(
+    String,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local         
+            as_quiv_path,   # Local function that turns a syllable into the 
+                            #  <quiv>-path that it represents
+            data,           # Defining data of <strip>
+            k,              # Integer variable
+            string,         # String variable
+            sy;             # Syllable variable
+            
+        if IsZeroStrip( strip ) then
+            return "<zero strip>";
+            
+        elif IsVirtualStripRep( strip ) then
+            return "<virtual strip>";
+        
+        else
+        
+            # Each syllable of <sba> represents a path of <sba>: this is the
+            #  function that will tell you which
+            as_quiv_path := function( sy )
+                return GroundPathOfOverquiverPathNC(
+                 UnderlyingPathOfSyllable( sy )
+                 );
+                
+            end;
+            
+            string := "";
+            
+            # Print the strip so it looks something like
+            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
+            data := strip![1];
+            for k in [ 1..Length( data ) ] do
+                if IsOddInt( k ) then
+                    sy := data[k];
+                    Append(
+                     string,
+                     Concatenation( "(", String( as_quiv_path( sy ) ), ")" )
+                     );
+                    if data[k+1] = -1 then
+                        Append( string, "^-1" );
+                    elif (data[k+1] = 1) and (IsBound( data[k+2] )) then
+                        Append( string, " " );
+                    fi;
+                fi;
+            od;
+            
+            return string;
         fi;
     end
 );
@@ -1613,11 +1648,14 @@ InstallMethod(
             old_syz_set;    # Set variable, storing those strips "old" at stage
                             #  <j> (ie, seen strictly before)
                             
+        # Initialize at stage <0>. At this stage, nothing is "old" and <strip>
+        #  is new
         j := 0;
         new_syz_set := Set( [ strip ] );
         old_syz_set := Set( [] );
 
-        while j <= N  do
+        # Proceed stage by stage
+        while j <= N do
             # Increment the stage number
             j := j + 1;
 
@@ -1633,18 +1671,22 @@ InstallMethod(
             # Whatever is left is new at this stage. If nothing is new at this
             #  stage, then <strip> has finite syzygy type of degree at most <j>
             #  and we can stop.
+            
             if IsEmpty( new_syz_set ) then
-                Print(
-                 "The given strip has syzygy type at most ",
-                 Size( old_syz_set ),
-                 ", of degree ",
-                 j - 1 ,
-                 ".\n"
-                 );
+                Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
+                Info( InfoSBStrips, 2, "This strip has finite syzygy type." );
+                Info( InfoSBStrips, 2, "The set of strings appearing as ",
+                 "summands of its first N syzygies stabilizes at N=",
+                 String( j-1 ), ", at which point it has cardinality ",
+                 String( Size( old_syz_set ) ) );
                 return true;
             fi;
         od;
         
+        Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
+        Info( InfoSBStrips, 2, "The set of strings appearing as summands of ",
+         "its first ", String( N ), " syzygies has cardinality ",
+         Size( old_syz_set ) );
         return false;
     end
 );

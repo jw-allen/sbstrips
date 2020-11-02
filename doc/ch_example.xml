@@ -243,8 +243,9 @@ true
   
   Now that we've implement strips, we should play around with them. Let's see some of the fun tests built into &SBStrips;!
   
-  For this, we'll introduce the algebra <C>alg1</C>. It is the Nakayama algebra <M>KQ/J^4</M>, where <M>Q</M> is the <M>3</M>-cycle
-  quiver<Alt Not="LaTeX"> with arrows <M>a</M>, <M>b</M> and <M>c</M>,</Alt><Alt Only="Latex"><Display>
+  For this, we'll introduce the algebra <C>alg1</C>. It is the Nakayama algebra
+  <M>KQ/J^4</M>, where <M>Q</M> is the <M>3</M>-cycle quiver<Alt Not="LaTeX">
+  with arrows <M>a</M>, <M>b</M> and <M>c</M>,</Alt><Alt Only="Latex"><Display>
     \begin{tikzcd}
             1 \ar[r, "a"]
       &amp; 2 \ar[r, "b"]

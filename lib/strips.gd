@@ -95,16 +95,17 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##      </Heading>
 ##
 ##      <Description>
-##        This attribute takes <M>1</M>st syzygies of strips. For higher
+##        (This attribute takes <M>1</M>st syzygies of strips. For higher
 ##        syzygies, <Ref Oper="NthSyzygyOfStrip" Label="for strips"/> may be
 ##        more convenient while <Ref Oper="CollectedNthSyzygyOfStrip"
-##        Label="for strips"/> may be more efficient.
+##        Label="for strips"/> may be more efficient.)
+##        <P />
 ##      </Description>
 ##
 ##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
 ##      <Description>
 ##		  Argument: <A>strip</A>, a strip
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list of strips, corresponding to the indecomposable direct summands
@@ -115,13 +116,17 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
 ##      <Description>
 ##        Argument: <A>list</A>, a list of strips
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        The syzygy of each strip in <A>list</A> is calculated, yielding a
-##        list, and then these lists are concatenated.
-##        <P />
+##        a list of strips, corresponding to the indecomposable direct summands
+##        of the syzygy of the strips in <A>list</A>
 ##      </Returns>
+##      <Description>
+##        The syzygy of each strip in <A>list</A> is calculated. This gives
+##        several lists of strips, which are then concatenated.
+##        <P />
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "SyzygyOfStrip", IsStripRep );

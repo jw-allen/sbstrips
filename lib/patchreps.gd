@@ -2,9 +2,9 @@ DeclareRepresentation( "IsPatchRep", IsAttributeStoringRep,
  [ "NW", "NE", "SW", "SE" ]
  );
 
-DeclareAttribute( "PatchFamilyOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "PatchSetOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "ZeroPatchOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "PatchFamilyOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "PatchSetOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ZeroPatchOfSBAlg", IsSpecialBiserialAlgebra );
 
 DeclareAttribute( "IsZeroPatch", IsPatchRep );
 DeclareAttribute( "IsPatchOfStringProjective", IsPatchRep );
@@ -18,5 +18,3 @@ DeclareOperation( "Patchify",
 DeclareOperation( "PatchifyByTop", [ IsSyllableRep, IsSyllableRep ] );
 
 DeclareOperation( "OverlapFunctionNC", [ IsPatchRep, IsPatchRep ] );
-
-#########1#########2#########3#########4#########5#########6#########7#########

@@ -84,7 +84,7 @@ InstallMethod(
             # Make <new_quiv> remember it is a 2-regular augmentation (and of
             #  whom)
             SetIs2RegAugmentationOfQuiver( new_quiv, true );
-            SetOriginalSbQuiverOf2RegAugmentation( new_quiv, ground_quiv );
+            SetOriginalSBQuiverOf2RegAugmentation( new_quiv, ground_quiv );
 
             # Make vertices of <new_quiv> aware of their counterparts in
             # <ground_quiv>, and vice versa
@@ -134,28 +134,41 @@ InstallMethod(
     "for 2-regular augmentation",
     [ IsQuiver ],
     function( quiver )
-        if HasIs2RegAugmentationOfQuiver( quiver ) then
-            return Is2RegAugmentationOfQuiver( quiver );
+        # A problem arose when evalutating the property
+        #  <Is2RegAugmentationOfQuiver> of a 2-regular quiver, say <Q>, before
+        #  evaluating the attribute <2RegAugmentationOfQuiver>. This attribute
+        #  of <Q> wants to have value <Q>, causing the property to be <true>.
+        #  If the property is tested first, then it will have value <false>,
+        #  which causes problems since the attribute wants to set the property
+        #  to <true>. The code below is a workaround for this problem.
 
-        # When not already decided, print message and return <false>
-        else
-
-            Print( "The property <Is2RegAugmentationOfQuiver> only recognizes \
-             2-regular augmentations constructed using the <2RegAugmentationOf\
-             Quiver> operation.\n Contact the maintainer of the <sbstrips> \
-             package if you believe there is an error here.\n" );
+        if not IsSpecialBiserialQuiver( quiver ) then
             return false;
+        else
+            2RegAugmentationOfQuiver( quiver );
+            if HasIs2RegAugmentationOfQuiver( quiver ) then
+                return Is2RegAugmentationOfQuiver( quiver );
+
+            # When not already decided, print message and return <false>
+            else
+
+                Print( "The property <Is2RegAugmentationOfQuiver> only recognizes \
+                 2-regular augmentations constructed using the <2RegAugmentationOf\
+                 Quiver> operation.\n Contact the maintainer of the <sbstrips> \
+                 package if you believe there is an error here.\n" );
+                return false;
+            fi;
         fi;
     end
 );
 
 InstallMethod(
-    OriginalSbQuiverOf2RegAugmentation,
+    OriginalSBQuiverOf2RegAugmentation,
     "for 2-regular augmentations of special biserial quivers",
     [ IsQuiver ],
     function( quiver )
-        if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
-            return OriginalSbQuiverOf2RegAugmentation( quiver );
+        if HasOriginalSBQuiverOf2RegAugmentation( quiver ) then
+            return OriginalSBQuiverOf2RegAugmentation( quiver );
         else
             Print( "This attribute only recognizes 2-regular augmentations con\
              structed using the <2RegAugmentationOfQuiver> operation.\n\
@@ -222,7 +235,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    CompatibleTrackPermutationOfSbAlg,
+    CompatibleTrackPermutationOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -236,8 +249,8 @@ InstallMethod(
             pa,                     # Path algebra of which <sba> is a quotient
             v;                      # Vertex variable
 
-        if HasCompatibleTrackPermutationOfSbAlg( sba ) then
-            return CompatibleTrackPermutationOfSbAlg( sba );
+        if HasCompatibleTrackPermutationOfSBAlg( sba ) then
+            return CompatibleTrackPermutationOfSBAlg( sba );
 
         else
             # Write local function that turns a path of the 2-regular
@@ -284,7 +297,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    OverquiverOfSbAlg,
+    OverquiverOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -303,11 +316,11 @@ InstallMethod(
             out_arr_pos,    # Local function
             part,           # Compatible track permutation of <sba>
             ret;            # Retraction of <2reg> to <ground_quiv>
-        if HasOverquiverOfSbAlg( sba ) then
-            return OverquiverOfSbAlg( sba );
+        if HasOverquiverOfSBAlg( sba ) then
+            return OverquiverOfSBAlg( sba );
 
         else
-            part := CompatibleTrackPermutationOfSbAlg( sba );
+            part := CompatibleTrackPermutationOfSBAlg( sba );
             N := Length( part );
 
             ground_quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
@@ -388,7 +401,7 @@ InstallMethod(
 
             # Load quiver with data
             SetIsOverquiver( oquiv, true );
-            SetSbAlgOfOverquiver( oquiv, sba );
+            SetSBAlgOfOverquiver( oquiv, sba );
             oquiv!.2Reg := 2reg;
 
             # Return <oquiv>
@@ -401,12 +414,12 @@ InstallMethod(
     IsOverquiver,
     "for quivers",
     [ IsQuiver ],
-    function( quiv )
-        if HasIsOverquiver( quiv ) then
-            return IsOverquiver( quiv );
+    function( quiver )
+        if HasIsOverquiver( quiver ) then
+            return IsOverquiver( quiver );
         else
             # Overquivers are exactly those quivers constructed using the
-            #  <OverquiverOfSbAlg> command. Such quivers have this property set
+            #  <OverquiverOfSBAlg> command. Such quivers have this property set
             #  (to <true>) at creation. Therefore any quiver for which this
             #  property has not been set must not have been so constructed.
             return false;
@@ -464,16 +477,16 @@ InstallMethod(
 );
 
 InstallMethod(
-    SbAlgOfOverquiver,
+    SBAlgOfOverquiver,
     "for overquivers",
     [ IsQuiver ],
-    function( quiv )
-        if HasSbAlgOfOverquiver( quiv ) then
-            return SbAlgOfOverquiver( quiv );
-        elif not IsOverquiver( quiv ) then
+    function( quiver )
+        if HasSBAlgOfOverquiver( quiver ) then
+            return SBAlgOfOverquiver( quiver );
+        elif not IsOverquiver( quiver ) then
             return fail;
         else
-            Error( "Somehow the given quiver\n", quiv, "\nis an overquiver \
+            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver \
              that doesn't know the special biserial algebra to which it \
              belongs! Please contact the maintainer of the sbstrips package."
              );
@@ -525,10 +538,9 @@ InstallMethod(
 );
 
 InstallGlobalFunction(
-    SbAlgResidueOfOverquiverPathNC,
+    GroundPathOfOverquiverPathNC,
     function( path )
         local
-            1_sba,  # Multiplicative unit of <sba>
             2reg,   # 2-regular augmentation of <quiv>
             cont,   # Contraction of <oquiv>
             oquiv,  # Overquiver to which <path> belongs
@@ -539,16 +551,26 @@ InstallGlobalFunction(
         oquiv := QuiverContainingPath( path );
         cont := ContractionOfOverquiver( oquiv );
         
-        sba := SbAlgOfOverquiver( oquiv );
-        1_sba := One( sba );
+        sba := SBAlgOfOverquiver( oquiv );
         
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         2reg := 2RegAugmentationOfQuiver( quiv );
         ret := RetractionOf2RegAugmentation( 2reg );
         
-        return ret( cont( path ) )*1_sba;
+        return ret( cont( path ) );
     end
 );
 
-#########1#########2#########3#########4#########5#########6#########7#########
-#########1#########2#########3#########4#########5#########6#########7#########
+InstallGlobalFunction(
+    SBAlgResidueOfOverquiverPathNC,
+    function( path )
+        local
+            oquiv,  # Overquiver to which <path> belongs
+            1_sba;  # Multiplicative unit of <sba>
+
+        oquiv := QuiverContainingPath( path );
+        1_sba := One( SBAlgOfOverquiver( oquiv ) );
+        
+        return GroundPathOfOverquiverPathNC( path ) * 1_sba;
+    end
+);

@@ -4,7 +4,7 @@ SetPackageInfo( rec(
  
  Subtitle := "strips and strings for special biserial algebras",
  
- Version := "v0.5.2",
+ Version := "v0.6.0",
  
  Date := "23/07/2020",
  
@@ -65,11 +65,20 @@ SetPackageInfo( rec(
   <span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
   data structure called 'strips', and performs this syzygy calculation.",
  
- # PackageDoc := ......   # Documentation still in development!
+ PackageDoc := rec(
+   BookName := "sbstripsdoc",
+   ArchiveURLSubset := ["doc"],
+   HTMLStart := "doc/chap0.html",
+   PDFFile := "doc/sbstripsdoc.pdf",
+   SixFile := "doc/manual.six",
+   LongTitle := ~.Subtitle
+  ),
 
  Dependencies := rec(
   GAP := ">=4.5",
-  NeededOtherPackages := [["qpa", ">=1.27"]],
+  NeededOtherPackages := [
+   ["qpa", "1.27"], ["GAPDoc", ">=1.6"]
+   ],
   SuggestedOtherPackages := [],
   ExternalConditions := []
   ),

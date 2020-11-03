@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+  <entry id="All21"><phdthesis>
+    <author>
+      <name><first>Joe</first><last>Allen</last></name>
+    </author>
+    <title>
+      PhD thesis (title TBC)
+    </title>
+    <school>
+      School of Mathematics, University of Bristol
+    </school>
+    <year>
+      2021
+    </year>
+    <note>(work in progress)</note>
+  </phdthesis></entry>
+
+  <entry id="LM04"><article>
+    <author>
+      <name><first>Shiping</first><last>Liu</last></name>
+      <name><first>Jean-Philippe</first><last>Morin</last></name>
+    </author>
+    <title>
+      The strong no loop conjecture for special biserial algebras
+    </title>
+    <journal>
+      Proceedings of the American Mathematical Society
+    </journal>
+    <year>
+      2004
+    </year>
+    <volume>
+      132
+    </volume>
+    <number>
+      12
+    </number>
+    <pages>
+      3513-3523
+    </pages>
+  </article></entry>
+
+  <entry id="QPA"><manual>
+    <author>
+       The QPA-team
+    </author>
+    <title>
+      QPA -- Quivers, path algebras and representations, Version 1.29
+    </title>
+    <year>
+      2018
+    </year>
+    <note>
+      <URL>
+        https://folk.ntnu.no/oyvinso/QPA/
+      </URL>
+    </note>
+  </manual></entry>
+</file>

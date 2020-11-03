@@ -1,5 +1,5 @@
 InstallMethod(
-    ComponentsOfCommutativityRelationsOfSbAlg,
+    ComponentsOfCommutativityRelationsOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function ( sba )
@@ -12,8 +12,8 @@ InstallMethod(
             list,           # List of components of commutativity relations
             rels;           # Defining relations of <sba>
 
-        if HasComponentsOfCommutativityRelationsOfSbAlg( sba ) then
-            return ComponentsOfCommutativityRelationsOfSbAlg( sba );
+        if HasComponentsOfCommutativityRelationsOfSBAlg( sba ) then
+            return ComponentsOfCommutativityRelationsOfSBAlg( sba );
 
         else
             # Write functions answering whether an element of a path algebra is
@@ -61,7 +61,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    ComponentExchangeMapOfSba,
+    ComponentExchangeMapOfSBa,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -70,11 +70,11 @@ InstallMethod(
                         #  <sba>
             func;       # Function variable
 
-        if HasComponentExchangeMapOfSba( sba ) then
-            return ComponentExchangeMapOfSba( sba );
+        if HasComponentExchangeMapOfSBa( sba ) then
+            return ComponentExchangeMapOfSBa( sba );
 
         else
-            complist := ComponentsOfCommutativityRelationsOfSbAlg( sba );
+            complist := ComponentsOfCommutativityRelationsOfSBAlg( sba );
 
             func := function( elt )
                 local
@@ -111,7 +111,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    LinDepOfSbAlg,
+    LinDepOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -123,11 +123,11 @@ InstallMethod(
             oarrs,  # Arrows of the overquiver of <sba>
             p,      # Path variable
             walk;   # List variable for walks of paths
-        if HasLinDepOfSbAlg( sba ) then
-            return LinDepOfSbAlg( sba );
+        if HasLinDepOfSBAlg( sba ) then
+            return LinDepOfSBAlg( sba );
         else
-            comps := ComponentsOfCommutativityRelationsOfSbAlg( sba );
-            oarrs := ArrowsOfQuiver( OverquiverOfSbAlg( sba ) );
+            comps := ComponentsOfCommutativityRelationsOfSBAlg( sba );
+            oarrs := ArrowsOfQuiver( OverquiverOfSBAlg( sba ) );
 
             # Lift each path appearing within <comps>; do this by lifting each
             #  constituent arrow (in the ground quiver to one in the over-
@@ -149,7 +149,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    LinIndOfSbAlg,
+    LinIndOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -166,13 +166,13 @@ InstallMethod(
             pa,     # Original path algebra of <sba>
             ret,    # Retraction of <2reg>
             v;      # Vertex variable
-        if HasLinIndOfSbAlg( sba ) then
-            return LinIndOfSbAlg( sba );
+        if HasLinIndOfSBAlg( sba ) then
+            return LinIndOfSBAlg( sba );
         else
             pa := OriginalPathAlgebra( sba );
             ideal := IdealOfQuotient( sba );
             2reg := 2RegAugmentationOfQuiver( QuiverOfPathAlgebra( pa ) );
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             cont := ContractionOfOverquiver( oquiv );
             ret := RetractionOf2RegAugmentation( 2reg );
 
@@ -182,7 +182,7 @@ InstallMethod(
                 return ElementOfPathAlgebra( pa, ret( cont( path ) ) );
             end;
             
-            lindep := LinDepOfSbAlg( sba );
+            lindep := LinDepOfSBAlg( sba );
             list := [];
             for v in VerticesOfQuiver( oquiv ) do
                 l := 0;
@@ -203,20 +203,20 @@ InstallMethod(
 );
 
 InstallMethod(
-    PermDataOfSbAlg,
+    PermDataOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
-        if HasPermDataOfSbAlg( sba ) then
-            return PermDataOfSbAlg( sba );
+        if HasPermDataOfSBAlg( sba ) then
+            return PermDataOfSBAlg( sba );
         else
-            return Immutable( [ LinIndOfSbAlg( sba ), LinDepOfSbAlg( sba ) ] );
+            return Immutable( [ LinIndOfSBAlg( sba ), LinDepOfSBAlg( sba ) ] );
         fi;
     end
 );
 
 InstallMethod(
-    SourceEncodingOfPermDataOfSbAlg,
+    SourceEncodingOfPermDataOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -234,13 +234,13 @@ InstallMethod(
             pos,            #
             v;              # Vertex variable
 
-        if HasSourceEncodingOfPermDataOfSbAlg( sba ) then
-            return SourceEncodingOfPermDataOfSbAlg( sba );
+        if HasSourceEncodingOfPermDataOfSBAlg( sba ) then
+            return SourceEncodingOfPermDataOfSBAlg( sba );
         else
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
-            lindep := LinDepOfSbAlg( sba );
-            linind := LinIndOfSbAlg( sba );
+            lindep := LinDepOfSBAlg( sba );
+            linind := LinIndOfSBAlg( sba );
 
             comp_sources := List( lindep, SourceOfPath );
 
@@ -268,7 +268,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    TargetEncodingOfPermDataOfSbAlg,
+    TargetEncodingOfPermDataOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -286,13 +286,13 @@ InstallMethod(
             pos,            #
             v;              # Vertex variable
 
-        if HasTargetEncodingOfPermDataOfSbAlg( sba ) then
-            return TargetEncodingOfPermDataOfSbAlg( sba );
+        if HasTargetEncodingOfPermDataOfSBAlg( sba ) then
+            return TargetEncodingOfPermDataOfSBAlg( sba );
         else
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
-            lindep := LinDepOfSbAlg( sba );
-            linind := LinIndOfSbAlg( sba );
+            lindep := LinDepOfSBAlg( sba );
+            linind := LinIndOfSBAlg( sba );
 
             comp_sources := List( lindep, TargetOfPath );
 
@@ -319,8 +319,6 @@ InstallMethod(
     end
 );
 
-#########1#########2#########3#########4#########5#########6#########7#########
-
 InstallMethod(
     IsRepresentativeOfCommuRelSource,
     "for vertices of overquivers",
@@ -339,8 +337,8 @@ InstallMethod(
             if not IsOverquiver( oquiv ) then
                 TryNextMethod();
             else
-                sba := SbAlgOfOverquiver( oquiv );
-                source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
+                sba := SBAlgOfOverquiver( oquiv );
+                source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
                 b_seq := source_enc[2];
 
                 return ( b_seq.( String(vert) ) = 0 );
@@ -367,8 +365,8 @@ InstallMethod(
             if not IsOverquiver( oquiv ) then
                 TryNextMethod();
             else
-                sba := SbAlgOfOverquiver( oquiv );
-                target_enc := TargetEncodingOfPermDataOfSbAlg( sba );
+                sba := SBAlgOfOverquiver( oquiv );
+                target_enc := TargetEncodingOfPermDataOfSBAlg( sba );
                 d_seq := target_enc[2];
 
                 return ( d_seq.( String(vert) ) = 0 );
@@ -376,6 +374,3 @@ InstallMethod(
         fi;
     end
 );
-
-#########1#########2#########3#########4#########5#########6#########7#########
-#########1#########2#########3#########4#########5#########6#########7#########

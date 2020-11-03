@@ -4,5 +4,3 @@ DeclareRepresentation( "IsVertexIndexedSequenceRep", IsAttributeStoringRep,
 DeclareAttribute( "VertexIndexedSequenceFamilyOfQuiver", IsQuiver );
 
 DeclareOperation( "VISify", [ IsQuiver, IsList, IsString ] );
-
-#########1#########2#########3#########4#########5#########6#########7#########

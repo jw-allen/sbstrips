@@ -183,5 +183,3 @@ InstallMethod(
 # InstallMethod for "IsUnboundedPanel" property of IsPanelRep
 
 # InstallMethod for "aileron segments of panel" attribute of IsPanelRep
-
-#########1#########2#########3#########4#########5#########6#########7#########

@@ -224,5 +224,3 @@ DeclareGlobalFunction( "SBAlgResidueOfOverquiverPathNC" );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "ExchangePartnerOfVertex", IsQuiverVertex );
-
-#########1#########2#########3#########4#########5#########6#########7#########

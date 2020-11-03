@@ -18,5 +18,3 @@ DeclareOperation( "Patchify",
 DeclareOperation( "PatchifyByTop", [ IsSyllableRep, IsSyllableRep ] );
 
 DeclareOperation( "OverlapFunctionNC", [ IsPatchRep, IsPatchRep ] );
-
-#########1#########2#########3#########4#########5#########6#########7#########

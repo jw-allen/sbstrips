@@ -613,5 +613,3 @@ InstallMethod(
         return PatchifyByTop( patch1!.SE, patch2!.SW );
     end
 );
-
-#########1#########2#########3#########4#########5#########6#########7#########

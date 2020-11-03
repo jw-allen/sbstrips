@@ -492,5 +492,3 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##  <#/GAPDoc>
 DeclareOperation( "ModuleDataOfStrip", [ IsStripRep ] );
 DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
-
-#########1#########2#########3#########4#########5#########6#########7#########

@@ -1,4 +1,4 @@
-DeclareRepresentation( "IsStripRep", IsPositionalObjectRep, [] );
+DeclareRepresentation( "IsStripRep", IsAttributeStoringRep, [ "data" ] );
 DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );

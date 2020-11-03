@@ -29,7 +29,7 @@ InstallMethod(
             ori_list,   # Sublist of orientations in <data>
             sy_list;    # Sublist of syllables in <data>
             
-        data := strip![1];
+        data := strip!.data;
         l := Length( data );
         
         # The syllables are in the odd positions of <data>; the orientations in
@@ -66,8 +66,8 @@ InstallOtherMethod(
             ori_list1, ori_list2,   # Orientation list of <data1> and <data2>
             sy_list1, sy_list2;     # Syllable list of <data1> and <data2>
             
-        data1 := strip1![1];
-        data2 := strip2![1];
+        data1 := strip1!.data;
+        data2 := strip2!.data;
         
         if Length( data1 ) <> Length( data2 ) then
             return false;
@@ -142,11 +142,11 @@ InstallGlobalFunction(
         
         Info( InfoSBStrips, 4, "no normalisation needed, creating object..." );
         
-        data := arg;
+        data := rec( data := arg );
         fam := StripFamilyOfSBAlg( sba );
         type := NewType( fam, IsStripRep );
         
-        return Objectify( type, [ data ] );
+        return Objectify( type, data );
     end
 );
 
@@ -299,6 +299,7 @@ InstallGlobalFunction(
     [ IsList ],
     function( list )
         local
+            data,       # Defining data of output strip
             fam,        # Syllable family to which syllables in <list> belong
             sba,        # SB algebra to which syllables in <list> belong
             type,       # Type variable
@@ -308,9 +309,11 @@ InstallGlobalFunction(
         sba := fam!.sb_alg;
         zero_sy := ZeroSyllableOfSBAlg( sba );
         
-        list := [ zero_sy, -1, list[1], 1, list[3], -1, zero_sy, 1 ];
+        data := rec(
+         data := [ zero_sy, -1, list[1], 1, list[3], -1, zero_sy, 1 ]
+         );
         type := NewType( fam, IsVirtualStripRep );
-        return Objectify( type, [ list ] );
+        return Objectify( type, data );
     end
 );
 
@@ -326,7 +329,7 @@ InstallMethod(
         if IsZeroStrip( strip ) then
             Print( "<zero strip>\n" );
         else
-            data := strip![1];
+            data := strip!.data;
             for k in [ 1..Length( data ) ] do
                 if IsOddInt( k ) then
                     if data[k+1] = -1 then
@@ -368,7 +371,7 @@ InstallMethod(
             
             # Print the strip so it looks something like
             #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
-            data := strip![1];
+            data := strip!.data;
             for k in [ 1..Length( data ) ] do
                 if IsOddInt( k ) then
                     sy := data[k];
@@ -418,7 +421,7 @@ InstallMethod(
             
             # Print the strip so it looks something like
             #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
-            data := strip![1];
+            data := strip!.data;
             for k in [ 1..Length( data ) ] do
                 if IsOddInt( k ) then
                     sy := data[k];
@@ -668,8 +671,8 @@ InstallMethod(
             "\nshould alternate in sign!" );
             
         elif not IsSpecialBiserialAlgebra( sba ) then
-            Error( "The first argument\n", sba,
-             "\nshould be a special biserial algebra!" );
+            Error( "The first argument\n", arr,
+             "\nshould belong to a special biserial algebra!" );
              
         else
             # Test that <arr> is an "arrow" of <sba>
@@ -958,7 +961,7 @@ InstallMethod(
         fam := StripFamilyOfSBAlg( sba );
         type := NewType( fam, IsStripRep );
         zero_sy := ZeroSyllableOfSBAlg( sba );
-        obj := [ [ zero_sy, -1, zero_sy, 1 ] ];
+        obj := rec( data := [ [ zero_sy, -1, zero_sy, 1 ] ] );
         
         ObjectifyWithAttributes(
          obj, type,
@@ -996,7 +999,7 @@ InstallMethod(
             data,       # Defining data of <strip>
             indices;    # Odd indices of <data>
 
-        data := strip![1];
+        data := strip!.data;
         indices := Filtered( [1..Length( data )], IsOddInt );
         return data{ indices };
     end
@@ -1109,7 +1112,7 @@ InstallMethod(
 
 InstallOtherMethod(
     SyzygyOfStrip,
-    "for a list of strips",
+    "for a (flat) list of strips",
     [ IsList ],
     function( list )
         if false in List( list, IsStripRep ) then
@@ -1135,8 +1138,10 @@ InstallMethod(
             return strip;
         else
             syz := strip;
+            Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
             for k in [1..N] do
-                Info( InfoDebug, 2, "Calculated ", Ordinal( k ), " syzygy!" );
+                Info( InfoSBStrips, 2, "Calculated ", Ordinal( k ),
+                 " syzygy..." );
                 syz := SyzygyOfStrip( syz );
             od;
             
@@ -1162,8 +1167,10 @@ InstallOtherMethod(
             return list;
         else
             syz := list;
+            Info( InfoSBStrips, 2, "Examining list of strips" );
             for k in [1..N] do
-                Info( InfoDebug, 2, "Calculated ", Ordinal( k ), " syzygy!" );
+                Info( InfoSBStrips, 2, "Calculated ", Ordinal( k ),
+                 " syzygy..." );
                 syz := SyzygyOfStrip( syz );
             od;
             
@@ -1183,7 +1190,7 @@ InstallMethod(
 
 InstallOtherMethod(
     CollectedSyzygyOfStrip,
-    "for a list of strip-reps",
+    "for a (flat) list of strip-reps",
     [ IsList ],
     function( list )
         if not ( ForAll( list, IsStripRep ) ) then
@@ -1647,8 +1654,8 @@ InstallMethod(
     [ IsStripRep, IsPosInt ],
     function( strip, N )
         local
-            j,              # Integer variable, storing which "stage" our cal-
-                            #  -culation is at
+            j,              # Integer variable, storing which "stage" our
+                            #  calculation is at
             new_syz_set,    # Set variable, storing those strips "new" at stage
                             #  <j>
             old_syz_set;    # Set variable, storing those strips "old" at stage
@@ -1881,7 +1888,7 @@ InstallMethod(
             return exp_walk;
         end;
         
-        data := strip![1];
+        data := strip!.data;
         L_data := Length( data );
         expanded := [];
         

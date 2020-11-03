@@ -3,8 +3,8 @@ DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 
-DeclareAttribute( "StripFamilyOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "ZeroStripOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "StripFamilyOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocStripify">
 ##    <ManSection>
@@ -281,12 +281,12 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 DeclareOperation( "CollectedNthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
-DeclareGlobalFunction( "StripifyFromSbAlgPathNC" );
+DeclareGlobalFunction( "StripifyFromSBAlgPathNC" );
 DeclareGlobalFunction( "StripifyVirtualStripNC" );
 
-##  <#GAPDoc Label="DocSimpleStripsOfSbAlg">
+##  <#GAPDoc Label="DocSimpleStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="SimpleStripsOfSbAlg" Arg="sba"/>
+##      <Attr Name="SimpleStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -298,16 +298,16 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>SimpleStripsOfSbAlg</C>
+##        vertices of that quiver are ordered; <C>SimpleStripsOfSBAlg</C>
 ##        adopts that order for strips of simple modules.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocProjectiveStripsOfSbAlg">
+##  <#GAPDoc Label="DocProjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="ProjectiveStripsOfSbAlg" Arg="sba"/>
+##      <Attr Name="ProjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -319,22 +319,22 @@ DeclareAttribute( "SimpleStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>ProjectiveStripsOfSbAlg</C>
+##        vertices of that quiver are ordered; <C>ProjectiveStripsOfSBAlg</C>
 ##        adopts that order for strips of projective modules.
 ##        <P/>
 ##
 ##        If the projective module corresponding to the <C>j</C>th vertex of
 ##        <A>sba</A> is a string module, then
-##        <C>ProjectiveStripsOfSbAlg( sba )[j]</C> returns the strip describing
+##        <C>ProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
 ##        that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocInjectiveStripsOfSbAlg">
+##  <#GAPDoc Label="DocInjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="InjectiveStripsOfSbAlg" Arg="sba"/>
+##      <Attr Name="InjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
@@ -346,18 +346,18 @@ DeclareAttribute( "ProjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>InjectiveStripsOfSbAlg</C>
+##        vertices of that quiver are ordered; <C>InjectiveStripsOfSBAlg</C>
 ##        adopts that order for strips of projective modules.
 ##        <P/>
 ##
 ##        If the injective module corresponding to the <C>j</C>th vertex of
 ##        <A>sba</A> is a string module, then
-##        <C>InjectiveStripsOfSbAlg( sba )[j]</C> returns the strip describing
+##        <C>InjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
 ##        that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "InjectiveStripsOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "InjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocWidthOfStrip">
 ##    <ManSection>
@@ -449,7 +449,7 @@ DeclareOperation(
 ##        type by the <A>N</A>th syzygy, and &false; otherwise.
 ##      </Returns>
 ##      <Description>
-##        This function calls <Ref Attr="InjectiveStripsOfSbAlg"/> for
+##        This function calls <Ref Attr="InjectiveStripsOfSBAlg"/> for
 ##        <A>sba</A>, filters out all the &fail;s, and then checks each
 ##        remaining strip individually using <Ref
 ##        Oper="IsFiniteSyzygyTypeStripByNthSyzygy"/> (with second argument

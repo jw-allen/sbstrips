@@ -1,15 +1,15 @@
 InstallMethod(
-    StripFamilyOfSbAlg,
+    StripFamilyOfSBAlg,
     "for special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             fam;
 
-        if HasStripFamilyOfSbAlg( sba ) then
-            return StripFamilyOfSbAlg( sba );
+        if HasStripFamilyOfSBAlg( sba ) then
+            return StripFamilyOfSBAlg( sba );
         else
-            fam := NewFamily( "StripFamilyForSbAlg" );
+            fam := NewFamily( "StripFamilyForSBAlg" );
             fam!.sb_alg := sba;
             
             return fam;
@@ -104,7 +104,7 @@ InstallGlobalFunction(
             type;       # Type variable
         
         len := Length( arg );
-        sba := SbAlgOfSyllable( arg[1] );
+        sba := SBAlgOfSyllable( arg[1] );
         
         # This is an NC function, so we can assume that the arguments are
         #      sy1, or1, sy2, or2, sy3, or3, ..., syN, orN
@@ -117,7 +117,7 @@ InstallGlobalFunction(
         #  end if necessary and calling the function again
         
         if arg[2] <> -1 then
-            norm_sy := SidestepFunctionOfSbAlg( sba )( arg[1] );
+            norm_sy := SidestepFunctionOfSBAlg( sba )( arg[1] );
             norm_arg := Concatenation( [ norm_sy, -1 ], arg );
             
             Info( InfoSBStrips, 4, "Normalizing on left, calling again..." );
@@ -127,7 +127,7 @@ InstallGlobalFunction(
              norm_arg
              );
         elif arg[ len ] <> 1 then
-            norm_sy := SidestepFunctionOfSbAlg( sba )( arg[ len - 1 ] );
+            norm_sy := SidestepFunctionOfSBAlg( sba )( arg[ len - 1 ] );
             norm_arg := Concatenation( arg, [ norm_sy, 1 ] );
             
             Info( InfoSBStrips, 4, "Normalizing on right, calling again..." );
@@ -143,7 +143,7 @@ InstallGlobalFunction(
         Info( InfoSBStrips, 4, "no normalisation needed, creating object..." );
         
         data := arg;
-        fam := StripFamilyOfSbAlg( sba );
+        fam := StripFamilyOfSBAlg( sba );
         type := NewType( fam, IsStripRep );
         
         return Objectify( type, [ data ] );
@@ -154,7 +154,7 @@ InstallGlobalFunction(
 # CAN THE FOLLOWING BE REMOVED?
 
 # InstallGlobalFunction(
-    # StripifyFromSbAlgPathNC,
+    # StripifyFromSBAlgPathNC,
     # "for a nonstationary path in an SB algebra between two lists of integers",
     # function( left_list, path, right_list )
         # local
@@ -182,10 +182,10 @@ InstallGlobalFunction(
         # quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         # 2reg := 2RegAugmentationOfQuiver( quiv );
         # ret := RetractionOf2RegAugmentation( 2reg );
-        # oquiv := OverquiverOfSbAlg( sba );
+        # oquiv := OverquiverOfSBAlg( sba );
         # cont := ContractionOfOverquiver( oquiv );
 
-        # linind := LinIndOfSbAlg( sba );
+        # linind := LinIndOfSBAlg( sba );
         
         # # Find the path <over_path> in <oquiv> whose <sba>-residue is <path>.
         # #  (Recall that entries of <linind> are paths in <oquiv>. Applying
@@ -215,7 +215,7 @@ InstallGlobalFunction(
 
                 # path := ret( cont( over_path ) )*1_sba;
                 # left_list := left_list{ [ 1..( Length( left_list ) - 1 ) ] };
-                # return StripifyFromSbAlgPathNC( left_list, path, right_list );
+                # return StripifyFromSBAlgPathNC( left_list, path, right_list );
             # fi;
         # fi;
         
@@ -228,7 +228,7 @@ InstallGlobalFunction(
                 
                 # path := ret( cont( over_path ) )*1_sba;
                 # right_list := right_list{ [ 2..( Length( right_list ) ) ] };
-                # return StripifyFromSbAlgPathNC( left_list, path, right_list  );
+                # return StripifyFromSBAlgPathNC( left_list, path, right_list  );
             # fi;
         # fi;
         
@@ -306,7 +306,7 @@ InstallGlobalFunction(
                     
         fam := FamilyObj( list[1] );
         sba := fam!.sb_alg;
-        zero_sy := ZeroSyllableOfSbAlg( sba );
+        zero_sy := ZeroSyllableOfSBAlg( sba );
         
         list := [ zero_sy, -1, list[1], 1, list[3], -1, zero_sy, 1 ];
         type := NewType( fam, IsVirtualStripRep );
@@ -673,11 +673,11 @@ InstallMethod(
              
         else
             # Test that <arr> is an "arrow" of <sba>
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             oquiv_arrs := ArrowsOfQuiver( oquiv );
             sba_arrs := List(
              oquiv_arrs,
-             SbAlgResidueOfOverquiverPathNC
+             SBAlgResidueOfOverquiverPathNC
              );
              
             if not arr in sba_arrs then
@@ -688,7 +688,7 @@ InstallMethod(
                 # Represent <arr> as an arrow of <oquiv>
                 oarr := First(
                  oquiv_arrs,
-                 x -> SbAlgResidueOfOverquiverPathNC( x ) = arr
+                 x -> SBAlgResidueOfOverquiverPathNC( x ) = arr
                  );
                 
                 # If <int_list> is empty, then our task is easy
@@ -700,10 +700,10 @@ InstallMethod(
                 
                 # Otherwise, <int_list> is nonempty. We construct the syllables
                 #  in turn. We'll need the permissible data of <sba>.
-                a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
-                b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
-                c_seq := TargetEncodingOfPermDataOfSbAlg( sba )[1];
-                d_seq := TargetEncodingOfPermDataOfSbAlg( sba )[2];
+                a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+                b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+                c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+                d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
                 syll_list := [];
                 
                 # The first syllable must be constructed with care. We'll
@@ -866,11 +866,11 @@ InstallOtherMethod(
              "\nmust belong to a special biserial algebra" );
         fi;
         
-        perm_data := PermDataOfSbAlg( sba );
+        perm_data := PermDataOfSBAlg( sba );
         opath_list := perm_data[1];
         residue_list := List(
          opath_list,
-         SbAlgResidueOfOverquiverPathNC
+         SBAlgResidueOfOverquiverPathNC
          );
          
         if not path in residue_list then
@@ -911,7 +911,7 @@ InstallOtherMethod(
         # #  strip of the corresponding simple module for <sba>.
         # else
             # pos := Position( sba_verts, vert );
-            # simps := SimpleStripsOfSbAlg( sba );
+            # simps := SimpleStripsOfSBAlg( sba );
             
             # return simps[ pos ];
         # fi;
@@ -945,7 +945,7 @@ InstallOtherMethod(
 # );
 
 InstallMethod(
-    ZeroStripOfSbAlg,
+    ZeroStripOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -955,9 +955,9 @@ InstallMethod(
             type,       # Type variable
             zero_sy;    # Zero syllable of <sba>
         
-        fam := StripFamilyOfSbAlg( sba );
+        fam := StripFamilyOfSBAlg( sba );
         type := NewType( fam, IsStripRep );
-        zero_sy := ZeroSyllableOfSbAlg( sba );
+        zero_sy := ZeroSyllableOfSBAlg( sba );
         obj := [ [ zero_sy, -1, zero_sy, 1 ] ];
         
         ObjectifyWithAttributes(
@@ -1031,7 +1031,7 @@ InstallMethod(
             #  two copies of the zero patch of <sba>.
             
             sba := FamilyObj( strip )!.sb_alg;
-            zero_patch := ZeroPatchOfSbAlg( sba );
+            zero_patch := ZeroPatchOfSBAlg( sba );
             patch_list := [ zero_patch ];
             
             indices := [ 1..Length( sy_list ) ];
@@ -1314,7 +1314,7 @@ InstallOtherMethod(
 );
 
 InstallMethod(
-    SimpleStripsOfSbAlg,
+    SimpleStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1328,10 +1328,10 @@ InstallMethod(
             quiv,       # Ground quiver of <sba>
             verts;      # Vertices of <quiv>
             
-        if HasSimpleStripsOfSbAlg( sba ) then
-            return SimpleStripsOfSbAlg( sba );
+        if HasSimpleStripsOfSBAlg( sba ) then
+            return SimpleStripsOfSBAlg( sba );
         else
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
         
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
@@ -1356,7 +1356,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    ProjectiveStripsOfSbAlg,
+    ProjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1377,16 +1377,16 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasProjectiveStripsOfSbAlg( sba ) then
-            return ProjectiveStripsOfSbAlg( sba );
+        if HasProjectiveStripsOfSBAlg( sba ) then
+            return ProjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
 
-            a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
-            b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
 
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
 
             olift := function( v )
@@ -1423,7 +1423,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    InjectiveStripsOfSbAlg,
+    InjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1444,16 +1444,16 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasInjectiveStripsOfSbAlg( sba ) then
-            return InjectiveStripsOfSbAlg( sba );
+        if HasInjectiveStripsOfSBAlg( sba ) then
+            return InjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
 
-            c_seq := TargetEncodingOfPermDataOfSbAlg( sba )[1];
-            d_seq := TargetEncodingOfPermDataOfSbAlg( sba )[2];
+            c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
 
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
 
             olift := function( v )
@@ -1707,7 +1707,7 @@ InstallGlobalFunction(
             test_list;          # Results of testing the entries of
                                 #  <non_pin_inj_list> up to degree <N>
             
-        inj_list := InjectiveStripsOfSbAlg( sba );
+        inj_list := InjectiveStripsOfSBAlg( sba );
         non_pin_inj_list := Filtered( inj_list, x -> not ( x = fail ) );
         test_list := List(
          non_pin_inj_list,

@@ -38,9 +38,9 @@ DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 ##  <#/GAPDoc>
 DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
 
-##  <#GAPDoc Label="DocOriginalSbQuiverOf2RegAugmentation">
+##  <#GAPDoc Label="DocOriginalSBQuiverOf2RegAugmentation">
 ##  <ManSection>
-##    <Attr Name="OriginalSbQuiverOf2RegAugmentation" Arg="quiver"/>
+##    <Attr Name="OriginalSBQuiverOf2RegAugmentation" Arg="quiver"/>
 ##    <Description>
 ##      Argument: <A>quiver</A>, a quiver
 ##      <Br />
@@ -56,7 +56,7 @@ DeclareProperty( "Is2RegAugmentationOfQuiver", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
+DeclareAttribute( "OriginalSBQuiverOf2RegAugmentation", IsQuiver );
 
 ##  <#GAPDoc Label="DocRetractionOf2RegAugmentation">
 ##  <ManSection>
@@ -68,16 +68,16 @@ DeclareAttribute( "OriginalSbQuiverOf2RegAugmentation", IsQuiver );
 ##    </Description>
 ##    <Returns>
 ##      a function <C>ret</C>, which accepts paths in <A>quiver</A> as input
-##      and which outputs paths in <C>OriginalSbQuiverOf2RegAugmentation(
+##      and which outputs paths in <C>OriginalSBQuiverOf2RegAugmentation(
 ##      quiver )</C> <Ref Label="Doc2RegAugmentationOfQuiver"/>.
 ##    </Returns>
 ##    <Description>
-##      One can identify <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>
+##      One can identify <C>OriginalSBQuiverOf2RegAugmentation( quiver )</C>
 ##      with a subquiver of <A>quiver</A>. Some paths in <A>quiver</A> lie
 ##      wholly in that subquiver, some do not. This function <C>ret</C> takes
 ##      those that do to the corresponding path of
-##      <C>OriginalSbQuiverOf2RegAugmentation( quiver )</C>, and those that
-##      do not to the zero path of <C>OriginalSbQuiverOf2RegAugmentation(
+##      <C>OriginalSBQuiverOf2RegAugmentation( quiver )</C>, and those that
+##      do not to the zero path of <C>OriginalSBQuiverOf2RegAugmentation(
 ##      quiver )</C>.
 ##      <Br />
 ##    </Description>
@@ -93,12 +93,12 @@ DeclareAttribute( "RetractionOf2RegAugmentation", IsQuiver );
 ##   -taneous choice, for each vertex of the quiver of <sba>, out of two
 ##   options. This attribute picks one such possibility, and so "the" over-
 ##   -quiver for <sba> is the overquiver corresponding to this choice.
-DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
+DeclareAttribute( "CompatibleTrackPermutationOfSBAlg",
  IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocOverquiverOfSbAlg">
+##  <#GAPDoc Label="DocOverquiverOfSBAlg">
 ##  <ManSection>
-##    <Attr Name="OverquiverOfSbAlg" Arg="sba"/>
+##    <Attr Name="OverquiverOfSBAlg" Arg="sba"/>
 ##    <Description>
 ##      Argument: <A>sba</A>, a special biserial algebra
 ##      <Br />
@@ -109,7 +109,7 @@ DeclareAttribute( "CompatibleTrackPermutationOfSbAlg",
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "OverquiverOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocIsOverquiver">
 ##  <ManSection>
@@ -120,7 +120,7 @@ DeclareAttribute( "OverquiverOfSbAlg", IsSpecialBiserialAlgebra );
 ##    </Description>
 ##    <Returns>
 ##      &true; if <A>quiver</A> was constructed by <Ref
-##      Label="DocOverquiverOfSbAlg"/>, and &false; otherwise.
+##      Label="DocOverquiverOfSBAlg"/>, and &false; otherwise.
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -131,7 +131,7 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##    <Attr Name="ContractionOfOverquiver" Arg="oquiv"/>
 ##    <Description>
 ##      Argument: <A>oquiv</A>, an overquiver (as constructed by <Ref
-##      Label="DocOverquiverOfSbAlg" />)
+##      Label="DocOverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>
@@ -141,9 +141,9 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##      Recall that <A>oquiv</A> was the overquiver of some special biserial
 ##      algebra, say <C>sba</C>, defined over some original quiver, say
 ##      <C>orig_quiv</C>. Also recall that <A>oquiv</A> was constructed using
-##      <Ref Label="DocOverquiverOfSbAlg" />.
+##      <Ref Label="DocOverquiverOfSBAlg" />.
 ##      <Br />
-##      When <Ref Label="DocOverquiverOfSbAlg" /> is called on <C>sba</C>, it
+##      When <Ref Label="DocOverquiverOfSBAlg" /> is called on <C>sba</C>, it
 ##      creates the <M>2</M>-regular augmentation <C>orig_quiv</C>. Call the
 ##      augmentation <C>2reg</C>. Notice that <C>orig_quiv</C> can be
 ##      identified with a subquiver of <C>2reg</C>, and that <C>2reg</C> can be
@@ -156,12 +156,12 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##  <#/GAPDoc>
 DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 
-##  <#GAPDoc Label="DocSbAlgOfOverquiver">
+##  <#GAPDoc Label="DocSBAlgOfOverquiver">
 ##  <ManSection>
-##    <Attr Name="SbAlgOfOverquiver" Arg="quiver"/>
+##    <Attr Name="SBAlgOfOverquiver" Arg="quiver"/>
 ##    <Description>
 ##      Argument: <A>quiver</A>, an overquiver (as constructed by <Ref
-##      Label="DocOverquiverOfSbAlg" />)
+##      Label="DocOverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>
@@ -170,12 +170,12 @@ DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 ##    </Returns>
 ##    <Description>
 ##      Informally speaking, this attribute is the "inverse" to
-##      <C>OverquiverOfSbAlg</C>.
+##      <C>OverquiverOfSBAlg</C>.
 ##      <Br />
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
+DeclareAttribute( "SBAlgOfOverquiver", IsQuiver );
 
 ##  (These belong behind the scenes only. We provide no formal documentation.)
 ##
@@ -198,16 +198,16 @@ DeclareAttribute( "SbAlgOfOverquiver", IsQuiver );
 ##   This latter concatenation, which takes a path in <oquiv> as input and
 ##   gives a (possibly zero) path in <quiver> as output, is
 ##   <GroundPathOfOverquiverPathNC>. If you further view that resulting path in
-##   <quiver> as a path in <sba>, you've used <SbAlgResidueOfOverquiverPathNC>. 
+##   <quiver> as a path in <sba>, you've used <SBAlgResidueOfOverquiverPathNC>. 
 DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );
-DeclareGlobalFunction( "SbAlgResidueOfOverquiverPathNC" );
+DeclareGlobalFunction( "SBAlgResidueOfOverquiverPathNC" );
 
 ##  <#GAPDoc Label="DocExchangePartnerOfVertex">
 ##  <ManSection>
 ##    <Attr Name="ExchangePartnerOfVertex" Arg="v"/>
 ##    <Description>
 ##      Argument: <A>v</A>, a vertex of an overquiver <C>oquiv</C> (as
-##      constructed by <Ref Label="DocOverquiverOfSbAlg" />)
+##      constructed by <Ref Label="DocOverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>

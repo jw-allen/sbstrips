@@ -84,7 +84,7 @@ InstallMethod(
             # Make <new_quiv> remember it is a 2-regular augmentation (and of
             #  whom)
             SetIs2RegAugmentationOfQuiver( new_quiv, true );
-            SetOriginalSbQuiverOf2RegAugmentation( new_quiv, ground_quiv );
+            SetOriginalSBQuiverOf2RegAugmentation( new_quiv, ground_quiv );
 
             # Make vertices of <new_quiv> aware of their counterparts in
             # <ground_quiv>, and vice versa
@@ -163,12 +163,12 @@ InstallMethod(
 );
 
 InstallMethod(
-    OriginalSbQuiverOf2RegAugmentation,
+    OriginalSBQuiverOf2RegAugmentation,
     "for 2-regular augmentations of special biserial quivers",
     [ IsQuiver ],
     function( quiver )
-        if HasOriginalSbQuiverOf2RegAugmentation( quiver ) then
-            return OriginalSbQuiverOf2RegAugmentation( quiver );
+        if HasOriginalSBQuiverOf2RegAugmentation( quiver ) then
+            return OriginalSBQuiverOf2RegAugmentation( quiver );
         else
             Print( "This attribute only recognizes 2-regular augmentations con\
              structed using the <2RegAugmentationOfQuiver> operation.\n\
@@ -235,7 +235,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    CompatibleTrackPermutationOfSbAlg,
+    CompatibleTrackPermutationOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -249,8 +249,8 @@ InstallMethod(
             pa,                     # Path algebra of which <sba> is a quotient
             v;                      # Vertex variable
 
-        if HasCompatibleTrackPermutationOfSbAlg( sba ) then
-            return CompatibleTrackPermutationOfSbAlg( sba );
+        if HasCompatibleTrackPermutationOfSBAlg( sba ) then
+            return CompatibleTrackPermutationOfSBAlg( sba );
 
         else
             # Write local function that turns a path of the 2-regular
@@ -297,7 +297,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    OverquiverOfSbAlg,
+    OverquiverOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -316,11 +316,11 @@ InstallMethod(
             out_arr_pos,    # Local function
             part,           # Compatible track permutation of <sba>
             ret;            # Retraction of <2reg> to <ground_quiv>
-        if HasOverquiverOfSbAlg( sba ) then
-            return OverquiverOfSbAlg( sba );
+        if HasOverquiverOfSBAlg( sba ) then
+            return OverquiverOfSBAlg( sba );
 
         else
-            part := CompatibleTrackPermutationOfSbAlg( sba );
+            part := CompatibleTrackPermutationOfSBAlg( sba );
             N := Length( part );
 
             ground_quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
@@ -401,7 +401,7 @@ InstallMethod(
 
             # Load quiver with data
             SetIsOverquiver( oquiv, true );
-            SetSbAlgOfOverquiver( oquiv, sba );
+            SetSBAlgOfOverquiver( oquiv, sba );
             oquiv!.2Reg := 2reg;
 
             # Return <oquiv>
@@ -419,7 +419,7 @@ InstallMethod(
             return IsOverquiver( quiver );
         else
             # Overquivers are exactly those quivers constructed using the
-            #  <OverquiverOfSbAlg> command. Such quivers have this property set
+            #  <OverquiverOfSBAlg> command. Such quivers have this property set
             #  (to <true>) at creation. Therefore any quiver for which this
             #  property has not been set must not have been so constructed.
             return false;
@@ -477,12 +477,12 @@ InstallMethod(
 );
 
 InstallMethod(
-    SbAlgOfOverquiver,
+    SBAlgOfOverquiver,
     "for overquivers",
     [ IsQuiver ],
     function( quiver )
-        if HasSbAlgOfOverquiver( quiver ) then
-            return SbAlgOfOverquiver( quiver );
+        if HasSBAlgOfOverquiver( quiver ) then
+            return SBAlgOfOverquiver( quiver );
         elif not IsOverquiver( quiver ) then
             return fail;
         else
@@ -551,7 +551,7 @@ InstallGlobalFunction(
         oquiv := QuiverContainingPath( path );
         cont := ContractionOfOverquiver( oquiv );
         
-        sba := SbAlgOfOverquiver( oquiv );
+        sba := SBAlgOfOverquiver( oquiv );
         
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         2reg := 2RegAugmentationOfQuiver( quiv );
@@ -562,14 +562,14 @@ InstallGlobalFunction(
 );
 
 InstallGlobalFunction(
-    SbAlgResidueOfOverquiverPathNC,
+    SBAlgResidueOfOverquiverPathNC,
     function( path )
         local
             oquiv,  # Overquiver to which <path> belongs
             1_sba;  # Multiplicative unit of <sba>
 
         oquiv := QuiverContainingPath( path );
-        1_sba := One( SbAlgOfOverquiver( oquiv ) );
+        1_sba := One( SBAlgOfOverquiver( oquiv ) );
         
         return GroundPathOfOverquiverPathNC( path ) * 1_sba;
     end

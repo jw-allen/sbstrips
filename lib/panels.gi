@@ -1,15 +1,15 @@
 InstallMethod(
-    PanelFamilyOfSbAlg,
+    PanelFamilyOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             fam;    # Family variable
         
-        if HasPanelFamilyOfSbAlg( sba ) then
-            return PanelFamilyOfSbAlg( sba );
+        if HasPanelFamilyOfSBAlg( sba ) then
+            return PanelFamilyOfSBAlg( sba );
         else
-            fam := NewFamily( "PanelFamilyForSbAlg" );
+            fam := NewFamily( "PanelFamilyForSBAlg" );
             fam!.sb_alg := sba;
             
             return fam;
@@ -59,11 +59,11 @@ InstallMethod(
         else
             # Setup
             sba := FamilyObj( sy )!.sb_alg;
-            zero_syll := ZeroSyllableOfSbAlg( sba );
-            fam := PanelFamilyOfSbAlg( sba );
+            zero_syll := ZeroSyllableOfSBAlg( sba );
+            fam := PanelFamilyOfSBAlg( sba );
             
-            descent := DescentFunctionOfSbAlg( sba );
-            sidestep := SidestepFunctionOfSbAlg( sba );
+            descent := DescentFunctionOfSBAlg( sba );
+            sidestep := SidestepFunctionOfSBAlg( sba );
             sprawl := function( x )
                 return sidestep( descent( x ) );
             end;
@@ -177,7 +177,7 @@ InstallMethod(
 );
 
 
-# InstallMethod for "StationaryPanelsOfSbAlg" (panels of stationary syllables) 
+# InstallMethod for "StationaryPanelsOfSBAlg" (panels of stationary syllables) 
 #  attribute of IsSpecialBiserialAlgebra
 
 # InstallMethod for "IsUnboundedPanel" property of IsPanelRep

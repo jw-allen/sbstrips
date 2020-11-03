@@ -1,18 +1,18 @@
-DeclareAttribute( "ComponentsOfCommutativityRelationsOfSbAlg",
+DeclareAttribute( "ComponentsOfCommutativityRelationsOfSBAlg",
  IsSpecialBiserialAlgebra );
 
-DeclareAttribute( "ComponentExchangeMapOfSba", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ComponentExchangeMapOfSBa", IsSpecialBiserialAlgebra );
 
-DeclareAttribute( "LinDepOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "LinDepOfSBAlg", IsSpecialBiserialAlgebra );
 
-DeclareAttribute( "LinIndOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "LinIndOfSBAlg", IsSpecialBiserialAlgebra );
 
-DeclareAttribute( "PermDataOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "PermDataOfSBAlg", IsSpecialBiserialAlgebra );
 
-DeclareAttribute( "SourceEncodingOfPermDataOfSbAlg",
+DeclareAttribute( "SourceEncodingOfPermDataOfSBAlg",
  IsSpecialBiserialAlgebra );
  
-DeclareAttribute( "TargetEncodingOfPermDataOfSbAlg",
+DeclareAttribute( "TargetEncodingOfPermDataOfSBAlg",
  IsSpecialBiserialAlgebra );
  
 DeclareProperty( "IsRepresentativeOfCommuRelSource", IsQuiverVertex );

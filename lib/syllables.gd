@@ -1,9 +1,9 @@
 DeclareRepresentation( "IsSyllableRep", IsAttributeStoringRep,
  [ "path", "perturbation", "sb_alg" ] );
 
-DeclareAttribute( "SyllableFamilyOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "SyllableSetOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "ZeroSyllableOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SyllableFamilyOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SyllableSetOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra );
 
 DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
 
@@ -32,10 +32,10 @@ DeclareProperty( "IsPinBoundarySyllable", IsSyllableRep );
 ##  <#/GAPDoc>
 DeclareProperty( "IsStationarySyllable", IsSyllableRep );
 
-DeclareOperation( "SbAlgOfSyllable", [ IsSyllableRep ] );
+DeclareOperation( "SBAlgOfSyllable", [ IsSyllableRep ] );
 
-DeclareAttribute( "DescentFunctionOfSbAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "SidestepFunctionOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "DescentFunctionOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "SidestepFunctionOfSBAlg", IsSpecialBiserialAlgebra );
 
 DeclareOperation( "IsPeakCompatiblePairOfSyllables",
  [ IsSyllableRep, IsSyllableRep ] );

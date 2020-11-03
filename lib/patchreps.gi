@@ -1,15 +1,15 @@
 InstallMethod(
-    PatchFamilyOfSbAlg,
+    PatchFamilyOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             fam;    # Family variable
 
-        if HasPatchFamilyOfSbAlg( sba ) then
-            return PatchFamilyOfSbAlg( sba );
+        if HasPatchFamilyOfSBAlg( sba ) then
+            return PatchFamilyOfSBAlg( sba );
         else
-            fam := NewFamily( "PatchFamilyForSbAlg" );
+            fam := NewFamily( "PatchFamilyForSBAlg" );
             fam!.sb_alg := sba;
             
             return fam;
@@ -52,7 +52,7 @@ InstallOtherMethod(
 );
 
 InstallMethod(
-    PatchSetOfSbAlg,
+    PatchSetOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -81,25 +81,25 @@ InstallMethod(
             type,           # Type variable 
             zero_sy;        # Zero syllable of <sba>
 
-        if HasPatchSetOfSbAlg( sba ) then
-            return PatchSetOfSbAlg( sba );
+        if HasPatchSetOfSBAlg( sba ) then
+            return PatchSetOfSBAlg( sba );
         else
             # Assign key variables
             type := NewType(
-             PatchFamilyOfSbAlg( sba ),
+             PatchFamilyOfSBAlg( sba ),
              IsComponentObjectRep and IsPatchRep
              );
 
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             overts := VerticesOfQuiver( oquiv );
-            zero_sy := ZeroSyllableOfSbAlg( sba );
+            zero_sy := ZeroSyllableOfSBAlg( sba );
             
-            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
+            source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
             a_seq := source_enc[1];
             b_seq := source_enc[2];
 
-            desc := DescentFunctionOfSbAlg( sba );
-            sy_set := SyllableSetOfSbAlg( sba );
+            desc := DescentFunctionOfSBAlg( sba );
+            sy_set := SyllableSetOfSBAlg( sba );
             proper_sylls := Filtered(
              sy_set,
              x -> not ( IsZeroSyllable(x) or IsVirtualSyllable(x) )
@@ -121,7 +121,7 @@ InstallMethod(
              IsPatchOfPinModule, false,
              IsVirtualPatch, false
              );
-            SetZeroPatchOfSbAlg( sba, obj );
+            SetZeroPatchOfSBAlg( sba, obj );
             Add( set, obj );
 
             Info( InfoDebug, 2, "Made zero patch" );
@@ -444,7 +444,7 @@ InstallMethod(
             sba;        # SB algebra of which <sy_NW> etc are syllables
 
         sba := FamilyObj( sy_NW )!.sb_alg;
-        patch_set := PatchSetOfSbAlg( sba );
+        patch_set := PatchSetOfSBAlg( sba );
         matches := Filtered(
          patch_set,
          x -> [ x!.NW, x!.NE, x!.SW, x!.SE ] = [ sy_NW, sy_NE, sy_SW, sy_SE ]
@@ -458,15 +458,15 @@ InstallMethod(
 );
 
 InstallMethod(
-    ZeroPatchOfSbAlg,
+    ZeroPatchOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
-        if HasZeroPatchOfSbAlg( sba ) then
-            return ZeroPatchOfSbAlg( sba );
+        if HasZeroPatchOfSBAlg( sba ) then
+            return ZeroPatchOfSBAlg( sba );
         else
-            PatchSetOfSbAlg( sba );;
-            return ZeroPatchOfSbAlg( sba );
+            PatchSetOfSBAlg( sba );;
+            return ZeroPatchOfSBAlg( sba );
         fi;
     end
 );
@@ -591,7 +591,7 @@ InstallMethod(
             sba;        # SB algebra of which <sy_NW> etc are syllables
 
         sba := FamilyObj( sy_NW )!.sb_alg;
-        patch_set := PatchSetOfSbAlg( sba );
+        patch_set := PatchSetOfSBAlg( sba );
         matches := Filtered(
          patch_set,
          x -> [ x!.NW, x!.NE ] = [ sy_NW, sy_NE ]

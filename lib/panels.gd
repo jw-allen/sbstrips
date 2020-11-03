@@ -8,9 +8,9 @@
 ##  <#/GAPDoc>
 DeclareRepresentation( "IsPanelRep", IsAttributeStoringRep, [ "panel" ] );
 
-##  <#GAPDoc Label="DocPanelFamilyOfSbAlg">
+##  <#GAPDoc Label="DocPanelFamilyOfSBAlg">
 ##  <ManSection>
-##  <Attr Name="PanelFamilyOfSbAlg" Arg="sba"/>
+##  <Attr Name="PanelFamilyOfSBAlg" Arg="sba"/>
 ##    <Description>
 ##      Argument: <A>sba</A>, a SB algebra
 ##    </Description>
@@ -19,7 +19,7 @@ DeclareRepresentation( "IsPanelRep", IsAttributeStoringRep, [ "panel" ] );
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "PanelFamilyOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "PanelFamilyOfSBAlg", IsSpecialBiserialAlgebra );
 
 # Maybe I don't need this? I feel as though I'll always want to use
 #  <ObjectifyWithAttributes> rather than just <Objectify>?
@@ -27,9 +27,9 @@ DeclareOperation( "PanellifyNC", [ IsList ] );
 
 DeclareOperation( "PanellifyFromUnstableSyllable", [ IsSyllableRep ] );
 
-##  <#GAPDoc Label="DocStationaryPanelsOfSbAlg">
+##  <#GAPDoc Label="DocStationaryPanelsOfSBAlg">
 ##  <ManSection>
-##    <Attr Name="StationaryPanelsOfSbAlg" Arg="sba"/>
+##    <Attr Name="StationaryPanelsOfSBAlg" Arg="sba"/>
 ##    <Description>
 ##      Argument: <A>sba</A>, a SB algebra
 ##    </Description>
@@ -42,7 +42,7 @@ DeclareOperation( "PanellifyFromUnstableSyllable", [ IsSyllableRep ] );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "StationaryPanelsOfSbAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "StationaryPanelsOfSBAlg", IsSpecialBiserialAlgebra );
 
 
 ##  <#GAPDoc Label="DocIsUnboundedPanel">

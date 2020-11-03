@@ -1,15 +1,15 @@
 InstallMethod(
-    SyllableFamilyOfSbAlg,
+    SyllableFamilyOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             fam;    # Family variable
 
-        if HasSyllableFamilyOfSbAlg( sba ) then
-            return SyllableFamilyOfSbAlg( sba );
+        if HasSyllableFamilyOfSBAlg( sba ) then
+            return SyllableFamilyOfSBAlg( sba );
         else
-            fam := NewFamily( "SyllableFamilyForSbAlg" );
+            fam := NewFamily( "SyllableFamilyForSBAlg" );
             fam!.sb_alg := sba;
             
             return fam;
@@ -75,7 +75,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    SyllableSetOfSbAlg,
+    SyllableSetOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -94,12 +94,12 @@ InstallMethod(
             target_enc,     # Target encoding of permissible data of <sba>
             type;           # Type variable
 
-        if HasSyllableSetOfSbAlg( sba ) then
-            return SyllableSetOfSbAlg( sba );
+        if HasSyllableSetOfSBAlg( sba ) then
+            return SyllableSetOfSBAlg( sba );
         else
-            oquiv := OverquiverOfSbAlg( sba );
+            oquiv := OverquiverOfSBAlg( sba );
             type := NewType(
-             SyllableFamilyOfSbAlg( sba ),
+             SyllableFamilyOfSBAlg( sba ),
              IsComponentObjectRep and IsSyllableRep
              );
              
@@ -122,7 +122,7 @@ InstallMethod(
              IsStationarySyllable, false
             );
             
-            SetZeroSyllableOfSbAlg( sba, obj );
+            SetZeroSyllableOfSBAlg( sba, obj );
             
             AddSet( set, obj );
             
@@ -136,8 +136,8 @@ InstallMethod(
             #  then range over values of <l> that do not exceed the upper
             #  inequality.
 
-            source_enc := SourceEncodingOfPermDataOfSbAlg( sba );
-            target_enc := TargetEncodingOfPermDataOfSbAlg( sba );
+            source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
+            target_enc := TargetEncodingOfPermDataOfSBAlg( sba );
             
             a_seq := source_enc[1];
             b_seq := source_enc[2];
@@ -180,7 +180,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    SbAlgOfSyllable,
+    SBAlgOfSyllable,
     "for syllables",
     [ IsSyllableRep ],
     function( sy )
@@ -205,8 +205,8 @@ InstallMethod(
         elif not ( int in [ 0,1 ] ) then
             TryNextMethod();
         else
-            sba := SbAlgOfOverquiver( oquiv );
-            syll_set := SyllableSetOfSbAlg( sba );
+            sba := SBAlgOfOverquiver( oquiv );
+            syll_set := SyllableSetOfSBAlg( sba );
             matches := Filtered( syll_set,
              x -> (x!.path = path) and (x!.perturbation = int)
              );
@@ -237,24 +237,24 @@ InstallOtherMethod(
                 Error( "The given zero path is not the zero path of an over\
                 quiver!\n" );
             else
-                sba := SbAlgOfOverquiver( oquiv );
-                return ZeroSyllableOfSbAlg( sba );
+                sba := SBAlgOfOverquiver( oquiv );
+                return ZeroSyllableOfSBAlg( sba );
             fi;
         fi;
     end
 );
 
 InstallMethod(
-    ZeroSyllableOfSbAlg,
+    ZeroSyllableOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             syll_set;   # Syllable set of <sba>
-        if HasZeroSyllableOfSbAlg( sba ) then
-            return ZeroSyllableOfSbAlg( sba );
+        if HasZeroSyllableOfSBAlg( sba ) then
+            return ZeroSyllableOfSBAlg( sba );
         else
-            syll_set := SyllableSetOfSbAlg( sba );
+            syll_set := SyllableSetOfSBAlg( sba );
             return Filtered( syll_set, IsZeroSyllable )[1];
         fi;
     end
@@ -333,9 +333,9 @@ InstallMethod(
             return false;
 
         else
-            sba := SbAlgOfSyllable( sy );
-            a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
-            b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+            sba := SBAlgOfSyllable( sy );
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
 
             i := SourceOfPath( UnderlyingPathOfSyllable( sy ) );
             len := LengthOfPath( UnderlyingPathOfSyllable( sy ) );
@@ -371,14 +371,14 @@ InstallMethod(
 );
 
 InstallMethod(
-    DescentFunctionOfSbAlg,
+    DescentFunctionOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             desc;   # Function variable
-        if HasDescentFunctionOfSbAlg( sba ) then
-            return DescentFunctionOfSbAlg( sba );
+        if HasDescentFunctionOfSBAlg( sba ) then
+            return DescentFunctionOfSBAlg( sba );
         else
             desc := function( sy )
                 local
@@ -393,13 +393,13 @@ InstallMethod(
 
                 if not IsSyllableRep( sy ) then
                     TryNextMethod();
-                elif not ( SbAlgOfSyllable( sy ) = sba ) then
+                elif not ( SBAlgOfSyllable( sy ) = sba ) then
                     return fail;
                 else
                     if IsZeroSyllable( sy ) then
                         return sy;
                     elif IsVirtualSyllable( sy ) then
-                        return ZeroSyllableOfSbAlg( sba );
+                        return ZeroSyllableOfSBAlg( sba );
                     else
                         # Write <sy> as tuple [ i1, l1, ep1 ]
                         path1 := UnderlyingPathOfSyllable( sy );
@@ -408,8 +408,8 @@ InstallMethod(
                         ep1 := PerturbationTermOfSyllable( sy );
                         
                         # Obtain <i1>th terms in permissble data of <sba>
-                        a_seq := SourceEncodingOfPermDataOfSbAlg( sba )[1];
-                        b_seq := SourceEncodingOfPermDataOfSbAlg( sba )[2];
+                        a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+                        b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
                         
                         a_i1 := a_seq.( String( i1 ) );
                         b_i1 := b_seq.( String( i1 ) );
@@ -433,7 +433,7 @@ InstallMethod(
                             path2 := PathBySourceAndLength( i2, l2 );
                             return Syllabify( path2, ep2 );
                         else
-                            return ZeroSyllableOfSbAlg( sba );
+                            return ZeroSyllableOfSBAlg( sba );
                         fi;                        
                         
                     fi;
@@ -446,15 +446,15 @@ InstallMethod(
 );
 
 InstallMethod(
-    SidestepFunctionOfSbAlg,
+    SidestepFunctionOfSBAlg,
     "for special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
             sidestep;   # Function variable
 
-        if HasSidestepFunctionOfSbAlg( sba ) then
-            return SidestepFunctionOfSbAlg( sba );
+        if HasSidestepFunctionOfSBAlg( sba ) then
+            return SidestepFunctionOfSBAlg( sba );
         else
             sidestep := function( sy )
                 local
@@ -463,7 +463,7 @@ InstallMethod(
                 # Verify that input <sy> is a syllable of <sba>
                 if not IsSyllableRep( sy ) then
                     TryNextMethod();
-                elif not SbAlgOfSyllable( sy ) = sba then
+                elif not SBAlgOfSyllable( sy ) = sba then
                     return fail;
                 
                 # The zero syllable is a fixpoint of the function
@@ -534,9 +534,9 @@ InstallMethod(
             return IsUltimatelyDescentStableSyllable( sy );
 
         else
-            sba := SbAlgOfSyllable( sy );
-            desc := DescentFunctionOfSbAlg( sba );
-            zero_syll := ZeroSyllableOfSbAlg( sba );
+            sba := SBAlgOfSyllable( sy );
+            desc := DescentFunctionOfSBAlg( sba );
+            zero_syll := ZeroSyllableOfSBAlg( sba );
             orbit := [ sy ];
             
             # This property is constant along <desc>-orbits. So calculate the

@@ -336,13 +336,12 @@ DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##    <ManSection>
 ##      <Attr Name="InjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
-##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
-##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
-##        <P />
+##        Argument: <A>sba</A>, a special biserial algebra
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a list <C>inj_list</C>, whose entry are either strips or the boolean
-##        &fail;. 
+##        a list <C>inj_list</C>, whose entries are either strips or the
+##        boolean &fail;. 
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
@@ -358,6 +357,25 @@ DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "InjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+
+##  <#GAPDoc Label="DocUniserialStripsOfSBAlg">
+##    <ManSection>
+##      <Attr Name="UniserialStripsOfSBAlg" Arg="sba"/>
+##      <Description>
+##        Argument: <A>sba</A>, a special biserial algebra
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a list of the strips that correspond to uniserial modules for
+##        <A>sba</A>
+##      </Returns>
+##      <Description>
+##        Simple modules are uniserial, therefore every element of <Ref
+##        Attr="SimpleStripsOfSBAlg"/> will occur in this list too.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocWidthOfStrip">
 ##    <ManSection>

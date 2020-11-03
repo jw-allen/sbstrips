@@ -18,6 +18,20 @@ gap> # Include an example here!
 </Section>
 
 <Section>
+  <Heading>
+    Particular strips
+  </Heading>
+  
+  <#Include Label="DocSimpleStripsOfSBAlg">
+  
+  <#Include Label="DocUniserialStripsOfSBAlg">
+  
+  <#Include Label="DocProjectiveStripsOfSBAlg">
+  
+  <#Include Label="DocInjectiveStripsOfSBAlg">
+</Section>
+
+<Section>
   <Heading>Calculating syzygies of strips</Heading>
 
   <#Include Label="DocSyzygyOfStrip">

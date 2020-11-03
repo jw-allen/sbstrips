@@ -1135,6 +1135,28 @@ InstallMethod(
 );
 
 InstallMethod(
+    UniserialStripsOfSBAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            list,       # 
+            path_set;   # Set of linearly independent paths in <sba>
+            
+        if HasUniserialStripsOfSBAlg( sba ) then
+            return UniserialStripsOfSBAlg( sba );
+        else
+            path_set := Set(
+             LinIndOfSBAlg( sba ),
+             SBAlgResidueOfOverquiverPathNC
+             );
+             
+            return Immutable( List( path_set, Stripify ) );
+        fi;
+    end
+);
+
+InstallMethod(
     WidthOfStrip,
     "for a strip rep",
     [ IsStripRep ],
@@ -1405,7 +1427,7 @@ InstallMethod(
         if IsZeroStrip( strip ) then
             return ZeroModule( sba );
 
-        elif IsVirtualStrip( strip ) then
+        elif IsVirtualStripRep( strip ) then
             Error( "Virtual strips do not represent modules!" );
         fi;
         

@@ -1,0 +1,33 @@
+#SIXFORMAT  GapDocGAP
+HELPBOOKINFOSIXTMP := rec(
+encoding := "UTF-8",
+bookname := "manual",
+entries :=
+[ [ "Title page", ".", [ 0, 0, 0 ], 1, 1, 
+      "title page", "X7D2C85EC87DD46E5" ], 
+  [ "Abstract", ".-1", [ 0, 0, 1 ], 20, 2, "abstract", 
+      "X7AA6C5737B711C89" ], 
+  [ "Copyright", ".-2", [ 0, 0, 2 ], 31, 2, 
+      "copyright", "X81488B807F2A1CF1" ], 
+  [ "Acknowledgements", ".-3", [ 0, 0, 3 ], 36, 2, 
+      "acknowledgements", "X82A988D47DFAFCFA" ], 
+  [ "Table of Contents", ".-4", [ 0, 0, 4 ], 43, 3, 
+      "table of contents", "X8537FEB07AF2BEC8" ], 
+  [ 
+      "\033[1X\033[33X\033[0;-2YIntroduction\033[133X\033[\
+101X", "1", [ 1, 0, 0 ], 1, 4, "introduction", 
+      "X7DFB63A97E67C0A1" ], 
+  [ 
+      "\033[1X\033[33X\033[0;-2YHeading\033[133X\033[101X"
+        , "1.1", [ 1, 1, 0 ], 6, 4, "heading", 
+      "X834391447E59E4A4" ], 
+  [ "Bibliography", "bib", [ "Bib", 0, 0 ], 1, 5, 
+      "bibliography", "X7A6F98FD85F02BFE" ], 
+  [ "References", "bib", [ "Bib", 0, 0 ], 1, 5, 
+      "references", "X7A6F98FD85F02BFE" ], 
+  [ "Index", "ind", [ "Ind", 0, 0 ], 1, 6, "index", 
+      "X83A0356F839C696F" ], 
+  [ "\033[2XInfoSBStrips\033[102X", "1.1-1", 
+      [ 1, 1, 1 ], 9, 4, "infosbstrips", 
+      "X866084A27E1E9C34" ] ]
+);

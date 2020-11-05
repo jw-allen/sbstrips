@@ -1,5 +1,5 @@
 # Set up
-path := Directory( "./gap4r8/pkg/sbstrips/doc/" );
+path := Directory( "Documents/GitHub/pkg/sbstrips/doc/" );
 main := "main.xml";
 files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
  "../lib/patchreps.gd", "../lib/permdata.gd", "../lib/strips.gd",
@@ -14,7 +14,7 @@ files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
 bookname := "manual";
 
 # Compose document
-doc := ComposedDocument("GAPDoc", path, main, files, true);
+doc := ComposedDocument( "GAPDoc", path, main, files, true );
 
 # Make and check tree 
 r := ParseTreeXMLString( doc[1], doc[2] );

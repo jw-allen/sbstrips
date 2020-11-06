@@ -1,6 +1,6 @@
 # Set up
-path := Directory( "Documents/GitHub/pkg/sbstrips/doc/" );
-main := "main.xml";
+path := Directory( "Documents/GitHub/pkg/sbstrips/doc/" );;
+main := "main.xml";;
 files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
  "../lib/patchreps.gd", "../lib/permdata.gd", "../lib/strips.gd",
  "../lib/syllables.gd", "../lib/util.gd", "../lib/vertseqs.gd",
@@ -10,22 +10,22 @@ files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
  "ch_syllables.xml", "ch_utilities.xml", "ch_vis_encodings.xml",
  "ap_example_sbas.xml",
  "sbstripsbib.xml"
- ];
-bookname := "manual";
+ ];;
+bookname := "manual";;
 
 # Compose document
-doc := ComposedDocument( "GAPDoc", path, main, files, true );
+doc := ComposedDocument( "GAPDoc", path, main, files, true );;
 
 # Make and check tree 
-r := ParseTreeXMLString( doc[1], doc[2] );
+r := ParseTreeXMLString( doc[1], doc[2] );;
 CheckAndCleanGapDocTree( r );
 
 # Make and print text files
-t := GAPDoc2Text( r , path );
+t := GAPDoc2Text( r , path );;
 GAPDoc2TextPrintTextFiles( t , path );
 
 # Make and print LaTeX files
-l := GAPDoc2LaTeX( r );
+l := GAPDoc2LaTeX( r );;
 FileString( Filename( path, Concatenation( bookname, ".tex") ), l );
 
 # At this point, run TeX

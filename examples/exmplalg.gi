@@ -121,7 +121,7 @@ InstallGlobalFunction(
                ]
              );
             
-            pa := PathAlgebra( Rationals, quiv5 );
+            pa := PathAlgebra( Rationals, quiv );
             
             rels := [
              pa.a * pa.f, pa.b * pa.g, pa.c * pa.h, pa.d * pa.e,

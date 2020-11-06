@@ -1,0 +1,52 @@
+  
+  
+                                   [1X [5XSBStrips[105X [101X
+  
+  
+                                 Version 0.6.0
+  
+  
+                                   Joe Allen
+  
+  
+  
+            [33X[0;10YA  discrete  model  of special biserial algebras, string
+            modules and their syzygies[133X
+  
+  
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[101X
+  [33X[0;0YWe  implement a discrete model of special biserial algebras and, more to the
+  point,  their  string modules. We represent string modules using new objects
+  that  we  call  [13Xstrips[113X.  Using  these,  we efficiently calculate syzygies of
+  string modules in terms of the strips that represent them.[133X
+  
+  [33X[0;0YThis  package  builds  on, an interfaces with, the [5XQPA[105X package. This package
+  was created as part of the author's PhD thesis.[133X
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0YJoe Allen © 2020[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YI  thank  my  PhD  supervisor  Professor Jeremy Rickard, on whom I inflicted
+  multiple  early  iterations of [5XSBStrips[105X, for his time and his comments. This
+  package was much worse before his feedback.[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (SBStrips)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YHeading[133X
+      1.1-1 InfoSBStrips
+  
+  
+  [32X

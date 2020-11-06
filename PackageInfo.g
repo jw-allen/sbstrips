@@ -6,7 +6,7 @@ SetPackageInfo( rec(
  
  Version := "v0.6.0",
  
- Date := "23/07/2020",
+ Date := "05/11/2020",
  
  License := "GPL-2.0-or-later",
  
@@ -51,25 +51,25 @@ SetPackageInfo( rec(
  ArchiveFormats := ".tar.gz",
 
  README_URL := 
-  Concatenation( ~.PackageWWWHome, "/README.md" ),
+  Concatenation( ~.PackageWWWHome, "/README" ),
 
  PackageInfoURL :=
   "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
 
  AbstractHTML :=
   "The <span class=\"pkgname\">SBstrips</span> package models 'strings' -- \
-  the decorated graphs used in representation theory. These graphs are known \
-  to describe a type of module for a special biserial algebra called a string \
-  module. The syzygy of a string module is a direct sum of string modules; \
-  hence syzygy-taking is essentially a one-to-many operation on strings. \
-  <span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
-  data structure called 'strips', and performs this syzygy calculation.",
+the decorated graphs used in representation theory. These graphs are known \
+to describe a type of module for a special biserial algebra called a string \
+module. The syzygy of a string module is a direct sum of string modules; \
+hence syzygy-taking is essentially a one-to-many operation on strings. \
+<span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
+data structure called 'strips', and performs this syzygy calculation.",
  
  PackageDoc := rec(
-   BookName := "sbstripsdoc",
+   BookName := "SBStrips",
    ArchiveURLSubset := ["doc"],
    HTMLStart := "doc/chap0.html",
-   PDFFile := "doc/sbstripsdoc.pdf",
+   PDFFile := "doc/manual.pdf",
    SixFile := "doc/manual.six",
    LongTitle := ~.Subtitle
   ),

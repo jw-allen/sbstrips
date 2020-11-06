@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Documentation for the SBStrips package of GAP, written by Joe Allen as part +
++ of his PhD thesis.                                                          +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!DOCTYPE Book SYSTEM "gapdoc.dtd"
+  [ <!ENTITY fail "<K>fail</K>">
+    <!ENTITY false "<K>false</K>">
+    <!ENTITY QPA "<Package>QPA</Package>">
+    <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
+    <!ENTITY true "<K>true</K>">
+    ]
+  >
+
+<?LaTeX ExtraPreamble="
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\tikzset{>=to}
+
+\DeclareMathOperator{\add}{add}
+"?>
+
+<Book Name="SBStrips">
+  
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                                 FRONTMATTER                                 +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+  
+  <TitlePage>
+    <#Include Label="TitlePage">
+  </TitlePage>
+  
+  <TableOfContents/>
+  
+  <Body>
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                              ABOVE THE SURFACE                              +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Introduction                                                              |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <Chapter>
+      <Heading>Introduction</Heading>
+      
+      <#Include Label="ChapIntroduction">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Worked example                                                            |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <Chapter>
+      <Heading>
+        Worked example
+      </Heading>
+    
+      <#Include Label="ChapExample">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Strips and syzygies                                                       |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Strips
+      </Heading>
+
+      <#Include Label="ChapStripsSyzygies">
+    </Chapter>
+
+
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                              UNDER THE SURFACE                              +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Discrete model for SB algebras and their string modules                   |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Discrete model for SB algebras and their string modules
+      </Heading>
+      
+      <#Include Label="ChapDiscreteModel">
+      
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Quiver utilities and the overquiver of a SB algebra                       |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <Chapter>
+      <Heading>
+        Quiver utilities and the overquiver of a SB algebra
+      </Heading>
+      
+      <#Include Label="ChapQuiverUtilitiesOverquiver">
+      
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Permissible data of a SB algebra                                          |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <Chapter>
+      <Heading>
+        Permissible data of a SB algebra
+      </Heading>
+      
+      <#Include Label="ChapPermissibleData">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Vertex-indexed sequences and encodings of permissible data                |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Vertex-indexed sequences and encodings of permissible data
+      </Heading>
+      
+      <#Include Label="ChapVISEncodings">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Syllables                                                                 |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Syllables
+      </Heading>
+      
+      <#Include Label="ChapSyllables">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Patches                                                                   |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Patches
+      </Heading>
+      
+      <#Include Label="ChapPatches">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Utilities                                                                 |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Utilities
+      </Heading>
+      
+      <#Include Label="ChapUtilities">
+    </Chapter>
+  </Body>
+
+
+
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                                 APPENDICES                                  +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+
+  <Appendix>
+    <Heading>
+      Example algebras
+    </Heading>
+    
+    <#Include Label="AppExampleAlgebras"/>
+  </Appendix>
+
+
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                                 BACKMATTER                                  +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+  
+  <Bibliography Databases="sbstripsbib.xml" Style="alpha"/>
+  
+  <TheIndex/>
+
+</Book>

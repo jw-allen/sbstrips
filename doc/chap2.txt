@@ -1,0 +1,335 @@
+  
+  [1X2 [33X[0;0YWorked example[133X[101X
+  
+  
+  [1X2.1 [33X[0;0YStrips, aka "strings for special biserial algebras"[133X[101X
+  
+  [33X[0;0YThis  package  is  principally for "strings and their syzygies". Strings are
+  defined  over  special  biserial (SB) algebras. Our first job is to tell [5XGAP[105X
+  about  a  SB  algebra.  We'll do this using tools from [5XQPA[105X. If the following
+  doesn't make sense to you, then see the QPA documentation [ ].[133X
+  
+  [33X[0;0YAn  important rule is that the SB algebra be presented by [13Xmonomial relations
+  [113X  and [13Xskew commutativity relations[113X. A monomial relation is just a path [22Xp[122X (or
+  more  generally  [22Xλ  p[122X  for  some  coefficient  in  the  ambient  field, here
+  [10XRationals[110X). A (skew) commutativity relation is a linear difference [22Xλ p - μ q[122X
+  of  paths  [22Xp,q[122X  having  common  source  and  target,  where  [22Xλ,μ[122X are nonzero
+  coefficients.   It   is  well-known  that  all  SB  algebras  admit  such  a
+  presentation; [5XSBStrips[105X takes it for granted you have used one.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xq2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;[127X[104X
+    [4X[25Xgap>[125X [27Xkq2 := PathAlgebra( Rationals, q2 );;[127X[104X
+    [4X[25Xgap>[125X [27Xrels2 := [ kq2.a * kq2.a, kq2.b * kq2.d, kq2.c * kq2.b,[127X[104X
+    [4X[25X>[125X [27Xkq2.d * kq2.c, kq2.c * kq2.a * kq2.b, (kq2.d)^4,[127X[104X
+    [4X[25X>[125X [27Xkq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];;[127X[104X
+    [4X[25Xgap>[125X [27Xgb2 := GBNPGroebnerBasis( rels2, kq2 );;[127X[104X
+    [4X[25Xgap>[125X [27Xideal2 := Ideal( kq2, gb2 );;[127X[104X
+    [4X[25Xgap>[125X [27XGroebnerBasis( ideal2, gb2 );;[127X[104X
+    [4X[25Xgap>[125X [27Xalg2 := kq2/ideal2;[127X[104X
+    [4X[28X<Rationals[<quiver with 2 vertices and 4 arrows>]/[128X[104X
+    [4X[28X<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>[128X[104X
+    [4X[28X, (7 generators)>>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis  defines  a  special  biserial  algebra  [10Xalg2[110X.  The  following  is what
+  representation  theorists call a string over [10Xalg2[110X, but which we'll prefer to
+  call a [13Xstrip[113X. (For reasons why, see Section [14X1.1[114X.)[133X
+  
+  
+  [24X[33X[0;6Y(a)^{-1} (b) (c) (a)^{-1} (b) (d)^{-1} (c) (a)^{-1} (c)^{-1} (d)[133X
+  
+  [124X
+  
+  [33X[0;0YNote  in  particular  that  the  "first arrow" in this strip is [22Xa[122X and it has
+  exponent [22X-1[122X. This information (plus a bit extra) gets used when creating the
+  strip in [5XGAP[105X via the operation [2XStripify[102X ([14X3.2-1[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );[127X[104X
+    [4X[28X(a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.2 [33X[0;0YModules from strips[133X[101X
+  
+  [33X[0;0YRepresentation  theorists  will  know  that  this  strip [10Xs[110X corresponds to an
+  indecomposable  module  over  [10Xalg2[110X.  In the literature they're called string
+  modules,  but maybe here we could call them strip modules? Whatever you want
+  to call it, that module can be made in [5XGAP[105X using [2XModuleOfStrip[102X ([14X3.6-1[114X).[133X
+  
+  [33X[0;0YA  technicality  to  bear  in  mind  is that that module is implemented as a
+  representation  of  the  quiver  over  which  [10Xalg2[110X  was defined. You'll find
+  details about quiver representations in the [5XQPA[105X documentation.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xmodule := ModuleOfStrip( s );[127X[104X
+    [4X[28X<[ 6, 5 ]>[128X[104X
+    [4X[25Xgap>[125X [27XPrint( module );[127X[104X
+    [4X[28X<Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/[128X[104X
+    [4X[28X<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>[128X[104X
+    [4X[28X, (7 generators)>> with dimension vector [ 6, 5 ]>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YYou  can  turn  a  list of strips into a list of modules using [2XModuleOfStrip[102X
+  ([14X3.6-1[114X).  You  can turn a collected list (see below [13XADD REFERENCE[113X) of strips
+  into a collected list of modules using [2XModuleOfStrip[102X ([14X3.6-1[114X). If you want to
+  turn  a  list  or  collected list of strips into a single module, namely the
+  direct  sum  of  all  the  modules represented by strips in your list, it is
+  better to call [10XDirectSumModuleOfStrip[110X.[133X
+  
+  
+  [1X2.3 [33X[0;0YSyzygies of strips[133X[101X
+  
+  [33X[0;0YNow,  you [13Xcan[113X calculate the syzygy of [10XX[110X using [5XQPA[105X's function [2X1stSyzygy[102X ([14XQPA:
+  1stSyzygy[114X)  on  [10XX[110X  if  you  really  want.  It'll  give you the syzygy module
+  [10X\Omega^1(X)[110X as another quiver representation.[133X
+  
+  [33X[0;0YHowever,  you  should  know that the syzygy of a string module [22XX[122X is a direct
+  sum  of string modules. Suppose we write this as [22XΩ^1 (X) = X_1 ⊕ ⋯ ⊕ X_m[122X. It
+  turns  out  that syzygies may be computed in an algorithmic fashion, just at
+  the  level of "strings". In other words, you give me the "string" describing
+  [22XX[122X  and I give you the "strings" describing each summand [22XX_j[122X of its syzygy in
+  turn.  This  result was proved constructively by Liu and Morin in their 2004
+  paper  [13XADD  REFERENCE[113X  using  a pseudoalgorithm. The purpose of the [5XSBStrips[105X
+  package  is  to  formalize  this  pseudoalgorithm  and  implement it in [5XGAP[105X.
+  Instead  of "strings", which can be ambiguous, we use strips. Our added care
+  pays off when examining asymoptotic syzygy behavior of strings.[133X
+  
+  [33X[0;0YRecall  our  strip  [10Xs[110X  from above. Let's start calculating its syzygies. The
+  operation   [10XSyzygyOfStrip[110X   returns   a   list   of  strips,  one  for  each
+  indecomposable direct summand of the syzygy of its input.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSyzygyOfStrip( s );[127X[104X
+    [4X[28X[ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ][128X[104X
+    [4X[25Xgap>[125X [27XLength( last );[127X[104X
+    [4X[28X3[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThis example shows that the syzygy of [10Xs[110X has [22X3[122X indecomposable summands.[133X
+  
+  [33X[0;0YOf  course,  there's  no reason to stop at [22X1[122Xst syzygies. [5XSBStrips[105X is able to
+  take  higher  syzygies  very  easily  (but  refer  to the next section for a
+  discussion  of an efficient approach). For example, we can calculate the [22X4[122Xth
+  syzygy of [10Xs[110X as follows.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27X4th_syz := NthSyzygyOfStrip( s, 4 );[127X[104X
+    [4X[28X[ (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d^2), (a)^-1(v1), (v2)^-1(d^2),[128X[104X
+    [4X[28X  (a)^-1(b*c) (a)^-1(v1), (d^2)^-1(v2), (v1)^-1(a), (v2)^-1(v2),[128X[104X
+    [4X[28X  (v2)^-1(c) (c*a)^-1(v2), (v1)^-1(a), (v2)^-1(v2),[128X[104X
+    [4X[28X  (v2)^-1(c) (c*a)^-1(v2), (v2)^-1(v2), (a)^-1(v1),[128X[104X
+    [4X[28X  (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d), (a)^-1(v1), (v2)^-1(d^2),[128X[104X
+    [4X[28X  (a)^-1(v1), (d^2)^-1(v2) ][128X[104X
+    [4X[25Xgap>[125X [27XLength( 4th_syz );[127X[104X
+    [4X[28X20[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe find that the [22X4[122Xth syzygy of [10Xs[110X has [22X20[122X indecomposable direct summands.[133X
+  
+  [33X[0;0YNote that many strips occur multiple times in this [10X4th_syz[110X. (What this means
+  mathematically  is  that many of those summands are isomorphic.) If you want
+  to  remove duplicates from the above list (which is like looking at just the
+  isomorphism types of modules in the direct sum), then the most efficient way
+  is   with  [2XSet[102X  ([14XReference:  Set[114X).  Alternatively,  you  can  use  [2XCollected[102X
+  ([14XReference:   Collected[114X).   This   turn  the  list  into  something  that  a
+  mathematician  might  call  a  multiset.  That  is,  the distinct strips are
+  recorded along with their frequency in the list.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSet( 4th_syz );[127X[104X
+    [4X[28X[ (v2)^-1(v2), (v1)^-1(a), (v2)^-1(d), (v2)^-1(d^2),[128X[104X
+    [4X[28X  (v2)^-1(c*a) (c)^-1(v2), (a)^-1(b*c) (a)^-1(v1) ][128X[104X
+    [4X[25Xgap>[125X [27XCollected( 4th_syz );[127X[104X
+    [4X[28X[ [ (v2)^-1(v2), 3 ], [ (v1)^-1(a), 6 ], [ (v2)^-1(d), 1 ],[128X[104X
+    [4X[28X  [ (v2)^-1(d^2), 5 ], [ (v2)^-1(c*a) (c)^-1(v2), 4 ],[128X[104X
+    [4X[28X  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YFor  example,  the  second  output  means that [10X(v2)^-1(v2)[110X occurs [22X3[122X times in
+  [10X4th_syz[110X while [10X(v1)^-1(a)[110X occurs [22X6[122X times.[133X
+  
+  [33X[0;0YWe  call these "multisets" [13Xcollected lists[113X. The [5XSBStrips[105X package has several
+  built-in  functionalities  for  taking  such  "collected lists" of syzygies.
+  Principal    among    these    are    [2XCollectedSyzygyOfStrip[102X   ([14X3.4-3[114X)   and
+  [2XCollectedNthSyzygyOfStrip[102X ([14X3.4-4[114X).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCollectedSyzygyOfStrip( s );[127X[104X
+    [4X[28X[ [ (a)^-1(v1), 1 ], [ (d)^-1(v2), 1 ],[128X[104X
+    [4X[28X  [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XCollectedNthSyzygyOfStrip( s, 4 );[127X[104X
+    [4X[28X[ [ (v2)^-1(c) (c*a)^-1(v2), 4 ], [ (v2)^-1(v2), 3 ],[128X[104X
+    [4X[28X  [ (v1)^-1(a), 6 ], [ (v2)^-1(d^2), 5 ], [ (v2)^-1(d), 1 ],[128X[104X
+    [4X[28X  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y(In  the  next  section,  we  pause  to  discuss  the  efficiency  of  these
+  "collected" methods.)[133X
+  
+  [33X[0;0YWe  reiterate  that  the lists (resp. collected lists) of strips returned by
+  [10XSyzygyOfStrip[110X  (resp.  [10XCollectedSyzygyOfStrip[110X)  and  its [10XNth[110X variants may be
+  turned  into  lists  (resp. collected lists) of quiver representations using
+  [10XModuleOfStrip[110X.  These  may  alternatively be turned into a single direct sum
+  module using [10XDirectSumModuleOfStrips[110X.[133X
+  
+  
+  [1X2.4 [33X[0;0YComputing higher syzygies efficiently[133X[101X
+  
+  [33X[0;0YA  central  point in my thesis [13X(reference!)[113X is that the syzygies of a string
+  module   should   be  arranged  in  a  particular  format.  (A  little  more
+  specifically,  they  should  be  written into a certain kind of array.) This
+  format  does  not  print nicely onto the Euclidean plane so, sadly, there is
+  little  hope of [5XGAP[105X displaying syzygies in the most optimal way. The closest
+  it  can get -- which is not very close at all, frankly -- is the list format
+  returned   by   [10XSyzygyOfStrip[110X  or  [10XNthSyzygyOfStrip[110X.  However,  this  format
+  compresses  lots  into  a  single line. This loses information and becomes a
+  very  inefficient  way to store data (let along compute with them). By using
+  functions       like       [10XCollected[110X,       [10XCollectedSyzygyOfStrip[110X       and
+  [10XCollectedNthSyzygyOfStrip[110X,   we   lose  what  little  information  the  list
+  presentation holds onto, but we streamline out calculations greatly.[133X
+  
+  [33X[0;0YTo  see this, consider the [22X20[122Xth syzygy of [10Xs[110X. The following calculation shows
+  that  it  has  [22X344732[122X  distinct summands (many of which will be isomorphic);
+  this took over [22X2[122X minutes to perform on my device.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XNthSyzygyOfStrip( s, 20 );;[127X[104X
+    [4X[25Xgap>[125X [27Xtime;[127X[104X
+    [4X[28X130250[128X[104X
+    [4X[25Xgap>[125X [27XLength( last2 );[127X[104X
+    [4X[28X344732[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YCompare  this  with  a  "collected"  approach,  wherein  the [22X20[122Xth syzygy was
+  calculated in a heartbeat (and the [22X100[122Xth syzygy in not much more).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XCollectedNthSyzygyOfStrip( s, 20 );[127X[104X
+    [4X[28X[ [ (v2)^-1(c) (c*a)^-1(v2), 66012 ], [ (v2)^-1(v2), 55403 ],[128X[104X
+    [4X[28X  [ (v1)^-1(a), 121414 ], [ (v2)^-1(d^2), 101901 ], [ (v2)^-1(d), 1 ],[128X[104X
+    [4X[28X  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xtime;[127X[104X
+    [4X[28X62[128X[104X
+    [4X[25Xgap>[125X [27XCollectedNthSyzygyOfStrip( s, 100 );[127X[104X
+    [4X[28X[ [ (v2)^-1(c) (c*a)^-1(v2), 98079530178586034536500564 ],[128X[104X
+    [4X[28X  [ (v2)^-1(v2), 82316850636514866677657075 ],[128X[104X
+    [4X[28X  [ (v1)^-1(a), 180396380815100901214157638 ],[128X[104X
+    [4X[28X  [ (v2)^-1(d^2), 151404293106684183601223221 ], [ (v2)^-1(d), 1 ],[128X[104X
+    [4X[28X  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xtime;[127X[104X
+    [4X[28X297[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YBe  advised  that,  even in this easier-to-store form, the integers involved
+  may  become  to  big for [5XGAP[105X to handle. Efficient storage only increases the
+  upper bound on information we can store; it doesn't remove it![133X
+  
+  
+  [1X2.5 [33X[0;0YOther important strips[133X[101X
+  
+  [33X[0;0YFirst,  some  general  theory about finite-dimensional algebras. Recall that
+  (the  isomorphism  classes  of) the simple modules over an SB algebra are in
+  one-to-one correspondence with the vertices of its ordinary quiver. The same
+  is  true  for  the  indecomposable projective modules and the indecomposable
+  injective  modules.  (It  is  also  true  for  any finite-dimensional quiver
+  algebra,  more  generally.)  In  this section, suppose that the vertices are
+  [22Xi_1,   dots,  i_n[122X,  and  that  the  simple,  indecomposable  projective  and
+  indecomposable  injective  modules associated to vertex [22Xi_r[122X are respectively
+  [22XS_r[122X, [22XP_r[122X and [22XI_r[122X.[133X
+  
+  [33X[0;0YAll of the simple modules over an SB algebra are string modules. The list of
+  strips that describe them can be obtained using the following command.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSimpleStripsOfSBAlg( alg2 );[127X[104X
+    [4X[28X[ (v1)^-1(v1), (v2)^-1(v2) ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe [10Xr[110Xth entry is the strip describing the [10Xr[110Xth simple module [22XS_r[122X.[133X
+  
+  [33X[0;0YAdditionally,  some  of  the  indecomposable  projective  modules are string
+  modules. The attribute [2XProjectiveStripsOfSBAlg[102X ([14X5.5-3[114X) returns a list, whose
+  [10Xr[110Xth  entry is the strip describing the module [22XP_r[122X (if [22XP_r[122X is indeed a string
+  module)  or  the boolean [9Xfail[109X (if not). The attribute [2XInjectiveStripsOfSBAlg[102X
+  ([14X5.5-4[114X) is similar.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XProjectiveStripsOfSbAlg( alg2 );[127X[104X
+    [4X[28X[ fail, (c*a)^-1(d^3) ][128X[104X
+    [4X[25Xgap>[125X [27XInjectiveStripsOfSbAlg( alg2 );[127X[104X
+    [4X[28X[ fail, (v1)^-1(a*b) (d^3)^-1(v2) ][128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0Y(If  a  projective  or  injective  module over an SB algebra is not a string
+  module,  then  it  must  be  [13Xp[113Xrojective,  [13Xi[113Xnjective  and  [13Xn[113Xonuniserial. Such
+  modules, which we call [13Xpin[113X modules (can you see why?) are not implemented in
+  [5XSBStrips[105X.  However, from time to time our notation refers to them obliquely,
+  for instance [2XIsPinBoundarySyllable[102X ([14X???IsPinBoundarySyllable???[114X).)[133X
+  
+  [33X[0;0YThe  uniserial  modules are also, in particular, string modules. They are in
+  one-to-one  correspondence  with  the  paths  in  the SB algebra. There is a
+  method  for  [2XStripify[102X  ([14X3.2-1[114X) that turns a path for the SB algebra into the
+  corresponding  strip.  Paths in the SB algebra are created using [5XQPA[105X syntax.
+  Perhaps it is clearest to see an example.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XStripify( alg2.a * alg2.b );[127X[104X
+    [4X[28X(a*b)^-1(v1)[128X[104X
+    [4X[25Xgap>[125X [27XStripify( alg2.c );[127X[104X
+    [4X[28X(c)^-1(v2)[128X[104X
+    [4X[25Xgap>[125X [27XStripify( alg2.d^3 );[127X[104X
+    [4X[28X(d^3)^-1(v2)[128X[104X
+    [4X[25Xgap>[125X [27XStripify( alg2.v1 );[127X[104X
+    [4X[28X(v1)^-1(v1)[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIn  the  first  example,  [10Xa[110X and [10Xb[110X are the names of arrows in the quiver with
+  which  [10Xalg2[110X  was  presented.  The  residue of the arrow [10Xa[110X in [10Xalg2[110X is [10Xalg2.a[110X;
+  similarly,  [10Xalg2.b[110X. Their product [10Xalg2.a * alg2.b[110X is the residue of the path
+  [10Xa  * b[110X in the quiver (where [10Xa * b[110X means "[10Xa[110X then [10Xb[110X"). This is what we mean by
+  a  path  in the SB algebra: products of (residues of) arrows and vertices in
+  the algebra.[133X
+  
+  [33X[0;0YWe  see  that  vertices  or  arrows  of  the SB algebra (such as [10Xalg2.v1[110X and
+  [10Xalg2.c[110X)  are  paths too. We also see an example of the [10X^[110X operation: [10Xalg2.d^3[110X
+  is equivalent to [10Xalg2.d * alg2.d * alg2.d[110X.[133X
+  
+  [33X[0;0YSince  vertices are still paths (trivially) and simple modules are uniserial
+  (trivially),  we therefore have a second way to access the simple modules of
+  a SB algebra.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xs1 := Stripify( alg2.v1 );;[127X[104X
+    [4X[25Xgap>[125X [27Xs2 := Stripify( alg2.v2 );;[127X[104X
+    [4X[25Xgap>[125X [27X[ s1, s2 ] = SimpleStripsOfSbAlg( alg2 );[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.6 [33X[0;0YTests with strips[133X[101X
+  
+  [33X[0;0YNow  that we've implement strips, we should play around with them. Let's see
+  some  of  the  fun  tests built into [5XSBStrips[105X! For this, we'll introduce the
+  algebra  [10Xalg1[110X.  It  is  the  Nakayama algebra [22XKQ/J^4[122X, where [22XQ[122X is the [22X3[122X-cycle
+  quiver with arrows [22Xa[122X, [22Xb[122X and [22Xc[122X,[133X
+  
+  [33X[0;0Y,  where [22XJ[122X is the [22X4[122Xth power of the arrow ideal of [22XKQ[122X, and where [22XK=ℚ[122X. (Really
+  [22XK[122X could be any field.)[133X
+  
+  [33X[0;0YThis  algebra  is  chosen  because  it  is  much  more boring than [10Xalg2[110X. For
+  instance,  as a monomial algebra, [10Xalg1[110X is [13Xsyzygy-finite[113X. Roughly, this means
+  that  the  class of syzygies stabilizes. More precisely, it means that there
+  is  some  integer  [22X0  ≤  m  <  ∞[122X and a finite set [22XmathcalS[122X of indecomposable
+  modules such that, for any module [22XX[122X, the indecomposable summands of [22XΩ^m( X )[122X
+  belong  to  [22XmathcalS[122X.  (By  a  result  of Zimmermann Huisgen [13XREFERENCE![113X, [22Xm=2[122X
+  works.)  But,  in  fact,  we  can  say something stronger. Because [10Xalg2[110X is a
+  Nakayama  algebra,  it  is  [13Xrepresentation  finite[113X (so, in fact, [22Xm=0[122X works).
+  Things to test: weakly periodic; finite syzygy type[133X
+  
+  
+  [1X2.7 [33X[0;0YAdditional examples[133X[101X
+  
+  [33X[0;0YGive some other sample algebras here, and do things with them.[133X
+  

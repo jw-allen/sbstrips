@@ -39,7 +39,7 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##        (Of course, this method assumes that the string contains at least one
 ##        arrow. There is a different, easier, method for strings comprising
 ##        only a single vertex. Namely <Ref Meth="Stripify"
-##        Label="for paths of a special biserial algebra"/> called with the
+##        Label="for a path of a special biserial algebra"/> called with the
 ##        residue of a vertex.)
 ##        <P />
 ##        The first arrow (ie, the leftmost one drawn on the page) is
@@ -487,24 +487,36 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##  <#GAPDoc Label="DocModuleOfStrip">
 ##    <ManSection>
 ##      <Meth Name="ModuleOfStrip" Arg="strip" Label="for a strip"/>
+##      <Meth Name="ModuleOfStrip" Arg="list"
+##      Label="for a (flat) list of strips"/>
+##      <Meth Name="ModuleOfStrip" Arg="clist"
+##      Label="for a collected list of strips"/>
 ##      <Description>
-##        Argument: <A>strip</A>, a strip
-##        <P />
+##        Argument: a strip <A>strip</A>, or a list <A>list</A> of strips, or
+##        a collected list <A>clist</A> of strips
+##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a right module for the SB algebra over which <A>strip</A> is defined
+##        a right module for the SB algebra over which <A>strip</A> is defined,
+##        or a list or collected list of the modules associated to the strips
+##        in <A>list</A> or <A>clist</A> respectively.
 ##      </Returns>
 ##      <Description>
-##        The indecomposable modules for a SB algebra come in two kinds (over
-##        an algebraically closed field, at least). One of those are <E>string
-##        modules</E>, so-called because they may be described by the decorated
-##        graphs that representation theorists call <E>strings</E> and which
-##        the &SBStrips; package calls <E>strips</E>.
+##        <E>Reminder.</E> The indecomposable modules for a SB algebra come in
+##        two kinds (over an algebraically closed field, at least). One of
+##        those are <E>string modules</E>, so-called because they may be
+##        described by the decorated graphs that representation theorists call
+##        <E>strings</E> and which the &SBStrips; package calls <E>strips</E>.
 ##        <P />
-##        This operation returns the string module corresponding to the strip 
-##        <A>strip</A>. More specifically, it gives that module as a quiver,
-##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
-##        Label="with dimension vector" BookName="QPA"/>.
+##        The first method for this operation returns the string module
+##        corresponding to the strip  <A>strip</A>. More specifically, it gives
+##        that module as a quiver, ultimately using <Ref
+##        Oper="RightModuleOverPathAlgebra" Label="with dimension vector"
+##        BookName="QPA"/>.
+##        <P />
+##        The second and third methods respectively apply the first method to
+##        each strip in <A>list</A> or in <A>clist</A>, returning a list or
+##        collected list of modules.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>

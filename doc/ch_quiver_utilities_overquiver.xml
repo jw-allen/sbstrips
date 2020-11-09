@@ -43,13 +43,13 @@
 <Section>
   <Heading>New attributes for special biserial algebras</Heading>
 
-  <#Include Label="DocOverquiverOfSbAlg">
+  <#Include Label="DocOverquiverOfSBAlg">
 
-  <#Include Label="DocSimpleStripsOfSbAlg">
+  <#Include Label="DocSimpleStripsOfSBAlg">
   
-  <#Include Label="DocProjectiveStripsOfSbAlg">
+  <#Include Label="DocProjectiveStripsOfSBAlg">
   
-  <#Include Label="DocInjectiveStripsOfSbAlg">
+  <#Include Label="DocInjectiveStripsOfSBAlg">
 </Section>
  
 <Section>

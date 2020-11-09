@@ -1,0 +1,219 @@
+  
+  [1X5 [33X[0;0YQuiver utilities and the overquiver of a SB algebra[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YQuivers  are  finite  directed  graphs.  Paths  in  a  given quiver [22XQ[122X can be
+  concatenated  in  an  obvious  way,  and  this concatenation can be extended
+  [22XK[122X-linearly (over a field [22XK[122X) to give an associative, unital algebra [22XKQ[122X called
+  a  [13Xpath  algebra[113X.  A path algebra is infinite-dimensional iff its underlying
+  quiver  [22XQ[122X  is  acyclic.  Finite-dimensional  [13Xquiver  algebras[113X  --  that  is,
+  finite-dimensional  quotient  algebras  [22XKQ/I[122X  of  a  path algebra [22XKQ[122X by some
+  (frequently  admissible)  ideal  [22XI[122X  --  are a very important class of rings,
+  whose representation theory has been much studied.[133X
+  
+  [33X[0;0YThe  excellent  [5XQPA[105X  package  implements these objects in [5XGAP[105X. The (far more
+  humdrum)  [5XSBStrips[105X  package extends [5XQPA[105X's functionality. Quivers constructed
+  using  the [5XQPA[105X function [2XQuiver[102X ([14XQPA: Quiver no. of vertices, list of arrows[114X)
+  belong to the filter [2XIsQuiver[102X ([14XQPA: IsQuiver[114X), and special biserial algebras
+  are  those  quiver  algebras for which the property [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returns [9Xtrue[109X.[133X
+  
+  [33X[0;0YIn this section, we explain some added functionality for quivers and special
+  biserial algebras.[133X
+  
+  
+  [1X5.2 [33X[0;0YNew property of quivers[133X[101X
+  
+  [1X5.2-1 Is1RegQuiver[101X
+  
+  [33X[1;0Y[29X[2XIs1RegQuiver[102X( [3Xquiver[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10Yeither  [10Xtrue[110X  or  [10Xfalse[110X,  depending  on  whether  or not [3Xquiver[103X is
+            [22X1[122X-regular.[133X
+  
+  [1X5.2-2 IsOverquiver[101X
+  
+  [33X[1;0Y[29X[2XIsOverquiver[102X( [3Xquiver[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if [3Xquiver[103X was constructed by [14X???DocOverquiverOfSBAlg???[114X, and
+            [9Xfalse[109X otherwise.[133X
+  
+  
+  [1X5.3 [33X[0;0YNew attributes of quivers[133X[101X
+  
+  [1X5.3-1 1RegQuivIntAct[101X
+  
+  [33X[1;0Y[29X[2X1RegQuivIntAct[102X( [3Xx[103X, [3Xk[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xx[103X, which is either a vertex or an arrow of a [22X1[122X-regular quiver; [3Xk[103X,
+  an integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe path [22Xx+k[122X, as per the [22Xℤ[122X-action (see below).[133X
+  
+  [33X[0;0YRecall  that  a  quiver is [22X1[122X-regular iff the source and target functions [22Xs,t[122X
+  are  bijections  from  the  arrow  set  to the vertex set (in which case the
+  inverse  [22Xt^-1[122X  is well-defined). The generator [22X1 ∈ ℤ[122X acts as ``[22Xt^-1[122X then [22Xs[122X''
+  on vertices and ``[22Xs[122X then [22Xt^-1[122X'' on arrows.[133X
+  [33X[0;0YThis  operation figures out from [3Xx[103X the quiver to which [3Xx[103X belongs and applies
+  [2X1RegQuivIntActionFunction[102X ([14X5.3-2[114X) of tha quiver. For this reason, it is more
+  user-friendly.[133X
+  
+  [1X5.3-2 1RegQuivIntActionFunction[101X
+  
+  [33X[1;0Y[29X[2X1RegQuivIntActionFunction[102X( [3Xquiver[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a [22X1[122X-regular quiver (as tested by [2XIs1RegQuiver[102X ([14X5.2-1[114X))[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  single  function [10Xf[110X describing the [22Xℤ[122X-actions on the vertices and
+            the arrows of [3Xquiver[103X[133X
+  
+  [33X[0;0YRecall  that  a  quiver is [22X1[122X-regular iff the source and target functions [22Xs,t[122X
+  are  bijections  from  the  arrow  set  to the vertex set (in which case the
+  inverse  [22Xt^-1[122X  is well-defined). The generator [22X1 ∈ ℤ[122X acts as ``[22Xt^-1[122X then [22Xs[122X''
+  on vertices and ``[22Xs[122X then [22Xt^-1[122X'' on arrows.[133X
+  [33X[0;0YIn  practice  you will probably want to use [2X1RegQuivIntAct[102X ([14X5.3-1[114X), since it
+  saves you having to remind [5XSBStrips[105X which quiver you intend to act on.[133X
+  
+  [1X5.3-3 2RegAugmentationOfQuiver[101X
+  
+  [33X[1;0Y[29X[2X2RegAugmentationOfQuiver[102X( [3Xground_quiv[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:    [3Xground_quiv[103X,    a    sub[22X2[122X-regular    quiver   (as   tested   by
+  [2XIsSpecialBiserialQuiver[102X ([14XQPA: IsSpecialBiserialQuiver[114X))[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya [22X2[122X-regular quiver of which [3Xground_quiv[103X may naturally be seen as a
+            subquiver[133X
+  
+  [33X[0;0YIf   [3Xground_quiv[103X  is  itself  sub-[22X2[122X-regular,  then  this  attribute  returns
+  [3Xground_quiv[103X  identically. If not, then this attribute constructs a brand new
+  quiver  object  which has vertices and arrows having the same names as those
+  of [3Xground_quiv[103X, but also has arrows with names [10Xaugarr1[110X, [10Xaugarr2[110X and so on.[133X
+  
+  
+  [1X5.4 [33X[0;0YOperations on vertices and arrows of quivers[133X[101X
+  
+  [1X5.4-1 1RegQuivIntAct[101X
+  
+  [33X[1;0Y[29X[2X1RegQuivIntAct[102X( [3Xx[103X, [3Xk[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xx[103X, which is either a vertex or an arrow of a [22X1[122X-regular quiver; [3Xk[103X,
+  an integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe path [22Xx+k[122X, as per the [22Xℤ[122X-action (see below).[133X
+  
+  [33X[0;0YRecall  that  a  quiver is [22X1[122X-regular iff the source and target functions [22Xs,t[122X
+  are  bijections  from  the  arrow  set  to the vertex set (in which case the
+  inverse  [22Xt^-1[122X  is well-defined). The generator [22X1 ∈ ℤ[122X acts as ``[22Xt^-1[122X then [22Xs[122X''
+  on vertices and ``[22Xs[122X then [22Xt^-1[122X'' on arrows.[133X
+  [33X[0;0YThis  operation figures out from [3Xx[103X the quiver to which [3Xx[103X belongs and applies
+  [2X1RegQuivIntActionFunction[102X ([14X5.3-2[114X) of tha quiver. For this reason, it is more
+  user-friendly.[133X
+  
+  [1X5.4-2 PathBySourceAndLength[101X
+  
+  [33X[1;0Y[29X[2XPathBySourceAndLength[102X( [3Xvert[103X, [3Xlen[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments:  [3Xvert[103X,  a  vertex  of  a  [22X1[122X-regular  quiver [22XQ[122X; [3Xlen[103X, a nonnegative
+  integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe unique path in [22XQ[122X which has source [3Xvert[103X and length [3Xlen[103X.[133X
+  
+  [1X5.4-3 PathByTargetAndLength[101X
+  
+  [33X[1;0Y[29X[2XPathByTargetAndLength[102X( [3Xvert[103X, [3Xlen[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments:  [3Xvert[103X,  a  vertex  of  a  [22X1[122X-regular  quiver [22XQ[122X; [3Xlen[103X, a nonnegative
+  integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe unique path in [22XQ[122X which has target [3Xvert[103X and length [3Xlen[103X.[133X
+  
+  
+  [1X5.5 [33X[0;0YNew attributes for special biserial algebras[133X[101X
+  
+  [1X5.5-1 OverquiverOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XOverquiverOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya   quiver   [10Xoquiv[110X   with   which  uniserial  [3Xsba[103X-modules  can  be
+            conveniently (and unambiguously) represented.[133X
+  
+  [1X5.5-2 SimpleStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XSimpleStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:  [3Xsba[103X,  a  special  biserial  algebra (ie, [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returs [9Xtrue[109X)[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya   list   [10Xsimple_list[110X,  whose  [22Xj[122Xth  entry  is  the  simple  strip
+            corresponding to the [22Xj[122Xth vertex of [3Xsba[103X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver  are  ordered;  [10XSimpleStripsOfSBAlg[110X  adopts  that order for strips of
+  simple modules.[133X
+  
+  [1X5.5-3 ProjectiveStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XProjectiveStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:  [3Xsba[103X,  a  special  biserial  algebra (ie, [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returs [9Xtrue[109X)[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  [10Xproj_list[110X,  whose  entry are either strips or the boolean
+            [9Xfail[109X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver  are ordered; [10XProjectiveStripsOfSBAlg[110X adopts that order for strips of
+  projective modules.[133X
+  
+  [33X[0;0YIf  the projective module corresponding to the [10Xj[110Xth vertex of [3Xsba[103X is a string
+  module,  then [10XProjectiveStripsOfSBAlg( sba )[j][110X returns the strip describing
+  that string module. If not, then it returns [9Xfail[109X.[133X
+  
+  [1X5.5-4 InjectiveStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XInjectiveStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  [10Xinj_list[110X,  whose entries are either strips or the boolean
+            [9Xfail[109X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver  are  ordered; [10XInjectiveStripsOfSBAlg[110X adopts that order for strips of
+  projective modules.[133X
+  
+  [33X[0;0YIf  the  injective module corresponding to the [10Xj[110Xth vertex of [3Xsba[103X is a string
+  module,  then  [10XInjectiveStripsOfSBAlg( sba )[j][110X returns the strip describing
+  that string module. If not, then it returns [9Xfail[109X.[133X
+  
+  
+  [1X5.6 [33X[0;0YNew function for special biserial algebras[133X[101X
+  
+  [1X5.6-1 TestInjectiveStripsUpToNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XTestInjectiveStripsUpToNthSyzygy[102X( [3Xsba[103X, [3XN[103X ) [32X function[133X
+  
+  [33X[0;0YArguments:  [3Xsba[103X,  a  special  biserial algebra (ie, [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returs [9Xtrue[109X); [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X, if all strips of injective string modules have finite syzygy
+            type by the [3XN[103Xth syzygy, and [9Xfalse[109X otherwise.[133X
+  
+  [33X[0;0YThis  function calls [2XInjectiveStripsOfSBAlg[102X ([14X5.5-4[114X) for [3Xsba[103X, filters out all
+  the   [9Xfail[109Xs,  and  then  checks  each  remaining  strip  individually  using
+  [2XIsFiniteSyzygyTypeStripByNthSyzygy[102X ([14X3.6-2[114X) (with second argument [3XN[103X).[133X
+  
+  [33X[0;0Y[13XAuthor's  note.[113X  For  every  special  biserial algebra I test, this function
+  returns  true  for  sufficiently  large  [3XN[103X.  It  suggests that the injective
+  cogenerator  of  a  SB algebra always has finite syzygy type. This condition
+  implies   many   homological  conditions  of  interest  (including  the  big
+  finitistic dimension conjecture)![133X
+  

@@ -75,9 +75,9 @@ data structure called 'strips', and performs this syzygy calculation.",
   ),
 
  Dependencies := rec(
-  GAP := ">=4.5",
+  GAP := ">=4.11",
   NeededOtherPackages := [
-   ["qpa", "1.27"], ["GAPDoc", ">=1.6"]
+   ["qpa", "1.30"], ["GAPDoc", ">=1.6"]
    ],
   SuggestedOtherPackages := [],
   ExternalConditions := []

@@ -1,0 +1,44 @@
+\indexentry{Stripify@\texttt  {Stripify}!for an arrow, +/-1 and a list of integers|hyperpage}{12}
+\indexentry{Stripify@\texttt  {Stripify}!for a path of a special biserial algebra|hyperpage}{13}
+\indexentry{SimpleStripsOfSBAlg@\texttt  {SimpleStripsOfSBAlg}|hyperpage}{13}
+\indexentry{UniserialStripsOfSBAlg@\texttt  {UniserialStripsOfSBAlg}|hyperpage}{13}
+\indexentry{ProjectiveStripsOfSBAlg@\texttt  {ProjectiveStripsOfSBAlg}|hyperpage}{13}
+\indexentry{InjectiveStripsOfSBAlg@\texttt  {InjectiveStripsOfSBAlg}|hyperpage}{14}
+\indexentry{SyzygyOfStrip@\texttt  {SyzygyOfStrip}!for strips|hyperpage}{14}
+\indexentry{SyzygyOfStrip@\texttt  {SyzygyOfStrip}!for lists of strips|hyperpage}{14}
+\indexentry{NthSyzygyOfStrip@\texttt  {NthSyzygyOfStrip}!for strips|hyperpage}{14}
+\indexentry{NthSyzygyOfStrip@\texttt  {NthSyzygyOfStrip}!for lists of strips|hyperpage}{14}
+\indexentry{CollectedSyzygyOfStrip@\texttt  {CollectedSyzygyOfStrip}!for strips|hyperpage}{15}
+\indexentry{CollectedSyzygyOfStrip@\texttt  {CollectedSyzygyOfStrip}!for flat lists of strips|hyperpage}{15}
+\indexentry{CollectedSyzygyOfStrip@\texttt  {CollectedSyzygyOfStrip}!for collected lists of strips|hyperpage}{15}
+\indexentry{CollectedNthSyzygyOfStrip@\texttt  {CollectedNthSyzygyOfStrip}!for strips|hyperpage}{15}
+\indexentry{CollectedNthSyzygyOfStrip@\texttt  {CollectedNthSyzygyOfStrip}!for lists of strips|hyperpage}{15}
+\indexentry{CollectedNthSyzygyOfStrip@\texttt  {CollectedNthSyzygyOfStrip}!for collected lists of strips|hyperpage}{15}
+\indexentry{WidthOfStrip@\texttt  {WidthOfStrip}|hyperpage}{15}
+\indexentry{ModuleOfStrip@\texttt  {ModuleOfStrip}!for a strip|hyperpage}{16}
+\indexentry{ModuleOfStrip@\texttt  {ModuleOfStrip}!for a (flat) list of strips|hyperpage}{16}
+\indexentry{ModuleOfStrip@\texttt  {ModuleOfStrip}!for a collected list of strips|hyperpage}{16}
+\indexentry{IsFiniteSyzygyTypeStripByNthSyzygy@\texttt  {IsFiniteSyzygyTypeStripByNthSyzygy}|hyperpage}{16}
+\indexentry{IsWeaklyPeriodicStripByNthSyzygy@\texttt  {IsWeaklyPeriodicStripByNthSyzygy}|hyperpage}{16}
+\indexentry{Is1RegQuiver@\texttt  {Is1RegQuiver}|hyperpage}{18}
+\indexentry{IsOverquiver@\texttt  {IsOverquiver}|hyperpage}{18}
+\indexentry{1RegQuivIntAct@\texttt  {1RegQuivIntAct}|hyperpage}{19}
+\indexentry{1RegQuivIntActionFunction@\texttt  {1RegQuivIntActionFunction}|hyperpage}{19}
+\indexentry{2RegAugmentationOfQuiver@\texttt  {2RegAugmentationOfQuiver}|hyperpage}{19}
+\indexentry{1RegQuivIntAct@\texttt  {1RegQuivIntAct}|hyperpage}{19}
+\indexentry{PathBySourceAndLength@\texttt  {PathBySourceAndLength}|hyperpage}{20}
+\indexentry{PathByTargetAndLength@\texttt  {PathByTargetAndLength}|hyperpage}{20}
+\indexentry{OverquiverOfSBAlg@\texttt  {OverquiverOfSBAlg}|hyperpage}{20}
+\indexentry{SimpleStripsOfSBAlg@\texttt  {SimpleStripsOfSBAlg}|hyperpage}{20}
+\indexentry{ProjectiveStripsOfSBAlg@\texttt  {ProjectiveStripsOfSBAlg}|hyperpage}{20}
+\indexentry{InjectiveStripsOfSBAlg@\texttt  {InjectiveStripsOfSBAlg}|hyperpage}{21}
+\indexentry{TestInjectiveStripsUpToNthSyzygy@\texttt  {TestInjectiveStripsUpToNthSyzygy}|hyperpage}{21}
+\indexentry{IsCollectedList@\texttt  {IsCollectedList}|hyperpage}{27}
+\indexentry{IsCollectedDuplicateFreeList@\texttt  {IsCollectedDuplicateFreeList}|hyperpage}{27}
+\indexentry{IsCollectedHomogeneousList@\texttt  {IsCollectedHomogeneousList}|hyperpage}{27}
+\indexentry{Recollected@\texttt  {Recollected}|hyperpage}{28}
+\indexentry{Uncollected@\texttt  {Uncollected}|hyperpage}{28}
+\indexentry{String@\texttt  {String}!for paths of length at least 2|hyperpage}{28}
+\indexentry{ArrowsOfQuiverAlgebra@\texttt  {ArrowsOfQuiverAlgebra}|hyperpage}{28}
+\indexentry{VerticesOfQuiverAlgebra@\texttt  {VerticesOfQuiverAlgebra}|hyperpage}{29}
+\indexentry{SBStripsExampleAlgebra@\texttt  {SBStripsExampleAlgebra}|hyperpage}{30}

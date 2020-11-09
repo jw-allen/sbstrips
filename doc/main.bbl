@@ -1,0 +1,15 @@
+\begin{thebibliography}{QPA18}
+
+\bibitem[LM04]{LM04}
+S.~Liu and J.-P. Morin.
+\newblock The strong no loop conjecture for special biserial algebras.
+\newblock {\em Proceedings of the American Mathematical Society},
+  132(12):3513--3523, 2004.
+
+\bibitem[QPA18]{QPA}
+{\em QPA -- Quivers, path algebras and representations, Version 1.29}, 2018.
+\newblock \href {https://folk.ntnu.no/oyvinso/QPA/}
+  {\texttt{https://folk.ntnu.no/}\discretionary
+  {}{}{}\texttt{oyvinso/}\discretionary {}{}{}\texttt{QPA/}}.
+
+\end{thebibliography}

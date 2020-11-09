@@ -1,17 +1,43 @@
   
   [1X1 [33X[0;0YIntroduction[133X[101X
   
-  [33X[0;0YThis is based on [?LM04?].[133X
+  
+  [1X1.1 [33X[0;0YWhy "strips", not "strings"?[133X[101X
+  
+  [33X[0;0YFirst,  some context. Representation theorists use the word [13Xstring[113X to mean a
+  decorated  graph  that  describes  a  module; fittingly, this module is then
+  dubbed  a  [13Xstring  module[113X.  Liu  and Morin [LM ] showed that the syzygy of a
+  string module over a special biserial (SB) algebra is a direct sum of string
+  modules. This means that, in essence, we can forget about the modules [13Xper se[113X
+  and  compute syzygies just at the level of strings. Liu and Morin's proof is
+  constructive,   specifying   how   to   obtain   the  strings  indexing  the
+  indecompsoable  direct  summands  of  syzygy  from  thae string indexing the
+  original  module.  Their  language  sketches  how to spot patterns appearing
+  "from  one  syzygy  to  the  next",  but it does not scale in a particularly
+  transparent  way.  For example, I believe it does not lend itself to clearly
+  seeing  asymptotic  behaviour of syzygies of string modules. My research has
+  aimed,  in part, to provide a more robust language: one which lays bare more
+  patterns  in  the  syzygies  of  string modules over SB algebras in a manner
+  amenable to computer calculation.[133X
+  
+  [33X[0;0YOne  key  ingredient  is  a slight refinement of the definition of a string.
+  Really, this differs from the established definition only in technical ways,
+  the  effect  being  to  disambiguate  how the graph is decorated so that the
+  syzygy  calculation  is  streamlined. In my thesis, I propose the term [13Xstrip[113X
+  for this refined notion of a string. A happy side-effect of this name change
+  is that it avoids the clash with what [5XGAP[105X already thinks "string" means.[133X
+  
+  [33X[0;0Y[13X  In  brief: if whenever you read the word "strip" here, you imagine that it
+  means  the  kind  of  decorated  graph  that representation theorists call a
+  "string", then you won't go too far wrong. [113X[133X
   
   
-  [1X1.1 [33X[0;0YHeading[133X[101X
+  [1X1.2 [33X[0;0YAims[133X[101X
   
-  [1X1.1-1 InfoSBStrips[101X
+  [33X[0;0YSome text to go here![133X
   
-  [33X[1;0Y[29X[2XInfoSBStrips[102X[32X info class[133X
-  [6XReturns:[106X  [33X[0;10Ynothing[133X
   
-  [33X[0;0YThe  default  value  is  [22X1[122X.  Set  it  to [22X2[122X, [22X3[122X or [22X4[122X for increasing amounts of
-  verbiosity.  Set  it  to  [22X0[122X to receive no commentary from [5XSBStrips[105X about the
-  work it's doing.[133X
+  [1X1.3 [33X[0;0YInstallation[133X[101X
+  
+  [33X[0;0YSome text to go here![133X
   

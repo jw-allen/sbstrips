@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.4)  9 NOV 2020 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9.6100 64-bit) (preloaded format=pdflatex 2016.12.4)  9 NOV 2020 18:16
 entering extended mode
 **./main.tex
 (main.tex
@@ -933,14 +933,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--135
 
  []
 
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 141.
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--140
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 [2]
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 144.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 146.
  (main.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
@@ -1183,51 +1187,40 @@ Package xcolor Warning: Incompatible color definition on input line 79.
  [4]
 Chapter 1.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 148.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 150.
 
-Package xcolor Warning: Incompatible color definition on input line 148.
-
-
-Package xcolor Warning: Incompatible color definition on input line 152.
+Package xcolor Warning: Incompatible color definition on input line 150.
 
 
-Package xcolor Warning: Incompatible color definition on input line 157.
+Package xcolor Warning: Incompatible color definition on input line 154.
 
 
-Package xcolor Warning: Incompatible color definition on input line 182.
+Package xcolor Warning: Incompatible color definition on input line 159.
 
 
-Package xcolor Warning: Incompatible color definition on input line 188.
+Package xcolor Warning: Incompatible color definition on input line 184.
+
+
+Package xcolor Warning: Incompatible color definition on input line 190.
 
 [5
 
 ]
 Chapter 2.
 
-Package xcolor Warning: Incompatible color definition on input line 196.
+Package xcolor Warning: Incompatible color definition on input line 198.
 
 
-Package xcolor Warning: Incompatible color definition on input line 200.
+Package xcolor Warning: Incompatible color definition on input line 202.
 
 
-Package xcolor Warning: Incompatible color definition on input line 204.
+Package xcolor Warning: Incompatible color definition on input line 206.
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 206.
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-
-Package xcolor Warning: Incompatible color definition on input line 212.
+Package xcolor Warning: Incompatible color definition on input line 214.
 
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 212.
-
-Package xcolor Warning: Incompatible color definition on input line 212.
-
-
-Package xcolor Warning: Incompatible color definition on input line 214.
-
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 214.
 
 Package xcolor Warning: Incompatible color definition on input line 214.
 
@@ -1274,212 +1267,212 @@ Package xcolor Warning: Incompatible color definition on input line 228.
 Package xcolor Warning: Incompatible color definition on input line 228.
 
 
-Package xcolor Warning: Incompatible color definition on input line 233.
+Package xcolor Warning: Incompatible color definition on input line 230.
 
 
-Package xcolor Warning: Incompatible color definition on input line 250.
+Package xcolor Warning: Incompatible color definition on input line 230.
 
 
-Package xcolor Warning: Incompatible color definition on input line 253.
+Package xcolor Warning: Incompatible color definition on input line 235.
 
 
-Package xcolor Warning: Incompatible color definition on input line 253.
+Package xcolor Warning: Incompatible color definition on input line 252.
 
 
-Package xcolor Warning: Incompatible color definition on input line 259.
+Package xcolor Warning: Incompatible color definition on input line 255.
 
 
-Package xcolor Warning: Incompatible color definition on input line 264.
+Package xcolor Warning: Incompatible color definition on input line 255.
+
+
+Package xcolor Warning: Incompatible color definition on input line 261.
+
+
+Package xcolor Warning: Incompatible color definition on input line 266.
 
 [6
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 270.
+Package xcolor Warning: Incompatible color definition on input line 272.
 
 
-Package xcolor Warning: Incompatible color definition on input line 270.
+Package xcolor Warning: Incompatible color definition on input line 272.
 
 
-Package xcolor Warning: Incompatible color definition on input line 273.
+Package xcolor Warning: Incompatible color definition on input line 275.
 
 
-Package xcolor Warning: Incompatible color definition on input line 273.
+Package xcolor Warning: Incompatible color definition on input line 275.
 
 
-Package xcolor Warning: Incompatible color definition on input line 280.
+Package xcolor Warning: Incompatible color definition on input line 282.
 
 
-Package xcolor Warning: Incompatible color definition on input line 280.
+Package xcolor Warning: Incompatible color definition on input line 282.
 
 
-Package xcolor Warning: Incompatible color definition on input line 285.
+Package xcolor Warning: Incompatible color definition on input line 287.
 
 
-Package xcolor Warning: Incompatible color definition on input line 299.
+Package xcolor Warning: Incompatible color definition on input line 301.
 
 
-Package xcolor Warning: Incompatible color definition on input line 299.
+Package xcolor Warning: Incompatible color definition on input line 301.
 
 
-Package xcolor Warning: Incompatible color definition on input line 302.
+Package xcolor Warning: Incompatible color definition on input line 304.
 
 
-Package xcolor Warning: Incompatible color definition on input line 302.
+Package xcolor Warning: Incompatible color definition on input line 304.
 
 
-Package xcolor Warning: Incompatible color definition on input line 311.
+Package xcolor Warning: Incompatible color definition on input line 313.
 
 
-Package xcolor Warning: Incompatible color definition on input line 311.
+Package xcolor Warning: Incompatible color definition on input line 313.
 
 [7]
 
-Package xcolor Warning: Incompatible color definition on input line 319.
+Package xcolor Warning: Incompatible color definition on input line 321.
 
 
-Package xcolor Warning: Incompatible color definition on input line 319.
+Package xcolor Warning: Incompatible color definition on input line 321.
 
 
-Package xcolor Warning: Incompatible color definition on input line 332.
+Package xcolor Warning: Incompatible color definition on input line 334.
 
 
-Package xcolor Warning: Incompatible color definition on input line 332.
+Package xcolor Warning: Incompatible color definition on input line 334.
 
 
-Package xcolor Warning: Incompatible color definition on input line 336.
+Package xcolor Warning: Incompatible color definition on input line 338.
 
 
-Package xcolor Warning: Incompatible color definition on input line 336.
+Package xcolor Warning: Incompatible color definition on input line 338.
 
 
-Package xcolor Warning: Incompatible color definition on input line 344.
+Package xcolor Warning: Incompatible color definition on input line 346.
 
 
-Package xcolor Warning: Incompatible color definition on input line 344.
+Package xcolor Warning: Incompatible color definition on input line 346.
 
 
-Package xcolor Warning: Incompatible color definition on input line 347.
+Package xcolor Warning: Incompatible color definition on input line 349.
 
 
-Package xcolor Warning: Incompatible color definition on input line 347.
+Package xcolor Warning: Incompatible color definition on input line 349.
 
 
-Package xcolor Warning: Incompatible color definition on input line 351.
+Package xcolor Warning: Incompatible color definition on input line 353.
 
 
-Package xcolor Warning: Incompatible color definition on input line 351.
+Package xcolor Warning: Incompatible color definition on input line 353.
 
 
-Package xcolor Warning: Incompatible color definition on input line 363.
+Package xcolor Warning: Incompatible color definition on input line 365.
 
 [8]
 
-Package xcolor Warning: Incompatible color definition on input line 378.
-
-
-Package xcolor Warning: Incompatible color definition on input line 378.
-
-
 Package xcolor Warning: Incompatible color definition on input line 380.
 
 
 Package xcolor Warning: Incompatible color definition on input line 380.
 
 
-Package xcolor Warning: Incompatible color definition on input line 383.
+Package xcolor Warning: Incompatible color definition on input line 382.
 
 
-Package xcolor Warning: Incompatible color definition on input line 383.
+Package xcolor Warning: Incompatible color definition on input line 382.
 
 
-Package xcolor Warning: Incompatible color definition on input line 389.
+Package xcolor Warning: Incompatible color definition on input line 385.
 
 
-Package xcolor Warning: Incompatible color definition on input line 389.
+Package xcolor Warning: Incompatible color definition on input line 385.
 
 
-Package xcolor Warning: Incompatible color definition on input line 394.
+Package xcolor Warning: Incompatible color definition on input line 391.
 
 
-Package xcolor Warning: Incompatible color definition on input line 394.
+Package xcolor Warning: Incompatible color definition on input line 391.
 
 
-Package xcolor Warning: Incompatible color definition on input line 397.
+Package xcolor Warning: Incompatible color definition on input line 396.
 
 
-Package xcolor Warning: Incompatible color definition on input line 397.
+Package xcolor Warning: Incompatible color definition on input line 396.
 
 
-Package xcolor Warning: Incompatible color definition on input line 404.
+Package xcolor Warning: Incompatible color definition on input line 399.
 
 
-Package xcolor Warning: Incompatible color definition on input line 404.
+Package xcolor Warning: Incompatible color definition on input line 399.
 
 
-Package xcolor Warning: Incompatible color definition on input line 414.
+Package xcolor Warning: Incompatible color definition on input line 406.
 
 
-Package xcolor Warning: Incompatible color definition on input line 429.
+Package xcolor Warning: Incompatible color definition on input line 406.
 
 
-Package xcolor Warning: Incompatible color definition on input line 429.
+Package xcolor Warning: Incompatible color definition on input line 416.
+
+
+Package xcolor Warning: Incompatible color definition on input line 431.
+
+
+Package xcolor Warning: Incompatible color definition on input line 431.
 
 [9]
 
-Package xcolor Warning: Incompatible color definition on input line 435.
+Package xcolor Warning: Incompatible color definition on input line 437.
 
 
-Package xcolor Warning: Incompatible color definition on input line 435.
+Package xcolor Warning: Incompatible color definition on input line 437.
 
 
-Package xcolor Warning: Incompatible color definition on input line 438.
+Package xcolor Warning: Incompatible color definition on input line 440.
 
 
-Package xcolor Warning: Incompatible color definition on input line 438.
+Package xcolor Warning: Incompatible color definition on input line 440.
 
 
-Package xcolor Warning: Incompatible color definition on input line 441.
+Package xcolor Warning: Incompatible color definition on input line 443.
 
 
-Package xcolor Warning: Incompatible color definition on input line 441.
+Package xcolor Warning: Incompatible color definition on input line 443.
 
 
 LaTeX Warning: Reference `IsPinBoundarySyllable' on page 10 undefined on input 
-line 446.
+line 448.
 
 
-Package xcolor Warning: Incompatible color definition on input line 450.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
-Package xcolor Warning: Incompatible color definition on input line 454.
+Package xcolor Warning: Incompatible color definition on input line 456.
 
 
-Package xcolor Warning: Incompatible color definition on input line 454.
+Package xcolor Warning: Incompatible color definition on input line 456.
 
 
-Package xcolor Warning: Incompatible color definition on input line 457.
+Package xcolor Warning: Incompatible color definition on input line 459.
 
 
-Package xcolor Warning: Incompatible color definition on input line 457.
+Package xcolor Warning: Incompatible color definition on input line 459.
 
 
-Package xcolor Warning: Incompatible color definition on input line 460.
+Package xcolor Warning: Incompatible color definition on input line 462.
 
 
-Package xcolor Warning: Incompatible color definition on input line 460.
+Package xcolor Warning: Incompatible color definition on input line 462.
 
 
-Package xcolor Warning: Incompatible color definition on input line 463.
+Package xcolor Warning: Incompatible color definition on input line 465.
 
 
-Package xcolor Warning: Incompatible color definition on input line 463.
-
-
-Package xcolor Warning: Incompatible color definition on input line 476.
-
-
-Package xcolor Warning: Incompatible color definition on input line 476.
+Package xcolor Warning: Incompatible color definition on input line 465.
 
 
 Package xcolor Warning: Incompatible color definition on input line 478.
@@ -1494,50 +1487,56 @@ Package xcolor Warning: Incompatible color definition on input line 480.
 Package xcolor Warning: Incompatible color definition on input line 480.
 
 
-Package xcolor Warning: Incompatible color definition on input line 486.
+Package xcolor Warning: Incompatible color definition on input line 482.
+
+
+Package xcolor Warning: Incompatible color definition on input line 482.
+
+
+Package xcolor Warning: Incompatible color definition on input line 488.
 
 [10]
 
-Package xcolor Warning: Incompatible color definition on input line 496.
+Package xcolor Warning: Incompatible color definition on input line 498.
 
 [11]
 Chapter 3.
 
-Package xcolor Warning: Incompatible color definition on input line 504.
+Package xcolor Warning: Incompatible color definition on input line 506.
 
 
-Package xcolor Warning: Incompatible color definition on input line 508.
+Package xcolor Warning: Incompatible color definition on input line 510.
 
 pdfTeX warning (ext4): destination with the same identifier (name{L.X7DFB63A97E
 67C0A1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.509 \hyperdef{L}{X7DFB63A97E67C0A1}{}
+l.511 \hyperdef{L}{X7DFB63A97E67C0A1}{}
                                        
 
-Package xcolor Warning: Incompatible color definition on input line 514.
+Package xcolor Warning: Incompatible color definition on input line 516.
 
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 518.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 520.
 
-Package xcolor Warning: Incompatible color definition on input line 518.
-
-
-Package xcolor Warning: Incompatible color definition on input line 523.
+Package xcolor Warning: Incompatible color definition on input line 520.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--524
+Package xcolor Warning: Incompatible color definition on input line 525.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 523--526
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 545.
+Package xcolor Warning: Incompatible color definition on input line 547.
 
 
-Package xcolor Warning: Incompatible color definition on input line 559.
+Package xcolor Warning: Incompatible color definition on input line 561.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 557--560
+Underfull \hbox (badness 10000) in paragraph at lines 559--562
 
  []
 
@@ -1545,101 +1544,101 @@ Underfull \hbox (badness 10000) in paragraph at lines 557--560
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 580.
+Package xcolor Warning: Incompatible color definition on input line 582.
 
 
-Package xcolor Warning: Incompatible color definition on input line 580.
+Package xcolor Warning: Incompatible color definition on input line 582.
 
 
-Package xcolor Warning: Incompatible color definition on input line 585.
+Package xcolor Warning: Incompatible color definition on input line 587.
 
 
-Package xcolor Warning: Incompatible color definition on input line 590.
+Package xcolor Warning: Incompatible color definition on input line 592.
 
 
-Package xcolor Warning: Incompatible color definition on input line 595.
+Package xcolor Warning: Incompatible color definition on input line 597.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 593--596
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 609.
-
-
-Package xcolor Warning: Incompatible color definition on input line 614.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 612--615
+Underfull \hbox (badness 10000) in paragraph at lines 595--598
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 623.
+Package xcolor Warning: Incompatible color definition on input line 611.
 
 
-Package xcolor Warning: Incompatible color definition on input line 627.
+Package xcolor Warning: Incompatible color definition on input line 616.
 
 
-Package xcolor Warning: Incompatible color definition on input line 632.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 630--633
+Underfull \hbox (badness 10000) in paragraph at lines 614--617
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 648.
+Package xcolor Warning: Incompatible color definition on input line 625.
 
 
-Package xcolor Warning: Incompatible color definition on input line 653.
+Package xcolor Warning: Incompatible color definition on input line 629.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 651--654
+Package xcolor Warning: Incompatible color definition on input line 634.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 632--635
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 650.
+
+
+Package xcolor Warning: Incompatible color definition on input line 655.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 653--656
 
  []
 
 [13]
 
-Package xcolor Warning: Incompatible color definition on input line 669.
+Package xcolor Warning: Incompatible color definition on input line 671.
 
 
-Package xcolor Warning: Incompatible color definition on input line 673.
-
-
-Package xcolor Warning: Incompatible color definition on input line 678.
-
-
-Package xcolor Warning: Incompatible color definition on input line 678.
+Package xcolor Warning: Incompatible color definition on input line 675.
 
 
 Package xcolor Warning: Incompatible color definition on input line 680.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 678--681
+Package xcolor Warning: Incompatible color definition on input line 680.
+
+
+Package xcolor Warning: Incompatible color definition on input line 682.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 680--683
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 690.
+Package xcolor Warning: Incompatible color definition on input line 692.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 688--691
+Underfull \hbox (badness 10000) in paragraph at lines 690--693
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 704.
-
-
-Package xcolor Warning: Incompatible color definition on input line 709.
+Package xcolor Warning: Incompatible color definition on input line 706.
 
 
 Package xcolor Warning: Incompatible color definition on input line 711.
 
 
-Underfull \hbox (badness 3019) in paragraph at lines 709--712
+Package xcolor Warning: Incompatible color definition on input line 713.
+
+
+Underfull \hbox (badness 3019) in paragraph at lines 711--714
 \T1/ptm/m/n/10.95 This op-er-a-tion cal-cu-lates $\OML/ztmcm/m/it/10.95 N$\T1/p
 tm/m/n/10.95 th syzy-gies of strips. For large $\OML/ztmcm/m/it/10.95 N$ \T1/pt
 m/m/n/10.95 (say, $\OML/ztmcm/m/it/10.95 N \OMS/ztmcm/m/n/10.95  \OT1/ztmcm/m/
@@ -1647,197 +1646,197 @@ n/10.95 10$\T1/ptm/m/n/10.95 ) con-sider
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 709--712
+Underfull \hbox (badness 10000) in paragraph at lines 711--714
 \T1/ptm/m/n/10.95 us-ing \T1/cmtt/m/n/10.95 CollectedNthSyzygyOfStrip \T1/ptm/m
 /n/10.95 ([][]3.4.4[][]) in-stead, since it is much more ef-fi-cient.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 709--712
+Underfull \hbox (badness 10000) in paragraph at lines 711--714
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 723.
+Package xcolor Warning: Incompatible color definition on input line 725.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 721--724
+Underfull \hbox (badness 10000) in paragraph at lines 723--726
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 736.
+Package xcolor Warning: Incompatible color definition on input line 738.
 
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 747.
+Package xcolor Warning: Incompatible color definition on input line 749.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 745--748
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 763.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 761--764
+Underfull \hbox (badness 10000) in paragraph at lines 747--750
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 779.
+Package xcolor Warning: Incompatible color definition on input line 765.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 777--780
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 788.
-
-
-Package xcolor Warning: Incompatible color definition on input line 797.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 793--798
+Underfull \hbox (badness 10000) in paragraph at lines 763--766
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 809.
+Package xcolor Warning: Incompatible color definition on input line 781.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 807--810
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 821.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 819--822
+Underfull \hbox (badness 10000) in paragraph at lines 779--782
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 834.
+Package xcolor Warning: Incompatible color definition on input line 790.
 
 
-Package xcolor Warning: Incompatible color definition on input line 839.
+Package xcolor Warning: Incompatible color definition on input line 799.
 
 
-Package xcolor Warning: Incompatible color definition on input line 844.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 842--845
+Underfull \hbox (badness 10000) in paragraph at lines 795--800
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 857.
+Package xcolor Warning: Incompatible color definition on input line 811.
 
 
-Package xcolor Warning: Incompatible color definition on input line 862.
+Underfull \hbox (badness 10000) in paragraph at lines 809--812
+
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 867.
+Package xcolor Warning: Incompatible color definition on input line 823.
 
 
-Package xcolor Warning: Incompatible color definition on input line 870.
+Underfull \hbox (badness 10000) in paragraph at lines 821--824
+
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 873.
+Package xcolor Warning: Incompatible color definition on input line 836.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 865--874
+Package xcolor Warning: Incompatible color definition on input line 841.
+
+
+Package xcolor Warning: Incompatible color definition on input line 846.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 844--847
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 859.
+
+
+Package xcolor Warning: Incompatible color definition on input line 864.
+
+
+Package xcolor Warning: Incompatible color definition on input line 869.
+
+
+Package xcolor Warning: Incompatible color definition on input line 872.
+
+
+Package xcolor Warning: Incompatible color definition on input line 875.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 867--876
 
  []
 
 [15]
 
-Package xcolor Warning: Incompatible color definition on input line 895.
+Package xcolor Warning: Incompatible color definition on input line 897.
 
 
-Package xcolor Warning: Incompatible color definition on input line 900.
+Package xcolor Warning: Incompatible color definition on input line 902.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 898--901
+Underfull \hbox (badness 10000) in paragraph at lines 900--903
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 914.
+Package xcolor Warning: Incompatible color definition on input line 916.
 
 
-Package xcolor Warning: Incompatible color definition on input line 919.
+Package xcolor Warning: Incompatible color definition on input line 921.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 917--920
+Underfull \hbox (badness 10000) in paragraph at lines 919--922
 
  []
 
 [16]
 Chapter 4.
 
-Package xcolor Warning: Incompatible color definition on input line 936.
+Package xcolor Warning: Incompatible color definition on input line 938.
 
 [17
 
 ]
 Chapter 5.
 
-Package xcolor Warning: Incompatible color definition on input line 942.
+Package xcolor Warning: Incompatible color definition on input line 944.
 
 
-Package xcolor Warning: Incompatible color definition on input line 946.
+Package xcolor Warning: Incompatible color definition on input line 948.
 
 pdfTeX warning (ext4): destination with the same identifier (name{L.X7DFB63A97E
 67C0A1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.947 \hyperdef{L}{X7DFB63A97E67C0A1}{}
+l.949 \hyperdef{L}{X7DFB63A97E67C0A1}{}
                                        
 
-Package xcolor Warning: Incompatible color definition on input line 961.
+Package xcolor Warning: Incompatible color definition on input line 963.
 
 
-Package xcolor Warning: Incompatible color definition on input line 966.
+Package xcolor Warning: Incompatible color definition on input line 968.
 
 
-Package xcolor Warning: Incompatible color definition on input line 971.
+Package xcolor Warning: Incompatible color definition on input line 973.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 969--972
+Underfull \hbox (badness 10000) in paragraph at lines 971--974
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 982.
+Package xcolor Warning: Incompatible color definition on input line 984.
 
 
-Package xcolor Warning: Incompatible color definition on input line 987.
+Package xcolor Warning: Incompatible color definition on input line 989.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 985--988
+Underfull \hbox (badness 10000) in paragraph at lines 987--990
 
  []
 
 
 LaTeX Warning: Reference `DocOverquiverOfSBAlg' on page 18 undefined on input l
-ine 992.
+ine 994.
 
 
-Package xcolor Warning: Incompatible color definition on input line 999.
+Package xcolor Warning: Incompatible color definition on input line 1001.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1004.
+Package xcolor Warning: Incompatible color definition on input line 1006.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1009.
+Package xcolor Warning: Incompatible color definition on input line 1011.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1007--1010
+Underfull \hbox (badness 10000) in paragraph at lines 1009--1012
 
  []
 
@@ -1845,66 +1844,66 @@ Underfull \hbox (badness 10000) in paragraph at lines 1007--1010
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 1019.
+Package xcolor Warning: Incompatible color definition on input line 1021.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1018--1020
+Underfull \hbox (badness 10000) in paragraph at lines 1020--1022
 \T1/ptm/m/n/10.95 This op-er-a-tion fig-ures out from [] the quiver to which []
  be-longs and ap-plies
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1023.
+Package xcolor Warning: Incompatible color definition on input line 1025.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1028.
+Package xcolor Warning: Incompatible color definition on input line 1030.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1026--1029
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1031.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1038.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1042.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1047.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1045--1048
+Underfull \hbox (badness 10000) in paragraph at lines 1028--1031
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1056--1059
+Package xcolor Warning: Incompatible color definition on input line 1033.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1040.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1044.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1049.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1047--1050
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1063.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1068.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1073.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1071--1074
+Underfull \hbox (badness 10000) in paragraph at lines 1058--1061
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1083.
+Package xcolor Warning: Incompatible color definition on input line 1065.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1082--1084
+Package xcolor Warning: Incompatible color definition on input line 1070.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1075.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1073--1076
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1085.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1084--1086
 \T1/ptm/m/n/10.95 This op-er-a-tion fig-ures out from [] the quiver to which []
  be-longs and ap-plies
  []
@@ -1914,355 +1913,349 @@ Underfull \hbox (badness 10000) in paragraph at lines 1082--1084
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1084 
+l.1086 
        ]
 
-Package xcolor Warning: Incompatible color definition on input line 1087.
+Package xcolor Warning: Incompatible color definition on input line 1089.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1092.
+Package xcolor Warning: Incompatible color definition on input line 1094.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1090--1093
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1103.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1108.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1106--1109
+Underfull \hbox (badness 10000) in paragraph at lines 1092--1095
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1120.
+Package xcolor Warning: Incompatible color definition on input line 1105.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1125.
+Package xcolor Warning: Incompatible color definition on input line 1110.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1130.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1128--1131
+Underfull \hbox (badness 10000) in paragraph at lines 1108--1111
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1141.
+Package xcolor Warning: Incompatible color definition on input line 1122.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1127.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1132.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1130--1133
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1143.
 
 pdfTeX warning (ext4): destination with the same identifier (name{L.X813AF39E7E
 3ECC8B}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1143 \hyperdef{L}{X813AF39E7E3ECC8B}{}
+l.1145 \hyperdef{L}{X813AF39E7E3ECC8B}{}
                                         
 
-Package xcolor Warning: Incompatible color definition on input line 1146.
+Package xcolor Warning: Incompatible color definition on input line 1148.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1144--1147
+Underfull \hbox (badness 10000) in paragraph at lines 1146--1149
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1160.
+Package xcolor Warning: Incompatible color definition on input line 1162.
 
 pdfTeX warning (ext4): destination with the same identifier (name{L.X84655A3D81
 5A27AF}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1162 \hyperdef{L}{X84655A3D815A27AF}{}
+l.1164 \hyperdef{L}{X84655A3D815A27AF}{}
                                         
 
-Package xcolor Warning: Incompatible color definition on input line 1165.
+Package xcolor Warning: Incompatible color definition on input line 1167.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1163--1166
+Underfull \hbox (badness 10000) in paragraph at lines 1165--1168
 
  []
 
 [20]
 
-Package xcolor Warning: Incompatible color definition on input line 1181.
+Package xcolor Warning: Incompatible color definition on input line 1183.
 
 pdfTeX warning (ext4): destination with the same identifier (name{L.X7CD13D557E
 B29468}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1183 \hyperdef{L}{X7CD13D557EB29468}{}
+l.1185 \hyperdef{L}{X7CD13D557EB29468}{}
                                         
 
-Package xcolor Warning: Incompatible color definition on input line 1186.
+Package xcolor Warning: Incompatible color definition on input line 1188.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1184--1187
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1202.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1207.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1212.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1210--1213
+Underfull \hbox (badness 10000) in paragraph at lines 1186--1189
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1222.
+Package xcolor Warning: Incompatible color definition on input line 1204.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1222.
+Package xcolor Warning: Incompatible color definition on input line 1209.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1214.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1212--1215
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1224.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1224.
 
 [21]
 Chapter 6.
 
-Package xcolor Warning: Incompatible color definition on input line 1234.
+Package xcolor Warning: Incompatible color definition on input line 1236.
 
 [22
 
 ]
 Chapter 7.
 
-Package xcolor Warning: Incompatible color definition on input line 1241.
+Package xcolor Warning: Incompatible color definition on input line 1243.
 
 [23
 
 ]
 Chapter 8.
 
-Package xcolor Warning: Incompatible color definition on input line 1249.
+Package xcolor Warning: Incompatible color definition on input line 1251.
 
 [24
 
 ]
 Chapter 9.
 
-Package xcolor Warning: Incompatible color definition on input line 1255.
+Package xcolor Warning: Incompatible color definition on input line 1257.
 
 [25
 
 ]
 Chapter 10.
 
-Package xcolor Warning: Incompatible color definition on input line 1261.
+Package xcolor Warning: Incompatible color definition on input line 1263.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1268.
+Package xcolor Warning: Incompatible color definition on input line 1270.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1280.
+Package xcolor Warning: Incompatible color definition on input line 1282.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1280.
+Package xcolor Warning: Incompatible color definition on input line 1282.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1283.
+Package xcolor Warning: Incompatible color definition on input line 1285.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1283.
+Package xcolor Warning: Incompatible color definition on input line 1285.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1287.
+Package xcolor Warning: Incompatible color definition on input line 1289.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1287.
+Package xcolor Warning: Incompatible color definition on input line 1289.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1301.
+Package xcolor Warning: Incompatible color definition on input line 1303.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1301.
+Package xcolor Warning: Incompatible color definition on input line 1303.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1304.
+Package xcolor Warning: Incompatible color definition on input line 1306.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1304.
+Package xcolor Warning: Incompatible color definition on input line 1306.
 
 [26
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 1307.
+Package xcolor Warning: Incompatible color definition on input line 1309.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1307.
+Package xcolor Warning: Incompatible color definition on input line 1309.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1311.
+Package xcolor Warning: Incompatible color definition on input line 1313.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1311.
+Package xcolor Warning: Incompatible color definition on input line 1313.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1314.
+Package xcolor Warning: Incompatible color definition on input line 1316.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1317.
+Package xcolor Warning: Incompatible color definition on input line 1319.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1317.
+Package xcolor Warning: Incompatible color definition on input line 1319.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1325.
+Package xcolor Warning: Incompatible color definition on input line 1327.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1330.
+Package xcolor Warning: Incompatible color definition on input line 1332.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1328--1331
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1345.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1350.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1348--1351
+Underfull \hbox (badness 10000) in paragraph at lines 1330--1333
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1363.
+Package xcolor Warning: Incompatible color definition on input line 1347.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1368.
+Package xcolor Warning: Incompatible color definition on input line 1352.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1366--1369
+Underfull \hbox (badness 10000) in paragraph at lines 1350--1353
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1365.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1370.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1368--1371
 
  []
 
 [27]
 
-Package xcolor Warning: Incompatible color definition on input line 1381.
+Package xcolor Warning: Incompatible color definition on input line 1383.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1386.
+Package xcolor Warning: Incompatible color definition on input line 1388.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1384--1387
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 1400.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1405.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1403--1406
+Underfull \hbox (badness 10000) in paragraph at lines 1386--1389
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1417.
+Package xcolor Warning: Incompatible color definition on input line 1402.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1407.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1405--1408
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1419.
 
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 1417.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 1419.
 
-Package xcolor Warning: Incompatible color definition on input line 1422.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1427.
+Package xcolor Warning: Incompatible color definition on input line 1424.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1425--1428
-
- []
+Package xcolor Warning: Incompatible color definition on input line 1429.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1444.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1449.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 1447--1450
+Underfull \hbox (badness 10000) in paragraph at lines 1427--1430
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1460.
+Package xcolor Warning: Incompatible color definition on input line 1446.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1465.
+Package xcolor Warning: Incompatible color definition on input line 1451.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1463--1466
+Underfull \hbox (badness 10000) in paragraph at lines 1449--1452
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 1462.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1467.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1465--1468
 
  []
 
 [28] [29]
 Appendix A.
 
-Package xcolor Warning: Incompatible color definition on input line 1483.
+Package xcolor Warning: Incompatible color definition on input line 1485.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1487.
+Package xcolor Warning: Incompatible color definition on input line 1489.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1491.
+Package xcolor Warning: Incompatible color definition on input line 1493.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1495.
+Package xcolor Warning: Incompatible color definition on input line 1497.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1500.
+Package xcolor Warning: Incompatible color definition on input line 1502.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1498--1501
+Underfull \hbox (badness 10000) in paragraph at lines 1500--1503
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 1510.
+Package xcolor Warning: Incompatible color definition on input line 1512.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1510.
+Package xcolor Warning: Incompatible color definition on input line 1512.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1510.
+Package xcolor Warning: Incompatible color definition on input line 1512.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1510.
+Package xcolor Warning: Incompatible color definition on input line 1512.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1510.
+Package xcolor Warning: Incompatible color definition on input line 1512.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1515.
+Package xcolor Warning: Incompatible color definition on input line 1517.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1522.
+Package xcolor Warning: Incompatible color definition on input line 1524.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1522.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1524.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1522.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1524.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1522.
-
-Package xcolor Warning: Incompatible color definition on input line 1529.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1529.
-
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1524.
 
 Package xcolor Warning: Incompatible color definition on input line 1531.
 
@@ -2282,28 +2275,28 @@ Package xcolor Warning: Incompatible color definition on input line 1535.
 Package xcolor Warning: Incompatible color definition on input line 1535.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1538.
+Package xcolor Warning: Incompatible color definition on input line 1537.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1538.
+Package xcolor Warning: Incompatible color definition on input line 1537.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1541.
+Package xcolor Warning: Incompatible color definition on input line 1540.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1541.
+Package xcolor Warning: Incompatible color definition on input line 1540.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1543.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1543.
 
 [30
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 1571.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1578.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1578.
+Package xcolor Warning: Incompatible color definition on input line 1573.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1580.
@@ -2324,10 +2317,10 @@ Package xcolor Warning: Incompatible color definition on input line 1584.
 Package xcolor Warning: Incompatible color definition on input line 1584.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1589.
+Package xcolor Warning: Incompatible color definition on input line 1586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1589.
+Package xcolor Warning: Incompatible color definition on input line 1586.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1591.
@@ -2354,13 +2347,13 @@ Package xcolor Warning: Incompatible color definition on input line 1597.
 Package xcolor Warning: Incompatible color definition on input line 1597.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1619.
+Package xcolor Warning: Incompatible color definition on input line 1599.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1626.
+Package xcolor Warning: Incompatible color definition on input line 1599.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1626.
+Package xcolor Warning: Incompatible color definition on input line 1621.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1628.
@@ -2387,16 +2380,16 @@ Package xcolor Warning: Incompatible color definition on input line 1634.
 Package xcolor Warning: Incompatible color definition on input line 1634.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1637.
+Package xcolor Warning: Incompatible color definition on input line 1636.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1637.
+Package xcolor Warning: Incompatible color definition on input line 1636.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1640.
+Package xcolor Warning: Incompatible color definition on input line 1639.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1640.
+Package xcolor Warning: Incompatible color definition on input line 1639.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1642.
@@ -2415,15 +2408,15 @@ Package xcolor Warning: Incompatible color definition on input line 1646.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1646.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1648.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1648.
 
 [31]
 
-Package xcolor Warning: Incompatible color definition on input line 1648.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1648.
-
-
 Package xcolor Warning: Incompatible color definition on input line 1650.
 
 
@@ -2442,13 +2435,13 @@ Package xcolor Warning: Incompatible color definition on input line 1654.
 Package xcolor Warning: Incompatible color definition on input line 1654.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1678.
+Package xcolor Warning: Incompatible color definition on input line 1656.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1685.
+Package xcolor Warning: Incompatible color definition on input line 1656.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1685.
+Package xcolor Warning: Incompatible color definition on input line 1680.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1687.
@@ -2487,16 +2480,16 @@ Package xcolor Warning: Incompatible color definition on input line 1697.
 Package xcolor Warning: Incompatible color definition on input line 1697.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1700.
+Package xcolor Warning: Incompatible color definition on input line 1699.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1700.
+Package xcolor Warning: Incompatible color definition on input line 1699.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1703.
+Package xcolor Warning: Incompatible color definition on input line 1702.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1703.
+Package xcolor Warning: Incompatible color definition on input line 1702.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1705.
@@ -2569,16 +2562,16 @@ Package xcolor Warning: Incompatible color definition on input line 1727.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1727.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1729.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1729.
 
 [32]
 
-Package xcolor Warning: Incompatible color definition on input line 1732.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1739.
-
-
-Package xcolor Warning: Incompatible color definition on input line 1739.
+Package xcolor Warning: Incompatible color definition on input line 1734.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1741.
@@ -2605,16 +2598,16 @@ Package xcolor Warning: Incompatible color definition on input line 1747.
 Package xcolor Warning: Incompatible color definition on input line 1747.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1750.
+Package xcolor Warning: Incompatible color definition on input line 1749.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1750.
+Package xcolor Warning: Incompatible color definition on input line 1749.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1753.
+Package xcolor Warning: Incompatible color definition on input line 1752.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1753.
+Package xcolor Warning: Incompatible color definition on input line 1752.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1755.
@@ -2675,6 +2668,12 @@ Package xcolor Warning: Incompatible color definition on input line 1773.
 
 
 Package xcolor Warning: Incompatible color definition on input line 1773.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1775.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1775.
 
 (main.bbl (main.brf)
 \tf@brf=\write9
@@ -2832,11 +2831,11 @@ Package xcolor Warning: Incompatible color definition on input line 90.
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1808.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1808.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1810.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1810.
  (main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1808.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1808.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1810.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1810.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 844E06290F828B9E8109EEBDE0683D81;2659.
@@ -2849,7 +2848,7 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1808.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1810.
  ) 
 Here is how much of TeX's memory you used:
  19587 strings out of 493333
@@ -2858,11 +2857,11 @@ Here is how much of TeX's memory you used:
  22523 multiletter control sequences out of 15000+200000
  87253 words of font info for 122 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,15n,82p,623b,1036s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 56i,15n,82p,601b,1036s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Joe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ec
 st1095.pk> <C:\Users\Joe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\d
-pi600\ectt1000.pk> <C:\Users\Joe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
-pen\ec\dpi600\ectt1095.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.
+pi600\ectt1095.pk> <C:\Users\Joe\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ectt1000.pk>{C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.
 enc}<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program F
 iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiK
@@ -2874,7 +2873,7 @@ C:/Program Files/MiKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/M
 iKTeX 2.9/fonts/type1/urw/symbol/usyr.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utm
 r8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (35 pages, 293851 bytes).
+Output written on main.pdf (35 pages, 294814 bytes).
 PDF statistics:
  813 PDF objects out of 1000 (max. 8388607)
  194 named destinations out of 1000 (max. 500000)

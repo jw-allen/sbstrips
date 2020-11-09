@@ -34,9 +34,13 @@
   
   -------------------------------------------------------
   [1XAcknowledgements[101X
-  [33X[0;0YI  thank  my  PhD  supervisor  Professor Jeremy Rickard, on whom I inflicted
-  multiple  early  iterations of [5XSBStrips[105X, for his time and his comments. This
-  package was much worse before his feedback.[133X
+  [33X[0;0YI  thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
+  early  iterations  of  [5XSBStrips[105X, for his time and his comments. This package
+  was much worse before his feedback.[133X
+  
+  [33X[0;0YAdditionally, I received help understanding [5XGAPDoc[105X from Prof Max Horn and Dr
+  Frank  Lübeck,  the  latter  of whom wrote the [11Xmakedocrel.g[111X file included in
+  this package. I am grateful to them both.[133X
   
   
   -------------------------------------------------------

@@ -11,7 +11,7 @@ entries :=
       "X81488B807F2A1CF1" ], 
   [ "Acknowledgements", ".-3", [ 0, 0, 3 ], 36, 2, "acknowledgements", 
       "X82A988D47DFAFCFA" ], 
-  [ "Table of Contents", ".-4", [ 0, 0, 4 ], 43, 3, "table of contents",
+  [ "Table of Contents", ".-4", [ 0, 0, 4 ], 47, 3, "table of contents",
       "X8537FEB07AF2BEC8" ], 
   [ "\033[1X\033[33X\033[0;-2YIntroduction\033[133X\033[101X", "1", 
       [ 1, 0, 0 ], 1, 5, "introduction", "X7DFB63A97E67C0A1" ], 

@@ -1,8 +1,8 @@
-# Save for very minor adjustments, the code in this file was written for me by
+# Save for very minor adjustments, the code in this file was written by Dr
 #  Frank Luebeck in answer to an issue I posted on GAPDoc's issue tracker on
 #  GitHub: see https://github.com/frankluebeck/GAPDoc/issues/44 . I thank him
-#  for his help and for this code. I also thank Max Horn for his suggestions
-#  with my issue.
+#  for his help and for this code. I also thank Prof Max Horn for his
+#  suggestions with my issue.
 
 
 # The string <pathtoroot> gives the location of the root directory of GAP, rel-

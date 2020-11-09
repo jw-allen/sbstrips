@@ -35,6 +35,14 @@
 
 
 <Acknowledgements>
-  I thank my PhD supervisor Professor Jeremy Rickard, on whom I inflicted multiple early iterations of &SBStrips;, for his time and his comments. This package was much worse before his feedback. 
+  I thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
+  early iterations of &SBStrips;, for his time and his comments. This package
+  was much worse before his feedback.
+  <P />
+  
+  Additionally, I received help understanding <Package>GAPDoc</Package> from
+  Prof Max Horn and Dr Frank Lübeck, the latter of whom wrote the
+  <F>makedocrel.g</F> file included in this package. I am grateful to them
+  both.
 </Acknowledgements>
 <#/GAPDoc>

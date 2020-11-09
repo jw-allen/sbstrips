@@ -134,9 +134,11 @@ the strips that represent them.
 {\small 
 \section*{Acknowledgements}
 \logpage{[ 0, 0, 3 ]}
- I thank my PhD supervisor Professor Jeremy Rickard, on whom I inflicted
-multiple early iterations of \textsf{SBStrips}, for his time and his comments. This package was much worse before his
-feedback. \mbox{}}\\[1cm]
+ I thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
+early iterations of \textsf{SBStrips}, for his time and his comments. This package was much worse before his
+feedback. 
+
+ Additionally, I received help understanding \textsf{GAPDoc} from Prof Max Horn and Dr Frank L{\"u}beck, the latter of whom wrote the \texttt{makedocrel.g} file included in this package. I am grateful to them both. \mbox{}}\\[1cm]
 \newpage
 
 \def\contentsname{Contents\logpage{[ 0, 0, 4 ]}}
@@ -208,15 +210,24 @@ presentation; \textsf{SBStrips} takes it for granted you have used one.
 
  
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@q2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;|
-  !gapprompt@gap>| !gapinput@kq2 := PathAlgebra( Rationals, q2 );;|
-  !gapprompt@gap>| !gapinput@rels2 := [ kq2.a * kq2.a, kq2.b * kq2.d, kq2.c * kq2.b,|
-  !gapprompt@>| !gapinput@kq2.d * kq2.c, kq2.c * kq2.a * kq2.b, (kq2.d)^4,|
-  !gapprompt@>| !gapinput@kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];;|
-  !gapprompt@gap>| !gapinput@gb2 := GBNPGroebnerBasis( rels2, kq2 );;|
-  !gapprompt@gap>| !gapinput@ideal2 := Ideal( kq2, gb2 );;|
-  !gapprompt@gap>| !gapinput@GroebnerBasis( ideal2, gb2 );;|
-  !gapprompt@gap>| !gapinput@alg2 := kq2/ideal2;|
+  !gapprompt@gap>| !gapinput@q2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;
+|
+  !gapprompt@gap>| !gapinput@kq2 := PathAlgebra( Rationals, q2 );;
+|
+  !gapprompt@gap>| !gapinput@rels2 := [ kq2.a * kq2.a, kq2.b * kq2.d, kq2.c * kq2.b,
+|
+  !gapprompt@>| !gapinput@kq2.d * kq2.c, kq2.c * kq2.a * kq2.b, (kq2.d)^4,
+|
+  !gapprompt@>| !gapinput@kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];;
+|
+  !gapprompt@gap>| !gapinput@gb2 := GBNPGroebnerBasis( rels2, kq2 );;
+|
+  !gapprompt@gap>| !gapinput@ideal2 := Ideal( kq2, gb2 );;
+|
+  !gapprompt@gap>| !gapinput@GroebnerBasis( ideal2, gb2 );;
+|
+  !gapprompt@gap>| !gapinput@alg2 := kq2/ideal2;
+|
   <Rationals[<quiver with 2 vertices and 4 arrows>]/
   <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
   , (7 generators)>>
@@ -240,7 +251,8 @@ presentation; \textsf{SBStrips} takes it for granted you have used one.
  Note in particular that the "first arrow" in this strip is $a$ and it has exponent $-1$ (which means it points to the
   left). This information (plus a bit extra) gets used when creating the strip in \textsf{GAP} via the operation \texttt{Stripify} (\ref{Stripify:for an arrow, +/-1 and a list of integers}). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );|
+  !gapprompt@gap>| !gapinput@s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
+|
   (a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
 \end{Verbatim}
  }
@@ -256,9 +268,11 @@ in \textsf{GAP} using \texttt{ModuleOfStrip} (\ref{ModuleOfStrip:for a strip}).
  A technicality to bear in mind is that that module is implemented as a
 representation of the quiver over which \texttt{alg2} was defined. You'll find details about quiver representations in the \textsf{QPA} documentation. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@module := ModuleOfStrip( s );|
+  !gapprompt@gap>| !gapinput@module := ModuleOfStrip( s );
+|
   <[ 6, 5 ]>
-  !gapprompt@gap>| !gapinput@Print( module );|
+  !gapprompt@gap>| !gapinput@Print( module );
+|
   <Module over <Rationals[<quiver with 2 vertices and 4 arrows>]/
   <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
   , (7 generators)>> with dimension vector [ 6, 5 ]>
@@ -283,9 +297,11 @@ pays off when examining asymoptotic syzygy behavior of strings.
  Recall our strip \texttt{s} from above. Let's start calculating its syzygies. The operation \texttt{SyzygyOfStrip} returns a list of strips, one for each indecomposable direct summand of the
 syzygy of its input. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@SyzygyOfStrip( s );|
+  !gapprompt@gap>| !gapinput@SyzygyOfStrip( s );
+|
   [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
-  !gapprompt@gap>| !gapinput@Length( last );|
+  !gapprompt@gap>| !gapinput@Length( last );
+|
   3
 \end{Verbatim}
  This example shows that the syzygy of \texttt{s} has $3$ indecomposable summands. 
@@ -293,14 +309,16 @@ syzygy of its input.
  Of course, there's no reason to stop at $1$st syzygies. \textsf{SBStrips} is able to take higher syzygies very easily (but refer to the next section for
 a discussion of an efficient approach). For example, we can calculate the $4$th syzygy of \texttt{s} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@4th_syz := NthSyzygyOfStrip( s, 4 );|
+  !gapprompt@gap>| !gapinput@4th_syz := NthSyzygyOfStrip( s, 4 );
+|
   [ (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d^2), (a)^-1(v1), (v2)^-1(d^2),
     (a)^-1(b*c) (a)^-1(v1), (d^2)^-1(v2), (v1)^-1(a), (v2)^-1(v2),
     (v2)^-1(c) (c*a)^-1(v2), (v1)^-1(a), (v2)^-1(v2),
     (v2)^-1(c) (c*a)^-1(v2), (v2)^-1(v2), (a)^-1(v1),
     (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d), (a)^-1(v1), (v2)^-1(d^2),
     (a)^-1(v1), (d^2)^-1(v2) ]
-  !gapprompt@gap>| !gapinput@Length( 4th_syz );|
+  !gapprompt@gap>| !gapinput@Length( 4th_syz );
+|
   20
 \end{Verbatim}
  We find that the $4$th syzygy of \texttt{s} has $20$ indecomposable direct summands. 
@@ -312,10 +330,12 @@ the most efficient way is with \texttt{Set} (\textbf{Reference: Set}). Alternati
 multiset. That is, the distinct strips are recorded along with their frequency
 in the list. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@Set( 4th_syz );|
+  !gapprompt@gap>| !gapinput@Set( 4th_syz );
+|
   [ (v2)^-1(v2), (v1)^-1(a), (v2)^-1(d), (v2)^-1(d^2),
     (v2)^-1(c*a) (c)^-1(v2), (a)^-1(b*c) (a)^-1(v1) ]
-  !gapprompt@gap>| !gapinput@Collected( 4th_syz );|
+  !gapprompt@gap>| !gapinput@Collected( 4th_syz );
+|
   [ [ (v2)^-1(v2), 3 ], [ (v1)^-1(a), 6 ], [ (v2)^-1(d), 1 ],
     [ (v2)^-1(d^2), 5 ], [ (v2)^-1(c*a) (c)^-1(v2), 4 ],
     [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
@@ -325,10 +345,12 @@ in the list.
  We call these "multisets" \emph{collected lists}. The \textsf{SBStrips} package has several built-in functionalities for taking such "collected lists"
 of syzygies. Principal among these are \texttt{CollectedSyzygyOfStrip} (\ref{CollectedSyzygyOfStrip:for strips}) and \texttt{CollectedNthSyzygyOfStrip} (\ref{CollectedNthSyzygyOfStrip:for strips}). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@CollectedSyzygyOfStrip( s );|
+  !gapprompt@gap>| !gapinput@CollectedSyzygyOfStrip( s );
+|
   [ [ (a)^-1(v1), 1 ], [ (d)^-1(v2), 1 ],
     [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), 1 ] ]
-  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 4 );|
+  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 4 );
+|
   [ [ (v2)^-1(c) (c*a)^-1(v2), 4 ], [ (v2)^-1(v2), 3 ],
     [ (v1)^-1(a), 6 ], [ (v2)^-1(d^2), 5 ], [ (v2)^-1(d), 1 ],
     [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
@@ -354,27 +376,34 @@ streamline out calculations greatly.
 
  To see this, consider the $20$th syzygy of \texttt{s}. The following calculation shows that it has $344732$ distinct summands (many of which will be isomorphic); this took over $2$ minutes to perform on my device. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@NthSyzygyOfStrip( s, 20 );;|
-  !gapprompt@gap>| !gapinput@time;|
+  !gapprompt@gap>| !gapinput@NthSyzygyOfStrip( s, 20 );;
+|
+  !gapprompt@gap>| !gapinput@time;
+|
   130250
-  !gapprompt@gap>| !gapinput@Length( last2 );|
+  !gapprompt@gap>| !gapinput@Length( last2 );
+|
   344732
 \end{Verbatim}
  Compare this with a "collected" approach, wherein the $20$th syzygy was calculated in a heartbeat (and the $100$th syzygy in not much more). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 20 );|
+  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 20 );
+|
   [ [ (v2)^-1(c) (c*a)^-1(v2), 66012 ], [ (v2)^-1(v2), 55403 ],
     [ (v1)^-1(a), 121414 ], [ (v2)^-1(d^2), 101901 ], [ (v2)^-1(d), 1 ],
     [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-  !gapprompt@gap>| !gapinput@time;|
+  !gapprompt@gap>| !gapinput@time;
+|
   62
-  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 100 );|
+  !gapprompt@gap>| !gapinput@CollectedNthSyzygyOfStrip( s, 100 );
+|
   [ [ (v2)^-1(c) (c*a)^-1(v2), 98079530178586034536500564 ],
     [ (v2)^-1(v2), 82316850636514866677657075 ],
     [ (v1)^-1(a), 180396380815100901214157638 ],
     [ (v2)^-1(d^2), 151404293106684183601223221 ], [ (v2)^-1(d), 1 ],
     [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-  !gapprompt@gap>| !gapinput@time;|
+  !gapprompt@gap>| !gapinput@time;
+|
   297
 \end{Verbatim}
  
@@ -398,7 +427,8 @@ modules associated to vertex $i_r$ are respectively $S_r$, $P_r$ and $I_r$.
  All of the simple modules over an SB algebra are string modules. The list of
 strips that describe them can be obtained using the following command. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@SimpleStripsOfSBAlg( alg2 );|
+  !gapprompt@gap>| !gapinput@SimpleStripsOfSBAlg( alg2 );
+|
   [ (v1)^-1(v1), (v2)^-1(v2) ]
 \end{Verbatim}
  The \texttt{r}th entry is the strip describing the \texttt{r}th simple module $S_r$. 
@@ -406,9 +436,11 @@ strips that describe them can be obtained using the following command.
  Additionally, some of the indecomposable projective modules are string
 modules. The attribute \texttt{ProjectiveStripsOfSBAlg} (\ref{ProjectiveStripsOfSBAlg}) returns a list, whose \texttt{r}th entry is the strip describing the module $P_r$ (if $P_r$ is indeed a string module) or the boolean \texttt{fail} (if not). The attribute \texttt{InjectiveStripsOfSBAlg} (\ref{InjectiveStripsOfSBAlg}) is similar. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@ProjectiveStripsOfSbAlg( alg2 );|
+  !gapprompt@gap>| !gapinput@ProjectiveStripsOfSbAlg( alg2 );
+|
   [ fail, (c*a)^-1(d^3) ]
-  !gapprompt@gap>| !gapinput@InjectiveStripsOfSbAlg( alg2 );|
+  !gapprompt@gap>| !gapinput@InjectiveStripsOfSbAlg( alg2 );
+|
   [ fail, (v1)^-1(a*b) (d^3)^-1(v2) ]
 \end{Verbatim}
  (If a projective or injective module over an SB algebra is not a string
@@ -420,13 +452,17 @@ one-to-one correspondence with the paths in the SB algebra. There is a method
 for \texttt{Stripify} (\ref{Stripify:for a path of a special biserial algebra}) that turns a path for the SB algebra into the corresponding strip. Paths in
 the SB algebra are created using \textsf{QPA} syntax. Perhaps it is clearest to see an example. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@Stripify( alg2.a * alg2.b );|
+  !gapprompt@gap>| !gapinput@Stripify( alg2.a * alg2.b );
+|
   (a*b)^-1(v1)
-  !gapprompt@gap>| !gapinput@Stripify( alg2.c );|
+  !gapprompt@gap>| !gapinput@Stripify( alg2.c );
+|
   (c)^-1(v2)
-  !gapprompt@gap>| !gapinput@Stripify( alg2.d^3 );|
+  !gapprompt@gap>| !gapinput@Stripify( alg2.d^3 );
+|
   (d^3)^-1(v2)
-  !gapprompt@gap>| !gapinput@Stripify( alg2.v1 );|
+  !gapprompt@gap>| !gapinput@Stripify( alg2.v1 );
+|
   (v1)^-1(v1)
 \end{Verbatim}
  In the first example, \texttt{a} and \texttt{b} are the names of arrows in the quiver with which \texttt{alg2} was presented. The residue of the arrow \texttt{a} in \texttt{alg2} is \texttt{alg2.a}; similarly, \texttt{alg2.b}. Their product \texttt{alg2.a * alg2.b} is the residue of the path \texttt{a * b} in the quiver (where \texttt{a * b} means "\texttt{a} then \texttt{b}"). This is what we mean by a path in the SB algebra: products of (residues
@@ -438,9 +474,12 @@ of) arrows and vertices in the algebra.
 (trivially), we therefore have a second way to access the simple modules of a
 SB algebra. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@s1 := Stripify( alg2.v1 );;|
-  !gapprompt@gap>| !gapinput@s2 := Stripify( alg2.v2 );;|
-  !gapprompt@gap>| !gapinput@[ s1, s2 ] = SimpleStripsOfSbAlg( alg2 );|
+  !gapprompt@gap>| !gapinput@s1 := Stripify( alg2.v1 );;
+|
+  !gapprompt@gap>| !gapinput@s2 := Stripify( alg2.v2 );;
+|
+  !gapprompt@gap>| !gapinput@[ s1, s2 ] = SimpleStripsOfSbAlg( alg2 );
+|
   true
 \end{Verbatim}
  }
@@ -539,7 +578,8 @@ need to specify the strip.
 
  
 \begin{Verbatim}[commandchars=@|A,fontsize=\small,frame=single,label=Example]
-  @gapprompt|gap>A @gapinput|# Include an example here!A
+  @gapprompt|gap>A @gapinput|# Include an example here!
+A
 \end{Verbatim}
  }
 
@@ -1238,12 +1278,15 @@ information.
  \textsf{GAP} implements this functionality using \texttt{Collected} (\textbf{Reference: Collected}). Calls to this operation yield lists that store information in a more
 economical, if slightly less informative, fashion, of which \textsf{SBStrips} makes great use. Using \texttt{Collected} on a list \texttt{list} returns another list, detailing the different elements appearing in \texttt{list} and their \emph{multiplicity} (ie, number of instances) in \texttt{list}. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@list := [ "s", "b", "s", "t", "r", "i", "p", "s" ];|
+  !gapprompt@gap>| !gapinput@list := [ "s", "b", "s", "t", "r", "i", "p", "s" ];
+|
   [ "s", "b", "s", "t", "r", "i", "p", "s" ]
-  !gapprompt@gap>| !gapinput@clist := Collected( list );|
+  !gapprompt@gap>| !gapinput@clist := Collected( list );
+|
   [ [ "b", 1 ], [ "i", 1 ], [ "p", 1 ], [ "r", 1 ], [ "s", 3 ],
     [ "t", 1 ] ]
-  !gapprompt@gap>| !gapinput@elt := clist[5];|
+  !gapprompt@gap>| !gapinput@elt := clist[5];
+|
   [ "s", 3 ]
 \end{Verbatim}
  In the above example, the entry \texttt{[ "s", 3 ]} in \texttt{clist} tells us that the element \texttt{"s"} appears \texttt{3} times in \texttt{list}. In other words, \texttt{"s} has \emph{multitplicity} \texttt{3} (in \texttt{list}). 
@@ -1256,19 +1299,24 @@ length $2$, the second being a positive integer. Elements may be repeated. This 
 happen from simple uses of \texttt{Collected}, of course, but can result from combining several collected lists, for
 instance with \texttt{Collected} (\textbf{Reference: Collected}) or \texttt{Append} (\textbf{Reference: Append}). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@hello := Collected( [ "h", "e", "l", "l", "o" ] );|
+  !gapprompt@gap>| !gapinput@hello := Collected( [ "h", "e", "l", "l", "o" ] );
+|
   [ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ] ]
-  !gapprompt@gap>| !gapinput@world := Collected( [ "w", "o", "r", "l", "d" ] );|
+  !gapprompt@gap>| !gapinput@world := Collected( [ "w", "o", "r", "l", "d" ] );
+|
   [ [ "d", 1 ], [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
-  !gapprompt@gap>| !gapinput@hello_world := Concatenation( hello, world );|
+  !gapprompt@gap>| !gapinput@hello_world := Concatenation( hello, world );
+|
   [ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ], [ "d", 1 ],
     [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
-  !gapprompt@gap>| !gapinput@IsCollectedList( hello_world );|
+  !gapprompt@gap>| !gapinput@IsCollectedList( hello_world );
+|
   true
 \end{Verbatim}
  Here, the element \texttt{"l"} appears twice in \texttt{hello{\textunderscore}world}, first with multiplicity \texttt{2} and then again with multiplicity \texttt{1}. The element \texttt{"o"} also appears twice with multiplicity \texttt{1} each time. Despite this repetition, \texttt{hello{\textunderscore}world} is still a collected list. It may be "tidied up" using \texttt{Recollected} (\ref{Recollected}). 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@Recollected( hello_world );|
+  !gapprompt@gap>| !gapinput@Recollected( hello_world );
+|
   [ [ "e", 1 ], [ "h", 1 ], [ "l", 3 ], [ "o", 2 ], [ "d", 1 ],
     [ "r", 1 ], [ "w", 1 ] ]
 \end{Verbatim}
@@ -1479,14 +1527,20 @@ example.
 {
   The quiver and relations of this algebra are specified to \textsf{QPA} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@quiv := Quiver(|
-  !gapprompt@>| !gapinput@3,|
-  !gapprompt@>| !gapinput@[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 1, "c" ] ]|
-  !gapprompt@>| !gapinput@);|
+  !gapprompt@gap>| !gapinput@quiv := Quiver(
+|
+  !gapprompt@>| !gapinput@3,
+|
+  !gapprompt@>| !gapinput@[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 1, "c" ] ]
+|
+  !gapprompt@>| !gapinput@);
+|
   <quiver with 3 vertices and 3 arrows>
-  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );|
+  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );
+|
   <Rationals[<quiver with 3 vertices and 3 arrows>]>
-  !gapprompt@gap>| !gapinput@rels := NthPowerOfArrowIdeal( pa, 4 );|
+  !gapprompt@gap>| !gapinput@rels := NthPowerOfArrowIdeal( pa, 4 );
+|
   [ (1)*a*b*c*a, (1)*b*c*a*b, (1)*c*a*b*c ]
 \end{Verbatim}
  
@@ -1522,18 +1576,27 @@ example.
 {
   The quiver and relations of this algebra are specified to \textsf{QPA} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@quiv := Quiver(|
-  !gapprompt@>| !gapinput@2,|
-  !gapprompt@>| !gapinput@[ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ]|
-  !gapprompt@>| !gapinput@);|
+  !gapprompt@gap>| !gapinput@quiv := Quiver(
+|
+  !gapprompt@>| !gapinput@2,
+|
+  !gapprompt@>| !gapinput@[ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ]
+|
+  !gapprompt@>| !gapinput@);
+|
   <quiver with 2 vertices and 4 arrows>
   pa := PathAlgebra( Rationals, quiv );
   <Rationals[<quiver with 2 vertices and 4 arrows>]>
-  !gapprompt@gap>| !gapinput@rels := [|
-  !gapprompt@>| !gapinput@pa.a * pa.a, pa.b * pa.d, pa.c * pa.b, pa.d * pa.c,|
-  !gapprompt@>| !gapinput@pa.c * pa.a * pa.b, (pa.d)^4,|
-  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c - pa.b * pa.c * pa.a|
-  !gapprompt@>| !gapinput@];|
+  !gapprompt@gap>| !gapinput@rels := [
+|
+  !gapprompt@>| !gapinput@pa.a * pa.a, pa.b * pa.d, pa.c * pa.b, pa.d * pa.c,
+|
+  !gapprompt@>| !gapinput@pa.c * pa.a * pa.b, (pa.d)^4,
+|
+  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c - pa.b * pa.c * pa.a
+|
+  !gapprompt@>| !gapinput@];
+|
   [ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (1)*c*a*b,
     (1)*d^4, (1)*a*b*c+(-1)*b*c*a ]
 \end{Verbatim}
@@ -1561,22 +1624,36 @@ example.
 {
   The quiver and relations of this algebra are specified to \textsf{QPA} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@quiv := Quiver(|
-  !gapprompt@>| !gapinput@4,|
-  !gapprompt@>| !gapinput@[ [1,2,"a"], [2,3,"b"], [3,4,"c"], [4,1,"d"], [4,4,"e"], [1,2,"f"],|
-  !gapprompt@>| !gapinput@  [2,3,"g"], [3,1,"h"] ]|
-  !gapprompt@>| !gapinput@);|
+  !gapprompt@gap>| !gapinput@quiv := Quiver(
+|
+  !gapprompt@>| !gapinput@4,
+|
+  !gapprompt@>| !gapinput@[ [1,2,"a"], [2,3,"b"], [3,4,"c"], [4,1,"d"], [4,4,"e"], [1,2,"f"],
+|
+  !gapprompt@>| !gapinput@  [2,3,"g"], [3,1,"h"] ]
+|
+  !gapprompt@>| !gapinput@);
+|
   <quiver with 4 vertices and 8 arrows>
-  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );|
+  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );
+|
   <Rationals[<quiver with 4 vertices and 8 arrows>]>
-  !gapprompt@gap>| !gapinput@rels := [|
-  !gapprompt@>| !gapinput@pa.a * pa.g, pa.b * pa.h, pa.c * pa.e, pa.d * pa.f,|
-  !gapprompt@>| !gapinput@pa.e * pa.d, pa.f * pa.b, pa.g * pa.c, pa.h * pa.a,|
-  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d * pa.a - ( pa.f * pa.g * pa.h )^2 * pa.f,|
-  !gapprompt@>| !gapinput@pa.d * pa.a * pa.b * pa.c - ( pa.e )^3,|
-  !gapprompt@>| !gapinput@pa.c * pa.d * pa.a * pa.b * pa.c,|
-  !gapprompt@>| !gapinput@( pa.h * pa.f * pa.g )^2 * pa.h|
-  !gapprompt@>| !gapinput@];|
+  !gapprompt@gap>| !gapinput@rels := [
+|
+  !gapprompt@>| !gapinput@pa.a * pa.g, pa.b * pa.h, pa.c * pa.e, pa.d * pa.f,
+|
+  !gapprompt@>| !gapinput@pa.e * pa.d, pa.f * pa.b, pa.g * pa.c, pa.h * pa.a,
+|
+  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d * pa.a - ( pa.f * pa.g * pa.h )^2 * pa.f,
+|
+  !gapprompt@>| !gapinput@pa.d * pa.a * pa.b * pa.c - ( pa.e )^3,
+|
+  !gapprompt@>| !gapinput@pa.c * pa.d * pa.a * pa.b * pa.c,
+|
+  !gapprompt@>| !gapinput@( pa.h * pa.f * pa.g )^2 * pa.h
+|
+  !gapprompt@>| !gapinput@];
+|
   [ (1)*a*g, (1)*b*h, (1)*c*e, (1)*d*f, (1)*e*d, (1)*f*b, (1)*g*c,
     (1)*h*a, (1)*a*b*c*d*a+(-1)*f*g*h*f*g*h*f, (-1)*e^3+(1)*d*a*b*c,
     (1)*c*d*a*b*c, (1)*h*f*g*h*f*g*h ]
@@ -1606,29 +1683,50 @@ example.
 {
   The quiver and relations of this algebra are specified to \textsf{QPA} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@quiv := Quiver(|
-  !gapprompt@>| !gapinput@8,|
-  !gapprompt@>| !gapinput@[ [ 1, 1, "a" ], [ 1, 2, "b" ], [ 2, 2, "c" ], [ 2, 3, "d" ],|
-  !gapprompt@>| !gapinput@  [ 3, 4, "e" ], [ 4, 3, "f" ], [ 3, 4, "g" ], [ 4, 5, "h" ],|
-  !gapprompt@>| !gapinput@  [ 5, 6, "i" ], [ 6, 5, "j" ], [ 5, 7, "k" ], [ 7, 6, "l" ],|
-  !gapprompt@>| !gapinput@  [ 6, 7, "m" ], [ 7, 8, "n" ], [ 8, 8, "o" ], [ 8, 1, "p" ] ]|
-  !gapprompt@>| !gapinput@);|
+  !gapprompt@gap>| !gapinput@quiv := Quiver(
+|
+  !gapprompt@>| !gapinput@8,
+|
+  !gapprompt@>| !gapinput@[ [ 1, 1, "a" ], [ 1, 2, "b" ], [ 2, 2, "c" ], [ 2, 3, "d" ],
+|
+  !gapprompt@>| !gapinput@  [ 3, 4, "e" ], [ 4, 3, "f" ], [ 3, 4, "g" ], [ 4, 5, "h" ],
+|
+  !gapprompt@>| !gapinput@  [ 5, 6, "i" ], [ 6, 5, "j" ], [ 5, 7, "k" ], [ 7, 6, "l" ],
+|
+  !gapprompt@>| !gapinput@  [ 6, 7, "m" ], [ 7, 8, "n" ], [ 8, 8, "o" ], [ 8, 1, "p" ] ]
+|
+  !gapprompt@>| !gapinput@);
+|
   <quiver with 8 vertices and 16 arrows>
-  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );|
+  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv );
+|
   <Rationals[<quiver with 8 vertices and 16 arrows>]>
-  !gapprompt@gap>| !gapinput@rels := [|
-  !gapprompt@>| !gapinput@pa.a * pa.a, pa.b * pa.d, pa.c * pa.c, pa.d * pa.g, pa.e * pa.h,|
-  !gapprompt@>| !gapinput@pa.f * pa.e, pa.g * pa.f, pa.h * pa.k, pa.i * pa.m, pa.j * pa.i,|
-  !gapprompt@>| !gapinput@pa.k * pa.n, pa.l * pa.j,|
-  !gapprompt@>| !gapinput@pa.m * pa.l, pa.n * pa.p, pa.o * pa.o, pa.p * pa.b,|
-  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d,|
-  !gapprompt@>| !gapinput@pa.e * pa.f * pa.g * pa.h,|
-  !gapprompt@>| !gapinput@pa.g * pa.h * pa.i * pa.j * pa.k,|
-  !gapprompt@>| !gapinput@pa.c * pa.d * pa.e - pa.d * pa.e * pa.f * pa.g,|
-  !gapprompt@>| !gapinput@pa.f * pa.g * pa.h * pa.i - pa.h * pa.i * pa.j * pa.k * pa.l,|
-  !gapprompt@>| !gapinput@pa.j * pa.k * pa.l * pa.m * pa.n - pa.m * pa.n * pa.o,|
-  !gapprompt@>| !gapinput@pa.o * pa.p * pa.a * pa.b - pa.p * pa.a * pa.b * pa.c|
-  !gapprompt@>| !gapinput@];|
+  !gapprompt@gap>| !gapinput@rels := [
+|
+  !gapprompt@>| !gapinput@pa.a * pa.a, pa.b * pa.d, pa.c * pa.c, pa.d * pa.g, pa.e * pa.h,
+|
+  !gapprompt@>| !gapinput@pa.f * pa.e, pa.g * pa.f, pa.h * pa.k, pa.i * pa.m, pa.j * pa.i,
+|
+  !gapprompt@>| !gapinput@pa.k * pa.n, pa.l * pa.j,
+|
+  !gapprompt@>| !gapinput@pa.m * pa.l, pa.n * pa.p, pa.o * pa.o, pa.p * pa.b,
+|
+  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d,
+|
+  !gapprompt@>| !gapinput@pa.e * pa.f * pa.g * pa.h,
+|
+  !gapprompt@>| !gapinput@pa.g * pa.h * pa.i * pa.j * pa.k,
+|
+  !gapprompt@>| !gapinput@pa.c * pa.d * pa.e - pa.d * pa.e * pa.f * pa.g,
+|
+  !gapprompt@>| !gapinput@pa.f * pa.g * pa.h * pa.i - pa.h * pa.i * pa.j * pa.k * pa.l,
+|
+  !gapprompt@>| !gapinput@pa.j * pa.k * pa.l * pa.m * pa.n - pa.m * pa.n * pa.o,
+|
+  !gapprompt@>| !gapinput@pa.o * pa.p * pa.a * pa.b - pa.p * pa.a * pa.b * pa.c
+|
+  !gapprompt@>| !gapinput@];
+|
 \end{Verbatim}
  The relations of this algebra are chosen so that the nonzero paths of length $2$ are: \texttt{a*b}, \texttt{b*c}, \texttt{c*d}, \texttt{d*e}, \texttt{e*f}, \texttt{f*g}, \texttt{g*h}, \texttt{h*i}, \texttt{i*j}, \texttt{j*k}, \texttt{k*l}, \texttt{l*m}, \texttt{m*n}, \texttt{n*o}, \texttt{o*p} and \texttt{p*a}. }
 
@@ -1639,25 +1737,42 @@ example.
 {
   The quiver and relations of this algebra are specified to \textsf{QPA} as follows. 
 \begin{Verbatim}[commandchars=!@|,fontsize=\small,frame=single,label=Example]
-  !gapprompt@gap>| !gapinput@quiv := Quiver(|
-  !gapprompt@>| !gapinput@4,|
-  !gapprompt@>| !gapinput@[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 4, "c" ], [ 4, 1, "d" ],|
-  !gapprompt@>| !gapinput@  [ 1, 2, "e" ], [ 2, 3, "f" ], [ 3, 1, "g" ], [ 4, 4, "h" ] ]|
-  !gapprompt@>| !gapinput@);|
+  !gapprompt@gap>| !gapinput@quiv := Quiver(
+|
+  !gapprompt@>| !gapinput@4,
+|
+  !gapprompt@>| !gapinput@[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 4, "c" ], [ 4, 1, "d" ],
+|
+  !gapprompt@>| !gapinput@  [ 1, 2, "e" ], [ 2, 3, "f" ], [ 3, 1, "g" ], [ 4, 4, "h" ] ]
+|
+  !gapprompt@>| !gapinput@);
+|
   <quiver with 4 vertices and 8 arrows>
-  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv5 );|
+  !gapprompt@gap>| !gapinput@pa := PathAlgebra( Rationals, quiv5 );
+|
   <Rationals[<quiver with 4 vertices and 8 arrows>]>
-  !gapprompt@gap>| !gapinput@rels := [|
-  !gapprompt@>| !gapinput@pa.a * pa.f, pa.b * pa.g, pa.c * pa.h, pa.d * pa.e, pa.e * pa.b,|
-  !gapprompt@>| !gapinput@pa.f * pa.c, pa.g * pa.a, pa.h * pa.d,|
-  !gapprompt@>| !gapinput@pa.b * pa.c * pa.d * pa.a * pa.b * pa.c,|
-  !gapprompt@>| !gapinput@pa.d * pa.a * pa.b * pa.c * pa.d * pa.a,|
-  !gapprompt@>| !gapinput@( pa.h )^6,|
-  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d * pa.a * pa.b -|
-  !gapprompt@>| !gapinput@    pa.e * pa.f * pa.g * pa.e * pa.f * pa.g * pa.e * pa.f,|
-  !gapprompt@>| !gapinput@pa.c * pa.d * pa.a * pa.b * pa.c * pa.d -|
-  !gapprompt@>| !gapinput@    pa.g * pa.e * pa.f * pa.g * pa.e * pa.f * pa.g|
-  !gapprompt@>| !gapinput@];|
+  !gapprompt@gap>| !gapinput@rels := [
+|
+  !gapprompt@>| !gapinput@pa.a * pa.f, pa.b * pa.g, pa.c * pa.h, pa.d * pa.e, pa.e * pa.b,
+|
+  !gapprompt@>| !gapinput@pa.f * pa.c, pa.g * pa.a, pa.h * pa.d,
+|
+  !gapprompt@>| !gapinput@pa.b * pa.c * pa.d * pa.a * pa.b * pa.c,
+|
+  !gapprompt@>| !gapinput@pa.d * pa.a * pa.b * pa.c * pa.d * pa.a,
+|
+  !gapprompt@>| !gapinput@( pa.h )^6,
+|
+  !gapprompt@>| !gapinput@pa.a * pa.b * pa.c * pa.d * pa.a * pa.b -
+|
+  !gapprompt@>| !gapinput@    pa.e * pa.f * pa.g * pa.e * pa.f * pa.g * pa.e * pa.f,
+|
+  !gapprompt@>| !gapinput@pa.c * pa.d * pa.a * pa.b * pa.c * pa.d -
+|
+  !gapprompt@>| !gapinput@    pa.g * pa.e * pa.f * pa.g * pa.e * pa.f * pa.g
+|
+  !gapprompt@>| !gapinput@];
+|
   [ (1)*a*f, (1)*b*g, (1)*c*h, (1)*d*e, (1)*e*b, (1)*f*c, (1)*g*a,
     (1)*h*d, (1)*b*c*d*a*b*c, (1)*d*a*b*c*d*a, (1)*h^6,
     (1)*a*b*c*d*a*b+(-1)*e*f*g*e*f*g*e*f,

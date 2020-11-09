@@ -1,0 +1,7 @@
+  
+  [1X7 [33X[0;0YVertex-indexed sequences and encodings of permissible data[133X[101X
+  
+  [33X[0;0YIn  this  chapter,  I  explain  about the source and target encodings of the
+  permissible  data  of a SB algebra. I also describe vertex-indexed sequences
+  more generally.[133X
+  

@@ -15,6 +15,9 @@ DeclareProperty( "IsVirtualSyllable", IsSyllableRep );
 DeclareProperty( "IsStableSyllable", IsSyllableRep );
 DeclareProperty( "IsSyllableWithStableSource", IsSyllableRep );
 DeclareProperty( "IsUltimatelyDescentStableSyllable", IsSyllableRep );
+
+##
+##
 DeclareProperty( "IsPinBoundarySyllable", IsSyllableRep );
 
 ##  <#GAPDoc Label="DocIsStationarySyllable">

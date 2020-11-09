@@ -45,8 +45,82 @@
   [1XContents (SBStrips)[101X
   
   1 [33X[0;0YIntroduction[133X
-    1.1 [33X[0;0YHeading[133X
-      1.1-1 InfoSBStrips
+    1.1 [33X[0;0YWhy "strips", not "strings"?[133X
+    1.2 [33X[0;0YAims[133X
+    1.3 [33X[0;0YInstallation[133X
+  2 [33X[0;0YWorked example[133X
+    2.1 [33X[0;0YStrips, aka "strings for special biserial algebras"[133X
+    2.2 [33X[0;0YModules from strips[133X
+    2.3 [33X[0;0YSyzygies of strips[133X
+    2.4 [33X[0;0YComputing higher syzygies efficiently[133X
+    2.5 [33X[0;0YOther important strips[133X
+    2.6 [33X[0;0YTests with strips[133X
+    2.7 [33X[0;0YAdditional examples[133X
+  3 [33X[0;0YStrips[133X
+    3.1 [33X[0;0YIntroduction[133X
+    3.2 [33X[0;0YConstructing strips[133X
+      3.2-1 [33X[0;0YStripify[133X
+    3.3 [33X[0;0YParticular strips[133X
+      3.3-1 SimpleStripsOfSBAlg
+      3.3-2 UniserialStripsOfSBAlg
+      3.3-3 ProjectiveStripsOfSBAlg
+      3.3-4 InjectiveStripsOfSBAlg
+    3.4 [33X[0;0YCalculating syzygies of strips[133X
+      3.4-1 [33X[0;0YSyzygyOfStrip[133X
+      3.4-2 [33X[0;0YNthSyzygyOfStrip[133X
+      3.4-3 [33X[0;0YCollectedSyzygyOfStrip[133X
+      3.4-4 [33X[0;0YCollectedNthSyzygyOfStrip[133X
+    3.5 [33X[0;0YAttributes of strips[133X
+      3.5-1 WidthOfStrip
+    3.6 [33X[0;0YOperation on strips[133X
+      3.6-1 ModuleOfStrip
+      3.6-2 IsFiniteSyzygyTypeStripByNthSyzygy
+      3.6-3 IsWeaklyPeriodicStripByNthSyzygy
+  4 [33X[0;0YDiscrete model for SB algebras and their string modules[133X
+  5 [33X[0;0YQuiver utilities and the overquiver of a SB algebra[133X
+    5.1 [33X[0;0YIntroduction[133X
+    5.2 [33X[0;0YNew property of quivers[133X
+      5.2-1 Is1RegQuiver
+      5.2-2 IsOverquiver
+    5.3 [33X[0;0YNew attributes of quivers[133X
+      5.3-1 1RegQuivIntAct
+      5.3-2 1RegQuivIntActionFunction
+      5.3-3 2RegAugmentationOfQuiver
+    5.4 [33X[0;0YOperations on vertices and arrows of quivers[133X
+      5.4-1 1RegQuivIntAct
+      5.4-2 PathBySourceAndLength
+      5.4-3 PathByTargetAndLength
+    5.5 [33X[0;0YNew attributes for special biserial algebras[133X
+      5.5-1 OverquiverOfSBAlg
+      5.5-2 SimpleStripsOfSBAlg
+      5.5-3 ProjectiveStripsOfSBAlg
+      5.5-4 InjectiveStripsOfSBAlg
+    5.6 [33X[0;0YNew function for special biserial algebras[133X
+      5.6-1 TestInjectiveStripsUpToNthSyzygy
+  6 [33X[0;0YPermissible data of a SB algebra[133X
+  7 [33X[0;0YVertex-indexed sequences and encodings of permissible data[133X
+  8 [33X[0;0YSyllables[133X
+  9 [33X[0;0YPatches[133X
+  10 [33X[0;0YUtilities[133X
+    10.1 [33X[0;0YCollected lists[133X
+      10.1-1 IsCollectedList
+      10.1-2 IsCollectedDuplicateFreeList
+      10.1-3 IsCollectedHomogeneousList
+      10.1-4 Recollected
+      10.1-5 Uncollected
+    10.2 [33X[0;0YMiscellaneous utilities for [5XQPA[105X[133X
+      10.2-1 String
+      10.2-2 ArrowsOfQuiverAlgebra
+      10.2-3 VerticesOfQuiverAlgebra
+  A [33X[0;0YExample algebras[133X
+    A.1 [33X[0;0YThe function[133X
+      A.1-1 SBStripsExampleAlgebra
+    A.2 [33X[0;0YThe algebras[133X
+      A.2-1 [33X[0;0YAlgebra [22X1[122X[133X
+      A.2-2 [33X[0;0YAlgebra [22X2[122X[133X
+      A.2-3 [33X[0;0YAlgebra [22X3[122X[133X
+      A.2-4 [33X[0;0YAlgebra [22X4[122X[133X
+      A.2-5 [33X[0;0YAlgebra [22X5[122X[133X
   
   
   [32X

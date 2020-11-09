@@ -1,0 +1,92 @@
+\begin{theindex}
+
+  \item \texttt  {1RegQuivIntAct}, \hyperpage{19}
+  \item \texttt  {1RegQuivIntActionFunction}, \hyperpage{19}
+  \item \texttt  {2RegAugmentationOfQuiver}, \hyperpage{19}
+
+  \indexspace
+
+  \item \texttt  {ArrowsOfQuiverAlgebra}, \hyperpage{28}
+
+  \indexspace
+
+  \item \texttt  {CollectedNthSyzygyOfStrip}
+    \subitem for collected lists of strips, \hyperpage{15}
+    \subitem for lists of strips, \hyperpage{15}
+    \subitem for strips, \hyperpage{15}
+  \item \texttt  {CollectedSyzygyOfStrip}
+    \subitem for collected lists of strips, \hyperpage{15}
+    \subitem for flat lists of strips, \hyperpage{15}
+    \subitem for strips, \hyperpage{15}
+
+  \indexspace
+
+  \item \texttt  {InjectiveStripsOfSBAlg}, \hyperpage{14}, 
+		\hyperpage{21}
+  \item \texttt  {Is1RegQuiver}, \hyperpage{18}
+  \item \texttt  {IsCollectedDuplicateFreeList}, \hyperpage{27}
+  \item \texttt  {IsCollectedHomogeneousList}, \hyperpage{27}
+  \item \texttt  {IsCollectedList}, \hyperpage{27}
+  \item \texttt  {IsFiniteSyzygyTypeStripByNthSyzygy}, \hyperpage{16}
+  \item \texttt  {IsOverquiver}, \hyperpage{18}
+  \item \texttt  {IsWeaklyPeriodicStripByNthSyzygy}, \hyperpage{16}
+
+  \indexspace
+
+  \item \texttt  {ModuleOfStrip}
+    \subitem for a (flat) list of strips, \hyperpage{16}
+    \subitem for a collected list of strips, \hyperpage{16}
+    \subitem for a strip, \hyperpage{16}
+
+  \indexspace
+
+  \item \texttt  {NthSyzygyOfStrip}
+    \subitem for lists of strips, \hyperpage{14}
+    \subitem for strips, \hyperpage{14}
+
+  \indexspace
+
+  \item \texttt  {OverquiverOfSBAlg}, \hyperpage{20}
+
+  \indexspace
+
+  \item \texttt  {PathBySourceAndLength}, \hyperpage{20}
+  \item \texttt  {PathByTargetAndLength}, \hyperpage{20}
+  \item \texttt  {ProjectiveStripsOfSBAlg}, \hyperpage{13}, 
+		\hyperpage{20}
+
+  \indexspace
+
+  \item \texttt  {Recollected}, \hyperpage{28}
+
+  \indexspace
+
+  \item \texttt  {SBStripsExampleAlgebra}, \hyperpage{30}
+  \item \texttt  {SimpleStripsOfSBAlg}, \hyperpage{13}, \hyperpage{20}
+  \item \texttt  {String}
+    \subitem for paths of length at least 2, \hyperpage{28}
+  \item \texttt  {Stripify}
+    \subitem for a path of a special biserial algebra, \hyperpage{13}
+    \subitem for an arrow, +/-1 and a list of integers, \hyperpage{12}
+  \item \texttt  {SyzygyOfStrip}
+    \subitem for lists of strips, \hyperpage{14}
+    \subitem for strips, \hyperpage{14}
+
+  \indexspace
+
+  \item \texttt  {TestInjectiveStripsUpToNthSyzygy}, \hyperpage{21}
+
+  \indexspace
+
+  \item \texttt  {Uncollected}, \hyperpage{28}
+  \item \texttt  {UniserialStripsOfSBAlg}, \hyperpage{13}
+
+  \indexspace
+
+  \item \texttt  {VerticesOfQuiverAlgebra}, \hyperpage{29}
+
+  \indexspace
+
+  \item \texttt  {WidthOfStrip}, \hyperpage{15}
+
+\end{theindex}

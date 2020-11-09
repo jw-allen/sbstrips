@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SBStrips) - Contents</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap0"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap0_mj.html">[MathJax on]</a></p>
+<p><a id="X7D2C85EC87DD46E5" name="X7D2C85EC87DD46E5"></a></p>
+<div class="pcenter">
+
+<h1><strong class="pkg">SBStrips</strong></h1>
+
+<p>
+  Version 0.6.0</p>
+
+</div>
+<p>
+  A discrete model of special biserial algebras, string modules and their
+  syzygies
+</p>
+<p><b>
+  Joe Allen
+</b>
+</p>
+
+<p><a id="X7AA6C5737B711C89" name="X7AA6C5737B711C89"></a></p>
+<h3>Abstract</h3>
+<p>We implement a discrete model of special biserial algebras and, more to the point, their string modules. We represent string modules using new objects that we call <em>strips</em>. Using these, we efficiently calculate syzygies of string modules in terms of the strips that represent them.</p>
+
+<p>This package builds on, an interfaces with, the <strong class="pkg">QPA</strong> package. This package was created as part of the author's PhD thesis.</p>
+
+<p><a id="X81488B807F2A1CF1" name="X81488B807F2A1CF1"></a></p>
+<h3>Copyright</h3>
+<p>Joe Allen © 2020</p>
+
+<p><a id="X82A988D47DFAFCFA" name="X82A988D47DFAFCFA"></a></p>
+<h3>Acknowledgements</h3>
+<p>I thank my PhD supervisor Professor Jeremy Rickard, on whom I inflicted multiple early iterations of <strong class="pkg">SBStrips</strong>, for his time and his comments. This package was much worse before his feedback.</p>
+
+<p><a id="X8537FEB07AF2BEC8" name="X8537FEB07AF2BEC8"></a></p>
+
+<div class="contents">
+<h3>Contents<a id="contents" name="contents"></a></h3>
+
+<div class="ContChap"><a href="chap1.html#X7DFB63A97E67C0A1">1 <span class="Heading">Introduction</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X82DE174F80A89DF6">1.1 <span class="Heading">
+    Why "strips", not "strings"?
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X853EA0D6839268EE">1.2 <span class="Heading">
+    Aims
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap1.html#X8360C04082558A12">1.3 <span class="Heading">
+    Installation
+  </span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap2.html#X7B0FE1477C5D89EF">2 <span class="Heading">
+        Worked example
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X81BB5C047A361371">2.1 <span class="Heading">
+    Strips, aka "strings for special biserial algebras"
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7948836087B35782">2.2 <span class="Heading">Modules from strips</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7C4DE6E1786C5AFD">2.3 <span class="Heading">Syzygies of strips</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X85A7243787000FB7">2.4 <span class="Heading">Computing higher syzygies efficiently</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7DA6DDC984FAE6D4">2.5 <span class="Heading">Other important strips</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80DD262286DA9021">2.6 <span class="Heading">
+    Tests with strips
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7F4536F08712B181">2.7 <span class="Heading">
+    Additional examples
+  </span></a>
+</span>
+</div>
+</div>
+<div class="ContChap"><a href="chap3.html#X7D12E5587D7A9AA4">3 <span class="Heading">
+        Strips
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7DFB63A97E67C0A1">3.1 <span class="Heading">Introduction</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7A1ABE6084831B63">3.2 <span class="Heading">
+    Constructing strips
+  </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8640C59C7A42F020">3.2-1 <span class="Heading">
+      Stripify
+    </span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X86FDC2F27A552978">3.3 <span class="Heading">
+    Particular strips
+  </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X813AF39E7E3ECC8B">3.3-1 SimpleStripsOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8784C33580BD8340">3.3-2 UniserialStripsOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84655A3D815A27AF">3.3-3 ProjectiveStripsOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7CD13D557EB29468">3.3-4 InjectiveStripsOfSBAlg</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7DE96C0C86506A9B">3.4 <span class="Heading">Calculating syzygies of strips</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7E17B30E80371A05">3.4-1 <span class="Heading">
+      SyzygyOfStrip
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8257298F848BA94C">3.4-2 <span class="Heading">
+        NthSyzygyOfStrip
+      </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X84E6DBEA784A4E6A">3.4-3 <span class="Heading">
+        CollectedSyzygyOfStrip
+      </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80869FAE7F348DC8">3.4-4 <span class="Heading">
+      CollectedNthSyzygyOfStrip
+    </span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7BA49A70791E2780">3.5 <span class="Heading">Attributes of strips</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X8165685B84AC7480">3.5-1 WidthOfStrip</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X8000E0C07B6DA65C">3.6 <span class="Heading">Operation on strips</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X80842A627A6121DD">3.6-1 ModuleOfStrip</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7FFA3C3683E703DC">3.6-2 IsFiniteSyzygyTypeStripByNthSyzygy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7BB2FF7F7A9C6694">3.6-3 IsWeaklyPeriodicStripByNthSyzygy</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap4.html#X78F8E3D981BA3796">4 <span class="Heading">
+        Discrete model for SB algebras and their string modules
+      </span></a>
+</div>
+<div class="ContChap"><a href="chap5.html#X7FF6DE0987BA7FE8">5 <span class="Heading">
+        Quiver utilities and the overquiver of a SB algebra
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7DFB63A97E67C0A1">5.1 <span class="Heading">Introduction</span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X80D26BE77B81D39B">5.2 <span class="Heading">New property of quivers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84DB986178D69D82">5.2-1 Is1RegQuiver</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7826ED2883732DFE">5.2-2 IsOverquiver</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7BDFC9697A297FF0">5.3 <span class="Heading">New attributes of quivers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EA297B985C82A45">5.3-1 1RegQuivIntAct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X789D2CD47B327603">5.3-2 1RegQuivIntActionFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X841ECFAA84FDB011">5.3-3 2RegAugmentationOfQuiver</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7B890A9482293463">5.4 <span class="Heading">Operations on vertices and arrows of quivers</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7EA297B985C82A45">5.4-1 1RegQuivIntAct</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X810A887585D4098B">5.4-2 PathBySourceAndLength</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7892361E85783F8B">5.4-3 PathByTargetAndLength</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X8469C13D7C36B7FB">5.5 <span class="Heading">New attributes for special biserial algebras</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7B70276A7A43291C">5.5-1 OverquiverOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X813AF39E7E3ECC8B">5.5-2 SimpleStripsOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X84655A3D815A27AF">5.5-3 ProjectiveStripsOfSBAlg</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X7CD13D557EB29468">5.5-4 InjectiveStripsOfSBAlg</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap5.html#X7BACE16A822E36B8">5.6 <span class="Heading">New function for special biserial algebras</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap5.html#X83C3BF9178B8D97A">5.6-1 TestInjectiveStripsUpToNthSyzygy</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chap6.html#X7C814A527B75D9DA">6 <span class="Heading">
+        Permissible data of a SB algebra
+      </span></a>
+</div>
+<div class="ContChap"><a href="chap7.html#X7879389E7A4C8E33">7 <span class="Heading">
+        Vertex-indexed sequences and encodings of permissible data
+      </span></a>
+</div>
+<div class="ContChap"><a href="chap8.html#X82627C9183191A66">8 <span class="Heading">
+        Syllables
+      </span></a>
+</div>
+<div class="ContChap"><a href="chap9.html#X836A2C337D1922F9">9 <span class="Heading">
+        Patches
+      </span></a>
+</div>
+<div class="ContChap"><a href="chap10.html#X7DFC90B87DC503A1">10 <span class="Heading">
+        Utilities
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X799A288C82AB99D5">10.1 <span class="Heading">Collected lists</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7EAE7FCC848D5F27">10.1-1 IsCollectedList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7D95686A8591E1A6">10.1-2 IsCollectedDuplicateFreeList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X83A0E7AE8385CC31">10.1-3 IsCollectedHomogeneousList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X80AC17A07EC6FD6C">10.1-4 Recollected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X7DB1A947791FF9AA">10.1-5 Uncollected</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap10.html#X7F5CB24078515612">10.2 <span class="Heading">Miscellaneous utilities for <strong class="pkg">QPA</strong></span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X86BC46E17F29652D">10.2-1 String</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X875DD4597C9E5465">10.2-2 ArrowsOfQuiverAlgebra</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap10.html#X81D60A0579AFEEC4">10.2-3 VerticesOfQuiverAlgebra</a></span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapA.html#X818882647BB546A1">A <span class="Heading">
+      Example algebras
+    </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X7868BE1E80F83B45">A.1 <span class="Heading">
+    The function
+  </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X877739D5861AAAB7">A.1-1 SBStripsExampleAlgebra</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chapA.html#X84EC390080AD8F1B">A.2 <span class="Heading">
+    The algebras
+  </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7BFFFBC7830786FD">A.2-1 <span class="Heading">
+      Algebra <span class="SimpleMath">1</span>
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X826F6EDC809F5531">A.2-2 <span class="Heading">
+      Algebra <span class="SimpleMath">2</span>
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X851F1DD581E8E475">A.2-3 <span class="Heading">
+      Algebra <span class="SimpleMath">3</span>
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7CF9548F87AEF2A9">A.2-4 <span class="Heading">
+      Algebra <span class="SimpleMath">4</span>
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chapA.html#X7B89278686D943ED">A.2-5 <span class="Heading">
+      Algebra <span class="SimpleMath">5</span>
+    </span></a>
+</span>
+</div></div>
+</div>
+<div class="ContChap"><a href="chapBib.html"><span class="Heading">References</span></a></div>
+<div class="ContChap"><a href="chapInd.html"><span class="Heading">Index</span></a></div>
+<br />
+</div>
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

@@ -1,5 +1,6 @@
 ReadPackage( "sbstrips", "lib/1reg.gd" );
 ReadPackage( "sbstrips", "lib/info.gd" );
+ReadPackage( "sbstrips", "lib/makedoc.gd" );
 ReadPackage( "sbstrips", "lib/overquiver.gd" );
 ReadPackage( "sbstrips", "lib/permdata.gd" );
 ReadPackage( "sbstrips", "lib/strips.gd" );
@@ -13,4 +14,3 @@ ReadPackage( "sbstrips", "lib/panels.gd" );
 
 # Read examples
 ReadPackage( "sbstrips", "examples/exmplalg.gd" );
-ReadPackage( "sbstrips", "examples/exmplalg.gi" );

@@ -2,6 +2,13 @@
   
   [1XReferences[101X
   
+  [[20X [120X] [16X[116X, [17X QPA -- Quivers, path algebras and representations, Version 1.29
+  [117X ( 2018 ), (( https://folk.ntnu.no/oyvinso/QPA/ )).
+  
+  [[20XLM  [120X]  [16XLiu,  S.  and Morin, J.-P.[116X, [17X The strong no loop conjecture for
+  special  biserial algebras [117X, [18X Proceedings of the American Mathematical
+  Society [118X, [19X 132 [119X, 12 ( 2004 ), 3513-3523 .
+  
   
   
   [32X

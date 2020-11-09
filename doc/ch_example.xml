@@ -4,9 +4,7 @@
     Strips, aka "strings for special biserial algebras"
   </Heading>
 
-  This package is principally for "strings and their syzygies". Strings are
-  defined over special biserial (SB) algebras. Our first job is to tell &GAP; about a SB algebra. We'll do this using tools from &QPA;. If the following
-  doesn't make sense to you, then see the QPA documentation <Cite Key="QPA"/>.
+  This package is principally for "strings and their syzygies". Strings are defined over special biserial (SB) algebras. Our first job is to tell &GAP; about a SB algebra. We'll do this using tools from &QPA;. If the following doesn't make sense to you, then see the QPA documentation <Cite Key="QPA"/>.
   <P />
   
   An important rule is that the SB algebra be presented by <E>monomial relations </E> and <E>skew commutativity relations</E>. A monomial relation is just a path <M>p</M> (or more generally <M>\lambda p</M> for some coefficient in the ambient field, here <C>Rationals</C>). A (skew) commutativity relation is a linear difference <M> \lambda p - \mu q</M> of paths <M>p,q</M> having common source and target, where <M>\lambda,\mu</M> are nonzero coefficients. It is well-known that all SB algebras admit such a presentation; &SBStrips; takes it for granted you have used one.
@@ -44,7 +42,7 @@ gap> alg2 := kq2/ideal2;
       &amp; 2
     \end{tikzcd}
   </Display></Alt><Alt Not="LaTeX"><Display>
-    (a)^-1 (b) (c) (a)^-1 (b) (d)^-1 (c) (a)^-1 (c)^-1 (d)
+    (a)^{-1} (b) (c) (a)^{-1} (b) (d)^{-1} (c) (a)^{-1} (c)^{-1} (d)
   </Display></Alt>
   Note in particular that the "first arrow" in this strip is <M>a</M> and it
   has exponent <M>-1</M><Alt Only="LaTeX"> (which means it points to the
@@ -192,13 +190,13 @@ gap> time;
   
   All of the simple modules over an SB algebra are string modules. The list of strips that describe them can be obtained using the following command.
 <Example><![CDATA[
-gap> SimpleStripsOfSbAlg( alg2 );
+gap> SimpleStripsOfSBAlg( alg2 );
 [ (v1)^-1(v1), (v2)^-1(v2) ]
 ]]></Example>
   The <C>r</C>th entry is the strip describing the <C>r</C>th simple module <M>S_r</M>.
   <P />
   
-  Additionally, some of the indecomposable projective modules are string modules. The attribute <Ref Attr="ProjectiveStripsOfSbAlg"/> returns a list, whose <C>r</C>th entry is the strip describing the module <M>P_r</M> (if <M>P_r</M> is indeed a string module) or the boolean &fail; (if not). The attribute <Ref Attr="InjectiveStripsOfSbAlg"/> is similar.
+  Additionally, some of the indecomposable projective modules are string modules. The attribute <Ref Attr="ProjectiveStripsOfSBAlg"/> returns a list, whose <C>r</C>th entry is the strip describing the module <M>P_r</M> (if <M>P_r</M> is indeed a string module) or the boolean &fail; (if not). The attribute <Ref Attr="InjectiveStripsOfSBAlg"/> is similar.
 <Example><![CDATA[
 gap> ProjectiveStripsOfSbAlg( alg2 );
 [ fail, (c*a)^-1(d^3) ]

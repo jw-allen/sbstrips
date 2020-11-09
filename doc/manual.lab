@@ -1,0 +1,99 @@
+\GAPDocLabFile{sbstrips}
+\makelabel{sbstrips:Title page}{}{X7D2C85EC87DD46E5}
+\makelabel{sbstrips:Abstract}{}{X7AA6C5737B711C89}
+\makelabel{sbstrips:Copyright}{}{X81488B807F2A1CF1}
+\makelabel{sbstrips:Acknowledgements}{}{X82A988D47DFAFCFA}
+\makelabel{sbstrips:Table of Contents}{}{X8537FEB07AF2BEC8}
+\makelabel{sbstrips:Introduction}{1}{X7DFB63A97E67C0A1}
+\makelabel{sbstrips:Why "strips", not "strings"?}{1.1}{X82DE174F80A89DF6}
+\makelabel{sbstrips:Aims}{1.2}{X853EA0D6839268EE}
+\makelabel{sbstrips:Installation}{1.3}{X8360C04082558A12}
+\makelabel{sbstrips:Worked example}{2}{X7B0FE1477C5D89EF}
+\makelabel{sbstrips:Strips, aka "strings for special biserial algebras"}{2.1}{X81BB5C047A361371}
+\makelabel{sbstrips:Modules from strips}{2.2}{X7948836087B35782}
+\makelabel{sbstrips:Syzygies of strips}{2.3}{X7C4DE6E1786C5AFD}
+\makelabel{sbstrips:Computing higher syzygies efficiently}{2.4}{X85A7243787000FB7}
+\makelabel{sbstrips:Other important strips}{2.5}{X7DA6DDC984FAE6D4}
+\makelabel{sbstrips:Tests with strips}{2.6}{X80DD262286DA9021}
+\makelabel{sbstrips:Additional examples}{2.7}{X7F4536F08712B181}
+\makelabel{sbstrips:Strips}{3}{X7D12E5587D7A9AA4}
+\makelabel{sbstrips:Introduction}{3.1}{X7DFB63A97E67C0A1}
+\makelabel{sbstrips:Constructing strips}{3.2}{X7A1ABE6084831B63}
+\makelabel{sbstrips:Stripify}{3.2.1}{X8640C59C7A42F020}
+\makelabel{sbstrips:Particular strips}{3.3}{X86FDC2F27A552978}
+\makelabel{sbstrips:Calculating syzygies of strips}{3.4}{X7DE96C0C86506A9B}
+\makelabel{sbstrips:SyzygyOfStrip}{3.4.1}{X7E17B30E80371A05}
+\makelabel{sbstrips:NthSyzygyOfStrip}{3.4.2}{X8257298F848BA94C}
+\makelabel{sbstrips:CollectedSyzygyOfStrip}{3.4.3}{X84E6DBEA784A4E6A}
+\makelabel{sbstrips:CollectedNthSyzygyOfStrip}{3.4.4}{X80869FAE7F348DC8}
+\makelabel{sbstrips:Attributes of strips}{3.5}{X7BA49A70791E2780}
+\makelabel{sbstrips:Operation on strips}{3.6}{X8000E0C07B6DA65C}
+\makelabel{sbstrips:Discrete model for SB algebras and their string modules}{4}{X78F8E3D981BA3796}
+\makelabel{sbstrips:Quiver utilities and the overquiver of a SB algebra}{5}{X7FF6DE0987BA7FE8}
+\makelabel{sbstrips:Introduction}{5.1}{X7DFB63A97E67C0A1}
+\makelabel{sbstrips:New property of quivers}{5.2}{X80D26BE77B81D39B}
+\makelabel{sbstrips:New attributes of quivers}{5.3}{X7BDFC9697A297FF0}
+\makelabel{sbstrips:Operations on vertices and arrows of quivers}{5.4}{X7B890A9482293463}
+\makelabel{sbstrips:New attributes for special biserial algebras}{5.5}{X8469C13D7C36B7FB}
+\makelabel{sbstrips:New function for special biserial algebras}{5.6}{X7BACE16A822E36B8}
+\makelabel{sbstrips:Permissible data of a SB algebra}{6}{X7C814A527B75D9DA}
+\makelabel{sbstrips:Vertex-indexed sequences and encodings of permissible data}{7}{X7879389E7A4C8E33}
+\makelabel{sbstrips:Syllables}{8}{X82627C9183191A66}
+\makelabel{sbstrips:Patches}{9}{X836A2C337D1922F9}
+\makelabel{sbstrips:Utilities}{10}{X7DFC90B87DC503A1}
+\makelabel{sbstrips:Collected lists}{10.1}{X799A288C82AB99D5}
+\makelabel{sbstrips:Miscellaneous utilities for QPA}{10.2}{X7F5CB24078515612}
+\makelabel{sbstrips:Example algebras}{A}{X818882647BB546A1}
+\makelabel{sbstrips:The function}{A.1}{X7868BE1E80F83B45}
+\makelabel{sbstrips:The algebras}{A.2}{X84EC390080AD8F1B}
+\makelabel{sbstrips:Algebra 1}{A.2.1}{X7BFFFBC7830786FD}
+\makelabel{sbstrips:Algebra 2}{A.2.2}{X826F6EDC809F5531}
+\makelabel{sbstrips:Algebra 3}{A.2.3}{X851F1DD581E8E475}
+\makelabel{sbstrips:Algebra 4}{A.2.4}{X7CF9548F87AEF2A9}
+\makelabel{sbstrips:Algebra 5}{A.2.5}{X7B89278686D943ED}
+\makelabel{sbstrips:Bibliography}{Bib}{X7A6F98FD85F02BFE}
+\makelabel{sbstrips:References}{Bib}{X7A6F98FD85F02BFE}
+\makelabel{sbstrips:Index}{Ind}{X83A0356F839C696F}
+\makelabel{sbstrips:Stripify for a path of a special biserial algebra}{3.2.1}{X8640C59C7A42F020}
+\makelabel{sbstrips:SimpleStripsOfSBAlg}{3.3.1}{X813AF39E7E3ECC8B}
+\makelabel{sbstrips:UniserialStripsOfSBAlg}{3.3.2}{X8784C33580BD8340}
+\makelabel{sbstrips:ProjectiveStripsOfSBAlg}{3.3.3}{X84655A3D815A27AF}
+\makelabel{sbstrips:InjectiveStripsOfSBAlg}{3.3.4}{X7CD13D557EB29468}
+\makelabel{sbstrips:SyzygyOfStrip for strips}{3.4.1}{X7E17B30E80371A05}
+\makelabel{sbstrips:SyzygyOfStrip for lists of strips}{3.4.1}{X7E17B30E80371A05}
+\makelabel{sbstrips:NthSyzygyOfStrip for strips}{3.4.2}{X8257298F848BA94C}
+\makelabel{sbstrips:NthSyzygyOfStrip for lists of strips}{3.4.2}{X8257298F848BA94C}
+\makelabel{sbstrips:CollectedSyzygyOfStrip for strips}{3.4.3}{X84E6DBEA784A4E6A}
+\makelabel{sbstrips:CollectedSyzygyOfStrip for flat lists of strips}{3.4.3}{X84E6DBEA784A4E6A}
+\makelabel{sbstrips:CollectedSyzygyOfStrip for collected lists of strips}{3.4.3}{X84E6DBEA784A4E6A}
+\makelabel{sbstrips:CollectedNthSyzygyOfStrip for strips}{3.4.4}{X80869FAE7F348DC8}
+\makelabel{sbstrips:CollectedNthSyzygyOfStrip for lists of strips}{3.4.4}{X80869FAE7F348DC8}
+\makelabel{sbstrips:CollectedNthSyzygyOfStrip for collected lists of strips}{3.4.4}{X80869FAE7F348DC8}
+\makelabel{sbstrips:WidthOfStrip}{3.5.1}{X8165685B84AC7480}
+\makelabel{sbstrips:ModuleOfStrip for a strip}{3.6.1}{X80842A627A6121DD}
+\makelabel{sbstrips:ModuleOfStrip for a (flat) list of strips}{3.6.1}{X80842A627A6121DD}
+\makelabel{sbstrips:ModuleOfStrip for a collected list of strips}{3.6.1}{X80842A627A6121DD}
+\makelabel{sbstrips:IsFiniteSyzygyTypeStripByNthSyzygy}{3.6.2}{X7FFA3C3683E703DC}
+\makelabel{sbstrips:IsWeaklyPeriodicStripByNthSyzygy}{3.6.3}{X7BB2FF7F7A9C6694}
+\makelabel{sbstrips:Is1RegQuiver}{5.2.1}{X84DB986178D69D82}
+\makelabel{sbstrips:IsOverquiver}{5.2.2}{X7826ED2883732DFE}
+\makelabel{sbstrips:1RegQuivIntAct}{5.3.1}{X7EA297B985C82A45}
+\makelabel{sbstrips:1RegQuivIntActionFunction}{5.3.2}{X789D2CD47B327603}
+\makelabel{sbstrips:2RegAugmentationOfQuiver}{5.3.3}{X841ECFAA84FDB011}
+\makelabel{sbstrips:1RegQuivIntAct}{5.4.1}{X7EA297B985C82A45}
+\makelabel{sbstrips:PathBySourceAndLength}{5.4.2}{X810A887585D4098B}
+\makelabel{sbstrips:PathByTargetAndLength}{5.4.3}{X7892361E85783F8B}
+\makelabel{sbstrips:OverquiverOfSBAlg}{5.5.1}{X7B70276A7A43291C}
+\makelabel{sbstrips:SimpleStripsOfSBAlg}{5.5.2}{X813AF39E7E3ECC8B}
+\makelabel{sbstrips:ProjectiveStripsOfSBAlg}{5.5.3}{X84655A3D815A27AF}
+\makelabel{sbstrips:InjectiveStripsOfSBAlg}{5.5.4}{X7CD13D557EB29468}
+\makelabel{sbstrips:TestInjectiveStripsUpToNthSyzygy}{5.6.1}{X83C3BF9178B8D97A}
+\makelabel{sbstrips:IsCollectedList}{10.1.1}{X7EAE7FCC848D5F27}
+\makelabel{sbstrips:IsCollectedDuplicateFreeList}{10.1.2}{X7D95686A8591E1A6}
+\makelabel{sbstrips:IsCollectedHomogeneousList}{10.1.3}{X83A0E7AE8385CC31}
+\makelabel{sbstrips:Recollected}{10.1.4}{X80AC17A07EC6FD6C}
+\makelabel{sbstrips:Uncollected}{10.1.5}{X7DB1A947791FF9AA}
+\makelabel{sbstrips:String for paths of length at least 2}{10.2.1}{X86BC46E17F29652D}
+\makelabel{sbstrips:ArrowsOfQuiverAlgebra}{10.2.2}{X875DD4597C9E5465}
+\makelabel{sbstrips:VerticesOfQuiverAlgebra}{10.2.3}{X81D60A0579AFEEC4}
+\makelabel{sbstrips:SBStripsExampleAlgebra}{A.1.1}{X877739D5861AAAB7}

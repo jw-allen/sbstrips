@@ -1,179 +1,0 @@
-  
-  [1XA [33X[0;0YExample algebras[133X[101X
-  
-  
-  [1XA.1 [33X[0;0YThe function[133X[101X
-  
-  [33X[0;0YFor your convenience, [5XSBStrips[105X comes bundled with [22X5[122X SB algebras built in. We
-  detail  these  algebras  in  this  appendix. They may be obtained by calling
-  [2XSBStripsExampleAlgebra[102X ([14XA.1-1[114X).[133X
-  
-  [1XA.1-1 SBStripsExampleAlgebra[101X
-  
-  [33X[1;0Y[29X[2XSBStripsExampleAlgebra[102X( [3Xn[103X ) [32X function[133X
-  
-  [33X[0;0YArguments: [3Xn[103X, an integer between [10X1[110X and [10X5[110X inclusive[133X
-  
-  [6XReturns:[106X  [33X[0;10Ya SB algebra[133X
-  
-  [33X[0;0YCalling this function with argument [10X1[110X, [10X2[110X, [10X3[110X, [10X4[110X or [10X5[110X respectively returns the
-  algebras described in subsections [14XA.2-1[114X, [14XA.2-2[114X, [14XA.2-3[114X, [14XA.2-4[114X or [14XA.2-5[114X.[133X
-  
-  
-  [1XA.2 [33X[0;0YThe algebras[133X[101X
-  
-  [33X[0;0YEach  algebra is of the form [22XKQ/⟨ ρ ⟩[122X, where [22XK[122X is the field [10XRationals[110X in [5XGAP[105X
-  and  where  [22XQ[122X  and [22Xρ[122X are respectively a quiver and a set of relations. These
-  change from example to example.[133X
-  
-  [33X[0;0YThe LaTeX version of this documentation provides pictures of each quiver.[133X
-  
-  
-  [1XA.2-1 [33X[0;0YAlgebra [22X1[122X[101X[1X[133X[101X
-  
-  [33X[0;0YThe quiver and relations of this algebra are specified to [5XQPA[105X as follows.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xquiv := Quiver([127X[104X
-    [4X[25X>[125X [27X3,[127X[104X
-    [4X[25X>[125X [27X[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 1, "c" ] ][127X[104X
-    [4X[25X>[125X [27X);[127X[104X
-    [4X[28X<quiver with 3 vertices and 3 arrows>[128X[104X
-    [4X[25Xgap>[125X [27Xpa := PathAlgebra( Rationals, quiv );[127X[104X
-    [4X[28X<Rationals[<quiver with 3 vertices and 3 arrows>]>[128X[104X
-    [4X[25Xgap>[125X [27Xrels := NthPowerOfArrowIdeal( pa, 4 );[127X[104X
-    [4X[28X[ (1)*a*b*c*a, (1)*b*c*a*b, (1)*c*a*b*c ][128X[104X
-  [4X[32X[104X
-  
-  [33X[0;0Y(In  other  words,  this quiver is the [22X3[122X-cycle quiver, and the relations are
-  the paths of length [22X4[122X.) The nonzero paths of length [22X2[122X are: [10Xa*b[110X, [10Xb*c[110X, [10Xc*a[110X.[133X
-  
-  [33X[0;0YThis algebra is a Nakayama algebra, and so has finite representation type. [13XA
-  fortiori[113X, it is syzygy-finite.[133X
-  
-  
-  [1XA.2-2 [33X[0;0YAlgebra [22X2[122X[101X[1X[133X[101X
-  
-  [33X[0;0YThe quiver and relations of this algebra are specified to [5XQPA[105X as follows.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xquiv := Quiver([127X[104X
-    [4X[25X>[125X [27X2,[127X[104X
-    [4X[25X>[125X [27X[ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ][127X[104X
-    [4X[25X>[125X [27X);[127X[104X
-    [4X[28X<quiver with 2 vertices and 4 arrows>[128X[104X
-    [4X[28Xpa := PathAlgebra( Rationals, quiv );[128X[104X
-    [4X[28X<Rationals[<quiver with 2 vertices and 4 arrows>]>[128X[104X
-    [4X[25Xgap>[125X [27Xrels := [[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.a, pa.b * pa.d, pa.c * pa.b, pa.d * pa.c,[127X[104X
-    [4X[25X>[125X [27Xpa.c * pa.a * pa.b, (pa.d)^4,[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.b * pa.c - pa.b * pa.c * pa.a[127X[104X
-    [4X[25X>[125X [27X];[127X[104X
-    [4X[28X[ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (1)*c*a*b,[128X[104X
-    [4X[28X  (1)*d^4, (1)*a*b*c+(-1)*b*c*a ][128X[104X
-  [4X[32X[104X
-  
-  [33X[0;0YThe relations of this algebra are chosen so that the nonzero paths of length
-  [22X2[122X are: [10Xa*b[110X, [10Xb*c[110X, [10Xc*a[110X, [10Xd*d[110X.[133X
-  
-  [33X[0;0YThe simple module associated to vertex [10Xv2[110X has infinite syzygy type.[133X
-  
-  
-  [1XA.2-3 [33X[0;0YAlgebra [22X3[122X[101X[1X[133X[101X
-  
-  [33X[0;0YThe quiver and relations of this algebra are specified to [5XQPA[105X as follows.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xquiv := Quiver([127X[104X
-    [4X[25X>[125X [27X4,[127X[104X
-    [4X[25X>[125X [27X[ [1,2,"a"], [2,3,"b"], [3,4,"c"], [4,1,"d"], [4,4,"e"], [1,2,"f"],[127X[104X
-    [4X[25X>[125X [27X  [2,3,"g"], [3,1,"h"] ][127X[104X
-    [4X[25X>[125X [27X);[127X[104X
-    [4X[28X<quiver with 4 vertices and 8 arrows>[128X[104X
-    [4X[25Xgap>[125X [27Xpa := PathAlgebra( Rationals, quiv );[127X[104X
-    [4X[28X<Rationals[<quiver with 4 vertices and 8 arrows>]>[128X[104X
-    [4X[25Xgap>[125X [27Xrels := [[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.g, pa.b * pa.h, pa.c * pa.e, pa.d * pa.f,[127X[104X
-    [4X[25X>[125X [27Xpa.e * pa.d, pa.f * pa.b, pa.g * pa.c, pa.h * pa.a,[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.b * pa.c * pa.d * pa.a - ( pa.f * pa.g * pa.h )^2 * pa.f,[127X[104X
-    [4X[25X>[125X [27Xpa.d * pa.a * pa.b * pa.c - ( pa.e )^3,[127X[104X
-    [4X[25X>[125X [27Xpa.c * pa.d * pa.a * pa.b * pa.c,[127X[104X
-    [4X[25X>[125X [27X( pa.h * pa.f * pa.g )^2 * pa.h[127X[104X
-    [4X[25X>[125X [27X];[127X[104X
-    [4X[28X[ (1)*a*g, (1)*b*h, (1)*c*e, (1)*d*f, (1)*e*d, (1)*f*b, (1)*g*c,[128X[104X
-    [4X[28X  (1)*h*a, (1)*a*b*c*d*a+(-1)*f*g*h*f*g*h*f, (-1)*e^3+(1)*d*a*b*c,[128X[104X
-    [4X[28X  (1)*c*d*a*b*c, (1)*h*f*g*h*f*g*h ][128X[104X
-  [4X[32X[104X
-  
-  [33X[0;0YThe relations of this algebra are chosen so that the nonzero paths of length
-  [22X2[122X are: [10Xa*b[110X, [10Xb*c[110X, [10Xc*d[110X, [10Xd*a[110X, [10Xe*e[110X, [10Xf*g[110X, [10Xg*h[110X and [10Xh*f[110X.[133X
-  
-  
-  [1XA.2-4 [33X[0;0YAlgebra [22X4[122X[101X[1X[133X[101X
-  
-  [33X[0;0YThe quiver and relations of this algebra are specified to [5XQPA[105X as follows.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xquiv := Quiver([127X[104X
-    [4X[25X>[125X [27X8,[127X[104X
-    [4X[25X>[125X [27X[ [ 1, 1, "a" ], [ 1, 2, "b" ], [ 2, 2, "c" ], [ 2, 3, "d" ],[127X[104X
-    [4X[25X>[125X [27X  [ 3, 4, "e" ], [ 4, 3, "f" ], [ 3, 4, "g" ], [ 4, 5, "h" ],[127X[104X
-    [4X[25X>[125X [27X  [ 5, 6, "i" ], [ 6, 5, "j" ], [ 5, 7, "k" ], [ 7, 6, "l" ],[127X[104X
-    [4X[25X>[125X [27X  [ 6, 7, "m" ], [ 7, 8, "n" ], [ 8, 8, "o" ], [ 8, 1, "p" ] ][127X[104X
-    [4X[25X>[125X [27X);[127X[104X
-    [4X[28X<quiver with 8 vertices and 16 arrows>[128X[104X
-    [4X[25Xgap>[125X [27Xpa := PathAlgebra( Rationals, quiv );[127X[104X
-    [4X[28X<Rationals[<quiver with 8 vertices and 16 arrows>]>[128X[104X
-    [4X[25Xgap>[125X [27Xrels := [[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.a, pa.b * pa.d, pa.c * pa.c, pa.d * pa.g, pa.e * pa.h,[127X[104X
-    [4X[25X>[125X [27Xpa.f * pa.e, pa.g * pa.f, pa.h * pa.k, pa.i * pa.m, pa.j * pa.i,[127X[104X
-    [4X[25X>[125X [27Xpa.k * pa.n, pa.l * pa.j,[127X[104X
-    [4X[25X>[125X [27Xpa.m * pa.l, pa.n * pa.p, pa.o * pa.o, pa.p * pa.b,[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.b * pa.c * pa.d,[127X[104X
-    [4X[25X>[125X [27Xpa.e * pa.f * pa.g * pa.h,[127X[104X
-    [4X[25X>[125X [27Xpa.g * pa.h * pa.i * pa.j * pa.k,[127X[104X
-    [4X[25X>[125X [27Xpa.c * pa.d * pa.e - pa.d * pa.e * pa.f * pa.g,[127X[104X
-    [4X[25X>[125X [27Xpa.f * pa.g * pa.h * pa.i - pa.h * pa.i * pa.j * pa.k * pa.l,[127X[104X
-    [4X[25X>[125X [27Xpa.j * pa.k * pa.l * pa.m * pa.n - pa.m * pa.n * pa.o,[127X[104X
-    [4X[25X>[125X [27Xpa.o * pa.p * pa.a * pa.b - pa.p * pa.a * pa.b * pa.c[127X[104X
-    [4X[25X>[125X [27X];[127X[104X
-  [4X[32X[104X
-  
-  [33X[0;0YThe relations of this algebra are chosen so that the nonzero paths of length
-  [22X2[122X are: [10Xa*b[110X, [10Xb*c[110X, [10Xc*d[110X, [10Xd*e[110X, [10Xe*f[110X, [10Xf*g[110X, [10Xg*h[110X, [10Xh*i[110X, [10Xi*j[110X, [10Xj*k[110X, [10Xk*l[110X, [10Xl*m[110X, [10Xm*n[110X, [10Xn*o[110X,
-  [10Xo*p[110X and [10Xp*a[110X.[133X
-  
-  
-  [1XA.2-5 [33X[0;0YAlgebra [22X5[122X[101X[1X[133X[101X
-  
-  [33X[0;0YThe quiver and relations of this algebra are specified to [5XQPA[105X as follows.[133X
-  
-  [4X[32X  Example  [32X[104X
-    [4X[25Xgap>[125X [27Xquiv := Quiver([127X[104X
-    [4X[25X>[125X [27X4,[127X[104X
-    [4X[25X>[125X [27X[ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 4, "c" ], [ 4, 1, "d" ],[127X[104X
-    [4X[25X>[125X [27X  [ 1, 2, "e" ], [ 2, 3, "f" ], [ 3, 1, "g" ], [ 4, 4, "h" ] ][127X[104X
-    [4X[25X>[125X [27X);[127X[104X
-    [4X[28X<quiver with 4 vertices and 8 arrows>[128X[104X
-    [4X[25Xgap>[125X [27Xpa := PathAlgebra( Rationals, quiv5 );[127X[104X
-    [4X[28X<Rationals[<quiver with 4 vertices and 8 arrows>]>[128X[104X
-    [4X[25Xgap>[125X [27Xrels := [[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.f, pa.b * pa.g, pa.c * pa.h, pa.d * pa.e, pa.e * pa.b,[127X[104X
-    [4X[25X>[125X [27Xpa.f * pa.c, pa.g * pa.a, pa.h * pa.d,[127X[104X
-    [4X[25X>[125X [27Xpa.b * pa.c * pa.d * pa.a * pa.b * pa.c,[127X[104X
-    [4X[25X>[125X [27Xpa.d * pa.a * pa.b * pa.c * pa.d * pa.a,[127X[104X
-    [4X[25X>[125X [27X( pa.h )^6,[127X[104X
-    [4X[25X>[125X [27Xpa.a * pa.b * pa.c * pa.d * pa.a * pa.b -[127X[104X
-    [4X[25X>[125X [27X    pa.e * pa.f * pa.g * pa.e * pa.f * pa.g * pa.e * pa.f,[127X[104X
-    [4X[25X>[125X [27Xpa.c * pa.d * pa.a * pa.b * pa.c * pa.d -[127X[104X
-    [4X[25X>[125X [27X    pa.g * pa.e * pa.f * pa.g * pa.e * pa.f * pa.g[127X[104X
-    [4X[25X>[125X [27X];[127X[104X
-    [4X[28X[ (1)*a*f, (1)*b*g, (1)*c*h, (1)*d*e, (1)*e*b, (1)*f*c, (1)*g*a,[128X[104X
-    [4X[28X  (1)*h*d, (1)*b*c*d*a*b*c, (1)*d*a*b*c*d*a, (1)*h^6,[128X[104X
-    [4X[28X  (1)*a*b*c*d*a*b+(-1)*e*f*g*e*f*g*e*f,[128X[104X
-    [4X[28X  (1)*c*d*a*b*c*d+(-1)*g*e*f*g*e*f*g ][128X[104X
-  [4X[32X[104X
-  
-  [33X[0;0YThe relations of this algebra are chosen so that the nonzero paths of length
-  [22X2[122X are: [10Xa*b[110X, [10Xb*c[110X, [10Xc*d[110X, [10Xd*a[110X, [10Xe*f[110X, [10Xf*g[110X, [10Xg*e[110X, [10Xh*h[110X.[133X
-  

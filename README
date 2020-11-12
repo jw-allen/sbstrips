@@ -41,6 +41,9 @@ have GAP installed.)
 +--+ Contents +---------------------------------------------------------------+
 This version of SBStrips includes the following files
 
+    .gitnore
+        Technical file
+
     LICENSE
         Details of the GNU General Public Licence v2.0, under which this code
         is released

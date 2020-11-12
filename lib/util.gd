@@ -86,7 +86,7 @@ DeclareProperty( "IsCollectedHomogeneousList", IsList );
 
 ##  <#GAPDoc Label="DocCollectedLength">
 ##    <ManSection>
-##      <Attr Name="CollectedLength", Arg="clist"/>
+##      <Attr Name="CollectedLength" Arg="clist"/>
 ##      <Description>
 ##        Argument: <A>clist</A>, a collected list
 ##        <Br />

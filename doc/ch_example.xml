@@ -203,7 +203,7 @@ gap> ProjectiveStripsOfSbAlg( alg2 );
 gap> InjectiveStripsOfSbAlg( alg2 );
 [ fail, (v1)^-1(a*b) (d^3)^-1(v2) ]
 ]]></Example>
-  (If a projective or injective module over an SB algebra is not a string module, then it must be <E>p</E>rojective, <E>i</E>njective and <E>n</E>onuniserial. Such modules, which we call <E>pin</E> modules (can you see why?) are not implemented in &SBStrips;. However, from time to time our notation refers to them obliquely, for instance <Ref Attr="IsPinBoundarySyllable"/>.) 
+  (If a projective or injective module over an SB algebra is not a string module, then it must be <E>p</E>rojective, <E>i</E>njective and <E>n</E>onuniserial. Such modules, which we call <E>pin</E> modules (can you see why?) are not implemented in &SBStrips;. However, from time to time our notation refers to them obliquely, for instance <Ref Prop="IsPinBoundarySyllable"/>.) 
   <P />
 
   The uniserial modules are also, in particular, string modules. They are in one-to-one correspondence with the paths in the SB algebra. There is a method for <Ref Meth="Stripify" Label="for a path of a special biserial algebra"/> that turns a path for the SB algebra into the corresponding strip.

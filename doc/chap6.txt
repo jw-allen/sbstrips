@@ -1,6 +1,0 @@
-  
-  [1X6 [33X[0;0YPermissible data of a SB algebra[133X[101X
-  
-  [33X[0;0YIn  this  chapter,  I explain the permissible data of a SB algebra. Largely,
-  this means expanding on [13Xindependent paths[113X and [13Xcomponents[113X.[133X
-  

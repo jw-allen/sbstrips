@@ -1,5 +1,15 @@
 <#GAPDoc Label="ChapSyllables">
 
-  In this chapter, I describe syllables.
+In this chapter, I describe syllables.
+
+<Section>
+  <Heading>
+    Attributes and properties of syllables
+  </Heading>
+  
+  <#Include Label="DocIsStationarySyllable">
+  
+  <#Include Label="DocIsPinBoundarySyllable">
+</Section>
 
 <#/GAPDoc>

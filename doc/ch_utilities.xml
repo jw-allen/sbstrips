@@ -83,6 +83,8 @@ gap> Recollected( hello_world );
   <#Include Label="DocRecollected">
 
   <#Include Label="DocUncollected">
+  
+  <#Include Label="DocCollectedLength">
 </Section>
 
 <Section>

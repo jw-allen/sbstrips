@@ -44,9 +44,11 @@ gap> # Include an example here!
 </Section>
 
 <Section>
-  <Heading>Attributes of strips</Heading>
+  <Heading>Attributes and properties of strips</Heading>
 
   <#Include Label="DocWidthOfStrip">
+
+  <#Include Label="DocIsZeroStrip">
 </Section>
 
 <Section>
@@ -58,4 +60,11 @@ gap> # Include an example here!
 
   <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
 </Section>
+
+<Section>
+  <Heading>Tests on an SB algebra that use strips</Heading>
+
+  <#Include Label="DocTestInjectiveStripsUpToNthSyzygy">
+</Section>
+
 <#/GAPDoc>

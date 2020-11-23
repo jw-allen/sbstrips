@@ -46,6 +46,4 @@ MakeGAPDocDoc(path, main, files, bookname, relpath, "MathJax");
 CopyHTMLStyleFiles( "Documents/GitHub/pkg/sbstrips/doc/" );
 
 # compatibility with old style package manuals
-GAPDocManualLab("SBStrips");
-
-QUIT;
+GAPDocManualLab( "SBStrips" );

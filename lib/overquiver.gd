@@ -31,7 +31,7 @@ DeclareAttribute( "2RegAugmentationOfQuiver", IsQuiver );
 ##    </Description>
 ##    <Returns>
 ##      &true; if <A>quiver</A> was constructed by
-##      <Ref Label="Doc2RegAugmentationOfQuiver"/> or if <A>quiver</A> was an
+##      <Ref Label="2RegAugmentationOfQuiver"/> or if <A>quiver</A> was an
 ##      already <M>2</M>-regular quiver, and &false; otherwise.
 ##    </Returns>
 ##  </ManSection>
@@ -69,7 +69,7 @@ DeclareAttribute( "OriginalSBQuiverOf2RegAugmentation", IsQuiver );
 ##    <Returns>
 ##      a function <C>ret</C>, which accepts paths in <A>quiver</A> as input
 ##      and which outputs paths in <C>OriginalSBQuiverOf2RegAugmentation(
-##      quiver )</C> <Ref Label="Doc2RegAugmentationOfQuiver"/>.
+##      quiver )</C> <Ref Label="2RegAugmentationOfQuiver"/>.
 ##    </Returns>
 ##    <Description>
 ##      One can identify <C>OriginalSBQuiverOf2RegAugmentation( quiver )</C>
@@ -120,7 +120,7 @@ DeclareAttribute( "OverquiverOfSBAlg", IsSpecialBiserialAlgebra );
 ##    </Description>
 ##    <Returns>
 ##      &true; if <A>quiver</A> was constructed by <Ref
-##      Label="DocOverquiverOfSBAlg"/>, and &false; otherwise.
+##      Label="OverquiverOfSBAlg"/>, and &false; otherwise.
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
@@ -131,7 +131,7 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##    <Attr Name="ContractionOfOverquiver" Arg="oquiv"/>
 ##    <Description>
 ##      Argument: <A>oquiv</A>, an overquiver (as constructed by <Ref
-##      Label="DocOverquiverOfSBAlg" />)
+##      Label="OverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>
@@ -141,9 +141,9 @@ DeclareProperty( "IsOverquiver", IsQuiver );
 ##      Recall that <A>oquiv</A> was the overquiver of some special biserial
 ##      algebra, say <C>sba</C>, defined over some original quiver, say
 ##      <C>orig_quiv</C>. Also recall that <A>oquiv</A> was constructed using
-##      <Ref Label="DocOverquiverOfSBAlg" />.
-##      <Br />
-##      When <Ref Label="DocOverquiverOfSBAlg" /> is called on <C>sba</C>, it
+##      <Ref Label="OverquiverOfSBAlg" />.
+##      <P />
+##      When <Ref Label="OverquiverOfSBAlg" /> is called on <C>sba</C>, it
 ##      creates the <M>2</M>-regular augmentation <C>orig_quiv</C>. Call the
 ##      augmentation <C>2reg</C>. Notice that <C>orig_quiv</C> can be
 ##      identified with a subquiver of <C>2reg</C>, and that <C>2reg</C> can be
@@ -161,7 +161,7 @@ DeclareAttribute( "ContractionOfOverquiver", IsQuiver );
 ##    <Attr Name="SBAlgOfOverquiver" Arg="quiver"/>
 ##    <Description>
 ##      Argument: <A>quiver</A>, an overquiver (as constructed by <Ref
-##      Label="DocOverquiverOfSBAlg" />)
+##      Label="OverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>
@@ -207,7 +207,7 @@ DeclareGlobalFunction( "SBAlgResidueOfOverquiverPathNC" );
 ##    <Attr Name="ExchangePartnerOfVertex" Arg="v"/>
 ##    <Description>
 ##      Argument: <A>v</A>, a vertex of an overquiver <C>oquiv</C> (as
-##      constructed by <Ref Label="DocOverquiverOfSBAlg" />)
+##      constructed by <Ref Label="OverquiverOfSBAlg" />)
 ##      <Br />
 ##    </Description>
 ##    <Returns>

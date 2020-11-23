@@ -1,315 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-<title>GAP (SBStrips) - Chapter 2: 
-        Worked example
-      </title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta name="generator" content="GAPDoc2HTML" />
-<link rel="stylesheet" type="text/css" href="manual.css" />
-<script src="manual.js" type="text/javascript"></script>
-<script type="text/javascript">overwriteStyle();</script>
-</head>
-<body class="chap2"  onload="jscontent()">
-
-
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
-
-<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
-
-<p id="mathjaxlink" class="pcenter"><a href="chap2_mj.html">[MathJax on]</a></p>
-<p><a id="X7B0FE1477C5D89EF" name="X7B0FE1477C5D89EF"></a></p>
-<div class="ChapSects"><a href="chap2.html#X7B0FE1477C5D89EF">2 <span class="Heading">
-        Worked example
-      </span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X81BB5C047A361371">2.1 <span class="Heading">
-    Strips, aka "strings for special biserial algebras"
-  </span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7948836087B35782">2.2 <span class="Heading">Modules from strips</span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7C4DE6E1786C5AFD">2.3 <span class="Heading">Syzygies of strips</span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X85A7243787000FB7">2.4 <span class="Heading">Computing higher syzygies efficiently</span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7DA6DDC984FAE6D4">2.5 <span class="Heading">Other important strips</span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X80DD262286DA9021">2.6 <span class="Heading">
-    Tests with strips
-  </span></a>
-</span>
-</div>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7F4536F08712B181">2.7 <span class="Heading">
-    Additional examples
-  </span></a>
-</span>
-</div>
-</div>
-
-<h3>2 <span class="Heading">
-        Worked example
-      </span></h3>
-
-<p><a id="X81BB5C047A361371" name="X81BB5C047A361371"></a></p>
-
-<h4>2.1 <span class="Heading">
-    Strips, aka "strings for special biserial algebras"
-  </span></h4>
-
-<p>This package is principally for "strings and their syzygies". Strings are defined over special biserial (SB) algebras. Our first job is to tell <strong class="pkg">GAP</strong> about a SB algebra. We'll do this using tools from <strong class="pkg">QPA</strong>. If the following doesn't make sense to you, then see the QPA documentation <a href="chapBib.html#biBQPA">[ ]</a>.</p>
-
-<p>An important rule is that the SB algebra be presented by <em>monomial relations </em> and <em>skew commutativity relations</em>. A monomial relation is just a path <span class="SimpleMath">p</span> (or more generally <span class="SimpleMath">λ p</span> for some coefficient in the ambient field, here <code class="code">Rationals</code>). A (skew) commutativity relation is a linear difference <span class="SimpleMath">λ p - μ q</span> of paths <span class="SimpleMath">p,q</span> having common source and target, where <span class="SimpleMath">λ,μ</span> are nonzero coefficients. It is well-known that all SB algebras admit such a presentation; <strong class="pkg">SBStrips</strong> takes it for granted you have used one.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">q2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">kq2 := PathAlgebra( Rationals, q2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">rels2 := [ kq2.a * kq2.a, kq2.b * kq2.d, kq2.c * kq2.b,</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">kq2.d * kq2.c, kq2.c * kq2.a * kq2.b, (kq2.d)^4,</span>
-<span class="GAPprompt">&gt;</span> <span class="GAPinput">kq2.a * kq2.b * kq2.c - kq2.b * kq2.c * kq2.a ];;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gb2 := GBNPGroebnerBasis( rels2, kq2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ideal2 := Ideal( kq2, gb2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">GroebnerBasis( ideal2, gb2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">alg2 := kq2/ideal2;</span>
-&lt;Rationals[&lt;quiver with 2 vertices and 4 arrows&gt;]/
-&lt;two-sided ideal in &lt;Rationals[&lt;quiver with 2 vertices and 4 arrows&gt;]&gt;
-, (7 generators)&gt;&gt;
-</pre></div>
-
-<p>This defines a special biserial algebra <code class="code">alg2</code>. The following is what representation theorists call a string over <code class="code">alg2</code>, but which we'll prefer to call a <em>strip</em>. (For reasons why, see Section <a href="chap1.html#X82DE174F80A89DF6"><span class="RefLink">1.1</span></a>.)</p>
-
-<p class="pcenter">
-    (a)^{-1} (b) (c) (a)^{-1} (b) (d)^{-1} (c) (a)^{-1} (c)^{-1} (d)
-  </p>
-
-<p>Note in particular that the "first arrow" in this strip is <span class="SimpleMath">a</span> and it has exponent <span class="SimpleMath">-1</span>. This information (plus a bit extra) gets used when creating the strip in <strong class="pkg">GAP</strong> via the operation <code class="func">Stripify</code> (<a href="chap3.html#X8640C59C7A42F020"><span class="RefLink">3.2-1</span></a>).</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );</span>
-(a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
-</pre></div>
-
-<p><a id="X7948836087B35782" name="X7948836087B35782"></a></p>
-
-<h4>2.2 <span class="Heading">Modules from strips</span></h4>
-
-<p>Representation theorists will know that this strip <code class="code">s</code> corresponds to an indecomposable module over <code class="code">alg2</code>. In the literature they're called string modules, but maybe here we could call them strip modules? Whatever you want to call it, that module can be made in <strong class="pkg">GAP</strong> using <code class="func">ModuleOfStrip</code> (<a href="chap3.html#X80842A627A6121DD"><span class="RefLink">3.6-1</span></a>).</p>
-
-<p>A technicality to bear in mind is that that module is implemented as a representation of the quiver over which <code class="code">alg2</code> was defined. You'll find details about quiver representations in the <strong class="pkg">QPA</strong> documentation.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">module := ModuleOfStrip( s );</span>
-&lt;[ 6, 5 ]&gt;
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Print( module );</span>
-&lt;Module over &lt;Rationals[&lt;quiver with 2 vertices and 4 arrows&gt;]/
-&lt;two-sided ideal in &lt;Rationals[&lt;quiver with 2 vertices and 4 arrows&gt;]&gt;
-, (7 generators)&gt;&gt; with dimension vector [ 6, 5 ]&gt;
-</pre></div>
-
-<p>You can turn a list of strips into a list of modules using <code class="func">ModuleOfStrip</code> (<a href="chap3.html#X80842A627A6121DD"><span class="RefLink">3.6-1</span></a>). You can turn a collected list (see below <em>ADD REFERENCE</em>) of strips into a collected list of modules using <code class="func">ModuleOfStrip</code> (<a href="chap3.html#X80842A627A6121DD"><span class="RefLink">3.6-1</span></a>). If you want to turn a list or collected list of strips into a single module, namely the direct sum of all the modules represented by strips in your list, it is better to call <code class="code">DirectSumModuleOfStrip</code>.</p>
-
-<p><a id="X7C4DE6E1786C5AFD" name="X7C4DE6E1786C5AFD"></a></p>
-
-<h4>2.3 <span class="Heading">Syzygies of strips</span></h4>
-
-<p>Now, you <em>can</em> calculate the syzygy of <code class="code">X</code> using <strong class="pkg">QPA</strong>'s function <code class="func">1stSyzygy</code> (<a href="../../../../../../gap-4.11.0//pkg/qpa-version-1.30/doc/chap8.html#X7EC01D588141BB96"><span class="RefLink">QPA: 1stSyzygy</span></a>) on <code class="code">X</code> if you really want. It'll give you the syzygy module <code class="code">\Omega^1(X)</code> as another quiver representation.</p>
-
-<p>However, you should know that the syzygy of a string module <span class="SimpleMath">X</span> is a direct sum of string modules. Suppose we write this as <span class="SimpleMath">Ω^1 (X) = X_1 ⊕ ⋯ ⊕ X_m</span>. It turns out that syzygies may be computed in an algorithmic fashion, just at the level of "strings". In other words, you give me the "string" describing <span class="SimpleMath">X</span> and I give you the "strings" describing each summand <span class="SimpleMath">X_j</span> of its syzygy in turn. This result was proved constructively by Liu and Morin in their 2004 paper <em>ADD REFERENCE</em> using a pseudoalgorithm. The purpose of the <strong class="pkg">SBStrips</strong> package is to formalize this pseudoalgorithm and implement it in <strong class="pkg">GAP</strong>. Instead of "strings", which can be ambiguous, we use strips. Our added care pays off when examining asymoptotic syzygy behavior of strings.</p>
-
-<p>Recall our strip <code class="code">s</code> from above. Let's start calculating its syzygies. The operation <code class="code">SyzygyOfStrip</code> returns a list of strips, one for each indecomposable direct summand of the syzygy of its input.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SyzygyOfStrip( s );</span>
-[ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), (a)^-1(v1), (d)^-1(v2) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( last );</span>
-3
-</pre></div>
-
-<p>This example shows that the syzygy of <code class="code">s</code> has <span class="SimpleMath">3</span> indecomposable summands.</p>
-
-<p>Of course, there's no reason to stop at <span class="SimpleMath">1</span>st syzygies. <strong class="pkg">SBStrips</strong> is able to take higher syzygies very easily (but refer to the next section for a discussion of an efficient approach). For example, we can calculate the <span class="SimpleMath">4</span>th syzygy of <code class="code">s</code> as follows.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">4th_syz := NthSyzygyOfStrip( s, 4 );</span>
-[ (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d^2), (a)^-1(v1), (v2)^-1(d^2),
-  (a)^-1(b*c) (a)^-1(v1), (d^2)^-1(v2), (v1)^-1(a), (v2)^-1(v2),
-  (v2)^-1(c) (c*a)^-1(v2), (v1)^-1(a), (v2)^-1(v2),
-  (v2)^-1(c) (c*a)^-1(v2), (v2)^-1(v2), (a)^-1(v1),
-  (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d), (a)^-1(v1), (v2)^-1(d^2),
-  (a)^-1(v1), (d^2)^-1(v2) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( 4th_syz );</span>
-20
-</pre></div>
-
-<p>We find that the <span class="SimpleMath">4</span>th syzygy of <code class="code">s</code> has <span class="SimpleMath">20</span> indecomposable direct summands.</p>
-
-<p>Note that many strips occur multiple times in this <code class="code">4th_syz</code>. (What this means mathematically is that many of those summands are isomorphic.) If you want to remove duplicates from the above list (which is like looking at just the isomorphism types of modules in the direct sum), then the most efficient way is with <code class="func">Set</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap30.html#X7E399AC97FD98217"><span class="RefLink">Reference: Set</span></a>). Alternatively, you can use <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>). This turn the list into something that a mathematician might call a multiset. That is, the distinct strips are recorded along with their frequency in the list.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Set( 4th_syz );</span>
-[ (v2)^-1(v2), (v1)^-1(a), (v2)^-1(d), (v2)^-1(d^2),
-  (v2)^-1(c*a) (c)^-1(v2), (a)^-1(b*c) (a)^-1(v1) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Collected( 4th_syz );</span>
-[ [ (v2)^-1(v2), 3 ], [ (v1)^-1(a), 6 ], [ (v2)^-1(d), 1 ],
-  [ (v2)^-1(d^2), 5 ], [ (v2)^-1(c*a) (c)^-1(v2), 4 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-</pre></div>
-
-<p>For example, the second output means that <code class="code">(v2)^-1(v2)</code> occurs <span class="SimpleMath">3</span> times in <code class="code">4th_syz</code> while <code class="code">(v1)^-1(a)</code> occurs <span class="SimpleMath">6</span> times.</p>
-
-<p>We call these "multisets" <em>collected lists</em>. The <strong class="pkg">SBStrips</strong> package has several built-in functionalities for taking such "collected lists" of syzygies. Principal among these are <code class="func">CollectedSyzygyOfStrip</code> (<a href="chap3.html#X84E6DBEA784A4E6A"><span class="RefLink">3.4-3</span></a>) and <code class="func">CollectedNthSyzygyOfStrip</code> (<a href="chap3.html#X80869FAE7F348DC8"><span class="RefLink">3.4-4</span></a>).</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollectedSyzygyOfStrip( s );</span>
-[ [ (a)^-1(v1), 1 ], [ (d)^-1(v2), 1 ],
-  [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), 1 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollectedNthSyzygyOfStrip( s, 4 );</span>
-[ [ (v2)^-1(c) (c*a)^-1(v2), 4 ], [ (v2)^-1(v2), 3 ],
-  [ (v1)^-1(a), 6 ], [ (v2)^-1(d^2), 5 ], [ (v2)^-1(d), 1 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-</pre></div>
-
-<p>(In the next section, we pause to discuss the efficiency of these "collected" methods.)</p>
-
-<p>We reiterate that the lists (resp. collected lists) of strips returned by <code class="code">SyzygyOfStrip</code> (resp. <code class="code">CollectedSyzygyOfStrip</code>) and its <code class="code">Nth</code> variants may be turned into lists (resp. collected lists) of quiver representations using <code class="code">ModuleOfStrip</code>. These may alternatively be turned into a single direct sum module using <code class="code">DirectSumModuleOfStrips</code>.</p>
-
-<p><a id="X85A7243787000FB7" name="X85A7243787000FB7"></a></p>
-
-<h4>2.4 <span class="Heading">Computing higher syzygies efficiently</span></h4>
-
-<p>A central point in my thesis <em>(reference!)</em> is that the syzygies of a string module should be arranged in a particular format. (A little more specifically, they should be written into a certain kind of array.) This format does not print nicely onto the Euclidean plane so, sadly, there is little hope of <strong class="pkg">GAP</strong> displaying syzygies in the most optimal way. The closest it can get -- which is not very close at all, frankly -- is the list format returned by <code class="code">SyzygyOfStrip</code> or <code class="code">NthSyzygyOfStrip</code>. However, this format compresses lots into a single line. This loses information and becomes a very inefficient way to store data (let along compute with them). By using functions like <code class="code">Collected</code>, <code class="code">CollectedSyzygyOfStrip</code> and <code class="code">CollectedNthSyzygyOfStrip</code>, we lose what little information the list presentation holds onto, but we streamline out calculations greatly.</p>
-
-<p>To see this, consider the <span class="SimpleMath">20</span>th syzygy of <code class="code">s</code>. The following calculation shows that it has <span class="SimpleMath">344732</span> distinct summands (many of which will be isomorphic); this took over <span class="SimpleMath">2</span> minutes to perform on my device.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NthSyzygyOfStrip( s, 20 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-130250
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Length( last2 );</span>
-344732
-</pre></div>
-
-<p>Compare this with a "collected" approach, wherein the <span class="SimpleMath">20</span>th syzygy was calculated in a heartbeat (and the <span class="SimpleMath">100</span>th syzygy in not much more).</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollectedNthSyzygyOfStrip( s, 20 );</span>
-[ [ (v2)^-1(c) (c*a)^-1(v2), 66012 ], [ (v2)^-1(v2), 55403 ],
-  [ (v1)^-1(a), 121414 ], [ (v2)^-1(d^2), 101901 ], [ (v2)^-1(d), 1 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-62
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">CollectedNthSyzygyOfStrip( s, 100 );</span>
-[ [ (v2)^-1(c) (c*a)^-1(v2), 98079530178586034536500564 ],
-  [ (v2)^-1(v2), 82316850636514866677657075 ],
-  [ (v1)^-1(a), 180396380815100901214157638 ],
-  [ (v2)^-1(d^2), 151404293106684183601223221 ], [ (v2)^-1(d), 1 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">time;</span>
-297
-</pre></div>
-
-<p>Be advised that, even in this easier-to-store form, the integers involved may become to big for <strong class="pkg">GAP</strong> to handle. Efficient storage only increases the upper bound on information we can store; it doesn't remove it!</p>
-
-<p><a id="X7DA6DDC984FAE6D4" name="X7DA6DDC984FAE6D4"></a></p>
-
-<h4>2.5 <span class="Heading">Other important strips</span></h4>
-
-<p>First, some general theory about finite-dimensional algebras. Recall that (the isomorphism classes of) the simple modules over an SB algebra are in one-to-one correspondence with the vertices of its ordinary quiver. The same is true for the indecomposable projective modules and the indecomposable injective modules. (It is also true for any finite-dimensional quiver algebra, more generally.) In this section, suppose that the vertices are <span class="SimpleMath">i_1, dots, i_n</span>, and that the simple, indecomposable projective and indecomposable injective modules associated to vertex <span class="SimpleMath">i_r</span> are respectively <span class="SimpleMath">S_r</span>, <span class="SimpleMath">P_r</span> and <span class="SimpleMath">I_r</span>.</p>
-
-<p>All of the simple modules over an SB algebra are string modules. The list of strips that describe them can be obtained using the following command.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">SimpleStripsOfSBAlg( alg2 );</span>
-[ (v1)^-1(v1), (v2)^-1(v2) ]
-</pre></div>
-
-<p>The <code class="code">r</code>th entry is the strip describing the <code class="code">r</code>th simple module <span class="SimpleMath">S_r</span>.</p>
-
-<p>Additionally, some of the indecomposable projective modules are string modules. The attribute <code class="func">ProjectiveStripsOfSBAlg</code> (<a href="chap5.html#X84655A3D815A27AF"><span class="RefLink">5.5-3</span></a>) returns a list, whose <code class="code">r</code>th entry is the strip describing the module <span class="SimpleMath">P_r</span> (if <span class="SimpleMath">P_r</span> is indeed a string module) or the boolean <code class="keyw">fail</code> (if not). The attribute <code class="func">InjectiveStripsOfSBAlg</code> (<a href="chap5.html#X7CD13D557EB29468"><span class="RefLink">5.5-4</span></a>) is similar.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">ProjectiveStripsOfSbAlg( alg2 );</span>
-[ fail, (c*a)^-1(d^3) ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">InjectiveStripsOfSbAlg( alg2 );</span>
-[ fail, (v1)^-1(a*b) (d^3)^-1(v2) ]
-</pre></div>
-
-<p>(If a projective or injective module over an SB algebra is not a string module, then it must be <em>p</em>rojective, <em>i</em>njective and <em>n</em>onuniserial. Such modules, which we call <em>pin</em> modules (can you see why?) are not implemented in <strong class="pkg">SBStrips</strong>. However, from time to time our notation refers to them obliquely, for instance <code class="func">IsPinBoundarySyllable</code> (<span class="RefLink">???</span>).)</p>
-
-<p>The uniserial modules are also, in particular, string modules. They are in one-to-one correspondence with the paths in the SB algebra. There is a method for <code class="func">Stripify</code> (<a href="chap3.html#X8640C59C7A42F020"><span class="RefLink">3.2-1</span></a>) that turns a path for the SB algebra into the corresponding strip. Paths in the SB algebra are created using <strong class="pkg">QPA</strong> syntax. Perhaps it is clearest to see an example.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stripify( alg2.a * alg2.b );</span>
-(a*b)^-1(v1)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stripify( alg2.c );</span>
-(c)^-1(v2)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stripify( alg2.d^3 );</span>
-(d^3)^-1(v2)
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Stripify( alg2.v1 );</span>
-(v1)^-1(v1)
-</pre></div>
-
-<p>In the first example, <code class="code">a</code> and <code class="code">b</code> are the names of arrows in the quiver with which <code class="code">alg2</code> was presented. The residue of the arrow <code class="code">a</code> in <code class="code">alg2</code> is <code class="code">alg2.a</code>; similarly, <code class="code">alg2.b</code>. Their product <code class="code">alg2.a * alg2.b</code> is the residue of the path <code class="code">a * b</code> in the quiver (where <code class="code">a * b</code> means "<code class="code">a</code> then <code class="code">b</code>"). This is what we mean by a path in the SB algebra: products of (residues of) arrows and vertices in the algebra.</p>
-
-<p>We see that vertices or arrows of the SB algebra (such as <code class="code">alg2.v1</code> and <code class="code">alg2.c</code>) are paths too. We also see an example of the <code class="code">^</code> operation: <code class="code">alg2.d^3</code> is equivalent to <code class="code">alg2.d * alg2.d * alg2.d</code>.</p>
-
-<p>Since vertices are still paths (trivially) and simple modules are uniserial (trivially), we therefore have a second way to access the simple modules of a SB algebra.</p>
-
-
-<div class="example"><pre>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s1 := Stripify( alg2.v1 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">s2 := Stripify( alg2.v2 );;</span>
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">[ s1, s2 ] = SimpleStripsOfSbAlg( alg2 );</span>
-true
-</pre></div>
-
-<p><a id="X80DD262286DA9021" name="X80DD262286DA9021"></a></p>
-
-<h4>2.6 <span class="Heading">
-    Tests with strips
-  </span></h4>
-
-<p>Now that we've implement strips, we should play around with them. Let's see some of the fun tests built into <strong class="pkg">SBStrips</strong>! For this, we'll introduce the algebra <code class="code">alg1</code>. It is the Nakayama algebra <span class="SimpleMath">KQ/J^4</span>, where <span class="SimpleMath">Q</span> is the <span class="SimpleMath">3</span>-cycle quiver with arrows <span class="SimpleMath">a</span>, <span class="SimpleMath">b</span> and <span class="SimpleMath">c</span>,</p>
-
-<p>, where <span class="SimpleMath">J</span> is the <span class="SimpleMath">4</span>th power of the arrow ideal of <span class="SimpleMath">KQ</span>, and where <span class="SimpleMath">K=ℚ</span>. (Really <span class="SimpleMath">K</span> could be any field.)</p>
-
-<p>This algebra is chosen because it is much more boring than <code class="code">alg2</code>. For instance, as a monomial algebra, <code class="code">alg1</code> is <em>syzygy-finite</em>. Roughly, this means that the class of syzygies stabilizes. More precisely, it means that there is some integer <span class="SimpleMath">0 ≤ m &lt; ∞</span> and a finite set <span class="SimpleMath">mathcalS</span> of indecomposable modules such that, for any module <span class="SimpleMath">X</span>, the indecomposable summands of <span class="SimpleMath">Ω^m( X )</span> belong to <span class="SimpleMath">mathcalS</span>. (By a result of Zimmermann Huisgen <em>REFERENCE!</em>, <span class="SimpleMath">m=2</span> works.) But, in fact, we can say something stronger. Because <code class="code">alg2</code> is a Nakayama algebra, it is <em>representation finite</em> (so, in fact, <span class="SimpleMath">m=0</span> works). Things to test: weakly periodic; finite syzygy type</p>
-
-<p><a id="X7F4536F08712B181" name="X7F4536F08712B181"></a></p>
-
-<h4>2.7 <span class="Heading">
-    Additional examples
-  </span></h4>
-
-<p>Give some other sample algebras here, and do things with them.</p>
-
-
-<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
-
-
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chap7.html">7</a>  <a href="chap8.html">8</a>  <a href="chap9.html">9</a>  <a href="chap10.html">10</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
-
-<hr />
-<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
-</body>
-</html>

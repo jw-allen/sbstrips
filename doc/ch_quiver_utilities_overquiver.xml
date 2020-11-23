@@ -1,60 +1,54 @@
 <#GAPDoc Label="ChapQuiverUtilitiesOverquiver">
 <Section>
-  <Heading>Introduction</Heading>
+  <Heading>
+    Introduction
+  </Heading>
 
-  Quivers are finite directed graphs. Paths in a given quiver <M>Q</M> can be concatenated in an obvious way, and this concatenation can be extended <M>K</M>-linearly (over a field <M>K</M>) to give an associative, unital algebra <M>KQ</M> called a <E>path algebra</E>. A path algebra is infinite-dimensional iff its underlying quiver <M>Q</M> is acyclic. Finite-dimensional <E>quiver algebras</E> -- that is, finite-dimensional quotient algebras <M>KQ/I</M> of a path algebra <M>KQ</M> by some (frequently admissible) ideal <M>I</M> -- are a very important class of rings, whose representation theory has been much studied.
-  <P/>
-
-  The excellent &QPA; package implements these objects in &GAP;. The (far more humdrum) &SBStrips; package extends &QPA;'s functionality. Quivers constructed using the &QPA; function <Ref Func="Quiver" BookName="QPA"/> belong to the filter <Ref Filt="IsQuiver" BookName="QPA"/>, and special biserial algebras are those quiver algebras for which the property <Ref Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returns &true;.
-  <P/>
-
-  In this section, we explain some added functionality for quivers and special biserial algebras.<P/>
+  My discrete model of a SB algebra uses quivers. In particular, from a SB algebra <M>A</M>, it creates a <M>1</M>-regular quiver called the <E>overquiver of <M>A</M></E>. The &SBStrips; package includes several tools for working with the overquiver of an algebra, along with other utility functions for use on <M>1</M>-regular or special biserial quivers. (The latter might also be called <E>sub-<M>2</M>-regular</E>.)
 </Section>
 
 <Section>
-  <Heading>New property of quivers</Heading>
-
+  <Heading>
+    <M>1</M>-regular quivers
+  </Heading>
+  
   <#Include Label="DocIs1RegQuiver">
-
-
-  <#Include Label="DocIsOverquiver">
-</Section>
-
-<Section>
-  <Heading>New attributes of quivers</Heading>
-
-  <#Include Label="Doc1RegQuivIntAct">
-
-  <#Include Label="Doc1RegQuivIntActionFunction">
-
-  <#Include Label="Doc2RegAugmentationOfQuiver">
-</Section>
-
-<Section>
-  <Heading>Operations on vertices and arrows of quivers</Heading>
-
-  <#Include Label="Doc1RegQuivIntAct">
   
   <#Include Label="DocPathBySourceAndLength">
   
   <#Include Label="DocPathByTargetAndLength">
+  
+  <#Include Label="Doc1RegQuivIntAct">
+
+  <#Include Label="Doc1RegQuivIntActionFunction">
 </Section>
 
 <Section>
-  <Heading>New attributes for special biserial algebras</Heading>
+  <Heading>Special biserial quivers</Heading>
+  
+  <#Include Label="Doc2RegAugmentationOfQuiver">
+  
+  <#Include Label="DocIs2RegAugmentationOfQuiver">
+  
+  <#Include Label="DocOriginalSBQuiverOf2RegAugmentation">
+  
+  <#Include Label="DocRetractionOf2RegAugmentation">
+</Section>
 
+<Section>
+  <Heading>
+    Overquivers
+  </Heading>
+  
+  <#Include Label="DocIsOverquiver">
+  
   <#Include Label="DocOverquiverOfSBAlg">
-
-  <#Include Label="DocSimpleStripsOfSBAlg">
   
-  <#Include Label="DocProjectiveStripsOfSBAlg">
+  <#Include Label="DocContractionOfOverquiver">
   
-  <#Include Label="DocInjectiveStripsOfSBAlg">
+  <#Include Label="DocExchangePartnerOfVertex">
+  
+  <#Include Label="DocSBAlgOfOverquiver">
 </Section>
- 
-<Section>
-  <Heading>New function for special biserial algebras</Heading>
 
-  <#Include Label="DocTestInjectiveStripsUpToNthSyzygy">
-</Section>
 <#/GAPDoc>

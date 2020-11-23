@@ -399,12 +399,12 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##        Argument: <A>strip</A>, a strip
 ##        <P />
 ##      </Description>
-##      <Returns
+##      <Returns>
 ##        &true; if <A>strip</A> is the zero strip of some SB algebra, and
 ##        &false; otherwise.
 ##      </Returns>
 ##      <Description>
-##        Note that &sbstrips; knows which SB algebra <A>strip</A> belongs to.
+##        Note that &SBStrips; knows which SB algebra <A>strip</A> belongs to.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>

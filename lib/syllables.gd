@@ -1,5 +1,5 @@
 DeclareRepresentation( "IsSyllableRep", IsAttributeStoringRep,
- [ "path", "perturbation", "sb_alg" ] );
+ [ "path", "stability", "sb_alg" ] );
 
 DeclareAttribute( "SyllableFamilyOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "SyllableSetOfSBAlg", IsSpecialBiserialAlgebra );
@@ -8,7 +8,7 @@ DeclareAttribute( "ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
 
 DeclareOperation( "UnderlyingPathOfSyllable", [ IsSyllableRep ] );
-DeclareOperation( "PerturbationTermOfSyllable", [ IsSyllableRep ] );
+DeclareOperation( "StabilityTermOfSyllable", [ IsSyllableRep ] );
 
 DeclareProperty( "IsZeroSyllable", IsSyllableRep );
 DeclareProperty( "IsVirtualSyllable", IsSyllableRep );

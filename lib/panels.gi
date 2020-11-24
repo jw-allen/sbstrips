@@ -52,7 +52,7 @@ InstallMethod(
         # Test for, and reject, syllables beside unstable ones.
         if IsZeroSyllable( sy ) then
             Error( "Cannot panellify from a zero syllable" );
-        elif PerturbationTermOfSyllable( sy ) = 0 then
+        elif StabilityTermOfSyllable( sy ) = 0 then
             Error( "Cannot panellify from a stable syllable" );
             
         # Otherwise, proceed.

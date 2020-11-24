@@ -24,7 +24,7 @@ InstallMethod(
     [ IsSyllableRep, IsSyllableRep ],
     function( sy1, sy2 )
         if ( sy1!.path = sy2!.path and
-         sy1!.perturbation = sy2!.perturbation and
+         sy1!.stability = sy2!.stability and
          sy1!.sb_alg = sy2!.sb_alg ) then
             return true;
         else
@@ -40,7 +40,7 @@ InstallMethod(
     [ IsSyllableRep, IsSyllableRep ],
     function( sy1, sy2 )
         local
-            ep1, ep2,       # Perturbation terms of <sy1> and <sy2>
+            ep1, ep2,       # Stability terms of <sy1> and <sy2>
             i1, i2,         # Sources of <path1> and <path2>
             len1, len2,     # Lengths of <path1> and <path2>
             path1, path2;   # Underlying paths of <sy1> and <sy2>
@@ -66,8 +66,8 @@ InstallMethod(
             i2 := SourceOfPath( path2 );
             len1 := LengthOfPath( path1 );
             len2 := LengthOfPath( path2 );
-            ep1 := sy1!.perturbation;
-            ep2 := sy2!.perturbation;
+            ep1 := sy1!.stability;
+            ep2 := sy2!.stability;
             
             return [ len1, i1, ep1 ] < [ len2, i2, ep2 ];
         fi;
@@ -84,7 +84,7 @@ InstallMethod(
             a_seq, b_seq,   # Integer and bit sequences of <source_enc>
             d_i,            # <i>th term <d_seq>
             d_seq,          # Bit sequence of <target_enc>
-            ep,             # Bit variable for perturbation
+            ep,             # Bit variable for stability
             i,              # Vertex variable
             l,              # Length variable
             obj,            # Object to be made into a syllable, or data therof
@@ -108,7 +108,7 @@ InstallMethod(
             # Create zero syllable
             obj := rec(
              path := Zero( oquiv ),
-             perturbation := fail,
+             stability := fail,
              sb_alg := sba
             );
             
@@ -154,7 +154,7 @@ InstallMethod(
                         if d_i <= l + ep then
                             obj := rec(
                              path := PathBySourceAndLength( i, l ),
-                             perturbation := ep,
+                             stability := ep,
                              sb_alg := sba
                              );
                             ObjectifyWithAttributes(
@@ -190,7 +190,7 @@ InstallMethod(
 
 InstallMethod(
     Syllabify,
-    "for a path and a perturbation term",
+    "for a path and a stability term",
     [ IsPath, IsInt ],
     function( path, int )
         local
@@ -208,7 +208,7 @@ InstallMethod(
             sba := SBAlgOfOverquiver( oquiv );
             syll_set := SyllableSetOfSBAlg( sba );
             matches := Filtered( syll_set,
-             x -> (x!.path = path) and (x!.perturbation = int)
+             x -> (x!.path = path) and (x!.stability = int)
              );
             if Length( matches ) <> 1 then
                 Error( "No syllables match this description!" );
@@ -270,11 +270,11 @@ InstallMethod(
 );
 
 InstallMethod(
-    PerturbationTermOfSyllable,
+    StabilityTermOfSyllable,
     "for syllables",
     [ IsSyllableRep ],
     function( sy )
-        return sy!.perturbation;
+        return sy!.stability;
     end
 );
 
@@ -286,7 +286,7 @@ InstallMethod(
         if HasIsStableSyllable( sy ) then
             return IsStableSyllable( sy );
         else
-            return ( PerturbationTermOfSyllable( sy ) = 0 );
+            return ( StabilityTermOfSyllable( sy ) = 0 );
         fi;
     end
 );
@@ -319,7 +319,7 @@ InstallMethod(
             a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
             a_seq, b_seq,   # Integer and bit sequences of source_encoding of
                             #  permissible data of <sba>
-            ep,             # Perturbation term of <sy>
+            ep,             # Stability term of <sy>
             i,              # Source of underlying path of <sy>
             len,            # Length of underlying path of <sy>
             sba,            # SB algebra to which <sy> belongs
@@ -339,7 +339,7 @@ InstallMethod(
 
             i := SourceOfPath( UnderlyingPathOfSyllable( sy ) );
             len := LengthOfPath( UnderlyingPathOfSyllable( sy ) );
-            ep := PerturbationTermOfSyllable( sy );
+            ep := StabilityTermOfSyllable( sy );
 
             a_i := a_seq.( String( i ) );
             b_i := b_seq.( String( i ) );
@@ -405,7 +405,7 @@ InstallMethod(
                         path1 := UnderlyingPathOfSyllable( sy );
                         i1 := SourceOfPath( path1 );
                         l1 := LengthOfPath( path1 );
-                        ep1 := PerturbationTermOfSyllable( sy );
+                        ep1 := StabilityTermOfSyllable( sy );
                         
                         # Obtain <i1>th terms in permissble data of <sba>
                         a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
@@ -494,7 +494,7 @@ InstallMethod(
     function( sy )
         local
             path,           # Underlying path of <sy>
-            pert;           # Perturbation term of <sy>
+            stab;           # Stability term of <sy>
 
         if IsZeroSyllable( sy ) then
             return "( )";
@@ -502,10 +502,10 @@ InstallMethod(
         else
             # The returned string should look something like "( p, ep )"
             path := UnderlyingPathOfSyllable( sy );
-            pert := PerturbationTermOfSyllable( sy );
+            stab := StabilityTermOfSyllable( sy );
 
             return Concatenation(
-             "( ",  String( path ), ", ", String( pert ), " )"
+             "( ",  String( path ), ", ", String( stab ), " )"
              );
         fi;
     end
@@ -666,7 +666,7 @@ InstallMethod(
         if IsZeroSyllable( sy ) then
             TryNextMethod();
         else
-            # (Recall that virtual syllables have perturbation term 0 and so
+            # (Recall that virtual syllables have stability term 0 and so
             #  are stable syllables. This means they will (rightly) return
             #  <false> in the call below.)
 
@@ -684,7 +684,7 @@ InstallMethod(
         if IsZeroSyllable( sy ) then
             TryNextMethod();
         else
-            # (Recall that virtual syllables have perturbation term 0 and so
+            # (Recall that virtual syllables have stability term 0 and so
             #  are stable syllables. This means they will (rightly) return
             #  <false> in the call below.)
 

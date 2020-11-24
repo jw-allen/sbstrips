@@ -130,7 +130,7 @@ InstallMethod(
             #  (overquiver representatives of) components of commuativity
             #  relations. On one side (east or west), these have as northern
             #  component a virtual syllable (ie, a syllable with source/
-            #  length/perturbation tuple [i,0,0] for some target i of a commu-
+            #  length/stability tuple [i,0,0] for some target i of a commu-
             #  -tativity rel) and as southern component the associated trivial
             #  syllable (ie, [i,0,1]) as southern component. On the other side,
             #  both components are <zero_sy>
@@ -235,12 +235,12 @@ InstallMethod(
 
             # Second, we create those featuring exactly one 'pin boundary'.
             #  These also deserve special treatment, as any southern entry on
-            #  the nonboundary side must have perturbation term 1 (not 0).
+            #  the nonboundary side must have stability term 1 (not 0).
             # The patches will have the 'pin boundary' syllable in a northern
             #  component on one side; beneath it on that side goes <zero_sy>.
             #  On the other side, the northern component is any non-'pin bound-
             #  -ary' syllable with source <j>, and the southern component is
-            #  the <desc>-image thereof with perturbation term adjusted to 1:
+            #  the <desc>-image thereof with stability term adjusted to 1:
             #  here, <j> denotes the exchange partner of the source <i> of the
             #  'pin boundary' syllable. General theory ensures that this
             #  <desc>-image is never <zero_sy>. We write a local boolean func-
@@ -361,7 +361,7 @@ InstallMethod(
             # Lastly, create the patches that have exactly one "northern" comp-
             #  -onent featuring <zero_sy>. These syllables can be constructed
             #  by replacing a single trivial syllable (ie, a syllable whose
-            #  source/length/pertubation tuple is [i,0,1] for some vertex i) in
+            #  source/length/stability tuple is [i,0,1] for some vertex i) in
             #  a northern component by <zero_sy>.
 
             # {Is it possible to make this functionality part of the the
@@ -370,11 +370,11 @@ InstallMethod(
             is_triv := function( x )
                 local
                     path,   # Underlying path of <x>
-                    pert;   # Perturbation term of <x>
+                    stab;   # Stability term of <x>
                 path := UnderlyingPathOfSyllable( x );
-                pert := PerturbationTermOfSyllable( x );
+                stab := StabilityTermOfSyllable( x );
                 
-                return ( IsQuiverVertex( path ) and ( pert = 1 ) );
+                return ( IsQuiverVertex( path ) and ( stab = 1 ) );
             end;
             
             triv_list := [];

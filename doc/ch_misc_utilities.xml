@@ -1,8 +1,7 @@
-<#GAPDoc Label="ChapUtilities">
+<#GAPDoc Label="ChapMiscUtilities">
 In this chapter, we document some additional functionalities that have been
 implemented in &SBStrips; but which, really, can stand independently of it.
 Others may find these useful without caring about SB algebras or what-have-you.
-Among these, we include minor extensions of functionality for &QPA;
 
 <Section>
   <Heading>Collected lists</Heading>
@@ -85,18 +84,5 @@ gap> Recollected( hello_world );
   <#Include Label="DocUncollected">
   
   <#Include Label="DocCollectedLength">
-</Section>
-
-<Section>
-  <Heading>Miscellaneous utilities for &QPA;</Heading>
-  
-  What follows are minor additional utilities for &QPA;. 
-
-  <#Include Label="DocStringMethodForPaths">
-
-  <#Include Label="DocArrowsOfQuiverAlgebra">
-
-  <#Include Label="DocVerticesOfQuiverAlgebra">
-
 </Section>
 <#/GAPDoc>

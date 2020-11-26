@@ -24,10 +24,10 @@
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <Chapter>
       <Heading>
-        Quiver utilities and the overquiver of a SB algebra
+        Overquiver of a SB algebra
       </Heading>
       
-      <#Include Label="ChapQuiverUtilitiesOverquiver">
+      <#Include Label="ChapOverquiver">
       
     </Chapter>
 

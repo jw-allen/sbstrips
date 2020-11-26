@@ -2,7 +2,7 @@
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 + Documentation for the SBStrips package of GAP, written by Joe Allen as part +
-+ of his PhD thesis.                                                          +
++ of his PhD studies.                                                         +
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
@@ -90,7 +90,7 @@
         &QPA; utilities
       </Heading>
       
-      <!-- MOVE QPA UTILITIES HERE -->
+      <#Include Label="ChapQPAUtilities">
     </Chapter>
 
 
@@ -103,7 +103,7 @@
         Miscellaneous utilities
       </Heading>
       
-      <!-- MOVE OTHER UTILITIES HERE -->
+      <#Include Label="ChapMiscUtilities">
     </Chapter>
 
 

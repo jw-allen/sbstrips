@@ -8,6 +8,7 @@
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
   [ <!ENTITY fail "<K>fail</K>">
     <!ENTITY false "<K>false</K>">
+    <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
     <!ENTITY QPA "<Package>QPA</Package>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">

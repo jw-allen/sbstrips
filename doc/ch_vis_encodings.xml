@@ -1,7 +1,0 @@
-<#GAPDoc Label="ChapVISEncodings">
-
-  In this chapter, I explain about the source and target encodings of the
-  permissible data of a SB algebra. I also describe vertex-indexed sequences
-  more generally.
-
-<#/GAPDoc>

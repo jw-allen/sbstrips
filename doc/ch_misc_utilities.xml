@@ -1,7 +1,7 @@
 <#GAPDoc Label="ChapMiscUtilities">
 In this chapter, we document some additional functionalities that have been
 implemented in &SBStrips; but which, really, can stand independently of it.
-Others may find these useful without caring about SB algebras or what-have-you.
+Others may find these useful without caring a jot about SB algebras.
 
 <Section>
   <Heading>Collected lists</Heading>

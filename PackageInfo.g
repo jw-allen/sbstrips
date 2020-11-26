@@ -6,7 +6,7 @@ SetPackageInfo( rec(
  
  Version := "v0.6.0",
  
- Date := "05/11/2020",
+ Date := "26/11/2020",
  
  License := "GPL-2.0-or-later",
  

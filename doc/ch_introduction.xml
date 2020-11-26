@@ -1,51 +1,85 @@
 <#GAPDoc Label="ChapIntroduction">
-  
-<Section Label="SecWhyStripsNotStrings">
+
+<Section>
   <Heading>
-    Why "strips", not "strings"?
+    Aim
   </Heading>
-
-
-  First, some context. Representation theorists use the word <E>string</E> to
-  mean a decorated graph that describes a module; fittingly, this module is
-  then  dubbed a <E>string module</E>. Liu and Morin <Cite Key="LM04"/> showed
-  that the syzygy of a string module over a special biserial (SB) algebra is a
-  direct sum of string modules. This means that, in essence, we can forget
-  about the modules <E>per se</E> and compute syzygies just at the level of
-  strings. Liu and Morin's proof is constructive, specifying how to obtain the
-  strings indexing the indecompsoable direct summands of syzygy from thae 
-  string indexing the original module. Their language sketches how to spot
-  patterns appearing "from one syzygy to the next", but it does not scale in a
-  particularly transparent way. For example, I believe it does not lend itself
-  to clearly seeing asymptotic behaviour of syzygies of string modules. My
-  research has aimed, in part, to provide a more robust language: one which
-  lays bare more patterns in the syzygies of string modules over SB algebras
-  in a manner amenable to computer calculation.
-  <P />
-
-  One key ingredient is a slight refinement of the definition of a string.
-  Really, this differs from the established definition only in technical ways,
-  the effect being to disambiguate how the graph is decorated so that the
-  syzygy calculation is streamlined. In my thesis, I propose the term
-  <E>strip</E> for this refined notion of a string. A happy side-effect of
-  this name change is that it avoids the clash with what &GAP; already thinks
-  "string" means.
-  <P />
-
-  <E>
-    In brief: if whenever you read the word "strip" here, you imagine that it
-    means the kind of decorated graph that representation theorists call a
-    "string", then you won't go too far wrong.
-  </E>
-  <P />
+  
+  The aim of the &SBStrips; package is to calculate syzygies of string modules over special biserial (SB) algebras in a user-friendly way.
 </Section>
 
 <Section>
   <Heading>
-    Aims
+    Some historical context
   </Heading>
+  Special biserial algebras are a combinatorially-defined class of
+  finite-dimensional <M>K</M>-algebras (over some field <M>K</M>, often assumed
+  algebraically closed), which have been the object of much study. Among other
+  results, their indecomposable finite-dimensional modules have been entirely
+  classified into three sorts, one of which are the <E>string modules</E>.
+  These are so called because their module structure is characterised by
+  certain decorated graphs. In the literature these graphs are called
+  <E>strings</E> but, for our convenience (shortly to be justified), we will
+  call them <E>string graphs</E>.
+  <P />
+  
+  Liu and Morin <Cite Key="LM04"/> proved that the syzygy <M>\Omega^1(X)</M> of
+  a string module <M>X</M> is a direct sum of indecomposable string modules.
+  Their proof is constructive (it explicitly gives the string graphs describing
+  each summand of <M>\Omega^1(X)</M> from that describing <M>X</M>) and
+  elementary (they cleverly choose a basis of the projective cover <M>P(X)</M>
+  of <M>X</M> which disjointly combines bases of <M>\Omega^1(X)</M> and
+  <M>X</M>), being valid regardless of the characteristic of <M>K</M> or
+  whether it is algebraically closed. It follows that, in a very strong way,
+  "taking the syzygy of a string module" is a (many-valued) combinatorial
+  operation on combinatorial objects, not an algebraic one on algebraic
+  objects.
+  <P />
+  
+  This package implements that operation effectively. However, instead of the
+  slightly naive notation used in the above article, &SBStrips; uses
+  an alternative, more efficient, framework developed by the author during his
+  doctoral studies. More precisely, the author devised a theoretical framework
+  (to prove mathematical theorems) that this package models. This theoretical
+  framework was created with syzygy-taking in mind.
+</Section>
 
-  Some text to go here!
+<Section Label="SecWhyStripsNotStrings">
+  <Heading>
+    Why "strips", not "strings"?
+  </Heading>
+  <List>
+    <Mark>
+      Mantra:
+    </Mark>
+    <Item>
+      <E>
+        If whenever you read the word "strip" in this package, you imagine that
+        it means the kind of decorated graph that representation theorists call
+        a "string", then you won't go too far wrong.
+      </E>
+    </Item>
+  </List>
+  
+  Liu and Morin's aforementioned paper exploits a kind of alternating behavior,
+  manifesting from one syzygy to the next. Through much trial and error, the
+  author found patterns only apparent over a greater "timescale". It rapidly
+  became impractical to <E>describe</E> these greater patterns using the
+  classical notation for strips, let alone to <E>rigorously prove</E>
+  statements about them. From this necessity was born the &SBStrips; package --
+  or, rather, the abstract framework underpinning it.
+  <P />
+  
+  One crucial aspect in this framework is that string graphs are refined into
+  objects called <E>strips</E>. This refinement is technical, does not break
+  any new ground mathematically -- it largely amounts to disambiguation and
+  some algorithmic choice-making -- and so we keep it behind the scenes.
+  <P />
+  
+  The &SBStrips; user may safely assume that <E>strip</E> (or
+  <C>IsStripRep</C>) simply means the kind of object that &GAP; uses to
+  represent string graphs for SB algebras. As an added bonus, this name avoids
+  a clash with those objects that &GAP;already calls "strings"!  
 </Section>
 
 <Section>
@@ -53,6 +87,16 @@
     Installation
   </Heading>
   
-  Some text to go here!
+  The &SBStrips; package was designed for version 4.11 of &GAP;; the author makes no promises about compatibility with previous versions. It requires version 1.30 of &QPA; and version 1.6 of &GAPDoc;.
+  
+  It is presently distributed in <C>tar.gz</C> and <C>zip</C> formats. These may be downloaded from <URL>https://github.com/jw-allen/sbstrips/releases</URL> (be sure to download the latest version!), and then unpacked into the user's <C>pkg</C> directory.
+</Section>
+
+<Section>
+  <Heading>
+    InfoClass for &SBStrips;
+  </Heading>
+  
+  <#Include Label="DocInfoSBStrips">
 </Section>
 <#/GAPDoc>

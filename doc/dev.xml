@@ -1,0 +1,98 @@
+<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                                             |
++                              UNDER THE SURFACE                              +
+|                                                                             |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Discrete model for SB algebras and their string modules                   |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Discrete model for SB algebras and their string modules
+      </Heading>
+      
+      <#Include Label="ChapDiscreteModel">
+      
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Quiver utilities and the overquiver of a SB algebra                       |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <Chapter>
+      <Heading>
+        Quiver utilities and the overquiver of a SB algebra
+      </Heading>
+      
+      <#Include Label="ChapQuiverUtilitiesOverquiver">
+      
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Permissible data of a SB algebra                                          |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    
+    <Chapter>
+      <Heading>
+        Permissible data of a SB algebra
+      </Heading>
+      
+      <#Include Label="ChapPermissibleData">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Vertex-indexed sequences and encodings of permissible data                |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Vertex-indexed sequences and encodings of permissible data
+      </Heading>
+      
+      <#Include Label="ChapVISEncodings">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Syllables                                                                 |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Syllables
+      </Heading>
+      
+      <#Include Label="ChapSyllables">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Patches                                                                   |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Patches
+      </Heading>
+      
+      <#Include Label="ChapPatches">
+    </Chapter>
+
+
+<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
+|   Utilities                                                                 |
++ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+    <Chapter>
+      <Heading>
+        Utilities
+      </Heading>
+      
+      <#Include Label="ChapUtilities">
+    </Chapter>
+  </Body>

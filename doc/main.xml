@@ -79,106 +79,32 @@
 
       <#Include Label="ChapStripsSyzygies">
     </Chapter>
-
-
-<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                                                                             |
-+                              UNDER THE SURFACE                              +
-|                                                                             |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Discrete model for SB algebras and their string modules                   |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Discrete model for SB algebras and their string modules
-      </Heading>
-      
-      <#Include Label="ChapDiscreteModel">
-      
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Quiver utilities and the overquiver of a SB algebra                       |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <Chapter>
-      <Heading>
-        Quiver utilities and the overquiver of a SB algebra
-      </Heading>
-      
-      <#Include Label="ChapQuiverUtilitiesOverquiver">
-      
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Permissible data of a SB algebra                                          |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     
-    <Chapter>
-      <Heading>
-        Permissible data of a SB algebra
-      </Heading>
-      
-      <#Include Label="ChapPermissibleData">
-    </Chapter>
-
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Vertex-indexed sequences and encodings of permissible data                |
+|   QPA utilities                                                             |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <Chapter>
       <Heading>
-        Vertex-indexed sequences and encodings of permissible data
+        &QPA; utilities
       </Heading>
       
-      <#Include Label="ChapVISEncodings">
+      <!-- MOVE QPA UTILITIES HERE -->
     </Chapter>
 
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Syllables                                                                 |
+|   Miscellaneous utilities                                                   |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <Chapter>
       <Heading>
-        Syllables
+        Miscellaneous utilities
       </Heading>
       
-      <#Include Label="ChapSyllables">
+      <!-- MOVE OTHER UTILITIES HERE -->
     </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Patches                                                                   |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Patches
-      </Heading>
-      
-      <#Include Label="ChapPatches">
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Utilities                                                                 |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Utilities
-      </Heading>
-      
-      <#Include Label="ChapUtilities">
-    </Chapter>
-  </Body>
 
 
 

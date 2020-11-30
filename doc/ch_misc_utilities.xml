@@ -3,7 +3,7 @@ In this chapter, we document some additional functionalities that have been
 implemented in &SBStrips; but which, really, can stand independently of it.
 Others may find these useful without caring a jot about SB algebras.
 
-<Section>
+<Section Label="SecCollectedLists">
   <Heading>Collected lists</Heading>
 
   Sometimes it is important to know <E>where</E> in a list an element appears.

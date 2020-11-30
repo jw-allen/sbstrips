@@ -72,14 +72,14 @@
   
   One crucial aspect in this framework is that string graphs are refined into
   objects called <E>strips</E>. This refinement is technical, does not break
-  any new ground mathematically -- it largely amounts to disambiguation and
-  some algorithmic choice-making -- and so we keep it behind the scenes.
+  any new ground mathematically - - it largely amounts to disambiguation and
+  some algorithmic choice-making - - and so we keep it behind the scenes.
   <P />
   
   The &SBStrips; user may safely assume that <E>strip</E> (or
   <C>IsStripRep</C>) simply means the kind of object that &GAP; uses to
   represent string graphs for SB algebras. As an added bonus, this name avoids
-  a clash with those objects that &GAP;already calls "strings"!  
+  a clash with those objects that &GAP; already calls "strings"!  
 </Section>
 
 <Section>

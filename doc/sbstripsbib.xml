@@ -12,10 +12,34 @@
       School of Mathematics, University of Bristol
     </school>
     <year>
-      2021
+      expected 2021
     </year>
-    <note>(work in progress)</note>
+    <note>Work in progress</note>
   </phdthesis></entry>
+  
+  <entry id="ASS06"><book>
+    <author>
+      <name><first>Ibrahim</first> <last>Assem</last></name>
+      <name><first>Daniel</first> <last>Simson</last></name>
+      <name><first>Andrzej</first> <last>Skowronski</last></name>
+    </author>
+    <title>
+      Elements of the Representation Theory of Associative Algebras, volume I:
+      Techniques of Representation Theory
+    </title>
+    <publisher>
+      Cambridge University Press
+    </publisher>
+    <year>
+      2006
+    </year>
+    <number>
+      65
+    </number>
+    <series>
+      London Mathematical Society student texts
+    </series>
+  </book></entry>
 
   <entry id="LM04"><article>
     <author>
@@ -58,4 +82,25 @@
       </URL>
     </note>
   </manual></entry>
+  
+  <entry id="ZH91"><article>
+    <author>
+      <name><first>Birge</first> <last>Zimmermann-Huisgen</last></name>
+    </author>
+    <title>
+      Predicting syzygies over monomial relation algebras
+    </title>
+    <journal>
+      Manuscripta mathematica
+    </journal>
+    <year>
+      1991
+    </year>
+    <volume>
+      70
+    </volume>
+    <pages>
+      157-182
+    </pages>
+  </article></entry>
 </file>

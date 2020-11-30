@@ -51,7 +51,9 @@
 |   Introduction                                                              |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <Chapter>
-      <Heading>Introduction</Heading>
+      <Heading>
+        Introduction
+      </Heading>
       
       <#Include Label="ChapIntroduction">
     </Chapter>
@@ -60,6 +62,7 @@
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
 |   Worked example                                                            |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
     <Chapter>
       <Heading>
         Worked example
@@ -107,7 +110,7 @@
       <#Include Label="ChapMiscUtilities">
     </Chapter>
 
-
+  </Body>
 
 <!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                                             |

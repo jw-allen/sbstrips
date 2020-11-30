@@ -9,6 +9,8 @@
   
   An important rule is that the SB algebra be presented by <E>monomial relations </E> and <E>skew commutativity relations</E>. A monomial relation is just a path <M>p</M> (or more generally <M>\lambda p</M> for some coefficient in the ambient field, here <C>Rationals</C>). A (skew) commutativity relation is a linear difference <M> \lambda p - \mu q</M> of paths <M>p,q</M> having common source and target, where <M>\lambda,\mu</M> are nonzero coefficients. It is well-known that all SB algebras admit such a presentation; &SBStrips; takes it for granted you have used one.
   <P />
+  
+  Included in this package are some sample SB algebras, which can be accessed using the function <Ref Func="SBStripsExampleAlgebra"/>. The following algebra <C>alg2</C> is just <Ref Subsect="ExAlg2" Style="Text"/>. But, instead of simply writing <C>SBStripsExampleAlgebra( 2 )</C> and hiding all the details, we gives its definition in full in the hope of clarity.
 <Example><![CDATA[
 gap> q2 := Quiver( 2, [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ] );;
 gap> kq2 := PathAlgebra( Rationals, q2 );;
@@ -23,10 +25,7 @@ gap> alg2 := kq2/ideal2;
 <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
 , (7 generators)>>
 ]]></Example>
-  This defines a special biserial algebra <C>alg2</C>. The following is
-  what representation theorists call a string over <C>alg2</C>, but which we'll
-  prefer to call a <E>strip</E>. (For reasons why, see Section <Ref
-  Sect="SecWhyStripsNotStrings" Style="Number"/>.)
+  This creates the SB algebra <C>alg2</C> in &GAP;. Consider the following string graph for this algebra.
   <Alt Only="LaTeX"><Display>
     \begin{tikzcd}[sep=small]
             1
@@ -44,30 +43,24 @@ gap> alg2 := kq2/ideal2;
   </Display></Alt><Alt Not="LaTeX"><Display>
     (a)^{-1} (b) (c) (a)^{-1} (b) (d)^{-1} (c) (a)^{-1} (c)^{-1} (d)
   </Display></Alt>
-  Note in particular that the "first arrow" in this strip is <M>a</M> and it
-  has exponent <M>-1</M><Alt Only="LaTeX"> (which means it points to the
-  left)</Alt>. This information (plus a bit extra) gets used when creating the
-  strip in &GAP; via the operation <Ref Meth="Stripify"
-  Label="for an arrow, +/-1 and a list of integers"/>.
+  Reading from left to right, the first arrow in this string graph is <M>a</M> and it has exponent <M>-1</M><Alt Only="LaTeX"> (which means it points to the
+  left, the negative direction)</Alt>. It's followed by 2 arrows with positive exponent ("<C>2</C>"), then 1 with negative ("<C>-1</C>"), then 1 positive ("<C>1</C>"), 1 negative ("<C>-1</C>"), 1 positive ("<C>1</C>"), 2 negative ("<C>-2</C>") and 1 positive ("<C>1</C>").
+  <P />
+  
+  This is the information used when specifying the string graph to &SBStrips;. The operation <Ref Meth="Stripify"
+  Label="for an arrow, +/-1 and a list of integers"/> spits out the strip representing this string graph.
 <Example><![CDATA[
 gap> s := Stripify( alg2.a, -1, [2, -1, 1, -1, 1, -2, 1] );
 (a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
+gap> IsStripRep( s );
+true;
 ]]></Example>
 </Section>
 
 <Section>
   <Heading>Modules from strips</Heading>
 
-  Representation theorists will know that this strip <C>s</C> corresponds to an
-  indecomposable module over <C>alg2</C>. In the literature they're called
-  string modules, but maybe here we could call them strip modules? Whatever you
-  want to call it, that module can be made in &GAP; using <Ref
-  Meth="ModuleOfStrip" Label="for a strip"/>.
-  <P />
-  
-  A technicality to bear in mind is that that module is implemented as a
-  representation of the quiver over which <C>alg2</C> was defined. You'll find
-  details about quiver representations in the &QPA; documentation.
+  This strip <C>s</C> represents a module over <C>alg2</C>. In the literature such modules are called string modules, but maybe here we could call them strip modules? Whatever you want to call it, that module can be made in &GAP; using <Ref Meth="ModuleOfStrip" Label="for a strip"/>.
 <Example><![CDATA[
 gap> module := ModuleOfStrip( s );
 <[ 6, 5 ]>
@@ -76,18 +69,16 @@ gap> Print( module );
 <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
 , (7 generators)>> with dimension vector [ 6, 5 ]>
 ]]></Example>
+  (This creates a quiver representation, using &QPA;.)
   <P />
   
-  You can turn a list of strips into a list of modules using <Ref Meth="ModuleOfStrip" Label="for a (flat) list of strips"/>. You can turn a collected list (see below <E>ADD REFERENCE</E>) of strips into a collected list of modules using <Ref Meth="ModuleOfStrip" Label="for a collected list of strips"/>. If you want to turn a list or collected list of strips into a single module, namely the direct sum of all the modules represented by strips in your list, it is better to call <C>DirectSumModuleOfStrip</C>.
+  You can turn a list of strips into a list of modules using <Ref Meth="ModuleOfStrip" Label="for a (flat) list of strips"/>. You can turn a collected list (see <Ref Sect="SecCollectedLists"/>) of strips into a collected list of modules using <Ref Meth="ModuleOfStrip" Label="for a collected list of strips"/>. If you want to turn a list or collected list of strips into a single module, namely the direct sum of all the modules represented by strips in your list, then you want to call <C>DirectSumModuleOfStrip</C>.
 </Section>
 
 <Section>
   <Heading>Syzygies of strips</Heading>
 
-  Now, you <E>can</E> calculate the syzygy of <C>X</C> using &QPA;'s function <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C> if you really want. It'll give you the syzygy module <C>\Omega^1(X)</C> as another quiver representation.
-  <P />
-  
-  However, you should know that the syzygy of a string module <M>X</M> is a direct sum of string modules. Suppose we write this as <M>\Omega^1 (X) = X_1 \oplus \cdots \oplus X_m</M>. It turns out that syzygies may be computed in an algorithmic fashion, just at the level of "strings". In other words, you give me the "string" describing <M>X</M> and I give you the "strings" describing each summand <M>X_j</M> of its syzygy in turn. This result was proved constructively by Liu and Morin in their 2004 paper <E>ADD REFERENCE</E> using a pseudoalgorithm. The purpose of the &SBStrips; package is to formalize this pseudoalgorithm and implement it in &GAP;. Instead of "strings", which can be ambiguous, we use strips. Our added care pays off when examining asymoptotic syzygy behavior of strings.
+  Now, you <E>can</E> calculate the syzygy of <C>X</C> using &QPA;'s function <Ref Attr="1stSyzygy" BookName="QPA"/> on <C>X</C> if you really want. It'll give you the syzygy module <C>\Omega^1(X)</C> as another quiver representation. However if you've read the &SBStrips; abstract, then you should know that the syzygy of a string module <M>X</M> is a direct sum of string modules. The string graphs of the syzygy summands can be calculated from that of the original module: this calculation is the heart of the &SBStrips; package! But rather than string graphs, we're using strips.
   <P />
   
   Recall our strip <C>s</C> from above. Let's start calculating its syzygies. The operation <C>SyzygyOfStrip</C> returns a list of strips, one for each indecomposable direct summand of the syzygy of its input.
@@ -100,8 +91,7 @@ gap> Length( last );
   This example shows that the syzygy of <C>s</C> has <M>3</M> indecomposable summands.
   <P />
   
-  Of course, there's no reason to stop at <M>1</M>st syzygies. &SBStrips; is able to take higher syzygies very easily (but refer to the next section for a discussion of an efficient approach). For example, we can calculate the
-  <M>4</M>th syzygy of <C>s</C> as follows.
+  Of course, there's no reason to stop at <M>1</M>st syzygies. &SBStrips; is able to take higher syzygies very easily (but refer to the next section for a discussion of an efficient approach). For example, we can calculate the <M>4</M>th syzygy of <C>s</C> as follows.
 <Example><![CDATA[
 gap> 4th_syz := NthSyzygyOfStrip( s, 4 );
 [ (v2)^-1(c*a) (c)^-1(v2), (v2)^-1(d^2), (a)^-1(v1), (v2)^-1(d^2),
@@ -116,7 +106,8 @@ gap> Length( 4th_syz );
   We find that the <M>4</M>th syzygy of <C>s</C> has <M>20</M> indecomposable direct summands.
   <P />
   
-  Note that many strips occur multiple times in this <C>4th_syz</C>. (What this means mathematically is that many of those summands are isomorphic.) If you want to remove duplicates from the above list (which is like looking at just the isomorphism types of modules in the direct sum), then the most efficient way is with <Ref Oper="Set" BookName="Reference"/>. Alternatively, you can use <Ref Oper="Collected" BookName="Reference"/>. This turn the list into something that a mathematician might call a multiset. That is, the distinct strips are recorded along with their frequency in the list.
+  Note that many strips occur multiple times in this <C>4th_syz</C>. (Mathematically, this means many of distinct direct summands are isomorphic.) If you want to remove duplicates from the above list (which is like looking at just the isomorphism types of modules in the direct sum), then the most efficient way is with <Ref Oper="Set" BookName="Reference"/>. Alternatively, you can use <Ref Oper="Collected" BookName="Reference"/>, which turns the list into something that a mathematician might call a multiset. This means that the distinct strips are recorded along with their frequency in the list. For example, the second output below means that <C>(v2)^-1(v2)</C> occurs <M>3</M> times
+  in <C>4th_syz</C> while <C>(v1)^-1(a)</C> occurs <M>6</M> times.
 <Example><![CDATA[
 gap> Set( 4th_syz );
 [ (v2)^-1(v2), (v1)^-1(a), (v2)^-1(d), (v2)^-1(d^2),
@@ -126,11 +117,12 @@ gap> Collected( 4th_syz );
   [ (v2)^-1(d^2), 5 ], [ (v2)^-1(c*a) (c)^-1(v2), 4 ],
   [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
 ]]></Example>
-  For example, the second output means that <C>(v2)^-1(v2)</C> occurs <M>3</M> times
-  in <C>4th_syz</C> while <C>(v1)^-1(a)</C> occurs <M>6</M> times.
   <P />
   
-  We call these "multisets" <E>collected lists</E>. The &SBStrips; package has several built-in functionalities for taking such "collected lists" of syzygies. Principal among these are <Ref Meth="CollectedSyzygyOfStrip" Label="for strips"/> and <Ref Meth="CollectedNthSyzygyOfStrip" Label="for strips"/>.
+  This package uses the term <E>collected lists</E> for these multisets; refer <Ref Sect="SecCollectedLists"/>. It offers several built-in functionalities for calculating collected lists of syzygies. Principal among these are <Ref Meth="CollectedSyzygyOfStrip" Label="for strips"/> and <Ref Meth="CollectedNthSyzygyOfStrip" Label="for strips"/>.
+  <P />
+  
+  The author recommends that, if calculating <M>k</M>th syzygies for large <M>k</M> (say <M>k \geq 10</M>), you use a Collected method. 
 <Example><![CDATA[
 gap> CollectedSyzygyOfStrip( s );
 [ [ (a)^-1(v1), 1 ], [ (d)^-1(v2), 1 ],
@@ -143,16 +135,19 @@ gap> CollectedNthSyzygyOfStrip( s, 4 );
   (In the next section, we pause to discuss the efficiency of these "collected" methods.)
   <P />
   
-  We reiterate that the lists (resp. collected lists) of strips returned by <C>SyzygyOfStrip</C> (resp. <C>CollectedSyzygyOfStrip</C>) and its <C>Nth</C> variants may be turned into lists (resp. collected lists) of quiver representations using <C>ModuleOfStrip</C>. These may alternatively be turned into a single direct sum module using <C>DirectSumModuleOfStrips</C>.
+  We reiterate that the lists of strips returned by <C>SyzygyOfStrip</C> and its "-<C>Nth</C>-" variant may be turned into lists of quiver representations using <C>ModuleOfStrip</C>. Alternatively, these may be turned into a single direct sum module using <C>DirectSumModuleOfStrips</C>. This paragraph remains true is "list" is everywhere replaced by "collected list" (and <C>SyzygyOfStrip</C> by <C>CollectedSyzygyOfStrip</C>).
 </Section>
   
 <Section>
   <Heading>Computing higher syzygies efficiently</Heading>
 
-  A central point in my thesis <E>(reference!)</E> is that the syzygies of a string module should be arranged in a particular format. (A little more specifically, they should be written into a certain kind of array.) This format does not print nicely onto the Euclidean plane so, sadly, there is little hope of &GAP; displaying syzygies in the most optimal way. The closest it can get -- which is not very close at all, frankly -- is the list format returned by <C>SyzygyOfStrip</C> or <C>NthSyzygyOfStrip</C>. However, this format compresses lots into a single line. This loses information and becomes a very inefficient way to store data (let along compute with them). By using functions like <C>Collected</C>, <C>CollectedSyzygyOfStrip</C> and <C>CollectedNthSyzygyOfStrip</C>, we lose what little information the list presentation holds onto, but we streamline out calculations greatly.
+  This section is a short digression, more philosophical than computational.
+  <P />
+
+  A central point of the author's doctoral studies (refer <Cite Key="All21"/>) is that the syzygies of a string module should be arranged in a particular format. (A little more specifically, they should be written into a certain kind of array.) Most of the time this format does not print nicely onto the Euclidean plane so, sadly, there is little hope of &GAP; displaying syzygies in the most "optimal" way. The closest it can get -- which is not very close at all, frankly -- is the list format returned by <C>SyzygyOfStrip</C> or <C>NthSyzygyOfStrip</C>. However, this format compresses lots into a single line. This loses information and becomes a very inefficient way to store data (let along compute with them). By using functions like <C>Collected</C>, <C>CollectedSyzygyOfStrip</C> and <C>CollectedNthSyzygyOfStrip</C>, we lose what little information the list presentation holds onto, but we streamline out calculations greatly.
   <P />
   
-  To see this, consider the <M>20</M>th syzygy of <C>s</C>. The following calculation shows that it has <M>344732</M> distinct summands (many of which will be isomorphic); this took over <M>2</M> minutes to perform on my device.
+  To see this, let <C>s</C> be the example strip from above and consider the <M>20</M>th syzygy of <C>s</C>. The following calculation shows that it has <M>344732</M> distinct summands (many of which will be isomorphic); this took over <M>2</M> minutes to perform on my device.
 <Example><![CDATA[
 gap> NthSyzygyOfStrip( s, 20 );;
 gap> time;
@@ -160,7 +155,7 @@ gap> time;
 gap> Length( last2 );
 344732
 ]]></Example>
-  Compare this with a "collected" approach, wherein the <M>20</M>th syzygy was calculated in a heartbeat (and the <M>100</M>th syzygy in not much more).
+  Compare this with a "collected" approach, wherein the <M>20</M>th syzygy was calculated in a heartbeat the <M>200</M>th syzygy in not much more and 
 <Example><![CDATA[
 gap> CollectedNthSyzygyOfStrip( s, 20 );
 [ [ (v2)^-1(c) (c*a)^-1(v2), 66012 ], [ (v2)^-1(v2), 55403 ],
@@ -168,24 +163,39 @@ gap> CollectedNthSyzygyOfStrip( s, 20 );
   [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
 gap> time;
 62
-gap> CollectedNthSyzygyOfStrip( s, 100 );
-[ [ (v2)^-1(c) (c*a)^-1(v2), 98079530178586034536500564 ],
-  [ (v2)^-1(v2), 82316850636514866677657075 ],
-  [ (v1)^-1(a), 180396380815100901214157638 ],
-  [ (v2)^-1(d^2), 151404293106684183601223221 ], [ (v2)^-1(d), 1 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
+gap> CollectedNthSyzygyOfStrip( s, 200 );
+[ [ (v2)^-1(c) (c*a)^-1(v2),
+      28610320653810477165032088685001500201865067503083660 ],
+  [ (v2)^-1(v2), 24012263187173292438733091914788756514219413052446981 ]
+    ,
+  [ (v1)^-1(a), 52622583840983769603765180599790256716084480555530640 ],
+  [ (v2)^-1(d^2), 44165437642884416151601614150885951220530708429827491
+     ], [ (v2)^-1(d), 1 ], [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
 gap> time;
-297
+547
+gap> CollectedNthSyzygyOfStrip( s, 2000 );; time;
+5422
+gap> CollectedNthSyzygyOfStrip( s, 20000 );; time;
+54172
+gap> CollectedNthSyzygyOfStrip( s, 200000 );; time;
+548922
 ]]></Example>
   <P />
 
-  Be advised that, even in this easier-to-store form, the integers involved may become to big for &GAP; to handle. Efficient storage only increases the upper bound on information we can store; it doesn't remove it! 
+  Be advised that, even in this easier-to-store form, the integers involved may become to big for &GAP; to handle. Effective book-keeping only <E>increases</E> the upper bound on information we can store; it doesn't <E>remove</E> it! 
 </Section>
 
 <Section>
-  <Heading>Other important strips</Heading>
+  <Heading>
+    Other important strips
+  </Heading>
   
-  First, some general theory about finite-dimensional algebras. Recall that (the isomorphism classes of) the simple modules over an SB algebra are in one-to-one correspondence with the vertices of its ordinary quiver. The same is true for the indecomposable projective modules and the indecomposable injective modules. (It is also true for any finite-dimensional quiver algebra, more generally.) In this section, suppose that the vertices are <M>i_1, \dots, i_n</M>, and that the simple, indecomposable projective and indecomposable injective modules associated to vertex <M>i_r</M> are respectively <M>S_r</M>, <M>P_r</M> and <M>I_r</M>.
+  The strip <C>s</C> that has been our running example was picked for no real reason: the associated string module is not canonical in any way. Other string modules are: namely simple modules (which are always string modules) and indecomposable projective or injective modules (which are sometimes string modules).
+  
+  Let's quickly recall some general theory about finite-dimensional algebras. It is well-known that (the isomorphism classes of) the simple modules over an SB algebra are in one-to-one correspondence with the vertices of its quiver. The same is true for the indecomposable projective modules and the indecomposable injective modules. It is convenient to identify the vertices of the quiver with integers <M>1,2,\dots,n</M> for some <M>n</M>. (The &QPA; package does this implicitly when it imposes a total order on the vertex set of a quiver.)
+  <P />
+  
+  We'll respectively denote the simple, indecomposable projective and indecomposable injective module associated to vertex <M>i</M> by <M>S_i</M>, <M>P_i</M> and <M>I_i</M>.
   <P />
   
   All of the simple modules over an SB algebra are string modules. The list of strips that describe them can be obtained using the following command.
@@ -203,7 +213,7 @@ gap> ProjectiveStripsOfSbAlg( alg2 );
 gap> InjectiveStripsOfSbAlg( alg2 );
 [ fail, (v1)^-1(a*b) (d^3)^-1(v2) ]
 ]]></Example>
-  (If a projective or injective module over an SB algebra is not a string module, then it must be <E>p</E>rojective, <E>i</E>njective and <E>n</E>onuniserial. Such modules, which we call <E>pin</E> modules (can you see why?) are not implemented in &SBStrips;. However, from time to time our notation refers to them obliquely, for instance <Ref Prop="IsPinBoundarySyllable"/>.) 
+  (If a projective or injective module over an SB algebra is not a string module, then it must be <E>p</E>rojective, <E>i</E>njective and <E>n</E>onuniserial. Such modules, which we call <E>pin</E> modules are not implemented in &SBStrips;, but we still mention them here because the inner workings of &SBStrips; occasionally make oblique references to them.) 
   <P />
 
   The uniserial modules are also, in particular, string modules. They are in one-to-one correspondence with the paths in the SB algebra. There is a method for <Ref Meth="Stripify" Label="for a path of a special biserial algebra"/> that turns a path for the SB algebra into the corresponding strip.
@@ -239,10 +249,40 @@ true
     Tests with strips
   </Heading>
   
-  Now that we've implement strips, we should play around with them. Let's see some of the fun tests built into &SBStrips;!
+  Now that we've implemented strips, we should play around with them. We need some definitions before we can see the fun tests built into &SBStrips;. In the sequel, suppose that <M>A</M> is some finite-dimensional <M>K</M>-algebra (<M>K</M> a field). Write <M>[X]</M> for the isomorphism class of the <M>A</M>-module <M>X</M>.
+  <P />
   
-  For this, we'll introduce the algebra <C>alg1</C>. It is the Nakayama algebra
-  <M>KQ/J^4</M>, where <M>Q</M> is the <M>3</M>-cycle quiver<Alt Not="LaTeX">
+  <List>
+    <Mark>
+      Weakly periodic
+    </Mark>
+    <Item>
+      An indecomposable <M>A</M>-module <M>X</M> is <E>weakly periodic</E> if there exists <M>t > 0</M> for which <M>X</M> is a direct summand of <M>\Omega^t(X)</M>.
+    </Item>
+    
+    <Mark>
+      Syzygy repetition index and syzygy type
+    </Mark>
+    <Item>
+    For an <M>A</M>-module <M>X</M> and some integer <M>t\geq 0</M>, let <M>\mathcal{C}_t</M> denote <Display>\{[M] \colon M \text{ is an indecomposable direct summand of } \Omega^k(X) \text{ for some }k\geq t\}\text{.}</Display> It is clear that increasing <M>t</M> gives a descending sequence <M>\mathcal{C}_0 \supseteq \mathcal{C}_1 \supseteq \mathcal{C}_2 \supseteq \cdots</M>.
+    <P />
+    
+    If there is some <M>t</M> such that <M>\mathcal{C}_{t}=\mathcal{C}_{t+1}</M>(<M>=\mathcal{C}_{t+2}=\cdots</M>) then there is a minimal such, which we call the <E>syzygy repetition index</E> of <M>X</M>; otherwise its syzygy repetition index is <M>+\infty</M>.
+    <P />
+    
+    If <M>\mathcal{C}_0</M> is finite, then we say that <M>X</M> has <E>syzygy type</E> <M>|\mathcal{C}_0|</M>; if not, then it has syzygy type <M>+\infty</M>.
+    <P />
+    
+    (Of course, syzygy type <M>t &lt; +\infty</M> implies syzygy repetition index at most <M>t &lt; +\infty</M>.)
+    </Item>
+  </List>
+   
+  
+  
+  For comparison, let's introduce another algebra to play with. This will be the built-in example algebra <C>SBStripsExampleAlgebra( 1 )</C> (refer to <Ref Subsect="ExAlg1"/>) but, as before, we'll repeat the definition here for the reader's convenience.
+  <P />
+  
+  Let <C>alg1</C> be the Nakayama algebra <M>KQ/J^4</M>, where <M>Q</M> is the <M>3</M>-cycle quiver<Alt Not="LaTeX">
   with arrows <M>a</M>, <M>b</M> and <M>c</M>,</Alt><Alt Only="Latex"><Display>
     \begin{tikzcd}
             1 \ar[r, "a"]
@@ -258,12 +298,12 @@ true
                   ]
     \end{tikzcd}
     \text{,}
-  </Display></Alt>, where <M>J</M> is the <M>4</M>th power of the arrow ideal of <M>KQ</M>, and where <M>K=&QQ;</M>. (Really <M>K</M> could be any field.)
+  </Display></Alt>, where <M>J</M> is the <M>4</M>th power of the arrow ideal of <M>KQ</M>, and where <M>K</M> is the field of rationals (not that that matters at all).
   <P />
   
-  This algebra is chosen because it is much more boring than <C>alg2</C>. For instance, as a monomial algebra, <C>alg1</C> is <E>syzygy-finite</E>. Roughly, this means that the class of syzygies stabilizes. More precisely, it means that there is some integer <M>0 \leq m &lt; \infty </M> and a finite set <M>\mathcal{S}</M> of indecomposable modules such that, for any module <M>X</M>, the indecomposable summands of <M>\Omega^m( X )</M> belong to <M>\mathcal{S}</M>. (By a result of Zimmermann Huisgen <E>REFERENCE!</E>, <M>m=2</M> works.) But, in fact, we can say something stronger. Because <C>alg2</C> is a Nakayama algebra, it is <E>representation finite</E> (so, in fact, <M>m=0</M> works).
+  This algebra is chosen because it is much more boring than <C>alg2</C>. It's certainly a monomial algebra, and therefore <E>syzygy finite</E>: this means there exists some integer <M>m</M> and some finite-dimensional module <M>M</M> such that the <M>m</M>th syzygy <M>\Omega^m(X)</M> of <E>any</E> <C>alg1</C>-module <M>X</M> is a direct summand of some (finite) direct sum of copies of <M>M</M>. (This is proven explicitly in <Cite Key="ZH91" Where="Thm I"/> for <M>m=2</M> and <M>M</M> the direct sum of right ideals of <C>alg1</C>.) But we can say actually say something stronger. It is a Nakayama algebra, and therefore <E>representation finite</E>: this means there are only finitely many isomorphism classes of <C>alg1</C>-modules. (For a proof, see <Cite Key="ASS06" Where="Thm V.3.5"/>.)
   
-  Things to test: weakly periodic; finite syzygy type
+  From this it is trivial to see that <Display>\{M\text{ an indecomposable module} \colon M \text{ is a direct summand of }\Omega^m(X) \text{ for some }m \}</Display> contains finitely many isomorphism types, for any <C>alg1</C>-module <M>X</M>. This is the condition that <M>X</M> have <E>finite syzygy type</E>. 
 </Section>
 
 <Section>

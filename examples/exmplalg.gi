@@ -37,21 +37,11 @@ InstallGlobalFunction(
         if not n in [ 1, 2, 3, 4, 5, 6 ] then
             Error( "The input ", n,
              " should be a positive integer between 1 and 6 inclusive!" );
-        
+                
         elif n = 1 then
             quiv := Quiver(
-             3,
-             [ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 1, "c" ] ]
-             );
-            
-            pa := PathAlgebra( Rationals, quiv );
-            
-            rels := NthPowerOfArrowIdeal( pa, 4 );
-        
-        elif n = 2 then
-            quiv := Quiver(
              2,
-             [ [1,1,"a"], [1,2,"b"], [2,1,"c"], [2,2,"d"] ]
+             [ [ 1, 1, "a" ], [ 1, 2, "b" ], [ 2, 1, "c" ], [ 2, 2, "d" ] ]
              );
             
             pa := PathAlgebra( Rationals, quiv );
@@ -65,7 +55,17 @@ InstallGlobalFunction(
              (pa.d)^4,
              pa.a * pa.b * pa.c - pa.b * pa.c * pa.a
              ];
+
+       elif n = 2 then
+            quiv := Quiver(
+             3,
+             [ [ 1, 2, "a" ], [ 2, 3, "b" ], [ 3, 1, "c" ] ]
+             );
             
+            pa := PathAlgebra( Rationals, quiv );
+            
+            rels := NthPowerOfArrowIdeal( pa, 4 );
+
         elif n = 3 then
             quiv := Quiver(
              4,

@@ -1278,7 +1278,7 @@ InstallMethod(
             if strip in syz then
                 found_yet := true;
                 Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
-                Info( InfoSBStrips, 2, "This strip first appears as a direct", 
+                Info( InfoSBStrips, 2, "This strip first appears as a direct ", 
                  "summand of its ", Ordinal( j ), " syzygy" );
                 return true;
             fi;
@@ -1286,7 +1286,7 @@ InstallMethod(
         
         Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
         Info( InfoSBStrips, 2, "This strip does not occur as a summand of ",
-         "its first ", String( N ), "syzygies" );
+         "its first ", String( N ), " syzygies" );
         return false;        
     end
 );

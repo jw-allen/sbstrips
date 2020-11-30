@@ -24,7 +24,7 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##        accessed using the <C>\.</C> operation. See <Ref Oper="."
 ##        Label="for a path algebra" BookName="QPA"/> for details and see below
 ##        for examples.)
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        the strip specified by this data
@@ -65,7 +65,7 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##      <Description>
 ##        Arguments: <A>path</A>, the residue (in a special biserial algebra)
 ##        of some path.
-##        <P />
+##        <Br />
 ##        (Remember that residues of vertices and arrows can be easily accessed
 ##        using <Ref Oper="." Label="for a path algebra" BookName="QPA"/>, and
 ##        that these can be multiplied together using <Ref Oper="\*"
@@ -95,10 +95,11 @@ DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 ##      </Heading>
 ##
 ##      <Description>
-##        (This attribute takes <M>1</M>st syzygies of strips. For higher
+##        <E>(This attribute takes <M>1</M>st syzygies of strips. For higher
 ##        syzygies, <Ref Oper="NthSyzygyOfStrip" Label="for strips"/> may be
 ##        more convenient while <Ref Oper="CollectedNthSyzygyOfStrip"
-##        Label="for strips"/> may be more efficient.)
+##        Label="for strips"/> may be more efficient.)</E>
+##        <P />
 ##      </Description>
 ##
 ##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
@@ -135,16 +136,17 @@ DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 ##      </Heading>
 ##      
 ##      <Description>
-##        This operation calculates <M>N</M>th syzygies of strips. For large
-##        <M>N</M> (say, <M>N \geq 10</M>) consider using <Ref
+##        <E>(This operation calculates <M>N</M>th syzygies of strips. For large
+##        <M>N</M> -- say, <M>N \geq 10</M> -- consider using <Ref
 ##        Oper="CollectedNthSyzygyOfStrip" Label="for strips"/> instead, since
-##        it is much more efficient.
+##        it is much more efficient.)</E>
+##        <P />
 ##      </Description>
 ##
 ##      <Meth Name="NthSyzygyOfStrip" Label="for strips" Arg="strip, N"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list of strips containing the indecomposable <A>N</A>th syzygy
@@ -156,7 +158,7 @@ DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 ##      Arg="list, N"/>
 ##      <Description>
 ##        Argument: <A>list</A>, a list of strips; <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        the <A>N</A>th syzygy strips of each strip in <A>list</A> in turn, all in
@@ -174,22 +176,23 @@ DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 ##      </Heading>
 ##
 ##      <Description>
-##        This operation calculates syzygies, and then collects the result into
-##        a collected list, using <Ref Oper="Collected" BookName="Reference"/>.
-##        It has different methods, depending on whether its input is a single
-##        strip, a (flat) list of strips or a collected list of strips.
+##        <E>(This operation calculates 1st syzygies and then collects the
+##        result into a collected list, using <Ref Oper="Collected"
+##        BookName="Reference"/>. It has different methods, depending on
+##        whether its input is a single strip, a (flat) list of strips or a
+##        collected list of strips.)</E>
 ##        <P />
 ##      </Description>
 ##
 ##		<Meth Name="CollectedSyzygyOfStrip" Label="for strips" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose elements are the syzygy strips of
 ##        <A>strip</A>
-##        <P />
+##        <Br />
 ##      </Returns>
 ##      <Description>
 ##        This is equivalent to calling
@@ -218,6 +221,7 @@ DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 ##      Label="for collected lists of strips" Arg="clist"/>
 ##		<Description>
 ##		  Argument: <A>clist</A>, a collected list of strips
+##        <Br />
 ##		</Description>
 ##		<Returns>
 ##		  a collected list, whose elements are the syzygy strips of the strips
@@ -234,17 +238,18 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 ##      </Heading>
 ##
 ##      <Description>
-##        This operation calculates <M>N</M>th syzygies of strips and collects
-##        the result into a collected list. It has different methods, depending
-##        on whether its input is a single strip, a (flat) list of strips or a
-##        collected of strips.
+##        <E>(This operation calculates <M>N</M>th syzygies of strips and
+##        collects the result into a collected list. It has different methods,
+##        depending on whether its input is a single strip, a (flat) list of
+##        strips or a collected of strips.)</E>
+##        <P />
 ##      </Description>
 ##
 ##      <Meth Name="CollectedNthSyzygyOfStrip" Label="for strips"
 ##      Arg="strip, N"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose entries are the <A>N</A>th syzygies of
@@ -257,7 +262,7 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 ##      <Description>
 ##        Arguments: <A>list</A>, a (flat) list of strips; <A>N</A>, a positive
 ##        integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose entries are the <A>N</A>th syzygies of the
@@ -270,7 +275,7 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 ##      <Description>
 ##        Arguments: <A>clist</A>, a collected list of strips; <A>N</A>, a
 ##        positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose entries are the <A>N</A>th syzygies of the
@@ -290,7 +295,7 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list <C>simple_list</C>, whose <M>j</M>th entry is the simple strip
@@ -311,7 +316,7 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list <C>proj_list</C>, whose entry are either strips or the boolean
@@ -382,7 +387,7 @@ DeclareAttribute( "UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      <Oper Name="WidthOfStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a nonnegative integer, counting the number (with multiplicity) of
@@ -397,7 +402,7 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##      <Prop Name="IsZeroStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if <A>strip</A> is the zero strip of some SB algebra, and
@@ -415,7 +420,7 @@ DeclareProperty( "IsZeroStrip", IsStripRep );
 ##      <Oper Name="IsWeaklyPeriodicStripByNthSyzygy" Arg="strip, N"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if <A>strip</A> is appears among its own first <A>N</A>
@@ -435,7 +440,7 @@ DeclareOperation( "IsWeaklyPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ]
 ##    <Oper Name="IsFiniteSyzygyTypeStripByNthSyzygy" Arg="strip, N"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if the strips appearing in the <A>N</A>th syzygy of
@@ -460,7 +465,7 @@ DeclareOperation(
 ##        Arguments: <A>sba</A>, a special biserial algebra (ie, <Ref
 ##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;);
 ##        <A>N</A>, a positive integer
-##        <P />
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true;, if all strips of injective string modules have finite syzygy

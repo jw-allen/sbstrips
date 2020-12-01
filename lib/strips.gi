@@ -1332,7 +1332,7 @@ InstallMethod(
                 Info( InfoSBStrips, 2, "Examining strip: ", String( strip ) );
                 Info( InfoSBStrips, 2, "This strip has finite syzygy type." );
                 Info( InfoSBStrips, 2, "The set of strings appearing as ",
-                 "summands of its first N syzygies stabilizes at N=",
+                 "summands of its first N syzygies stabilizes at index N=",
                  String( j-1 ), ", at which point it has cardinality ",
                  String( Size( old_syz_set ) ) );
                 return true;

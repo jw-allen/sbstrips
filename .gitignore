@@ -13,12 +13,14 @@ doc/*.js
 doc/*.lab
 doc/*.log
 doc/*.out
+doc/*.pdf
 doc/*.pnr
 doc/*.six
 doc/*.tex
 doc/*.toc
 doc/*.txt
+doc/*.xml
 
 dev/
 
-*.xml
+

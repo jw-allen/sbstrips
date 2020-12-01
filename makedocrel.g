@@ -39,12 +39,12 @@ files := [ "../lib/1reg.gd",
            "../lib/util.gd",
            "../lib/vertseqs.gd",
            "titlepage.xml",
-           "ch_example.xml",
-           "ch_introduction.xml",
-           "ch_qpa_utilities.xml",
-           "ch_strips_syzygies.xml",
-           "ch_misc_utilities.xml",
-           "ap_example_sbas.xml",
+           "ChExample.xml",
+           "ChIntroduction.xml",
+           "ChQpaUtilities.xml",
+           "ChStripsSyzygies.xml",
+           "ChMiscUtilities.xml",
+           "ApExampleSbas.xml",
            "sbstripsbib.xml"
           ];
 bookname := "SBStrips";

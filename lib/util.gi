@@ -239,6 +239,31 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    CollectedListElementwiseFunction,
+    "for a collected list and a function",
+    [ IsList, IsFunction ],
+    function( clist, func )
+        local
+            new,    # List variable, for the output
+            x;      # Variable, for entries of <clist>
+    
+        if not IsCollectedList( clist ) then
+            Error( "The first argument ", clist,
+             " should be a collected list!" );
+             
+        else
+            new := ShallowCopy( clist );
+            
+            for x in new do
+                x[1] := func( x[1] );
+            od;
+        
+            return new;
+        fi;
+    end
+);
+
 # Useful functions for QPA
 
 InstallMethod(
@@ -300,7 +325,7 @@ InstallMethod(
     function( alg )
         local
             1_alg,  # Multiplicative identity of <alg>
-            verts,   # Arrows of <quiv>
+            verts,  # Vertices of <quiv>
             quiv;   # Original quiver of <alg>
         
         1_alg := One( alg );
@@ -308,5 +333,26 @@ InstallMethod(
         verts := VerticesOfQuiver( quiv );
         
         return List( verts, x -> x*1_alg );
+    end
+);
+
+InstallMethod(
+    FieldOfQuiverAlgebra,
+    "for a quiver algebra",
+    [ IsQuiverAlgebra ],
+    function( alg )
+        # Accessing the components of <alg> is naughty, and may be impacted by
+        #  future updates of QPA. I therefore isolate the close dependence in
+        #  this single, easily-modified operation.
+        return alg!.LeftActingDomain;
+    end
+);
+
+InstallMethod(
+    DefiningQuiverOfQuiverAlgebra,
+    "for a quiver algebra",
+    [ IsQuiverAlgebra ],
+    function( alg )
+        return QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
     end
 );

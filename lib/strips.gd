@@ -527,3 +527,27 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##  <#/GAPDoc>
 DeclareOperation( "ModuleDataOfStrip", [ IsStripRep ] );
 DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
+
+##  <#GAPDoc Label="DocDirectSumModuleOfListOfStrips"/>
+##    <ManSection>
+##      <Meth Name="DirectSumModuleOfListOfStrips"
+##      Label="for a (flat) list of strips" Arg="list"/>
+##      <Meth Name="DirectSumModuleOfListOfStrips"
+##      Label="for a collected list of strips" Arg="clist"/>
+##      <Description>
+##        Argument (first method): <A>list</A>, a list of strips (over a common
+##        SB algebra <M>A</M>)
+##        <P />
+##        Argument (second method): <A>clist</A>, a collected list of strips
+##        (over a common SB algebra <M>A</M>)
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver representation corresponding to the direct sum of
+##        <M>A</M>-modules whose indecomposable direct summands are specified
+##        by <A>list</A> or <A>clist</A>.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "DirectSumModuleDataOfListOfStrips", [ IsList ] );
+DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );

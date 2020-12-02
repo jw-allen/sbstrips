@@ -1389,7 +1389,6 @@ InstallMethod(
             field,      # Ground field of <sba>
             gens,       # Arrow-indexed list of matrices corresponding to the
                         #  <field>-linear maps described by <strip>
-            get_field,  # Local function that obtains the ground_field of <sba>
             is_nonnull_mat,
                         # Local function, to be used to filter out matrices of
                         #  zeroes from output
@@ -1412,14 +1411,7 @@ InstallMethod(
         sba := FamilyObj( strip )!.sb_alg;
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         
-        # Accessing the components of <sba> is naughty, and may be impacted by
-        #  future updates of QPA. I therefore make it clear where the close
-        #  dependence lies.
-        get_field := function( quiver_algebra )
-            return quiver_algebra!.LeftActingDomain;
-        end;
-        
-        field := get_field( sba );
+        field := FieldOfQuiverAlgebra( sba );
         one := One( field );
         zero := Zero( field );
         
@@ -1670,4 +1662,273 @@ InstallMethod(
              );
         fi;
      end
+);
+
+InstallOtherMethod(
+    ModuleOfStrip,
+    "for (flat) lists of strips",
+    [ IsList ],
+    function( list )
+    
+        if not ( ForAll( list, IsStripRep ) ) then
+            TryNextMethod();
+            
+        else
+            return List( list, ModuleOfStrip );
+            
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    ModuleOfStrip,
+    "for collected lists of strips",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Variable, for elements of <clist>
+    
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            elts := List( clist, x -> x[1] );
+            if not ForAll( elts, IsStripRep ) then
+                TryNextMethod();
+                
+            else
+                return
+                 CollectedListElementwiseFunction( clist, ModuleOfStrip );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    DirectSumModuleDataOfListOfStrips,
+    "for a (flat) list of strips",
+    [ IsList ],
+    function( list )
+        local
+            a,          # Arrow variable
+            arrow_mat,  # Matrix variable
+            arrs,       # Arrows of <quiv>
+            C,c,        # Integer variables
+            constituent_dim_vectors,
+                        # Dimension vectors of modules associated to strips in
+                        #  <list>
+            datum,      # Entry of <data>
+            data,       # Module data of strips
+            dim_vector, # List variable, for dimension vectors
+            fam,        # Family variable
+            field,      # Ambient field of <sba>
+            gens,       # Arrow-and-matrix information of an entry of <data>
+            k,          # Integer variable, for indices of entries of <data>
+            mat,        # Matrix variable
+            output_dim_vector,
+                        # Dimension vector of output module
+            output_gens,
+                        # Arrow-and-matrix information of output
+            pad_data,   # Local function, that adds null matrices where
+                        #  necessary
+            R, r,       # Integer variables
+            quiv,       # Ground quiver of <sba>
+            sba,        # SB algebra of definition
+            sourcedim, targetdim,
+                        # Dimension of space at source/target of <a>
+            sourcepos, targetpos,
+                        # Position of source/target of <a> in <verts>
+            verts;      # Vertices of <quiv>
+
+        if IsEmpty( list ) then
+            Error( "The input list cannot be empty!" );
+        
+        elif IsCollectedList( list ) then
+            TryNextMethod();
+            
+        elif
+         not ( IsHomogeneousList( list ) and ForAll( list, IsStripRep ) )
+         then
+            Error( "The input list\n", list,
+             "\nmust be a homogeneous list of strips!" );
+             
+        else
+            data := List( list, x -> ShallowCopy( ModuleDataOfStrip( x ) ) );
+            
+            # Each constituent strip in <list> gives us three pieces of
+            #  information:
+            #
+            #    (i)   the SB algebra over which the strip is defined
+            #    (ii)  the dimension vector of the quiver representation
+            #          associated to that strip
+            #    (iii) The matrices of the nonzero linear maps in the quiver
+            #          representation associated to that strip
+            #
+            # Our task is to combine the constituent information into the
+            #  defining information of a single module, the direct sum. We
+            #  assemble this information one part at a time.
+            
+            # (i)
+            #
+            # This is easy, because all strips in strip are defined over the
+            #  same SB algebra. We can harvest it from the first strip.
+        
+            fam := FamilyObj( list[1] );
+            sba := fam!.sb_alg;
+            
+            # While we're here, harvest further information from <sba>
+            field := FieldOfQuiverAlgebra( sba );
+            quiv := DefiningQuiverOfQuiverAlgebra( sba );
+            arrs := ArrowsOfQuiver( quiv );
+            verts := VerticesOfQuiver( quiv );
+            
+            # (ii)
+            #
+            # This is also easy. We can just sum the constituent dimension
+            #  vectors.
+            
+            constituent_dim_vectors := List( data, x -> x[2] );
+            output_dim_vector := Sum( constituent_dim_vectors );
+            
+            # (iii)
+            #
+            # This is the most work. To each arrow of the quiver of <sba> we
+            #  must associate a matrix, namely the the coproduct of the con-
+            #  -stituent matrices. This entails create block-diagonal matrices.
+            #  Unfortunately, GAP does not (appear to) have methods for
+            #  creating block matrices where individual blocks have different
+            #  dimensions, so we have to do the hard work ourselves.
+            
+            # The matrices associated to arrows for each constituent strip will
+            #  be the blocks on the main block diagonal; this means that all
+            #  blocks off the main block-diagonal are certainly zero. However, 
+            #  some of the blocks on the main block-diagonal are zero too.
+            #  Before assembling the block matrix, we have to create null
+            #  matrices for arrows where necessary.
+            
+            # We write a local function to this effect.
+            
+            pad_data := function( mdos )
+            
+                # <mdos> abbreviates "module data of strip"
+                
+                local
+                    a,              # Arrow variable
+                    dim_vector,     # List variable for dimension vector
+                    gens,           # Third entry of <mdos>, the arrow-indexed
+                                    #  list of matrices.
+                    present_arrows, # Arrows present in <gens>
+                    sourcepos, targetpos,
+                                    # Position in <verts> of the source/target
+                                    #  vertex of <a>
+                    sourcedim, targetdim;
+                                    # Dimension of space at the source/target
+                                    #  of <a>
+                    
+                dim_vector := mdos[2];
+                mdos[3] := ShallowCopy( mdos[3] );
+                gens := mdos[3];
+                present_arrows := List( gens, x -> x[1] );
+                
+                for
+                 a in Filtered( arrs, x -> not String( x ) in present_arrows )
+                 do
+                    sourcepos := Position( verts, SourceOfPath( a ) );
+                    targetpos := Position( verts, TargetOfPath( a ) );
+                    
+                    sourcedim := dim_vector[ sourcepos ];
+                    targetdim := dim_vector[ targetpos ];
+                    
+                    Add(
+                     gens,
+                     [ String( a ), NullMat( sourcedim, targetdim, field ) ]
+                     );
+                od;
+            end;
+            
+            # We apply the local function
+            
+            for k in [ 1 .. Length( data ) ] do
+                pad_data( data[k] );
+            od;
+            
+            # We work arrow by arrow, assembling block matrices.
+            
+            output_gens := [];
+            
+            for a in arrs do
+                # We create a placeholder matrix <mat>, initially null
+                sourcepos := Position( verts, SourceOfPath( a ) );
+                targetpos := Position( verts, TargetOfPath( a ) );
+                
+                sourcedim := output_dim_vector[ sourcepos ];
+                targetdim := output_dim_vector[ targetpos ];
+                
+                mat := NullMat( sourcedim, targetdim, field );
+                
+                # Next, we work constituent by constituent, overwriting entries
+                #  of <mat> with the entries of the matrix associated to <a> by
+                #  that constituent.
+                
+                R := 0;
+                C := 0;
+                
+                for k in [ 1 .. Length( data ) ] do
+                    datum := data[k];
+                    dim_vector := datum[2];
+                    sourcedim := dim_vector[ sourcepos ];
+                    targetdim := dim_vector[ targetpos ];
+                    gens := datum[3];
+                    arrow_mat := First( gens, x -> x[1] = String( a ) )[2];
+                    
+                    for r in [ 1 .. Length( arrow_mat ) ] do
+                        for c in [ 1 .. Length( arrow_mat[r] ) ] do
+                            mat[ R+r ][ C+c ] := arrow_mat[r][c];
+                        od;
+                    od;
+                    
+                    R := R + sourcedim;
+                    C := C + targetdim;
+                od;
+                
+                Add( output_gens, [ String( a ), mat ] );
+            od;
+            
+            return Immutable( [ sba, output_dim_vector, output_gens ] );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    DirectSumModuleDataOfListOfStrips,
+    "for a collected list of strips",
+    [ IsList ],
+    function( clist )
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            # Uncollect <clist> and then delegate to the (flat) list method for
+            #  <DirectSumModuleDataOfListOfStrips>
+            return DirectSumModuleDataOfListOfStrips( Uncollected( clist ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    DirectSumModuleOfListOfStrips,
+    "for a (flat) or collected list of strips",
+    [ IsList ],
+    function( list )
+        # Delegate to <DirectSumModuleDataOfListOfStrips> for all the hard
+        #  work. It has one method for (flat) lists and one for collected
+        #  lists. It will pick the appropriate method to treat <list>, and will
+        #  also be able to check that <list> is valid input and is able to test
+        #  them for validity.
+        
+        return CallFuncList(
+         RightModuleOverPathAlgebra,
+         DirectSumModuleDataOfListOfStrips( list )
+         );
+    end
 );

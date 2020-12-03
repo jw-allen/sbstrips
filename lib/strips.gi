@@ -1932,3 +1932,13 @@ InstallMethod(
          );
     end
 );
+
+InstallOtherMethod(
+    DirectSumModuleOfListOfStrips,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        # Make <strip> into a one-entry list
+        return DirectSumModuleOfListOfStrips( [ strip ] );
+    end
+);

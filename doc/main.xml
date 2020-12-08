@@ -24,6 +24,19 @@
 \tikzset{>=to}
 
 \DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\modules}{mod}
+\DeclareMathOperator{\PP}{\mathbb{P}}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\rep}{rep}
+\DeclareMathOperator{\syzygy}{\Omega}
+
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\ideal}{\trianglelefteq}
+\newcommand{\Modcat}{\Mod\text{-}}
+\newcommand{\modcat}{\modules\text{-}}
 "?>
 
 <Book Name="SBStrips">
@@ -69,7 +82,9 @@
         Worked example
       </Heading>
     
-      Many people learn by doing. This chapter is for those people, as are the exercises in Appendix [ADD REFERENCE] (and their solutions in [ADD REFERENCE]).
+      Many people learn by doing. This chapter is for those people, as are the
+      exercises in Appendix [ADD REFERENCE] (and their solutions in
+      [ADD REFERENCE]).
       <P />
       
       In this chapter, we demonstrate the &SBStrips; package. We also give some commentary.
@@ -77,6 +92,14 @@
       <#Include Label="ChapExample">
     </Chapter>
 
+
+    <Chapter>
+      <Heading>
+        Mathematical background
+      </Heading>
+      
+      <#Include Label="ChapMathsBackground">
+    </Chapter>
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
 |   Strips and syzygies                                                       |

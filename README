@@ -1,10 +1,10 @@
 +--------------------------------------------------------+--------------------+
 |                                                        | Copyright (C) 2020 |
-|                   SBStrips  (v0.6.0)                   |          Joe Allen |
+|                   SBStrips  (v0.6.1)                   |          Joe Allen |
 |                                                        |       [he/him/his] |
 +--------------------------------------------------------+--------------------+
 
-This is the README file for SBStrips (v0.6.0), which is a package for GAP 4.11.
+This is the README file for SBStrips (v0.6.1), which is a package for GAP 4.11.
 
 +--+ About +------------------------------------------------------------------+
 The SBStrips package models 'strings', namely the decorated graphs used in
@@ -15,7 +15,8 @@ one-to-many operation on strings. The SBStrips package implements 'strings' as
 a data structure called 'strips', and performs this syzygy calculation.
 
 The SBStrips package is designed for version >=4.11.x of GAP, requiring version
->=1.30.x of QPA. (QPA is another package for GAP.)
+>=1.30.x of QPA and version >=1.6.x of GAPDoc. (QPA and GAPDoc are other
+packages for GAP.)
 
 The SBStrips package is being written by me, Joe Allen, during my doctoral
 studies at the University of Bristol. In my thesis, I am developing a
@@ -27,9 +28,9 @@ The SBStrips can be installed by following these steps (assuming you already
 have GAP installed.)
 
     1. Download the archive file 
-            sbstrips/archive/v0.6.0.tar.gz
+            sbstrips/archive/v0.6.1.tar.gz
        from
-            https://github.com/jw-allen/sbstrips/archive/v0.6.0.tar.gz
+            https://github.com/jw-allen/sbstrips/archive/v0.6.1.tar.gz
         
     2. Unpack it into your  pkg  directory. It should create a subdirectory
        called  sbstrips.
@@ -50,6 +51,9 @@ This version of SBStrips includes the following files
         
     PackageInfo.g
         Meta-information about this package
+        
+    makedocrel.g
+        Code to (re)generate the documentation
         
     README
         This file!

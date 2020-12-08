@@ -82,12 +82,8 @@
         Worked example
       </Heading>
     
-      Many people learn by doing. This chapter is for those people, as are the
-      exercises in Appendix [ADD REFERENCE] (and their solutions in
-      [ADD REFERENCE]).
-      <P />
-      
-      In this chapter, we demonstrate the &SBStrips; package. We also give some commentary.
+      Many people learn by doing. This chapter is for them. Here, we provide a
+      guided tour of the the &SBStrips; package together with commentary.
     
       <#Include Label="ChapExample">
     </Chapter>

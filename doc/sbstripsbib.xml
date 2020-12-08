@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE file SYSTEM "bibxmlext.dtd">
 <file>
-  <entry id="All21"><phdthesis>
+  <entry id="All21"><misc>
     <author>
       <name><first>Joe</first><last>Allen</last></name>
     </author>
     <title>
-      PhD thesis (title TBC)
+      Ph<C>D</C> thesis
     </title>
-    <school>
-      School of Mathematics, University of Bristol
-    </school>
-    <year>
-      expected 2021
-    </year>
-    <note>Work in progress</note>
-  </phdthesis></entry>
+    <note>
+      Work in progress
+    </note>
+  </misc></entry>
   
   <entry id="ASS06"><book>
     <author>
@@ -40,6 +36,125 @@
       London Mathematical Society student texts
     </series>
   </book></entry>
+
+  <entry id="Ben95"><book>
+    <author>
+      <name><first>D J</first> <last>Benson</last></name>
+    </author>
+    <title>
+      Representations and Cohomology, I: Basic representation theory of finite
+      groups and associative algebras
+    </title>
+    <publisher>
+      Cambridge University Press
+    </publisher>
+    <year>
+      1995
+    </year>
+    <number>
+      30
+    </number>
+    <series>
+      Cambridge Studies in Advanced Mathematics
+    </series>
+  </book></entry>
+
+  <entry id="Dro80"><inproceedings>
+    <author>
+      <name><first>J A</first> <last>Drozd</last></name>
+    </author>
+    <title>
+      Tame and wild matrix problems
+    </title>
+    <booktitle>
+      Representation Theory II
+    </booktitle>
+    <publisher>
+      Springer, Berlin, Heidelberg
+    </publisher>
+    <year>
+      1980
+    </year>
+    <editor>
+      <name><first>P</first> <last>Gabriel</last></name>
+      <name><first>V</first> <last>Dlab</last></name>
+    </editor>
+    <volume>
+      832
+    </volume>
+    <series>
+      Lecture Notes in Mathematics
+    </series>
+    <pages>
+      242-258
+    </pages>   
+  </inproceedings></entry>
+
+  <entry id="GalPhD"><misc>
+    <author>
+      <name><first>Julia</first> <last>Galstad</last></name>
+    </author>
+    <title>
+      Ph<C>D</C> thesis
+    </title>
+    <note>
+      Work in progress
+    </note>
+  </misc></entry>
+
+  <entry id="GHZ98"><inproceedings>
+    <author>
+      <name><first>K R</first> <last>Goodearl</last></name>
+      <name><first>B</first> <last>Huisgen-Zimmermann</last></name>
+    </author>
+    <title>
+      Repetitive resolutions over classical orders and finite dimensional algebras
+    </title>
+    <booktitle>
+      Algebras and modules II: Eighth International Conference on Representations of Algebras, August 4-10, 1996, Geiranger, Norway
+    </booktitle>
+    <publisher>
+      Canadian Mathematical Society
+    </publisher>
+    <year>
+      1996
+    </year>
+    <editor>
+      <name><first>Idun</first> <last>Reiten</last></name>
+      <name><first>Sverre O</first> <last>Smalo</last></name>
+      <name><first>Oyvind</first> <last>Solberg</last></name>
+    </editor>
+    <volume>
+      24
+    </volume>
+    <series>
+      CMS Conference Proceedings
+    </series>
+    <pages>
+      205-226
+    </pages>
+  </inproceedings></entry>
+
+  <entry id="HZ16"><article>
+    <author>
+      <name><first>Birge</first> <last>Huisgen-Zimmermann</last></name>
+    </author>
+    <title>
+      Representation-tame algebras need not be homologically tame
+    </title>
+    <journal>
+      Algebras and Representation Theory
+    </journal>
+    <year>
+      2016
+    </year>
+    <volume>
+      19
+    </volume>
+    <pages>
+      943-956
+    </pages>
+  </article></entry>
 
   <entry id="LM04"><article>
     <author>
@@ -82,6 +197,46 @@
       </URL>
     </note>
   </manual></entry>
+  
+  <entry id="Ric19"><article>
+    <author>
+      <name><first>Jeremy</first> <last>Rickard</last></name>
+    </author>
+    <title>
+      Unbounded derived categories and the finitistic dimension conjecture
+    </title>
+    <journal>
+      Advances in Mathematics
+    </journal>
+    <year>
+      2019
+    </year>
+    <volume>
+      354
+    </volume>
+  </article></entry>
+
+  <entry id="WW85"><article>
+    <author>
+      <name><first>Burkhard</first> <last>Wald</last></name>
+      <name><first>Josef</first> <last>Waschbüsch</last></name>
+    </author>
+    <title>
+      Tame biserial algebras
+    </title>
+    <journal>
+      Journal of Algebra
+    </journal>
+    <year>
+      1985
+    </year>
+    <volume>
+      95
+    </volume>
+    <pages>
+      480-500
+    </pages>
+  </article></entry>
   
   <entry id="ZH91"><article>
     <author>

@@ -113,7 +113,7 @@ DeclareAttribute( "CollectedLength", IsList );
 ##        If <A>clist</A> contains entries with matching first entries, say
 ##        <C>[ obj, n ]</C> and <C>[ obj, m ]</C>, then it will combine them
 ##        into a single entry <C>[ obj, n+m ]</C> with totalised multiplicity.
-##        This can be necessary when dealing with concatenations (<Ref
+##        This can be necessary when dealing with concatenations (see <Ref
 ##        Func="Concatenation" BookName="Reference"/>) of collected lists.
 ##      </Description>
 ##    </ManSection>
@@ -184,8 +184,7 @@ DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 ##    <ManSection>
 ##      <Oper Name="ArrowsOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -200,8 +199,7 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##    <ManSection>
 ##      <Oper Name="VerticesOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -216,8 +214,7 @@ DeclareOperation( "VerticesOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##    <ManSection>
 ##      <Oper Name="FieldOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -231,8 +228,7 @@ DeclareOperation( "FieldOfQuiverAlgebra", [ IsQuiverAlgebra ]  );
 ##    <ManSection>
 ##      <Oper Name="DefiningQuiverOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>

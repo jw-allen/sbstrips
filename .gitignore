@@ -21,6 +21,8 @@ doc/*.toc
 doc/*.txt
 doc/*.xml
 
+**.pdf
+
 dev/
 
 

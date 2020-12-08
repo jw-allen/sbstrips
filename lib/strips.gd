@@ -37,11 +37,11 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        The first method is intended for specifying arbitrary string( graphs)
-##        over a SB algebra to &GAP;. The second method is intended for
-##        specifying those string( graph)s where all arrows point in the same
-##        direction. This includes the vacuous case where the string (graph)
-##        has no arrows.
-##
+##        over a SB algebra to &GAP;. The second method is more specialized,
+##        being intended for specifying those string( graph)s where all arrows
+##        point in the same direction. This includes the vacuous case where the
+##        string (graph) has no arrows.
+##        <P /> 
 ##        For the first method, suppose you draw your string graph on the page
 ##        as a linear graph with some arrows pointing to the right (the
 ##        "positive" direction) and some to the left (the "negative"
@@ -64,7 +64,7 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##        doesn't think they do, then it will throw up an Error message.
 ##        <P />
 ##        For the second method, &SBStrips; directly infers the string (graph)
-##        and the SB algebra directly from <A>path</A>
+##        and the SB algebra directly from <A>path</A>.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>

@@ -1,13 +1,11 @@
 <#GAPDoc Label="TitlePage">
 
 <Title>
-  <Package>
-    SBStrips
-  </Package>
+  &SBStrips;
 </Title>
 
 <Version>
-  Version 0.6.0
+  Version &VERSION;
 </Version>
 
 <TitleComment>
@@ -43,8 +41,8 @@
   I thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
   early iterations of &SBStrips;, for his time and his comments. This package
   was much worse before his feedback. I also thank my fellow members of "Team
-  Splendid" -- Charley Cummings, Luke Kershaw and Dr Simon Peacock -- for
-  countless engaging conversations about representation theory, programming
+  Splendid" -- namely Charley Cummings, Luke Kershaw and Dr Simon Peacock --
+  for countless engaging conversations about representation theory, programming
   and much else besides.
   <P />
   

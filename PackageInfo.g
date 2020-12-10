@@ -6,7 +6,7 @@ SetPackageInfo( rec(
  
  Version := "v0.6.0",
  
- Date := "05/11/2020",
+ Date := "26/11/2020",
  
  License := "GPL-2.0-or-later",
  
@@ -18,7 +18,7 @@ SetPackageInfo( rec(
    IsMaintainer := true,
    Email := Concatenation( [
     "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk" 
-    ]),
+    ] ),
    WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
    PostalAddress := Concatenation( [
     "School of Mathematics,\n",
@@ -57,13 +57,15 @@ SetPackageInfo( rec(
   "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
 
  AbstractHTML :=
-  "The <span class=\"pkgname\">SBstrips</span> package models 'strings' -- \
-the decorated graphs used in representation theory. These graphs are known \
-to describe a type of module for a special biserial algebra called a string \
-module. The syzygy of a string module is a direct sum of string modules; \
-hence syzygy-taking is essentially a one-to-many operation on strings. \
-<span class=\"pkgname\">SBstrips</span> package implements 'strings' as a \
-data structure called 'strips', and performs this syzygy calculation.",
+  "String modules for special biserial (SB) algebras are represented by string\
+ graphs. The syzygy of a string module (over an SB algebra) is a direct sum of\
+ string modules, by a 2004 result of Liu and Morin, therefore syzygy-taking\
+ can be performed at the (combinatorial) level of string graphs rather than\
+ the (homological-algebraic) level of modules. This package represents string\
+ graphs in <span class=\"pkgname\">GAP</span> by objects called strips and it\
+ implements syzygy-taking as an operation on them. Together with some\
+ utilities for book-keeping, it allows for very efficient calculation of Kth\
+ syzygyies for large K.",
  
  PackageDoc := rec(
    BookName := "SBStrips",

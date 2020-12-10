@@ -29,21 +29,31 @@ LoadPackage("GAPDoc");
 
 path := "/proc/cygdrive/C/Users/Joe/Documents/GitHub/pkg/sbstrips/doc";
 main := "main.xml";
-files := [ "../lib/1reg.gd", "../lib/overquiver.gd", "../lib/panels.gd",
-     "../lib/patchreps.gd", "../lib/permdata.gd", "../lib/strips.gd",
-     "../lib/syllables.gd", "../lib/util.gd", "../lib/vertseqs.gd",
-     "titlepage.xml", "ch_discrete_model.xml", "ch_example.xml",
-     "ch_introduction.xml", "ch_patches.xml", "ch_permissible_data.xml",
-     "ch_quiver_utilities_overquiver.xml", "ch_strips_syzygies.xml",
-     "ch_syllables.xml", "ch_utilities.xml", "ch_vis_encodings.xml",
-     "ap_example_sbas.xml",
-     "sbstripsbib.xml" ];
+files := [ "../lib/1reg.gd",
+           "../lib/info.gd",
+           "../lib/overquiver.gd",
+           "../lib/patchreps.gd",
+           "../lib/permdata.gd",
+           "../lib/strips.gd",
+           "../lib/syllables.gd",
+           "../lib/util.gd",
+           "../lib/vertseqs.gd",
+           "titlepage.xml",
+           "ChExample.xml",
+           "ChIntroduction.xml",
+           "ChMathematicalBackground.xml",
+           "ChQpaUtilities.xml",
+           "ChStripsSyzygies.xml",
+           "ChMiscUtilities.xml",
+           "ApExampleSbas.xml",
+           "sbstripsbib.xml"
+          ];
 bookname := "SBStrips";
 
-MakeGAPDocDoc(path, main, files, bookname, relpath, "MathJax");
+MakeGAPDocDoc( path, main, files, bookname, relpath, "MathJax" );
 
-# make HTML versions look nicer
+# This makes HTML versions look nicer
 CopyHTMLStyleFiles( "Documents/GitHub/pkg/sbstrips/doc/" );
 
-# compatibility with old style package manuals
+# This affords compatibility with old style package manuals
 GAPDocManualLab( "SBStrips" );

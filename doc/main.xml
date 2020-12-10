@@ -2,15 +2,18 @@
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 + Documentation for the SBStrips package of GAP, written by Joe Allen as part +
-+ of his PhD thesis.                                                          +
++ of his PhD studies.                                                         +
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 <!DOCTYPE Book SYSTEM "gapdoc.dtd"
   [ <!ENTITY fail "<K>fail</K>">
     <!ENTITY false "<K>false</K>">
+    <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
+    <!ENTITY GBNP "<Package>GBNP</Package>">
     <!ENTITY QPA "<Package>QPA</Package>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">
+    <!ENTITY VERSION "0.6.1">
     ]
   >
 
@@ -22,6 +25,19 @@
 \tikzset{>=to}
 
 \DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Mod}{Mod}
+\DeclareMathOperator{\modules}{mod}
+\DeclareMathOperator{\PP}{\mathbb{P}}
+\DeclareMathOperator{\Rep}{Rep}
+\DeclareMathOperator{\rep}{rep}
+\DeclareMathOperator{\syzygy}{\Omega}
+
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\ideal}{\trianglelefteq}
+\newcommand{\Modcat}{\Mod\text{-}}
+\newcommand{\modcat}{\modules\text{-}}
 "?>
 
 <Book Name="SBStrips">
@@ -50,7 +66,9 @@
 |   Introduction                                                              |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <Chapter>
-      <Heading>Introduction</Heading>
+      <Heading>
+        Introduction
+      </Heading>
       
       <#Include Label="ChapIntroduction">
     </Chapter>
@@ -59,14 +77,26 @@
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
 |   Worked example                                                            |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
     <Chapter>
       <Heading>
         Worked example
       </Heading>
     
+      Many people learn by doing. This chapter is for them. Here, we provide a
+      guided tour of the the &SBStrips; package together with commentary.
+    
       <#Include Label="ChapExample">
     </Chapter>
 
+
+    <Chapter>
+      <Heading>
+        Mathematical background
+      </Heading>
+      
+      <#Include Label="ChapMathsBackground">
+    </Chapter>
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
 |   Strips and syzygies                                                       |
@@ -79,108 +109,34 @@
 
       <#Include Label="ChapStripsSyzygies">
     </Chapter>
-
-
-<!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|                                                                             |
-+                              UNDER THE SURFACE                              +
-|                                                                             |
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+ -->
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Discrete model for SB algebras and their string modules                   |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Discrete model for SB algebras and their string modules
-      </Heading>
-      
-      <#Include Label="ChapDiscreteModel">
-      
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Quiver utilities and the overquiver of a SB algebra                       |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <Chapter>
-      <Heading>
-        Quiver utilities and the overquiver of a SB algebra
-      </Heading>
-      
-      <#Include Label="ChapQuiverUtilitiesOverquiver">
-      
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Permissible data of a SB algebra                                          |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     
-    <Chapter>
-      <Heading>
-        Permissible data of a SB algebra
-      </Heading>
-      
-      <#Include Label="ChapPermissibleData">
-    </Chapter>
-
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Vertex-indexed sequences and encodings of permissible data                |
+|   QPA utilities                                                             |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <Chapter>
       <Heading>
-        Vertex-indexed sequences and encodings of permissible data
+        &QPA; utilities
       </Heading>
       
-      <#Include Label="ChapVISEncodings">
+      <#Include Label="ChapQPAUtilities">
     </Chapter>
 
 
 <!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Syllables                                                                 |
+|   Miscellaneous utilities                                                   |
 + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
     <Chapter>
       <Heading>
-        Syllables
+        Miscellaneous utilities
       </Heading>
       
-      <#Include Label="ChapSyllables">
+      <#Include Label="ChapMiscUtilities">
     </Chapter>
 
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Patches                                                                   |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Patches
-      </Heading>
-      
-      <#Include Label="ChapPatches">
-    </Chapter>
-
-
-<!--  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - + 
-|   Utilities                                                                 |
-+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-
-    <Chapter>
-      <Heading>
-        Utilities
-      </Heading>
-      
-      <#Include Label="ChapUtilities">
-    </Chapter>
   </Body>
-
-
 
 <!--  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                                                                             |

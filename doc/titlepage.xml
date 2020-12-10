@@ -1,11 +1,11 @@
 <#GAPDoc Label="TitlePage">
 
 <Title>
-  <Package>SBStrips</Package>
+  &SBStrips;
 </Title>
 
 <Version>
-  Version 0.6.0
+  Version &VERSION;
 </Version>
 
 <TitleComment>
@@ -14,30 +14,36 @@
 </TitleComment>
 
 <Author>
-  Joe Allen
+  Joe Allen (he/him/his)
 </Author>
 
 <Abstract>
-  We implement a discrete model of special biserial algebras and, more to the
-  point, their string modules. We represent string modules using new objects
-  that we call <E>strips</E>. Using these, we efficiently calculate syzygies of
-  string modules in terms of the strips that represent them.
+  String modules for special biserial (SB) algebras are represented by string
+  graphs. The syzygy of a string module (over an SB algebra) is a direct sum of
+  string modules, by a 2004 result of Liu and Morin, therefore syzygy-taking
+  can be performed at the (combinatorial) level of string graphs rather than
+  the (homological-algebraic) level of modules.
   <P />
-
-  This package builds on, an interfaces with, the &QPA; package.
   
-  This package was created as part of the author's PhD thesis.
+  This package represents string graphs in &GAP; by objects called strips and
+  it implements syzygy-taking as an operation on them. Together with some
+  utilities for book-keeping, it allows for very efficient calculation of
+  <M>k</M>th syzygyies for large <M>k</M>.
+  <P />
 </Abstract>
 
 <Copyright>
-  Joe Allen &copyright; 2020
+  &copyright; 2020 Joe Allen
 </Copyright>
 
 
 <Acknowledgements>
   I thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
   early iterations of &SBStrips;, for his time and his comments. This package
-  was much worse before his feedback.
+  was much worse before his feedback. I also thank my fellow members of "Team
+  Splendid" -- namely Charley Cummings, Luke Kershaw and Dr Simon Peacock --
+  for countless engaging conversations about representation theory, programming
+  and much else besides.
   <P />
   
   Additionally, I received help understanding <Package>GAPDoc</Package> from
@@ -45,4 +51,9 @@
   <F>makedocrel.g</F> file included in this package. I am grateful to them
   both.
 </Acknowledgements>
+
+<Colophon>
+  This package was created during the author's doctoral studies at the
+  University of Bristol.
+</Colophon>
 <#/GAPDoc>

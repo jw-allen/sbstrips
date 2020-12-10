@@ -1,6 +1,7 @@
 doc/*.aux
 doc/*.bbl
 doc/*.bib
+doc/*.blg
 doc/*.brf
 doc/*.css
 doc/*.html
@@ -10,14 +11,17 @@ doc/*.ilg
 doc/*.ind
 doc/*.js
 doc/*.lab
-doc/*.tex
+doc/*.log
 doc/*.out
-doc/*.blg
+doc/*.pdf
 doc/*.pnr
 doc/*.six
-doc/*.txt
-doc/*.log
+doc/*.tex
 doc/*.toc
+doc/*.txt
+doc/*.xml
+
+**.pdf
 
 doc/main.pdf
 

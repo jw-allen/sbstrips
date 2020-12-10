@@ -3,7 +3,6 @@ ReadPackage( "sbstrips", "lib/info.gi" );
 ReadPackage( "sbstrips", "lib/makedoc.gi" );
 ReadPackage( "sbstrips", "lib/overquiver.gi" );
 ReadPackage( "sbstrips", "lib/patchreps.gi" );
-ReadPackage( "sbstrips", "lib/panels.gi" );
 ReadPackage( "sbstrips", "lib/permdata.gi" );
 ReadPackage( "sbstrips", "lib/strips.gi" );
 ReadPackage( "sbstrips", "lib/syllables.gi" );

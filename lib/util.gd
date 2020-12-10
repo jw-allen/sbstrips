@@ -113,7 +113,7 @@ DeclareAttribute( "CollectedLength", IsList );
 ##        If <A>clist</A> contains entries with matching first entries, say
 ##        <C>[ obj, n ]</C> and <C>[ obj, m ]</C>, then it will combine them
 ##        into a single entry <C>[ obj, n+m ]</C> with totalised multiplicity.
-##        This can be necessary when dealing with concatenations (<Ref
+##        This can be necessary when dealing with concatenations (see <Ref
 ##        Func="Concatenation" BookName="Reference"/>) of collected lists.
 ##      </Description>
 ##    </ManSection>
@@ -134,6 +134,21 @@ DeclareOperation( "Recollected", [ IsList ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "Uncollected", [ IsList ] );
+
+##  <#GAPDoc Label="DocCollectedListElementwiseFunction">
+##    <ManSection>
+##      <Oper Name="CollectedListElementwiseFunction" Arg="clist, func"/>
+##      <Description>
+##        Arguments: <A>clist</A>, a collected list; <A>func</A>, a function
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a new collected list, obtained from <A>clist</A> by applying
+##        <A>func</A> to each element
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 
 
 ##  For QPA
@@ -169,8 +184,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##    <ManSection>
 ##      <Oper Name="ArrowsOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -185,8 +199,7 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##    <ManSection>
 ##      <Oper Name="VerticesOfQuiverAlgebra" Arg="alg"/>
 ##      <Description>
-##        Argument: <A>alg</A>, a quiver algebra (see <Ref
-##        Filt="IsQuiverAlgebra" BookName="QPA"/>)
+##        Argument: <A>alg</A>, a quiver algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -196,3 +209,36 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "VerticesOfQuiverAlgebra", [ IsQuiverAlgebra ] );
+
+##  <#GAPDoc Label="DocFieldOfQuiverAlgebra">
+##    <ManSection>
+##      <Oper Name="FieldOfQuiverAlgebra" Arg="alg"/>
+##      <Description>
+##        Argument: <A>alg</A>, a quiver algebra
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the field of definition of <A>alg</A>
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "FieldOfQuiverAlgebra", [ IsQuiverAlgebra ]  );
+
+##  <#GAPDoc Label="DocDefiningQuiverOfQuiverAlgebra">
+##    <ManSection>
+##      <Oper Name="DefiningQuiverOfQuiverAlgebra" Arg="alg"/>
+##      <Description>
+##        Argument: <A>alg</A>, a quiver algebra
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver of definition of <A>alg</A>
+##      </Returns>
+##      <Description>
+##        This single operation performs <Ref Attr="OriginalPathAlgebra"
+##        BookName="QPA"/> and then <Ref Attr="QuiverOfPathAlgebra"
+##        BookName="QPA"/>
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "DefiningQuiverOfQuiverAlgebra", [ IsQuiverAlgebra ] );

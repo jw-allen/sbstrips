@@ -1,5 +1,6 @@
 doc/*.aux
 doc/*.bbl
+doc/*.bib
 doc/*.brf
 doc/*.css
 doc/*.html

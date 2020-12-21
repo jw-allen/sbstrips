@@ -237,21 +237,45 @@ InstallMethod(
     function( quiver )
         local
             func,       # Function variable
-            orig_quiv;  # Quiver of which <quiver> is the 2-reg augmentation
+            orig_quiv,  # Quiver of which <quiver> is the 2-reg augmentation
+            ret;        # Retraction function
 
         if HasRetractionOf2RegAugmentation( quiver ) then
             return RetractionOf2RegAugmentation( quiver );
+            
+        # If the opposite quiver of <quiver> has a retraction map, then the
+        #  hard work is already done. We need only "conjugate" by
+        #  <OppositePath> (and add a few minor tweaks).
+        elif HasRetractionOf2RegAugmentation( OppositeQuiver( quiver ) ) then
+            orig_quiv := OriginalSBQuiverOf2RegAugmentation( quiver );
+            ret := RetractionOf2RegAugmentation( OppositeQuiver( quiver ) );
+            
+            func := function( path )
+            
+                if IsZeroPath( path ) then
+                    return Zero( orig_quiv );
+                    
+                elif IsZeroPath( ret( OppositePath( path ) ) ) then
+                    return Zero( orig_quiv );
+                    
+                else
+                    return OppositePath( ret( OppositePath( path ) ) );
+                fi;
+            end;
+            
+            return func;
 
         # Test validity of <quiver>; if found wanting then return a function
         #  that returns a warning message each time, alongside <fail>
         elif not Is2RegAugmentationOfQuiver( quiver ) then
-            Print( "The given quiver\n", quiver, "\nhas not been constructed \
-             using the <2RegAugmentationOfQuiver> operation.\n");
+            Print( "The given quiver\n", quiver, "\nhas not been constructed ",
+             " using the <2RegAugmentationOfQuiver> operation.\n");
 
              func := function( input )
-                Print( "You are calling the retraction of a 2-regular augmenta\
-                 tion map that doesn't exist; something's gone wrong! Please \
-                 contact the maintainer of the sbstrips package.\n" );
+                Print( "You are calling the retraction of a 2-regular ",
+                 "augmentation map that doesn't exist; something's gone ",
+                 "wrong! Please contact the maintainer of the sbstrips ",
+                 "package.\n" );
                 return fail;
              end;
 
@@ -265,11 +289,13 @@ InstallMethod(
 
                 # Check input
                 if not path in quiver then
-                    Error( "The given path\n", path, "\n does not belong to \
-                     the 2-regular augmentation\n", quiver );
+                    Error( "The given path\n", path, "\n does not belong to ",
+                     "the 2-regular augmentation\n", quiver );
 
                 # Zero or trivial paths know which ground path they lift
-                elif ( path = Zero( quiver ) ) or ( IsQuiverVertex( path ) ) then
+                elif
+                 ( path = Zero( quiver ) ) or ( IsQuiverVertex( path ) )
+                 then
                     return path!.2RegAugPathOf;
 
                 # Paths of positive lengths have walks, each constituent arrow

@@ -97,3 +97,18 @@ DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 ##  </ManSection>
 ##  <#/GAPDoc>  
 DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
+
+##  <#GAPDoc Label="DocIs2RegQuiver">
+##  <ManSection>
+##    <Prop Name="Is2RegQuiver" Arg="quiver"/>
+##    <Description>
+##      Argument: <A>quiver</A>, a quiver
+##      <Br />
+##    </Description>
+##    <Returns>
+##      either <C>true</C> or <C>false</C>, depending on whether or not
+##      <A>quiver</A> is <M>2</M>-regular.
+##    </Returns>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "Is2RegQuiver", IsQuiver );

@@ -329,6 +329,20 @@ InstallMethod(
 
         if HasCompatibleTrackPermutationOfSBAlg( sba ) then
             return CompatibleTrackPermutationOfSBAlg( sba );
+            
+        elif
+         HasCompatibleTrackPermutationOfSBAlg( OppositePathAlgebra( sba ) )
+         then
+            list := CompatibleTrackPermutationOfSBAlg(
+             OppositePathAlgebra( sba )
+             );
+             
+            return Immutable(
+             List(
+              list,
+              x -> Reversed( List( x, OppositePath ) )
+              )
+             );
 
         else
             # Write local function that turns a path of the 2-regular

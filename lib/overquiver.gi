@@ -407,94 +407,139 @@ InstallMethod(
             overts,         # Vertices of <oquiv>
             out_arr_pos,    # Local function
             part,           # Compatible track permutation of <sba>
-            ret;            # Retraction of <2reg> to <ground_quiv>
+            ret,            # Retraction of <2reg> to <ground_quiv>
+            v;              # Vertex variable
+            
         if HasOverquiverOfSBAlg( sba ) then
             return OverquiverOfSBAlg( sba );
 
+        # The first step is to create a new quiver object <oquiv>. The second
+        #  step is to enter information into that quiver.
+        # If the opposite path algebra of <sba> already has an overquiver, then
+        #  we can save much hard work by dualising (or rather "opposite-ing")
+        #  information from that overquiver.
+
         else
-            part := CompatibleTrackPermutationOfSBAlg( sba );
-            N := Length( part );
-
-            ground_quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
-            2reg := 2RegAugmentationOfQuiver( ground_quiv );
-            2reg_arrs := ArrowsOfQuiver( 2reg );
-            ret := RetractionOf2RegAugmentation( 2reg );
-
-            # Vertices of overquiver correspond to entries of <part>. For
-            #  convenience, entries of <part> will be identified with their
-            #  indices
-
-            # <arr> is the incoming arrow in some path in <part>. Write a local
-            #  function finding the entry index of that path in <part>
-            in_arr_pos := function( arr )
-                local
-                    k;  #integer variable
-                k := 1;
-                for k in [1..Length( part )] do
-                    if part[k][1] = arr then
-                        return k;
-                    else
-                        k := k + 1;
-                    fi;
-                od;
-            end;
-
-            # Similarly but for outcoming arrow
-            out_arr_pos := function( arr )
-                local
-                    k;  # integer variable
-                k := 1;
-                for k in [1..Length( part )] do
-                    if part[k][2] = arr then
-                        return k;
-                    else
-                        k := k + 1;
-                    fi;
-                od;
-            end;
-
-            # Write function that names lifts of arrows
-            oarr_str := function( arr )
-                return Concatenation( [ String( arr ), "_over" ] );
-            end;
-
-            # Arrows of <2reg> lift to arrows of the overquiver. An arrow <a>
-            #  points from [?,a] to [a,?] (or, rather, the vertices
-            #  corresponding to those length 2 paths)
-
-            arr_data := [];
-            for a in 2reg_arrs do
-                Append( arr_data,
-                 [ [ out_arr_pos( a ), in_arr_pos( a ), oarr_str( a ) ] ]
+            # In this case, the opposite path algebra of <sba> already has an
+            #  overquiver.
+            if HasOverquiverOfSBAlg( OppositePathAlgebra( sba ) ) then
+                # Creating a new quiver object is straightforward.
+                oquiv := OppositeQuiver(
+                 OverquiverOfSBAlg( OppositePathAlgebra( sba ) )
                  );
-            od;
-
-            # Create overquiver <oquiv>
-            oquiv := Quiver( N, arr_data );
-
-            # Load vertices with data
-            k := 1;
-            overts := VerticesOfQuiver( oquiv );
-            while k <= N do
-                overts[k]!.LiftOf := TargetOfPath( part[k][1] );
-                k := k + 1;
-            od;
-
-            # Load arrows with data
-            k := 1;
-            oarrs := ArrowsOfQuiver( oquiv );
-            while k <= Length( oarrs ) do
-                oarrs[k]!.LiftOf := 2reg_arrs[k] ;
-                k := k+1;
-            od;
+                 
+                2reg := OppositeQuiver( OppositeQuiver( oquiv )!.2Reg );
             
-            # Load zero path with data
+                # Loading <oquiv> with information is straightforward.
+                SetIsOverquiver( oquiv, true );
+                SetSBAlgOfOverquiver( oquiv, sba );
+                oquiv!.2Reg := 2reg;
+                
+                for v in VerticesOfQuiver( oquiv ) do
+                    v!.LiftOf := OppositePath( OppositePath( v )!.LiftOf );
+                od;
+                
+                for a in ArrowsOfQuiver( oquiv ) do
+                    a!.LiftOf := OppositePath( OppositePath( v )!.LiftOf );
+                od;
+                
                 Zero( oquiv )!.LiftOf := Zero( 2reg );
+                
+            # In this case, we complete all the hard work.
+            else        
+                part := CompatibleTrackPermutationOfSBAlg( sba );
+                N := Length( part );
 
-            # Load quiver with data
-            SetIsOverquiver( oquiv, true );
-            SetSBAlgOfOverquiver( oquiv, sba );
-            oquiv!.2Reg := 2reg;
+                ground_quiv := QuiverOfPathAlgebra(
+                 OriginalPathAlgebra( sba )
+                 );
+                2reg := 2RegAugmentationOfQuiver( ground_quiv );
+                2reg_arrs := ArrowsOfQuiver( 2reg );
+                ret := RetractionOf2RegAugmentation( 2reg );
+
+                # Vertices of overquiver correspond to entries of <part>. For
+                #  convenience, entries of <part> will be identified with their
+                # indices.
+
+                # Any arrow <arr> of <2reg> is the incoming arrow in some path
+                #  in <part>. Write a local function finding the entry index of
+                #  that path in <part>.
+                in_arr_pos := function( arr )
+                    local
+                        k;  #integer variable
+                        
+                    k := 1;
+                    for k in [ 1 .. Length( part ) ] do
+                    
+                        if part[k][1] = arr then
+                            return k;
+                            
+                        else
+                            k := k + 1;
+                        fi;
+                    od;
+                end;
+
+                # Similarly but for outcoming arrow
+                out_arr_pos := function( arr )
+                    local
+                        k;  # integer variable
+                        
+                    k := 1;
+                    for k in [1..Length( part )] do
+                    
+                        if part[k][2] = arr then
+                            return k;
+                            
+                        else
+                            k := k + 1;
+                        fi;
+                    od;
+                end;
+
+                # Write function that names lifts of arrows
+                oarr_str := function( arr )
+                    return Concatenation( [ String( arr ), "_over" ] );
+                end;
+
+                # Arrows of <2reg> lift to arrows of the overquiver. An arrow
+                #  <a> points from [?,a] to [a,?] (or, rather, the vertices
+                #  corresponding to those paths of length 2).
+
+                arr_data := [];
+                for a in 2reg_arrs do
+                    Append( arr_data,
+                     [ [ out_arr_pos( a ), in_arr_pos( a ), oarr_str( a ) ] ]
+                     );
+                od;
+
+                # Create overquiver <oquiv>.
+                oquiv := Quiver( N, arr_data );
+                
+                # Load vertices with data
+                k := 1;
+                overts := VerticesOfQuiver( oquiv );
+                while k <= N do
+                    overts[k]!.LiftOf := TargetOfPath( part[k][1] );
+                    k := k + 1;
+                od;
+
+                # Load arrows with data
+                k := 1;
+                oarrs := ArrowsOfQuiver( oquiv );
+                while k <= Length( oarrs ) do
+                    oarrs[k]!.LiftOf := 2reg_arrs[k] ;
+                    k := k+1;
+                od;
+                
+                # Load zero path with data
+                    Zero( oquiv )!.LiftOf := Zero( 2reg );
+
+                # Load quiver with data
+                SetIsOverquiver( oquiv, true );
+                SetSBAlgOfOverquiver( oquiv, sba );
+                oquiv!.2Reg := 2reg;
+            fi;
 
             # Return <oquiv>
             return oquiv;

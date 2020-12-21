@@ -539,6 +539,9 @@ InstallMethod(
                 SetIsOverquiver( oquiv, true );
                 SetSBAlgOfOverquiver( oquiv, sba );
                 oquiv!.2Reg := 2reg;
+                
+                # Create contraction function
+                ContractionOfOverquiver( oquiv );;
             fi;
 
             # Return <oquiv>
@@ -571,11 +574,25 @@ InstallMethod(
     function( oquiv )
         local
             cont,   # Function to be returned
+            contop, # Contraction of opposite quiver
             ret;    # Retraction of 2-regular augmentation on which <oquiv> is
                     #  based
 
         if HasContractionOfOverquiver( oquiv ) then
             return ContractionOfOverquiver( oquiv );
+            
+        elif HasContractionOfOverquiver( OppositeQuiver( oquiv ) ) then
+            contop := ContractionOfOverquiver( OppositeQuiver( oquiv ) );
+            cont := function( path )
+                if IsZeroPath( path ) then
+                    return path!.LiftOf;
+                
+                else
+                    return OppositePath( contop( OppositePath( path ) ) );
+                fi;
+            end;
+            
+            return cont;
             
         # Test input quiver
         elif not IsOverquiver( oquiv ) then

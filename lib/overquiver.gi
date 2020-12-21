@@ -245,7 +245,8 @@ InstallMethod(
             
         # If the opposite quiver of <quiver> has a retraction map, then the
         #  hard work is already done. We need only "conjugate" by
-        #  <OppositePath> (and add a few minor tweaks).
+        #  <OppositePath> (and add a few minor tweaks for dealing with zero
+        #  paths).
         elif HasRetractionOf2RegAugmentation( OppositeQuiver( quiver ) ) then
             orig_quiv := OriginalSBQuiverOf2RegAugmentation( quiver );
             ret := RetractionOf2RegAugmentation( OppositeQuiver( quiver ) );

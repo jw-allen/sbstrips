@@ -61,18 +61,24 @@ InstallMethod(
                 od;
                 
                 # Make each arrow of <new_quiv> know the arrow of <ground_quiv>
-                #  it corresponds to
+                #  it corresponds to, if any. (Connect it to the zero path if
+                #  not.)
                 for a in ArrowsOfQuiver( new_quiv ) do
-                    a!.2RegAugPathOf := OppositePath(
-                     OppositePath( a )!.2RegAugPathOf
-                     );
+                    if not IsZeroPath( OppositePath( a )!.2RegAugPathOf ) then
+                        a!.2RegAugPathOf := OppositePath(
+                         OppositePath( a )!.2RegAugPathOf
+                        );
+                        
+                    else
+                        a!.2RegAugPathOf := Zero( ground_quiv );
+                    fi;
                 od;
                 
                 # Make each arrow of <ground_quiv> know the arrow of <new_quiv>
                 #  it corresponds to
                 for a in ArrowsOfQuiver( ground_quiv ) do
                     a!.2RegAugPath := OppositePath(
-                     OppositePath( a!.2RegAugPath )
+                     OppositePath( a )!.2RegAugPath
                      );
                 od;
                 

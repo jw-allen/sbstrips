@@ -1,10 +1,10 @@
 +--------------------------------------------------------+--------------------+
 |                                                        | Copyright (C) 2020 |
-|                   SBStrips  (v0.6.1)                   |          Joe Allen |
+|                   SBStrips  (v0.6.2)                   |          Joe Allen |
 |                                                        |       [he/him/his] |
 +--------------------------------------------------------+--------------------+
 
-This is the README file for SBStrips (v0.6.1), which is a package for GAP 4.11.
+This is the README file for SBStrips, which is a package for GAP 4.11.
 
 +--+ About +------------------------------------------------------------------+
 The SBStrips package models 'strings', namely the decorated graphs used in
@@ -28,9 +28,9 @@ The SBStrips can be installed by following these steps (assuming you already
 have GAP installed.)
 
     1. Download the archive file 
-            sbstrips/archive/v0.6.1.tar.gz
+            sbstrips/archive/v0.6.2.tar.gz
        from
-            https://github.com/jw-allen/sbstrips/archive/v0.6.1.tar.gz
+            https://github.com/jw-allen/sbstrips/archive/v0.6.2.tar.gz
         
     2. Unpack it into your  pkg  directory. It should create a subdirectory
        called  sbstrips.

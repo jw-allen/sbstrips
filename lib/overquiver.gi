@@ -655,8 +655,8 @@ InstallMethod(
         elif not IsOverquiver( quiver ) then
             return fail;
         else
-            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver "
-             "that doesn't know the special biserial algebra to which it "
+            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver ",
+             "that doesn't know the special biserial algebra to which it ",
              "belongs! Please contact the maintainer of the sbstrips package."
              );
         fi;

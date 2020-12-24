@@ -431,8 +431,6 @@ InstallMethod(
                 2reg := OppositeQuiver( OppositeQuiver( oquiv )!.2Reg );
             
                 # Loading <oquiv> with information is straightforward.
-                SetIsOverquiver( oquiv, true );
-                SetSBAlgOfOverquiver( oquiv, sba );
                 oquiv!.2Reg := 2reg;
                 
                 for v in VerticesOfQuiver( oquiv ) do
@@ -560,12 +558,13 @@ InstallMethod(
             
         elif HasIsOverquiver( OppositeQuiver( quiver ) ) then
             return IsOverquiver( OppositeQuiver( quiver ) );
+        
         else
             # Overquivers are exactly those quivers constructed using the
             #  <OverquiverOfSBAlg> command. Such quivers have this property set
             #  (to <true>) at creation. Therefore any quiver for which this
             #  property has not been set must not have been so constructed.
-            return false;
+            return fail;
         fi;
     end
 );
@@ -638,14 +637,27 @@ InstallMethod(
     "for overquivers",
     [ IsQuiver ],
     function( quiver )
+        local
+            sba_op; # Opposite SB algebra to that of <quiver>
+
         if HasSBAlgOfOverquiver( quiver ) then
             return SBAlgOfOverquiver( quiver );
+            
+        elif HasSBAlgOfOverquiver( OppositeQuiver( quiver ) ) then
+            sba_op := SBAlgOfOverquiver( OppositeQuiver( quiver ) );
+            
+            if not ( sba_op = fail ) then
+                return OppositePathAlgebra( sba_op );
+            else
+                return fail;
+            fi;
+        
         elif not IsOverquiver( quiver ) then
             return fail;
         else
-            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver \
-             that doesn't know the special biserial algebra to which it \
-             belongs! Please contact the maintainer of the sbstrips package."
+            Error( "Somehow the given quiver\n", quiver, "\nis an overquiver "
+             "that doesn't know the special biserial algebra to which it "
+             "belongs! Please contact the maintainer of the sbstrips package."
              );
         fi;
     end

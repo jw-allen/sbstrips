@@ -1951,3 +1951,79 @@ InstallOtherMethod(
         return DirectSumModuleOfListOfStrips( [ strip ] );
     end
 );
+
+InstallMethod(
+    VectorSpaceDualOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            sba,        # Defining SB algebra of <strip>
+            sba_op,     # Opposite path algebra of <sba>
+            strip_op,   # Output 
+            syll_list,  # Syllable list of <strip>
+            x, y,       # Variables, for vertices or syllables
+            zero_op;    # Zero strip of <sba_op>
+        
+        # Test whether the hard work has already been done
+        if HasVectorSpaceDualOfStrip( strip ) then
+            return VectorSpaceDualOfStrip( strip );
+
+        # Reject virtual strips. (They do not correspond to string modules, so
+        #  they have no sensible vector-space dual.)
+        elif IsVirtualStrip( strip ) then
+            ErrorNoReturn( "Virtual strips do not have vector-space duals!" );
+
+        # Otherwise, only strips that represent string modules remain.
+        else
+            sba := SBAlgOfStrip( strip );
+            sba_op := OppositePathAlgebra( strip );
+            
+            # Deal with zero strip.
+            if IsZeroStrip( strip ) then
+                strip_op := ZeroStripOfSBAlg( sba_op );
+
+               
+            # Deal with simple strips (ie, strips of width 0).
+            elif WidthOfStrip( strip ) = 0 then
+            
+                # By constuction, simple strips are the juxtaposition of two
+                #  stationary syllables, displayed <( x, 1 )^{-1}( y, 1 )>. We
+                #  can harvest the underlying paths <x> and <y> of those
+                #  syllables, then turn them into their opposite paths <x_op>,
+                #  <y_op> in the opposite (over)quiver, then construct the
+                #  opposite strip easily: <( x_op, 1)^{-1}( y_op, 1 )>.
+            
+                # Obtain syllable list
+                syll_list := SyllableListOfStripNC( strip );
+                
+                # Harvest paths
+                x := UnderlyingPath( syll_list[1] );
+                y := UnderlyingPath( syll_list[2] );
+                
+                # Make into opposite paths
+                x := OppositePath( u );
+                y := OppositePath( v );
+                
+                # Make into stationary syllables (which always have stability
+                #  term 1).
+                x := Syllabify( u, 1 );
+                y := Syllabify( v, 1 );
+                
+                # Create vector-space-dual string
+                strip_op :=
+                 StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
+            
+            # Deal with strips of positive width.
+            else
+                
+                # RESUME HERE!
+            
+            fi;
+            
+            # Ensure the double-dual is identically the original object.
+            SetVectorSpaceDualOfStrip( strip_op, strip);
+            return strip_op;
+        fi;
+    end
+);

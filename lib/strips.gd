@@ -71,6 +71,8 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareOperation( "Stripify", [ IsMultiplicativeElement, IsInt, IsList ] );
 DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
 
+DeclareOperation( "SBAlgOfStrip", [ IsStripRep ] );
+
 ##  <#GAPDoc Label="DocSyzygyOfStrip">
 ##    <ManSection>
 ##      <Heading>

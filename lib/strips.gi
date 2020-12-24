@@ -18,6 +18,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    SBAlgOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        return FamilyObj( strip )!.sb_alg;
+    end
+);
+
+InstallMethod(
     ReflectionOfStrip,
     "for a strip rep",
     [ IsStripRep ],

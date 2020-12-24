@@ -557,6 +557,9 @@ InstallMethod(
     function( quiver )
         if HasIsOverquiver( quiver ) then
             return IsOverquiver( quiver );
+            
+        elif HasIsOverquiver( OppositeQuiver( quiver ) ) then
+            return IsOverquiver( OppositeQuiver( quiver ) );
         else
             # Overquivers are exactly those quivers constructed using the
             #  <OverquiverOfSBAlg> command. Such quivers have this property set

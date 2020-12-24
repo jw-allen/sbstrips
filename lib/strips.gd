@@ -2,6 +2,7 @@ DeclareRepresentation( "IsStripRep", IsAttributeStoringRep, [ "data" ] );
 DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
+DeclareOperation( "DefiningDataOfStripNC", [ IsStripRep ] );
 
 DeclareAttribute( "StripFamilyOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );

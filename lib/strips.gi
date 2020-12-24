@@ -649,6 +649,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    DefiningDataOfStripNC,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        return strip!.data;
+    end
+);
+
+InstallMethod(
     SyzygyOfStrip,
     "for a strip",
     [ IsStripRep ],

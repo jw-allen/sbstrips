@@ -450,7 +450,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 DeclareOperation( "ModuleDataOfStrip", [ IsStripRep ] );
 DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 
-##  <#GAPDoc Label="DocDirectSumModuleOfListOfStrips"/>
+##  <#GAPDoc Label="DocDirectSumModuleOfListOfStrips">
 ##    <ManSection>
 ##      <Meth Name="DirectSumModuleOfListOfStrips"
 ##      Label="for a (flat) list of strips" Arg="list"/>
@@ -475,3 +475,19 @@ DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 ##  <#/GAPDoc>
 DeclareOperation( "DirectSumModuleDataOfListOfStrips", [ IsList ] );
 DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
+
+
+##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
+##    <ManSection>
+##      <Meth Name="VectorSpaceDualOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument (first method): <A>strip</A>, a strip representing some
+##        string module <M>X</M> over a <M>K</M>-algebra.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a strip representing the vector-space dual module <M>\Hom_K(X,K)</M>.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "VectorSpaceDualOfStrip", [ IsStripRep ] );

@@ -481,10 +481,10 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 
 ##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
 ##    <ManSection>
-##      <Meth Name="VectorSpaceDualOfStrip" Arg="strip"/>
+##      <Attr Name="VectorSpaceDualOfStrip" Arg="strip"/>
 ##      <Description>
-##        Argument (first method): <A>strip</A>, a strip representing some
-##        string module <M>X</M> over a <M>K</M>-algebra.
+##        Argument: <A>strip</A>, a strip representing some string module
+##        <M>X</M> over a <M>K</M>-algebra.
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -492,4 +492,4 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "VectorSpaceDualOfStrip", [ IsStripRep ] );
+DeclareAttribute( "VectorSpaceDualOfStrip", IsStripRep );

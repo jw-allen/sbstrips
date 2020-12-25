@@ -1967,6 +1967,18 @@ InstallMethod(
     [ IsStripRep ],
     function( strip )
         local
+            is_stationary_func,
+                        # Local function, checking for stationary syllables
+            is_stationary_results,
+                        # Entrywise image of <data> is <is_stationary_func>
+            data,       # Defining data of <strip>
+            k,          # Integer variable, for positions in a list
+            make_syllables_into_paths,
+                        # Local function, checking for syllables and replacing
+                        #  them by their underlying paths
+            opposite_path_or_orientation,
+                        # Local function, turning paths or orientations into
+                        #  the opposite path or orientation
             sba,        # Defining SB algebra of <strip>
             sba_op,     # Opposite path algebra of <sba>
             strip_op,   # Output 
@@ -1980,13 +1992,13 @@ InstallMethod(
 
         # Reject virtual strips. (They do not correspond to string modules, so
         #  they have no sensible vector-space dual.)
-        elif IsVirtualStrip( strip ) then
+        elif IsVirtualStripRep( strip ) then
             ErrorNoReturn( "Virtual strips do not have vector-space duals!" );
 
         # Otherwise, only strips that represent string modules remain.
         else
             sba := SBAlgOfStrip( strip );
-            sba_op := OppositePathAlgebra( strip );
+            sba_op := OppositePathAlgebra( sba );
             
             # Deal with zero strip.
             if IsZeroStrip( strip ) then
@@ -2007,17 +2019,17 @@ InstallMethod(
                 syll_list := SyllableListOfStripNC( strip );
                 
                 # Harvest paths
-                x := UnderlyingPath( syll_list[1] );
-                y := UnderlyingPath( syll_list[2] );
+                x := UnderlyingPathOfSyllable( syll_list[1] );
+                y := UnderlyingPathOfSyllable( syll_list[2] );
                 
                 # Make into opposite paths
-                x := OppositePath( u );
-                y := OppositePath( v );
+                x := OppositePath( x );
+                y := OppositePath( y );
                 
                 # Make into stationary syllables (which always have stability
                 #  term 1).
-                x := Syllabify( u, 1 );
-                y := Syllabify( v, 1 );
+                x := Syllabify( x, 1 );
+                y := Syllabify( y, 1 );
                 
                 # Create vector-space-dual string
                 strip_op :=
@@ -2025,9 +2037,66 @@ InstallMethod(
             
             # Deal with strips of positive width.
             else
+                # Remove redundant stationary syllables at boundary
+                data := ShallowCopy( DefiningDataOfStripNC( strip ) );
                 
-                # RESUME HERE!
+                is_stationary_func := function( elt )
+                    return
+                     IsSyllableRep( elt ) and IsStationarySyllable( elt );
+                end;
+                
+                while ForAny( data, is_stationary_func ) do
+                    is_stationary_results := List( data, is_stationary_func );
+                    k := Position( is_stationary_results, true );
+                    Remove( data, k+1 );
+                    Remove( data, k );
+                od;
+                
+                # Replace syllables by underlying paths
+                
+                make_syllables_into_paths := function( elt )
+                    if IsSyllableRep( elt ) then
+                        return UnderlyingPathOfSyllable( elt );
+                        
+                    else
+                        return elt;
+                    fi;
+                end;
+                
+                Apply( data, make_syllables_into_paths );
+                
+                # Replace all paths by opposite paths, and swap all orient-
+                #  -ations
+                
+                opposite_path_or_orientation := function( elt )
+                    if IsPath( elt ) then
+                        return OppositePath( elt );
+                    
+                    elif elt in [ 1, -1 ] then
+                        return -1*elt; 
+                    fi;
+                end;
             
+                Apply( data, opposite_path_or_orientation );
+                
+                # Turn paths into syllables, taking into account whether they
+                #  should be boundary or not
+                for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+                    if ( k = 1 ) and data[ k+1 ] = -1 then
+                        data[k] := Syllabify( data[k], 1 );
+                        
+                    elif ( k = Length( data ) - 1 ) and data[ k+1 ] = 1 then
+                        data[k] := Syllabify( data[k], 1 );
+                        
+                    else
+                        data[k] := Syllabify( data[k], 0 );
+                    fi;
+                od;
+                
+                strip_op := CallFuncList(
+                 StripifyFromSyllablesAndOrientationsNC,
+                 data
+                 );
             fi;
             
             # Ensure the double-dual is identically the original object.

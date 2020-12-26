@@ -356,3 +356,118 @@ InstallMethod(
         return QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
     end
 );
+
+InstallMethod(
+    PathOneArrowLongerAtSource,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            arrow,  # Arrow to add
+            vertex; # Source vertex of <path>
+            
+        if HasPathOneArrowLongerAtSource( path ) then
+            return PathOneArrowLongerAtSource( path );
+            
+        else
+            vertex := SourceOfPath( path );
+            if not ( InDegreeOfVertex( vertex ) = 1 ) then
+                return fail;
+                
+            else
+                arrow := IncomingArrowsOfVertex( vertex )[1];
+                return arrow * path;
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowLongerAtTarget,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            arrow,  # Arrow to add
+            vertex; # Target vertex of <path>
+            
+        if HasPathOneArrowLongerAtTarget( path ) then
+            return PathOneArrowLongerAtTarget( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        else
+            vertex := TargetOfPath( path );
+            if not ( OutDegreeOfVertex( vertex ) = 1 ) then
+                return fail;
+                
+            else
+                arrow := OutgoingArrowsOfVertex( vertex )[1];
+                return path * arrow;
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowShorterAtSource,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            l,          # Length of <path>
+            new_path,   # Appropriate subpath of <path>
+            walk;       # Walk of path
+            
+        if HasPathOneArrowShorterAtSource( path ) then
+            return PathOneArrowShorterAtSource( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        elif LengthOfPath( path ) < 1 then
+            return fail;
+            
+        elif LengthOfPath( path ) = 1 then
+            return TargetOfPath( path );
+            
+        else
+            walk := WalkOfPath( path );
+            l := LengthOfPath( path );
+            new_path := Product( walk{ [ 2 .. l ] } );
+            return new_path;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowShorterAtTarget,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            l,          # Length of <path>
+            new_path,   # Appropriate subpath of <path>
+            walk;       # Walk of path
+            
+        if HasPathOneArrowShorterAtTarget( path ) then
+            return PathOneArrowShorterAtTarget( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        elif LengthOfPath( path ) < 1 then
+            return fail;
+            
+        elif LengthOfPath( path ) = 1 then
+            return SourceOfPath( path );
+            
+        else
+            walk := WalkOfPath( path );
+            l := LengthOfPath( path );
+            new_path := Product( walk{ [ 1 .. l-1 ] } );
+            return new_path;
+        fi;
+    end
+);

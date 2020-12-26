@@ -1967,15 +1967,8 @@ InstallMethod(
     [ IsStripRep ],
     function( strip )
         local
-            is_stationary_func,
-                        # Local function, checking for stationary syllables
-            is_stationary_results,
-                        # Entrywise image of <data> is <is_stationary_func>
             data,       # Defining data of <strip>
             k,          # Integer variable, for positions in a list
-            make_syllables_into_paths,
-                        # Local function, checking for syllables and replacing
-                        #  them by their underlying paths
             opposite_path_or_orientation,
                         # Local function, turning paths or orientations into
                         #  the opposite path or orientation
@@ -2003,8 +1996,7 @@ InstallMethod(
             # Deal with zero strip.
             if IsZeroStrip( strip ) then
                 strip_op := ZeroStripOfSBAlg( sba_op );
-
-               
+                
             # Deal with simple strips (ie, strips of width 0).
             elif WidthOfStrip( strip ) = 0 then
             
@@ -2037,33 +2029,9 @@ InstallMethod(
             
             # Deal with strips of positive width.
             else
-                # Remove redundant stationary syllables at boundary
-                data := ShallowCopy( DefiningDataOfStripNC( strip ) );
-                
-                is_stationary_func := function( elt )
-                    return
-                     IsSyllableRep( elt ) and IsStationarySyllable( elt );
-                end;
-                
-                while ForAny( data, is_stationary_func ) do
-                    is_stationary_results := List( data, is_stationary_func );
-                    k := Position( is_stationary_results, true );
-                    Remove( data, k+1 );
-                    Remove( data, k );
-                od;
-                
-                # Replace syllables by underlying paths
-                
-                make_syllables_into_paths := function( elt )
-                    if IsSyllableRep( elt ) then
-                        return UnderlyingPathOfSyllable( elt );
-                        
-                    else
-                        return elt;
-                    fi;
-                end;
-                
-                Apply( data, make_syllables_into_paths );
+                data := ShallowCopy(
+                 PathAndOrientationListOfStripNC( strip )
+                 );
                 
                 # Replace all paths by opposite paths, and swap all orient-
                 #  -ations
@@ -2105,3 +2073,57 @@ InstallMethod(
         fi;
     end
 );
+
+InstallMethod(
+    PathAndOrientationListOfStripNC,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,   # Defining data of <strip>
+            is_stationary_func,
+                    # Local function, checking for stationary syllables
+            is_stationary_results,
+                    # Entrywise image of <data> is <is_stationary_func>
+            make_syllables_into_paths,
+                        # Local function, checking for syllables and replacing
+                        #  them by their underlying paths
+            
+        data := ShallowCopy( DefiningDataOfStrip( strip ) );
+        
+        if WidthOfStrip( strip ) = 0 then
+            data[1] := UnderlyingPathOfSyllable( data[1] );
+            data[3] := UnderlyingPathOfSyllable( data[3] );
+            
+        else
+            is_stationary_func := function( elt )
+                return
+                 IsSyllableRep( elt ) and IsStationarySyllable( elt );
+            end;
+            
+            while ForAny( data, is_stationary_func ) do
+                is_stationary_results := List( data, is_stationary_func );
+                k := Position( is_stationary_results, true );
+                Remove( data, k+1 );
+                Remove( data, k );
+            od;
+            
+            # Replace syllables by underlying paths
+            
+            make_syllables_into_paths := function( elt )
+                if IsSyllableRep( elt ) then
+                    return UnderlyingPathOfSyllable( elt );
+                    
+                else
+                    return elt;
+                fi;
+            end;
+            
+            Apply( data, make_syllables_into_paths );   
+        fi;
+        
+        return Immutable( data );
+    end
+);
+
+

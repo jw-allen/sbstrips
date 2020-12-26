@@ -243,7 +243,7 @@ DeclareOperation( "FieldOfQuiverAlgebra", [ IsQuiverAlgebra ]  );
 ##  <#/GAPDoc>
 DeclareOperation( "DefiningQuiverOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 
-##  <#GAPDoc Label="PathOneArrowDifferent">
+##  <#GAPDoc Label="DocPathOneArrowDifferent">
 ##  <ManSection>
 ##    <Heading>
 ##      Paths obtained by adding/removing an arrow at source/target

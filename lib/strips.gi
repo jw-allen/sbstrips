@@ -2085,11 +2085,12 @@ InstallMethod(
                     # Local function, checking for stationary syllables
             is_stationary_results,
                     # Entrywise image of <data> is <is_stationary_func>
-            make_syllables_into_paths,
+            k,      # Integer variable, for indexing entries of <data>
+            make_syllables_into_paths;
                         # Local function, checking for syllables and replacing
                         #  them by their underlying paths
             
-        data := ShallowCopy( DefiningDataOfStrip( strip ) );
+        data := ShallowCopy( DefiningDataOfStripNC( strip ) );
         
         if WidthOfStrip( strip ) = 0 then
             data[1] := UnderlyingPathOfSyllable( data[1] );

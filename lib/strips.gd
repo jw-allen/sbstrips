@@ -524,12 +524,13 @@ DeclareSynonymAttr( "OppositeStrip", VectorSpaceDualOfStrip );
 ##  <#/GAPDoc>
 DeclareAttribute(
  "LeftAlterationTowardsTrDOfStrip",
- [ IsStripRep ]
+ IsStripRep
  );
 DeclareAttribute(
  "RightAlterationTowardsTrDOfStrip",
- [ IsStripRep ]
+ IsStripRep
  );
 DeclareAttribute(
- "TrDOfStrip"
+ "TrDOfStrip",
+ IsStripRep
 );

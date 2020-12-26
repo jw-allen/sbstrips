@@ -112,3 +112,41 @@ DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "Is2RegQuiver", IsQuiver );
+
+##  <#GAPDoc Label="PathOneArrowDifferent">
+##  <ManSection>
+##    <Heading>
+##      Paths obtained by adding/removing an arrow at source/target
+##    </Heading>
+##    <Oper Name="PathOneArrowLongerAtSource" Arg="path"/>
+##    <Oper Name="PathOneArrowLongerAtTarget" Arg="path"/>
+##    <Oper Name="PathOneArrowShorterAtSource" Arg="path"/>
+##    <Oper Name="PathOneArrowShorterAtTarget" Arg="path"/>
+##    <Description>
+##      Argument: <A>path</A>, a path
+##      <Br />
+##    </Description>
+##    <Returns>
+##      a path <C>new_path</C> which differs from <A>path</A> by one arrow in
+##      the appropriate way, or &fail; if no such arrow exists.
+##    </Returns>
+##    <Description>
+##      Both of the <C>-Shorter-</C>  operations require <A>path</A> to have
+##      length at least <M>1</M>, as measured by <Ref Attr="LengthOfPath"
+##      BookName="QPA"/>.
+##      <P />
+##      Both of the <C>-Longer-</C> operations require there to be a unique
+##      choice of arrow to add. So, for example,
+##      <C>PathOneArrowLongerAtSource</C> requires the source of <A>path</A> to
+##      have indegree exactly <M>1</M>, as measured by <Ref
+##      Attr="InDegreeOfVertex" BookName="QPA"/>. This is always the situation
+##      with <M>1</M>-regular quivers, where these operations are most intended
+##      to be used.
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+
+DeclareOperation( "PathOneArrowLongerAtSource", [ IsPath ] );
+DeclareOperation( "PathOneArrowLongerAtTarget", [ IsPath ] );
+DeclareOperation( "PathOneArrowShorterAtSource", [ IsPath ] );
+DeclareOperation( "PathOneArrowShorterAtTarget", [ IsPath ] );

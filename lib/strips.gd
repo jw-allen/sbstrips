@@ -483,14 +483,52 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 ##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
 ##    <ManSection>
 ##      <Attr Name="VectorSpaceDualOfStrip" Arg="strip"/>
+##      <Attr Name="OppositeStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip representing some string module
-##        <M>X</M> over a <M>K</M>-algebra.
+##        <M>X</M> over a <M>K</M>-algebra <M>A</M>.
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        a strip representing the vector-space dual module <M>\Hom_K(X,K)</M>.
+##        a strip representing the vector-space dual module
+##        <M>\D M = \Hom_K(X,K)</M> of <M>X</M>.
 ##      </Returns>
+##      <Description>
+##        Recall that <M>\D X</M> is a module for <M>A^\op</M>, the opposite
+##        algebra to <M>A</M>.
+##        <P />
+##        <C>OppositeStrip</C> is a synonym for <C>VectorSpaceDualOfStrip</C>.
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "VectorSpaceDualOfStrip", IsStripRep );
+DeclareSynonymAttr( "OppositeStrip", VectorSpaceDualOfStrip );
+
+##  <#GAPDoc Label="TrDOfStrip">
+##    <ManSection>
+##      <Attr Name="TrDOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument: <A>strip</A>, a strip representing some string module
+##        <M>X</M>.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a strip representing the Auslander-Reiten inverse translate
+##        <M>\Tr \D X</M> of <M>X</M>.
+##      </Returns>
+##      <Description>
+##        Recall that if <M>X</M> is injective then <M>\Tr \D X = 0</M>.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute(
+ "LeftAlterationTowardsTrDOfStrip",
+ [ IsStripRep ]
+ );
+DeclareAttribute(
+ "RightAlterationTowardsTrDOfStrip",
+ [ IsStripRep ]
+ );
+DeclareAttribute(
+ "TrDOfStrip"
+);

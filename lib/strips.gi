@@ -2183,9 +2183,10 @@ InstallMethod(
             ErrorNoReturn( "No right alteration exists for virtual strips!" );
             
         # <ReflectionOfStrip> is compatible with
-        #  RightAlterationTowardsTrDOfStrip and LeftAlterationTowardsTrDOfStrip
-        #  in the fashion mentioned above. If the other is already known, then
-        #  we can save ourselves some hard work.
+        #  <RightAlterationTowardsTrDOfStrip> and
+        #  <LeftAlterationTowardsTrDOfStrip> in the fashion mentioned above. If
+        #  the other is already known, then we can save ourselves some hard
+        #  work.
         elif
          HasLeftAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
          then
@@ -2219,7 +2220,7 @@ InstallMethod(
                 a_i := a_seq.( String( i ) );
                 
                 if a_i > 0 then
-                    b_i := b_seq.( Strip( i ) );
+                    b_i := b_seq.( String( i ) );
                     q := PathBySourceAndLength( i, a_i + b_i - 1 );
                     
                     x := Syllabify( p, 1 );
@@ -2339,3 +2340,31 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    LeftAlterationTowardsTrDOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        if HasLeftAlterationTowardsTrDOfStrip( strip ) then
+            return LeftAlterationTowardsTrDOfStrip( strip );
+        
+        elif IsZeroStrip( strip ) then
+            return strip;
+        
+        # Reject virtual strips, since they do not represent string modules
+        elif IsVirtualStripRep( strip ) then
+            ErrorNoReturn( "No right alteration exists for virtual strips!" );
+            
+        # <ReflectionOfStrip> is compatible with
+        #  <RightAlterationTowardsTrDOfStrip> and
+        #  <LeftAlterationTowardsTrDOfStrip> in the fashion mentioned above. If
+        #  the other is already known, then we can save ourselves some hard
+        #  work.
+        else
+            return
+             ReflectionOfStrip(
+              RightAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
+              );
+        fi;
+    end
+);

@@ -2186,10 +2186,12 @@ InstallMethod(
         #  RightAlterationTowardsTrDOfStrip and LeftAlterationTowardsTrDOfStrip
         #  in the fashion mentioned above. If the other is already known, then
         #  we can save ourselves some hard work.
-        elif HasLeftAlterationTowardsTrDOfStrip( OppositeStrip( strip ) ) then
-            return OppositeStrip(
+        elif
+         HasLeftAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
+         then
+            return ReflectionOfStrip(
              LeftAlterationTowardsTrDOfStrip(
-              OppositeStrip( strip )
+              ReflectionOfStrip( strip )
               )
              );
             

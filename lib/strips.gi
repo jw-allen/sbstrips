@@ -38,28 +38,34 @@ InstallMethod(
             ori_list,   # Sublist of orientations in <data>
             sy_list;    # Sublist of syllables in <data>
             
-        data := strip!.data;
-        l := Length( data );
+        if IsZeroStrip( strip ) then
+            return ZeroStrip( strip );
         
-        # The syllables are in the odd positions of <data>; the orientations in
-        #  the even positions.
-        sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
-        ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
+        else
+            data := DefiningDataOfStripNC( strip );
+            l := Length( data );
+            
+            # The syllables are in the odd positions of <data>; the orien-
+            #  -tations in the even positions.
+            sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
 
-        # <sy_list> needs to be reversed individually and then interwoven with
-        #  <ori_list>
-        sy_list := Reversed( sy_list );
-        
-        list := [1..l];
-        for k in list do
-            if IsOddInt( k ) then
-                list[ k ] := sy_list[ (k+1)/2  ];
-            elif IsEvenInt( k ) then
-                list[ k ] := ori_list[ k/2 ];
-            fi;
-        od;
+            # <sy_list> needs to be reversed individually and then interwoven
+            #  with <ori_list>
+            sy_list := Reversed( sy_list );
+            
+            list := [1..l];
+            for k in list do
+                if IsOddInt( k ) then
+                    list[ k ] := sy_list[ (k+1)/2  ];
+                elif IsEvenInt( k ) then
+                    list[ k ] := ori_list[ k/2 ];
+                fi;
+            od;
 
-        return CallFuncList( StripifyFromSyllablesAndOrientationsNC, list );
+            return
+             CallFuncList( StripifyFromSyllablesAndOrientationsNC, list );
+        fi;
     end
 );
 

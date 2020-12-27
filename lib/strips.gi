@@ -2127,4 +2127,213 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    RightAlterationTowardsTrDOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        # This attribute is the ( ? )_1 operation from [WW85, Sec 3] while
+        #  <LefttAlterationTowardsTrDOfStrip> is the ( ? )_2 operation.  Of
+        #  course, <v_1> = <w_2>, for <w> the reflection of the strip <v>.
+        #
+        #     [WW85]
+        #       B. Wald and J. Waschbuesch
+        #       Tame biserial algebras
+        #       Journal of Algebra, 95:480-500
+        #       1985
+    
+        local
+            a_i, b_i, c_i, d_i,
+                        # <i>th term of <a_seq>, <b_seq>, <c_seq> and <d_seq>,
+                        #  respectively
+            a_seq, b_seq,
+                        # Integer and bit sequence of the source encoding of
+                        #  the permissible data of <strip>
+            c_seq, d_seq,
+                        # Integer and bit sequence of the target encoding of
+                        #  the permissible data of <strip>
+            data,       # Defining data of strip
+            i,          # Vertex variable
+            l,          # Integer variable, for the length of a path
+            k,          # Integer variable, for indexing entries of <data>
+            lin_ind,    # Set of paths representing linearly independent
+                        #  paths in <sba>
+            make_substrip,
+                        # Local function obtaining a "substrip" of <strip>
+            make_superstrip,
+                        # Local function obtaining a "superstrip" of <strip>
+            p, q, r,    # Path variables
+            sba,        # Defining SB algebra of <strip>
+            v,          # Vertex variable
+            x, y,       # Syllable variables
+            zero_strip; # Zero strip of <sba>
+        
+        sba := SBAlgOfStrip( strip );
+        zero_strip := ZeroStripOfSBAlg( sba ); 
+        
+        if HasRightAlterationTowardsTrDOfStrip( strip ) then
+            return RightAlterationTowardsTrDOfStrip( strip );
+            
+        # The "right alteration" of the zero strip is the zero strip.
+        elif IsZeroStrip( strip ) then
+            return zero_strip;
+            
+        # Reject virtual strips, since they do not represent string modules.
+        elif IsVirtualStripRep( strip ) then
+            ErrorNoReturn( "No right alteration exists for virtual strips!" );
+            
+        # <ReflectionOfStrip> is compatible with
+        #  RightAlterationTowardsTrDOfStrip and LeftAlterationTowardsTrDOfStrip
+        #  in the fashion mentioned above. If the other is already known, then
+        #  we can save ourselves some hard work.
+        elif HasLeftAlterationTowardsTrDOfStrip( OppositeStrip( strip ) ) then
+            return OppositeStrip(
+             LeftAlterationTowardsTrDOfStrip(
+              OppositeStrip( strip )
+              )
+             );
+            
+        # Deal with simple strips
+        elif WidthOfStrip( strip ) = 0 then
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+        
+            data := ShallowCopy( DefiningDataOfStripNC( strip ) );
+            data[1] := UnderlyingPathOfSyllable( data[1] );
+            data[3] := UnderlyingPathOfSyllable( data[3] );
+            
+            i := data[3];
+            
+            c_i := c_seq.( String( i ) );
+            if c_i = 0 then
+                return zero_strip;
+                
+            else
+                p := PathByTargetAndLength( i, 1 );
+                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                
+                a_i := a_seq.( String( i ) );
+                
+                if a_i > 0 then
+                    b_i := b_seq.( Strip( i ) );
+                    q := PathBySourceAndLength( i, a_i + b_i - 1 );
+                    
+                    x := Syllabify( p, 1 );
+                    y := Syllabify( q, 1 );
+                    
+                    return
+                     StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
+                else
+                    return zero_strip;
+                fi;
+            fi;
+        
+        # Deal with strips of positive width
+        else
+            data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
+            
+            lin_ind := LinIndOfSBAlg( sba );
+            
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            
+            if data[ Length( data ) ] = -1 then
+                make_substrip := function()
+                    local
+                        p;  # Path variable
+                
+                    if Length( data ) = 2 then
+                        return zero_strip;
+                        
+                    else
+                        Remove( data, Length( data ) );
+                        Remove( data, Length( data ) );
+                        p := data[ Length( data ) - 1 ];
+                        data[ Length( data ) - 1 ] :=
+                         PathOneArrowShorterAtTarget( p );
+                    fi;
+                end;
+            
+                p := data[ Length( data ) - 1 ];
+                
+                if PathOneArrowLongerAtSource( p ) in lin_ind then
+                    p := PathOneArrowLongerAtSource( p );
+                    i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                    
+                    a_i := a_seq.( String( i ) );
+                    if a_i > 0 then
+                        b_i := b_seq.( String( i ) );
+                        q := PathBySourceAndLength( i,  a_i + b_i - 1 );
+                        
+                        data[ Length( data ) - 1 ] := p;
+                        Add( data, q );
+                        Add( data, 1 );
+                        
+                    else
+                        make_substrip();
+                    fi;
+                    
+                else
+                    make_substrip();                    
+                fi;
+                
+            elif data[ Length( data ) ] = 1 then
+                make_substrip := function()
+                    local
+                        p;  # Path variable
+                        
+                    p := data[ Length( data ) - 1 ];
+                    data[ Length( data ) - 1 ] :=
+                     PathOneArrowShorterAtTarget( p );
+                end;
+                
+                r := data[ Length( data ) - 1 ];
+                i := ExchangePartnerOfVertex( TargetOfPath( r ) );
+                
+                c_i := c_seq.( String( i ) );
+                
+                if c_i > 0 then
+                    d_i := d_seq.( String( i ) );
+                    p := PathByTargetAndLength( i, 1 );
+                    i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                    a_i := a_seq.( String( i ) );
+                    if a_i > 0 then
+                        b_i := b_seq.( String( i ) );
+                        q := PathBySourceAndLength( i, a_i + b_i - 1 );
+                        Add( data, p );
+                        Add( data, -1 );
+                        Add( data, q );
+                        Add( data, 1 );
+                    
+                    else
+                        make_substrip();
+                    fi;
+                
+                else
+                    make_substrip();
+                fi;
+            fi;
+            
+            ## DO SOMETHING WITH <data>!
+            for k in Filtered( [ 1..Length(data) ], IsOddInt ) do
+                if k = 1 and data[2] = -1 then
+                    data[k] := Syllabify( data[k], 1 );
+                elif
+                 k = ( Length( data ) - 1 ) and data[ k+1 ] = 1
+                 then
+                    data[k] := Syllabify( data[k], 1 );
+                else
+                    data[k] := Syllabify( data[k], 0 );
+                fi;
+            od;
+            
+            return
+             CallFuncList( StripifyFromSyllablesAndOrientationsNC, data );
+        fi;
+    end
+);
 

@@ -2224,19 +2224,13 @@ InstallMethod(
                 i := ExchangePartnerOfVertex( SourceOfPath( p ) );
                 
                 a_i := a_seq.( String( i ) );
+                b_i := b_seq.( String( i ) );
+                q := PathBySourceAndLength( i, a_i + b_i - 1 );
                 
-                if a_i > 0 then
-                    b_i := b_seq.( String( i ) );
-                    q := PathBySourceAndLength( i, a_i + b_i - 1 );
-                    
-                    x := Syllabify( p, 1 );
-                    y := Syllabify( q, 1 );
-                    
-                    return
-                     StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
-                else
-                    return zero_strip;
-                fi;
+                x := Syllabify( p, 1 );
+                y := Syllabify( q, 1 );
+
+                return StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
             fi;
         
         # Deal with strips of positive width

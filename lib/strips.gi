@@ -39,7 +39,7 @@ InstallMethod(
             sy_list;    # Sublist of syllables in <data>
             
         if IsZeroStrip( strip ) then
-            return ZeroStrip( strip );
+            return strip;
         
         else
             data := DefiningDataOfStripNC( strip );

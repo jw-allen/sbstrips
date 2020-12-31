@@ -2139,7 +2139,7 @@ InstallMethod(
     [ IsStripRep ],
     function( strip )
         # This attribute is the ( ? )_1 operation from [WW85, Sec 3] while
-        #  <LefttAlterationTowardsTrDOfStrip> is the ( ? )_2 operation.  Of
+        #  <LeftAlterationTowardsTrDOfStrip> is the ( ? )_2 operation.  Of
         #  course, <v_1> = <w_2>, for <w> the reflection of the strip <v>.
         #
         #     [WW85]
@@ -2206,8 +2206,8 @@ InstallMethod(
         elif WidthOfStrip( strip ) = 0 then
             a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
             b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
-            c_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
-            d_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
         
             data := ShallowCopy( DefiningDataOfStripNC( strip ) );
             data[1] := UnderlyingPathOfSyllable( data[1] );
@@ -2241,8 +2241,8 @@ InstallMethod(
             
             a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
             b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
-            c_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
-            d_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
             
             if data[ Length( data ) ] = -1 then
                 make_substrip := function()
@@ -2268,7 +2268,7 @@ InstallMethod(
                     i := ExchangePartnerOfVertex( SourceOfPath( p ) );
                     
                     a_i := a_seq.( String( i ) );
-                    if a_i > 0 then
+                    # if a_i > 0 then
                         b_i := b_seq.( String( i ) );
                         q := PathBySourceAndLength( i,  a_i + b_i - 1 );
                         
@@ -2276,9 +2276,9 @@ InstallMethod(
                         Add( data, q );
                         Add( data, 1 );
                         
-                    else
-                        make_substrip();
-                    fi;
+                    # else
+                        # make_substrip();
+                    # fi;
                     
                 else
                     make_substrip();                    
@@ -2304,7 +2304,7 @@ InstallMethod(
                     p := PathByTargetAndLength( i, 1 );
                     i := ExchangePartnerOfVertex( SourceOfPath( p ) );
                     a_i := a_seq.( String( i ) );
-                    if a_i > 0 then
+                    # if a_i > 0 then
                         b_i := b_seq.( String( i ) );
                         q := PathBySourceAndLength( i, a_i + b_i - 1 );
                         Add( data, p );
@@ -2312,16 +2312,15 @@ InstallMethod(
                         Add( data, q );
                         Add( data, 1 );
                     
-                    else
-                        make_substrip();
-                    fi;
+                    # else
+                        # make_substrip();
+                    # fi;
                 
                 else
                     make_substrip();
                 fi;
             fi;
             
-            ## DO SOMETHING WITH <data>!
             for k in Filtered( [ 1..Length(data) ], IsOddInt ) do
                 if k = 1 and data[2] = -1 then
                     data[k] := Syllabify( data[k], 1 );
@@ -2368,3 +2367,4 @@ InstallMethod(
         fi;
     end
 );
+

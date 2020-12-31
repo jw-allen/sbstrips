@@ -2418,3 +2418,17 @@ InstallMethod(
         fi;
     end
 );
+
+InstallOtherMethod(
+    TrDOfStrip,
+    "for a (flat) list of strips",
+    [ IsList ],
+    function( list )
+        if not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+            
+        else
+            return List( list, TrDOfStrip );
+        fi;
+    end
+);

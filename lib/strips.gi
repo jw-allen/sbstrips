@@ -2432,3 +2432,27 @@ InstallOtherMethod(
         fi;
     end
 );
+
+InstallOtherMethod(
+    TrDOfStrip,
+    "for a collected list of strips",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Elements of <clist>
+    
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            elts := List( clist, x -> x[1] );
+            
+            if not ForAll( elts, IsStripRep ) then
+                TryNextMethod();
+                
+            else
+                return CollectedListElementwiseFunction( clist, TrDOfStrip );
+            fi;
+        fi;
+    end
+);

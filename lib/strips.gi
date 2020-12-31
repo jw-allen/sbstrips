@@ -2368,3 +2368,53 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    TrDOfStrip,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            left, right,    # Left/right "alterations" of <strip>
+            sba;            # Defining SB algebra of <strip>
+    
+        if HasTrDOfStrip( strip ) then
+            return TrDOfStrip( strip );
+        
+        elif IsZeroStrip( strip ) then
+            return strip;
+            
+        elif IsVirtualStripRep( strip ) then
+            Error( "TrD is not defined on virtual strips, since they do not ",
+             "represent string modules!" );
+        
+        else
+            left := LeftAlterationTowardsTrDOfStrip( strip );
+            right := RightAlterationTowardsTrDOfStrip( strip );
+            
+            if IsZeroStrip( left ) and IsZeroStrip( right ) then
+                return left;
+            
+            elif IsZeroStrip( left ) and ( not IsZeroStrip( right ) ) then
+                return LeftAlterationTowardsTrDOfStrip( right );
+                
+            elif ( not IsZeroStrip( left ) ) and IsZeroStrip( right ) then
+                return RightAlterationTowardsTrDOfStrip( left );
+                
+            else
+                if not
+                 ( RightAlterationTowardsTrDOfStrip( left )
+                   =
+                   LeftAlterationTowardsTrDOfStrip( right ) )
+                 then
+                Error( "The left and right alterations of the given strip\n",
+                 strip, "\ndo not agree when they should. You have revealed ",
+                 "a bug! Please contact the maintainer of the SBStrips ",
+                 "package!");
+                
+                else
+                    return RightAlterationTowardsTrDOfStrip( left );
+                fi;
+            fi;
+        fi;
+    end
+);

@@ -485,6 +485,7 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 ##    <ManSection>
 ##      <Attr Name="VectorSpaceDualOfStrip" Arg="strip"/>
 ##      <Attr Name="OppositeStrip" Arg="strip"/>
+##      <Attr Name="DOfStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip representing some string module
 ##        <M>X</M> over a <M>K</M>-algebra <M>A</M>.
@@ -498,16 +499,19 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 ##        Recall that <M>\D X</M> is a module for <M>A^\op</M>, the opposite
 ##        algebra to <M>A</M>.
 ##        <P />
-##        <C>OppositeStrip</C> is a synonym for <C>VectorSpaceDualOfStrip</C>.
+##        <C>OppositeStrip</C> and <C>DOfStrip</C> are synonyms for
+##        <C>VectorSpaceDualOfStrip</C>.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "VectorSpaceDualOfStrip", IsStripRep );
 DeclareSynonymAttr( "OppositeStrip", VectorSpaceDualOfStrip );
+DeclareSynonymAttr( "DOfStrip", VectorSpaceDualOfStrip );
 
-##  <#GAPDoc Label="TrDOfStrip">
+##  <#GAPDoc Label="DocTrDOfStrip">
 ##    <ManSection>
 ##      <Attr Name="TrDOfStrip" Arg="strip"/>
+##      <Attr Name="ARInverseTranslateOfStrip" Arg="strip"/>
 ##      <Description>
 ##        Argument: <A>strip</A>, a strip representing some string module
 ##        <M>X</M>.
@@ -519,18 +523,58 @@ DeclareSynonymAttr( "OppositeStrip", VectorSpaceDualOfStrip );
 ##      </Returns>
 ##      <Description>
 ##        Recall that if <M>X</M> is injective then <M>\Tr \D X = 0</M>.
+##        <P />
+##        <C>ARInverseTranslateOfStrip</C> is a synonym for <C>TrDOfStrip</C>.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute(
- "LeftAlterationTowardsTrDOfStrip",
- IsStripRep
- );
-DeclareAttribute(
- "RightAlterationTowardsTrDOfStrip",
- IsStripRep
- );
-DeclareAttribute(
- "TrDOfStrip",
- IsStripRep
-);
+DeclareAttribute( "LeftAlterationTowardsTrDOfStrip", IsStripRep );
+DeclareAttribute( "RightAlterationTowardsTrDOfStrip", IsStripRep );
+DeclareAttribute( "TrDOfStrip", IsStripRep );
+DeclareSynonymAttr( "ARInverseTranslateOfStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocTransposeOfStrip">
+##    <ManSection>
+##      <Attr Name="TransposeOfStrip" Arg="strip"/>
+##      <Attr Name="TrOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument: <A>strip</A>, a strip representing some string module
+##        <M>X</M>.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a strip representing the transpose <M>\Tr X</M> of <M>X</M>.
+##      </Returns>
+##      <Description>
+##        Recall that if <M>X</M> is an <M>A</M>-module, then <M>\Tr X</M> is
+##        an <M>A^\op</M>-module.
+##        <P />
+##        <C>TrOfStrip</C> is a synonym for <C>TransposeOfStrip</C>.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "TrOfStrip", IsStripRep );
+DeclareSynonymAttr( "TransposeOfStrip", TrOfStrip );
+
+##  <#GAPDoc Label="DocDTrOfStrip">
+##    <ManSection>
+##      <Attr Name="DTrOfStrip" Arg="strip"/>
+##      <Attr Name="ARTranslateOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument: <A>strip</A>, a strip representing some string module
+##        <M>X</M>.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a strip representing the Auslander-Reiten translate <M>\D \Tr X</M>
+##        of <M>X</M>.
+##      </Returns>
+##      <Description>
+##        Recall that if <M>X</M> is projective then <M>\D \Tr X = 0</M>.
+##        <P />
+##        <C>ARTranslateOfStrip</C> is a synonym for <C>DTrOfStrip</C>.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "DTrOfStrip", IsStripRep );
+DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );

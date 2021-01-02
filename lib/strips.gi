@@ -2169,6 +2169,9 @@ InstallMethod(
             make_superstrip,
                         # Local function obtaining a "superstrip" of <strip>
             p, q, r,    # Path variables
+            return_zero_strip,
+                        # Boolean variable, determining whether to return
+                        #  <zero_strip> or not
             sba,        # Defining SB algebra of <strip>
             v,          # Vertex variable
             x, y,       # Syllable variables
@@ -2193,14 +2196,14 @@ InstallMethod(
         #  <LeftAlterationTowardsTrDOfStrip> in the fashion mentioned above. If
         #  the other is already known, then we can save ourselves some hard
         #  work.
-        elif
-         HasLeftAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
-         then
-            return ReflectionOfStrip(
-             LeftAlterationTowardsTrDOfStrip(
-              ReflectionOfStrip( strip )
-              )
-             );
+        # elif
+         # HasLeftAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
+         # then
+            # return ReflectionOfStrip(
+             # LeftAlterationTowardsTrDOfStrip(
+              # ReflectionOfStrip( strip )
+              # )
+             # );
             
         # Deal with simple strips
         elif WidthOfStrip( strip ) = 0 then
@@ -2236,6 +2239,7 @@ InstallMethod(
         # Deal with strips of positive width
         else
             data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
+            return_zero_strip := false;
             
             # # Tidy up <data>, removing any stationary syllables
             
@@ -2249,7 +2253,6 @@ InstallMethod(
             # data := Compacted( data );
             
             # Setup
-            
             lin_ind := LinIndOfSBAlg( sba );
             
             a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
@@ -2263,7 +2266,7 @@ InstallMethod(
                         p;  # Path variable
                 
                     if Length( data ) = 2 then
-                        return zero_strip;
+                        return_zero_strip := true;
                         
                     else
                         Remove( data, Length( data ) );
@@ -2295,7 +2298,8 @@ InstallMethod(
                     Add( data, 1 );
                     
                 else
-                    make_substrip();                    
+                    make_substrip();  
+                    
                 fi;
                 
             elif data[ Length( data ) ] = 1 then
@@ -2318,21 +2322,19 @@ InstallMethod(
                     p := PathByTargetAndLength( i, 1 );
                     i := ExchangePartnerOfVertex( SourceOfPath( p ) );
                     a_i := a_seq.( String( i ) );
-                    # if a_i > 0 then
-                        b_i := b_seq.( String( i ) );
-                        q := PathBySourceAndLength( i, a_i + b_i - 1 );
-                        Add( data, p );
-                        Add( data, -1 );
-                        Add( data, q );
-                        Add( data, 1 );
-                    
-                    # else
-                        # make_substrip();
-                    # fi;
-                
+                    b_i := b_seq.( String( i ) );
+                    q := PathBySourceAndLength( i, a_i + b_i - 1 );
+                    Add( data, p );
+                    Add( data, -1 );
+                    Add( data, q );
+                    Add( data, 1 );                
                 else
                     make_substrip();
                 fi;
+            fi;
+            
+            if return_zero_strip then
+                return zero_strip;
             fi;
             
             for k in Filtered( [ 1..Length(data) ], IsOddInt ) do
@@ -2573,3 +2575,4 @@ InstallOtherMethod(
         fi;
     end
 );
+

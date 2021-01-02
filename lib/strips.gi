@@ -2508,8 +2508,7 @@ InstallOtherMethod(
             elts := List( clist, x -> x[1] );
             
             if ForAll( elts, IsStripRep ) then
-                return
-                 CollectedListElementwiseFunction( clist, DTrOfStrip );
+                return CollectedListElementwiseFunction( clist, DTrOfStrip );
                  
             else
                 Error( "The given collected list has elements that are not ",
@@ -2517,6 +2516,58 @@ InstallOtherMethod(
              fi;
         else
             TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    TrOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )           
+        if HasTransposeOfStrip( strip ) then
+            return TransposeOfStrip( strip );
+        
+        else
+            return TrDOfStrip( DOfStrip( strip ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrOfStrip,
+    "for a (flat) list of strip-reps",
+    [ IsList ],
+    function( list )
+        if not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+            
+        else
+            return List( list, TrOfStrip );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Element list of <clist>
+
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+
+        else
+            elts := List( clist, x -> x[1] );
+            if not ForAll( elts, IsStripRep ) then
+                Error( "The given collected list has elements that are not ",
+                 "strip-reps!" );
+
+            else
+                return CollectedListElementwiseFunction( clist, TrOfStrip );
+            fi;
         fi;
     end
 );

@@ -601,3 +601,19 @@ DeclareSynonymAttr( "TransposeOfStrip", TrOfStrip );
 ##  <#/GAPDoc>
 DeclareAttribute( "DTrOfStrip", IsStripRep );
 DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );
+
+##  <#GAPDoc Label="DocSuspensionOfStrip">
+##    <ManSection>
+##      <Attr Name="SuspensionOfStrip" Arg="strip"/>
+##      <Description>
+##        Argument: <A>strip</A>, a strip representing some string module
+##        <M>X</M>
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a list of strips, representing the indecomposable direct summands of
+##        the suspension <M>\suspension X = \Tr \syzygy \Tr X</M> of <M>X</M>
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "SuspensionOfStrip", IsStripRep );

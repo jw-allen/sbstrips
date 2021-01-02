@@ -2469,4 +2469,54 @@ InstallOtherMethod(
     end
 );
 
+InstallMethod(
+    DTrOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        if HasDTrOfStrip( strip ) then
+            return DTrOfStrip( strip );
+        
+        else
+            return DOfStrip( TrDOfStrip( DOfStrip( strip ) ) );
+        fi;
+    end
+);
 
+InstallOtherMethod(
+    DTrOfStrip,
+    "for a list of strip-reps",
+    [ IsList ],
+    function( list )
+        if not ( ForAll( list, IsStripRep ) ) then
+            TryNextMethod();
+        else
+            return List( list, DTrOfStrip );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    DTrOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Element list of <clist>
+
+        if IsCollectedList( clist ) then
+            elts := List( clist, x -> x[1] );
+            
+            if ForAll( elts, IsStripRep ) then
+                return
+                 CollectedListElementwiseFunction( clist, DTrOfStrip );
+                 
+            else
+                Error( "The given collected list has elements that are not ",
+                 "strips!" );
+             fi;
+        else
+            TryNextMethod();
+        fi;
+    end
+);

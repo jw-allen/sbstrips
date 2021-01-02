@@ -82,22 +82,27 @@ DeclareOperation( "SBAlgOfStrip", [ IsStripRep ] );
 ##      </Heading>
 ##
 ##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##  <!--
 ##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
+##  -->
 ##      <Description>
-##		  Argument (first method): <A>strip</A>, a strip
+##		  Argument: <A>strip</A>, a strip
+##  <!--
 ##        <P />
 ##        Argument (second method): <A>list</A>, a list of strips
+##  -->    
 ##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list of strips, corresponding to the indecomposable direct summands
-##        of the syzygy of <A>strip</A> (in the first method) or of the strips
-##        in <A>list</A>. 
+##        of the syzygy of <A>strip</A>.
 ##      </Returns>
 ##      <Description>
+##  <!--
 ##        The second method just calls the first method on each entry of
 ##        <A>list</A> and concatenates the results.
 ##        <P />
+##  -->
 ##        For higher syzygies, <Ref Oper="NthSyzygyOfStrip"
 ##        Label="for strips"/> is probably more convenient and <Ref
 ##        Oper="CollectedNthSyzygyOfStrip" Label="for strips"/> probably more
@@ -114,26 +119,30 @@ DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 ##      </Heading>
 ##
 ##      <Meth Name="NthSyzygyOfStrip" Label="for strips" Arg="strip, N"/>
+##  <!--    
 ##      <Meth Name="NthSyzygyOfStrip" Label="for lists of strips"
 ##      Arg="list, N"/>
+##  -->
 ##      <Description>
-##        Arguments (first method): <A>strip</A>, a strip; <A>N</A>, a positive
-##        integer
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer
+##  <!--
 ##        <P />
 ##        Arguments (second method): <A>list</A>, a list of strips; <A>N</A>, a
 ##        positive integer
+##  -->
 ##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a list of strips containing the indecomposable <A>N</A>th syzygy
-##        strips of <A>strip</A> (first method), or of the strips in
-##        <A>list</A>
+##        strips of <A>strip</A>
 ##        <P />
 ##      </Returns>
 ##      <Description>
+##  <!--
 ##        The second method simply calls the first method on each of the strips
 ##        in <A>list</A> and concatenates the results.
 ##        <P />
+##  -->
 ##        For large <M>N</M> -- say, <M>N \geq 10</M> -- consider using <Ref
 ##        Oper="CollectedNthSyzygyOfStrip" Label="for strips"/> instead, since
 ##        it is much more efficient.
@@ -149,32 +158,36 @@ DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 ##      </Heading>
 ##
 ##		<Meth Name="CollectedSyzygyOfStrip" Label="for strips" Arg="strip"/>
+##  <!--
 ##      <Meth Name="CollectedSyzygyOfStrip" Label="for (flat) lists of strips"
 ##      Arg="list"/>
 ##      <Meth Name="CollectedSyzygyOfStrip"
 ##      Label="for collected lists of strips" Arg="clist"/>
+##  -->
 ##      <Description>
-##        Argument (first method): <A>strip</A>, a strip
+##        Argument: <A>strip</A>, a strip
+##  <!--
 ##        <P />
 ##        Argument (second method): <A>list</A>, a (flat) list of strips
 ##        <P />
 ##		  Argument (third method): <A>clist</A>, a collected list of strips
+##  -->
 ##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose elements are the syzygy strips of
-##        <A>strip</A> (first method) or of the strips in <A>list</A> (second
-##        method) or in <A>clist</A> (third method), taking multiplicity of
-##        elements into account in the latter case
-##        <P />
+##        <A>strip</A>
 ##      </Returns>
 ##      <Description>
-##        The first method is equivalent to calling
-##        <C>Collected( SyzygyOfStrip( </C><A>strip</A><C> ) );</C>. The second
+##        This is equivalent to calling
+##        <C>Collected( SyzygyOfStrip( </C><A>strip</A><C> ) );</C>.
+##  <!--
+##        The second
 ##        method applies the first method to each entry in <A>list</A> and then
 ##        combines the result; this is equivalent to
 ##        <C>Collected( SyzygyOfStrip( </C><A>list</A><C> ) );</C>.
 ##        <P />
+##  -->
 ##      </Description>
 ##	  </ManSection>
 ##	<#/GAPDoc>
@@ -187,27 +200,33 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 ##      </Heading>
 ##      <Meth Name="CollectedNthSyzygyOfStrip" Label="for strips"
 ##      Arg="strip, N"/>
+##  <!--
 ##      <Meth Name="CollectedNthSyzygyOfStrip" Label="for lists of strips"
 ##      Arg="list, N"/>
 ##      <Meth Name="CollectedNthSyzygyOfStrip"
 ##      Label="for collected lists of strips" Arg="list, N"/>
+##  -->
 ##      <Description>
-##        Arguments (first method): <A>strip</A>, a strip; <A>N</A>, a positive
-##        integer.
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a positive integer.
+##  <!--
 ##        <P />
 ##        Arguments (second method): <A>list</A>, a (flat) list of strips;
 ##        <A>N</A>, a positive integer.
 ##        <P />
 ##        Arguments (third method): <A>clist</A>, a collected list of strips;
 ##        <A>N</A>, a positive integer.
+##  -->
 ##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a collected list, whose entries are the <A>N</A>th syzygies of
-##        <A>strip</A> (first method), or of the strip in <A>list</A> (second
+##        <A>strip</A>.
+##  <!--
+##        (first method), or of the strip in <A>list</A> (second
 ##        method) or in <A>clist</A> (third method), taking multiplicities of
 ##        elements into account in latter case
 ##        <P />
+##  -->
 ##     </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -421,16 +440,20 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##  <#GAPDoc Label="DocModuleOfStrip">
 ##    <ManSection>
 ##      <Meth Name="ModuleOfStrip" Arg="strip" Label="for a strip"/>
+##  <!--
 ##      <Meth Name="ModuleOfStrip" Arg="list"
 ##      Label="for a (flat) list of strips"/>
 ##      <Meth Name="ModuleOfStrip" Arg="clist"
 ##      Label="for a collected list of strips"/>
+##  -->
 ##      <Description>
-##        Argument (first method): a strip <A>strip</A>.
+##        Argument: a strip <A>strip</A>.
+##  <!--
 ##        <P />
 ##        Argument (second method): a list <A>list</A> of strips.
 ##        <P />
 ##        Argument (third method): a collected list <A>clist</A> of strips.
+##  -->
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -439,15 +462,16 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##        in <A>list</A> or <A>clist</A> respectively.
 ##      </Returns>
 ##      <Description>
-##        The first method for this operation returns the string module
-##        corresponding to the strip  <A>strip</A>. More specifically, it gives
-##        that module as a quiver, ultimately using <Ref
-##        Oper="RightModuleOverPathAlgebra" Label="with dimension vector"
-##        BookName="QPA"/>.
+##        This operation returns the string module corresponding to the strip
+##        <A>strip</A>. More specifically, it gives that module as a quiver,
+##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
+##        Label="with dimension vector" BookName="QPA"/>.
+##  <!--
 ##        <P />
 ##        The second and third methods apply the first method to
 ##        each strip in <A>list</A> or in <A>clist</A> respectively, returning
 ##        a list or collected list of modules as befits.
+##  -->
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -479,7 +503,6 @@ DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 ##  <#/GAPDoc>
 DeclareOperation( "DirectSumModuleDataOfListOfStrips", [ IsList ] );
 DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
-
 
 ##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
 ##    <ManSection>

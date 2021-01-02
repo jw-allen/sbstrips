@@ -2272,7 +2272,9 @@ InstallMethod(
                         data[ Length( data ) - 1 ] :=
                          PathOneArrowShorterAtTarget( p );
                          
-                        if Length( data ) = 2 then
+                        if
+                         Length( data ) = 2 and LengthOfPath( data[1] ) = 0
+                         then
                             data[ 2 ] := -1;
                         fi;
                     fi;
@@ -2558,7 +2560,7 @@ InstallOtherMethod(
 
         if not IsCollectedList( clist ) then
             TryNextMethod();
-
+            
         else
             elts := List( clist, x -> x[1] );
             if not ForAll( elts, IsStripRep ) then

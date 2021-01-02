@@ -2237,6 +2237,19 @@ InstallMethod(
         else
             data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
             
+            # # Tidy up <data>, removing any stationary syllables
+            
+            # for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+                # if IsStationarySyllable( data[ k ] ) then
+                    # Unbind( data[k] );
+                    # Unbind( data[k+1] );
+                # fi;
+            # od;
+            
+            # data := Compacted( data );
+            
+            # Setup
+            
             lin_ind := LinIndOfSBAlg( sba );
             
             a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
@@ -2258,6 +2271,10 @@ InstallMethod(
                         p := data[ Length( data ) - 1 ];
                         data[ Length( data ) - 1 ] :=
                          PathOneArrowShorterAtTarget( p );
+                         
+                        if Length( data ) = 2 then
+                            data[ 2 ] := -1;
+                        fi;
                     fi;
                 end;
             
@@ -2268,17 +2285,12 @@ InstallMethod(
                     i := ExchangePartnerOfVertex( SourceOfPath( p ) );
                     
                     a_i := a_seq.( String( i ) );
-                    # if a_i > 0 then
-                        b_i := b_seq.( String( i ) );
-                        q := PathBySourceAndLength( i,  a_i + b_i - 1 );
-                        
-                        data[ Length( data ) - 1 ] := p;
-                        Add( data, q );
-                        Add( data, 1 );
-                        
-                    # else
-                        # make_substrip();
-                    # fi;
+                    b_i := b_seq.( String( i ) );
+                    q := PathBySourceAndLength( i,  a_i + b_i - 1 );
+                    
+                    data[ Length( data ) - 1 ] := p;
+                    Add( data, q );
+                    Add( data, 1 );
                     
                 else
                     make_substrip();                    
@@ -2456,3 +2468,5 @@ InstallOtherMethod(
         fi;
     end
 );
+
+

@@ -880,35 +880,10 @@ InstallOtherMethod(
             TryNextMethod();
         
         else
-            # Tidy up <clist>
-            clist := Recollected( clist );
-            
-            list := [];
-
-            # Work entry-by-entry of <clist>            
-            for k in [ 1 .. Length( clist ) ] do
-                entry := clist[k];
-                
-                # Say each entry is
-                #       [ strip, mult ]
-                #  We calculate the collected syzygy of <strip> then multiply
-                #  all multiplicities by <mult>. That gives us the collected
-                #  syzygy of the entry.
-                strip := entry[1];
-                mult := entry[2];
-                syz_clist := CollectedSyzygyOfStrip( strip );
-                
-                for j in [ 1 .. Length( syz_clist ) ] do
-                    syz_clist[j][2] := syz_clist[j][2] * mult;
-                od;
-                
-                # We record this in collected list <syz_clist>
-                Append( list, syz_clist );
-            od;
-            
-            # Once the collected syzygies for each entry of <clist> have been
-            #  calculated, we tidy up the answer            
-            return Recollected( list );
+            return CollectedListElementwiseListValuedFunction(
+             clist,
+             SyzygyOfStrip
+             );
         fi;
     end
 );
@@ -2575,4 +2550,3 @@ InstallOtherMethod(
         fi;
     end
 );
-

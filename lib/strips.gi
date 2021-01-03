@@ -2550,3 +2550,67 @@ InstallOtherMethod(
         fi;
     end
 );
+
+InstallMethod(
+    SuspensionOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )            
+        if HasSuspensionOfStrip( strip ) then
+            return SuspensionOfStrip( strip );
+            
+        elif IsVirtualStripRep( strip ) then
+            Error( "Virtual strips do not have suspensions" );
+
+        elif IsZeroStrip( strip ) then
+            return strip;
+            
+        else
+            return TrOfStrip( SyzygyOfStrip( TrOfStrip( strip ) ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    SuspensionOfStrip,
+    "for a (flat) list of strip-reps",
+    [ IsList ],
+    function( list )
+        if IsCollectedList( list ) then
+            TryNextMethod();
+            
+        elif not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+        
+        else
+            return Concatenation( List( list, SuspensionOfStrip ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    SuspensionOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Elements of <clist>
+
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            elts := List( clist, x -> x[1] );
+            if not ForAll( elts, IsStripRep ) then
+                Error( "The given collected list has elements that are not ",
+                 "strip-reps" );
+                 
+            else
+                return CollectedListElementwiseListValuedFunction(
+                 clist,
+                 SuspensionOfStrip
+                 );
+            fi;
+        fi;
+    end
+);

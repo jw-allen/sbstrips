@@ -264,6 +264,62 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    CollectedListElementwiseListValuedFunction,
+    "for a collected list and a (flat) list-valued function",
+    [ IsList, IsFunction ],
+    function( clist, func )
+        local
+            elt,            # Variable, for elements of <clist>
+            entry,          # Variable, for entries of <clist>
+            j, k,           # Integer variables, indexing entries of lists
+            image_clist,    # Collected image of <elt> in <func>
+            list,           # List variable
+            mult;           # Integer variable, for multiplicity of <elt>
+            
+        if not IsCollectedList( clist ) then
+            Error( "The first argument ", clist,
+             " should be a collected list!" );
+             
+        else
+            # Tidy up <clist>
+            clist := Recollected( clist );
+            
+            list := [];
+
+            # Work entry-by-entry of <clist>            
+            for k in [ 1 .. Length( clist ) ] do
+                entry := clist[k];
+                
+                # Say each entry of <clist> is
+                #       [ elt, mult ]
+                #  We calculate and <Collect> the <func>-image of <elt> and
+                #  then multiply all multiplicities in the image by <mult>.
+                #  That gives us the collected image of the entry.
+                elt := entry[1];
+                mult := entry[2];
+                image_clist := func( elt );
+                
+                if not IsCollectedList( image_clist ) then
+                    image_clist := Collected( image_clist );
+                fi;
+                
+                for j in [ 1 .. Length( image_clist ) ] do
+                    image_clist[j][2] := image_clist[j][2] * mult;
+                od;
+                
+                # We record this in collected list <syz_clist>
+                Append( list, image_clist );
+            od;
+            
+            # Once the collected syzygies for each entry of <clist> have been
+            #  calculated, we tidy up the answer            
+            return Recollected( list );
+        fi;
+    end
+);
+
+
 # Useful functions for QPA
 
 InstallMethod(

@@ -150,6 +150,8 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##  <#/GAPDoc>
 DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 
+DeclareOperation( "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ] );
+
 
 ##  For QPA
 

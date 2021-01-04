@@ -18,6 +18,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    SBAlgOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        return FamilyObj( strip )!.sb_alg;
+    end
+);
+
+InstallMethod(
     ReflectionOfStrip,
     "for a strip rep",
     [ IsStripRep ],
@@ -29,28 +38,34 @@ InstallMethod(
             ori_list,   # Sublist of orientations in <data>
             sy_list;    # Sublist of syllables in <data>
             
-        data := strip!.data;
-        l := Length( data );
+        if IsZeroStrip( strip ) then
+            return strip;
         
-        # The syllables are in the odd positions of <data>; the orientations in
-        #  the even positions.
-        sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
-        ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
+        else
+            data := DefiningDataOfStripNC( strip );
+            l := Length( data );
+            
+            # The syllables are in the odd positions of <data>; the orien-
+            #  -tations in the even positions.
+            sy_list := data{ Filtered( [ 1..l ], IsOddInt ) };
+            ori_list := data{ Filtered( [ 1..l ], IsEvenInt ) };
 
-        # <sy_list> needs to be reversed individually and then interwoven with
-        #  <ori_list>
-        sy_list := Reversed( sy_list );
-        
-        list := [1..l];
-        for k in list do
-            if IsOddInt( k ) then
-                list[ k ] := sy_list[ (k+1)/2  ];
-            elif IsEvenInt( k ) then
-                list[ k ] := ori_list[ k/2 ];
-            fi;
-        od;
+            # <sy_list> needs to be reversed individually and then interwoven
+            #  with <ori_list>
+            sy_list := Reversed( sy_list );
+            
+            list := [1..l];
+            for k in list do
+                if IsOddInt( k ) then
+                    list[ k ] := sy_list[ (k+1)/2  ];
+                elif IsEvenInt( k ) then
+                    list[ k ] := ori_list[ k/2 ];
+                fi;
+            od;
 
-        return CallFuncList( StripifyFromSyllablesAndOrientationsNC, list );
+            return
+             CallFuncList( StripifyFromSyllablesAndOrientationsNC, list );
+        fi;
     end
 );
 
@@ -640,6 +655,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    DefiningDataOfStripNC,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        return strip!.data;
+    end
+);
+
+InstallMethod(
     SyzygyOfStrip,
     "for a strip",
     [ IsStripRep ],
@@ -856,35 +880,10 @@ InstallOtherMethod(
             TryNextMethod();
         
         else
-            # Tidy up <clist>
-            clist := Recollected( clist );
-            
-            list := [];
-
-            # Work entry-by-entry of <clist>            
-            for k in [ 1 .. Length( clist ) ] do
-                entry := clist[k];
-                
-                # Say each entry is
-                #       [ strip, mult ]
-                #  We calculate the collected syzygy of <strip> then multiply
-                #  all multiplicities by <mult>. That gives us the collected
-                #  syzygy of the entry.
-                strip := entry[1];
-                mult := entry[2];
-                syz_clist := CollectedSyzygyOfStrip( strip );
-                
-                for j in [ 1 .. Length( syz_clist ) ] do
-                    syz_clist[j][2] := syz_clist[j][2] * mult;
-                od;
-                
-                # We record this in collected list <syz_clist>
-                Append( list, syz_clist );
-            od;
-            
-            # Once the collected syzygies for each entry of <clist> have been
-            #  calculated, we tidy up the answer            
-            return Recollected( list );
+            return CollectedListElementwiseListValuedFunction(
+             clist,
+             SyzygyOfStrip
+             );
         fi;
     end
 );
@@ -1940,5 +1939,678 @@ InstallOtherMethod(
     function( strip )
         # Make <strip> into a one-entry list
         return DirectSumModuleOfListOfStrips( [ strip ] );
+    end
+);
+
+InstallMethod(
+    VectorSpaceDualOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,       # Defining data of <strip>
+            k,          # Integer variable, for positions in a list
+            opposite_path_or_orientation,
+                        # Local function, turning paths or orientations into
+                        #  the opposite path or orientation
+            sba,        # Defining SB algebra of <strip>
+            sba_op,     # Opposite path algebra of <sba>
+            strip_op,   # Output 
+            syll_list,  # Syllable list of <strip>
+            x, y,       # Variables, for vertices or syllables
+            zero_op;    # Zero strip of <sba_op>
+        
+        # Test whether the hard work has already been done
+        if HasVectorSpaceDualOfStrip( strip ) then
+            return VectorSpaceDualOfStrip( strip );
+
+        # Reject virtual strips. (They do not correspond to string modules, so
+        #  they have no sensible vector-space dual.)
+        elif IsVirtualStripRep( strip ) then
+            ErrorNoReturn( "Virtual strips do not have vector-space duals!" );
+
+        # Otherwise, only strips that represent string modules remain.
+        else
+            sba := SBAlgOfStrip( strip );
+            sba_op := OppositePathAlgebra( sba );
+            
+            # Deal with zero strip.
+            if IsZeroStrip( strip ) then
+                strip_op := ZeroStripOfSBAlg( sba_op );
+                
+            # Deal with simple strips (ie, strips of width 0).
+            elif WidthOfStrip( strip ) = 0 then
+            
+                # By constuction, simple strips are the juxtaposition of two
+                #  stationary syllables, displayed <( x, 1 )^{-1}( y, 1 )>. We
+                #  can harvest the underlying paths <x> and <y> of those
+                #  syllables, then turn them into their opposite paths <x_op>,
+                #  <y_op> in the opposite (over)quiver, then construct the
+                #  opposite strip easily: <( x_op, 1)^{-1}( y_op, 1 )>.
+            
+                # Obtain syllable list
+                syll_list := SyllableListOfStripNC( strip );
+                
+                # Harvest paths
+                x := UnderlyingPathOfSyllable( syll_list[1] );
+                y := UnderlyingPathOfSyllable( syll_list[2] );
+                
+                # Make into opposite paths
+                x := OppositePath( x );
+                y := OppositePath( y );
+                
+                # Make into stationary syllables (which always have stability
+                #  term 1).
+                x := Syllabify( x, 1 );
+                y := Syllabify( y, 1 );
+                
+                # Create vector-space-dual string
+                strip_op :=
+                 StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
+            
+            # Deal with strips of positive width.
+            else
+                data := ShallowCopy(
+                 PathAndOrientationListOfStripNC( strip )
+                 );
+                
+                # Replace all paths by opposite paths, and swap all orient-
+                #  -ations
+                
+                opposite_path_or_orientation := function( elt )
+                    if IsPath( elt ) then
+                        return OppositePath( elt );
+                    
+                    elif elt in [ 1, -1 ] then
+                        return -1*elt; 
+                    fi;
+                end;
+            
+                Apply( data, opposite_path_or_orientation );
+                
+                # Turn paths into syllables, taking into account whether they
+                #  should be boundary or not
+                for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+                    if ( k = 1 ) and data[ k+1 ] = -1 then
+                        data[k] := Syllabify( data[k], 1 );
+                        
+                    elif ( k = Length( data ) - 1 ) and data[ k+1 ] = 1 then
+                        data[k] := Syllabify( data[k], 1 );
+                        
+                    else
+                        data[k] := Syllabify( data[k], 0 );
+                    fi;
+                od;
+                
+                strip_op := CallFuncList(
+                 StripifyFromSyllablesAndOrientationsNC,
+                 data
+                 );
+            fi;
+            
+            # Ensure the double-dual is identically the original object.
+            SetVectorSpaceDualOfStrip( strip_op, strip);
+            return strip_op;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathAndOrientationListOfStripNC,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            data,   # Defining data of <strip>
+            is_stationary_func,
+                    # Local function, checking for stationary syllables
+            is_stationary_results,
+                    # Entrywise image of <data> is <is_stationary_func>
+            k,      # Integer variable, for indexing entries of <data>
+            make_syllables_into_paths;
+                        # Local function, checking for syllables and replacing
+                        #  them by their underlying paths
+            
+        data := ShallowCopy( DefiningDataOfStripNC( strip ) );
+        
+        if WidthOfStrip( strip ) = 0 then
+            data[1] := UnderlyingPathOfSyllable( data[1] );
+            data[3] := UnderlyingPathOfSyllable( data[3] );
+            
+        else
+            is_stationary_func := function( elt )
+                return
+                 IsSyllableRep( elt ) and IsStationarySyllable( elt );
+            end;
+            
+            while ForAny( data, is_stationary_func ) do
+                is_stationary_results := List( data, is_stationary_func );
+                k := Position( is_stationary_results, true );
+                Remove( data, k+1 );
+                Remove( data, k );
+            od;
+            
+            # Replace syllables by underlying paths
+            
+            make_syllables_into_paths := function( elt )
+                if IsSyllableRep( elt ) then
+                    return UnderlyingPathOfSyllable( elt );
+                    
+                else
+                    return elt;
+                fi;
+            end;
+            
+            Apply( data, make_syllables_into_paths );   
+        fi;
+        
+        return Immutable( data );
+    end
+);
+
+InstallMethod(
+    RightAlterationTowardsTrDOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        # This attribute is the ( ? )_1 operation from [WW85, Sec 3] while
+        #  <LeftAlterationTowardsTrDOfStrip> is the ( ? )_2 operation.  Of
+        #  course, <v_1> = <w_2>, for <w> the reflection of the strip <v>.
+        #
+        #     [WW85]
+        #       B. Wald and J. Waschbuesch
+        #       Tame biserial algebras
+        #       Journal of Algebra, 95:480-500
+        #       1985
+    
+        local
+            a_i, b_i, c_i, d_i,
+                        # <i>th term of <a_seq>, <b_seq>, <c_seq> and <d_seq>,
+                        #  respectively
+            a_seq, b_seq,
+                        # Integer and bit sequence of the source encoding of
+                        #  the permissible data of <strip>
+            c_seq, d_seq,
+                        # Integer and bit sequence of the target encoding of
+                        #  the permissible data of <strip>
+            data,       # Defining data of strip
+            i,          # Vertex variable
+            l,          # Integer variable, for the length of a path
+            k,          # Integer variable, for indexing entries of <data>
+            lin_ind,    # Set of paths representing linearly independent
+                        #  paths in <sba>
+            make_substrip,
+                        # Local function obtaining a "substrip" of <strip>
+            make_superstrip,
+                        # Local function obtaining a "superstrip" of <strip>
+            p, q, r,    # Path variables
+            return_zero_strip,
+                        # Boolean variable, determining whether to return
+                        #  <zero_strip> or not
+            sba,        # Defining SB algebra of <strip>
+            v,          # Vertex variable
+            x, y,       # Syllable variables
+            zero_strip; # Zero strip of <sba>
+        
+        sba := SBAlgOfStrip( strip );
+        zero_strip := ZeroStripOfSBAlg( sba ); 
+        
+        if HasRightAlterationTowardsTrDOfStrip( strip ) then
+            return RightAlterationTowardsTrDOfStrip( strip );
+            
+        # The "right alteration" of the zero strip is the zero strip.
+        elif IsZeroStrip( strip ) then
+            return zero_strip;
+            
+        # Reject virtual strips, since they do not represent string modules.
+        elif IsVirtualStripRep( strip ) then
+            ErrorNoReturn( "No right alteration exists for virtual strips!" );
+            
+        # <ReflectionOfStrip> is compatible with
+        #  <RightAlterationTowardsTrDOfStrip> and
+        #  <LeftAlterationTowardsTrDOfStrip> in the fashion mentioned above. If
+        #  the other is already known, then we can save ourselves some hard
+        #  work.
+        # elif
+         # HasLeftAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
+         # then
+            # return ReflectionOfStrip(
+             # LeftAlterationTowardsTrDOfStrip(
+              # ReflectionOfStrip( strip )
+              # )
+             # );
+            
+        # Deal with simple strips
+        elif WidthOfStrip( strip ) = 0 then
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
+        
+            data := ShallowCopy( DefiningDataOfStripNC( strip ) );
+            data[1] := UnderlyingPathOfSyllable( data[1] );
+            data[3] := UnderlyingPathOfSyllable( data[3] );
+            
+            i := data[3];
+            
+            c_i := c_seq.( String( i ) );
+            if c_i = 0 then
+                return zero_strip;
+                
+            else
+                p := PathByTargetAndLength( i, 1 );
+                i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                
+                a_i := a_seq.( String( i ) );
+                b_i := b_seq.( String( i ) );
+                q := PathBySourceAndLength( i, a_i + b_i - 1 );
+                
+                x := Syllabify( p, 1 );
+                y := Syllabify( q, 1 );
+
+                return StripifyFromSyllablesAndOrientationsNC( x, -1, y, 1 );
+            fi;
+        
+        # Deal with strips of positive width
+        else
+            data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
+            return_zero_strip := false;
+            
+            # # Tidy up <data>, removing any stationary syllables
+            
+            # for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+                # if IsStationarySyllable( data[ k ] ) then
+                    # Unbind( data[k] );
+                    # Unbind( data[k+1] );
+                # fi;
+            # od;
+            
+            # data := Compacted( data );
+            
+            # Setup
+            lin_ind := LinIndOfSBAlg( sba );
+            
+            a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
+            b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
+            c_seq := TargetEncodingOfPermDataOfSBAlg( sba )[1];
+            d_seq := TargetEncodingOfPermDataOfSBAlg( sba )[2];
+            
+            if data[ Length( data ) ] = -1 then
+                make_substrip := function()
+                    local
+                        p;  # Path variable
+                
+                    if Length( data ) = 2 then
+                        return_zero_strip := true;
+                        
+                    else
+                        Remove( data, Length( data ) );
+                        Remove( data, Length( data ) );
+                        p := data[ Length( data ) - 1 ];
+                        data[ Length( data ) - 1 ] :=
+                         PathOneArrowShorterAtTarget( p );
+                         
+                        if
+                         Length( data ) = 2 and LengthOfPath( data[1] ) = 0
+                         then
+                            data[ 2 ] := -1;
+                        fi;
+                    fi;
+                end;
+            
+                p := data[ Length( data ) - 1 ];
+                
+                if PathOneArrowLongerAtSource( p ) in lin_ind then
+                    p := PathOneArrowLongerAtSource( p );
+                    i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                    
+                    a_i := a_seq.( String( i ) );
+                    b_i := b_seq.( String( i ) );
+                    q := PathBySourceAndLength( i,  a_i + b_i - 1 );
+                    
+                    data[ Length( data ) - 1 ] := p;
+                    Add( data, q );
+                    Add( data, 1 );
+                    
+                else
+                    make_substrip();  
+                    
+                fi;
+                
+            elif data[ Length( data ) ] = 1 then
+                make_substrip := function()
+                    local
+                        p;  # Path variable
+                        
+                    p := data[ Length( data ) - 1 ];
+                    data[ Length( data ) - 1 ] :=
+                     PathOneArrowShorterAtTarget( p );
+                end;
+                
+                r := data[ Length( data ) - 1 ];
+                i := ExchangePartnerOfVertex( TargetOfPath( r ) );
+                
+                c_i := c_seq.( String( i ) );
+                
+                if c_i > 0 then
+                    d_i := d_seq.( String( i ) );
+                    p := PathByTargetAndLength( i, 1 );
+                    i := ExchangePartnerOfVertex( SourceOfPath( p ) );
+                    a_i := a_seq.( String( i ) );
+                    b_i := b_seq.( String( i ) );
+                    q := PathBySourceAndLength( i, a_i + b_i - 1 );
+                    Add( data, p );
+                    Add( data, -1 );
+                    Add( data, q );
+                    Add( data, 1 );                
+                else
+                    make_substrip();
+                fi;
+            fi;
+            
+            if return_zero_strip then
+                return zero_strip;
+            fi;
+            
+            for k in Filtered( [ 1..Length(data) ], IsOddInt ) do
+                if k = 1 and data[2] = -1 then
+                    data[k] := Syllabify( data[k], 1 );
+                elif
+                 k = ( Length( data ) - 1 ) and data[ k+1 ] = 1
+                 then
+                    data[k] := Syllabify( data[k], 1 );
+                else
+                    data[k] := Syllabify( data[k], 0 );
+                fi;
+            od;
+            
+            return
+             CallFuncList( StripifyFromSyllablesAndOrientationsNC, data );
+        fi;
+    end
+);
+
+InstallMethod(
+    LeftAlterationTowardsTrDOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        if HasLeftAlterationTowardsTrDOfStrip( strip ) then
+            return LeftAlterationTowardsTrDOfStrip( strip );
+        
+        elif IsZeroStrip( strip ) then
+            return strip;
+        
+        # Reject virtual strips, since they do not represent string modules
+        elif IsVirtualStripRep( strip ) then
+            ErrorNoReturn( "No right alteration exists for virtual strips!" );
+            
+        # <ReflectionOfStrip> is compatible with
+        #  <RightAlterationTowardsTrDOfStrip> and
+        #  <LeftAlterationTowardsTrDOfStrip> in the fashion mentioned above. If
+        #  the other is already known, then we can save ourselves some hard
+        #  work.
+        else
+            return
+             ReflectionOfStrip(
+              RightAlterationTowardsTrDOfStrip( ReflectionOfStrip( strip ) )
+              );
+        fi;
+    end
+);
+
+InstallMethod(
+    TrDOfStrip,
+    "for a strip rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            left, right,    # Left/right "alterations" of <strip>
+            sba;            # Defining SB algebra of <strip>
+    
+        if HasTrDOfStrip( strip ) then
+            return TrDOfStrip( strip );
+        
+        elif IsZeroStrip( strip ) then
+            return strip;
+            
+        elif IsVirtualStripRep( strip ) then
+            Error( "TrD is not defined on virtual strips, since they do not ",
+             "represent string modules!" );
+        
+        else
+            left := LeftAlterationTowardsTrDOfStrip( strip );
+            right := RightAlterationTowardsTrDOfStrip( strip );
+            
+            if IsZeroStrip( left ) and IsZeroStrip( right ) then
+                return left;
+            
+            elif IsZeroStrip( left ) and ( not IsZeroStrip( right ) ) then
+                return LeftAlterationTowardsTrDOfStrip( right );
+                
+            elif ( not IsZeroStrip( left ) ) and IsZeroStrip( right ) then
+                return RightAlterationTowardsTrDOfStrip( left );
+                
+            else
+                if not
+                 ( RightAlterationTowardsTrDOfStrip( left )
+                   =
+                   LeftAlterationTowardsTrDOfStrip( right ) )
+                 then
+                Error( "The left and right alterations of the given strip\n",
+                 strip, "\ndo not agree when they should. You have revealed ",
+                 "a bug! Please contact the maintainer of the SBStrips ",
+                 "package!");
+                
+                else
+                    return RightAlterationTowardsTrDOfStrip( left );
+                fi;
+            fi;
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrDOfStrip,
+    "for a (flat) list of strips",
+    [ IsList ],
+    function( list )
+        if not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+            
+        else
+            return List( list, TrDOfStrip );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrDOfStrip,
+    "for a collected list of strips",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Elements of <clist>
+    
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            elts := List( clist, x -> x[1] );
+            
+            if not ForAll( elts, IsStripRep ) then
+                TryNextMethod();
+                
+            else
+                return CollectedListElementwiseFunction( clist, TrDOfStrip );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    DTrOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        if HasDTrOfStrip( strip ) then
+            return DTrOfStrip( strip );
+        
+        else
+            return DOfStrip( TrDOfStrip( DOfStrip( strip ) ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    DTrOfStrip,
+    "for a list of strip-reps",
+    [ IsList ],
+    function( list )
+        if not ( ForAll( list, IsStripRep ) ) then
+            TryNextMethod();
+        else
+            return List( list, DTrOfStrip );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    DTrOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Element list of <clist>
+
+        if IsCollectedList( clist ) then
+            elts := List( clist, x -> x[1] );
+            
+            if ForAll( elts, IsStripRep ) then
+                return CollectedListElementwiseFunction( clist, DTrOfStrip );
+                 
+            else
+                Error( "The given collected list has elements that are not ",
+                 "strips!" );
+             fi;
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    TrOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )           
+        if HasTransposeOfStrip( strip ) then
+            return TransposeOfStrip( strip );
+        
+        else
+            return TrDOfStrip( DOfStrip( strip ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrOfStrip,
+    "for a (flat) list of strip-reps",
+    [ IsList ],
+    function( list )
+        if not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+            
+        else
+            return List( list, TrOfStrip );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    TrOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Element list of <clist>
+
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            elts := List( clist, x -> x[1] );
+            if not ForAll( elts, IsStripRep ) then
+                Error( "The given collected list has elements that are not ",
+                 "strip-reps!" );
+
+            else
+                return CollectedListElementwiseFunction( clist, TrOfStrip );
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    SuspensionOfStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )            
+        if HasSuspensionOfStrip( strip ) then
+            return SuspensionOfStrip( strip );
+            
+        elif IsVirtualStripRep( strip ) then
+            Error( "Virtual strips do not have suspensions" );
+
+        elif IsZeroStrip( strip ) then
+            return strip;
+            
+        else
+            return TrOfStrip( SyzygyOfStrip( TrOfStrip( strip ) ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    SuspensionOfStrip,
+    "for a (flat) list of strip-reps",
+    [ IsList ],
+    function( list )
+        if IsCollectedList( list ) then
+            TryNextMethod();
+            
+        elif not ForAll( list, IsStripRep ) then
+            TryNextMethod();
+        
+        else
+            return Concatenation( List( list, SuspensionOfStrip ) );
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    SuspensionOfStrip,
+    "for a collected list of strip-reps",
+    [ IsList ],
+    function( clist )
+        local
+            elts;   # Elements of <clist>
+
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+        
+        else
+            elts := List( clist, x -> x[1] );
+            if not ForAll( elts, IsStripRep ) then
+                Error( "The given collected list has elements that are not ",
+                 "strip-reps" );
+                 
+            else
+                return CollectedListElementwiseListValuedFunction(
+                 clist,
+                 SuspensionOfStrip
+                 );
+            fi;
+        fi;
     end
 );

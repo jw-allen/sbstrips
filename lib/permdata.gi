@@ -136,9 +136,9 @@ InstallMethod(
             for p in Flat( comps ) do
                 walk := ShallowCopy( WalkOfPath( p ) );
                 for k in [1..Length( walk )] do
-                    walk[k] := First( oarrs, x -> ( x!.LiftOf!.2RegAugPathOf = ( walk[k] ) ) );
+                    walk[k] := First( oarrs, x -> ( GroundPathOfOverquiverPathNC( x ) = walk[k] ) );
                 od;
-                Append( list, [ Product( walk ) ] );
+                Add( list, Product( walk ) );
             od;
 
             # Return the resulting list (of paths in the overquiver)

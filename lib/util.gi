@@ -264,6 +264,62 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    CollectedListElementwiseListValuedFunction,
+    "for a collected list and a (flat) list-valued function",
+    [ IsList, IsFunction ],
+    function( clist, func )
+        local
+            elt,            # Variable, for elements of <clist>
+            entry,          # Variable, for entries of <clist>
+            j, k,           # Integer variables, indexing entries of lists
+            image_clist,    # Collected image of <elt> in <func>
+            list,           # List variable
+            mult;           # Integer variable, for multiplicity of <elt>
+            
+        if not IsCollectedList( clist ) then
+            Error( "The first argument ", clist,
+             " should be a collected list!" );
+             
+        else
+            # Tidy up <clist>
+            clist := Recollected( clist );
+            
+            list := [];
+
+            # Work entry-by-entry of <clist>            
+            for k in [ 1 .. Length( clist ) ] do
+                entry := clist[k];
+                
+                # Say each entry of <clist> is
+                #       [ elt, mult ]
+                #  We calculate and <Collect> the <func>-image of <elt> and
+                #  then multiply all multiplicities in the image by <mult>.
+                #  That gives us the collected image of the entry.
+                elt := entry[1];
+                mult := entry[2];
+                image_clist := func( elt );
+                
+                if not IsCollectedList( image_clist ) then
+                    image_clist := Collected( image_clist );
+                fi;
+                
+                for j in [ 1 .. Length( image_clist ) ] do
+                    image_clist[j][2] := image_clist[j][2] * mult;
+                od;
+                
+                # We record this in collected list <syz_clist>
+                Append( list, image_clist );
+            od;
+            
+            # Once the collected syzygies for each entry of <clist> have been
+            #  calculated, we tidy up the answer            
+            return Recollected( list );
+        fi;
+    end
+);
+
+
 # Useful functions for QPA
 
 InstallMethod(
@@ -354,5 +410,120 @@ InstallMethod(
     [ IsQuiverAlgebra ],
     function( alg )
         return QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
+    end
+);
+
+InstallMethod(
+    PathOneArrowLongerAtSource,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            arrow,  # Arrow to add
+            vertex; # Source vertex of <path>
+            
+        if HasPathOneArrowLongerAtSource( path ) then
+            return PathOneArrowLongerAtSource( path );
+            
+        else
+            vertex := SourceOfPath( path );
+            if not ( InDegreeOfVertex( vertex ) = 1 ) then
+                return fail;
+                
+            else
+                arrow := IncomingArrowsOfVertex( vertex )[1];
+                return arrow * path;
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowLongerAtTarget,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            arrow,  # Arrow to add
+            vertex; # Target vertex of <path>
+            
+        if HasPathOneArrowLongerAtTarget( path ) then
+            return PathOneArrowLongerAtTarget( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        else
+            vertex := TargetOfPath( path );
+            if not ( OutDegreeOfVertex( vertex ) = 1 ) then
+                return fail;
+                
+            else
+                arrow := OutgoingArrowsOfVertex( vertex )[1];
+                return path * arrow;
+            fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowShorterAtSource,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            l,          # Length of <path>
+            new_path,   # Appropriate subpath of <path>
+            walk;       # Walk of path
+            
+        if HasPathOneArrowShorterAtSource( path ) then
+            return PathOneArrowShorterAtSource( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        elif LengthOfPath( path ) < 1 then
+            return fail;
+            
+        elif LengthOfPath( path ) = 1 then
+            return TargetOfPath( path );
+            
+        else
+            walk := WalkOfPath( path );
+            l := LengthOfPath( path );
+            new_path := Product( walk{ [ 2 .. l ] } );
+            return new_path;
+        fi;
+    end
+);
+
+InstallMethod(
+    PathOneArrowShorterAtTarget,
+    "for paths",
+    [ IsPath ],
+    function( path )
+        local
+            l,          # Length of <path>
+            new_path,   # Appropriate subpath of <path>
+            walk;       # Walk of path
+            
+        if HasPathOneArrowShorterAtTarget( path ) then
+            return PathOneArrowShorterAtTarget( path );
+            
+        elif IsZeroPath( path ) then
+            return fail;
+            
+        elif LengthOfPath( path ) < 1 then
+            return fail;
+            
+        elif LengthOfPath( path ) = 1 then
+            return SourceOfPath( path );
+            
+        else
+            walk := WalkOfPath( path );
+            l := LengthOfPath( path );
+            new_path := Product( walk{ [ 1 .. l-1 ] } );
+            return new_path;
+        fi;
     end
 );

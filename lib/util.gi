@@ -358,6 +358,42 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    IsCollectedSublist,
+    "for two collected lists",
+    [ IsList, IsList ],
+    function( sublist, superlist )
+        local
+            elt,        # Member of <elt_list>
+            elt_list,   # List of elements in <sublist>
+            k,          # Integer variable indexing entries of <sublist>
+            mult_sublist, mult_superlist;
+                        # Integer variable, giving the multiplicity of <elt> in
+                        #  <sublist> and <superlist> respectively
+        
+        if not IsCollectedList( sublist ) and IsCollectedList( superlist ) then
+            TryNextMethod();
+            
+        else
+            elt_list := ElementsOfCollectedList( sublist );
+            
+            for elt in elt_list do
+                mult_sublist :=
+                 MultiplicityOfElementInCollectedList( elt, sublist );
+                mult_superlist :=
+                 MultiplicityOfElementInCollectedList( elt, superlist );
+                
+                if mult_superlist < mult_sublist then
+                    return false;
+                fi;
+            od;
+            
+            return true;
+        fi;
+    end
+);
+
+
 
 # Useful functions for QPA
 

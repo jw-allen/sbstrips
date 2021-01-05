@@ -126,6 +126,31 @@ InstallMethod(
 );
 
 InstallMethod(
+    MultiplicityOfElementInCollectedList,
+    "for an object and a collected list",
+    [ IsObject, IsList ],
+    function( obj, clist )
+        local
+            j, k;   # Integer variables
+        
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            j := 0;
+            
+            for k in [ 1 .. Length( clist ) ] do
+                if clist[k][1] = obj then
+                    j := j + clist[k][2];
+                fi;
+            od;
+            
+            return j;
+        fi;
+    end;
+);
+
+InstallMethod(
     IsCollectedHomogeneousList,
     "for lists",
     [ IsList ],

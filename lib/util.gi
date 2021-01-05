@@ -112,6 +112,20 @@ InstallMethod(
 );
 
 InstallMethod(
+    ElementsOfCollectedList,
+    "for lists",
+    [ IsList ],
+    function( clist )
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            return List( clist, x -> x[1] );
+        fi;
+    end
+);
+
+InstallMethod(
     IsCollectedHomogeneousList,
     "for lists",
     [ IsList ],

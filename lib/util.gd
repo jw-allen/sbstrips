@@ -180,6 +180,20 @@ DeclareOperation(
  "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ]
  );
 
+##  <#GAPDoc Label="DocElementsOfCollectedList">
+##    <ManSection>
+##      <Oper Name="ElementsOfCollectedList" Arg="clist"/>
+##      <Description>
+##        Argument: <A>clist</A>, a collected list.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the elements of <A>clist</A>.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

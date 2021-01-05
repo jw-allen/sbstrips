@@ -147,7 +147,7 @@ InstallMethod(
             
             return j;
         fi;
-    end;
+    end
 );
 
 InstallMethod(

@@ -194,6 +194,23 @@ DeclareOperation(
 ##  <#/GAPDoc>
 DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
 
+##  <#GAPDoc Label="DocMultiplicityOfElementInCollectedList">
+##    <ManSection>
+##      <Oper Name="MultiplicityOfElementInCollectedList" Arg="obj, clist">
+##      <Description>
+##        Arguments: <A>obj</A>, an object; <A>clist</A>, a collected list.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a nonnegative integer, namely the (total) multiplicity of <A>obj</A>
+##        in <A>clist</A>.
+##      </Returns>
+##    </ManSection>    
+##  <#/GAPDoc>
+DeclareOperation(
+ "MultiplicityOfElementInCollectedList", [ IsObject, IsList ]
+ );
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

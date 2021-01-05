@@ -211,6 +211,21 @@ DeclareOperation(
  "MultiplicityOfElementInCollectedList", [ IsObject, IsList ]
  );
 
+##  <#GAPDoc Label="DocIsCollectedSublist">
+##    <ManSection>
+##      <Oper Name="IsCollectedSublist" Arg="sublist, superlist"/>
+##      <Description>
+##        Arguments: <A>sublist</A> and <A>superlist</A>, two collected lists
+##      </Description>
+##      <Returns>
+##        &true; if each element of <A>sublist</A> occurs in <A>superlist</A>
+##        with multiplicity as least that in <A>sublist</A>, and &false;
+##        otherwise.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

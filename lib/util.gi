@@ -113,7 +113,7 @@ InstallMethod(
 
 InstallMethod(
     ElementsOfCollectedList,
-    "for lists",
+    "for a collected list",
     [ IsList ],
     function( clist )
         if not IsCollectedList( clist ) then

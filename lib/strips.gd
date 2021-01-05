@@ -439,7 +439,7 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 
 ##  <#GAPDoc Label="DocModuleOfStrip">
 ##    <ManSection>
-##      <Meth Name="ModuleOfStrip" Arg="strip" Label="for a strip"/>
+##      <Meth Name="ModuleOfStrip" Arg="strip"/>
 ##  <!--
 ##      <Meth Name="ModuleOfStrip" Arg="list"
 ##      Label="for a (flat) list of strips"/>

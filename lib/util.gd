@@ -144,14 +144,41 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##      </Description>
 ##      <Returns>
 ##        a new collected list, obtained from <A>clist</A> by applying
-##        <A>func</A> to each element
+##        <A>func</A> to each element.
 ##      </Returns>
+##      <Description>
+##        If <A>func</A> returns lists (perhaps because it implements a
+##        "many-valued function"), consider using <Ref
+##        Oper="CollectedListElementwiseListValuedFunction"/> instead. 
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 
-DeclareOperation( "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ] );
-
+##  <#GAPDoc Label="DocCollectedListElementwiseListValuedFunction">
+##    <ManSection>
+##      <Oper Name="CollectedListElementwiseListValuedFunction"
+##      Arg="clist, func"/>
+##      <Description>
+##        Arguments: <A>clist</A>, a collected list; <A>func</A>, a function
+##        (presumed to return lists of objects).
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a new collected list.
+##      </Returns>
+##      <Description>
+##        Imagine <A>clist</A> were unpacked into a flat list, <A>func</A> were
+##        applied to each element of the flat list in turn and the result
+##        concatenated then collected. That is what this operation returns
+##        (although it determines the result more efficiently than the
+##        procedure just described).
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation(
+ "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ]
+ );
 
 ##  For QPA
 

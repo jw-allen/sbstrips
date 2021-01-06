@@ -196,7 +196,7 @@ DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
 
 ##  <#GAPDoc Label="DocMultiplicityOfElementInCollectedList">
 ##    <ManSection>
-##      <Oper Name="MultiplicityOfElementInCollectedList" Arg="obj, clist">
+##      <Oper Name="MultiplicityOfElementInCollectedList" Arg="obj, clist"/>
 ##      <Description>
 ##        Arguments: <A>obj</A>, an object; <A>clist</A>, a collected list.
 ##        <Br />
@@ -216,6 +216,7 @@ DeclareOperation(
 ##      <Oper Name="IsCollectedSublist" Arg="sublist, superlist"/>
 ##      <Description>
 ##        Arguments: <A>sublist</A> and <A>superlist</A>, two collected lists
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if each element of <A>sublist</A> occurs in <A>superlist</A>

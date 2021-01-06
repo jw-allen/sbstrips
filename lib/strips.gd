@@ -1,6 +1,9 @@
 DeclareRepresentation( "IsStripRep", IsAttributeStoringRep, [ "data" ] );
 DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
+DeclareOperation( "IsCollectedListOfStripReps", [ IsList ] );
+DeclareOperation( "IsFlatListOfStripReps", [ IsList ]  );
+
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "PathAndOrientationListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "DefiningDataOfStripNC", [ IsStripRep ] );

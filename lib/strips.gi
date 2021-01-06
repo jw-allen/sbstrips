@@ -18,6 +18,39 @@ InstallMethod(
 );
 
 InstallMethod(
+    IsFlatListOfStripReps,
+    "for a list",
+    [ IsList ],
+    function( list )
+        if list = Flat( list ) and ForAll( list, IsStripRep ) then
+            return true;
+
+        else
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsCollectedListOfStripReps,
+    "for a collected list",
+    [ IsList ],
+    function( clist )        
+        if IsCollectedList( clist ) then
+            if ForAll( ElementsOfCollectedList( clist ), IsStripRep ) then
+                return true;
+                
+            else
+                return false;
+            fi;
+            
+        else
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
     SBAlgOfStrip,
     "for a strip-rep",
     [ IsStripRep ],

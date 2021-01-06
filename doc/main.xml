@@ -25,6 +25,7 @@
 \tikzset{>=to}
 
 \DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\D}{D}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Mod}{Mod}
@@ -33,11 +34,14 @@
 \DeclareMathOperator{\Rep}{Rep}
 \DeclareMathOperator{\rep}{rep}
 \DeclareMathOperator{\syzygy}{\Omega}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\suspension}{\Sigma}
 
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\ideal}{\trianglelefteq}
 \newcommand{\Modcat}{\Mod\text{-}}
 \newcommand{\modcat}{\modules\text{-}}
+\newcommand{\op}{{\mathrm{op}}}
 "?>
 
 <Book Name="SBStrips">

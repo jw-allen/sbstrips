@@ -620,3 +620,21 @@ DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "SuspensionOfStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocIsStripDirectSummand">
+##    <ManSection>
+##      <Oper Name="IsStripDirectSummand" Arg="strip_or_strips, list"/>
+##      <Description>
+##        Arguments: <A>strip_or_strips</A>, a strip or list of strips or
+##        collected list of strips; <A>list</A>, a list or collected list of
+##        strips.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if the string module represented by <A>strip_or_strips</A> is
+##        a direct summand of the string module represented by the strips in
+##        <A>list</A>, and &false; otherwise.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );

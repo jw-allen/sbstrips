@@ -60,6 +60,8 @@
     
   <#Include Label="DocDirectSumModuleOfListOfStrips">
   
+  <#Include Label="DocIsStripDirectSummand">
+  
   <#Include Label="DocVectorSpaceDualOfStrip">
   
   <#Include Label="DocTransposeOfStrip">

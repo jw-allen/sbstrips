@@ -1,0 +1,152 @@
+<#GAPDoc Label="ChapMathsBackground">
+ 
+<Section>
+  <Heading>
+    Finite-dimensional algebras
+  </Heading>
+  
+  Here and throughout, <M>K</M> is some field. By a <Index Key=" Definitions and notation" Subkey="algebras"></Index><E><M>K</M>-algebra</E> <M>A</M>, we mean an associative and unital (but not necessarily commutative) ring with a compatible <M>K</M>-vector space structure.
+  <P />
+  
+  Suppose <M>Q</M> is a finite <Index Key=" Definitions and notation" Subkey="quivers"></Index>quiver: that is, a directed graph with finitely many vertices and finitely many arrows, where loops and/or multiple edges are permitted. The <Index Key=" Definitions and notation" Subkey="paths in a quiver"></Index>paths of <M>Q</M> (also called <E><M>Q</M>-paths</E> to emphasis their parent quiver), including the "stationary" paths at each vertex, form the basis of a vector space. multiplication can be defined on basis vectors <M>p</M> and <M>q</M> by "concatenation extended by zero"; more precisely, <M>p \cdot q = pq</M> ("<M>p</M> then <M>q</M>") if <M>pq</M> is a path in <M>Q</M>, and <M>p \cdot q = 0</M> otherwise. This defines the <Index Key=" Definitions and notation" Subkey="path algebras"></Index><E>path algebra</E> <M>KQ</M>. Its multiplicative unit is the sum of stationary paths. It has finite <M>K</M>-dimension iff <M>Q</M> contains no (directed) cycles.
+  <P />
+  
+  Let <M>J \ideal KQ</M> denote the <Index Key=" Definitions and notation" Subkey="arrow ideal"></Index><E>arrow ideal</E> of <M>KQ</M>: the smallest two-sided ideal of <M>KQ</M> containing the arrows of <M>Q</M>. An ideal <M>I \ideal KQ</M> is <Index Key=" Definitions and notation" Subkey="admissible ideals"></Index><E>admissible</E> iff there is an integer <M>N \geq 2</M> with <M>J^N \subseteq I \subseteq J^2</M>.
+  <P />
+  
+  By a <Index Key=" Definitions and notation" Subkey="quiver algebras"></Index><E>(bound) quiver algebra</E>, we mean a quotient <M>KQ/I</M> of a path algebra <M>KQ</M> by an admissible ideal <M>I</M>. Quiver algebras are always finite-dimensional <Cite Key="ASS06" Where="Sec II.2"/>. Indeed, at least when <M>K</M> is algebraically closed, any finite-dimensional algebra is a direct product of connected ones (trivially), any connected finite-dimensional algebra is Morita equivalent to a basic one <Cite Key="ASS06" Where="Sec I.6"/> and any basic, connected algebra is isomorphic to a quiver algebra <Cite Key="ASS06" Where="Sec II.3"/>.
+  <P />
+  
+  In this work, we assume that <M>K</M> is algebraically closed and <M>A</M> is a quiver algebra <M>KQ/I</M>. By the above, this is no loss of generality. We also use the term <Index Key=" Definitions and notation" Subkey="paths in an algebra"></Index><M>A</M>-path to mean a nonzero element <M>p+I</M> represented by a path of the quiver.
+</Section>
+  
+<Section>
+  <Heading>
+    Modules and bound quiver representations
+  </Heading>
+  
+  A representation of <M>A</M> is a homomorphism of algebras <M> \phi \colon A \to \End X</M> whose target is the endomorphism algebra <M>\End X</M> of a <M>K</M>-vector space <M>X</M>; for convenience, write <M>\phi_a</M> for the image of <M>a</M> in <M>\phi</M>. In this case, we call <M>X</M> a <Index Key=" Definitions and notation" Subkey="(right) modules"></Index><E>(right) <M>A</M>-module</E>, with associated action <M>x \cdot a = x\phi_a</M>. The module is <E>finite-dimensional</E> iff <E>X</E> is. 
+  <P />
+  
+  Since <M>A=KQ/I</M>, we can work in terms of <Index Key=" Definitions and notation" Subkey="representations of quivers"></Index><E>(bound) representations of quivers</E>. These are assignments of a vector space <M>X_i</M> to each vertex <M>i</M> of <M>Q</M> and a linear map <M>\theta_\alpha \colon X_i \to X_j</M> to each arrow <M>\alpha \colon i \to j</M> of <M>Q</M> such that for any <M>\rho = \sum_{k=1}^m p_k\lambda_k \in I</M>, the associated map <M>\sum_{k=1}^m \theta_{p_k} \colon \bigoplus_i X_i \to \bigoplus_i X_i</M> is zero. Here, <M>\theta_{p_k}=\theta_{\alpha_1}\cdots\theta_{\alpha_r}</M> for a decomposition of a nonstationary <M>p_k</M> into a product <M>\alpha_1\cdots\alpha_r</M> of arrows, and <M>\theta_{i}=\id_{X_i}</M> for any stationary path at <M>i</M>.
+  <P />
+  
+  As is well-known <Cite Key="ASS06" Where="III.1"/>, representations of quivers are equivalent to modules. More specifically, the categories <M>\Rep(Q,I)</M> of bound quiver representations and <M>\Modcat A</M> of <M>A</M>-modules are equivalent, and this equivalence restricts to their respective full subcategories <M>\rep(Q,I)</M> and <M>\modcat A</M> of finite-dimensional objects. In keeping with the quiver-minded approach from above, whenever we say module, we really mean the equivalent bound quiver representation.
+  <P />
+  
+  We note in particular that all of the categories in the previous paragraph are abelian: thus, we can speak of the direct sum of modules (denoted with <M>\oplus</M>) . We call a module <M>X</M> <Index Key=" Definitions and notation" Subkey="indecomposable modules"></Index><E>indecomposable</E> if <M>X = Y\oplus Z</M> implies <M>Y</M> or <M>Z</M> is zero. Further, if <M>\mathcal{U}</M> is any set of <M>A</M>-modules, we define the <Index Key=" Definitions and notation" Subkey="additive closure"></Index>additive closure <M>\add \mathcal{U}</M> of <M>\mathcal{U}</M> as the full subcategory of <M>\modcat A</M> whose objects are isomorphic to direct summands of finite direct sums of members of <M>\mathcal{U}</M>.
+  <P />
+  
+  There are certain canonical classes of module. A module <M>X</M> is: <Index Key=" Definitions and notation" Subkey="simple modules"></Index><E>simple</E> if it has no proper, nonzero submodules; <Index Key=" Definitions and notation" Subkey="projective modules"></Index><E>projective</E> if the covariant functor <M>\Hom_A(X,-)\colon \Modcat A \to \Modcat Z</M> is exact, or; <Index Key=" Definitions and notation" Subkey="injective modules"></Index><E>injective</E> if the functor <M>\Hom_A(-,X) \colon \Modcat A \to \Modcat Z</M> is exact. The simple <M>A</M>-modules (necessarily indecomposable) are in one-to-one correspondence with the vertices of <M>Q</M>, as are the indecomposable projective and injective modules. We respectively write <M>S_i</M>, <M>P_i</M> and <M>I_i</M> for the simple, indecomposable projective and indecomposable injective module corresponding to the vertex <M>i</M>. 
+  <P />
+  
+  A <Index Key=" Definitions and notation" Subkey="composition series"></Index><E>composition series</E> for a module <M>X</M> is a strictly ascending chain of submodules <Display Mode="M">0=X_0 &lt; X_1 &lt; X_2 &lt; \cdots &lt; X_{l-1} &lt; X_l=X</Display> of <M>X</M> such that each consecutive quotient <M>X_{k+1}/X_k</M> is simple. A module is <Index Key=" Definitions and notation" Subkey="uniserial modules"></Index><E>uniserial</E> if it has a unique composition series; equivalently, if its submodules form a chain. 
+  <P />
+  
+  Write <Index Key=" Definitions and notation" Subkey="isomorphism type of a module"></Index><M>[X]</M> for the isomorphism type of <M>X</M>. One can seek to classify the isomorphism classes of indecomposable (finite-dimensional) modules of an algebra. A deep theorem of Drozd <Cite Key="Dro80"/> establishes that all finite-dimensional algebras fall into exactly one of three <E>representation types</E>. In increasing order of difficulty, the options are <Index Key=" Definitions and notation" Subkey="finite representation type"></Index><E>representation finite</E>, <Index Key=" Definitions and notation" Subkey="tame representation type"></Index><E>tame</E> or <Index Key=" Definitions and notation" Subkey="wild representation type"></Index><E>wild</E>. The first simply means the algebra has only finitely many isoclasses of indecomposables. Speaking informally, tame algebras are those for which, in each dimension, almost all modules lie in one of finitely many classes each parameterized by the field. Speaking even more informally, wild algebras are those for which the classification problem is intractible in a very strong way. Discussion and formal definitions of representation type can be found in <Cite Key="Ben95" Where="Sec 4.4"/>.
+</Section>
+  
+<Section Label="SecSyzygiesAndPatterns">
+  <Heading>
+    Syzygies and patterns
+  </Heading>
+    
+  A <Index Key=" Definitions and notation" Subkey="projective cover"></Index><E>projective cover</E> of a finite-dimensional module <M>X</M> is a surjective module homomorphism <M>\pi \colon P \twoheadrightarrow X</M> such that <M>P</M> is projective and <M>\ker \pi</M> is a superfluous submodule of <M>P</M>: refer <Cite Key="ASS06" Where="Sec I.5"/>. The isomorphism class of <M>P</M> is unique: we denote it by <M>\PP M</M> but, in abuse of notation, treat <M>\PP M</M> as if it were a module rather than an isomorphism class. It is easy to see that <M>\PP(X \oplus Y) = (\PP X) \oplus (\PP Y)</M> and that, if <M>X</M> is itself projective, then the identity map on <M>X</M> is a projective cover.
+  <P />
+    
+  By convention the <Index Key=" Definitions and notation" Subkey="syzygy of module"></Index><E><M>0</M>th syzygy <M>\syzygy^0 X</M></E> of <M>X</M> is <M>X/P</M>, for <M>P</M> the largest projective direct summand of <M>X</M>. For <M>k \geq 0</M>, we iteratively define the <M>(k+1)</M>th syzygy <M>\syzygy^{k+1} X</M> to be the kernel of the projective cover of <M>\syzygy^k X</M>.
+  <P />
+    
+  For <M>k \geq 0</M> and some fixed module <M>X</M>, let
+  <Display>
+    \mathcal{A}_k
+    =
+    \big\{
+      [M]
+    \colon
+      M \in \add\{ \syzygy^t X \} \text{ for some } t \geq k
+    \big\}
+    \text{, }
+    <Alt Only="LaTeX">\hspace{0.25cm}</Alt>
+    \mathcal{B}_k
+    =
+    \big\{
+      [M]
+    \colon
+      M \in \add\{ \syzygy^t X \} \text{ for some } t \leq k
+    \big\}\text{.}
+  </Display>
+  (These letters were chosen so that <M>\mathcal{A}_k</M> contains the isoclasses of indecomposables appearing at or <M>\mathcal{A}</M>fter the <M>k</M>th syzygy, while <M>\mathcal{B}_k</M> contains those appearing at or <M>\mathcal{B}</M>efore.) The <M>\mathcal{A}_k</M> and <M>\mathcal{B}_k</M> relate in the following way:
+  <Display>
+      \mathcal{B}_0
+    \subseteq
+      \mathcal{B}_1
+    \subseteq
+      \mathcal{B}_2
+      \subseteq
+    \cdots
+      \subseteq
+    \bigcup_{k \geq 0} \mathcal{B}_k
+      =
+    \mathcal{A}_0
+      \supseteq
+    \mathcal{A}_1
+      \supseteq
+    \mathcal{A}_2
+      \supseteq
+    \cdots
+      \supseteq
+    \bigcap_{k \geq 0}
+      \mathcal{A}_k
+    \text{.}
+  </Display>
+  We comment that, for each successive inclusion <M>\mathcal{B}_k \supseteq \mathcal{B}_{k+1}</M> or <M>\mathcal{A}_k \supseteq \mathcal{A}_{k+1}</M>, the appropriate set difference between them is finite. Note also that <M>\cap_{k \geq 0}\mathcal{A}_k</M> contains exactly those isoclasses witnessed at <M>\syzygy^k X</M> for infinitely many indices <M>k</M>. Below, we use this sequence of inclusions to define some terminology for patterns in syzygies. Our definitions are inspired by comparable work in <Cite Key="GHZ98" Where="Sec 2"/> and <Cite Key="Ric19" Where="Sec 7"/>.
+  <P />
+    
+  If there is an index <M>t</M> for which <M>\mathcal{A}_t=\mathcal{A}_{t+1}</M>(<M>=\mathcal{A}_{t+2}=\cdots=\cap_{k \geq 0} \mathcal{A}_k</M>), then there is a minimal one <M>t_\star</M>, in which case we say that the <Index Key=" Definitions and notation" Subkey="syzygy repetition index of a module"></Index><E>syzygy repetition index</E> of <M>X</M> is <M>t-\star</M>. This holds exactly when <M>t_\star</M> satisfies <M>\mathcal{A}_{t_\star} = \cap_{k \geq 0} \mathcal{A}_k</M> (and is the minimal index to enjoy this property). If no such <M>t</M> exists, the syzygy repetition of index of <M>X</M> is <M>+\infty</M>.
+  <P />
+    
+  If <M>\mathcal{A}_0</M> is finite, then we say <M>X</M> has <Index Key=" Definitions and notation" Subkey="syzygy type and index of a module"></Index><E>syzygy type <M>|\mathcal{A}_0|</M> of index <M>s_\star</M></E>, for <M>s_\star</M> the minimal index <M>k</M> such that <M>\mathcal{B}_k=\mathcal{B}_{k+1}</M>(<M>\mathcal{B}_{k+2}=\cdots=\mathcal{A}_0</M>); the existence of <M>s_\star</M> in this case follows from an easy finiteness argument. Just as immediately, we see that if <M>X</M> has finite syzygy type <M>|\mathcal{A}_0|</M> then it has finite syzygy repetition index at most <M>|\mathcal{A}_0|</M>.
+    <P />
+    
+  If <M>[X] \in \cap_{k \geq 0} \mathcal{A}_k</M>, then we call <M>X</M> <E>weakly periodic</E>.
+</Section>
+  
+<Section>
+  <Heading>
+    Special biserial algebras
+  </Heading>
+    
+  A <Index Key=" Definitions and notation" Subkey="special biserial algebras, abstractly"></Index><E>special biserial (SB) algebra</E> is a quiver algebra <M>KQ/I</M> such that
+  <Enum>
+    <Item>
+      every vertex of <M>Q</M> is the source of at most <M>2</M> arrows,
+    </Item>
+    <Item>
+      every vertex of <M>Q</M> is the target of at most <M>2</M> arrows,
+    </Item>
+    <Item>
+      for every arrow <M>a</M> of <M>Q</M>, there is at most one arrow <M>b</M> with <M>ab \notin I</M> and
+    </Item>
+    <Item>
+      for every arrow <M>a</M> of <M>Q</M>, there is at most one arrow <M>c</M> with <M>ca \notin I</M>.
+    </Item>
+  </Enum>
+  These algebras emerged from the modular representation theory of finite groups. A key text on them is <Cite Key="WW85"/>, which establishes in particular that they are tame algebras. Their indecomposable modules fall into three classes: band modules, string modules and a finite class of projective-injective nonuniserial (<Index Key=" Definitions and notation" Subkey="pin (= projective, injective, nonuniserial) modules"></Index>"pin") modules.
+</Section>
+  
+<Section>
+  <Heading>
+    String modules for special biserial algebras
+  </Heading>
+    
+  String modules earn their name from the string graphs that describe them so well. A <Index Key=" Definitions and notation" Subkey="string graphs"></Index>string graph for <M>A=KQ/I</M> is a quiver homomorphism <M>w \colon \Gamma \to Q</M> from a quiver <M>\Gamma</M> whose underlying (undirected) graph is linear, and where the image in <M>w</M> of any <M>\Gamma</M>-path <M>p</M> is linearly independent of all other <M>A</M>-paths. More commonly, the string graph <M>w</M> is depicted by labelling each vertex and arrow of <M>\Gamma</M> by its respective images in <M>Q</M>. Then vertices of <M>w</M> provide a basis of the associated string module, and the labels describe the <M>A</M> action. We can identify a string graph with the <Index Key=" Definitions and notation" Subkey="string modules"></Index>string module it represents.
+  <P />
+ 
+  One subtle point: we do not require string graphs to be connected; accordingly we do require string modules to be indecomposable.
+  <P />
+  
+  Liu and Morin <Cite Key="LM04"/> proved that the syzygy of a string module is a string module. In as-yet-unpublished work of Galstad <Cite Key="GalPhD"/>, advertised by Huisgen-Zimmermann without proof <Cite Key="HZ16"/>, the syzygy of a band module <M>X</M> is also a string module provided that at least one indecomposable direct summand of <M>\PP X</M> is a string module.
+</Section>
+
+<#/GAPDoc>

@@ -2647,3 +2647,142 @@ InstallOtherMethod(
         fi;
     end
 );
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a collected list of strip-reps and a collected list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        local
+            k,              # Integer variable, storing index of zero strip
+            list_elts,      # Element list of <list>
+            strips_elts,    # Element list of <strips>
+            where_zero;     # Locations of zero strips
+            
+        if ( IsCollectedListOfStripReps( strips )
+         and IsCollectedListOfStripReps( list ) )
+         then
+            list_elts := ElementsOfCollectedList( list );
+            strips_elts := ElementsOfCollectedList( strips );
+            
+            # Neither <strips> nor <list> should virtual strips.
+            if
+             ForAny( strips_elts, IsVirtualStripRep ) or
+             ForAny( list_elts, IsVirtualStripRep )
+             then
+                Error( "Virtual strips do not represent string modules! They ",
+                 "cannot be direct summands!" );
+            
+            else
+                # If <strips> contains any zero strips, remove them and call
+                #  again.
+                if ForAny( strips_elts, IsZeroStrip ) then
+                    where_zero := List( strips_elts, IsZeroStrip );
+                    k := Position( where_zero, true );
+                    strips := ShallowCopy( strips );
+                    Remove( strips, k );
+                    
+                    return IsStripDirectSummand( strips, list );
+                
+                # If <list> contains any zero strips, remove them and call
+                #  again.
+                elif ForAny( list_elts, IsZeroStrip ) then
+                    where_zero := List( list_elts, IsZeroStrip );
+                    k := Position( where_zero, true );
+                    list_elts := ShallowCopy( list_elts );
+                    Remove( list_elts, k );
+                    
+                    return IsStripDirectSummand( strips, list );
+                    
+                else
+                    return IsCollectedSublist( strips, list );
+                fi;
+            fi;
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a (flat) list of strip-reps and a collected list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsFlatListOfStripReps( strips ) and IsCollectedListOfStripReps( list )
+         then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( Collected( strips ), list );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a collected list of strip-reps and a (flat) list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsCollectedListOfStripReps( strips ) and IsFlatListOfStripReps( list )
+         then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( strips, Collected( list ) );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a (flat) list of strip-reps and a (flat) list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsFlatListOfStripReps( strips ) and IsFlatListOfStripReps( list )
+         then
+            # Delegate to method where both arguments are collected lists
+            return
+             IsStripDirectSummand( Collected( strips ), Collected( list ) );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    IsStripDirectSummand,
+    "for a strip-rep and a collected list of strip-reps",
+    [ IsStripRep, IsList ],
+    function( strip, list )
+        if IsCollectedListOfStripReps( list ) then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( [ [ strip ], 1 ], list );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    IsStripDirectSummand,
+    "for a strip-rep and a (flat) list of strip-reps",
+    [ IsStripRep, IsList ],
+    function( strip, list )
+        if IsFlatListOfStripReps( list ) then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( [ [ strip ], 1 ], Collected( list ) );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);

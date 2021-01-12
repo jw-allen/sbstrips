@@ -2838,3 +2838,19 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    WithoutProjectiveStrips,
+    "for a (flat) list of strips",
+    [ IsList ],
+    function( list )            
+        if IsCollectedListOfStripReps( list ) then
+            TryNextMethod();
+            
+        elif not IsFlatListOfStripReps( list ) then
+            Error( "The given list is not a list of strip-reps!" );
+        
+        else
+            return Filtered( list, x -> not IsIndecProjectiveStrip( x ) );
+        fi;
+    end
+);

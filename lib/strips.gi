@@ -2860,12 +2860,12 @@ InstallMethod(
         local
             k,              # Integer variable
             nth_syzygy,     # <N>th syzygy of <strip>, as a collected list
-            test_module,    # List variable, holding a module to be tested          
+            test_module;    # List variable, holding a module to be tested          
         
         if N < 0 then
             Error( "The second argument ", N, "cannot be negative!" );
         
-        elif IsVirtualStrip( strip ) then
+        elif IsVirtualStripRep( strip ) then
             Error( "Virtual strips cannot be delooped!" );
         
         elif IsZeroStrip( strip ) then

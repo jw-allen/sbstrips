@@ -2854,3 +2854,39 @@ InstallMethod(
         fi;
     end
 );
+
+InstallMethod(
+    IsNthDeloopingMapSplit,
+    "for a strip-rep and a nonnegative integer",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        local
+            k,              # Integer variable
+            nth_syzygy,     # <N>th syzygy of <strip>, as a collected list
+            test_module,    # List variable, holding a module to be tested
+            
+        
+        if N < 0 then
+            Error( "The second argument ", N, "cannot be negative!" );
+        
+        elif IsVirtualStrip( strip ) then
+            Error( "Virtual strips cannot be delooped!" );
+        
+        elif IsZeroStrip( strip ) then
+            return true;
+            
+        else
+            nth_syzygy :=
+             WithoutProjectiveStrips( CollectedNthSyzygyOfStrip( strip, N ) );
+            
+            test_module := CollectedNthSyzygyOfStrip( strip, N );
+            for k in [ 1 .. N+1 ] do
+                test_module := SuspensionOfStrip( strip );
+            od;
+            test_module := CollectedNthSyzygyOfStrip( strip, N+1 );
+            test_module := WithoutProjectiveStrips( test_module );
+            
+            return IsStripDirectSummand( nth_syzygy, test_module );
+        fi;
+    end
+);

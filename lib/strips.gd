@@ -682,3 +682,5 @@ DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
+
+DeclareOperation( "IsNthDeloopingMapSplit", [ IsStripRep, IsInt ] );

@@ -2795,11 +2795,16 @@ InstallMethod(
         local
             projs,  # List of projective strips of <sba>
             sba;    # Defining SB algebra of <strip>
-            
-        sba := SBAlgOfStrip( strip );
-        projs := ProjectiveStripsOfSBAlg( sba );
         
-        return strip in projs;
+        if HasIsIndecProjectiveStrip( strip ) then
+            return IsIndecProjectiveStrip( strip );
+            
+        else
+            sba := SBAlgOfStrip( strip );
+            projs := ProjectiveStripsOfSBAlg( sba );
+            
+            return strip in projs;
+        fi;
     end
 );
 
@@ -2811,10 +2816,15 @@ InstallMethod(
         local
             injs,   # List of injective strips of <sba>
             sba;    # Defining SB algebra of <strip>
-            
-        sba := SBAlgOfStrip( strip );
-        injs := InjectiveStripsOfSBAlg( sba );
         
-        return strip in inj;
+        if HasIsIndecInjectiveStrip( strip ) then
+            return IsIndecProjectiveStrip( strip );
+            
+        else
+            sba := SBAlgOfStrip( strip );
+            injs := InjectiveStripsOfSBAlg( sba );
+            
+            return strip in inj;
+        fi;
     end
 );

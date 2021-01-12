@@ -93,6 +93,9 @@ InstallMethod(
         if HasIsCollectedList( list ) then
             return IsCollectedList( list );
 
+        elif IsEmpty( list ) then
+            return true;
+
         else
             if not ( ForAll( list, IsList ) ) then
                 return false;

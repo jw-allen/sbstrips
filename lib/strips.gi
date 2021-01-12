@@ -2248,18 +2248,7 @@ InstallMethod(
         else
             data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
             return_zero_strip := false;
-            
-            # # Tidy up <data>, removing any stationary syllables
-            
-            # for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
-                # if IsStationarySyllable( data[ k ] ) then
-                    # Unbind( data[k] );
-                    # Unbind( data[k+1] );
-                # fi;
-            # od;
-            
-            # data := Compacted( data );
-            
+                        
             # Setup
             lin_ind := LinIndOfSBAlg( sba );
             
@@ -2318,6 +2307,10 @@ InstallMethod(
                     p := data[ Length( data ) - 1 ];
                     data[ Length( data ) - 1 ] :=
                      PathOneArrowShorterAtTarget( p );
+                     
+                    if Length( data ) = 2 and LengthOfPath( data[1] ) = 0 then
+                        data[2] := -1;
+                    fi;
                 end;
                 
                 r := data[ Length( data ) - 1 ];
@@ -2415,15 +2408,19 @@ InstallMethod(
             left := LeftAlterationTowardsTrDOfStrip( strip );
             right := RightAlterationTowardsTrDOfStrip( strip );
             
+            # If both alterations are zero strips, then return the zero strip.
             if IsZeroStrip( left ) and IsZeroStrip( right ) then
                 return left;
             
+            # If exactly one alteration is a zero strip, alter the nonzero
+            #  alteration on the second side.
             elif IsZeroStrip( left ) and ( not IsZeroStrip( right ) ) then
                 return LeftAlterationTowardsTrDOfStrip( right );
-                
+            
             elif ( not IsZeroStrip( left ) ) and IsZeroStrip( right ) then
                 return RightAlterationTowardsTrDOfStrip( left );
-                
+            
+            # Otherwise, neither alteration is zero.
             else
                 if not
                  ( RightAlterationTowardsTrDOfStrip( left )
@@ -2863,8 +2860,7 @@ InstallMethod(
         local
             k,              # Integer variable
             nth_syzygy,     # <N>th syzygy of <strip>, as a collected list
-            test_module,    # List variable, holding a module to be tested
-            
+            test_module,    # List variable, holding a module to be tested          
         
         if N < 0 then
             Error( "The second argument ", N, "cannot be negative!" );

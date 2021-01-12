@@ -681,3 +681,4 @@ DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
+DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );

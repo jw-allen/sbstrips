@@ -2802,3 +2802,19 @@ InstallMethod(
         return strip in projs;
     end
 );
+
+InstallMethod(
+    IsIndecInjectiveStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            injs,   # List of injective strips of <sba>
+            sba;    # Defining SB algebra of <strip>
+            
+        sba := SBAlgOfStrip( strip );
+        injs := InjectiveStripsOfSBAlg( sba );
+        
+        return strip in inj;
+    end
+);

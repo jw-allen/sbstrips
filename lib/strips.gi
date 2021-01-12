@@ -2658,8 +2658,11 @@ InstallMethod(
             list_elts,      # Element list of <list>
             strips_elts,    # Element list of <strips>
             where_zero;     # Locations of zero strips
-            
-        if ( IsCollectedListOfStripReps( strips )
+        
+        if IsEmpty( strips ) then
+            return true;
+        
+        elif ( IsCollectedListOfStripReps( strips )
          and IsCollectedListOfStripReps( list ) )
          then
             list_elts := ElementsOfCollectedList( list );
@@ -2744,7 +2747,13 @@ InstallMethod(
     "for a (flat) list of strip-reps and a (flat) list of strip-reps",
     [ IsList, IsList ],
     function( strips, list )
-        if
+        
+        # Make allowance for <strips> to be the empty list so that we avoid a
+        #  recursion deathtrap!
+        if IsEmpty( strips ) and IsFlatListOfStripReps( list ) then
+            return true;
+            
+        elif
          IsFlatListOfStripReps( strips ) and IsFlatListOfStripReps( list )
          then
             # Delegate to method where both arguments are collected lists
@@ -2824,7 +2833,8 @@ InstallMethod(
             sba := SBAlgOfStrip( strip );
             injs := InjectiveStripsOfSBAlg( sba );
             
-            return strip in inj;
+            return strip in injs;
         fi;
     end
 );
+

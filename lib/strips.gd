@@ -638,3 +638,18 @@ DeclareAttribute( "SuspensionOfStrip", IsStripRep );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
+
+##  <#GAPDoc Label="DocIsIndecProjectiveStrip">
+##    <ManSection>
+##      <Prop Name="IsIndecProjectiveStrip" Arg="strip"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip.
+##      </Description>
+##      <Returns>
+##        &true; if <A>strip</A> represents a indecomposable projective string
+##        module, and &false; otherwise. (The indecomposability requirement
+##        means this returns &false; on zero strips.)
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );

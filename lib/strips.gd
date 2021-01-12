@@ -654,6 +654,21 @@ DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
 ##  <#/GAPDoc>
 DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
 
+##  <#GAPDoc Label="DocIsIndecInjectiveStrip">
+##    <ManSection>
+##      <Prop Name="IsIndecInjectiveStrip" Arg="strip"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip.
+##      </Description>
+##      <Returns>
+##        &true; if <A>strip</A> represents a indecomposable injective string
+##        module, and &false; otherwise. (The indecomposability requirement
+##        means this returns &false; on zero strips.)
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
+
 ##  <#GAPDoc Label="DocWithoutProjectiveStrips">
 ##    <ManSection>
 ##      <Oper Name="WithoutProjectiveStrips" Arg="list"/>

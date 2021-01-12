@@ -653,3 +653,16 @@ DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocWithoutProjectiveStrips">
+##    <ManSection>
+##      <Oper Name="WithoutProjectiveStrips" Arg="list"/>
+##      <Description>
+##        Argument: <A>list</A>, a list or collected list of strips
+##      </Description>
+##      <Returns>
+##        a new list or collected list <A>new_list</A> obtained from
+##        <A>list</A> by removing all the projective strips.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>

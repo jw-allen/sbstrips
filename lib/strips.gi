@@ -2786,3 +2786,19 @@ InstallOtherMethod(
         fi;
     end
 );
+
+InstallMethod(
+    IsIndecProjectiveStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            projs,  # List of projective strips of <sba>
+            sba;    # Defining SB algebra of <strip>
+            
+        sba := SBAlgOfStrip( strip );
+        projs := ProjectiveStripsOfSBAlg( sba );
+        
+        return strip in projs;
+    end
+);

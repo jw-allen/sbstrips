@@ -35,6 +35,10 @@
   <#Include Label="DocWidthOfStrip">
 
   <#Include Label="DocIsZeroStrip">
+  
+  <#Include Label="DocIsIndecProjectiveStrip">
+  
+  <#Include Label="DocIsIndecInjectiveStrip">
 </Section>
 
 <Section>

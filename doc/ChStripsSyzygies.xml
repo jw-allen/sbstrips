@@ -79,6 +79,8 @@
   <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 
   <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
+  
+  <#Include Label="DocWithoutProjectiveStrips">
 </Section>
 
 <Section>

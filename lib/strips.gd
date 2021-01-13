@@ -737,6 +737,6 @@ DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation(
- "SBAlgDeloopingLevelIfAtMostN",
+ "DeloopingLevelOfSBAlgIfAtMostN",
  [ IsSpecialBiserialAlgebra, IsInt ]
  );

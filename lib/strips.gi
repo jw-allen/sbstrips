@@ -2939,3 +2939,27 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    DeloopingLevelOfSBAlgIfAtMostN,
+    "for a special biserial algebra and a nonnegative integer",
+    [ IsSpecialBiserialAlgebra, IsInt ],
+    function( sba, N )
+        local
+            deloopings, # Delooping levels of simples in <simples>   
+            simples;    # Simple strips of <sba>
+            
+        simples := SimpleStripsOfSBAlg( sba );
+        deloopings := List(
+         simples,
+         x -> DeloopingLevelOfStripIfAtMostN( x, N )
+         );
+        
+        if fail in deloopings then
+            return fail;
+            
+        else
+            return Maximum( deloopings );
+        fi;
+    end
+);
+

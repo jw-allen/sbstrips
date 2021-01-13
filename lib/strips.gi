@@ -2963,3 +2963,11 @@ InstallMethod(
     end
 );
 
+RedispatchOnCondition(
+    DeloopingLevelOfSBAlgIfAtMostN,
+    "to ensure a check whether the quiver algebra is special biserial",
+    true,
+    [ IsQuiverAlgebra, IsInt ],
+    [ IsSpecialBiserialAlgebra,  ],
+    0
+);

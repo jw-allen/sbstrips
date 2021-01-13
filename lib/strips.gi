@@ -2986,11 +2986,3 @@ InstallMethod(
     end
 );
 
-InstallMethod(
-    SBAlgDeloopingLevelIfAtMostN,
-    "for a special biserial algebra and a nonnegative integer",
-    [ IsSpecialBiserialAlgebra, IsInt ],
-    function( sba, N )
-        
-    end
-);

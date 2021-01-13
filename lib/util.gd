@@ -227,6 +227,26 @@ DeclareOperation(
 ##  <#/GAPDoc>
 DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
 
+##  <#GAPDoc Label="DocCollectedFiltered">
+##    <ManSection>
+##      <Oper Name="CollectedFiltered" Arg="clist, bool_func"/>
+##      <Description>
+##        Arguments: <A>clist</A>, a collected list; <A>bool_func</A>, a
+##        function that returns either &true; or &false;.
+##      </Description>
+##      <Returns>
+##        the collected sublist of <A>clist</A> featuring only those elements
+##        for which <A>prop</A> returns &true;. (Those elements appear in the 
+##        sublist with the same multiplicity as in <A>clist</A>.)
+##      </Returns>
+##      <Description>
+##        This should be considered the analogue of <Ref Func="Filtered"
+##        BookName="Reference"/> for collected lists.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "CollectedFiltered", [ IsList, IsFunction ] );
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

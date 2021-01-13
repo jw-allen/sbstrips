@@ -644,6 +644,7 @@ DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
 ##      <Prop Name="IsIndecProjectiveStrip" Arg="strip"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip.
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if <A>strip</A> represents a indecomposable projective string
@@ -659,6 +660,7 @@ DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
 ##      <Prop Name="IsIndecInjectiveStrip" Arg="strip"/>
 ##      <Description>
 ##        Arguments: <A>strip</A>, a strip.
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        &true; if <A>strip</A> represents a indecomposable injective string
@@ -674,6 +676,7 @@ DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
 ##      <Oper Name="WithoutProjectiveStrips" Arg="list"/>
 ##      <Description>
 ##        Argument: <A>list</A>, a list or collected list of strips
+##        <Br />
 ##      </Description>
 ##      <Returns>
 ##        a new list or collected list <A>new_list</A> obtained from

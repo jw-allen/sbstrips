@@ -2903,3 +2903,45 @@ InstallMethod(
         fi;
     end
 );
+
+InstallMethod(
+    IsStripDeloopingLevelAtMostN,
+    "for a strip-rep and a nonnegative integer",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        local
+            k;  # Integer variable
+        
+        if N < 0 then
+            Error( "The second argument, ", N, ", should be nonnegative!" );
+        
+        elif IsVirtualStripRep( strip ) then
+            Error( "Virtual strips cannot be delooped!" );
+            
+        elif IsZeroStrip( strip ) then
+            Info( InfoSBStrips, 1,  PrintString( strip ), ":" );
+            Info( InfoSBStrips, 1, "  delooping level 0" );
+            
+            return true;
+            
+        else
+            if IsStripNthDeloopingMapSplit( strip, N ) then
+                for k in [ 1 .. N ] do
+                    if IsStripNthDeloopingMapSplit( strip, k ) then
+                        Info( InfoSBStrips, 1, PrintString( strip ), ":" );
+                        Info( InfoSBStrips, 1, "  delooping level ", k );
+                        break;
+                        
+                    else
+                        k := k+1;
+                    fi;
+                od;
+                
+                return true;
+            
+            else
+                return false;
+            fi;
+        fi;
+    end
+);

@@ -285,7 +285,7 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocIndecInjectiveStripsOfSBAlg">
 ##    <ManSection>
@@ -311,7 +311,7 @@ DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "InjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "IndecInjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocUniserialStripsOfSBAlg">
 ##    <ManSection>

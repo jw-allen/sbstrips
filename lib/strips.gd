@@ -686,4 +686,23 @@ DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
 ##  <#/GAPDoc>
 DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
 
+##  <#GAPDoc Label="DocIsStripDeloopingLevelAtMostN">
+##    <ManSection>
+##      <Oper Name="IsStripDeloopingLevelAtMostN" Arg="strip, N"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true;, if the delooping level of <A>strip</A> is at most <A>N</A>,
+##        and &false; otherwise. 
+##      </Returns>
+##      <Description>
+##        When &true;, &PACKAGENAME; will also print an Info message with the
+##        delooping level of <A>strip</A>, provided that <Ref
+##        InfoClass="InfoSBStrips"/> is at least <M>1</M> (the default value).
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareOperation( "IsStripNthDeloopingMapSplit", [ IsStripRep, IsInt ] );
+DeclareOperation( "IsStripDeloopingLevelAtMostN". [ IsStripRep, IsInt ] );

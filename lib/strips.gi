@@ -2403,6 +2403,11 @@ InstallMethod(
         elif IsVirtualStripRep( strip ) then
             Error( "TrD is not defined on virtual strips, since they do not ",
              "represent string modules!" );
+             
+        elif IsIndecInjectiveStrip( strip ) then
+            sba := SBAlgOfStrip( strip );
+            
+            return ZeroStripOfSBAlg( sba );
         
         else
             left := LeftAlterationTowardsTrDOfStrip( strip );

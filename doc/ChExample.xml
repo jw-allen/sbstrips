@@ -401,10 +401,10 @@ true
   <P />
   
   Some of the indecomposable projective modules are string modules. The
-  attribute <Ref Attr="ProjectiveStripsOfSBAlg"/> returns a list, whose
+  attribute <Ref Attr="IndecProjectiveStripsOfSBAlg"/> returns a list, whose
   <C>r</C>th entry is the strip describing the module <M>P_r</M> (if <M>P_r</M>
   is indeed a string module) or the boolean &fail; (if not). The attribute <Ref
-  Attr="InjectiveStripsOfSBAlg"/> is similar.
+  Attr="IndecInjectiveStripsOfSBAlg"/> is similar.
 <Example><![CDATA[
 gap> ProjectiveStripsOfSbAlg( alg1 );
 [ fail, (c*a)^-1(d^3) ]

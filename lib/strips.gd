@@ -300,8 +300,9 @@ DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>InjectiveStripsOfSBAlg</C>
-##        adopts that order for strips of the indecomposabe injective modules.
+##        vertices of that quiver are ordered;
+##        <C>IndecInjectiveStripsOfSBAlg</C> adopts that order for strips of
+##        the indecomposabe injective modules.
 ##        <P/>
 ##
 ##        If the indecomposable injective module corresponding to the
@@ -422,7 +423,7 @@ DeclareOperation(
 ##        type by the <A>N</A>th syzygy, and &false; otherwise.
 ##      </Returns>
 ##      <Description>
-##        This function calls <Ref Attr="InjectiveStripsOfSBAlg"/> for
+##        This function calls <Ref Attr="IndecInjectiveStripsOfSBAlg"/> for
 ##        <A>sba</A>, filters out all the &fail;s, and then checks each
 ##        remaining strip individually using <Ref
 ##        Oper="IsFiniteSyzygyTypeStripByNthSyzygy"/> (with second argument

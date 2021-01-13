@@ -706,3 +706,19 @@ DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
 ##  <#/GAPDoc>
 DeclareOperation( "IsStripNthDeloopingMapSplit", [ IsStripRep, IsInt ] );
 DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );
+
+##  <#GAPDoc Label="DocDeloopingLevelOfStripIfAtMostN">
+##    <ManSection>
+##      <Oper Name="DeloopingLevelOfStripIfAtMostN" Arg="strip, N"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the delooping level of <A>strip</A> if it is at most <A>N</A>, and
+##        &fail; if not.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
+

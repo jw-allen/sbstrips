@@ -2921,20 +2921,15 @@ InstallMethod(
         elif IsZeroStrip( strip ) then
             return 0;
             
-        elif N = 0 then
-            if IsStripNthDeloopingMapSplit( strip, 0 ) then
-                return 0;
-                
-            else
-                return fail;
-            fi;
-            
         else
-            for k in [ 1 .. N ] do
-                if
-                 IsStripNthDeloopingMapSplit( strip, k ) and
-                 ( not IsStripNthDeloopingMapSplit( strip, k-1 ) )
-                 then
+            for k in [ 0 .. N ] do
+                # Case k=0
+                if k = 0 and IsStripNthDeloopingMapSplit( strip, k ) then
+                    return k;
+                    
+                # Case k>0
+                elif IsStripNthDeloopingMapSplit( strip, k ) and
+                     ( not IsStripNthDeloopingMapSplit( strip, k-1 ) ) then
                     return k;
                 fi;
             od;
@@ -2943,3 +2938,4 @@ InstallMethod(
         fi;
     end
 );
+

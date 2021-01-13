@@ -396,6 +396,34 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    CollectedFiltered,
+    "for a collected list and a boolean-valued function",
+    [ IsList, IsFunction ],
+    function( clist, bool_func )
+        local
+            k,          # Integer variable, indexing the entries of <clist>
+            new_clist;  # List variable, storing the collected list to be
+                        #  returned
+            
+        if not IsCollectedList( clist ) then
+            Error(
+             "The first argument\n", clist, "\nis not a collected list!"
+             );
+        
+        else
+            new_clist := [];
+            
+            for k in [ 1 .. Length( clist ) ] do
+                if bool_func( clist[k][1] ) then
+                    Add( new_clist, [ clist[k][1], clist[k][2] ] );
+                fi;
+            od;
+            
+            return Recollected( new_clist );
+        fi;
+    end
+);
 
 
 # Useful functions for QPA

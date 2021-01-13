@@ -24,9 +24,9 @@
   
   <#Include Label="DocUniserialStripsOfSBAlg">
   
-  <#Include Label="DocProjectiveStripsOfSBAlg">
+  <#Include Label="DocIndecProjectiveStripsOfSBAlg">
   
-  <#Include Label="DocInjectiveStripsOfSBAlg">
+  <#Include Label="DocIndecInjectiveStripsOfSBAlg">
 </Section>
 
 <Section>

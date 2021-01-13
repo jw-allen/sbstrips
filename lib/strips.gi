@@ -1016,7 +1016,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    ProjectiveStripsOfSBAlg,
+    IndecProjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1037,8 +1037,8 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasProjectiveStripsOfSBAlg( sba ) then
-            return ProjectiveStripsOfSBAlg( sba );
+        if HasIndecProjectiveStripsOfSBAlg( sba ) then
+            return IndecProjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
@@ -1083,7 +1083,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    InjectiveStripsOfSBAlg,
+    IndecInjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1104,8 +1104,8 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasInjectiveStripsOfSBAlg( sba ) then
-            return InjectiveStripsOfSBAlg( sba );
+        if HasIndecInjectiveStripsOfSBAlg( sba ) then
+            return IndecInjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
@@ -1389,7 +1389,7 @@ InstallGlobalFunction(
             test_list;          # Results of testing the entries of
                                 #  <non_pin_inj_list> up to degree <N>
             
-        inj_list := InjectiveStripsOfSBAlg( sba );
+        inj_list := IndecInjectiveStripsOfSBAlg( sba );
         non_pin_inj_list := Filtered( inj_list, x -> not ( x = fail ) );
         test_list := List(
          non_pin_inj_list,
@@ -2807,7 +2807,7 @@ InstallMethod(
             
         else
             sba := SBAlgOfStrip( strip );
-            projs := ProjectiveStripsOfSBAlg( sba );
+            projs := IndecProjectiveStripsOfSBAlg( sba );
             
             return strip in projs;
         fi;
@@ -2828,7 +2828,7 @@ InstallMethod(
             
         else
             sba := SBAlgOfStrip( strip );
-            injs := InjectiveStripsOfSBAlg( sba );
+            injs := IndecInjectiveStripsOfSBAlg( sba );
             
             return strip in injs;
         fi;

@@ -260,12 +260,11 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 ##  <#/GAPDoc>
 DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocProjectiveStripsOfSBAlg">
+##  <#GAPDoc Label="DocIndecProjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="ProjectiveStripsOfSBAlg" Arg="sba"/>
+##      <Attr Name="IndecProjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
-##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
-##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
+##        Argument: <A>sba</A>, a special biserial algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -274,22 +273,23 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>ProjectiveStripsOfSBAlg</C>
-##        adopts that order for strips of projective modules.
+##        vertices of that quiver are ordered;
+##        <C>IndecProjectiveStripsOfSBAlg</C> adopts that order for strips of
+##        indecomposable projective modules.
 ##        <P/>
 ##
-##        If the projective module corresponding to the <C>j</C>th vertex of
-##        <A>sba</A> is a string module, then
-##        <C>ProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
-##        that string module. If not, then it returns &fail;.
+##        If the indecomposable projective module corresponding to the
+##        <C>j</C>th vertex of <A>sba</A> is a string module, then
+##        <C>IndecProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocInjectiveStripsOfSBAlg">
+##  <#GAPDoc Label="DocIndecInjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="InjectiveStripsOfSBAlg" Arg="sba"/>
+##      <Attr Name="IndecInjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra
 ##        <Br />
@@ -301,13 +301,13 @@ DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
 ##        vertices of that quiver are ordered; <C>InjectiveStripsOfSBAlg</C>
-##        adopts that order for strips of projective modules.
+##        adopts that order for strips of the indecomposabe injective modules.
 ##        <P/>
 ##
-##        If the injective module corresponding to the <C>j</C>th vertex of
-##        <A>sba</A> is a string module, then
-##        <C>InjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
-##        that string module. If not, then it returns &fail;.
+##        If the indecomposable injective module corresponding to the
+##        <C>j</C>th vertex of <A>sba</A> is a string module, then
+##        <C>IndecInjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>

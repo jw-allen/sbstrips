@@ -705,4 +705,4 @@ DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "IsStripNthDeloopingMapSplit", [ IsStripRep, IsInt ] );
-DeclareOperation( "IsStripDeloopingLevelAtMostN". [ IsStripRep, IsInt ] );
+DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );

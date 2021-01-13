@@ -80,6 +80,8 @@
 
   <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
   
+  <#Include Label="DocIsStripDeloopingLevelAtMostN">
+  
   <#Include Label="DocWithoutProjectiveStrips">
 </Section>
 

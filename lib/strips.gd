@@ -722,3 +722,21 @@ DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );
 ##  <#/GAPDoc>
 DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
 
+##  <#GAPDoc Label="DocDeloopingLevelOfSBAlgIfAtMostN">
+##    <ManSection>
+##      <Oper Name="DeloopingLevelOfSBAlgIfAtMostN", Arg="sba, N"/>
+##      <Description>
+##        Arguments: <A>sba</A>, a special biserial algebra; <A>N</A>, a
+##        nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the delooping level of <A>sba</A> if it is at most <A>N</A>, and
+##        &fail; if not.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation(
+ "SBAlgDeloopingLevelIfAtMostN",
+ [ IsSpecialBiserialAlgebra, IsInt ]
+ );

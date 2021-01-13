@@ -99,5 +99,7 @@ gap> Recollected( hello_world );
   <#Include Label="DocCollectedListElementwiseFunction">
   
   <#Include Label="DocCollectedListElementwiseListValuedFunction">
+  
+  <#Include Label="DocCollectedFiltered">
 </Section>
 <#/GAPDoc>

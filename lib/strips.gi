@@ -2718,8 +2718,21 @@ InstallMethod(
         if
          IsFlatListOfStripReps( strips ) and IsCollectedListOfStripReps( list )
          then
-            # Delegate to method where both arguments are collected lists
-            return IsStripDirectSummand( Collected( strips ), list );
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+                
+            # If <strips> is nonempty and <list> is empty, the answer is
+            #  false. (This step avoids another recursion deathtrap.)
+            elif IsEmpty( list ) then
+                return false;
+            
+            else
+                # Otherwise neither argument is empty and we may meaningfully
+                #  delegate to method where both arguments are collected lists
+                return IsStripDirectSummand( Collected( strips ), list );
+            fi;
             
         else
             TryNextMethod();
@@ -2735,8 +2748,21 @@ InstallMethod(
         if
          IsCollectedListOfStripReps( strips ) and IsFlatListOfStripReps( list )
          then
-            # Delegate to method where both arguments are collected lists
-            return IsStripDirectSummand( strips, Collected( list ) );
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+            
+            # If <strips> is nonempty and <list> is empty, the answer is
+            #  false. (This step avoids another recursion deathtrap.)
+            elif IsEmpty( list ) then
+                return false;
+            
+            else
+                # Otherwise neither argument is empty and we may meaningfully
+                #  delegate to method where both arguments are collected lists
+                return IsStripDirectSummand( strips, Collected( list ) );
+            fi;
             
         else
             TryNextMethod();
@@ -2749,18 +2775,31 @@ InstallMethod(
     "for a (flat) list of strip-reps and a (flat) list of strip-reps",
     [ IsList, IsList ],
     function( strips, list )
-        
-        # Make allowance for <strips> to be the empty list so that we avoid a
-        #  recursion deathtrap!
-        if IsEmpty( strips ) and IsFlatListOfStripReps( list ) then
-            return true;
-            
-        elif
+        if
          IsFlatListOfStripReps( strips ) and IsFlatListOfStripReps( list )
          then
-            # Delegate to method where both arguments are collected lists
-            return
-             IsStripDirectSummand( Collected( strips ), Collected( list ) );
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+            
+            else
+                # If <strips> is nonempty and <list> is empty, the answer is
+                #  false. (This step avoids another recursion deathtrap.)
+                if not IsEmpty( list ) then
+                    return false;
+                    
+                else
+                    # If neither of the previous cases holds, then we guarantee
+                    #  that both <strips> and <list> are nonempty. Hence, we
+                    #  can meaningfully delegate to the method that assumes
+                    #  both arguments are collected lists.
+                    return IsStripDirectSummand(
+                     Collected( strips ),
+                     Collected( list )
+                     );
+                fi;
+            fi;
             
         else
             TryNextMethod();

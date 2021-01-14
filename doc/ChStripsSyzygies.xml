@@ -80,7 +80,7 @@
 
   <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
   
-  <#Include Label="DocIsStripDeloopingLevelAtMostN">
+  <#Include Label="DocDeloopingLevelOfStripIfAtMostN">
   
   <#Include Label="DocWithoutProjectiveStrips">
 </Section>
@@ -89,6 +89,8 @@
   <Heading>Tests on an SB algebra that use strips</Heading>
 
   <#Include Label="DocTestInjectiveStripsUpToNthSyzygy">
+  
+  <#Include Label="DocDeloopingLevelOfSBAlgIfAtMostN">
 </Section>
 
 <#/GAPDoc>

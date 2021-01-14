@@ -1197,11 +1197,12 @@ InstallMethod(
             data,       # Defining data of <strip>
             sy_list;    # List of syllables of <strip>
         
-        # Once the zero strip of a SB algebra is implemented, <WidthOfStrip>
-        #  must return <-infinity> for it.
+        # The zero strip has width <-infinity>
+        if IsZeroStrip( strip ) then
+            return -infinity;
         
         # Virtual strips have width <-infinity>
-        if IsVirtualStripRep( strip ) then
+        elif IsVirtualStripRep( strip ) then
             return -infinity;
 
         # Remaining strips (neither zero nor virtual) have a nonnegative width,

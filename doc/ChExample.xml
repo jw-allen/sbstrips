@@ -423,7 +423,7 @@ gap> InjectiveStripsOfSbAlg( alg1 );
   
   The objective of the &SBStrips; package is to investigate the syzygies of
   string modules over SB algebras for patterns. There are some patterns,
-  described in <Ref Sect="SecSyzygiesAndPatterns"/>, that it already knows to
+  described in <Ref Sect="SubsectSyzygyPatterns"/>, that it already knows to
   look for. This section describes those functionalities.
   <P />
 

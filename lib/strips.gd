@@ -735,6 +735,11 @@ DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
 ##        the delooping level of <A>sba</A> if it is at most <A>N</A>, and
 ##        &fail; if not.
 ##      </Returns>
+##      <Description>
+##        <E>Author's note.</E> Every SB algebra the author has tested has had
+##        finite delooping level. It would be very interesting to know whether
+##        this is a general phenomenon!
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation(

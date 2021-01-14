@@ -725,7 +725,7 @@ DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
 
 ##  <#GAPDoc Label="DocDeloopingLevelOfSBAlgIfAtMostN">
 ##    <ManSection>
-##      <Oper Name="DeloopingLevelOfSBAlgIfAtMostN", Arg="sba, N"/>
+##      <Oper Name="DeloopingLevelOfSBAlgIfAtMostN" Arg="sba, N"/>
 ##      <Description>
 ##        Arguments: <A>sba</A>, a special biserial algebra; <A>N</A>, a
 ##        nonnegative integer.

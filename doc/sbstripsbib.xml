@@ -90,6 +90,30 @@
     </pages>   
   </inproceedings></entry>
 
+  <entry id="EHIS04"><article>
+    <author>
+      <name><first>Karin</first> <last>Erdmann</last></name>
+      <name><first>Thorsten</first> <last>Holm</last></name>
+      <name><first>Osamu</first> <last>Iyama</last></name>
+      <name><first>Jan</first> <last>Schr{\'o}er</last></name>
+    </author>
+    <title>
+      Radical embeddings and representation dimension
+    </title>
+    <journal>
+      Advances in Mathematics
+    </journal>
+    <year>
+      2004
+    </year>
+    <volume>
+      185
+    </volume>
+    <pages>
+      159-177
+    </pages>
+  </article></entry>
+
   <entry id="GalPhD"><misc>
     <author>
       <name><first>Julia</first> <last>Galstad</last></name>

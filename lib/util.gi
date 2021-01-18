@@ -93,6 +93,9 @@ InstallMethod(
         if HasIsCollectedList( list ) then
             return IsCollectedList( list );
 
+        elif IsEmpty( list ) then
+            return true;
+
         else
             if not ( ForAll( list, IsList ) ) then
                 return false;
@@ -107,6 +110,45 @@ InstallMethod(
                     return true;
                 fi;
             fi;
+        fi;
+    end
+);
+
+InstallMethod(
+    ElementsOfCollectedList,
+    "for a collected list",
+    [ IsList ],
+    function( clist )
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            return List( clist, x -> x[1] );
+        fi;
+    end
+);
+
+InstallMethod(
+    MultiplicityOfElementInCollectedList,
+    "for an object and a collected list",
+    [ IsObject, IsList ],
+    function( obj, clist )
+        local
+            j, k;   # Integer variables
+        
+        if not IsCollectedList( clist ) then
+            TryNextMethod();
+            
+        else
+            j := 0;
+            
+            for k in [ 1 .. Length( clist ) ] do
+                if clist[k][1] = obj then
+                    j := j + clist[k][2];
+                fi;
+            od;
+            
+            return j;
         fi;
     end
 );
@@ -315,6 +357,70 @@ InstallMethod(
             # Once the collected syzygies for each entry of <clist> have been
             #  calculated, we tidy up the answer            
             return Recollected( list );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsCollectedSublist,
+    "for two collected lists",
+    [ IsList, IsList ],
+    function( sublist, superlist )
+        local
+            elt,        # Member of <elt_list>
+            elt_list,   # List of elements in <sublist>
+            k,          # Integer variable indexing entries of <sublist>
+            mult_sublist, mult_superlist;
+                        # Integer variable, giving the multiplicity of <elt> in
+                        #  <sublist> and <superlist> respectively
+        
+        if not IsCollectedList( sublist ) and IsCollectedList( superlist ) then
+            TryNextMethod();
+            
+        else
+            elt_list := ElementsOfCollectedList( sublist );
+            
+            for elt in elt_list do
+                mult_sublist :=
+                 MultiplicityOfElementInCollectedList( elt, sublist );
+                mult_superlist :=
+                 MultiplicityOfElementInCollectedList( elt, superlist );
+                
+                if mult_superlist < mult_sublist then
+                    return false;
+                fi;
+            od;
+            
+            return true;
+        fi;
+    end
+);
+
+InstallMethod(
+    CollectedFiltered,
+    "for a collected list and a boolean-valued function",
+    [ IsList, IsFunction ],
+    function( clist, bool_func )
+        local
+            k,          # Integer variable, indexing the entries of <clist>
+            new_clist;  # List variable, storing the collected list to be
+                        #  returned
+            
+        if not IsCollectedList( clist ) then
+            Error(
+             "The first argument\n", clist, "\nis not a collected list!"
+             );
+        
+        else
+            new_clist := [];
+            
+            for k in [ 1 .. Length( clist ) ] do
+                if bool_func( clist[k][1] ) then
+                    Add( new_clist, [ clist[k][1], clist[k][2] ] );
+                fi;
+            od;
+            
+            return Recollected( new_clist );
         fi;
     end
 );

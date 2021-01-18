@@ -18,6 +18,39 @@ InstallMethod(
 );
 
 InstallMethod(
+    IsFlatListOfStripReps,
+    "for a list",
+    [ IsList ],
+    function( list )
+        if list = Flat( list ) and ForAll( list, IsStripRep ) then
+            return true;
+
+        else
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsCollectedListOfStripReps,
+    "for a collected list",
+    [ IsList ],
+    function( clist )        
+        if IsCollectedList( clist ) then
+            if ForAll( ElementsOfCollectedList( clist ), IsStripRep ) then
+                return true;
+                
+            else
+                return false;
+            fi;
+            
+        else
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
     SBAlgOfStrip,
     "for a strip-rep",
     [ IsStripRep ],
@@ -983,7 +1016,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    ProjectiveStripsOfSBAlg,
+    IndecProjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1004,8 +1037,8 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasProjectiveStripsOfSBAlg( sba ) then
-            return ProjectiveStripsOfSBAlg( sba );
+        if HasIndecProjectiveStripsOfSBAlg( sba ) then
+            return IndecProjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
@@ -1050,7 +1083,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    InjectiveStripsOfSBAlg,
+    IndecInjectiveStripsOfSBAlg,
     "for a special biserial algebra",
     [ IsSpecialBiserialAlgebra ],
     function( sba )
@@ -1071,8 +1104,8 @@ InstallMethod(
             overts,             # Vertices of <oquiv>
             quiv;               # Ground quiver of <sba>
 
-        if HasInjectiveStripsOfSBAlg( sba ) then
-            return InjectiveStripsOfSBAlg( sba );
+        if HasIndecInjectiveStripsOfSBAlg( sba ) then
+            return IndecInjectiveStripsOfSBAlg( sba );
         else
             quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
             list := ShallowCopy( VerticesOfQuiver( quiv ) );
@@ -1164,11 +1197,12 @@ InstallMethod(
             data,       # Defining data of <strip>
             sy_list;    # List of syllables of <strip>
         
-        # Once the zero strip of a SB algebra is implemented, <WidthOfStrip>
-        #  must return <-infinity> for it.
+        # The zero strip has width <-infinity>
+        if IsZeroStrip( strip ) then
+            return -infinity;
         
         # Virtual strips have width <-infinity>
-        if IsVirtualStripRep( strip ) then
+        elif IsVirtualStripRep( strip ) then
             return -infinity;
 
         # Remaining strips (neither zero nor virtual) have a nonnegative width,
@@ -1356,7 +1390,7 @@ InstallGlobalFunction(
             test_list;          # Results of testing the entries of
                                 #  <non_pin_inj_list> up to degree <N>
             
-        inj_list := InjectiveStripsOfSBAlg( sba );
+        inj_list := IndecInjectiveStripsOfSBAlg( sba );
         non_pin_inj_list := Filtered( inj_list, x -> not ( x = fail ) );
         test_list := List(
          non_pin_inj_list,
@@ -2215,18 +2249,7 @@ InstallMethod(
         else
             data := ShallowCopy( PathAndOrientationListOfStripNC( strip ) );
             return_zero_strip := false;
-            
-            # # Tidy up <data>, removing any stationary syllables
-            
-            # for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
-                # if IsStationarySyllable( data[ k ] ) then
-                    # Unbind( data[k] );
-                    # Unbind( data[k+1] );
-                # fi;
-            # od;
-            
-            # data := Compacted( data );
-            
+                        
             # Setup
             lin_ind := LinIndOfSBAlg( sba );
             
@@ -2285,6 +2308,10 @@ InstallMethod(
                     p := data[ Length( data ) - 1 ];
                     data[ Length( data ) - 1 ] :=
                      PathOneArrowShorterAtTarget( p );
+                     
+                    if Length( data ) = 2 and LengthOfPath( data[1] ) = 0 then
+                        data[2] := -1;
+                    fi;
                 end;
                 
                 r := data[ Length( data ) - 1 ];
@@ -2377,20 +2404,29 @@ InstallMethod(
         elif IsVirtualStripRep( strip ) then
             Error( "TrD is not defined on virtual strips, since they do not ",
              "represent string modules!" );
+             
+        elif IsIndecInjectiveStrip( strip ) then
+            sba := SBAlgOfStrip( strip );
+            
+            return ZeroStripOfSBAlg( sba );
         
         else
             left := LeftAlterationTowardsTrDOfStrip( strip );
             right := RightAlterationTowardsTrDOfStrip( strip );
             
+            # If both alterations are zero strips, then return the zero strip.
             if IsZeroStrip( left ) and IsZeroStrip( right ) then
                 return left;
             
+            # If exactly one alteration is a zero strip, alter the nonzero
+            #  alteration on the second side.
             elif IsZeroStrip( left ) and ( not IsZeroStrip( right ) ) then
                 return LeftAlterationTowardsTrDOfStrip( right );
-                
+            
             elif ( not IsZeroStrip( left ) ) and IsZeroStrip( right ) then
                 return RightAlterationTowardsTrDOfStrip( left );
-                
+            
+            # Otherwise, neither alteration is zero.
             else
                 if not
                  ( RightAlterationTowardsTrDOfStrip( left )
@@ -2613,4 +2649,370 @@ InstallOtherMethod(
             fi;
         fi;
     end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a collected list of strip-reps and a collected list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        local
+            k,              # Integer variable, storing index of zero strip
+            list_elts,      # Element list of <list>
+            strips_elts,    # Element list of <strips>
+            where_zero;     # Locations of zero strips
+        
+        if IsEmpty( strips ) then
+            return true;
+        
+        elif ( IsCollectedListOfStripReps( strips )
+         and IsCollectedListOfStripReps( list ) )
+         then
+            list_elts := ElementsOfCollectedList( list );
+            strips_elts := ElementsOfCollectedList( strips );
+            
+            # Neither <strips> nor <list> should virtual strips.
+            if
+             ForAny( strips_elts, IsVirtualStripRep ) or
+             ForAny( list_elts, IsVirtualStripRep )
+             then
+                Error( "Virtual strips do not represent string modules! They ",
+                 "cannot be direct summands!" );
+            
+            else
+                # If <strips> contains any zero strips, remove them and call
+                #  again.
+                if ForAny( strips_elts, IsZeroStrip ) then
+                    where_zero := List( strips_elts, IsZeroStrip );
+                    k := Position( where_zero, true );
+                    strips := ShallowCopy( strips );
+                    Remove( strips, k );
+                    
+                    return IsStripDirectSummand( strips, list );
+                
+                # If <list> contains any zero strips, remove them and call
+                #  again.
+                elif ForAny( list_elts, IsZeroStrip ) then
+                    where_zero := List( list_elts, IsZeroStrip );
+                    k := Position( where_zero, true );
+                    list_elts := ShallowCopy( list_elts );
+                    Remove( list_elts, k );
+                    
+                    return IsStripDirectSummand( strips, list );
+                    
+                else
+                    return IsCollectedSublist( strips, list );
+                fi;
+            fi;
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a (flat) list of strip-reps and a collected list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsFlatListOfStripReps( strips ) and IsCollectedListOfStripReps( list )
+         then
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+                
+            # If <strips> is nonempty and <list> is empty, the answer is
+            #  false. (This step avoids another recursion deathtrap.)
+            elif IsEmpty( list ) then
+                return false;
+            
+            else
+                # Otherwise neither argument is empty and we may meaningfully
+                #  delegate to method where both arguments are collected lists
+                return IsStripDirectSummand( Collected( strips ), list );
+            fi;
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a collected list of strip-reps and a (flat) list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsCollectedListOfStripReps( strips ) and IsFlatListOfStripReps( list )
+         then
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+            
+            # If <strips> is nonempty and <list> is empty, the answer is
+            #  false. (This step avoids another recursion deathtrap.)
+            elif IsEmpty( list ) then
+                return false;
+            
+            else
+                # Otherwise neither argument is empty and we may meaningfully
+                #  delegate to method where both arguments are collected lists
+                return IsStripDirectSummand( strips, Collected( list ) );
+            fi;
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripDirectSummand,
+    "for a (flat) list of strip-reps and a (flat) list of strip-reps",
+    [ IsList, IsList ],
+    function( strips, list )
+        if
+         IsFlatListOfStripReps( strips ) and IsFlatListOfStripReps( list )
+         then
+            # If <strips> is empty, then answer is true. (This step avoids one
+            #  recursion deathtrap.)
+            if IsEmpty( strips ) then
+                return true;
+            
+            else
+                # If <strips> is nonempty and <list> is empty, the answer is
+                #  false. (This step avoids another recursion deathtrap.)
+                if not IsEmpty( list ) then
+                    return false;
+                    
+                else
+                    # If neither of the previous cases holds, then we guarantee
+                    #  that both <strips> and <list> are nonempty. Hence, we
+                    #  can meaningfully delegate to the method that assumes
+                    #  both arguments are collected lists.
+                    return IsStripDirectSummand(
+                     Collected( strips ),
+                     Collected( list )
+                     );
+                fi;
+            fi;
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    IsStripDirectSummand,
+    "for a strip-rep and a collected list of strip-reps",
+    [ IsStripRep, IsList ],
+    function( strip, list )
+        if IsCollectedListOfStripReps( list ) then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( [ [ strip ], 1 ], list );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    IsStripDirectSummand,
+    "for a strip-rep and a (flat) list of strip-reps",
+    [ IsStripRep, IsList ],
+    function( strip, list )
+        if IsFlatListOfStripReps( list ) then
+            # Delegate to method where both arguments are collected lists
+            return IsStripDirectSummand( [ [ strip ], 1 ], Collected( list ) );
+            
+        else
+            TryNextMethod();
+        fi;
+    end
+);
+
+InstallMethod(
+    IsIndecProjectiveStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            projs,  # List of projective strips of <sba>
+            sba;    # Defining SB algebra of <strip>
+        
+        if HasIsIndecProjectiveStrip( strip ) then
+            return IsIndecProjectiveStrip( strip );
+            
+        else
+            sba := SBAlgOfStrip( strip );
+            projs := IndecProjectiveStripsOfSBAlg( sba );
+            
+            return strip in projs;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsIndecInjectiveStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            injs,   # List of injective strips of <sba>
+            sba;    # Defining SB algebra of <strip>
+        
+        if HasIsIndecInjectiveStrip( strip ) then
+            return IsIndecProjectiveStrip( strip );
+            
+        else
+            sba := SBAlgOfStrip( strip );
+            injs := IndecInjectiveStripsOfSBAlg( sba );
+            
+            return strip in injs;
+        fi;
+    end
+);
+
+InstallMethod(
+    WithoutProjectiveStrips,
+    "for a (flat) list of strips",
+    [ IsList ],
+    function( list )            
+        if IsCollectedListOfStripReps( list ) then
+            TryNextMethod();
+            
+        elif not IsFlatListOfStripReps( list ) then
+            Error( "The given list is not a list of strip-reps!" );
+        
+        else
+            return Filtered( list, x -> not IsIndecProjectiveStrip( x ) );
+        fi;
+    end
+);
+
+InstallMethod(
+    WithoutProjectiveStrips,
+    "for a (collected) list of strips",
+    [ IsList ],
+    function( clist )
+        if not IsCollectedListOfStripReps( clist ) then
+            TryNextMethod();
+            
+        else
+            return CollectedFiltered(
+             clist,
+             x -> not IsIndecProjectiveStrip( x )
+             );
+        fi;
+    end
+);
+
+InstallMethod(
+    IsStripNthDeloopingMapSplit,
+    "for a strip-rep and a nonnegative integer",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        local
+            k,              # Integer variable
+            nth_syzygy,     # <N>th syzygy of <strip>, as a collected list
+            test_module;    # List variable, holding a module to be tested          
+        
+        if N < 0 then
+            Error( "The second argument, ", N, ", cannot be negative!" );
+        
+        elif IsVirtualStripRep( strip ) then
+            Error( "Virtual strips cannot be delooped!" );
+        
+        elif IsZeroStrip( strip ) then
+            return true;
+            
+        else
+            nth_syzygy :=
+             WithoutProjectiveStrips( CollectedNthSyzygyOfStrip( strip, N ) );
+            
+            test_module := CollectedNthSyzygyOfStrip( strip, N );
+            for k in [ 1 .. N+1 ] do
+                test_module := SuspensionOfStrip( test_module );
+            od;
+            test_module := CollectedNthSyzygyOfStrip( test_module, N+1 );
+            test_module := WithoutProjectiveStrips( test_module );
+            
+            return IsStripDirectSummand( nth_syzygy, test_module );
+        fi;
+    end
+);
+
+InstallMethod(
+    DeloopingLevelOfStripIfAtMostN,
+    "for a strip-rep and a nonnegative integer",
+    [ IsStripRep, IsInt ],
+    function( strip, N )
+        local
+            k;  # Integer variable
+            
+        if N < 0 then
+            Error( "The second argument, ", N, ", should be nonnegative!" );
+        
+        elif IsVirtualStripRep( strip ) then
+            Error( "Virtual strips cannot be delooped!" );
+            
+        elif IsZeroStrip( strip ) then
+            return 0;
+            
+        else
+            for k in [ 0 .. N ] do
+                # Case k=0
+                if k = 0 and IsStripNthDeloopingMapSplit( strip, k ) then
+                    return k;
+                    
+                # Case k>0
+                elif IsStripNthDeloopingMapSplit( strip, k ) and
+                     ( not IsStripNthDeloopingMapSplit( strip, k-1 ) ) then
+                    return k;
+                fi;
+            od;
+            
+            return fail;
+        fi;
+    end
+);
+
+InstallMethod(
+    DeloopingLevelOfSBAlgIfAtMostN,
+    "for a special biserial algebra and a nonnegative integer",
+    [ IsSpecialBiserialAlgebra, IsInt ],
+    function( sba, N )
+        local
+            deloopings, # Delooping levels of simples in <simples>   
+            simples;    # Simple strips of <sba>
+            
+        simples := SimpleStripsOfSBAlg( sba );
+        deloopings := List(
+         simples,
+         x -> DeloopingLevelOfStripIfAtMostN( x, N )
+         );
+        
+        if fail in deloopings then
+            return fail;
+            
+        else
+            return Maximum( deloopings );
+        fi;
+    end
+);
+
+RedispatchOnCondition(
+    DeloopingLevelOfSBAlgIfAtMostN,
+    "to ensure a check whether the quiver algebra is special biserial",
+    true,
+    [ IsQuiverAlgebra, IsInt ],
+    [ IsSpecialBiserialAlgebra,  ],
+    0
 );

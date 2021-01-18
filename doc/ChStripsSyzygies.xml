@@ -1,0 +1,96 @@
+<#GAPDoc Label="ChapStripsSyzygies">
+<Section>
+  <Heading>Introduction</Heading>
+  
+  Strips are the principal objects of the &SBStrips; package. They are
+  syzygy-minded representations of string graphs.
+</Section>
+
+<Section>
+  <Heading>
+    Constructing strips
+  </Heading>
+
+  <#Include Label="DocStripify">
+
+</Section>
+
+<Section>
+  <Heading>
+    Canonical strips
+  </Heading>
+  
+  <#Include Label="DocSimpleStripsOfSBAlg">
+  
+  <#Include Label="DocUniserialStripsOfSBAlg">
+  
+  <#Include Label="DocIndecProjectiveStripsOfSBAlg">
+  
+  <#Include Label="DocIndecInjectiveStripsOfSBAlg">
+</Section>
+
+<Section>
+  <Heading>Attributes and properties of strips</Heading>
+
+  <#Include Label="DocWidthOfStrip">
+
+  <#Include Label="DocIsZeroStrip">
+  
+  <#Include Label="DocIsIndecProjectiveStrip">
+  
+  <#Include Label="DocIsIndecInjectiveStrip">
+</Section>
+
+<Section>
+  <Heading>
+    Operation on strips
+  </Heading>
+
+  The following attributes and operations usually take strips as input.
+  However, many of them are clever enough to recognise a list or collected list
+  of strips. They will then resort to special methods that apply the strip
+  method entrywise, combine the outputs and return a list or collected list (as
+  appropriate).
+
+  <#Include Label="DocSyzygyOfStrip">
+  
+  <#Include Label="DocNthSyzygyOfStrip">
+  
+  <#Include Label="DocCollectedSyzygyOfStrip">
+  
+  <#Include Label="DocCollectedNthSyzygyOfStrip">
+
+  <#Include Label="DocModuleOfStrip">
+    
+  <#Include Label="DocDirectSumModuleOfListOfStrips">
+  
+  <#Include Label="DocIsStripDirectSummand">
+  
+  <#Include Label="DocVectorSpaceDualOfStrip">
+  
+  <#Include Label="DocTransposeOfStrip">
+  
+  <#Include Label="DocDTrOfStrip">
+  
+  <#Include Label="DocTrDOfStrip">
+
+  <#Include Label="DocSuspensionOfStrip">
+
+  <#Include Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
+
+  <#Include Label="DocIsWeaklyPeriodicStripByNthSyzygy">
+  
+  <#Include Label="DocDeloopingLevelOfStripIfAtMostN">
+  
+  <#Include Label="DocWithoutProjectiveStrips">
+</Section>
+
+<Section>
+  <Heading>Tests on an SB algebra that use strips</Heading>
+
+  <#Include Label="DocTestInjectiveStripsUpToNthSyzygy">
+  
+  <#Include Label="DocDeloopingLevelOfSBAlgIfAtMostN">
+</Section>
+
+<#/GAPDoc>

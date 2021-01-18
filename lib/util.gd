@@ -144,14 +144,108 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##      </Description>
 ##      <Returns>
 ##        a new collected list, obtained from <A>clist</A> by applying
-##        <A>func</A> to each element
+##        <A>func</A> to each element.
 ##      </Returns>
+##      <Description>
+##        If <A>func</A> returns lists (perhaps because it implements a
+##        "many-valued function"), consider using <Ref
+##        Oper="CollectedListElementwiseListValuedFunction"/> instead. 
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 
-DeclareOperation( "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ] );
+##  <#GAPDoc Label="DocCollectedListElementwiseListValuedFunction">
+##    <ManSection>
+##      <Oper Name="CollectedListElementwiseListValuedFunction"
+##      Arg="clist, func"/>
+##      <Description>
+##        Arguments: <A>clist</A>, a collected list; <A>func</A>, a function
+##        (presumed to return lists of objects).
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a new collected list.
+##      </Returns>
+##      <Description>
+##        Imagine <A>clist</A> were unpacked into a flat list, <A>func</A> were
+##        applied to each element of the flat list in turn and the result
+##        concatenated then collected. That is what this operation returns
+##        (although it determines the result more efficiently than the
+##        procedure just described).
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation(
+ "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ]
+ );
 
+##  <#GAPDoc Label="DocElementsOfCollectedList">
+##    <ManSection>
+##      <Oper Name="ElementsOfCollectedList" Arg="clist"/>
+##      <Description>
+##        Argument: <A>clist</A>, a collected list.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the elements of <A>clist</A>.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
+
+##  <#GAPDoc Label="DocMultiplicityOfElementInCollectedList">
+##    <ManSection>
+##      <Oper Name="MultiplicityOfElementInCollectedList" Arg="obj, clist"/>
+##      <Description>
+##        Arguments: <A>obj</A>, an object; <A>clist</A>, a collected list.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a nonnegative integer, namely the (total) multiplicity of <A>obj</A>
+##        in <A>clist</A>.
+##      </Returns>
+##    </ManSection>    
+##  <#/GAPDoc>
+DeclareOperation(
+ "MultiplicityOfElementInCollectedList", [ IsObject, IsList ]
+ );
+
+##  <#GAPDoc Label="DocIsCollectedSublist">
+##    <ManSection>
+##      <Oper Name="IsCollectedSublist" Arg="sublist, superlist"/>
+##      <Description>
+##        Arguments: <A>sublist</A> and <A>superlist</A>, two collected lists
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if each element of <A>sublist</A> occurs in <A>superlist</A>
+##        with multiplicity as least that in <A>sublist</A>, and &false;
+##        otherwise.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
+
+##  <#GAPDoc Label="DocCollectedFiltered">
+##    <ManSection>
+##      <Oper Name="CollectedFiltered" Arg="clist, bool_func"/>
+##      <Description>
+##        Arguments: <A>clist</A>, a collected list; <A>bool_func</A>, a
+##        function that returns either &true; or &false;.
+##      </Description>
+##      <Returns>
+##        the collected sublist of <A>clist</A> featuring only those elements
+##        for which <A>prop</A> returns &true;. (Those elements appear in the 
+##        sublist with the same multiplicity as in <A>clist</A>.)
+##      </Returns>
+##      <Description>
+##        This should be considered the analogue of <Ref Func="Filtered"
+##        BookName="Reference"/> for collected lists.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "CollectedFiltered", [ IsList, IsFunction ] );
 
 ##  For QPA
 

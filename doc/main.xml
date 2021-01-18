@@ -10,10 +10,11 @@
     <!ENTITY false "<K>false</K>">
     <!ENTITY GAPDoc "<Package>GAPDoc</Package>">
     <!ENTITY GBNP "<Package>GBNP</Package>">
+    <!ENTITY PACKAGENAME "<Package>SBStrips</Package>">
     <!ENTITY QPA "<Package>QPA</Package>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">
-    <!ENTITY VERSION "0.6.2">
+    <!ENTITY VERSION "0.6.3">
     ]
   >
 
@@ -25,19 +26,32 @@
 \tikzset{>=to}
 
 \DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\cok}{cok}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\delooping}{dell}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\inj}{inj}
 \DeclareMathOperator{\Mod}{Mod}
 \DeclareMathOperator{\modules}{mod}
 \DeclareMathOperator{\PP}{\mathbb{P}}
+\DeclareMathOperator{\proj}{proj}
 \DeclareMathOperator{\Rep}{Rep}
 \DeclareMathOperator{\rep}{rep}
 \DeclareMathOperator{\syzygy}{\Omega}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\suspension}{\Sigma}
 
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\ideal}{\trianglelefteq}
+\newcommand{\injcat}{\inj\text{-}}
+\newcommand{\istmodcat}{\overline{\modules}\text{-}}
 \newcommand{\Modcat}{\Mod\text{-}}
 \newcommand{\modcat}{\modules\text{-}}
+\newcommand{\op}{{\mathrm{op}}}
+\newcommand{\projcat}{\proj\text{-}}
+\newcommand{\projdim}{\proj\dim}
+\newcommand{\pstmodcat}{\underline{\modules}\text{-}}
 "?>
 
 <Book Name="SBStrips">

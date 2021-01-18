@@ -1,6 +1,9 @@
 DeclareRepresentation( "IsStripRep", IsAttributeStoringRep, [ "data" ] );
 DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
 
+DeclareOperation( "IsCollectedListOfStripReps", [ IsList ] );
+DeclareOperation( "IsFlatListOfStripReps", [ IsList ]  );
+
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "PathAndOrientationListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "DefiningDataOfStripNC", [ IsStripRep ] );
@@ -257,12 +260,11 @@ DeclareGlobalFunction( "StripifyVirtualStripNC" );
 ##  <#/GAPDoc>
 DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocProjectiveStripsOfSBAlg">
+##  <#GAPDoc Label="DocIndecProjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="ProjectiveStripsOfSBAlg" Arg="sba"/>
+##      <Attr Name="IndecProjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
-##        Argument: <A>sba</A>, a special biserial algebra (ie, <Ref
-##        Prop="IsSpecialBiserialAlgebra" BookName="QPA"/> returs &true;)
+##        Argument: <A>sba</A>, a special biserial algebra
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -271,22 +273,23 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>ProjectiveStripsOfSBAlg</C>
-##        adopts that order for strips of projective modules.
+##        vertices of that quiver are ordered;
+##        <C>IndecProjectiveStripsOfSBAlg</C> adopts that order for strips of
+##        indecomposable projective modules.
 ##        <P/>
 ##
-##        If the projective module corresponding to the <C>j</C>th vertex of
-##        <A>sba</A> is a string module, then
-##        <C>ProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
-##        that string module. If not, then it returns &fail;.
+##        If the indecomposable projective module corresponding to the
+##        <C>j</C>th vertex of <A>sba</A> is a string module, then
+##        <C>IndecProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
-##  <#GAPDoc Label="DocInjectiveStripsOfSBAlg">
+##  <#GAPDoc Label="DocIndecInjectiveStripsOfSBAlg">
 ##    <ManSection>
-##      <Attr Name="InjectiveStripsOfSBAlg" Arg="sba"/>
+##      <Attr Name="IndecInjectiveStripsOfSBAlg" Arg="sba"/>
 ##      <Description>
 ##        Argument: <A>sba</A>, a special biserial algebra
 ##        <Br />
@@ -297,18 +300,19 @@ DeclareAttribute( "ProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
-##        vertices of that quiver are ordered; <C>InjectiveStripsOfSBAlg</C>
-##        adopts that order for strips of projective modules.
+##        vertices of that quiver are ordered;
+##        <C>IndecInjectiveStripsOfSBAlg</C> adopts that order for strips of
+##        the indecomposabe injective modules.
 ##        <P/>
 ##
-##        If the injective module corresponding to the <C>j</C>th vertex of
-##        <A>sba</A> is a string module, then
-##        <C>InjectiveStripsOfSBAlg( sba )[j]</C> returns the strip describing
-##        that string module. If not, then it returns &fail;.
+##        If the indecomposable injective module corresponding to the
+##        <C>j</C>th vertex of <A>sba</A> is a string module, then
+##        <C>IndecInjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "InjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute( "IndecInjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 
 ##  <#GAPDoc Label="DocUniserialStripsOfSBAlg">
 ##    <ManSection>
@@ -419,7 +423,7 @@ DeclareOperation(
 ##        type by the <A>N</A>th syzygy, and &false; otherwise.
 ##      </Returns>
 ##      <Description>
-##        This function calls <Ref Attr="InjectiveStripsOfSBAlg"/> for
+##        This function calls <Ref Attr="IndecInjectiveStripsOfSBAlg"/> for
 ##        <A>sba</A>, filters out all the &fail;s, and then checks each
 ##        remaining strip individually using <Ref
 ##        Oper="IsFiniteSyzygyTypeStripByNthSyzygy"/> (with second argument
@@ -617,3 +621,128 @@ DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareAttribute( "SuspensionOfStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocIsStripDirectSummand">
+##    <ManSection>
+##      <Oper Name="IsStripDirectSummand" Arg="strip_or_strips, list"/>
+##      <Description>
+##        Arguments: <A>strip_or_strips</A>, a strip or list of strips or
+##        collected list of strips; <A>list</A>, a list or collected list of
+##        strips.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if the string module represented by <A>strip_or_strips</A> is
+##        a direct summand of the string module represented by the strips in
+##        <A>list</A>, and &false; otherwise.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
+
+##  <#GAPDoc Label="DocIsIndecProjectiveStrip">
+##    <ManSection>
+##      <Prop Name="IsIndecProjectiveStrip" Arg="strip"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if <A>strip</A> represents a indecomposable projective string
+##        module, and &false; otherwise. (The indecomposability requirement
+##        means this returns &false; on zero strips.)
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocIsIndecInjectiveStrip">
+##    <ManSection>
+##      <Prop Name="IsIndecInjectiveStrip" Arg="strip"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if <A>strip</A> represents a indecomposable injective string
+##        module, and &false; otherwise. (The indecomposability requirement
+##        means this returns &false; on zero strips.)
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
+
+##  <#GAPDoc Label="DocWithoutProjectiveStrips">
+##    <ManSection>
+##      <Oper Name="WithoutProjectiveStrips" Arg="list"/>
+##      <Description>
+##        Argument: <A>list</A>, a list or collected list of strips
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a new list or collected list <A>new_list</A> obtained from
+##        <A>list</A> by removing all the projective strips.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
+
+##  <#GAPDoc Label="DocIsStripDeloopingLevelAtMostN">
+##    <ManSection>
+##      <Oper Name="IsStripDeloopingLevelAtMostN" Arg="strip, N"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true;, if the delooping level of <A>strip</A> is at most <A>N</A>,
+##        and &false; otherwise. 
+##      </Returns>
+##      <Description>
+##        When &true;, &PACKAGENAME; will also print an Info message with the
+##        delooping level of <A>strip</A>, provided that <Ref
+##        InfoClass="InfoSBStrips"/> is at least <M>1</M> (the default value).
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "IsStripNthDeloopingMapSplit", [ IsStripRep, IsInt ] );
+DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );
+
+##  <#GAPDoc Label="DocDeloopingLevelOfStripIfAtMostN">
+##    <ManSection>
+##      <Oper Name="DeloopingLevelOfStripIfAtMostN" Arg="strip, N"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip; <A>N</A>, a nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the delooping level of <A>strip</A> if it is at most <A>N</A>, and
+##        &fail; if not.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
+
+##  <#GAPDoc Label="DocDeloopingLevelOfSBAlgIfAtMostN">
+##    <ManSection>
+##      <Oper Name="DeloopingLevelOfSBAlgIfAtMostN" Arg="sba, N"/>
+##      <Description>
+##        Arguments: <A>sba</A>, a special biserial algebra; <A>N</A>, a
+##        nonnegative integer.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the delooping level of <A>sba</A> if it is at most <A>N</A>, and
+##        &fail; if not.
+##      </Returns>
+##      <Description>
+##        <E>Author's note.</E> Every SB algebra the author has tested has had
+##        finite delooping level. It would be very interesting to know whether
+##        this is a general phenomenon!
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation(
+ "DeloopingLevelOfSBAlgIfAtMostN",
+ [ IsSpecialBiserialAlgebra, IsInt ]
+ );

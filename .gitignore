@@ -19,7 +19,6 @@ doc/*.six
 doc/*.tex
 doc/*.toc
 doc/*.txt
-doc/*.xml
 
 **.pdf
 

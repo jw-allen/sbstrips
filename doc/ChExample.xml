@@ -119,8 +119,8 @@ gap> alg1 := pa1/ideal;
   ("<C>1</C>"), <M>2</M> negative ("<C>-2</C>") and <M>1</M> positive
   ("<C>1</C>"). <P />
   
-  This is the information used when specifying the string graph to &SBStrips;.
-  The operation <Ref Meth="Stripify"
+  This is the information used when specifying the string graph to
+  &PACKAGENAME;. The operation <Ref Meth="Stripify"
   Label="for an arrow, +/-1 and a list of integers"/> returns the strip
   representing this string graph. What gets printed is the formal word
   associated to the original string graph.
@@ -152,8 +152,9 @@ true;
   </Display></Alt><Alt Not="LaTeX"><Display>
     (d)^{-1} (c) (a) (c)^{-1} (d) (b)^{-1} (a) (c)^{-1} (b)^{-1} (a)
   </Display></Alt>
-  This gives us different defining data for the string. However, &SBStrips; is
-  smart enough to know that these two are representations of the same object.
+  This gives us different defining data for the string. However, &PACKAGENAME;
+  is smart enough to know that these two are representations of the same
+  object.
 <Example><![CDATA[
 gap> t := Stripify( alg1.d, -1, [ 2, -1, 1, -1, 1, -2, 1 ] );
 (d)^-1(c*a) (c)^-1(d) (b)^-1(a) (b*c)^-1(a)
@@ -175,7 +176,7 @@ true
   <C>alg1</C>. The syzygy of that string module <M>X</M> is a direct sum of
   indecomposable string modules, each of which may be represented by string
   graph. Those string graphs, or rather strips representing them, can be
-  calculated directly from <C>s</C>. This is the heart of the &SBStrips;
+  calculated directly from <C>s</C>. This is the heart of the &PACKAGENAME;
   package!
   <P />
   
@@ -193,7 +194,7 @@ gap> Length( last );
   syzygy of <C>s</C> has <M>3</M> indecomposable summands.
   <P />
   
-  Of course, there's no reason to stop at <M>1</M>st syzygies. &SBStrips; is
+  Of course, there's no reason to stop at <M>1</M>st syzygies. &PACKAGENAME; is
   able to take <M>N</M>th syzygies very easily for <M>N\geq0</M><!--
   (but refer to Section <Ref Sect="SecEfficientHigherSyzygies"/> for a
   discussion of an efficient approach when <M>N</M> is big)-->. For example, we
@@ -344,7 +345,7 @@ gap> CollectedNthSyzygyOfStrip( s, 200000 );; time;
   <P />
   
   However, there are some string modules which really <E>are</E> canonical for
-  one reason or another, and which &SBStrips; has methods to call. This
+  one reason or another, and which &PACKAGENAME; has methods to call. This
   includes the simple modules and, more generally, uniserial modules. It also
   includes the indecomposable projective or injective modules, provided that
   they are string modules (which is not guaranteeed).
@@ -421,10 +422,12 @@ gap> InjectiveStripsOfSbAlg( alg1 );
     Some inbuilt tests for string modules using strips
   </Heading>
   
-  The objective of the &SBStrips; package is to investigate the syzygies of
+  The objective of the &PACKAGENAME; package is to investigate the syzygies of
   string modules over SB algebras for patterns. There are some patterns,
   described in <Ref Sect="SubsectSyzygyPatterns"/>, that it already knows to
-  look for. This section describes those functionalities.
+  look for. This section describes those functionalities. We will also see
+  syzygies put to use in calculating the delooping level of modules and
+  algebras, as explained more in <Ref Subsect="SubsectDelooping"/>.
   <P />
 
   We keep the algebra <C>alg1</C> defined in previous sections. For comparison,
@@ -448,10 +451,10 @@ gap> alg2 := SBStripsExampleAlgebra( 2 );
 gap> SetInfoLevel( InfoSBStrips, 2 );
 ]]></Example>
   By raising the level of <Ref InfoClass="InfoSBStrips"/> to <C>3</C>, we make
-  &SBStrips; provide a bit more detail about this example algebra. Full details
-  can be found in <Ref Subsect="ExAlg2"/> but, for now, it suffices to say that
-  <C>alg2</C> is a Nakayama algebra. This means an algebra for which all
-  indecomposable modules are uniserial. It follows that <C>alg2</C> is
+  &PACKAGENAME; provide a bit more detail about this example algebra. Full
+  details can be found in <Ref Subsect="ExAlg2"/> but, for now, it suffices to
+  say that <C>alg2</C> is a Nakayama algebra: this means an algebra for which
+  all indecomposable modules are uniserial. It follows that <C>alg2</C> is
   representation finite and, <E>a fortiori</E>, syzygy finite.
   <P />
   
@@ -480,7 +483,7 @@ gap> IsWeaklyPeriodicStripByNthSyzygy( u, 4 );
 false
 ]]></Example>
   No luck so far but observe that, since <C>InfoSBStrips</C> is currently at
-  level <C>2</C>, &SBStrips; has also provided some commentary alongside our
+  level <C>2</C>, &PACKAGENAME; has also provided some commentary alongside our
   non-result. Let us raise the threshold from <M>4</M> to <M>10</M> and try
   again.
 <Example><![CDATA[
@@ -490,7 +493,7 @@ gap> IsWeaklyPeriodicStripByNthSyzygy( u, 10 );
 true
 ]]></Example>
   Fantastic! We learn that strip <C>u</C> does appear among its first
-  <M>10</M> syzygies. In fact, &SBStrips; is even kind enough to tell us the
+  <M>10</M> syzygies. In fact, &PACKAGENAME; is even kind enough to tell us the
   index of the earliest recurrence of <C>u</C>: at the <M>6</M>th syzygy. (This
   information would not be printed if <C>InfoSBStrips</C> had value <C>1</C> or
   <C>0</C>.)
@@ -541,8 +544,8 @@ gap> IsFiniteSyzygyTypeStripByNthSyzygy( uu, 10000 );
 abilizes at N=4, at which point it has cardinality 6
 true
 ]]></Example>
-  This is indeed what happens. Handily, &SBStrips; also tells us the index at
-  which stabilization occurs (namely <M>4</M>) and how many distinct strips
+  This is indeed what happens. Handily, &PACKAGENAME; also tells us the index
+  at which stabilization occurs (namely <M>4</M>) and how many distinct strips
   were seen at or before this index. We deduce that any strips that are going
   to occur would do so by the <M>4</M>th syzygy. Since <C>uu</C> did not recur
   by then, we know that it never will.
@@ -577,15 +580,80 @@ false
 gap> time;
 284860
 ]]></Example>
-  These tests are enough to pique our interest but, sadly, not enough to base
-  rigorous conclusions on.
+  (Of course these non-results can only be suggestive rather than conclusive.)
   <P />
   
-  We round off this section with a very interesting calculation which we hope
-  piques the reader's interest as it has piqued the author's. For each of
-  algebra created with <Ref Func="SBStripsExampleAlgebra"/>, we will test
-  whether the injective string modules have finite syzygy type. If they do,
-  then we say that algebra <E>passes</E> the test.
+  One can also explore whether a string module <M>X</M> is a direct summand of
+  <M>\syzygy Y</M> for some <M>Y</M> or, more generally, whether
+  <M>\syzygy^k X</M> is a direct summand of <M>\syzygy^{k+1} Y</M> for some
+  <M>Y</M>. When this happens, we say <M>X</M> can be <M>k</M>-delooped. The
+  delooping level of a module is the smallest <M>k \geq 0</M> for which it can
+  be <M>k</M>-delooped or <M>+\infty</M> if no such <M>k</M> exists.
+  <P />
+  
+  &PACKAGENAME; provides the operation <Ref
+  Oper="DeloopingLevelOfStripIfAtMostN"/> to determine the delooping level of a
+  module, aborting the calculation and returning &fail; if it finds the
+  delooping level exceeds a user-specified threshold.
+<Example><![CDATA[
+gap> U := UniserialStripsOfSBAlg( alg1 );;
+gap> a := U[3]; b := U[4]; ab := U[7];
+(a)^-1(v1)
+(b)^-1(v1)
+(a*b)^-1(v1)
+gap> DeloopingLevelOfStripIfAtMostN( a, 0 );
+0
+gap> DeloopingLevelOfStripIfAtMostN( a, 1 );
+0
+gap> DeloopingLevelOfStripIfAtMostN( b, 0 );
+fail
+gap> DeloopingLevelOfStripIfAtMostN( b, 1 );
+1
+gap> DeloopingLevelOfStripIfAtMostN( ab, 10 );
+2
+]]></Example>
+  <P />
+
+  The delooping level of a SB algebra is the supremum of the delooping levels
+  of its simple modules. &PACKAGENAME; provides <Ref
+  Oper="DeloopingLevelOfSBAlgIfAtMostN"/> to calculate this quantity for
+  algebras in a fashion similar to above with modules.
+<Example><![CDATA[
+gap> DeloopingLevelOfSBAlgIfAtMostN( alg1, 10 );
+0
+gap> DeloopingLevelOfSBAlgIfAtMostN( alg2, 10 );
+10
+gap> for k in [ 1 .. 5 ] do
+>   Print(
+>     DeloopingLevelOfSBAlgIfAtMostN( SBStripsExampleAlgebra( k ), 10 )
+>   );
+>   Print( "\n" );
+> od;
+0
+0
+2
+0
+1
+]]></Example>
+  We highlight that all of these examples return finite answers. Whether an
+  arbitrary SB algebra has finite delooping level remains an open question. In
+  general, if <M>A</M> has finite delooping level then <M>A^\op</M> satisfies
+  the big finitistic dimension conjecture, and this is still open for SB
+  algebras. (The little finitistic dimension conjecture is settled in the
+  affirmative; see <Cite Key="EHIS04"/>).
+  <P />
+  
+  Another sufficient condition for <M>A^\op</M> to satisfy the big finitistic
+  dimension conjecture is that the injective <M>A</M>-modules have finite
+  syzygy type <Cite Key="Ric19"/>. It is trivial that projective modules
+  obviously have finite syzygy type. Over a SB algebra, the nonprojective
+  (indecomposable) injective modules are string modules.
+  <P />
+  
+  To explore this question, &PACKAGENAME; provides the function <Ref
+  Func="TestInjectiveStripsUpToNthSyzygy"/>. It calculates up to the <M>N</M>th
+  syzygy of each injective string module of a SB algebra, and prints a message
+  whether they all have syzygy type at most <M>N</M>.
 <Example><![CDATA[
 gap> SetInfoLevel( InfoSBStrips, 1 );
 gap> alg_list := List( [ 1..5 ], SBStripsExampleAlgebra );;
@@ -628,19 +696,6 @@ abilizes at N=6, at which point it has cardinality 13
 [...omitted...]
 The given SB algebra has passed the test!
 ]]></Example>
-  (We changed the level of <C>InfoSBStrips</C> to give the most informative
-  output, subject to reasonable space constraints of this documentation.)
-  <P />
-  
-  This calculation suggests that the injective string modules of a SB algebra
-  have finite syzygy type. Indeed, all SB algebras that the author has tested
-  have passed (for sufficiently large <C>N</C>). The author conjectures that 
-  this statement -- all injective modules over a SB algebra have finite syzygy
-  type -- is true in general. It is known to imply several other important
-  homological properties, such as the big finitistic dimension conjecture for
-  SB algebras (currently open). The statement has been the principal focus of
-  the author's doctoral studies <Cite Key="All21"/> but has not been
-  attained... yet.
 </Section>
 
 <Section>
@@ -649,7 +704,7 @@ The given SB algebra has passed the test!
   </Heading>
 
   A combinatorial approach is all very well and good but perhaps you really do
-  want a module for your SB algebra. &SBStrips; can provide!
+  want a module for your SB algebra. &PACKAGENAME; can provide!
   <P />
   
   For the following, recall from preceding sections the strip <C>s</C> for the
@@ -697,7 +752,7 @@ gap> ModuleOfStrip( coll_4th_syz );
   list of modules (or a collected list, as appropriate). Perhaps you want the
   direct sum of all the modules in that list or collected list. Naive calls to
   &QPA;'s inbuilt functionality turn out to be resource intensive. In its
-  place, &SBStrips; offers the operation <Ref
+  place, &PACKAGENAME; offers the operation <Ref
   Meth="DirectSumModuleOfListOfStrips" Label="for a (flat) list of strips"/> or
   <Ref Meth="DirectSumModuleOfListOfStrips"
   Label="for a collected list of strips"/>.

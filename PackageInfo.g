@@ -87,5 +87,7 @@ SetPackageInfo( rec(
 
  AvailabilityTest := ReturnTrue,
 
+ TestFile := "tst/testall.g",
+
  Keywords := [ "special biserial algebra", "string module", "syzygy" ]
 ) );

@@ -39,7 +39,8 @@ gap> pa1 := PathAlgebra( Rationals, quiv1 );
   arrows in <C>pa1</C>. For details on refer to arrows of <C>pa1</C>, see
   <Ref Oper="." Label="for a path algebra" BookName="QPA"/>.
 <Example><![CDATA[
-gap> rels := [ pa1.a * pa1.a, pa1.b * pa1.d, pa1.c * pa1.b, pa1.d * pa1.c,
+gap> rels := [ pa1.a * pa1.a, pa1.b * pa1.d,
+>              pa1.c * pa1.b, pa1.d * pa1.c,
 >              pa1.c * pa1.a * pa1.b, (pa1.d)^4,
 >              pa1.a * pa1.b * pa1.c - pa1.b * pa1.c * pa1.a ];
 [ (1)*a^2, (1)*b*d, (1)*c*b, (1)*d*c, (1)*c*a*b, (1)*d^4,

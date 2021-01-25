@@ -275,7 +275,7 @@ InstallMethod(
         local
             c, d,           # 
             c_data, d_data, # Information 
-            comp_sources,   #
+            comp_targets,   #
             k,              # Integer variable
             lindep,         #
             linind,         #
@@ -294,15 +294,15 @@ InstallMethod(
             lindep := LinDepOfSBAlg( sba );
             linind := LinIndOfSBAlg( sba );
 
-            comp_sources := List( lindep, TargetOfPath );
+            comp_targets := List( lindep, TargetOfPath );
 
             c_data := List( [1..Length(overts)], x -> 0 );
             d_data := List( [1..Length(overts)], x -> 1 );
 
             for k in [1..Length( overts )] do
                 v := overts[k];
-                if v in comp_sources then
-                    pos := Position( comp_sources, v );
+                if v in comp_targets then
+                    pos := Position( comp_targets, v );
                     c_data[k] := LengthOfPath( lindep[pos] ); 
                     d_data[k] := 0;
                 else

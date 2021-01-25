@@ -724,7 +724,7 @@ InstallMethod(
             # We use <sy_list> to specify a list of patches, sandwiched between
             #  two copies of the zero patch of <sba>.
             
-            sba := FamilyObj( strip )!.sb_alg;
+            sba := SBAlgOfStrip( strip );
             zero_patch := ZeroPatchOfSBAlg( sba );
             patch_list := [ zero_patch ];
             

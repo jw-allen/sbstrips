@@ -2644,7 +2644,7 @@ InstallOtherMethod(
             else
                 return CollectedListElementwiseListValuedFunction(
                  clist,
-                 SuspensionOfStrip
+                 x -> WithoutProjectiveStrips( SuspensionOfStrip( x ) )
                  );
             fi;
         fi;
@@ -2892,7 +2892,10 @@ InstallMethod(
             Error( "The given list is not a list of strip-reps!" );
         
         else
-            return Filtered( list, x -> not IsIndecProjectiveStrip( x ) );
+            return Filtered(
+             list,
+             x -> not ( IsIndecProjectiveStrip( x ) or IsZeroStrip( x ) )
+             );
         fi;
     end
 );
@@ -2908,7 +2911,7 @@ InstallMethod(
         else
             return CollectedFiltered(
              clist,
-             x -> not IsIndecProjectiveStrip( x )
+             x -> not ( IsIndecProjectiveStrip( x ) or IsZeroStrip( x ) )
              );
         fi;
     end
@@ -2937,7 +2940,7 @@ InstallMethod(
             nth_syzygy :=
              WithoutProjectiveStrips( CollectedNthSyzygyOfStrip( strip, N ) );
             
-            test_module := CollectedNthSyzygyOfStrip( strip, N );
+            test_module := nth_syzygy;
             for k in [ 1 .. N+1 ] do
                 test_module := SuspensionOfStrip( test_module );
             od;

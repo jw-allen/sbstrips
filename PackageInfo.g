@@ -2,7 +2,8 @@ SetPackageInfo( rec(
 
  PackageName := "SBStrips",
  
- Subtitle := "strips and strings for special biserial algebras",
+ Subtitle := "representing string modules for special biserial algebras, \
+towards syzygy calculations",
  
  Version := "v0.6.4",
  

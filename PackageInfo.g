@@ -4,7 +4,7 @@ SetPackageInfo( rec(
  
  Subtitle := "for syzygies of string modules over special biserial algebras",
  
- Version := "v0.6.4",
+ Version := "v0.6.5",
  
  Date := "24/02/2021",
  

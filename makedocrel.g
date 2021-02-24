@@ -27,7 +27,7 @@ LoadPackage("GAPDoc");
 #  source code in (the  pkg/  subdirectory of) the root GAP directory, I must
 #  update <path>.
 
-path := "/proc/cygdrive/C/Users/Joe/Documents/GitHub/pkg/sbstrips-0.6.4/doc";
+path := "/proc/cygdrive/C/Users/Joe/Documents/GitHub/pkg/sbstrips-0.6.5/doc";
 main := "main.xml";
 files := [ "../lib/1reg.gd",
            "../lib/info.gd",
@@ -53,7 +53,7 @@ bookname := "SBStrips";
 MakeGAPDocDoc( path, main, files, bookname, relpath, "MathJax" );
 
 # This makes HTML versions look nicer
-CopyHTMLStyleFiles( "Documents/GitHub/pkg/sbstrips-0.6.4/doc/" );
+CopyHTMLStyleFiles( "Documents/GitHub/pkg/sbstrips-0.6.5/doc/" );
 
 # This affords compatibility with old style package manuals
 GAPDocManualLab( "SBStrips" );

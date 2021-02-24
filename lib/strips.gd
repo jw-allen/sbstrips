@@ -239,6 +239,9 @@ DeclareOperation( "CollectedNthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
 DeclareGlobalFunction( "StripifyFromSBAlgPathNC" );
 DeclareGlobalFunction( "StripifyVirtualStripNC" );
+DeclareOperation(
+ "StripifyFromPathAndOrientationListOfPositiveWidthStripNC", [ IsList ]
+ );
 
 ##  <#GAPDoc Label="DocSimpleStripsOfSBAlg">
 ##    <ManSection>

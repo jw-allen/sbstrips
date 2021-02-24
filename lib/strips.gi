@@ -198,6 +198,67 @@ InstallGlobalFunction(
     end
 );
 
+InstallMethod(
+    StripifyFromPathAndOrientationListOfPositiveWidthStripNC,
+    "for a list",
+    [ IsList ],
+    function( data )
+        # This function is like an inverse to <PathAndOrientationListOfStripNC>
+        #  for strips of positive width
+    
+        local
+            first_arr,  # "Leftmost" arrow of <data>
+            first_arr_complement,
+                        # Prefix complement of <first_arr> in <first_path>
+            first_path, # "Leftmost" path of <data>
+            first_walk, # Walk of <first_path>
+            k,          # Integer variable indexing odd entries of <data>
+            list,       # List variable encoding contents of <data> (except
+                        #  <first_arr>) as integers
+            ori;        # Orientation of <first_arr>
+            
+        # Take shallow copy in case <data> is immutable
+        data := ShallowCopy( data );
+            
+        # Identify "leftmost" arrow and orientation
+        first_path := data[1];
+        ori := data[2];
+        first_walk := WalkOfPath( first_path );
+        
+        if ori = 1 then
+            first_arr := first_walk[1];
+            first_arr_complement := PathOneArrowShorterAtSource( first_path );
+                       
+        else
+            first_arr := first_walk[ Length( first_walk ) ];
+            first_arr_complement := PathOneArrowShorterAtTarget( first_path );
+        fi;
+        
+        # Remove "leftmost" arrow from <data>
+        if LengthOfPath( first_arr_complement ) = 0 then
+            Remove( data, 2 );
+            Remove( data, 1 );
+        
+        else
+            data[1] := first_arr_complement;
+        fi;
+        
+        # Encode remaining contents of <data> using integers
+        list := [];
+        
+        for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+            Add( list, LengthOfPath( data[k] ) * data[k+1] );
+        od;
+        
+        # Pass arguments to <Stripify>
+        return Stripify(
+         SBAlgResidueOfOverquiverPathNC( first_arr ),
+         ori,
+         list
+         );
+    end
+);
+
 InstallGlobalFunction(
     StripifyVirtualStripNC,
     [ IsList ],

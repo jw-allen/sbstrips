@@ -352,6 +352,26 @@ DeclareAttribute( "UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##  <#/GAPDoc>
 DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 
+##  <#GAPDoc Label="DocWidthNStripsOfSBAlg">
+##    <ManSection>
+##      <Oper Name="WidthNStripsOfSBAlg" Arg="N, sba"/>
+##      <Description>
+##        Arguments: <A>N</A>, a nonnegative integer; <A>sba</A>, a special
+##        biserial algebra
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a list, comprising all the strips of width <A>N</A> over <A>sba</A>
+##      </Returns>
+##      <Description>
+##        Recall that the strips of width <M>0</M> are the simple strips and
+##        those of width <M>1</M> are the nonsimple uniserial strips.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareAttribute( "WidthNStripFunctionOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareOperation( "WidthNStripsOfSBAlg", [ IsInt, IsSpecialBiserialAlgebra ] );
+
 ##  <#GAPDoc Label="DocIsZeroStrip">
 ##    <ManSection>
 ##      <Prop Name="IsZeroStrip" Arg="strip"/>

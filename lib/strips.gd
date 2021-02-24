@@ -6,6 +6,7 @@ DeclareOperation( "IsFlatListOfStripReps", [ IsList ]  );
 
 DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "PathAndOrientationListOfStripNC", [ IsStripRep ] );
+DeclareOperation( "SyllableAndOrientationListOfStripNC", [ IsStripRep ] );
 DeclareOperation( "DefiningDataOfStripNC", [ IsStripRep ] );
 
 DeclareAttribute( "StripFamilyOfSBAlg", IsSpecialBiserialAlgebra );

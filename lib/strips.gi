@@ -688,6 +688,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    SyllableAndOrientationListOfStripNC,
+    "for a strip",
+    [ IsStripRep ],
+    function( strip )
+        return strip!.data;
+    end
+);
+
+InstallMethod(
     DefiningDataOfStripNC,
     "for a strip-rep",
     [ IsStripRep ],

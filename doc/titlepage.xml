@@ -4,14 +4,13 @@
   &PACKAGENAME;
 </Title>
 
+<Subtitle>
+  for syzygies of string modules over special biserial algebras
+</Subtitle>
+
 <Version>
   Version &VERSION;
 </Version>
-
-<TitleComment>
-  A discrete model of special biserial algebras, string modules and their
-  syzygies
-</TitleComment>
 
 <Author>
   Joe Allen (he/him/his)

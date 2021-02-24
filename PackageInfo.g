@@ -2,8 +2,7 @@ SetPackageInfo( rec(
 
  PackageName := "SBStrips",
  
- Subtitle := "representing string modules for special biserial algebras, \
-towards syzygy calculations",
+ Subtitle := "for syzygies of string modules over special biserial algebras",
  
  Version := "v0.6.4",
  
@@ -68,7 +67,7 @@ strips. It includes some tests for associated properties such as syzygy type, \
 delooping level and weak periodicity.\n\n SBStrips also includes bookkeeping \
 functionality for multisets, which it calls collected lists, and it \
 integrates with (and depends on) the QPA package for quiver algebras and \
-their modules."
+their modules.",
  
  PackageDoc := rec(
    BookName := "SBStrips",

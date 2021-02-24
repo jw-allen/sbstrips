@@ -1285,6 +1285,215 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    WidthNStripFunctionOfSBAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            memoized,   # Memoized version of <wfunc>
+            width1,     # Width 1 strips of <sba>
+            wfunc;      # Width N strip function of <sba>
+            
+        if HasWidthNStripFunctionOfSBAlg( sba ) then
+            return WidthNStripFunctionOfSBAlg( sba );
+        else
+            # Define strips for <sba> of width 1
+            width1 := Filtered(
+             UniserialStripsOfSBAlg( sba ),
+             x -> WidthOfStrip( x ) > 0
+             );
+            
+            # Define prototypical width N strip function
+            wfunc := function( N )
+                local
+                    a_seq, b_seq,   # Integer and bit sequence of <source_enc>
+                    c_seq, d_seq,   # Integer and bit sequence of <target_enc>
+                    longer_at_right,
+                                    # Local function, whose input is a strip
+                                    #  and whose output is a list of strips
+                                    #  one wider that it on the righthand side
+                    narrower_strips,
+                                    # Strips for <sba> of width <N-1>
+                    source_enc, target_enc;
+                                    # Source and target encoding of permissible
+                                    #  data of <sba>
+                
+                # Validate <N>
+                if not IsInt( N ) then
+                    Error( "Width must be an integer!" );
+                
+                elif N < 0 then
+                    Error( "Width must be a nonnegative integer!" );
+                
+                elif N = 0 then
+                    return SimpleStripsOfSBAlg( sba );
+                    
+                elif N = 1 then
+                    return width1;
+                    
+                else
+                    # Create strips of of width <N-1>
+                    narrower_strips := ShallowCopy(
+                     WidthNStripFunctionOfSBAlg( sba )( N-1 )
+                     );
+                    
+                    # Add reflections of strips of width <N-1>
+                    Append(
+                     narrower_strips,
+                     List( narrower_strips, ReflectionOfStrip )
+                     );
+                     
+                    # Retrieve permissible data of <sba>
+                    source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
+                    target_enc := TargetEncodingOfPermDataOfSBAlg( sba );
+                    
+                    a_seq := source_enc[1];
+                    b_seq := source_enc[2];
+                    
+                    c_seq := target_enc[1];
+                    d_seq := target_enc[2];
+                    
+                    # Write local function, whose input is a strip and whose
+                    #  output is a list of strips one wider at the right than
+                    #  the input. If the input looks like
+                    #     ...\/\/\
+                    #  then this returns all strips looking like
+                    #     ...\/\/\/
+                    #  whereas if the input looks like
+                    #     .../\/\/
+                    #  then this returns all strips looking like
+                    #     .../\/\/\.
+                    
+                    longer_at_right := function( strip )
+                        local
+                            a_i, b_i,
+                            c_i, d_i,
+                            data,
+                            i,
+                            l,
+                            L,
+                            last_path,
+                            new_data,
+                            new_path,
+                            new_strip,
+                            output_list;
+                         
+                        # Boil <strip> down to its path and orientation list
+                        data := ShallowCopy(
+                         PathAndOrientationListOfStripNC( strip )
+                         );
+                        L := Length( data );
+                        
+                        # Read of "rightmost" path
+                        last_path := data[ L-1 ];
+                        
+                        # Initialize <output_list> as empty
+                        output_list := [];
+                        
+                        # If "rightmost" path has positive orientation ("-->")
+                        if data[ L ] = 1 then
+                            i := ExchangePartnerOfVertex(
+                             TargetOfPath( last_path )
+                             );
+                            c_i := c_seq.( String( i ) );
+                            d_i := d_seq.( String( i ) );
+                            
+                            for l in [ 1 .. c_i + d_i - 1 ] do
+                                new_path := PathByTargetAndLength( i, l );
+                                new_data := Concatenation(
+                                 data,
+                                 [ new_path, -1 ]
+                                 );
+                                new_strip :=
+                      StripifyFromPathAndOrientationListOfPositiveWidthStripNC(
+                                  new_data
+                                  );
+                                  
+                                Add( output_list, new_strip );
+                            od;
+                        
+                        # If "rightmost" path has negative orientation ("<--")
+                        elif data[ L ] = -1 then
+                            i := ExchangePartnerOfVertex(
+                             SourceOfPath( last_path )
+                             );
+                            a_i := a_seq.( String( i ) );
+                            b_i := b_seq.( String( i ) );
+                            
+                            for l in [ 1 .. a_i + b_i - 1 ] do
+                                new_path := PathBySourceAndLength( i, l );
+                                new_data := Concatenation(
+                                 data,
+                                 [ new_path, 1 ]
+                                 );
+                                new_strip :=
+                      StripifyFromPathAndOrientationListOfPositiveWidthStripNC(
+                                  new_data
+                                  );
+                                  
+                                Add( output_list, new_strip );
+                            od;
+                        fi;
+                        
+                        return output_list;
+                    end;
+                     
+                    return Set(
+                     Flat( List( narrower_strips, longer_at_right ) )
+                     );
+                fi;
+            end;
+            # (The definition of <wfunc> terminates here)
+            
+            # Memoize <wfunc>
+            memoized := MemoizePosIntFunction(
+             wfunc,
+             rec(
+              defaults := [ width1 ],
+              errorHandler :=
+               function( N )
+                if not IsInt( N ) then
+                    Error( "Width must be an integer!" );
+                    
+                elif N < 0 then
+                    Error( "Width must be a nonnegative integer!" );
+                    
+                elif N = 0 then
+                    return SimpleStripsOfSBAlg( sba );
+                fi;
+               end
+              )
+             );
+             
+            return memoized;
+        fi;
+    end
+);
+
+InstallMethod(
+    WidthNStripsOfSBAlg,
+    "for a nonnegative integer and a special biserial algebra",
+    [ IsInt, IsSpecialBiserialAlgebra ],
+    function( N, sba )
+        if N < 0 then
+            Error( "Width must be a nonnegative integer!" );
+            
+        else
+            return WidthNStripFunctionOfSBAlg( sba )( N );
+        fi;
+    end
+);
+
+RedispatchOnCondition(
+    WidthNStripsOfSBAlg,
+    "to ensure a check whether the quiver algebra is special biserial",
+    true,
+    [ IsInt, IsQuiverAlgebra ],
+    [ , IsSpecialBiserialAlgebra ],
+    0
+);
+
 InstallOtherMethod(
     \<,
     "for two strip reps",

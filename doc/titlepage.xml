@@ -1,7 +1,7 @@
 <#GAPDoc Label="TitlePage">
 
 <Title>
-  &SBStrips;
+  &PACKAGENAME;
 </Title>
 
 <Version>
@@ -19,17 +19,34 @@
 
 <Abstract>
   String modules for special biserial (SB) algebras are represented by string
-  graphs. The syzygy of a string module (over an SB algebra) is a direct sum of
+  graphs. Many modules related to a given string module, including its
+  syzygy, transpose and vector-space dual and hence Auslander-Reiten translate
+  and inverse translate, are also string modules. These related modules can be
+  calculated combinatorially rather than algebraically. &PACKAGENAME;
+  implements this functionality in &GAP;, representing string graphs as objects
+  called <E>strips</E>. It includes some tests for associated properties such
+  as syzygy type, delooping level and weak periodicity.
+  <P />
+  
+  &PACKAGENAME; also includes bookkeeping functionality for multisets, which it
+  calls <E>collected lists</E>, and it integrates with (and depends on) the
+  &QPA; package for quiver algebras and their modules.
+  <!--
+  The syzygy of a string module (over an SB algebra) is a direct sum of
   string modules, by a 2004 result of Liu and Morin, therefore syzygy-taking
   can be performed at the (combinatorial) level of string graphs rather than
   the (homological-algebraic) level of modules.
   <P />
   
   This package represents string graphs in &GAP; by objects called strips and
-  it implements syzygy-taking as an operation on them. Together with some
+  it implements syzygy-taking as an operation on them. Together with some small
   utilities for book-keeping, it allows for very efficient calculation of
   <M>k</M>th syzygyies for large <M>k</M>.
   <P />
+  
+  We also include functionalities for the dual, transpose and delooping
+  level of a strip.
+  -->
 </Abstract>
 
 <Copyright>
@@ -38,12 +55,13 @@
 
 
 <Acknowledgements>
-  I thank my PhD supervisor Prof Jeremy Rickard, on whom I inflicted multiple
-  early iterations of &SBStrips;, for his time and his comments. This package
-  was much worse before his feedback. I also thank my fellow members of "Team
-  Splendid" -- namely Charley Cummings, Luke Kershaw and Dr Simon Peacock --
-  for countless engaging conversations about representation theory, programming
-  and much else besides.
+  I thank my fellow members of "Team Splendid" -- Prof Jeremy Rickard, Dr Simon
+  Peacock, Charley Cummings and Luke Kershaw -- for countless engaging
+  conversations about representation theory, programming and much else besides.
+  In particular I thank my PhD supervisor Jeremy, on whom I inflicted multiple
+  early iterations of &PACKAGENAME;, for his time and comments and my "big
+  brother" Simon for helping me organise the &PACKAGENAME; website. This
+  package was much worse before their feedback.
   <P />
   
   Additionally, I received help understanding <Package>GAPDoc</Package> from

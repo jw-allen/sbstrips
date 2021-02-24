@@ -198,6 +198,67 @@ InstallGlobalFunction(
     end
 );
 
+InstallMethod(
+    StripifyFromPathAndOrientationListOfPositiveWidthStripNC,
+    "for a list",
+    [ IsList ],
+    function( data )
+        # This function is like an inverse to <PathAndOrientationListOfStripNC>
+        #  for strips of positive width
+    
+        local
+            first_arr,  # "Leftmost" arrow of <data>
+            first_arr_complement,
+                        # Prefix complement of <first_arr> in <first_path>
+            first_path, # "Leftmost" path of <data>
+            first_walk, # Walk of <first_path>
+            k,          # Integer variable indexing odd entries of <data>
+            list,       # List variable encoding contents of <data> (except
+                        #  <first_arr>) as integers
+            ori;        # Orientation of <first_arr>
+            
+        # Take shallow copy in case <data> is immutable
+        data := ShallowCopy( data );
+            
+        # Identify "leftmost" arrow and orientation
+        first_path := data[1];
+        ori := data[2];
+        first_walk := WalkOfPath( first_path );
+        
+        if ori = 1 then
+            first_arr := first_walk[1];
+            first_arr_complement := PathOneArrowShorterAtSource( first_path );
+                       
+        else
+            first_arr := first_walk[ Length( first_walk ) ];
+            first_arr_complement := PathOneArrowShorterAtTarget( first_path );
+        fi;
+        
+        # Remove "leftmost" arrow from <data>
+        if LengthOfPath( first_arr_complement ) = 0 then
+            Remove( data, 2 );
+            Remove( data, 1 );
+        
+        else
+            data[1] := first_arr_complement;
+        fi;
+        
+        # Encode remaining contents of <data> using integers
+        list := [];
+        
+        for k in Filtered( [ 1 .. Length( data ) ], IsOddInt ) do
+            Add( list, LengthOfPath( data[k] ) * data[k+1] );
+        od;
+        
+        # Pass arguments to <Stripify>
+        return Stripify(
+         SBAlgResidueOfOverquiverPathNC( first_arr ),
+         ori,
+         list
+         );
+    end
+);
+
 InstallGlobalFunction(
     StripifyVirtualStripNC,
     [ IsList ],
@@ -688,6 +749,15 @@ InstallMethod(
 );
 
 InstallMethod(
+    SyllableAndOrientationListOfStripNC,
+    "for a strip",
+    [ IsStripRep ],
+    function( strip )
+        return strip!.data;
+    end
+);
+
+InstallMethod(
     DefiningDataOfStripNC,
     "for a strip-rep",
     [ IsStripRep ],
@@ -724,7 +794,7 @@ InstallMethod(
             # We use <sy_list> to specify a list of patches, sandwiched between
             #  two copies of the zero patch of <sba>.
             
-            sba := FamilyObj( strip )!.sb_alg;
+            sba := SBAlgOfStrip( strip );
             zero_patch := ZeroPatchOfSBAlg( sba );
             patch_list := [ zero_patch ];
             
@@ -1213,6 +1283,215 @@ InstallMethod(
             return Number( sy_list, x -> not IsStationarySyllable( x ) );
         fi;
     end
+);
+
+InstallMethod(
+    WidthNStripFunctionOfSBAlg,
+    "for a special biserial algebra",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            memoized,   # Memoized version of <wfunc>
+            width1,     # Width 1 strips of <sba>
+            wfunc;      # Width N strip function of <sba>
+            
+        if HasWidthNStripFunctionOfSBAlg( sba ) then
+            return WidthNStripFunctionOfSBAlg( sba );
+        else
+            # Define strips for <sba> of width 1
+            width1 := Filtered(
+             UniserialStripsOfSBAlg( sba ),
+             x -> WidthOfStrip( x ) > 0
+             );
+            
+            # Define prototypical width N strip function
+            wfunc := function( N )
+                local
+                    a_seq, b_seq,   # Integer and bit sequence of <source_enc>
+                    c_seq, d_seq,   # Integer and bit sequence of <target_enc>
+                    longer_at_right,
+                                    # Local function, whose input is a strip
+                                    #  and whose output is a list of strips
+                                    #  one wider that it on the righthand side
+                    narrower_strips,
+                                    # Strips for <sba> of width <N-1>
+                    source_enc, target_enc;
+                                    # Source and target encoding of permissible
+                                    #  data of <sba>
+                
+                # Validate <N>
+                if not IsInt( N ) then
+                    Error( "Width must be an integer!" );
+                
+                elif N < 0 then
+                    Error( "Width must be a nonnegative integer!" );
+                
+                elif N = 0 then
+                    return SimpleStripsOfSBAlg( sba );
+                    
+                elif N = 1 then
+                    return width1;
+                    
+                else
+                    # Create strips of of width <N-1>
+                    narrower_strips := ShallowCopy(
+                     WidthNStripFunctionOfSBAlg( sba )( N-1 )
+                     );
+                    
+                    # Add reflections of strips of width <N-1>
+                    Append(
+                     narrower_strips,
+                     List( narrower_strips, ReflectionOfStrip )
+                     );
+                     
+                    # Retrieve permissible data of <sba>
+                    source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
+                    target_enc := TargetEncodingOfPermDataOfSBAlg( sba );
+                    
+                    a_seq := source_enc[1];
+                    b_seq := source_enc[2];
+                    
+                    c_seq := target_enc[1];
+                    d_seq := target_enc[2];
+                    
+                    # Write local function, whose input is a strip and whose
+                    #  output is a list of strips one wider at the right than
+                    #  the input. If the input looks like
+                    #     ...\/\/\
+                    #  then this returns all strips looking like
+                    #     ...\/\/\/
+                    #  whereas if the input looks like
+                    #     .../\/\/
+                    #  then this returns all strips looking like
+                    #     .../\/\/\.
+                    
+                    longer_at_right := function( strip )
+                        local
+                            a_i, b_i,
+                            c_i, d_i,
+                            data,
+                            i,
+                            l,
+                            L,
+                            last_path,
+                            new_data,
+                            new_path,
+                            new_strip,
+                            output_list;
+                         
+                        # Boil <strip> down to its path and orientation list
+                        data := ShallowCopy(
+                         PathAndOrientationListOfStripNC( strip )
+                         );
+                        L := Length( data );
+                        
+                        # Read of "rightmost" path
+                        last_path := data[ L-1 ];
+                        
+                        # Initialize <output_list> as empty
+                        output_list := [];
+                        
+                        # If "rightmost" path has positive orientation ("-->")
+                        if data[ L ] = 1 then
+                            i := ExchangePartnerOfVertex(
+                             TargetOfPath( last_path )
+                             );
+                            c_i := c_seq.( String( i ) );
+                            d_i := d_seq.( String( i ) );
+                            
+                            for l in [ 1 .. c_i + d_i - 1 ] do
+                                new_path := PathByTargetAndLength( i, l );
+                                new_data := Concatenation(
+                                 data,
+                                 [ new_path, -1 ]
+                                 );
+                                new_strip :=
+                      StripifyFromPathAndOrientationListOfPositiveWidthStripNC(
+                                  new_data
+                                  );
+                                  
+                                Add( output_list, new_strip );
+                            od;
+                        
+                        # If "rightmost" path has negative orientation ("<--")
+                        elif data[ L ] = -1 then
+                            i := ExchangePartnerOfVertex(
+                             SourceOfPath( last_path )
+                             );
+                            a_i := a_seq.( String( i ) );
+                            b_i := b_seq.( String( i ) );
+                            
+                            for l in [ 1 .. a_i + b_i - 1 ] do
+                                new_path := PathBySourceAndLength( i, l );
+                                new_data := Concatenation(
+                                 data,
+                                 [ new_path, 1 ]
+                                 );
+                                new_strip :=
+                      StripifyFromPathAndOrientationListOfPositiveWidthStripNC(
+                                  new_data
+                                  );
+                                  
+                                Add( output_list, new_strip );
+                            od;
+                        fi;
+                        
+                        return output_list;
+                    end;
+                     
+                    return Set(
+                     Flat( List( narrower_strips, longer_at_right ) )
+                     );
+                fi;
+            end;
+            # (The definition of <wfunc> terminates here)
+            
+            # Memoize <wfunc>
+            memoized := MemoizePosIntFunction(
+             wfunc,
+             rec(
+              defaults := [ width1 ],
+              errorHandler :=
+               function( N )
+                if not IsInt( N ) then
+                    Error( "Width must be an integer!" );
+                    
+                elif N < 0 then
+                    Error( "Width must be a nonnegative integer!" );
+                    
+                elif N = 0 then
+                    return SimpleStripsOfSBAlg( sba );
+                fi;
+               end
+              )
+             );
+             
+            return memoized;
+        fi;
+    end
+);
+
+InstallMethod(
+    WidthNStripsOfSBAlg,
+    "for a nonnegative integer and a special biserial algebra",
+    [ IsInt, IsSpecialBiserialAlgebra ],
+    function( N, sba )
+        if N < 0 then
+            Error( "Width must be a nonnegative integer!" );
+            
+        else
+            return WidthNStripFunctionOfSBAlg( sba )( N );
+        fi;
+    end
+);
+
+RedispatchOnCondition(
+    WidthNStripsOfSBAlg,
+    "to ensure a check whether the quiver algebra is special biserial",
+    true,
+    [ IsInt, IsQuiverAlgebra ],
+    [ , IsSpecialBiserialAlgebra ],
+    0
 );
 
 InstallOtherMethod(
@@ -2644,7 +2923,7 @@ InstallOtherMethod(
             else
                 return CollectedListElementwiseListValuedFunction(
                  clist,
-                 SuspensionOfStrip
+                 x -> WithoutProjectiveStrips( SuspensionOfStrip( x ) )
                  );
             fi;
         fi;
@@ -2892,7 +3171,10 @@ InstallMethod(
             Error( "The given list is not a list of strip-reps!" );
         
         else
-            return Filtered( list, x -> not IsIndecProjectiveStrip( x ) );
+            return Filtered(
+             list,
+             x -> not ( IsIndecProjectiveStrip( x ) or IsZeroStrip( x ) )
+             );
         fi;
     end
 );
@@ -2908,7 +3190,7 @@ InstallMethod(
         else
             return CollectedFiltered(
              clist,
-             x -> not IsIndecProjectiveStrip( x )
+             x -> not ( IsIndecProjectiveStrip( x ) or IsZeroStrip( x ) )
              );
         fi;
     end
@@ -2937,7 +3219,7 @@ InstallMethod(
             nth_syzygy :=
              WithoutProjectiveStrips( CollectedNthSyzygyOfStrip( strip, N ) );
             
-            test_module := CollectedNthSyzygyOfStrip( strip, N );
+            test_module := nth_syzygy;
             for k in [ 1 .. N+1 ] do
                 test_module := SuspensionOfStrip( test_module );
             od;

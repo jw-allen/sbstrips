@@ -370,15 +370,19 @@ InstallMethod(
                 out1 := OutgoingArrowsOfVertex( v )[1];
                 out2 := OutgoingArrowsOfVertex( v )[2];
 
-                if not ( in_pa( in1 ) * in_pa( out1 ) ) in ideal then
+                if
+                 ( not ( in_pa( in1 ) * in_pa( out1 ) in ideal ) )
+                 or
+                 ( not ( in_pa( in2 ) * in_pa( out2 ) in ideal ) )
+                 then
                     Append( list,
                      [ Immutable( [ in1, out1 ] ), Immutable( [ in2, out2 ] ) ]
                      );
-                 else
+                else
                     Append( list,
                      [ Immutable( [ in1, out2 ] ), Immutable( [ in2, out1 ] ) ]
                      );
-                 fi;
+                fi;
             od;
             
             Sort( list );

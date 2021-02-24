@@ -24,6 +24,8 @@
   
   <#Include Label="DocUniserialStripsOfSBAlg">
   
+  <#Include Label="DocWidthNStripsOfSBAlg">
+  
   <#Include Label="DocIndecProjectiveStripsOfSBAlg">
   
   <#Include Label="DocIndecInjectiveStripsOfSBAlg">

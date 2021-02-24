@@ -4,9 +4,9 @@ SetPackageInfo( rec(
  
  Subtitle := "strips and strings for special biserial algebras",
  
- Version := "v0.6.0",
+ Version := "v0.6.4",
  
- Date := "26/11/2020",
+ Date := "24/02/2021",
  
  License := "GPL-2.0-or-later",
  
@@ -57,21 +57,23 @@ SetPackageInfo( rec(
   "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
 
  AbstractHTML :=
-  "String modules for special biserial (SB) algebras are represented by string\
- graphs. The syzygy of a string module (over an SB algebra) is a direct sum of\
- string modules, by a 2004 result of Liu and Morin, therefore syzygy-taking\
- can be performed at the (combinatorial) level of string graphs rather than\
- the (homological-algebraic) level of modules. This package represents string\
- graphs in <span class=\"pkgname\">GAP</span> by objects called strips and it\
- implements syzygy-taking as an operation on them. Together with some\
- utilities for book-keeping, it allows for very efficient calculation of Kth\
- syzygyies for large K.",
+  "String modules for special biserial (SB) algebras are represented by \
+string graphs. Many modules related to a given string module, including its \
+syzygy, transpose and vector-space dual and hence Auslander-Reiten translate \
+and inverse translate, are also string modules. These related modules can be \
+calculated combinatorially rather than algebraically. SBStrips implements \
+this functionality in GAP, representing string graphs as objects called \
+strips. It includes some tests for associated properties such as syzygy type, \
+delooping level and weak periodicity.\n\n SBStrips also includes bookkeeping \
+functionality for multisets, which it calls collected lists, and it \
+integrates with (and depends on) the QPA package for quiver algebras and \
+their modules."
  
  PackageDoc := rec(
    BookName := "SBStrips",
    ArchiveURLSubset := ["doc"],
    HTMLStart := "doc/chap0.html",
-   PDFFile := "doc/manual.pdf",
+   PDFFile := "doc/main.pdf",
    SixFile := "doc/manual.six",
    LongTitle := ~.Subtitle
   ),
@@ -86,6 +88,8 @@ SetPackageInfo( rec(
   ),
 
  AvailabilityTest := ReturnTrue,
+
+ TestFile := "tst/testall.g",
 
  Keywords := [ "special biserial algebra", "string module", "syzygy" ]
 ) );

@@ -1,0 +1,414 @@
+  
+  [1X4 [33X[0;0YStrips[133X[101X
+  
+  
+  [1X4.1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YStrips  are  the  principal  objects  of  the  [5XSBStrips[105X  package.  They  are
+  syzygy-minded representations of string graphs.[133X
+  
+  
+  [1X4.2 [33X[0;0YConstructing strips[133X[101X
+  
+  
+  [1X4.2-1 [33X[0;0YStripify[133X[101X
+  
+  [33X[1;0Y[29X[2XStripify[102X( [3Xarr[103X, [3XN[103X, [3Xint_list[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XStripify[102X( [3Xpath[103X ) [32X method[133X
+  
+  [33X[0;0YArguments (first method): [3Xarr[103X, an arrow in a SB algebra (see note below); [3XN[103X,
+  an  integer  which  is  either [10X1[110X or [10X-1[110X; [3Xint_list[103X, a (possibly empty) list of
+  nonzero integers whose entries are alternately positive and negative).[133X
+  
+  [33X[0;0YArgument (second method): [3Xpath[103X, a path in a SB algebra.[133X
+  
+  [33X[0;0Y([13XNote.[113X  Remember  that  vertices and arrows in a SB algebra, which is to say
+  the  elements in the algebra corresponding to the vertices and arrows of the
+  quiver, can be easily accessed using [2X.[102X ([14XQPA: . for a path algebra[114X), and that
+  these  can  be multiplied together using [2X\*[102X ([14XReference: *[114X) to make a path in
+  the SB algebra.)[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe strip specified by these data[133X
+  
+  [33X[0;0YThe first method is intended for specifying arbitrary string( graphs) over a
+  SB algebra to [5XGAP[105X. The second method is more specialized, being intended for
+  specifying  those  string(  graph)s  where  all  arrows  point  in  the same
+  direction.  This  includes  the vacuous case where the string (graph) has no
+  arrows.[133X
+  
+  [33X[0;0YFor  the  first  method, suppose you draw your string graph on the page as a
+  linear  graph  with  some  arrows  pointing  to  the  right  (the "positive"
+  direction)  and  some  to  the  left (the "negative" direction). See further
+  below for examples.[133X
+  
+  [33X[0;0YThe  first  arrow  (ie,  the  leftmost  one drawn on the page) is [3Xarr[103X. If it
+  points  to  the  right (the "positive" direction), then set [3XN[103X to be [10X1[110X. If it
+  points to the left (the "negative" direction), then set [3XN[103X to be [10X-1[110X.[133X
+  
+  [33X[0;0YNow,  ignore  that  first arrow [3Xarr[103X and look at the rest of the graph. It is
+  made up of several paths that alternately point rightward and leftward. Each
+  path  has  a  [13Xlength[113X;  that  is, the total number of arrows in it. Enter the
+  lengths  of  these  paths  to  [3Xint_list[103X  in  the  order you read them, using
+  positive  numbers  for  paths  pointing  rightwards and negative numbers for
+  paths pointing leftwards.[133X
+  
+  [33X[0;0Y[5XSBStrips[105X  will  check that your data validily specify a strip. If it doesn't
+  think they do, then it will throw up an Error message.[133X
+  
+  [33X[0;0YFor  the  second method, [5XSBStrips[105X directly infers the string (graph) and the
+  SB algebra directly from [3Xpath[103X.[133X
+  
+  
+  [1X4.3 [33X[0;0YCanonical strips[133X[101X
+  
+  [1X4.3-1 SimpleStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XSimpleStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:  [3Xsba[103X,  a  special  biserial  algebra (ie, [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returs [9Xtrue[109X)[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya   list   [10Xsimple_list[110X,  whose  [22Xj[122Xth  entry  is  the  simple  strip
+            corresponding to the [22Xj[122Xth vertex of [3Xsba[103X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver  are  ordered;  [10XSimpleStripsOfSBAlg[110X  adopts  that order for strips of
+  simple modules.[133X
+  
+  [1X4.3-2 UniserialStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XUniserialStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya list of the strips that correspond to uniserial modules for [3Xsba[103X[133X
+  
+  [33X[0;0YSimple modules are uniserial, therefore every element of [2XSimpleStripsOfSBAlg[102X
+  ([14X4.3-1[114X) will occur in this list too.[133X
+  
+  [1X4.3-3 WidthNStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XWidthNStripsOfSBAlg[102X( [3XN[103X, [3Xsba[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3XN[103X, a nonnegative integer; [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya list, comprising all the strips of width [3XN[103X over [3Xsba[103X[133X
+  
+  [33X[0;0YRecall that the strips of width [22X0[122X are the simple strips and those of width [22X1[122X
+  are the nonsimple uniserial strips.[133X
+  
+  [1X4.3-4 IndecProjectiveStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XIndecProjectiveStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  [10Xproj_list[110X,  whose  entry are either strips or the boolean
+            [9Xfail[109X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver  are  ordered;  [10XIndecProjectiveStripsOfSBAlg[110X  adopts  that  order for
+  strips of indecomposable projective modules.[133X
+  
+  [33X[0;0YIf  the  indecomposable projective module corresponding to the [10Xj[110Xth vertex of
+  [3Xsba[103X  is a string module, then [10XIndecProjectiveStripsOfSBAlg( sba )[j][110X returns
+  the strip describing that string module. If not, then it returns [9Xfail[109X.[133X
+  
+  [1X4.3-5 IndecInjectiveStripsOfSBAlg[101X
+  
+  [33X[1;0Y[29X[2XIndecInjectiveStripsOfSBAlg[102X( [3Xsba[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xsba[103X, a special biserial algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  [10Xinj_list[110X,  whose entries are either strips or the boolean
+            [9Xfail[109X.[133X
+  
+  [33X[0;0YYou  will  have  specified  [3Xsba[103X to [5XGAP[105X via some quiver. The vertices of that
+  quiver are ordered; [10XIndecInjectiveStripsOfSBAlg[110X adopts that order for strips
+  of the indecomposabe injective modules.[133X
+  
+  [33X[0;0YIf  the  indecomposable  injective module corresponding to the [10Xj[110Xth vertex of
+  [3Xsba[103X  is  a string module, then [10XIndecInjectiveStripsOfSBAlg( sba )[j][110X returns
+  the strip describing that string module. If not, then it returns [9Xfail[109X.[133X
+  
+  
+  [1X4.4 [33X[0;0YAttributes and properties of strips[133X[101X
+  
+  [1X4.4-1 WidthOfStrip[101X
+  
+  [33X[1;0Y[29X[2XWidthOfStrip[102X( [3Xstrip[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  nonnegative integer, counting the number (with multiplicity) of
+            syllables of [3Xstrip[103X are nonstationary.[133X
+  
+  [1X4.4-2 IsZeroStrip[101X
+  
+  [33X[1;0Y[29X[2XIsZeroStrip[102X( [3Xstrip[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  [3Xstrip[103X  is  the  zero strip of some SB algebra, and [9Xfalse[109X
+            otherwise.[133X
+  
+  [33X[0;0YNote that [5XSBStrips[105X knows which SB algebra [3Xstrip[103X belongs to.[133X
+  
+  [1X4.4-3 IsIndecProjectiveStrip[101X
+  
+  [33X[1;0Y[29X[2XIsIndecProjectiveStrip[102X( [3Xstrip[103X ) [32X property[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip.[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  [3Xstrip[103X  represents  a  indecomposable  projective  string
+            module,  and  [9Xfalse[109X  otherwise. (The indecomposability requirement
+            means this returns [9Xfalse[109X on zero strips.)[133X
+  
+  [1X4.4-4 IsIndecInjectiveStrip[101X
+  
+  [33X[1;0Y[29X[2XIsIndecInjectiveStrip[102X( [3Xstrip[103X ) [32X property[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip.[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if [3Xstrip[103X represents a indecomposable injective string module,
+            and [9Xfalse[109X otherwise. (The indecomposability requirement means this
+            returns [9Xfalse[109X on zero strips.)[133X
+  
+  
+  [1X4.5 [33X[0;0YOperation on strips[133X[101X
+  
+  [33X[0;0YThe  following  attributes  and  operations  usually  take  strips as input.
+  However,  many  of  them  are clever enough to recognise a list or collected
+  list  of  strips.  They  will  then resort to special methods that apply the
+  strip  method  entrywise, combine the outputs and return a list or collected
+  list (as appropriate).[133X
+  
+  
+  [1X4.5-1 [33X[0;0YSyzygyOfStrip[133X[101X
+  
+  [33X[1;0Y[29X[2XSyzygyOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  of  strips,  corresponding  to  the indecomposable direct
+            summands of the syzygy of [3Xstrip[103X.[133X
+  
+  [33X[0;0YFor  higher  syzygies,  [2XNthSyzygyOfStrip[102X ([14X4.5-2[114X) is probably more convenient
+  and [2XCollectedNthSyzygyOfStrip[102X ([14X4.5-4[114X) probably more efficient.[133X
+  
+  
+  [1X4.5-2 [33X[0;0YNthSyzygyOfStrip[133X[101X
+  
+  [33X[1;0Y[29X[2XNthSyzygyOfStrip[102X( [3Xstrip[103X, [3XN[103X ) [32X method[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list  of strips containing the indecomposable [3XN[103Xth syzygy strips
+            of [3Xstrip[103X[133X
+  
+  [33X[0;0YFor  large  [22XN[122X  --  say,  [22XN  ≥ 10[122X -- consider using [2XCollectedNthSyzygyOfStrip[102X
+  ([14X4.5-4[114X) instead, since it is much more efficient.[133X
+  
+  
+  [1X4.5-3 [33X[0;0YCollectedSyzygyOfStrip[133X[101X
+  
+  [33X[1;0Y[29X[2XCollectedSyzygyOfStrip[102X( [3Xstrip[103X ) [32X method[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya collected list, whose elements are the syzygy strips of [3Xstrip[103X[133X
+  
+  [33X[0;0YThis is equivalent to calling [10XCollected( SyzygyOfStrip( [110X[3Xstrip[103X[10X ) );[110X.[133X
+  
+  
+  [1X4.5-4 [33X[0;0YCollectedNthSyzygyOfStrip[133X[101X
+  
+  [33X[1;0Y[29X[2XCollectedNthSyzygyOfStrip[102X( [3Xstrip[103X, [3XN[103X ) [32X method[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya collected list, whose entries are the [3XN[103Xth syzygies of [3Xstrip[103X.[133X
+  
+  [1X4.5-5 ModuleOfStrip[101X
+  
+  [33X[1;0Y[29X[2XModuleOfStrip[102X( [3Xstrip[103X ) [32X method[133X
+  
+  [33X[0;0YArgument: a strip [3Xstrip[103X.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  right module for the SB algebra over which [3Xstrip[103X is defined, or
+            a  list  or collected list of the modules associated to the strips
+            in [3Xlist[103X or [3Xclist[103X respectively.[133X
+  
+  [33X[0;0YThis  operation  returns the string module corresponding to the strip [3Xstrip[103X.
+  More  specifically,  it  gives  that  module  as  a quiver, ultimately using
+  [2XRightModuleOverPathAlgebra[102X  ([14XQPA:  RightModuleOverPathAlgebra with dimension
+  vector[114X).[133X
+  
+  [1X4.5-6 DirectSumModuleOfListOfStrips[101X
+  
+  [33X[1;0Y[29X[2XDirectSumModuleOfListOfStrips[102X( [3Xlist[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XDirectSumModuleOfListOfStrips[102X( [3Xclist[103X ) [32X method[133X
+  
+  [33X[0;0YArgument (first method): [3Xlist[103X, a list of strips[133X
+  
+  [33X[0;0YArgument (second method): [3Xclist[103X, a collected list of strips[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe  quiver  representation  corresponding  to  the  direct sum of
+            [22XA[122X-modules  whose  indecomposable  direct summands are specified by
+            [3Xlist[103X or [3Xclist[103X.[133X
+  
+  [33X[0;0YThe  methods for this operation make the obvious requirement that all strips
+  present belong to the the same SB algebra.[133X
+  
+  [1X4.5-7 IsStripDirectSummand[101X
+  
+  [33X[1;0Y[29X[2XIsStripDirectSummand[102X( [3Xstrip_or_strips[103X, [3Xlist[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments:  [3Xstrip_or_strips[103X,  a strip or list of strips or collected list of
+  strips; [3Xlist[103X, a list or collected list of strips.[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  the  string  module  represented by [3Xstrip_or_strips[103X is a
+            direct  summand  of the string module represented by the strips in
+            [3Xlist[103X, and [9Xfalse[109X otherwise.[133X
+  
+  [1X4.5-8 VectorSpaceDualOfStrip[101X
+  
+  [33X[1;0Y[29X[2XVectorSpaceDualOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XOppositeStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XDOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:  [3Xstrip[103X, a strip representing some string module [22XX[122X over a [22XK[122X-algebra
+  [22XA[122X.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya strip representing the vector-space dual module [22XD M = Hom_K(X,K)[122X
+            of [22XX[122X.[133X
+  
+  [33X[0;0YRecall that [22XD X[122X is a module for [22XA^op[122X, the opposite algebra to [22XA[122X.[133X
+  
+  [33X[0;0Y[10XOppositeStrip[110X and [10XDOfStrip[110X are synonyms for [10XVectorSpaceDualOfStrip[110X.[133X
+  
+  [1X4.5-9 TransposeOfStrip[101X
+  
+  [33X[1;0Y[29X[2XTransposeOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XTrOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip representing some string module [22XX[122X.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya strip representing the transpose [22XTr X[122X of [22XX[122X.[133X
+  
+  [33X[0;0YRecall that if [22XX[122X is an [22XA[122X-module, then [22XTr X[122X is an [22XA^op[122X-module.[133X
+  
+  [33X[0;0Y[10XTrOfStrip[110X is a synonym for [10XTransposeOfStrip[110X.[133X
+  
+  [1X4.5-10 DTrOfStrip[101X
+  
+  [33X[1;0Y[29X[2XDTrOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XARTranslateOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip representing some string module [22XX[122X.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya strip representing the Auslander-Reiten translate [22XD Tr X[122X of [22XX[122X.[133X
+  
+  [33X[0;0YRecall that if [22XX[122X is projective then [22XD Tr X = 0[122X.[133X
+  
+  [33X[0;0Y[10XARTranslateOfStrip[110X is a synonym for [10XDTrOfStrip[110X.[133X
+  
+  [1X4.5-11 TrDOfStrip[101X
+  
+  [33X[1;0Y[29X[2XTrDOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XARInverseTranslateOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip representing some string module [22XX[122X.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya strip representing the Auslander-Reiten inverse translate [22XTr D X[122X
+            of [22XX[122X.[133X
+  
+  [33X[0;0YRecall that if [22XX[122X is injective then [22XTr D X = 0[122X.[133X
+  
+  [33X[0;0Y[10XARInverseTranslateOfStrip[110X is a synonym for [10XTrDOfStrip[110X.[133X
+  
+  [1X4.5-12 SuspensionOfStrip[101X
+  
+  [33X[1;0Y[29X[2XSuspensionOfStrip[102X( [3Xstrip[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xstrip[103X, a strip representing some string module [22XX[122X[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  list of strips, representing the indecomposable direct summands
+            of the suspension [22Xsuspension X = Tr syzygy Tr X[122X of [22XX[122X[133X
+  
+  [1X4.5-13 IsFiniteSyzygyTypeStripByNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XIsFiniteSyzygyTypeStripByNthSyzygy[102X( [3Xstrip[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  the strips appearing in the [3XN[103Xth syzygy of [3Xstrip[103X have all
+            appeared among earlier syzygies, and [9Xfalse[109X otherwise.[133X
+  
+  [33X[0;0YIf  the  call  to  this  function  returns [9Xtrue[109X, then it will also print the
+  smallest [3XN[103X for which it would return [9Xtrue[109X.[133X
+  
+  [1X4.5-14 IsWeaklyPeriodicStripByNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XIsWeaklyPeriodicStripByNthSyzygy[102X( [3Xstrip[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if [3Xstrip[103X is appears among its own first [3XN[103X syzygies, and [9Xfalse[109X
+            otherwise.[133X
+  
+  [33X[0;0YIf the call to this function returns [9Xtrue[109X, then it will also print the index
+  of the syzygy at which [3Xstrip[103X first appears.[133X
+  
+  [1X4.5-15 DeloopingLevelOfStripIfAtMostN[101X
+  
+  [33X[1;0Y[29X[2XDeloopingLevelOfStripIfAtMostN[102X( [3Xstrip[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xstrip[103X, a strip; [3XN[103X, a nonnegative integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe delooping level of [3Xstrip[103X if it is at most [3XN[103X, and [9Xfail[109X if not.[133X
+  
+  [1X4.5-16 WithoutProjectiveStrips[101X
+  
+  [33X[1;0Y[29X[2XWithoutProjectiveStrips[102X( [3Xlist[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xlist[103X, a list or collected list of strips[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  new  list  or  collected  list  [3Xnew_list[103X  obtained from [3Xlist[103X by
+            removing all the projective strips.[133X
+  
+  
+  [1X4.6 [33X[0;0YTests on an SB algebra that use strips[133X[101X
+  
+  [1X4.6-1 TestInjectiveStripsUpToNthSyzygy[101X
+  
+  [33X[1;0Y[29X[2XTestInjectiveStripsUpToNthSyzygy[102X( [3Xsba[103X, [3XN[103X ) [32X function[133X
+  
+  [33X[0;0YArguments:  [3Xsba[103X,  a  special  biserial algebra (ie, [2XIsSpecialBiserialAlgebra[102X
+  ([14XQPA: IsSpecialBiserialAlgebra[114X) returs [9Xtrue[109X); [3XN[103X, a positive integer[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X, if all strips of injective string modules have finite syzygy
+            type by the [3XN[103Xth syzygy, and [9Xfalse[109X otherwise.[133X
+  
+  [33X[0;0YThis function calls [2XIndecInjectiveStripsOfSBAlg[102X ([14X4.3-5[114X) for [3Xsba[103X, filters out
+  all  the  [9Xfail[109Xs,  and  then  checks  each remaining strip individually using
+  [2XIsFiniteSyzygyTypeStripByNthSyzygy[102X ([14X4.5-13[114X) (with second argument [3XN[103X).[133X
+  
+  [33X[0;0Y[13XAuthor's  note.[113X  For  every  special biserial algebra the author has tested,
+  this  function returns true (for sufficiently large [3XN[103X). It suggests that the
+  minimal injective cogenerator of a SB algebra always has finite syzygy type.
+  This  condition  implies  many homological conditions of interest (including
+  the big finitistic dimension conjecture)![133X
+  
+  [1X4.6-2 DeloopingLevelOfSBAlgIfAtMostN[101X
+  
+  [33X[1;0Y[29X[2XDeloopingLevelOfSBAlgIfAtMostN[102X( [3Xsba[103X, [3XN[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xsba[103X, a special biserial algebra; [3XN[103X, a nonnegative integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe delooping level of [3Xsba[103X if it is at most [3XN[103X, and [9Xfail[109X if not.[133X
+  
+  [33X[0;0Y[13XAuthor's  note.[113X  Every  SB  algebra  the  author  has  tested has had finite
+  delooping  level.  It  would  be  very interesting to know whether this is a
+  general phenomenon![133X
+  

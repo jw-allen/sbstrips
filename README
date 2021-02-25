@@ -1,0 +1,83 @@
++--------------------------------------------------------+--------------------+
+|                                                        | Copyright (C) 2021 |
+|                   SBStrips  (v0.6.5)                   |          Joe Allen |
+|                                                        |       [he/him/his] |
++--------------------------------------------------------+--------------------+
+
+This is the README file for SBStrips, which is a package for GAP 4.11.
+
++--+ About +------------------------------------------------------------------+
+The SBStrips package models 'strings', namely the decorated graphs used in
+representation theory. These graphs are known to describe a type of module for
+a special biserial algebra called a string module. The syzygy of a string
+module is a direct sum of string modules; hence syzygy-taking is essentially a
+one-to-many operation on strings. The SBStrips package implements 'strings' as
+a data structure called 'strips', and performs this syzygy calculation.
+
+The SBStrips package is designed for version >=4.11.x of GAP, requiring version
+>=1.30.x of QPA and version >=1.6.x of GAPDoc. (QPA and GAPDoc are other
+packages for GAP.)
+
+The SBStrips package is being written by me, Joe Allen, during my doctoral
+studies at the University of Bristol. In my thesis, I am developing a
+combinatorial model of special biserial algebras and their string modules.
+This package is the implementation in GAP of (aspects of) that model.
+
++--+ Installation +-----------------------------------------------------------+
+The SBStrips can be installed by following these steps (assuming you already
+have GAP installed.)
+
+    1. Download the archive file 
+            sbstrips/archive/v0.6.5.tar.gz
+       from
+            https://github.com/jw-allen/sbstrips/archive/v0.6.5.tar.gz
+        
+    2. Unpack it into your  pkg  directory. It should create a subdirectory
+       called  sbstrips.
+    
+    3. Run GAP as normal and type
+            LoadPackage( "sbstrips" );
+       at the GAP prompt (ie, when you see "gap>" in your terminal).
+       
++--+ Contents +---------------------------------------------------------------+
+This version of SBStrips includes the following files
+
+    .gitignore
+        Technical file
+
+    LICENSE
+        Details of the GNU General Public Licence v2.0, under which this code
+        is released
+        
+    PackageInfo.g
+        Meta-information about this package
+        
+    makedocrel.g
+        Code to (re)generate the documentation
+        
+    README
+        This file!
+        
+    init.g
+        Package initialisation
+        
+    read.g
+        Package initialisation
+        
+    version
+        The version number
+        
++--+ Contact +----------------------------------------------------------------+
+If you use SBStrips at all then please let me know! You can reach me at:
+
+    joe.allen [at] bristol [dot] ac [dot] uk
+    
+(My pronouns are he/him/his; please just call me Joe and not anything super
+formal like "Mr Allen".) I'd be very interested to hear of any applications
+you may find.
+
+I'd also like to hear if you encounter any bugs/issues, or have any
+recommendations/suggestions. You can email me directly at the above address or
+you can log your thoughts on the GitHub issues page at:
+
+    https://github.com/jw-allen/sbstrips/issues

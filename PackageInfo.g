@@ -1,102 +1,95 @@
-#############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
-##
-
 SetPackageInfo( rec(
 
-PackageName := "GitHubPagesForGAP",
-
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.3",
-Date := "10/11/2019", # dd/mm/yyyy format
-License := "0BSD",
-
-Persons := [
+ PackageName := "SBStrips",
+ 
+ Subtitle := "for syzygies of string modules over special biserial algebras",
+ 
+ Version := "v0.6.5",
+ 
+ Date := "24/02/2021",
+ 
+ License := "GPL-2.0-or-later",
+ 
+ Persons := [
   rec(
-    LastName      := "Horn",
-    FirstNames    := "Max",
-    IsAuthor      := true,
-    IsMaintainer  := true,
-    Email         := "max.horn@uni-siegen.de",
-    WWWHome       := "https://www.quendi.de/math",
-    PostalAddress := Concatenation(
-                       "Department Mathematik\n",
-                       "Universität Siegen\n",
-                       "Walter-Flex-Straße 3\n",
-                       "57072 Siegen\n",
-                       "Germany" ),
-    Place         := "Siegen",
-    Institution   := "Universität Siegen"
-  ),
-
-  rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
-    IsMaintainer  := true,
-    #Email         := "janitor@example.com",
-  ),
-],
-
-Status := "other",
-
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "gap-system",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
-
-PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
-
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
-
-PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
-  ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
-  PDFFile   := "doc/manual.pdf",
-  SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
-),
-
-# The following dependencies are fake and for testing / demo purposes
-Dependencies := rec(
-  GAP := ">=4.8.1",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
+   LastName := "Allen",
+   FirstNames := "Joe",
+   IsAuthor := true,
+   IsMaintainer := true,
+   Email := Concatenation( [
+    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk" 
+    ] ),
+   WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
+   PostalAddress := Concatenation( [
+    "School of Mathematics,\n",
+    "Fry Building,\n",
+    "Woodland Rd, Bristol,\n",
+    "BS8 1UG"
+     ] ),
+   Place := "Bristol",
+   Institution := "University of Bristol"
+   )
   ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+
+ Status := "dev",
+ 
+ SourceRepository := rec( 
+  Type := "git", 
+  URL := "https://github.com/jw-allen/sbstrips"
+  ),
+
+ IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ 
+ PackageWWWHome := ~.SourceRepository.URL,
+ 
+ ArchiveURL := Concatenation(
+  ~.SourceRepository.URL,
+  "/archive/",
+  ~.Version
+  ),
+  
+ ArchiveFormats := ".tar.gz",
+
+ README_URL := 
+  Concatenation( ~.PackageWWWHome, "/README" ),
+
+ PackageInfoURL :=
+  "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
+
+ AbstractHTML :=
+  "String modules for special biserial (SB) algebras are represented by \
+string graphs. Many modules related to a given string module, including its \
+syzygy, transpose and vector-space dual and hence Auslander-Reiten translate \
+and inverse translate, are also string modules. These related modules can be \
+calculated combinatorially rather than algebraically. SBStrips implements \
+this functionality in GAP, representing string graphs as objects called \
+strips. It includes some tests for associated properties such as syzygy type, \
+delooping level and weak periodicity.\n\n SBStrips also includes bookkeeping \
+functionality for multisets, which it calls collected lists, and it \
+integrates with (and depends on) the QPA package for quiver algebras and \
+their modules.",
+ 
+ PackageDoc := rec(
+   BookName := "SBStrips",
+   ArchiveURLSubset := ["doc"],
+   HTMLStart := "doc/chap0.html",
+   PDFFile := "doc/main.pdf",
+   SixFile := "doc/manual.six",
+   LongTitle := ~.Subtitle
+  ),
+
+ Dependencies := rec(
+  GAP := ">=4.11",
+  NeededOtherPackages := [
+   ["qpa", "1.30"], ["GAPDoc", ">=1.6"]
+   ],
+  SuggestedOtherPackages := [],
   ExternalConditions := []
-),
+  ),
 
-AvailabilityTest := ReturnTrue,
+ AvailabilityTest := ReturnTrue,
 
-Keywords := ["GitHub Pages", "GAP"]
+ TestFile := "tst/testall.g",
 
-));
-
-
+ Keywords := [ "special biserial algebra", "string module", "syzygy" ]
+) );

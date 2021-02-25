@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SBStrips) - Chapter 3: 
+        Mathematical background
+      </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap3"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap3_mj.html">[MathJax on]</a></p>
+<p><a id="X7EF1B6708069B0C7" name="X7EF1B6708069B0C7"></a></p>
+<div class="ChapSects"><a href="chap3.html#X7EF1B6708069B0C7">3 <span class="Heading">
+        Mathematical background
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7F6979907D3A907E">3.1 <span class="Heading">
+    Finite-dimensional algebras
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X82E3FC4B79D5B8A5">3.2 <span class="Heading">
+    Modules and bound quiver representations
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X79BC0E187E5A5851">3.3 <span class="Heading">
+    Syzygies and related constructions
+  </span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7C90F2137B6E6CF0">3.3-1 <span class="Heading">
+      Projective covers and syzygies
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7DE629237EDF2F4F">3.3-2 <span class="Heading">
+      Syzygy patterns
+    </span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7F9C35E4849D0EC6">3.3-3 <span class="Heading">
+      Delooping
+    </span></a>
+</span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X7FDF2655851D5298">3.4 <span class="Heading">
+    Special biserial algebras
+  </span></a>
+</span>
+</div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap3.html#X85E00E7B812607E2">3.5 <span class="Heading">
+    String modules for special biserial algebras
+  </span></a>
+</span>
+</div>
+</div>
+
+<h3>3 <span class="Heading">
+        Mathematical background
+      </span></h3>
+
+<p><a id="X7F6979907D3A907E" name="X7F6979907D3A907E"></a></p>
+
+<h4>3.1 <span class="Heading">
+    Finite-dimensional algebras
+  </span></h4>
+
+<p>Here and throughout, <span class="SimpleMath">K</span> is some field. By a <em><span class="SimpleMath">K</span>-algebra</em> <span class="SimpleMath">A</span>, we mean an associative and unital (but not necessarily commutative) ring with a compatible <span class="SimpleMath">K</span>-vector space structure. Any algebra <span class="SimpleMath">A</span> has an opposite algebra <span class="SimpleMath">A^op</span>.</p>
+
+<p>Suppose <span class="SimpleMath">Q</span> is a finite quiver: that is, a directed graph with finitely many vertices and finitely many arrows, where loops and/or multiple edges are permitted. The paths of <span class="SimpleMath">Q</span> (also called <em><span class="SimpleMath">Q</span>-paths</em> to emphasize their parent quiver), including the "stationary" paths at each vertex, form the basis of a vector space. multiplication can be defined on basis vectors <span class="SimpleMath">p</span> and <span class="SimpleMath">q</span> by "concatenation extended by zero"; more precisely, <span class="SimpleMath">p ⋅ q = pq</span> ("<span class="SimpleMath">p</span> then <span class="SimpleMath">q</span>") if <span class="SimpleMath">pq</span> is a path in <span class="SimpleMath">Q</span>, and <span class="SimpleMath">p ⋅ q = 0</span> otherwise. This defines the <em>path algebra</em> <span class="SimpleMath">KQ</span>. Its multiplicative unit is the sum of stationary paths. It has finite <span class="SimpleMath">K</span>-dimension iff <span class="SimpleMath">Q</span> contains no (directed) cycles.</p>
+
+<p>Let <span class="SimpleMath">J ideal KQ</span> denote the <em>arrow ideal</em> of <span class="SimpleMath">KQ</span>: the smallest two-sided ideal of <span class="SimpleMath">KQ</span> containing the arrows of <span class="SimpleMath">Q</span>. An ideal <span class="SimpleMath">I ideal KQ</span> is <em>admissible</em> iff there is an integer <span class="SimpleMath">N ≥ 2</span> with <span class="SimpleMath">J^N ⊆ I ⊆ J^2</span>.</p>
+
+<p>By a <em>(bound) quiver algebra</em>, we mean a quotient <span class="SimpleMath">KQ/I</span> of a path algebra <span class="SimpleMath">KQ</span> by an admissible ideal <span class="SimpleMath">I</span>. Quiver algebras are always finite-dimensional <a href="chapBib.html#biBASS06">[ASS , Sec II.2]</a>. Indeed, at least when <span class="SimpleMath">K</span> is algebraically closed, any finite-dimensional algebra is a direct product of connected ones (trivially), any connected finite-dimensional algebra is Morita equivalent to a basic one <a href="chapBib.html#biBASS06">[ASS , Sec I.6]</a> and any basic, connected algebra is isomorphic to a quiver algebra <a href="chapBib.html#biBASS06">[ASS , Sec II.3]</a>.</p>
+
+<p>In this document, we assume that <span class="SimpleMath">K</span> is algebraically closed and <span class="SimpleMath">A</span> is a quiver algebra <span class="SimpleMath">KQ/I</span>. By the above, this is no loss of generality. We also use the term <span class="SimpleMath">A</span>-path to mean a nonzero element <span class="SimpleMath">p+I</span> represented by a path of the quiver.</p>
+
+<p><a id="X82E3FC4B79D5B8A5" name="X82E3FC4B79D5B8A5"></a></p>
+
+<h4>3.2 <span class="Heading">
+    Modules and bound quiver representations
+  </span></h4>
+
+<p>A representation of <span class="SimpleMath">A</span> is a homomorphism of algebras <span class="SimpleMath">ϕ : A -&gt; End X</span> whose target is the endomorphism algebra <span class="SimpleMath">End X</span> of a <span class="SimpleMath">K</span>-vector space <span class="SimpleMath">X</span>; for convenience, write <span class="SimpleMath">ϕ_a</span> for the image of <span class="SimpleMath">a</span> in <span class="SimpleMath">ϕ</span>. In this case, we call <span class="SimpleMath">X</span> a <em>(right) <span class="SimpleMath">A</span>-module</em>, with associated action <span class="SimpleMath">x ⋅ a = xϕ_a</span>. The module is <em>finite-dimensional</em> iff <em>X</em> is.</p>
+
+<p>Since <span class="SimpleMath">A=KQ/I</span>, we can work in terms of <em>(bound) representations of quivers</em>. These are assignments of a vector space <span class="SimpleMath">X_i</span> to each vertex <span class="SimpleMath">i</span> of <span class="SimpleMath">Q</span> and a linear map <span class="SimpleMath">θ_α : X_i -&gt; X_j</span> to each arrow <span class="SimpleMath">α : i -&gt; j</span> of <span class="SimpleMath">Q</span> such that for any <span class="SimpleMath">ρ = ∑_k=1^m p_kλ_k ∈ I</span>, the associated map <span class="SimpleMath">∑_k=1^m θ_p_k : ⨁_i X_i -&gt; ⨁_i X_i</span> is zero. Here, <span class="SimpleMath">θ_p_k=θ_α_1⋯θ_α_r</span> for a decomposition of a nonstationary <span class="SimpleMath">p_k</span> into a product <span class="SimpleMath">α_1⋯α_r</span> of arrows, and <span class="SimpleMath">θ_i=id_X_i</span> for any stationary path at <span class="SimpleMath">i</span>.</p>
+
+<p>As is well-known <a href="chapBib.html#biBASS06">[ASS , III.1]</a>, representations of quivers are equivalent to modules. More specifically, the categories <span class="SimpleMath">Rep(Q,I)</span> of bound quiver representations and <span class="SimpleMath">Modcat A</span> of <span class="SimpleMath">A</span>-modules are equivalent, and this equivalence restricts to their respective full subcategories <span class="SimpleMath">rep(Q,I)</span> and <span class="SimpleMath">modcat A</span> of finite-dimensional objects. In keeping with the quiver-minded approach from above, whenever we say module, we really mean the equivalent bound quiver representation.</p>
+
+<p>We note in particular that all of the categories in the previous paragraph are abelian: thus, we can speak of the direct sum of modules (denoted with <span class="SimpleMath">⊕</span>) . We call a module <span class="SimpleMath">X</span> <em>indecomposable</em> if <span class="SimpleMath">X = Y⊕ Z</span> implies <span class="SimpleMath">Y</span> or <span class="SimpleMath">Z</span> is zero. Further, if <span class="SimpleMath">mathcalU</span> is any set of <span class="SimpleMath">A</span>-modules, we define the additive closure <span class="SimpleMath">add mathcalU</span> of <span class="SimpleMath">mathcalU</span> as the full subcategory of <span class="SimpleMath">modcat A</span> whose objects are isomorphic to direct summands of finite direct sums of members of <span class="SimpleMath">mathcalU</span>.</p>
+
+<p>Write <span class="SimpleMath">[X]</span> for the isomorphism type of <span class="SimpleMath">X</span>. One can seek to classify the isomorphism classes of indecomposable (finite-dimensional) modules of an algebra. A deep theorem of Drozd <a href="chapBib.html#biBDro80">[Dro ]</a> establishes that all finite-dimensional algebras fall into exactly one of three <em>representation types</em>. In increasing order of difficulty, the options are <em>representation finite</em>, <em>tame</em> or <em>wild</em>. The first simply means the algebra has only finitely many isoclasses of indecomposables. Speaking informally, tame algebras are those for which, in each dimension, almost all modules lie in one of finitely many classes each parameterized by the field. Speaking even more informally, wild algebras are those for which the classification problem is intractible in a very strong way. Discussion and formal definitions of representation type can be found in <a href="chapBib.html#biBBen95">[Ben , Sec 4.4]</a>.</p>
+
+<p>There are certain canonical classes of module. A module <span class="SimpleMath">X</span> is: <em>simple</em> if it has no proper, nonzero submodules; <em>projective</em> if the covariant functor <span class="SimpleMath">Hom_A(X,-): Modcat A -&gt; Modcat Z</span> is exact, or; <em>injective</em> if the functor <span class="SimpleMath">Hom_A(-,X) : Modcat A -&gt; Modcat Z</span> is exact. The simple <span class="SimpleMath">A</span>-modules (necessarily indecomposable) are in one-to-one correspondence with the vertices of <span class="SimpleMath">Q</span>, as are the indecomposable projective and injective modules. We respectively write <span class="SimpleMath">S_i</span>, <span class="SimpleMath">P_i</span> and <span class="SimpleMath">I_i</span> for the simple, indecomposable projective and indecomposable injective module corresponding to the vertex <span class="SimpleMath">i</span>. We also write <span class="SimpleMath">projcat A</span> and <span class="SimpleMath">injcat A</span> to for the full subcategories of <span class="SimpleMath">modcat A</span> whose objects are respectively the (finite-dimensional) projective and injective modules.</p>
+
+<p>A <em>composition series</em> for a module <span class="SimpleMath">X</span> is a strictly ascending chain of submodules</p>
+
+<p class="pcenter">0=X_0 &lt; X_1 &lt; X_2 &lt; ⋯ &lt; X_l-1 &lt; X_l=X</p>
+
+<p>of <span class="SimpleMath">X</span> such that each consecutive quotient <span class="SimpleMath">X_k+1/X_k</span> is simple. A module is <em>uniserial</em> if it has a unique composition series; equivalently, if its submodules form a chain.</p>
+
+<p>We write <span class="SimpleMath">D</span> for the vector-space duality <span class="SimpleMath">Hom_K(-, K) : modcat A -&gt; modcat A^op</span> of modules (and its inverse) and we write <span class="SimpleMath">*</span> for the dualities <span class="SimpleMath">Hom_A(-, A) : projcat A -&gt; projcat A^op</span> and <span class="SimpleMath">Hom_A(-, A) : injcat A -&gt; injcat A^op</span>.</p>
+
+<p><a id="X79BC0E187E5A5851" name="X79BC0E187E5A5851"></a></p>
+
+<h4>3.3 <span class="Heading">
+    Syzygies and related constructions
+  </span></h4>
+
+<p>In this section, we describe certain module constructions which refer to projective presentations (described below). These constructions do not generally extend to functors on the module category because they depend on the presentation chosen. However, this dependence is usually only up to the adding or removing of projective direct summands. By working in the finite-dimensional universe <span class="SimpleMath">modcat A</span> where the Krull-Schmidt theorem applies, we can reduce to study of modules having no indecomposable projective direct summands. These objects admit minimal projective presentations. This approach suffices for <strong class="pkg">SBStrips</strong>, since we will only be interested in constructions on modules and not their functorial extension to morphisms. Readers who care for the functorial approach should interpret the following in the (projectively) stable module category <span class="SimpleMath">pstmodcat A</span>: its objects are those of the usual module category <span class="SimpleMath">modcat A</span> and its hom-spaces are the quotients of their counterparts in <span class="SimpleMath">modcat A</span> by the subspaces of maps that factor through projective modules. They should also be aware of the injectively stable module category <span class="SimpleMath">istmodcat A</span>, similarly obtained by quotienting my maps factoring through injectives.</p>
+
+<p><a id="X7C90F2137B6E6CF0" name="X7C90F2137B6E6CF0"></a></p>
+
+<h5>3.3-1 <span class="Heading">
+      Projective covers and syzygies
+    </span></h5>
+
+<p>Any module <span class="SimpleMath">M</span> admits a projective presentation, which is to say an exact sequence <span class="SimpleMath">P_1 oversetf-&gt; P_0 -&gt; X -&gt; 0</span>. Applying <span class="SimpleMath">*</span> to <span class="SimpleMath">f</span> yields the map <span class="SimpleMath">f^* : P_0^* -&gt; P_1^*</span> in <span class="SimpleMath">projcat A^op</span>. Its cokernel <span class="SimpleMath">cok f^*</span> is called the transpose <span class="SimpleMath">Tr X</span> of <span class="SimpleMath">X</span>. (In <span class="SimpleMath">pstmodcat A</span>, transpose yields a duality <span class="SimpleMath">Tr : pstmodcat A -&gt; pstmodcat A^op</span>.)</p>
+
+<p>The composition <span class="SimpleMath">D Tr</span> (transpose first, then dual) is called the Auslander-Reiten translation (and is an equivalence <span class="SimpleMath">pstmodcat A -&gt; istmodcat A</span>). Its inverse is the opposite composition <span class="SimpleMath">Tr D</span>.</p>
+
+<p>For any finite-dimensional module <span class="SimpleMath">X</span> there is a smallest (in vector-space dimension) projective module <span class="SimpleMath">PP X</span> that maps onto it, say by the map <span class="SimpleMath">π : PP X ↠ X</span>. The kernel of this map is the (first) syzygy <span class="SimpleMath">syzygy^1 X</span> of <span class="SimpleMath">X</span>. We inductively define the <span class="SimpleMath">k</span>th syzygy as <span class="SimpleMath">syzygy^k+1 M = syzygy^1( syzygy^k M )</span> for <span class="SimpleMath">k ≥ 0</span> and, by convention, we set <span class="SimpleMath">syzygy^0 M</span> to be <span class="SimpleMath">X/P</span>, for <span class="SimpleMath">P</span> the largest projective direct summand of <span class="SimpleMath">X</span>.</p>
+
+<p>The projective dimension <span class="SimpleMath">projdim X</span> of <span class="SimpleMath">X</span> is the smallest <span class="SimpleMath">k≥ 0</span> for which <span class="SimpleMath">syzygy^k X = 0</span>, or <span class="SimpleMath">+∞</span> if no such <span class="SimpleMath">k</span> exists. In particular, a module has projective dimension <span class="SimpleMath">0</span> iff it is projective.</p>
+
+<p><a id="X7DE629237EDF2F4F" name="X7DE629237EDF2F4F"></a></p>
+
+<h5>3.3-2 <span class="Heading">
+      Syzygy patterns
+    </span></h5>
+
+<p>We can define certain homological behavior with reference to syzygies. For <span class="SimpleMath">k ≥ 0</span> and some fixed module <span class="SimpleMath">X</span>, let</p>
+
+<p class="pcenter">
+      \mathcal{A}_k
+      =
+      \big\{
+        [M]
+      \colon
+        M \in \add\{ \syzygy^t X \} \text{ for some } t \geq k
+      \big\}
+      \text{, }
+      
+      \mathcal{B}_k
+      =
+      \big\{
+        [M]
+      \colon
+        M \in \add\{ \syzygy^t X \} \text{ for some } t \leq k
+      \big\}\text{.}
+    </p>
+
+<p>(These letters were chosen so that <span class="SimpleMath">mathcalA_k</span> contains the isoclasses of indecomposables appearing at or <span class="SimpleMath">mathcalA</span>fter the <span class="SimpleMath">k</span>th syzygy, while <span class="SimpleMath">mathcalB_k</span> contains those appearing at or <span class="SimpleMath">mathcalB</span>efore.) The <span class="SimpleMath">mathcalA_k</span> and <span class="SimpleMath">mathcalB_k</span> relate in the following way:</p>
+
+<p class="pcenter">
+      \mathcal{B}_0
+        \subseteq
+      \mathcal{B}_1
+        \subseteq
+      \mathcal{B}_2
+        \subseteq
+      \cdots
+        \subseteq
+      \bigcup_{k \geq 0} \mathcal{B}_k
+        =
+      \mathcal{A}_0
+        \supseteq
+      \mathcal{A}_1
+        \supseteq
+      \mathcal{A}_2
+        \supseteq
+      \cdots
+        \supseteq
+      \bigcap_{k \geq 0}
+        \mathcal{A}_k
+      \text{.}
+    </p>
+
+<p>We comment that, for each successive inclusion <span class="SimpleMath">mathcalB_k ⊇ mathcalB_k+1</span> or <span class="SimpleMath">mathcalA_k ⊇ mathcalA_k+1</span>, the appropriate set difference between them is finite. Note also that <span class="SimpleMath">∩_k ≥ 0mathcalA_k</span> contains exactly those isoclasses witnessed at <span class="SimpleMath">syzygy^k X</span> for infinitely many indices <span class="SimpleMath">k</span>. Below, we use this sequence of inclusions to define some terminology for patterns in syzygies. Our definitions are inspired by comparable work in <a href="chapBib.html#biBGHZ98">[GH , Sec 2]</a> and <a href="chapBib.html#biBRic19">[Ric , Sec 7]</a>.</p>
+
+<p>If there is an index <span class="SimpleMath">t</span> for which <span class="SimpleMath">mathcalA_t=mathcalA_t+1</span>(<span class="SimpleMath">=mathcalA_t+2=⋯=∩_k ≥ 0 mathcalA_k</span>), then there is a minimal one <span class="SimpleMath">t_⋆</span>, in which case we say that the <em>syzygy repetition index</em> of <span class="SimpleMath">X</span> is <span class="SimpleMath">t_⋆</span>. This holds exactly when <span class="SimpleMath">t_⋆</span> satisfies <span class="SimpleMath">mathcalA_t_⋆ = ∩_k ≥ 0 mathcalA_k</span> (and is the minimal index to enjoy this property). If no such <span class="SimpleMath">t</span> exists, the syzygy repetition of index of <span class="SimpleMath">X</span> is <span class="SimpleMath">+∞</span>.</p>
+
+<p>If <span class="SimpleMath">mathcalA_0</span> is finite, then we say <span class="SimpleMath">X</span> has <em>syzygy type <span class="SimpleMath">|mathcalA_0|</span> of index <span class="SimpleMath">s_⋆</span></em>, for <span class="SimpleMath">s_⋆</span> the minimal index <span class="SimpleMath">k</span> such that <span class="SimpleMath">mathcalB_k=mathcalB_k+1</span>(<span class="SimpleMath">=mathcalB_k+2=⋯=mathcalA_0</span>); the existence of <span class="SimpleMath">s_⋆</span> in this case follows from an easy finiteness argument. Just as immediately, we see that if <span class="SimpleMath">X</span> has finite syzygy type <span class="SimpleMath">|mathcalA_0|</span> then it has finite syzygy repetition index at most <span class="SimpleMath">|mathcalA_0|</span>.</p>
+
+<p>If <span class="SimpleMath">[X] ∈ ∩_k ≥ 0 mathcalA_k</span>, then we call <span class="SimpleMath">X</span> <em>weakly periodic</em>.</p>
+
+<p><a id="X7F9C35E4849D0EC6" name="X7F9C35E4849D0EC6"></a></p>
+
+<h5>3.3-3 <span class="Heading">
+      Delooping
+    </span></h5>
+
+<p>We say a module <span class="SimpleMath">X</span> can be <span class="SimpleMath">k</span>-delooped if there is some module <span class="SimpleMath">Y</span> for which <span class="SimpleMath">syzygy^k X</span> is a direct summand <span class="SimpleMath">syzygy^k+1 Y</span>. Here, we either discard projective direct summands of both modules or, formally, work in <span class="SimpleMath">pstmodcat A</span>. Gélinas <a href="chapBib.html#biBGel20">[Gél , Thm 1.10]</a> showed that it suffices to check <span class="SimpleMath">Y = suspension^k+1 syzygy^k X</span>, where <span class="SimpleMath">suspension = Tr syzygy Tr</span> is called suspension.</p>
+
+<p>Gélinas defines the delooping level <span class="SimpleMath">delooping X</span> of a module <span class="SimpleMath">X</span> to be the smallest <span class="SimpleMath">k ≥ 0</span> for which it can be <span class="SimpleMath">k</span>-delooped, or <span class="SimpleMath">+∞</span> if no such <span class="SimpleMath">k</span> exists. He subsequently defines the delooping level <span class="SimpleMath">delooping A</span> of an algebra <span class="SimpleMath">A</span> as <span class="SimpleMath">delooping A = max {delooping S : S is simple}</span> and relates this invariant to the finitistic dimension of <span class="SimpleMath">A</span>.</p>
+
+<p><a id="X7FDF2655851D5298" name="X7FDF2655851D5298"></a></p>
+
+<h4>3.4 <span class="Heading">
+    Special biserial algebras
+  </span></h4>
+
+<p>A <em>special biserial (SB) algebra</em> is a quiver algebra <span class="SimpleMath">KQ/I</span> such that</p>
+
+<ol>
+<li><p>every vertex of <span class="SimpleMath">Q</span> is the source of at most <span class="SimpleMath">2</span> arrows,</p>
+
+</li>
+<li><p>every vertex of <span class="SimpleMath">Q</span> is the target of at most <span class="SimpleMath">2</span> arrows,</p>
+
+</li>
+<li><p>for every arrow <span class="SimpleMath">a</span> of <span class="SimpleMath">Q</span>, there is at most one arrow <span class="SimpleMath">b</span> with <span class="SimpleMath">ab ∉ I</span> and</p>
+
+</li>
+<li><p>for every arrow <span class="SimpleMath">a</span> of <span class="SimpleMath">Q</span>, there is at most one arrow <span class="SimpleMath">c</span> with <span class="SimpleMath">ca ∉ I</span>.</p>
+
+</li>
+</ol>
+<p>These algebras emerged from the modular representation theory of finite groups. A key text on them is <a href="chapBib.html#biBWW85">[WW ]</a>, which establishes in particular that they are tame algebras. Their indecomposable modules fall into three classes: band modules, string modules and a finite class of projective-injective nonuniserial ("pin") modules.</p>
+
+<p><a id="X85E00E7B812607E2" name="X85E00E7B812607E2"></a></p>
+
+<h4>3.5 <span class="Heading">
+    String modules for special biserial algebras
+  </span></h4>
+
+<p>String modules earn their name from the string graphs that describe them so well. A string graph for <span class="SimpleMath">A=KQ/I</span> is a quiver homomorphism <span class="SimpleMath">w : Γ -&gt; Q</span> from a quiver <span class="SimpleMath">Γ</span> such that: the domain is an orientation of a linear graph, <span class="SimpleMath">w(α) ≠ w(β)</span> whenever <span class="SimpleMath">α,β ∈ Γ_1</span> have common source or target and where the image in <span class="SimpleMath">w</span> of any <span class="SimpleMath">Γ</span>-path <span class="SimpleMath">p</span> is linearly independent of all other <span class="SimpleMath">A</span>-paths. A string graph <span class="SimpleMath">w</span> is commonly depicted by labelling each vertex and arrow of <span class="SimpleMath">Γ</span> by its respective images in <span class="SimpleMath">Q</span>. Then vertices of <span class="SimpleMath">w</span> provide a basis of the associated string module, and the labels describe the <span class="SimpleMath">A</span> action. We can identify a string graph with the string module it represents.</p>
+
+<p>One subtle point: here, we do not require string graphs to be connected; accordingly we do require string modules to be indecomposable.</p>
+
+<p>The dual <span class="SimpleMath">D X</span>, the transpose <span class="SimpleMath">Tr X</span> and the syzygy <span class="SimpleMath">syzygy^1 X</span> of a string module <span class="SimpleMath">X</span> are all string modules, albeit for the opposite algebra in the first two cases <a href="chapBib.html#biBWW85">[WW , Sec 3]</a> <a href="chapBib.html#biBLM04">[LM , Sec 2]</a>. In as-yet-unpublished work of Galstad <a href="chapBib.html#biBGalPhD">[Gal]</a> (and publicized without proof by Huisgen-Zimmermann <a href="chapBib.html#biBHZ16">[Hui ]</a>) the syzygy of a band module <span class="SimpleMath">X</span> is also a string module provided that at least one indecomposable direct summand of <span class="SimpleMath">PP X</span> is a string module.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap2.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap4.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

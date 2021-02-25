@@ -1,0 +1,107 @@
+  
+  
+  [1XIndex[101X
+  
+  , (right) modules 3.2 
+      additive closure 3.2 
+      admissible ideals 3.1 
+      algebras 3.1 
+      arrow ideal 3.1 
+      collected list 6.1 
+      composition series 3.2 
+      element (of a collected list) 6.1 
+      finite representation type 3.2 
+      indecomposable modules 3.2 
+      injective modules 3.2 
+      isomorphism type of a module 3.2 
+      multiplicity (of an element of a collected list) 6.1 
+      path algebras 3.1 
+      paths in a quiver 3.1 
+      paths in an algebra 3.1 
+      pin (= projective, injective, nonuniserial) modules 3.4 
+      projective modules 3.2 
+      quiver algebra 5.1 
+      quiver algebras 3.1 
+      quivers 3.1 
+      representations of quivers 3.2 
+      simple modules 3.2 
+      special biserial algebras, abstractly 3.4 
+      special biserial algebras, in GAP 2.1 
+      string graphs 3.5 
+      string modules 3.5 
+      syzygy repetition index of a module 3.3-2 
+      syzygy type and index of a module 3.3-2 
+      tame representation type 3.2 
+      uniserial modules 3.2 
+      wild representation type 3.2 
+  [2X1RegQuivIntAct[102X 5.2-4 
+  [2X1RegQuivIntActionFunction[102X 5.2-5 
+  [2X2RegAugmentationOfQuiver[102X 5.3-2 
+  [2XARInverseTranslateOfStrip[102X 4.5-11 
+  [2XArrowsOfQuiverAlgebra[102X 5.4-2 
+  [2XARTranslateOfStrip[102X 4.5-10 
+  [2XCollectedFiltered[102X 6.1-12 
+  [2XCollectedLength[102X 6.1-8 
+  [2XCollectedListElementwiseFunction[102X 6.1-10 
+  [2XCollectedListElementwiseListValuedFunction[102X 6.1-11 
+  [2XCollectedNthSyzygyOfStrip[102X, for strips 4.5-4 
+  [2XCollectedSyzygyOfStrip[102X, for strips 4.5-3 
+  [2XDefiningQuiverOfQuiverAlgebra[102X 5.4-5 
+  [2XDeloopingLevelOfSBAlgIfAtMostN[102X 4.6-2 
+  [2XDeloopingLevelOfStripIfAtMostN[102X 4.5-15 
+  [2XDirectSumModuleOfListOfStrips[102X, for a (flat) list of strips 4.5-6 
+      for a collected list of strips 4.5-6 
+  [2XDOfStrip[102X 4.5-8 
+  [2XDTrOfStrip[102X 4.5-10 
+  [2XElementsOfCollectedList[102X 6.1-4 
+  [2XFieldOfQuiverAlgebra[102X 5.4-4 
+  [2XIndecInjectiveStripsOfSBAlg[102X 4.3-5 
+  [2XIndecProjectiveStripsOfSBAlg[102X 4.3-4 
+  [2XInfoSBStrips[102X 1.5-1 
+  [2XIs1RegQuiver[102X 5.2-1 
+  [2XIs2RegAugmentationOfQuiver[102X 5.3-3 
+  [2XIs2RegQuiver[102X 5.3-1 
+  [2XIsCollectedDuplicateFreeList[102X 6.1-2 
+  [2XIsCollectedHomogeneousList[102X 6.1-3 
+  [2XIsCollectedList[102X 6.1-1 
+  [2XIsCollectedSublist[102X 6.1-9 
+  [2XIsFiniteSyzygyTypeStripByNthSyzygy[102X 4.5-13 
+  [2XIsIndecInjectiveStrip[102X 4.4-4 
+  [2XIsIndecProjectiveStrip[102X 4.4-3 
+  [2XIsStripDirectSummand[102X 4.5-7 
+  [2XIsWeaklyPeriodicStripByNthSyzygy[102X 4.5-14 
+  [2XIsZeroStrip[102X 4.4-2 
+  [2XModuleOfStrip[102X 4.5-5 
+  [2XMultiplicityOfElementInCollectedList[102X 6.1-5 
+  [2XNthSyzygyOfStrip[102X, for strips 4.5-2 
+  [2XOppositeStrip[102X 4.5-8 
+  [2XOriginalSBQuiverOf2RegAugmentation[102X 5.3-4 
+  [2XPathBySourceAndLength[102X 5.2-2 
+  [2XPathByTargetAndLength[102X 5.2-3 
+  [2XPathOneArrowLongerAtSource[102X 5.4-6 
+  [2XPathOneArrowLongerAtTarget[102X 5.4-6 
+  [2XPathOneArrowShorterAtSource[102X 5.4-6 
+  [2XPathOneArrowShorterAtTarget[102X 5.4-6 
+  [2XRecollected[102X 6.1-6 
+  [2XRetractionOf2RegAugmentation[102X 5.3-5 
+  [2XSBStripsExampleAlgebra[102X A.1-1 
+  [2XSimpleStripsOfSBAlg[102X 4.3-1 
+  [2XString[102X, for paths of length at least 2 5.4-1 
+  [2XStripify[102X, for a path of a special biserial algebra 4.2-1 
+      for an arrow, +/-1 and a list of integers 4.2-1 
+  [2XSuspensionOfStrip[102X 4.5-12 
+  [2XSyzygyOfStrip[102X, for strips 4.5-1 
+  [2XTestInjectiveStripsUpToNthSyzygy[102X 4.6-1 
+  [2XTransposeOfStrip[102X 4.5-9 
+  [2XTrDOfStrip[102X 4.5-11 
+  [2XTrOfStrip[102X 4.5-9 
+  [2XUncollected[102X 6.1-7 
+  [2XUniserialStripsOfSBAlg[102X 4.3-2 
+  [2XVectorSpaceDualOfStrip[102X 4.5-8 
+  [2XVerticesOfQuiverAlgebra[102X 5.4-3 
+  [2XWidthNStripsOfSBAlg[102X 4.3-3 
+  [2XWidthOfStrip[102X 4.4-1 
+  [2XWithoutProjectiveStrips[102X 4.5-16 
+  
+  
+  -------------------------------------------------------

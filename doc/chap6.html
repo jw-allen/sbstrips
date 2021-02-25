@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (SBStrips) - Chapter 6: 
+        Miscellaneous utilities
+      </title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+<script src="manual.js" type="text/javascript"></script>
+<script type="text/javascript">overwriteStyle();</script>
+</head>
+<body class="chap6"  onload="jscontent()">
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+<p id="mathjaxlink" class="pcenter"><a href="chap6_mj.html">[MathJax on]</a></p>
+<p><a id="X780E1E32820C6D64" name="X780E1E32820C6D64"></a></p>
+<div class="ChapSects"><a href="chap6.html#X780E1E32820C6D64">6 <span class="Heading">
+        Miscellaneous utilities
+      </span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap6.html#X799A288C82AB99D5">6.1 <span class="Heading">Collected lists</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7EAE7FCC848D5F27">6.1-1 IsCollectedList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7D95686A8591E1A6">6.1-2 IsCollectedDuplicateFreeList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X83A0E7AE8385CC31">6.1-3 IsCollectedHomogeneousList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7EE1C755821E274F">6.1-4 ElementsOfCollectedList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E38167180BCD5EC">6.1-5 MultiplicityOfElementInCollectedList</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X80AC17A07EC6FD6C">6.1-6 Recollected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7DB1A947791FF9AA">6.1-7 Uncollected</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7E0B5DA584FC2588">6.1-8 CollectedLength</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X8224E2017B24E704">6.1-9 IsCollectedSublist</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7838CEB683106C2A">6.1-10 CollectedListElementwiseFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7B6F91378238E71E">6.1-11 CollectedListElementwiseListValuedFunction</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap6.html#X7A8E049F7C5BD6FD">6.1-12 CollectedFiltered</a></span>
+</div></div>
+</div>
+
+<h3>6 <span class="Heading">
+        Miscellaneous utilities
+      </span></h3>
+
+<p>In this chapter, we document some additional functionalities that have been implemented in <strong class="pkg">SBStrips</strong> but which, really, can stand independently of it. Others may find these useful without caring a jot about SB algebras.</p>
+
+<p><a id="X799A288C82AB99D5" name="X799A288C82AB99D5"></a></p>
+
+<h4>6.1 <span class="Heading">Collected lists</span></h4>
+
+<p>Sometimes it is important to know <em>where</em> in a list an element appears. Sometimes, all that matters is <em>how often</em> it does. (In mathematical terms, these two ideas respectively correspond to a <em>sequence</em> of elements and the multiset of values it takes.) One can of course move from knowing the positions of elements to just knowing their frequency. This is a strict loss of information, but usually not a loss of very important information.</p>
+
+<p><strong class="pkg">GAP</strong> implements this functionality using <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>). Calls to this operation yield lists that store information in a more economical, if slightly less informative, fashion, of which <strong class="pkg">SBStrips</strong> makes great use. Using <code class="code">Collected</code> on a list <code class="code">list</code> returns another list, detailing the different elements appearing in <code class="code">list</code> and their <em>multiplicity</em> (ie, number of instances) in <code class="code">list</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">list := [ "s", "b", "s", "t", "r", "i", "p", "s" ];</span>
+[ "s", "b", "s", "t", "r", "i", "p", "s" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">clist := Collected( list );</span>
+[ [ "b", 1 ], [ "i", 1 ], [ "p", 1 ], [ "r", 1 ], [ "s", 3 ],
+  [ "t", 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">entry := clist[5];</span>
+[ "s", 3 ]
+</pre></div>
+
+<p>In the above example, the entry <code class="code">[ "s", 3 ]</code> in <code class="code">clist</code> tells us that the element <code class="code">"s"</code> appears <code class="code">3</code> times in <code class="code">list</code>. In other words, <code class="code">"s</code> has <em>multitplicity</em> <code class="code">3</code> (in <code class="code">list</code>).</p>
+
+<p>In this documentation, we will use the terms <em>elements</em> and <em>multiplicities</em> respectively to mean the first and second entries of entries of a collected list. So, in the above example, the elements of <code class="code">clist</code> are <code class="code">"b"</code>, <code class="code">"i"</code>, <code class="code">"p"</code>, <code class="code">"r"</code>, <code class="code">"s"</code> and <code class="code">"t"</code> and their respective multiplicities are <code class="code">1</code>, <code class="code">1</code>, <code class="code">1</code>, <code class="code">1</code>, <code class="code">3</code> and <code class="code">1</code>.</p>
+
+<p>What characterises a collected list is that all of its entries are lists of length <span class="SimpleMath">2</span>, the second being a positive integer. Elements may be repeated. This doesn't happen from simple uses of <code class="code">Collected</code>, but can result from combining several collected lists, for instance with <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>) or <code class="func">Append</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X79E31DB27C82D6E1"><span class="RefLink">Reference: Append</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hello := Collected( [ "h", "e", "l", "l", "o" ] );</span>
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">world := Collected( [ "w", "o", "r", "l", "d" ] );</span>
+[ [ "d", 1 ], [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">hello_world := Concatenation( hello, world );</span>
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 2 ], [ "o", 1 ], [ "d", 1 ],
+  [ "l", 1 ], [ "o", 1 ], [ "r", 1 ], [ "w", 1 ] ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsCollectedList( hello_world );</span>
+true
+</pre></div>
+
+<p>Here, the element <code class="code">"l"</code> appears twice in <code class="code">hello_world</code>, first with multiplicity <code class="code">2</code> and then again with multiplicity <code class="code">1</code>. The element <code class="code">"o"</code> also appears twice with multiplicity <code class="code">1</code> each time. Despite this repetition, <code class="code">hello_world</code> is still a collected list. It may be "tidied up" using <code class="func">Recollected</code> (<a href="chap6.html#X80AC17A07EC6FD6C"><span class="RefLink">6.1-6</span></a>).</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Recollected( hello_world );</span>
+[ [ "e", 1 ], [ "h", 1 ], [ "l", 3 ], [ "o", 2 ], [ "d", 1 ],
+  [ "r", 1 ], [ "w", 1 ] ]
+</pre></div>
+
+<p><a id="X7EAE7FCC848D5F27" name="X7EAE7FCC848D5F27"></a></p>
+
+<h5>6.1-1 IsCollectedList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCollectedList</code>( <var class="Arg">list</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">list</var>, a list <br /></p>
+
+<p>Returns: <code class="keyw">true</code> if all entries of <var class="Arg">list</var> are lists of length <span class="SimpleMath">2</span> having a positive integer in their second entry, and <code class="keyw">false</code> otherwise.</p>
+
+<p>This property will return <code class="keyw">true</code> on lists returned from the <strong class="pkg">GAP</strong> operation <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>), as well as on combinations of such lists using <code class="func">Concatenation</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7DF510F7848CBBFD"><span class="RefLink">Reference: concatenation of lists</span></a>) or <code class="func">Append</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X79E31DB27C82D6E1"><span class="RefLink">Reference: Append</span></a>). This is the principal intended use of this property.</p>
+
+<p>When this document refers to a <em>collected list</em>, it means a list for which <code class="func">IsCollectedList</code> returns <code class="keyw">true</code>.</p>
+
+<p><a id="X7D95686A8591E1A6" name="X7D95686A8591E1A6"></a></p>
+
+<h5>6.1-2 IsCollectedDuplicateFreeList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCollectedDuplicateFreeList</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var> <br /></p>
+
+<p>Returns: <code class="keyw">true</code> if <var class="Arg">clist</var> is a collected list with no repeated elements</p>
+
+<p>In particular, if <var class="Arg">clist</var> was created by applying <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>) to a duplicate-free list (see <code class="func">IsDuplicateFreeList</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7FA892828252BB3B"><span class="RefLink">Reference: IsDuplicateFreeList</span></a>)), then this property will return <code class="keyw">true</code>. This is the principal intended use of this property.</p>
+
+<p><a id="X83A0E7AE8385CC31" name="X83A0E7AE8385CC31"></a></p>
+
+<h5>6.1-3 IsCollectedHomogeneousList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCollectedHomogeneousList</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;property&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var>, a collected list <br /></p>
+
+<p>Returns: <code class="keyw">true</code> if the elements of <code class="code">clist</code> form a homogeneous list, and <code class="keyw">false</code> otherwise</p>
+
+<p>If <code class="code">obj</code> is the result of applying <code class="func">Collected</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7ECE9056792F28BA"><span class="RefLink">Reference: Collected</span></a>) to a homogeneous list, then this property returns <code class="keyw">true</code>. This is the principal intended use of this property.</p>
+
+<p><a id="X7EE1C755821E274F" name="X7EE1C755821E274F"></a></p>
+
+<h5>6.1-4 ElementsOfCollectedList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ElementsOfCollectedList</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var>, a collected list. <br /></p>
+
+<p>Returns: the elements of <var class="Arg">clist</var>.</p>
+
+<p><a id="X7E38167180BCD5EC" name="X7E38167180BCD5EC"></a></p>
+
+<h5>6.1-5 MultiplicityOfElementInCollectedList</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MultiplicityOfElementInCollectedList</code>( <var class="Arg">obj</var>, <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Arguments: <var class="Arg">obj</var>, an object; <var class="Arg">clist</var>, a collected list. <br /></p>
+
+<p>Returns: a nonnegative integer, namely the (total) multiplicity of <var class="Arg">obj</var> in <var class="Arg">clist</var>.</p>
+
+<p><a id="X80AC17A07EC6FD6C" name="X80AC17A07EC6FD6C"></a></p>
+
+<h5>6.1-6 Recollected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Recollected</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var>, a collected list <br /></p>
+
+<p>Returns: a collected list, removing repeated elements in <var class="Arg">clist</var> and totalling their multiplicities.</p>
+
+<p>If <var class="Arg">clist</var> contains entries with matching first entries, say <code class="code">[ obj, n ]</code> and <code class="code">[ obj, m ]</code>, then it will combine them into a single entry <code class="code">[ obj, n+m ]</code> with totalised multiplicity. This can be necessary when dealing with concatenations (see <code class="func">Concatenation</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7DF510F7848CBBFD"><span class="RefLink">Reference: concatenation of lists</span></a>)) of collected lists.</p>
+
+<p><a id="X7DB1A947791FF9AA" name="X7DB1A947791FF9AA"></a></p>
+
+<h5>6.1-7 Uncollected</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Uncollected</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var>, a collected list <br /></p>
+
+<p>Returns: a (flat) list, where each element in <var class="Arg">clist</var> appears with the appropriate multiplicity</p>
+
+<p><a id="X7E0B5DA584FC2588" name="X7E0B5DA584FC2588"></a></p>
+
+<h5>6.1-8 CollectedLength</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollectedLength</code>( <var class="Arg">clist</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Argument: <var class="Arg">clist</var>, a collected list <br /></p>
+
+<p>Returns: the sum of the multiplicities in <var class="Arg">clist</var></p>
+
+<p><a id="X8224E2017B24E704" name="X8224E2017B24E704"></a></p>
+
+<h5>6.1-9 IsCollectedSublist</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsCollectedSublist</code>( <var class="Arg">sublist</var>, <var class="Arg">superlist</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Arguments: <var class="Arg">sublist</var> and <var class="Arg">superlist</var>, two collected lists <br /></p>
+
+<p>Returns: <code class="keyw">true</code> if each element of <var class="Arg">sublist</var> occurs in <var class="Arg">superlist</var> with multiplicity as least that in <var class="Arg">sublist</var>, and <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X7838CEB683106C2A" name="X7838CEB683106C2A"></a></p>
+
+<h5>6.1-10 CollectedListElementwiseFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollectedListElementwiseFunction</code>( <var class="Arg">clist</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Arguments: <var class="Arg">clist</var>, a collected list; <var class="Arg">func</var>, a function <br /></p>
+
+<p>Returns: a new collected list, obtained from <var class="Arg">clist</var> by applying <var class="Arg">func</var> to each element.</p>
+
+<p>If <var class="Arg">func</var> returns lists (perhaps because it implements a "many-valued function"), consider using <code class="func">CollectedListElementwiseListValuedFunction</code> (<a href="chap6.html#X7B6F91378238E71E"><span class="RefLink">6.1-11</span></a>) instead.</p>
+
+<p><a id="X7B6F91378238E71E" name="X7B6F91378238E71E"></a></p>
+
+<h5>6.1-11 CollectedListElementwiseListValuedFunction</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollectedListElementwiseListValuedFunction</code>( <var class="Arg">clist</var>, <var class="Arg">func</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Arguments: <var class="Arg">clist</var>, a collected list; <var class="Arg">func</var>, a function (presumed to return lists of objects). <br /></p>
+
+<p>Returns: a new collected list.</p>
+
+<p>Imagine <var class="Arg">clist</var> were unpacked into a flat list, <var class="Arg">func</var> were applied to each element of the flat list in turn and the result concatenated then collected. That is what this operation returns (although it determines the result more efficiently than the procedure just described).</p>
+
+<p><a id="X7A8E049F7C5BD6FD" name="X7A8E049F7C5BD6FD"></a></p>
+
+<h5>6.1-12 CollectedFiltered</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; CollectedFiltered</code>( <var class="Arg">clist</var>, <var class="Arg">bool_func</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Arguments: <var class="Arg">clist</var>, a collected list; <var class="Arg">bool_func</var>, a function that returns either <code class="keyw">true</code> or <code class="keyw">false</code>.</p>
+
+<p>Returns: the collected sublist of <var class="Arg">clist</var> featuring only those elements for which <var class="Arg">prop</var> returns <code class="keyw">true</code>. (Those elements appear in the sublist with the same multiplicity as in <var class="Arg">clist</var>.)</p>
+
+<p>This should be considered the analogue of <code class="func">Filtered</code> (<a href="../../../../../../gap-4.11.0//doc/ref/chap21.html#X7C86D7F7795125F0"><span class="RefLink">Reference: Filtered</span></a>) for collected lists.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap5.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapA.html">[Next Chapter]</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chap5.html">5</a>  <a href="chap6.html">6</a>  <a href="chapA.html">A</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

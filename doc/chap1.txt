@@ -1,0 +1,89 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YAim[133X[101X
+  
+  [33X[0;0YThe  aim  of the [5XSBStrips[105X package is to calculate syzygies of string modules
+  over special biserial (SB) algebras in a user-friendly way.[133X
+  
+  
+  [1X1.2 [33X[0;0YSome historical context[133X[101X
+  
+  [33X[0;0YSpecial   biserial   algebras   are   a   combinatorially-defined  class  of
+  finite-dimensional   [22XK[122X-algebras   (over   some   field   [22XK[122X,   often  assumed
+  algebraically closed), which have been the object of much study. Among other
+  results,  their indecomposable finite-dimensional modules have been entirely
+  classified  into three sorts, one of which are the [13Xstring modules[113X. These are
+  so  called  because  their  module  structure  is  characterised  by certain
+  decorated graphs. In the literature these graphs are called [13Xstrings[113X but, for
+  our convenience (shortly to be justified), we will call them [13Xstring graphs[113X.[133X
+  
+  [33X[0;0YLiu  and Morin [LM ] proved that the syzygy [22XΩ^1(X)[122X of a string module [22XX[122X is a
+  direct sum of indecomposable string modules. Their proof is constructive and
+  elementary:  the  former,  because  it  explicitly  gives  the string graphs
+  describing  each  summand  of [22XΩ^1(X)[122X from that describing [22XX[122X, and the latter,
+  because they cleverly choose a basis of the projective cover [22XP(X)[122X of [22XX[122X which
+  disjointly  combines  bases  of  [22XΩ^1(X)[122X and [22XX[122X. In particular, their proof is
+  valid  regardless  of  the  characteristic  of  the field [22XK[122X or whether it is
+  algebraically closed. Consequently, we can argue that, in a very strong way,
+  "taking  the  syzygy  of  a  string module" is a (many-valued) combinatorial
+  operation  on  combinatorial  objects,  not  an  algebraic  one on algebraic
+  objects.[133X
+  
+  [33X[0;0YThis  package implements that operation effectively. However, instead of the
+  slightly  naive  notation/formalism used in the above article, [5XSBStrips[105X uses
+  an alternative, more efficient, framework developed by the author during his
+  doctoral studies. More precisely, the author devised a theoretical framework
+  (to   prove   mathematical   theorems)in  that  this  package  models.  This
+  theoretical framework was created with syzygy-taking in mind.[133X
+  
+  
+  [1X1.3 [33X[0;0YWhy "strips", not "strings"?[133X[101X
+  
+  [8X Mantra: [108X
+        [33X[0;6Y[13X  If  whenever  you read the word "strip" in this package, you imagine
+        that  it  means  the  kind  of  decorated  graph  that  representation
+        theorists call a "string", then you won't go too far wrong. [113X[133X
+  
+  [33X[0;0YLiu  and  Morin's  aforementioned  paper  exploits  a  kind  of  alternating
+  behavior,  manifesting  from  one syzygy to the next. Through much trial and
+  error,  the  author found patterns only apparent over a greater "timescale".
+  It  rapidly  became impractical to [13Xdescribe[113X these greater patterns using the
+  classical  notation  for  strips,  let  alone to [13Xrigorously prove[113X statements
+  about them. From this necessity was born the [5XSBStrips[105X package -- or, rather,
+  the abstract framework underpinning it.[133X
+  
+  [33X[0;0YOne  crucial aspect in this framework is that string graphs are refined into
+  objects  called [13Xstrips[113X. This refinement is technical, does not break any new
+  ground  mathematically  --  it  largely  amounts  to disambiguation and some
+  algorithmic choice-making -- and so we keep it behind the scenes.[133X
+  
+  [33X[0;0YThe  [5XSBStrips[105X user may safely assume that [13Xstrip[113X (or [10XIsStripRep[110X) simply means
+  the kind of object that [5XGAP[105X uses to represent string graphs for SB algebras.
+  As  an  added  bonus,  this  name avoids a clash with those objects that [5XGAP[105X
+  already calls "strings"![133X
+  
+  
+  [1X1.4 [33X[0;0YInstallation[133X[101X
+  
+  [33X[0;0YThe  [5XSBStrips[105X package was designed for version 4.11 of [5XGAP[105X; the author makes
+  no  promises about compatibility with previous versions. It requires version
+  1.30 of [5XQPA[105X and version 1.6 of [5XGAPDoc[105X. It is presently distributed in [10Xtar.gz[110X
+  and      [10Xzip[110X      formats.      These     may     be     downloaded     from
+  [7Xhttps://github.com/jw-allen/sbstrips/releases[107X   (be  sure  to  download  the
+  latest version!), and then unpacked into the user's [10Xpkg[110X directory.[133X
+  
+  
+  [1X1.5 [33X[0;0Y[10XInfoSBStrips[110X[101X[1X[133X[101X
+  
+  [1X1.5-1 InfoSBStrips[101X
+  
+  [33X[1;0Y[29X[2XInfoSBStrips[102X[32X info class[133X
+  [6XReturns:[106X  [33X[0;10Ynothing.[133X
+  
+  [33X[0;0YThe  InfoClass  for  the  [5XSBStrips[105X  package. The default value is [22X1[122X. Integer
+  values  from  [22X0[122X  to [22X4[122X inclusive are supported, offering increasingly verbose
+  information about [5XSBStrips[105X' inner working. (When set to [22X0[122X, no information is
+  printed.)[133X
+  

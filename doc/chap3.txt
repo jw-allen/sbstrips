@@ -1,0 +1,263 @@
+  
+  [1X3 [33X[0;0YMathematical background[133X[101X
+  
+  
+  [1X3.1 [33X[0;0YFinite-dimensional algebras[133X[101X
+  
+  [33X[0;0YHere  and  throughout,  [22XK[122X  is  some  field.  By  a  [13X[22XK[122X-algebra[113X  [22XA[122X, we mean an
+  associative  and  unital  (but  not  necessarily  commutative)  ring  with a
+  compatible  [22XK[122X-vector  space structure. Any algebra [22XA[122X has an opposite algebra
+  [22XA^op[122X.[133X
+  
+  [33X[0;0YSuppose  [22XQ[122X  is a finite quiver: that is, a directed graph with finitely many
+  vertices  and  finitely  many  arrows, where loops and/or multiple edges are
+  permitted.  The  paths  of  [22XQ[122X (also called [13X[22XQ[122X-paths[113X to emphasize their parent
+  quiver),  including the "stationary" paths at each vertex, form the basis of
+  a  vector  space.  multiplication can be defined on basis vectors [22Xp[122X and [22Xq[122X by
+  "concatenation extended by zero"; more precisely, [22Xp ⋅ q = pq[122X ("[22Xp[122X then [22Xq[122X") if
+  [22Xpq[122X  is  a  path in [22XQ[122X, and [22Xp ⋅ q = 0[122X otherwise. This defines the [13Xpath algebra[113X
+  [22XKQ[122X.  Its  multiplicative  unit is the sum of stationary paths. It has finite
+  [22XK[122X-dimension iff [22XQ[122X contains no (directed) cycles.[133X
+  
+  [33X[0;0YLet [22XJ ideal KQ[122X denote the [13Xarrow ideal[113X of [22XKQ[122X: the smallest two-sided ideal of
+  [22XKQ[122X  containing  the arrows of [22XQ[122X. An ideal [22XI ideal KQ[122X is [13Xadmissible[113X iff there
+  is an integer [22XN ≥ 2[122X with [22XJ^N ⊆ I ⊆ J^2[122X.[133X
+  
+  [33X[0;0YBy a [13X(bound) quiver algebra[113X, we mean a quotient [22XKQ/I[122X of a path algebra [22XKQ[122X by
+  an  admissible ideal [22XI[122X. Quiver algebras are always finite-dimensional [ASS ,
+  Sec   II.2].   Indeed,   at  least  when  [22XK[122X  is  algebraically  closed,  any
+  finite-dimensional   algebra   is   a   direct  product  of  connected  ones
+  (trivially),  any  connected finite-dimensional algebra is Morita equivalent
+  to  a  basic  one  [ASS  ,  Sec  I.6]  and  any  basic, connected algebra is
+  isomorphic to a quiver algebra [ASS , Sec II.3].[133X
+  
+  [33X[0;0YIn this document, we assume that [22XK[122X is algebraically closed and [22XA[122X is a quiver
+  algebra  [22XKQ/I[122X.  By the above, this is no loss of generality. We also use the
+  term  [22XA[122X-path  to  mean  a  nonzero  element [22Xp+I[122X represented by a path of the
+  quiver.[133X
+  
+  
+  [1X3.2 [33X[0;0YModules and bound quiver representations[133X[101X
+  
+  [33X[0;0YA  representation  of  [22XA[122X  is a homomorphism of algebras [22Xϕ : A -> End X[122X whose
+  target  is  the  endomorphism  algebra  [22XEnd  X[122X  of  a  [22XK[122X-vector space [22XX[122X; for
+  convenience,  write  [22Xϕ_a[122X  for the image of [22Xa[122X in [22Xϕ[122X. In this case, we call [22XX[122X a
+  [13X(right)  [22XA[122X-module[113X,  with  associated  action  [22Xx  ⋅  a  = xϕ_a[122X. The module is
+  [13Xfinite-dimensional[113X iff [13XX[113X is.[133X
+  
+  [33X[0;0YSince  [22XA=KQ/I[122X,  we  can work in terms of [13X(bound) representations of quivers[113X.
+  These  are  assignments  of  a  vector space [22XX_i[122X to each vertex [22Xi[122X of [22XQ[122X and a
+  linear  map [22Xθ_α : X_i -> X_j[122X to each arrow [22Xα : i -> j[122X of [22XQ[122X such that for any
+  [22Xρ  =  ∑_k=1^m  p_kλ_k ∈ I[122X, the associated map [22X∑_k=1^m θ_p_k : ⨁_i X_i -> ⨁_i
+  X_i[122X  is zero. Here, [22Xθ_p_k=θ_α_1⋯θ_α_r[122X for a decomposition of a nonstationary
+  [22Xp_k[122X into a product [22Xα_1⋯α_r[122X of arrows, and [22Xθ_i=id_X_i[122X for any stationary path
+  at [22Xi[122X.[133X
+  
+  [33X[0;0YAs is well-known [ASS , III.1], representations of quivers are equivalent to
+  modules.   More  specifically,  the  categories  [22XRep(Q,I)[122X  of  bound  quiver
+  representations   and  [22XModcat  A[122X  of  [22XA[122X-modules  are  equivalent,  and  this
+  equivalence  restricts  to  their respective full subcategories [22Xrep(Q,I)[122X and
+  [22Xmodcat  A[122X  of  finite-dimensional objects. In keeping with the quiver-minded
+  approach  from  above, whenever we say module, we really mean the equivalent
+  bound quiver representation.[133X
+  
+  [33X[0;0YWe  note  in particular that all of the categories in the previous paragraph
+  are  abelian:  thus, we can speak of the direct sum of modules (denoted with
+  [22X⊕[122X)  .  We call a module [22XX[122X [13Xindecomposable[113X if [22XX = Y⊕ Z[122X implies [22XY[122X or [22XZ[122X is zero.
+  Further, if [22XmathcalU[122X is any set of [22XA[122X-modules, we define the additive closure
+  [22Xadd  mathcalU[122X  of [22XmathcalU[122X as the full subcategory of [22Xmodcat A[122X whose objects
+  are  isomorphic  to  direct  summands  of  finite  direct sums of members of
+  [22XmathcalU[122X.[133X
+  
+  [33X[0;0YWrite  [22X[X][122X  for  the  isomorphism  type  of  [22XX[122X. One can seek to classify the
+  isomorphism  classes  of  indecomposable  (finite-dimensional) modules of an
+  algebra.   A   deep   theorem   of   Drozd   [Dro  ]  establishes  that  all
+  finite-dimensional  algebras  fall  into exactly one of three [13Xrepresentation
+  types[113X.  In  increasing  order  of difficulty, the options are [13Xrepresentation
+  finite[113X,  [13Xtame[113X  or [13Xwild[113X. The first simply means the algebra has only finitely
+  many  isoclasses  of indecomposables. Speaking informally, tame algebras are
+  those  for  which,  in  each  dimension,  almost  all  modules lie in one of
+  finitely  many  classes  each parameterized by the field. Speaking even more
+  informally,  wild algebras are those for which the classification problem is
+  intractible  in  a  very  strong  way.  Discussion and formal definitions of
+  representation type can be found in [Ben , Sec 4.4].[133X
+  
+  [33X[0;0YThere  are  certain canonical classes of module. A module [22XX[122X is: [13Xsimple[113X if it
+  has  no  proper,  nonzero  submodules;  [13Xprojective[113X  if the covariant functor
+  [22XHom_A(X,-):  Modcat  A  ->  Modcat  Z[122X is exact, or; [13Xinjective[113X if the functor
+  [22XHom_A(-,X)   :  Modcat  A  ->  Modcat  Z[122X  is  exact.  The  simple  [22XA[122X-modules
+  (necessarily  indecomposable)  are  in  one-to-one  correspondence  with the
+  vertices  of  [22XQ[122X, as are the indecomposable projective and injective modules.
+  We  respectively  write  [22XS_i[122X,  [22XP_i[122X  and  [22XI_i[122X  for the simple, indecomposable
+  projective  and  indecomposable injective module corresponding to the vertex
+  [22Xi[122X.  We  also  write  [22Xprojcat A[122X and [22Xinjcat A[122X to for the full subcategories of
+  [22Xmodcat  A[122X whose objects are respectively the (finite-dimensional) projective
+  and injective modules.[133X
+  
+  [33X[0;0YA  [13Xcomposition  series[113X  for  a  module  [22XX[122X  is  a strictly ascending chain of
+  submodules[133X
+  
+  
+  [24X[33X[0;6Y0=X_0 < X_1 < X_2 < ⋯ < X_l-1 < X_l=X[133X[124X
+  
+  [33X[0;0Yof  [22XX[122X  such  that each consecutive quotient [22XX_k+1/X_k[122X is simple. A module is
+  [13Xuniserial[113X  if  it  has  a  unique  composition  series; equivalently, if its
+  submodules form a chain.[133X
+  
+  [33X[0;0YWe  write  [22XD[122X  for  the vector-space duality [22XHom_K(-, K) : modcat A -> modcat
+  A^op[122X  of modules (and its inverse) and we write [22X*[122X for the dualities [22XHom_A(-,
+  A) : projcat A -> projcat A^op[122X and [22XHom_A(-, A) : injcat A -> injcat A^op[122X.[133X
+  
+  
+  [1X3.3 [33X[0;0YSyzygies and related constructions[133X[101X
+  
+  [33X[0;0YIn  this  section,  we  describe certain module constructions which refer to
+  projective  presentations  (described  below).  These  constructions  do not
+  generally  extend  to functors on the module category because they depend on
+  the  presentation chosen. However, this dependence is usually only up to the
+  adding  or  removing  of  projective  direct  summands.  By  working  in the
+  finite-dimensional   universe  [22Xmodcat  A[122X  where  the  Krull-Schmidt  theorem
+  applies,  we  can  reduce  to  study  of  modules  having  no indecomposable
+  projective   direct   summands.   These  objects  admit  minimal  projective
+  presentations.  This  approach  suffices for [5XSBStrips[105X, since we will only be
+  interested in constructions on modules and not their functorial extension to
+  morphisms. Readers who care for the functorial approach should interpret the
+  following  in  the  (projectively)  stable  module category [22Xpstmodcat A[122X: its
+  objects  are  those of the usual module category [22Xmodcat A[122X and its hom-spaces
+  are the quotients of their counterparts in [22Xmodcat A[122X by the subspaces of maps
+  that  factor  through  projective  modules. They should also be aware of the
+  injectively  stable  module  category  [22Xistmodcat  A[122X,  similarly  obtained by
+  quotienting my maps factoring through injectives.[133X
+  
+  
+  [1X3.3-1 [33X[0;0YProjective covers and syzygies[133X[101X
+  
+  [33X[0;0YAny  module  [22XM[122X  admits  a  projective presentation, which is to say an exact
+  sequence  [22XP_1 oversetf-> P_0 -> X -> 0[122X. Applying [22X*[122X to [22Xf[122X yields the map [22Xf^* :
+  P_0^* -> P_1^*[122X in [22Xprojcat A^op[122X. Its cokernel [22Xcok f^*[122X is called the transpose
+  [22XTr  X[122X  of [22XX[122X. (In [22Xpstmodcat A[122X, transpose yields a duality [22XTr : pstmodcat A ->
+  pstmodcat A^op[122X.)[133X
+  
+  [33X[0;0YThe   composition   [22XD   Tr[122X  (transpose  first,  then  dual)  is  called  the
+  Auslander-Reiten translation (and is an equivalence [22Xpstmodcat A -> istmodcat
+  A[122X). Its inverse is the opposite composition [22XTr D[122X.[133X
+  
+  [33X[0;0YFor  any  finite-dimensional  module  [22XX[122X there is a smallest (in vector-space
+  dimension) projective module [22XPP X[122X that maps onto it, say by the map [22Xπ : PP X
+  ↠  X[122X.  The  kernel  of  this  map  is the (first) syzygy [22Xsyzygy^1 X[122X of [22XX[122X. We
+  inductively  define  the [22Xk[122Xth syzygy as [22Xsyzygy^k+1 M = syzygy^1( syzygy^k M )[122X
+  for [22Xk ≥ 0[122X and, by convention, we set [22Xsyzygy^0 M[122X to be [22XX/P[122X, for [22XP[122X the largest
+  projective direct summand of [22XX[122X.[133X
+  
+  [33X[0;0YThe  projective  dimension  [22Xprojdim  X[122X  of  [22XX[122X is the smallest [22Xk≥ 0[122X for which
+  [22Xsyzygy^k  X  =  0[122X,  or  [22X+∞[122X  if no such [22Xk[122X exists. In particular, a module has
+  projective dimension [22X0[122X iff it is projective.[133X
+  
+  
+  [1X3.3-2 [33X[0;0YSyzygy patterns[133X[101X
+  
+  [33X[0;0YWe can define certain homological behavior with reference to syzygies. For [22Xk
+  ≥ 0[122X and some fixed module [22XX[122X, let[133X
+  
+  
+  [24X[33X[0;6Y\mathcal{A}_k  =  \big\{  [M]  \colon M \in \add\{ \syzygy^t X \} \text{ for
+  some  }  t  \geq  k \big\} \text{, } \mathcal{B}_k = \big\{ [M] \colon M \in
+  \add\{ \syzygy^t X \} \text{ for some } t \leq k \big\}\text{.}[133X
+  
+  [124X
+  
+  [33X[0;0Y(These  letters  were  chosen  so that [22XmathcalA_k[122X contains the isoclasses of
+  indecomposables   appearing   at  or  [22XmathcalA[122Xfter  the  [22Xk[122Xth  syzygy,  while
+  [22XmathcalB_k[122X contains those appearing at or [22XmathcalB[122Xefore.) The [22XmathcalA_k[122X and
+  [22XmathcalB_k[122X relate in the following way:[133X
+  
+  
+  [24X[33X[0;6Y\mathcal{B}_0  \subseteq  \mathcal{B}_1  \subseteq  \mathcal{B}_2  \subseteq
+  \cdots  \subseteq \bigcup_{k \geq 0} \mathcal{B}_k = \mathcal{A}_0 \supseteq
+  \mathcal{A}_1  \supseteq \mathcal{A}_2 \supseteq \cdots \supseteq \bigcap_{k
+  \geq 0} \mathcal{A}_k \text{.}[133X
+  
+  [124X
+  
+  [33X[0;0YWe  comment that, for each successive inclusion [22XmathcalB_k ⊇ mathcalB_k+1[122X or
+  [22XmathcalA_k  ⊇  mathcalA_k+1[122X,  the appropriate set difference between them is
+  finite.  Note  also that [22X∩_k ≥ 0mathcalA_k[122X contains exactly those isoclasses
+  witnessed  at  [22Xsyzygy^k  X[122X for infinitely many indices [22Xk[122X. Below, we use this
+  sequence  of inclusions to define some terminology for patterns in syzygies.
+  Our  definitions  are inspired by comparable work in [GH , Sec 2] and [Ric ,
+  Sec 7].[133X
+  
+  [33X[0;0YIf there is an index [22Xt[122X for which [22XmathcalA_t=mathcalA_t+1[122X([22X=mathcalA_t+2=⋯=∩_k
+  ≥  0 mathcalA_k[122X), then there is a minimal one [22Xt_⋆[122X, in which case we say that
+  the  [13Xsyzygy  repetition  index[113X  of  [22XX[122X  is  [22Xt_⋆[122X.  This holds exactly when [22Xt_⋆[122X
+  satisfies  [22XmathcalA_t_⋆  =  ∩_k  ≥ 0 mathcalA_k[122X (and is the minimal index to
+  enjoy this property). If no such [22Xt[122X exists, the syzygy repetition of index of
+  [22XX[122X is [22X+∞[122X.[133X
+  
+  [33X[0;0YIf [22XmathcalA_0[122X is finite, then we say [22XX[122X has [13Xsyzygy type [22X|mathcalA_0|[122X of index
+  [22Xs_⋆[122X[113X,      for      [22Xs_⋆[122X     the     minimal     index     [22Xk[122X     such     that
+  [22XmathcalB_k=mathcalB_k+1[122X([22X=mathcalB_k+2=⋯=mathcalA_0[122X); the existence of [22Xs_⋆[122X in
+  this  case follows from an easy finiteness argument. Just as immediately, we
+  see  that if [22XX[122X has finite syzygy type [22X|mathcalA_0|[122X then it has finite syzygy
+  repetition index at most [22X|mathcalA_0|[122X.[133X
+  
+  [33X[0;0YIf [22X[X] ∈ ∩_k ≥ 0 mathcalA_k[122X, then we call [22XX[122X [13Xweakly periodic[113X.[133X
+  
+  
+  [1X3.3-3 [33X[0;0YDelooping[133X[101X
+  
+  [33X[0;0YWe  say  a  module  [22XX[122X  can be [22Xk[122X-delooped if there is some module [22XY[122X for which
+  [22Xsyzygy^k  X[122X  is  a  direct  summand  [22Xsyzygy^k+1  Y[122X.  Here, we either discard
+  projective  direct  summands of both modules or, formally, work in [22Xpstmodcat
+  A[122X.  Gélinas  [Gél  ,  Thm  1.10]  showed  that  it  suffices  to  check  [22XY =
+  suspension^k+1  syzygy^k  X[122X,  where  [22Xsuspension  =  Tr  syzygy  Tr[122X is called
+  suspension.[133X
+  
+  [33X[0;0YGélinas  defines  the  delooping  level  [22Xdelooping X[122X of a module [22XX[122X to be the
+  smallest [22Xk ≥ 0[122X for which it can be [22Xk[122X-delooped, or [22X+∞[122X if no such [22Xk[122X exists. He
+  subsequently  defines  the  delooping  level  [22Xdelooping A[122X of an algebra [22XA[122X as
+  [22Xdelooping  A = max {delooping S : S is simple}[122X and relates this invariant to
+  the finitistic dimension of [22XA[122X.[133X
+  
+  
+  [1X3.4 [33X[0;0YSpecial biserial algebras[133X[101X
+  
+  [33X[0;0YA [13Xspecial biserial (SB) algebra[113X is a quiver algebra [22XKQ/I[122X such that[133X
+  
+  [31X1[131X   [33X[0;6Yevery vertex of [22XQ[122X is the source of at most [22X2[122X arrows,[133X
+  
+  [31X2[131X   [33X[0;6Yevery vertex of [22XQ[122X is the target of at most [22X2[122X arrows,[133X
+  
+  [31X3[131X   [33X[0;6Yfor every arrow [22Xa[122X of [22XQ[122X, there is at most one arrow [22Xb[122X with [22Xab ∉ I[122X and[133X
+  
+  [31X4[131X   [33X[0;6Yfor every arrow [22Xa[122X of [22XQ[122X, there is at most one arrow [22Xc[122X with [22Xca ∉ I[122X.[133X
+  
+  [33X[0;0YThese  algebras  emerged  from  the  modular representation theory of finite
+  groups.  A  key  text on them is [WW ], which establishes in particular that
+  they  are  tame  algebras.  Their  indecomposable  modules  fall  into three
+  classes:   band   modules,   string   modules   and   a   finite   class  of
+  projective-injective nonuniserial ("pin") modules.[133X
+  
+  
+  [1X3.5 [33X[0;0YString modules for special biserial algebras[133X[101X
+  
+  [33X[0;0YString  modules earn their name from the string graphs that describe them so
+  well.  A  string graph for [22XA=KQ/I[122X is a quiver homomorphism [22Xw : Γ -> Q[122X from a
+  quiver  [22XΓ[122X  such that: the domain is an orientation of a linear graph, [22Xw(α) ≠
+  w(β)[122X  whenever [22Xα,β ∈ Γ_1[122X have common source or target and where the image in
+  [22Xw[122X  of  any  [22XΓ[122X-path  [22Xp[122X is linearly independent of all other [22XA[122X-paths. A string
+  graph  [22Xw[122X is commonly depicted by labelling each vertex and arrow of [22XΓ[122X by its
+  respective images in [22XQ[122X. Then vertices of [22Xw[122X provide a basis of the associated
+  string  module,  and  the  labels  describe  the [22XA[122X action. We can identify a
+  string graph with the string module it represents.[133X
+  
+  [33X[0;0YOne  subtle  point:  here,  we do not require string graphs to be connected;
+  accordingly we do require string modules to be indecomposable.[133X
+  
+  [33X[0;0YThe  dual  [22XD  X[122X,  the  transpose  [22XTr X[122X and the syzygy [22Xsyzygy^1 X[122X of a string
+  module  [22XX[122X  are  all  string  modules, albeit for the opposite algebra in the
+  first  two  cases  [WW  , Sec 3] [LM , Sec 2]. In as-yet-unpublished work of
+  Galstad  [Gal]  (and  publicized without proof by Huisgen-Zimmermann [Hui ])
+  the syzygy of a band module [22XX[122X is also a string module provided that at least
+  one indecomposable direct summand of [22XPP X[122X is a string module.[133X
+  

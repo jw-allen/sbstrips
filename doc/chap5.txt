@@ -1,0 +1,227 @@
+  
+  [1X5 [33X[0;0Y[5XQPA[105X[101X[1X utilities[133X[101X
+  
+  
+  [1X5.1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YIn  order  to do what it does, the [5XSBStrips[105X package includes several utility
+  functions for use on quivers where each vertex has indegree and outdegree at
+  most [22X2[122X. (The existing term for such quivers is [13Xspecial biserial, abbreivated
+  SB[113X.)  This class includes the [22X1[122X-regular quivers: those where each vertex has
+  indegree and outdegree exactly [22X1[122X.[133X
+  
+  [33X[0;0YThese  quiver utility functions really build on the [5XQPA[105X package. We document
+  them  in this standalone chapter, alongside utilities for algebras presented
+  by quivers.[133X
+  
+  [33X[0;0YThe  term  [13Xquiver  algebra[113X  means  an object for which [2XIsQuiverAlgebra[102X ([14XQPA:
+  IsQuiverAlgebra[114X) returns [9Xtrue[109X.[133X
+  
+  
+  [1X5.2 [33X[0;0YUtilities for [22X1[122X[101X[1X-regular quivers[133X[101X
+  
+  [1X5.2-1 Is1RegQuiver[101X
+  
+  [33X[1;0Y[29X[2XIs1RegQuiver[102X( [3Xquiver[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10Yeither  [10Xtrue[110X  or  [10Xfalse[110X,  depending  on  whether  or not [3Xquiver[103X is
+            [22X1[122X-regular.[133X
+  
+  [1X5.2-2 PathBySourceAndLength[101X
+  
+  [33X[1;0Y[29X[2XPathBySourceAndLength[102X( [3Xvert[103X, [3Xlen[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments:  [3Xvert[103X,  a  vertex  of  a  [22X1[122X-regular  quiver [22XQ[122X; [3Xlen[103X, a nonnegative
+  integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe unique path in [22XQ[122X which has source [3Xvert[103X and length [3Xlen[103X.[133X
+  
+  [1X5.2-3 PathByTargetAndLength[101X
+  
+  [33X[1;0Y[29X[2XPathByTargetAndLength[102X( [3Xvert[103X, [3Xlen[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments:  [3Xvert[103X,  a  vertex  of  a  [22X1[122X-regular  quiver [22XQ[122X; [3Xlen[103X, a nonnegative
+  integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe unique path in [22XQ[122X which has target [3Xvert[103X and length [3Xlen[103X.[133X
+  
+  [1X5.2-4 1RegQuivIntAct[101X
+  
+  [33X[1;0Y[29X[2X1RegQuivIntAct[102X( [3Xx[103X, [3Xk[103X ) [32X operation[133X
+  
+  [33X[0;0YArguments: [3Xx[103X, which is either a vertex or an arrow of a [22X1[122X-regular quiver; [3Xk[103X,
+  an integer.[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe path [22Xx+k[122X, as per the [22Xℤ[122X-action (see below).[133X
+  
+  [33X[0;0YRecall  that  a  quiver is [22X1[122X-regular iff the source and target functions [22Xs,t[122X
+  are  bijections  from  the  arrow  set  to the vertex set (in which case the
+  inverse  [22Xt^-1[122X  is well-defined). The generator [22X1 ∈ ℤ[122X acts as ``[22Xt^-1[122X then [22Xs[122X''
+  on vertices and ``[22Xs[122X then [22Xt^-1[122X'' on arrows.[133X
+  [33X[0;0YThis  operation figures out from [3Xx[103X the quiver to which [3Xx[103X belongs and applies
+  [2X1RegQuivIntActionFunction[102X ([14X5.2-5[114X) of tha quiver. For this reason, it is more
+  user-friendly.[133X
+  
+  [1X5.2-5 1RegQuivIntActionFunction[101X
+  
+  [33X[1;0Y[29X[2X1RegQuivIntActionFunction[102X( [3Xquiver[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a [22X1[122X-regular quiver (as tested by [2XIs1RegQuiver[102X ([14X5.2-1[114X))[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  single  function [10Xf[110X describing the [22Xℤ[122X-actions on the vertices and
+            the arrows of [3Xquiver[103X[133X
+  
+  [33X[0;0YRecall  that  a  quiver is [22X1[122X-regular iff the source and target functions [22Xs,t[122X
+  are  bijections  from  the  arrow  set  to the vertex set (in which case the
+  inverse  [22Xt^-1[122X  is well-defined). The generator [22X1 ∈ ℤ[122X acts as ``[22Xt^-1[122X then [22Xs[122X''
+  on vertices and ``[22Xs[122X then [22Xt^-1[122X'' on arrows.[133X
+  [33X[0;0YIn  practice  you will probably want to use [2X1RegQuivIntAct[102X ([14X5.2-4[114X), since it
+  saves you having to remind [5XSBStrips[105X which quiver you intend to act on.[133X
+  
+  
+  [1X5.3 [33X[0;0YUtilities for SB quivers[133X[101X
+  
+  [1X5.3-1 Is2RegQuiver[101X
+  
+  [33X[1;0Y[29X[2XIs2RegQuiver[102X( [3Xquiver[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10Yeither  [10Xtrue[110X  or  [10Xfalse[110X,  depending  on  whether  or not [3Xquiver[103X is
+            [22X2[122X-regular.[133X
+  
+  [1X5.3-2 2RegAugmentationOfQuiver[101X
+  
+  [33X[1;0Y[29X[2X2RegAugmentationOfQuiver[102X( [3Xground_quiv[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument:    [3Xground_quiv[103X,    a    sub[22X2[122X-regular    quiver   (as   tested   by
+  [2XIsSpecialBiserialQuiver[102X ([14XQPA: IsSpecialBiserialQuiver[114X))[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya [22X2[122X-regular quiver of which [3Xground_quiv[103X may naturally be seen as a
+            subquiver[133X
+  
+  [33X[0;0YIf   [3Xground_quiv[103X  is  itself  sub-[22X2[122X-regular,  then  this  attribute  returns
+  [3Xground_quiv[103X  identically. If not, then this attribute constructs a brand new
+  quiver  object  which has vertices and arrows having the same names as those
+  of [3Xground_quiv[103X, but also has arrows with names [10Xaugarr1[110X, [10Xaugarr2[110X and so on.[133X
+  
+  [1X5.3-3 Is2RegAugmentationOfQuiver[101X
+  
+  [33X[1;0Y[29X[2XIs2RegAugmentationOfQuiver[102X( [3Xquiver[103X ) [32X property[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X  if  [3Xquiver[103X  was  constructed  by  [14X5.3-2[114X  or if [3Xquiver[103X was an
+            already [22X2[122X-regular quiver, and [9Xfalse[109X otherwise.[133X
+  
+  [1X5.3-4 OriginalSBQuiverOf2RegAugmentation[101X
+  
+  [33X[1;0Y[29X[2XOriginalSBQuiverOf2RegAugmentation[102X( [3Xquiver[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver[133X
+  
+  [6XReturns:[106X  [33X[0;10YThe   sub-[22X2[122X-regular  quiver  of  which  [3Xquiver[103X  is  the  [22X2[122X-regular
+            augmentation.[133X
+  
+  [33X[0;0YInformally    speaking,    this    attribute    is    the    "inverse"    to
+  [10X2RegAugmentationOfQuiver[110X.[133X
+  
+  [1X5.3-5 RetractionOf2RegAugmentation[101X
+  
+  [33X[1;0Y[29X[2XRetractionOf2RegAugmentation[102X( [3Xquiver[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xquiver[103X, a quiver constructed using [10X2RegAugmentationOfQuiver[110X[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  function  [10Xret[110X, which accepts paths in [3Xquiver[103X as input and which
+            outputs  paths  in  [10XOriginalSBQuiverOf2RegAugmentation(  quiver  )[110X
+            [14X5.3-2[114X.[133X
+  
+  [33X[0;0YOne   can  identify  [10XOriginalSBQuiverOf2RegAugmentation(  quiver  )[110X  with  a
+  subquiver of [3Xquiver[103X. Some paths in [3Xquiver[103X lie wholly in that subquiver, some
+  do  not.  This function [10Xret[110X takes those that do to the corresponding path of
+  [10XOriginalSBQuiverOf2RegAugmentation(  quiver  )[110X, and those that do not to the
+  zero path of [10XOriginalSBQuiverOf2RegAugmentation( quiver )[110X.[133X
+  
+  
+  [1X5.4 [33X[0;0YMiscellaneous utilities for [5XQPA[105X[101X[1X[133X[101X
+  
+  [33X[0;0YWhat follows are minor additional utilities for [5XQPA[105X.[133X
+  
+  [1X5.4-1 String[101X
+  
+  [33X[1;0Y[29X[2XString[102X( [3Xpath[103X ) [32X method[133X
+  
+  [33X[0;0YArgument:  [3Xpath[103X,  a  path of length at least [22X2[122X in a quiver (see [2XIsPath[102X ([14XQPA:
+  IsPath[114X) and [2XLengthOfPath[102X ([14XQPA: LengthOfPath[114X) for details)[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya string describing [3Xpath[103X[133X
+  
+  [33X[0;0YMethods for [2XString[102X ([14XReference: String[114X) already exist for vertices and arrows
+  of  a  quiver; that is to say, paths of length [22X0[122X or [22X1[122X. [5XQPA[105X forgets these for
+  longer paths: at present, only the default answer [10X"<object>"[110X is returned.[133X
+  
+  [33X[0;0YA  path  in [5XQPA[105X is products of arrows. Accordingly, we write its string as a
+  [10X*[110X-separated  sequences  of  its constituent arrows. This is in-line with how
+  paths are printed using [2XViewObj[102X ([14XReference: ViewObj[114X).[133X
+  
+  [1X5.4-2 ArrowsOfQuiverAlgebra[101X
+  
+  [33X[1;0Y[29X[2XArrowsOfQuiverAlgebra[102X( [3Xalg[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xalg[103X, a quiver algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe  residues  of the arrows in the defining quiver of [3Xalg[103X, listed
+            together[133X
+  
+  [1X5.4-3 VerticesOfQuiverAlgebra[101X
+  
+  [33X[1;0Y[29X[2XVerticesOfQuiverAlgebra[102X( [3Xalg[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xalg[103X, a quiver algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe residues of the vertices in the defining quiver of [3Xalg[103X, listed
+            together[133X
+  
+  [1X5.4-4 FieldOfQuiverAlgebra[101X
+  
+  [33X[1;0Y[29X[2XFieldOfQuiverAlgebra[102X( [3Xalg[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xalg[103X, a quiver algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe field of definition of [3Xalg[103X[133X
+  
+  [1X5.4-5 DefiningQuiverOfQuiverAlgebra[101X
+  
+  [33X[1;0Y[29X[2XDefiningQuiverOfQuiverAlgebra[102X( [3Xalg[103X ) [32X operation[133X
+  
+  [33X[0;0YArgument: [3Xalg[103X, a quiver algebra[133X
+  
+  [6XReturns:[106X  [33X[0;10Ythe quiver of definition of [3Xalg[103X[133X
+  
+  [33X[0;0YThis     single     operation     performs     [2XOriginalPathAlgebra[102X     ([14XQPA:
+  OriginalPathAlgebra[114X) and then [2XQuiverOfPathAlgebra[102X ([14XQPA: QuiverOfPathAlgebra[114X)[133X
+  
+  
+  [1X5.4-6 [33X[0;0YPaths obtained by adding/removing an arrow at source/target[133X[101X
+  
+  [33X[1;0Y[29X[2XPathOneArrowLongerAtSource[102X( [3Xpath[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XPathOneArrowLongerAtTarget[102X( [3Xpath[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XPathOneArrowShorterAtSource[102X( [3Xpath[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XPathOneArrowShorterAtTarget[102X( [3Xpath[103X ) [32X attribute[133X
+  
+  [33X[0;0YArgument: [3Xpath[103X, a path[133X
+  
+  [6XReturns:[106X  [33X[0;10Ya  path  [10Xnew_path[110X  which  differs  from  [3Xpath[103X  by one arrow in the
+            appropriate way, or [9Xfail[109X if no such arrow exists.[133X
+  
+  [33X[0;0YBoth  of the [10X-Shorter-[110X attributes require [3Xpath[103X to have length at least [22X1[122X, as
+  measured by [2XLengthOfPath[102X ([14XQPA: LengthOfPath[114X).[133X
+  
+  [33X[0;0YBoth  of  the  [10X-Longer-[110X  attributes require there to exist a unique arrow to
+  add.  So, for example [10XPathOneArrowLongerAtSource[110X requires the source of [3Xpath[103X
+  to   have   indegree  exactly  [22X1[122X,  as  measured  by  [2XInDegreeOfVertex[102X  ([14XQPA:
+  InDegreeOfVertex[114X).  This  is  always  the  situation with [22X1[122X-regular quivers,
+  where these operations are most intended to be used.[133X
+  

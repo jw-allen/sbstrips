@@ -1,0 +1,55 @@
+  
+  
+  [1XReferences[101X
+  
+  [[20XAll  [120X]  [16XAllen,  J.[116X,  [17X Syzygies of string modules for special biserial
+  algebras  [117X,  School of Mathematics, University of Bristol ( 2021 ), ((
+  Work in progress )).
+  
+  [[20XASS  [120X]  [16XAssem,  I.,  Simson,  D. and Skowronski, A.[116X, [17X Elements of the
+  Representation Theory of Associative Algebras, volume I: Techniques of
+  Representation   Theory   [117X,   Cambridge   University  Press  ,  London
+  Mathematical Society student texts , 65 ( 2006 ).
+  
+  [[20XBen  [120X]  [16XBenson,  D.  J.[116X,  [17X  Representations  and Cohomology, I: Basic
+  representation  theory  of  finite  groups  and associative algebras [117X,
+  Cambridge University Press , Cambridge Studies in Advanced Mathematics
+  , 30 ( 1995 ).
+  
+  [[20XDro  [120X]  [16XDrozd, J. A.[116X ([1m[31mGabriel, P. and Dlab, V.[15X, Eds.), [17X Tame and wild
+  matrix  problems  [117X,  in  Representation  Theory II , Springer, Berlin,
+  Heidelberg , Lecture Notes in Mathematics , [19X 832 [119X ( 1980 ), 242-258 .
+  
+  [[20XEHIS  [120X]  [16XErdmann,  K.,  Holm, T., Iyama, O. and Schröer, J.[116X, [17X Radical
+  embeddings  and representation dimension [117X, [18X Advances in Mathematics [118X, [19X
+  185 [119X ( 2004 ), 159-177 .
+  
+  [[20XGal[120X] [16XGalstad, J.[116X, [17X PhD thesis [117X, (( Work in progress )).
+  
+  [[20XGél [120X] [16XGélinas, V.[116X, [17X The depth, the delooping level and the finitistic
+  dimension [117X ( 2020 ), (( preprint )).
+  
+  [[20XGH  [120X]  [16XGoodearl, K. R. and Huisgen-Zimmermann, B.[116X ([1m[31mReiten, I., Smalo,
+  S.  O.  and Solberg, O.[15X, Eds.), [17X Repetitive resolutions over classical
+  orders  and  finite dimensional algebras [117X, in Algebras and modules II:
+  Eighth International Conference on Representations of Algebras, August
+  4-10,  1996,  Geiranger,  Norway , Canadian Mathematical Society , CMS
+  Conference Proceedings , [19X 24 [119X ( 1996 ), 205-226 .
+  
+  [[20XHui  [120X] [16XHuisgen-Zimmermann, B.[116X, [17X Representation-tame algebras need not
+  be  homologically  tame [117X, [18X Algebras and Representation Theory [118X, [19X 19 [119X (
+  2016 ), 943-956 .
+  
+  [[20XLM  [120X]  [16XLiu,  S.  and Morin, J.-P.[116X, [17X The strong no loop conjecture for
+  special  biserial algebras [117X, [18X Proceedings of the American Mathematical
+  Society [118X, [19X 132 [119X, 12 ( 2004 ), 3513-3523 .
+  
+  [[20XRic  [120X]  [16XRickard, J.[116X, [17X Unbounded derived categories and the finitistic
+  dimension conjecture [117X, [18X Advances in Mathematics [118X, [19X 354 [119X ( 2019 ).
+  
+  [[20XWW  [120X] [16XWald, B. and Waschbüsch, J.[116X, [17X Tame biserial algebras [117X, [18X Journal
+  of Algebra [118X, [19X 95 [119X ( 1985 ), 480-500 .
+  
+  
+  
+  [32X

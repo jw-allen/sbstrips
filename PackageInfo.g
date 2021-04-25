@@ -40,7 +40,7 @@ SetPackageInfo( rec(
 
  IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
  
- PackageWWWHome := ~.SourceRepository.URL,
+ PackageWWWHome := "https://jw-allen.github.io/sbstrips/",
  
  ArchiveURL := Concatenation(
   ~.SourceRepository.URL,
@@ -54,7 +54,7 @@ SetPackageInfo( rec(
   Concatenation( ~.PackageWWWHome, "/README" ),
 
  PackageInfoURL :=
-  "https://github.com/jw-allen/sbstrips/blob/master/PackageInfo.g",
+  Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 
  AbstractHTML :=
   "String modules for special biserial (SB) algebras are represented by \

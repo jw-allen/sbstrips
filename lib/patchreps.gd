@@ -5,6 +5,7 @@ DeclareRepresentation( "IsPatchRep", IsAttributeStoringRep,
 DeclareAttribute( "PatchFamilyOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "PatchSetOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroPatchOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareSynonymAttr( "BlankPatchOfSBAlg", ZeroPatchOfSBAlg );
 
 DeclareAttribute( "IsZeroPatch", IsPatchRep );
 DeclareAttribute( "IsPatchOfStringProjective", IsPatchRep );

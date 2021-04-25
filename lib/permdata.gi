@@ -203,6 +203,29 @@ InstallMethod(
 );
 
 InstallMethod(
+    NonzeroPathsOfSBAlg,
+    "for special biserial algebras",
+    [ IsSpecialBiserialAlgebra ],
+    function( sba )
+        local
+            lindep,     # Linearly dependent paths of <sba>
+            linind;     # Linearly independent paths of <sba>
+
+        if HasNonzeroPathsOfSBAlg( sba ) then
+            return NonzeroPathsOfSBAlg( sba );
+        
+        else
+            lindep := ShallowCopy( LinDepOfSBAlg( sba ) );
+            linind := ShallowCopy( LinIndOfSBAlg( sba ) );
+            
+            UniteSet( linind, lindep );
+            
+            return linind;
+        fi;
+    end
+);
+
+InstallMethod(
     PermDataOfSBAlg,
     "for special biserial algebras",
     [ IsSpecialBiserialAlgebra ],

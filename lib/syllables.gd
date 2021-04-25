@@ -4,6 +4,7 @@ DeclareRepresentation( "IsSyllableRep", IsAttributeStoringRep,
 DeclareAttribute( "SyllableFamilyOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "SyllableSetOfSBAlg", IsSpecialBiserialAlgebra );
 DeclareAttribute( "ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareSynonymAttr( "BlankSyllableOfSBAlg", ZeroSyllableOfSBAlg );
 
 DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
 

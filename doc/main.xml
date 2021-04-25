@@ -14,7 +14,7 @@
     <!ENTITY QPA "<Package>QPA</Package>">
     <!ENTITY SBStrips "<Package>SBStrips</Package>"> 
     <!ENTITY true "<K>true</K>">
-    <!ENTITY VERSION "0.6.5">
+    <!ENTITY VERSION "0.6.6">
     ]
   >
 

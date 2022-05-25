@@ -3298,3 +3298,22 @@ RedispatchOnCondition(
     [ IsSpecialBiserialAlgebra,  ],
     0
 );
+
+InstallMethod(
+    IsTorsionlessStrip,
+    "for a strip-rep",
+    [ IsStripRep ],
+    function( strip )
+        local
+            del0;    # Defining SB algebra of <strip>
+
+        if HasIsTorsionlessStrip( strip ) then
+            return IsTorsionlessStrip( strip );
+
+        else
+            del0 := DeloopingLevelOfStripIfAtMostN( strip, 0 );
+
+            return del0 = 0;
+        fi;
+    end
+);

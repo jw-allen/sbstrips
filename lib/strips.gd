@@ -770,3 +770,17 @@ DeclareOperation(
  "DeloopingLevelOfSBAlgIfAtMostN",
  [ IsSpecialBiserialAlgebra, IsInt ]
  );
+
+##  <#GAPDoc Label="DocIsTorsionlessStrip">
+##    <ManSection>
+##      <Prop Name="IsTorsionlessStrip" Arg="strip"/>
+##      <Description>
+##        Arguments: <A>strip</A>, a strip.
+##        <Br />
+##      </Description>
+##      <Returns>
+##        &true; if <A>strip</A> represents a torsionless module, and &false; otherwise.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareProperty( "IsTorsionlessStrip", IsStripRep );

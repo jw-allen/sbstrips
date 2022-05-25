@@ -41,6 +41,8 @@
   <#Include Label="DocIsIndecProjectiveStrip">
   
   <#Include Label="DocIsIndecInjectiveStrip">
+
+  <#Include Label="DocIsTorsionlessStrip">
 </Section>
 
 <Section>

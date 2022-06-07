@@ -54,20 +54,19 @@ gap> 4th_syz := NthSyzygyOfStrip( s, 4 );
 gap> Length( 4th_syz );
 20
 gap> Set( 4th_syz );
-[ (v2)^-1(v2), (v1)^-1(a), (v2)^-1(d), (v2)^-1(d^2),
+[ (v2)^-1(v2), (a)^-1(v1), (v2)^-1(d), (v2)^-1(d^2),
   (v2)^-1(c*a) (c)^-1(v2), (a)^-1(b*c) (a)^-1(v1) ]
 gap> Collected( 4th_syz );
-[ [ (v2)^-1(v2), 3 ], [ (v1)^-1(a), 6 ], [ (v2)^-1(d), 1 ],
+[ [ (v2)^-1(v2), 3 ], [ (a)^-1(v1), 6 ], [ (v2)^-1(d), 1 ],
   [ (v2)^-1(d^2), 5 ], [ (v2)^-1(c*a) (c)^-1(v2), 4 ],
   [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
 gap> CollectedSyzygyOfStrip( s );
 [ [ (a)^-1(v1), 1 ], [ (d)^-1(v2), 1 ],
   [ (v2)^-1(c) (a)^-1(b*c) (c*a)^-1(d^2), 1 ] ]
 gap> CollectedNthSyzygyOfStrip( s, 4 );
-[ [ (v2)^-1(c) (c*a)^-1(v2), 4 ], [ (v2)^-1(v2), 3 ],
-  [ (v1)^-1(a), 6 ], [ (v2)^-1(d^2), 5 ], [ (v2)^-1(d), 1 ],
-  [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
-  
+[ [ (v2)^-1(c) (c*a)^-1(v2), 4 ], [ (v2)^-1(v2), 3 ], [ (v1)^-1(a), 6 ],
+  [ (v2)^-1(d^2), 5 ], [ (v2)^-1(d), 1 ], [ (a)^-1(b*c) (a)^-1(v1), 1 ] ]
+
 # How to calculate Nth syzygies efficiently for large N
 gap> CollectedNthSyzygyOfStrip( s, 20 );
 [ [ (v2)^-1(c) (c*a)^-1(v2), 66012 ], [ (v2)^-1(v2), 55403 ],
@@ -95,15 +94,15 @@ gap> Stripify( alg1.d^3 );
 (d^3)^-1(v2)
 gap> Stripify( alg1.v1 );
 (v1)^-1(v1)
-gap> s1 := Stripify( alg2.v1 );;
-gap> s2 := Stripify( alg2.v2 );;
+gap> s1 := Stripify( alg1.v1 );;
+gap> s2 := Stripify( alg1.v2 );;
 gap> SimpleStripsOfSBAlg( alg1 );
 [ (v1)^-1(v1), (v2)^-1(v2) ]
-gap> [ s1, s2 ] = SimpleStripsOfSbAlg( alg2 );
+gap> [ s1, s2 ] = SimpleStripsOfSBAlg( alg1 );
 true
-gap> ProjectiveStripsOfSbAlg( alg1 );
+gap> IndecProjectiveStripsOfSBAlg( alg1 );
 [ fail, (c*a)^-1(d^3) ]
-gap> InjectiveStripsOfSbAlg( alg1 );
+gap> IndecInjectiveStripsOfSBAlg( alg1 );
 [ fail, (v1)^-1(a*b) (d^3)^-1(v2) ]
 
 # Some inbuilt tests for string modules using strips
@@ -125,7 +124,7 @@ gap> UniserialStripsOfSBAlg( alg2 );
 [ (v1)^-1(v1), (v2)^-1(v2), (v3)^-1(v3), (a)^-1(v1), (b)^-1(v2),
   (c)^-1(v3), (a*b)^-1(v1), (b*c)^-1(v2), (c*a)^-1(v3), (a*b*c)^-1(v1),
   (b*c*a)^-1(v2), (c*a*b)^-1(v3) ]
-gap> u := last[8];
+gap> u := last[7];
 (a*b)^-1(v1)
 gap> IsWeaklyPeriodicStripByNthSyzygy( u, 4 );
 #I  Examining strip: (a*b)^-1(v1)
@@ -156,8 +155,8 @@ false
 gap> IsFiniteSyzygyTypeStripByNthSyzygy( uu, 10000 );
 #I  Examining strip: (a*b)^-1(v1)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies st\
-abilizes at N=4, at which point it has cardinality 6
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=4, at which point it has cardinality 6
 true
 gap> s1 := SimpleStripsOfSBAlg( alg1 )[1];
 (v1)^-1(v1)
@@ -189,23 +188,40 @@ gap> DeloopingLevelOfStripIfAtMostN( ab, 10 );
 gap> DeloopingLevelOfSBAlgIfAtMostN( alg1, 10 );
 0
 gap> DeloopingLevelOfSBAlgIfAtMostN( alg2, 10 );
-10
+0
 gap> for k in [ 1 .. 5 ] do
 >   Print(
 >     DeloopingLevelOfSBAlgIfAtMostN( SBStripsExampleAlgebra( k ), 10 )
 >   );
 >   Print( "\n" );
 > od;
+#I  The quiver of this algebra has 2 vertices
+#I  and 4 arrows
 0
+#I  The quiver of this algebra has 3 vertices
+#I  and 3 arrows
 0
+#I  The quiver of this algebra has 4 vertices
+#I  and 8 arrows
 2
+#I  The quiver of this algebra has 8 vertices
+#I  and 16 arrows
 0
+#I  The quiver of this algebra has 4 vertices
+#I  and 8 arrows
 1
+
+gap> for k in [ 1 .. 5 ] do
+>   TestInjectiveStripsUpToNthSyzygy( SBStripsExampleAlgebra( k ), 10 );
+> od;
+#I  The quiver of this algebra has 2 vertices
+#I  and 4 arrows
 #I  Examining strip: (v1)^-1(a*b) (d*d*d)^-1(v2)
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=3, at which point it has cardinality 5
 The given SB algebra has passed the test!
-
+#I  The quiver of this algebra has 3 vertices
+#I  and 3 arrows
 #I  Examining strip: (v1)^-1(a*b*c)
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=0, at which point it has cardinality 1
@@ -216,7 +232,8 @@ The given SB algebra has passed the test!
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=0, at which point it has cardinality 1
 The given SB algebra has passed the test!
-
+#I  The quiver of this algebra has 4 vertices
+#I  and 8 arrows
 #I  Examining strip: (v1)^-1(a*b*c*d) (f*g*h*f*g*h)^-1(v1)
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=7, at which point it has cardinality 14
@@ -224,7 +241,8 @@ The given SB algebra has passed the test!
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=6, at which point it has cardinality 13
 The given SB algebra has passed the test!
-
+#I  The quiver of this algebra has 8 vertices
+#I  and 16 arrows
 #I  Examining strip: (v7)^-1(n*o*p*a) (n*o*p)^-1(v7)
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=8, at which point it has cardinality 21
@@ -238,7 +256,8 @@ The given SB algebra has passed the test!
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=8, at which point it has cardinality 16
 The given SB algebra has passed the test!
-
+#I  The quiver of this algebra has 4 vertices
+#I  and 8 arrows
 #I  Examining strip: (v1)^-1(a*b*c*d*a) (e*f*g*e*f*g*e)^-1(v1)
 #I  This strip has finite syzygy type.
 #I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=6, at which point it has cardinality 13
@@ -255,6 +274,11 @@ gap> Print( module );
 <two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>
 , (7 generators)>> with dimension vector [ 6, 5 ]>
 gap> 4th_syz := NthSyzygyOfStrip( s, 4 );;
+#I  Examining strip: (a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
+#I  Calculated 1st syzygy...
+#I  Calculated 2nd syzygy...
+#I  Calculated 3rd syzygy...
+#I  Calculated 4th syzygy...
 gap> ModuleOfStrip( 4th_syz );
 [ <[ 2, 2 ]>, <[ 0, 3 ]>, <[ 2, 0 ]>, <[ 0, 3 ]>, <[ 4, 1 ]>,
   <[ 0, 3 ]>, <[ 2, 0 ]>, <[ 0, 1 ]>, <[ 2, 2 ]>, <[ 2, 0 ]>,
@@ -268,6 +292,11 @@ gap> ModuleOfStrip( coll_4th_syz );
 [ [ <[ 2, 2 ]>, 4 ], [ <[ 0, 1 ]>, 3 ], [ <[ 2, 0 ]>, 6 ],
   [ <[ 0, 3 ]>, 5 ], [ <[ 0, 2 ]>, 1 ], [ <[ 4, 1 ]>, 1 ] ]
 gap> 4th_syz := NthSyzygyOfStrip( s, 4 );;
+#I  Examining strip: (a)^-1(b*c) (a)^-1(b) (d)^-1(c) (c*a)^-1(d)
+#I  Calculated 1st syzygy...
+#I  Calculated 2nd syzygy...
+#I  Calculated 3rd syzygy...
+#I  Calculated 4th syzygy...
 gap> coll_4th_syz := CollectedNthSyzygyOfStrip( s, 4 );;
 gap> DirectSumModuleOfListOfStrips( 4th_syz );
 <[ 24, 29 ]>

@@ -129,7 +129,7 @@ InstallOtherMethod(
             if ( sy_list1 = sy_list2 ) and ( ori_list1 = ori_list2 ) then
                 return true;
             elif ( sy_list1 = Reversed( sy_list2 ) ) and
-             ( ori_list1 = Reversed( ori_list2 ) ) then
+             ( List( ori_list1, ori -> -ori ) = Reversed( ori_list2 ) ) then
                 return true;
             else
                 return false;

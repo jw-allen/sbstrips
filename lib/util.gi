@@ -647,24 +647,24 @@ InstallMethod(
             find_class, # helper function for finding partition class of vertex
             s, t;       # ends of an arrow in construction loop
 
-        if not ForAll(parts, IsList) then
+        if not ForAll( parts, IsList ) then
             Error( "The second argument\n", parts, "\nmust be a list of lists of vertices",
              "of the quiver\n", quiver );
-        elif Set(Flat(parts)) <> Set(VerticesOfQuiver(quiver)) then
+        elif Set( Flat( parts ) ) <> Set( VerticesOfQuiver( quiver ) ) then
             Error( "The second argument\n", parts, "\nmust include all vertices ",
              "of the quiver\n", quiver );
-        elif Length(Flat(parts)) <> NumberOfVertices(quiver) then
+        elif Length( Flat( parts ) ) <> NumberOfVertices( quiver ) then
             Error( "The second argument\n", parts, "\nmust include all vertices ",
              "of the quiver\n", quiver );
         fi;
 
-        vertices := List([1..Length(parts)], i -> Concatenation("v", String(i)));
+        vertices := List( [ 1..Length( parts ) ], i -> Concatenation( "v", String( i ) ) );
 
-        find_class := function(vertex)
+        find_class := function( vertex )
             local i;
             i := 1;
-            while i <= Length(parts) do
-                if vertex in parts[i] then
+            while i <= Length( parts ) do
+                if vertex in parts[ i ] then
                     return i;
                 fi;
                 i := i + 1;
@@ -672,14 +672,14 @@ InstallMethod(
             return fail;
         end;
 
-        arrows := [];
-        for a in ArrowsOfQuiver(quiver) do
-            s := Concatenation("v", String(find_class(SourceOfPath(a))));
-            t := Concatenation("v", String(find_class(TargetOfPath(a))));
-            Add(arrows, [s, t, String(a)]);
+        arrows := [ ];
+        for a in ArrowsOfQuiver( quiver ) do
+            s := Concatenation( "v", String( find_class( SourceOfPath( a ) ) ) );
+            t := Concatenation( "v", String( find_class( TargetOfPath( a ) ) ) );
+            Add( arrows, [ s, t, String( a ) ] );
         od;
 
-        quot := Quiver(vertices, arrows);
+        quot := Quiver( vertices, arrows );
 
         return quot;
     end
@@ -689,15 +689,15 @@ InstallMethod(
     QuiverFilterArrows,
     "for a quiver and a partition of its vertices",
     [ IsQuiver, IsFunction ],
-    function(quiver, fn)
+    function( quiver, fn )
         local
             vertices,
             arrows;
 
-        vertices := List(VerticesOfQuiver(quiver), x -> String(x));
-        arrows := Filtered(ArrowsOfQuiver(quiver), x -> fn(x));
-        arrows := List(arrows, x -> [String(SourceOfPath(x)), String(TargetOfPath(x)), String(x)]);
+        vertices := List( VerticesOfQuiver( quiver ), x -> String( x ));
+        arrows := Filtered( ArrowsOfQuiver( quiver ), x -> fn( x ));
+        arrows := List( arrows, x -> [ String( SourceOfPath( x )), String( TargetOfPath( x )), String( x ) ] );
 
-        return Quiver(vertices, arrows);
+        return Quiver( vertices, arrows );
     end
 );

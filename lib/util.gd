@@ -392,7 +392,7 @@ DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "QuotientQuiver", [IsQuiver, IsList] );
+DeclareOperation( "QuotientQuiver", [ IsQuiver, IsList ] );
 
 ##  <#GAPDoc Label="DocQuiverFilterArrows">
 ##    <ManSection>

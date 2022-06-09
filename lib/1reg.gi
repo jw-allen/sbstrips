@@ -164,3 +164,42 @@ InstallMethod(
          );
     end
 );
+
+InstallGlobalFunction(
+    1RegQuivFromCycleLengths,
+    "for a list of positive integers",
+    function( cycle_lengths )
+        local
+            vertices,   # list of vertices
+            arrows,     # list of arrows
+            i,          # loop variable for names of vertices and arrows
+            len,        # loop variable for the length of each of the cycles
+            j,          # loop variable for vertices in a cycle
+            Q;          # output quiver
+
+        if not ForAll( cycle_lengths, IsPosInt ) then
+            TryNextMethod();
+        fi;
+
+        vertices := [];
+        arrows := [];
+
+        i := 0;
+        for len in cycle_lengths do
+            for j in [ 1 .. len ] do
+                Add( vertices, Concatenation( "v", String( i + j ) ) );
+                Add( arrows, [ Concatenation( "v", String( i + j ) ),
+                               Concatenation( "v", String( ( j mod len ) + i + 1 ) ),
+                               Concatenation( "a", String( i + j ) )
+                ] );
+            od;
+            i := i + len;
+        od;
+
+        Q := Quiver( vertices, arrows );
+        # If this assertion fails then something very weird has gone wrong
+        Assert( 1, Is1RegQuiver(Q), "Constructed quiver is not 1-regular" );
+
+        return Q;
+    end
+);

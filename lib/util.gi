@@ -684,3 +684,20 @@ InstallMethod(
         return quot;
     end
 );
+
+InstallMethod(
+    QuiverFilterArrows,
+    "for a quiver and a partition of its vertices",
+    [ IsQuiver, IsFunction ],
+    function(quiver, fn)
+        local
+            vertices,
+            arrows;
+
+        vertices := List(VerticesOfQuiver(quiver), x -> String(x));
+        arrows := Filtered(ArrowsOfQuiver(quiver), x -> fn(x));
+        arrows := List(arrows, x -> [String(SourceOfPath(x)), String(TargetOfPath(x)), String(x)]);
+
+        return Quiver(vertices, arrows);
+    end
+);

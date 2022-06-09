@@ -393,3 +393,20 @@ DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "QuotientQuiver", [IsQuiver, IsList] );
+
+##  <#GAPDoc Label="DocQuiverFilterArrows">
+##    <ManSection>
+##      <Oper Name="QuiverFilterArrows" Arg="quiver, fn"/>
+##      <Description>
+##        Arguments: <A>quiver</A>, a quiver;
+##                  <A>fn</A> a function that returns boolean values when evaluated on
+##                  arrows of <A>quiver</A>
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver obtained from <A>quiver</A> when you remove all vertices that return
+##        <A>false</A> when we apply <A>fn</A> to it.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "QuiverFilterArrows", [ IsQuiver, IsFunction ] );

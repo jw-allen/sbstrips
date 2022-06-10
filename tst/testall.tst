@@ -347,13 +347,25 @@ gap> Q2 := 1RegQuivFromCycleLengths( [ 2, 3, 4, 5 ] );
 <quiver with 14 vertices and 14 arrows>
 gap> Is1RegQuiver( Q2 );
 true
-gap> parts := [ ];;
+gap> parts1 := [ ];;
+gap> parts2 := [ ];;
+gap> parts3 := [ ];;
 gap> for k in [ 1 .. NumberOfVertices( Q2 ) / 2 ] do
->   Add( parts, VerticesOfQuiver( Q2 ){ [ 2 * k - 1, 2 * k ] } );
+>   Add( parts1, VerticesOfQuiver( Q2 ){ [ 2 * k - 1, 2 * k ] } );
+>   Add( parts2, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) - k + 1 ] } );
+>   Add( parts3, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) / 2 + k ] } );
 > od;
-gap> Q2reg := QuotientQuiver( Q2, parts );
+gap> Q2reg1 := QuotientQuiver( Q2, parts1 );
 <quiver with 7 vertices and 14 arrows>
-gap> Is2RegQuiver( Q2reg );
+gap> Q2reg2 := QuotientQuiver( Q2, parts2 );
+<quiver with 7 vertices and 14 arrows>
+gap> Q2reg3 := QuotientQuiver( Q2, parts3 );
+<quiver with 7 vertices and 14 arrows>
+gap> Is2RegQuiver( Q2reg1 );
+true
+gap> Is2RegQuiver( Q2reg2 );
+true
+gap> Is2RegQuiver( Q2reg3 );
 true
 
 # End test

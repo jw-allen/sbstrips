@@ -165,9 +165,10 @@ InstallMethod(
     end
 );
 
-InstallGlobalFunction(
+InstallMethod(
     1RegQuivFromCycleLengths,
     "for a list of positive integers",
+    [ IsList ],
     function( cycle_lengths )
         local
             vertices,   # list of vertices

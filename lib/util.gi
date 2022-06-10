@@ -645,7 +645,8 @@ InstallMethod(
             p,          # loop variable for classes of the partition
             a,          # loop variable for arrows of input quiver
             find_class, # helper function for finding partition class of vertex
-            s, t;       # ends of an arrow in construction loop
+            s, t,       # ends of an arrow in construction loop
+            quot;
 
         if not ForAll( parts, IsList ) then
             Error( "The second argument\n", parts, "\nmust be a list of lists of vertices",

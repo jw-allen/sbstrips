@@ -131,4 +131,4 @@ DeclareProperty( "Is2RegQuiver", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareGlobalFunction( "1RegQuivFromCycleLengths", IsList );
+DeclareOperation( "1RegQuivFromCycleLengths", [ IsList ] );

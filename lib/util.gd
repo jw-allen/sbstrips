@@ -375,9 +375,9 @@ DeclareAttribute( "PathOneArrowLongerAtTarget", IsPath );
 DeclareAttribute( "PathOneArrowShorterAtSource", IsPath );
 DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
 
-##  <#GAPDoc Label="DocQuotientQuiver">
+##  <#GAPDoc Label="DocQuiverQuotient">
 ##    <ManSection>
-##      <Oper Name="QuotientQuiver" Arg="quiver, parts"/>
+##      <Oper Name="QuiverQuotient" Arg="quiver, parts"/>
 ##      <Description>
 ##        Arguments: <A>quiver</A>, a quiver;
 ##                  <A>parts</A> a list where each entry is a sublist of the vertices
@@ -392,7 +392,7 @@ DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "QuotientQuiver", [ IsQuiver, IsList ] );
+DeclareOperation( "QuiverQuotient", [ IsQuiver, IsList ] );
 
 ##  <#GAPDoc Label="DocQuiverFilterArrows">
 ##    <ManSection>

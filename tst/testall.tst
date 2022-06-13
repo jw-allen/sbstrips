@@ -355,11 +355,11 @@ gap> for k in [ 1 .. NumberOfVertices( Q2 ) / 2 ] do
 >   Add( parts2, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) - k + 1 ] } );
 >   Add( parts3, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) / 2 + k ] } );
 > od;
-gap> Q2reg1 := QuotientQuiver( Q2, parts1 );
+gap> Q2reg1 := QuiverQuotient( Q2, parts1 );
 <quiver with 7 vertices and 14 arrows>
-gap> Q2reg2 := QuotientQuiver( Q2, parts2 );
+gap> Q2reg2 := QuiverQuotient( Q2, parts2 );
 <quiver with 7 vertices and 14 arrows>
-gap> Q2reg3 := QuotientQuiver( Q2, parts3 );
+gap> Q2reg3 := QuiverQuotient( Q2, parts3 );
 <quiver with 7 vertices and 14 arrows>
 gap> Is2RegQuiver( Q2reg1 );
 true

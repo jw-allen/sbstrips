@@ -635,7 +635,7 @@ InstallMethod(
 );
 
 InstallMethod(
-    QuotientQuiver,
+    QuiverQuotient,
     "for a quiver and a partition of its vertices",
     [ IsQuiver, IsList ],
     function( quiver, parts)

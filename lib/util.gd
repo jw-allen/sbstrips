@@ -390,9 +390,14 @@ DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
 ##        the quiver obtained from <A>quiver</A> when you identify all vertices in each entry
 ##        of <A>parts</A>
 ##      </Returns>
+##      <Description>
+##        Also attaches information about the quotient quiver to the input quiver.
+##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation( "QuiverQuotient", [ IsQuiver, IsList ] );
+DeclareAttribute( "IsCoveringQuiver", IsQuiver );
+DeclareAttribute( "IsQuotientQuiver", IsQuiver );
 
 ##  <#GAPDoc Label="DocQuiverFilterArrows">
 ##    <ManSection>

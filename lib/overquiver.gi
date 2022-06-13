@@ -568,7 +568,7 @@ InstallMethod(
             #  <OverquiverOfSBAlg> command. Such quivers have this property set
             #  (to <true>) at creation. Therefore any quiver for which this
             #  property has not been set must not have been so constructed.
-            return fail;
+            return false;
         fi;
     end
 );

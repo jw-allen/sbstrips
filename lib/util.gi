@@ -644,6 +644,7 @@ InstallMethod(
             arrows,     # list of arrows of constructed quiver
             p,          # loop variable for classes of the partition
             a,          # loop variable for arrows of input quiver
+            v,          # loop variable for vertices of input quiver
             find_class, # helper function for finding partition class of vertex
             s, t,       # ends of an arrow in construction loop
             quot;
@@ -682,7 +683,55 @@ InstallMethod(
 
         quot := Quiver( vertices, arrows );
 
+        for v in VerticesOfQuiver( quiver ) do
+            v!.LiftOf := quot.( Concatenation( "v", String( find_class( v ) ) ) );
+        od;
+
+        for a in ArrowsOfQuiver( quiver ) do
+            a!.LiftOf := quot.( String( a ) );
+        od;
+
+        SetIsCoveringQuiver( quiver, true );
+        quiver!.quotient := quot;
+        SetIsQuotientQuiver( quot, true );
+        quot!.covering := quiver;
+
         return quot;
+    end
+);
+
+InstallMethod(
+    IsCoveringQuiver,
+    "for quivers",
+    [ IsQuiver ],
+    function( quiver )
+        if HasIsCoveringQuiver( quiver ) then
+            return IsCoveringQuiver( quiver );
+        else
+            # Covering quivers are exactly those quivers that have been
+            #  inputted to the <QuiverQuotient> command. Such quivers have
+            #  this property set (to <true>) at creation. Therefore any quiver
+            #  for which this property has not been set must not have been so
+            #  inputted.
+            return false;
+        fi;
+    end
+);
+
+InstallMethod(
+    IsQuotientQuiver,
+    "for quivers",
+    [ IsQuiver ],
+    function( quiver )
+        if HasIsQuotientQuiver( quiver ) then
+            return IsQuotientQuiver( quiver );
+        else
+            # Quotient quivers are exactly those quivers constructed using the
+            #  <QuiverQuotient> command. Such quivers have this property set
+            #  (to <true>) at creation. Therefore any quiver for which this
+            #  property has not been set must not have been so constructed.
+            return false;
+        fi;
     end
 );
 

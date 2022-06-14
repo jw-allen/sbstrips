@@ -112,3 +112,23 @@ DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 ##  </ManSection>
 ##  <#/GAPDoc>
 DeclareProperty( "Is2RegQuiver", IsQuiver );
+
+##  <#GAPDoc Label="Doc1RegQuivFromCycleLengths">
+##  <ManSection>
+##    <Prop Name="1RegQuivFromCycleLengths" Arg="cycle_lengths"/>
+##    <Description>
+##      Argument: <A>cycle_lengths</A>, a list of integers
+##      <Br />
+##    </Description>
+##    <Returns>
+##      a <M>1</M>-regular quiver with cycles of the given lengths.
+##    </Returns>
+##    <Description>
+##      The vertices are named sequentially ("v1", "v2", ...) within each cycle
+##      and then in order of the cycles as given by the cycle lengths
+##      The arrows ("a1", "a2", ...) are named such that their number corresponds
+##      to the number of their source (i.e. the source of "a3" is "v3").
+##    </Description>
+##  </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "1RegQuivFromCycleLengths", [ IsList ] );

@@ -324,5 +324,49 @@ gap> Recollected( hello_world );
 [ [ "e", 1 ], [ "h", 1 ], [ "l", 3 ], [ "o", 2 ], [ "d", 1 ],
 [ "r", 1 ], [ "w", 1 ] ]
 
+# 1-regular quivers
+gap> Q1 := 1RegQuivFromCycleLengths( [ 2, 3, 4, 5, 7 ] );
+<quiver with 21 vertices and 21 arrows>
+gap> Is1RegQuiver( Q1 );
+true
+gap> equality := [ ];;
+gap> for v in VerticesOfQuiver( Q1 ) do
+>   Add( equality, 1RegQuivIntAct( v, 420 ) = v );
+> od;
+gap> ForAll(equality, x -> x);
+true
+gap> equality := [ ];;
+gap> for v in VerticesOfQuiver( Q1 ) do
+>   Add( equality, 1RegQuivIntAct( v, 11 ) = v );
+> od;
+gap> ForAny(equality, x -> x);
+false
+
+# 2-regular quivers
+gap> Q2 := 1RegQuivFromCycleLengths( [ 2, 3, 4, 5 ] );
+<quiver with 14 vertices and 14 arrows>
+gap> Is1RegQuiver( Q2 );
+true
+gap> parts1 := [ ];;
+gap> parts2 := [ ];;
+gap> parts3 := [ ];;
+gap> for k in [ 1 .. NumberOfVertices( Q2 ) / 2 ] do
+>   Add( parts1, VerticesOfQuiver( Q2 ){ [ 2 * k - 1, 2 * k ] } );
+>   Add( parts2, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) - k + 1 ] } );
+>   Add( parts3, VerticesOfQuiver( Q2 ){ [ k, NumberOfVertices( Q2 ) / 2 + k ] } );
+> od;
+gap> Q2reg1 := QuiverQuotient( Q2, parts1 );
+<quiver with 7 vertices and 14 arrows>
+gap> Q2reg2 := QuiverQuotient( Q2, parts2 );
+<quiver with 7 vertices and 14 arrows>
+gap> Q2reg3 := QuiverQuotient( Q2, parts3 );
+<quiver with 7 vertices and 14 arrows>
+gap> Is2RegQuiver( Q2reg1 );
+true
+gap> Is2RegQuiver( Q2reg2 );
+true
+gap> Is2RegQuiver( Q2reg3 );
+true
+
 # End test
 gap> STOP_TEST( "sbstrips.tst" );

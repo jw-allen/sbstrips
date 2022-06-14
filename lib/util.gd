@@ -374,3 +374,44 @@ DeclareAttribute( "PathOneArrowLongerAtSource", IsPath );
 DeclareAttribute( "PathOneArrowLongerAtTarget", IsPath );
 DeclareAttribute( "PathOneArrowShorterAtSource", IsPath );
 DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
+
+##  <#GAPDoc Label="DocQuiverQuotient">
+##    <ManSection>
+##      <Oper Name="QuiverQuotient" Arg="quiver, parts"/>
+##      <Description>
+##        Arguments: <A>quiver</A>, a quiver;
+##                  <A>parts</A> a list where each entry is a sublist of the vertices
+##                  of <A>quiver</A>, and the union of the entries is a list of all vertices of
+##                  <A>quiver</A> (i.e. <A>parts</A> is a partition of the vertices
+##                  of <A>quiver</A>).
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver obtained from <A>quiver</A> when you identify all vertices in each entry
+##        of <A>parts</A>
+##      </Returns>
+##      <Description>
+##        Also attaches information about the quotient quiver to the input quiver.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "QuiverQuotient", [ IsQuiver, IsList ] );
+DeclareAttribute( "IsCoveringQuiver", IsQuiver );
+DeclareAttribute( "IsQuotientQuiver", IsQuiver );
+
+##  <#GAPDoc Label="DocQuiverFilterArrows">
+##    <ManSection>
+##      <Oper Name="QuiverFilterArrows" Arg="quiver, fn"/>
+##      <Description>
+##        Arguments: <A>quiver</A>, a quiver;
+##                  <A>fn</A> a function that returns boolean values when evaluated on
+##                  arrows of <A>quiver</A>
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver obtained from <A>quiver</A> when you remove all vertices that return
+##        <A>false</A> when we apply <A>fn</A> to it.
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation( "QuiverFilterArrows", [ IsQuiver, IsFunction ] );

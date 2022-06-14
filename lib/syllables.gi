@@ -202,7 +202,7 @@ InstallMethod(
         oquiv := QuiverContainingPath(path);
         if not IsOverquiver(oquiv) then
             TryNextMethod();
-        elif not (int in [0,1]) then
+        elif not (int in [0, 1]) then
             TryNextMethod();
         else
             sba := SBAlgOfOverquiver(oquiv);
@@ -655,7 +655,6 @@ InstallMethod(
         return true;
     end
 );
-
 
 InstallMethod(
     IsValleyCompatiblePairOfSyllables,

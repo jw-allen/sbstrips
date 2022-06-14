@@ -11,7 +11,7 @@
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "Is1RegQuiver", IsQuiver );
+DeclareProperty("Is1RegQuiver", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivIntActionFunction">
 ##  <ManSection>
@@ -38,7 +38,7 @@ DeclareProperty( "Is1RegQuiver", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
+DeclareAttribute("1RegQuivIntActionFunction", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivIntAct">
 ##  <ManSection>
@@ -64,7 +64,7 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
+DeclareOperation("1RegQuivIntAct", [IsPath, IsInt]);
 
 ##  <#GAPDoc Label="DocPathBySourceAndLength">
 ##  <ManSection>
@@ -80,7 +80,7 @@ DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
+DeclareOperation("PathBySourceAndLength", [IsQuiverVertex, IsInt]);
 
 ##  <#GAPDoc Label="DocPathByTargetAndLength">
 ##  <ManSection>
@@ -96,7 +96,7 @@ DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
+DeclareOperation("PathByTargetAndLength", [IsQuiverVertex, IsInt]);
 
 ##  <#GAPDoc Label="DocIs2RegQuiver">
 ##  <ManSection>
@@ -111,7 +111,7 @@ DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "Is2RegQuiver", IsQuiver );
+DeclareProperty("Is2RegQuiver", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivFromCycleLengths">
 ##  <ManSection>
@@ -131,4 +131,4 @@ DeclareProperty( "Is2RegQuiver", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "1RegQuivFromCycleLengths", [ IsList ] );
+DeclareOperation("1RegQuivFromCycleLengths", [IsList]);

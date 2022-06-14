@@ -1,16 +1,16 @@
-DeclareRepresentation( "IsStripRep", IsAttributeStoringRep, [ "data" ] );
-DeclareRepresentation( "IsVirtualStripRep", IsStripRep, [] );
+DeclareRepresentation("IsStripRep", IsAttributeStoringRep, ["data"]);
+DeclareRepresentation("IsVirtualStripRep", IsStripRep, []);
 
-DeclareOperation( "IsCollectedListOfStripReps", [ IsList ] );
-DeclareOperation( "IsFlatListOfStripReps", [ IsList ]  );
+DeclareOperation("IsCollectedListOfStripReps", [IsList]);
+DeclareOperation("IsFlatListOfStripReps", [IsList]);
 
-DeclareOperation( "SyllableListOfStripNC", [ IsStripRep ] );
-DeclareOperation( "PathAndOrientationListOfStripNC", [ IsStripRep ] );
-DeclareOperation( "SyllableAndOrientationListOfStripNC", [ IsStripRep ] );
-DeclareOperation( "DefiningDataOfStripNC", [ IsStripRep ] );
+DeclareOperation("SyllableListOfStripNC", [IsStripRep]);
+DeclareOperation("PathAndOrientationListOfStripNC", [IsStripRep]);
+DeclareOperation("SyllableAndOrientationListOfStripNC", [IsStripRep]);
+DeclareOperation("DefiningDataOfStripNC", [IsStripRep]);
 
-DeclareAttribute( "StripFamilyOfSBAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("StripFamilyOfSBAlg", IsSpecialBiserialAlgebra);
+DeclareAttribute("ZeroStripOfSBAlg", IsSpecialBiserialAlgebra);
 
 ##  <#GAPDoc Label="DocStripify">
 ##    <ManSection>
@@ -42,9 +42,9 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##        the strip specified by these data
 ##      </Returns>
 ##      <Description>
-##        The first method is intended for specifying arbitrary string( graphs)
+##        The first method is intended for specifying arbitrary string(graphs)
 ##        over a SB algebra to &GAP;. The second method is more specialized,
-##        being intended for specifying those string( graph)s where all arrows
+##        being intended for specifying those string(graph)s where all arrows
 ##        point in the same direction. This includes the vacuous case where the
 ##        string (graph) has no arrows.
 ##        <P />
@@ -74,10 +74,10 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "Stripify", [ IsMultiplicativeElement, IsInt, IsList ] );
-DeclareOperation( "ReflectionOfStrip", [ IsStripRep ] );
+DeclareOperation("Stripify", [IsMultiplicativeElement, IsInt, IsList]);
+DeclareOperation("ReflectionOfStrip", [IsStripRep]);
 
-DeclareOperation( "SBAlgOfStrip", [ IsStripRep ] );
+DeclareOperation("SBAlgOfStrip", [IsStripRep]);
 
 ##  <#GAPDoc Label="DocSyzygyOfStrip">
 ##    <ManSection>
@@ -114,7 +114,7 @@ DeclareOperation( "SBAlgOfStrip", [ IsStripRep ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "SyzygyOfStrip", IsStripRep );
+DeclareAttribute("SyzygyOfStrip", IsStripRep);
 
 ##	<#GAPDoc Label="DocNthSyzygyOfStrip">
 ##    <ManSection>
@@ -153,7 +153,7 @@ DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
+DeclareOperation("NthSyzygyOfStrip", [IsStripRep, IsInt]);
 
 ##	<#GAPDoc Label="DocCollectedSyzygyOfStrip">
 ##	  <ManSection>
@@ -184,18 +184,18 @@ DeclareOperation( "NthSyzygyOfStrip", [ IsStripRep, IsInt ] );
 ##      </Returns>
 ##      <Description>
 ##        This is equivalent to calling
-##        <C>Collected( SyzygyOfStrip( </C><A>strip</A><C> ) );</C>.
+##        <C>Collected(SyzygyOfStrip(</C><A>strip</A><C>));</C>.
 ##  <!--
 ##        The second
 ##        method applies the first method to each entry in <A>list</A> and then
 ##        combines the result; this is equivalent to
-##        <C>Collected( SyzygyOfStrip( </C><A>list</A><C> ) );</C>.
+##        <C>Collected(SyzygyOfStrip(</C><A>list</A><C>));</C>.
 ##        <P />
 ##  -->
 ##      </Description>
 ##	  </ManSection>
 ##	<#/GAPDoc>
-DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
+DeclareOperation("CollectedSyzygyOfStrip", [IsStripRep]);
 
 ##  <#GAPDoc Label="DocCollectedNthSyzygyOfStrip">
 ##    <ManSection>
@@ -234,14 +234,14 @@ DeclareOperation( "CollectedSyzygyOfStrip", [ IsStripRep ] );
 ##     </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "CollectedNthSyzygyOfStrip", [ IsStripRep, IsInt ] );
+DeclareOperation("CollectedNthSyzygyOfStrip", [IsStripRep, IsInt]);
 
-DeclareGlobalFunction( "StripifyFromSyllablesAndOrientationsNC" );
-DeclareGlobalFunction( "StripifyFromSBAlgPathNC" );
-DeclareGlobalFunction( "StripifyVirtualStripNC" );
+DeclareGlobalFunction("StripifyFromSyllablesAndOrientationsNC");
+DeclareGlobalFunction("StripifyFromSBAlgPathNC");
+DeclareGlobalFunction("StripifyVirtualStripNC");
 DeclareOperation(
- "StripifyFromPathAndOrientationListOfPositiveWidthStripNC", [ IsList ]
- );
+ "StripifyFromPathAndOrientationListOfPositiveWidthStripNC", [IsList]
+);
 
 ##  <#GAPDoc Label="DocSimpleStripsOfSBAlg">
 ##    <ManSection>
@@ -262,7 +262,7 @@ DeclareOperation(
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra);
 
 ##  <#GAPDoc Label="DocIndecProjectiveStripsOfSBAlg">
 ##    <ManSection>
@@ -284,12 +284,12 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##
 ##        If the indecomposable projective module corresponding to the
 ##        <C>j</C>th vertex of <A>sba</A> is a string module, then
-##        <C>IndecProjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        <C>IndecProjectiveStripsOfSBAlg(sba)[j]</C> returns the strip
 ##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra);
 
 ##  <#GAPDoc Label="DocIndecInjectiveStripsOfSBAlg">
 ##    <ManSection>
@@ -311,12 +311,12 @@ DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##
 ##        If the indecomposable injective module corresponding to the
 ##        <C>j</C>th vertex of <A>sba</A> is a string module, then
-##        <C>IndecInjectiveStripsOfSBAlg( sba )[j]</C> returns the strip
+##        <C>IndecInjectiveStripsOfSBAlg(sba)[j]</C> returns the strip
 ##        describing that string module. If not, then it returns &fail;.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "IndecInjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("IndecInjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra);
 
 ##  <#GAPDoc Label="DocUniserialStripsOfSBAlg">
 ##    <ManSection>
@@ -335,7 +335,7 @@ DeclareAttribute( "IndecInjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra);
 
 ##  <#GAPDoc Label="DocWidthOfStrip">
 ##    <ManSection>
@@ -350,7 +350,7 @@ DeclareAttribute( "UniserialStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
+DeclareOperation("WidthOfStrip", [IsStripRep]);
 
 ##  <#GAPDoc Label="DocWidthNStripsOfSBAlg">
 ##    <ManSection>
@@ -369,8 +369,8 @@ DeclareOperation( "WidthOfStrip", [ IsStripRep ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "WidthNStripFunctionOfSBAlg", IsSpecialBiserialAlgebra );
-DeclareOperation( "WidthNStripsOfSBAlg", [ IsInt, IsSpecialBiserialAlgebra ] );
+DeclareAttribute("WidthNStripFunctionOfSBAlg", IsSpecialBiserialAlgebra);
+DeclareOperation("WidthNStripsOfSBAlg", [IsInt, IsSpecialBiserialAlgebra]);
 
 ##  <#GAPDoc Label="DocIsZeroStrip">
 ##    <ManSection>
@@ -388,7 +388,7 @@ DeclareOperation( "WidthNStripsOfSBAlg", [ IsInt, IsSpecialBiserialAlgebra ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsZeroStrip", IsStripRep );
+DeclareProperty("IsZeroStrip", IsStripRep);
 
 ##  <#GAPDoc Label="DocIsWeaklyPeriodicStripByNthSyzygy">
 ##    <ManSection>
@@ -407,8 +407,8 @@ DeclareProperty( "IsZeroStrip", IsStripRep );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "IsWeaklyPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ]
- );
+DeclareOperation("IsWeaklyPeriodicStripByNthSyzygy", [IsStripRep, IsPosInt]
+);
 
 ##  <#GAPDoc Label="DocIsFiniteSyzygyTypeStripByNthSyzygy">
 ##    <ManSection>
@@ -430,8 +430,8 @@ DeclareOperation( "IsWeaklyPeriodicStripByNthSyzygy", [ IsStripRep, IsPosInt ]
 ##  <#/GAPDoc>
 DeclareOperation(
  "IsFiniteSyzygyTypeStripByNthSyzygy",
- [ IsStripRep, IsPosInt ]
- );
+ [IsStripRep, IsPosInt]
+);
 
 ##  <#GAPDoc Label="DocTestInjectiveStripsUpToNthSyzygy">
 ##    <ManSection>
@@ -463,7 +463,7 @@ DeclareOperation(
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
+DeclareGlobalFunction("TestInjectiveStripsUpToNthSyzygy");
 
 ##  <#GAPDoc Label="DocModuleOfStrip">
 ##    <ManSection>
@@ -503,8 +503,8 @@ DeclareGlobalFunction( "TestInjectiveStripsUpToNthSyzygy" );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "ModuleDataOfStrip", [ IsStripRep ] );
-DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
+DeclareOperation("ModuleDataOfStrip", [IsStripRep]);
+DeclareOperation("ModuleOfStrip", [IsStripRep]);
 
 ##  <#GAPDoc Label="DocDirectSumModuleOfListOfStrips">
 ##    <ManSection>
@@ -529,8 +529,8 @@ DeclareOperation( "ModuleOfStrip", [ IsStripRep ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "DirectSumModuleDataOfListOfStrips", [ IsList ] );
-DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
+DeclareOperation("DirectSumModuleDataOfListOfStrips", [IsList]);
+DeclareOperation("DirectSumModuleOfListOfStrips", [IsList]);
 
 ##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
 ##    <ManSection>
@@ -555,9 +555,9 @@ DeclareOperation( "DirectSumModuleOfListOfStrips", [ IsList ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "VectorSpaceDualOfStrip", IsStripRep );
-DeclareSynonymAttr( "OppositeStrip", VectorSpaceDualOfStrip );
-DeclareSynonymAttr( "DOfStrip", VectorSpaceDualOfStrip );
+DeclareAttribute("VectorSpaceDualOfStrip", IsStripRep);
+DeclareSynonymAttr("OppositeStrip", VectorSpaceDualOfStrip);
+DeclareSynonymAttr("DOfStrip", VectorSpaceDualOfStrip);
 
 ##  <#GAPDoc Label="DocTrDOfStrip">
 ##    <ManSection>
@@ -579,10 +579,10 @@ DeclareSynonymAttr( "DOfStrip", VectorSpaceDualOfStrip );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "LeftAlterationTowardsTrDOfStrip", IsStripRep );
-DeclareAttribute( "RightAlterationTowardsTrDOfStrip", IsStripRep );
-DeclareAttribute( "TrDOfStrip", IsStripRep );
-DeclareSynonymAttr( "ARInverseTranslateOfStrip", IsStripRep );
+DeclareAttribute("LeftAlterationTowardsTrDOfStrip", IsStripRep);
+DeclareAttribute("RightAlterationTowardsTrDOfStrip", IsStripRep);
+DeclareAttribute("TrDOfStrip", IsStripRep);
+DeclareSynonymAttr("ARInverseTranslateOfStrip", IsStripRep);
 
 ##  <#GAPDoc Label="DocTransposeOfStrip">
 ##    <ManSection>
@@ -604,8 +604,8 @@ DeclareSynonymAttr( "ARInverseTranslateOfStrip", IsStripRep );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "TrOfStrip", IsStripRep );
-DeclareSynonymAttr( "TransposeOfStrip", TrOfStrip );
+DeclareAttribute("TrOfStrip", IsStripRep);
+DeclareSynonymAttr("TransposeOfStrip", TrOfStrip);
 
 ##  <#GAPDoc Label="DocDTrOfStrip">
 ##    <ManSection>
@@ -627,8 +627,8 @@ DeclareSynonymAttr( "TransposeOfStrip", TrOfStrip );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "DTrOfStrip", IsStripRep );
-DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );
+DeclareAttribute("DTrOfStrip", IsStripRep);
+DeclareSynonymAttr("ARTranslateOfStrip", DTrOfStrip);
 
 ##  <#GAPDoc Label="DocSuspensionOfStrip">
 ##    <ManSection>
@@ -644,7 +644,7 @@ DeclareSynonymAttr( "ARTranslateOfStrip", DTrOfStrip );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "SuspensionOfStrip", IsStripRep );
+DeclareAttribute("SuspensionOfStrip", IsStripRep);
 
 ##  <#GAPDoc Label="DocIsStripDirectSummand">
 ##    <ManSection>
@@ -662,7 +662,7 @@ DeclareAttribute( "SuspensionOfStrip", IsStripRep );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
+DeclareOperation("IsStripDirectSummand", [IsList, IsList]);
 
 ##  <#GAPDoc Label="DocIsIndecProjectiveStrip">
 ##    <ManSection>
@@ -678,7 +678,7 @@ DeclareOperation( "IsStripDirectSummand", [ IsList, IsList ] );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
+DeclareProperty("IsIndecProjectiveStrip", IsStripRep);
 
 ##  <#GAPDoc Label="DocIsIndecInjectiveStrip">
 ##    <ManSection>
@@ -694,7 +694,7 @@ DeclareProperty( "IsIndecProjectiveStrip", IsStripRep );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
+DeclareProperty("IsIndecInjectiveStrip", IsStripRep);
 
 ##  <#GAPDoc Label="DocWithoutProjectiveStrips">
 ##    <ManSection>
@@ -709,7 +709,7 @@ DeclareProperty( "IsIndecInjectiveStrip", IsStripRep );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
+DeclareOperation("WithoutProjectiveStrips", [IsList]);
 
 ##  <#GAPDoc Label="DocIsStripDeloopingLevelAtMostN">
 ##    <ManSection>
@@ -729,8 +729,8 @@ DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "IsStripNthDeloopingMapSplit", [ IsStripRep, IsInt ] );
-DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );
+DeclareOperation("IsStripNthDeloopingMapSplit", [IsStripRep, IsInt]);
+DeclareOperation("IsStripDeloopingLevelAtMostN", [IsStripRep, IsInt]);
 
 ##  <#GAPDoc Label="DocDeloopingLevelOfStripIfAtMostN">
 ##    <ManSection>
@@ -745,7 +745,7 @@ DeclareOperation( "IsStripDeloopingLevelAtMostN", [ IsStripRep, IsInt ] );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
+DeclareOperation("DeloopingLevelOfStripIfAtMostN", [IsStripRep, IsInt]);
 
 ##  <#GAPDoc Label="DocDeloopingLevelOfSBAlgIfAtMostN">
 ##    <ManSection>
@@ -768,8 +768,8 @@ DeclareOperation( "DeloopingLevelOfStripIfAtMostN", [ IsStripRep, IsInt ] );
 ##  <#/GAPDoc>
 DeclareOperation(
  "DeloopingLevelOfSBAlgIfAtMostN",
- [ IsSpecialBiserialAlgebra, IsInt ]
- );
+ [IsSpecialBiserialAlgebra, IsInt]
+);
 
 ##  <#GAPDoc Label="DocIsTorsionlessStrip">
 ##    <ManSection>
@@ -783,4 +783,4 @@ DeclareOperation(
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsTorsionlessStrip", IsStripRep );
+DeclareProperty("IsTorsionlessStrip", IsStripRep);

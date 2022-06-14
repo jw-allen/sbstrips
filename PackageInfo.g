@@ -1,4 +1,4 @@
-SetPackageInfo( rec(
+SetPackageInfo(rec(
 
  PackageName := "SBStrips",
 
@@ -16,29 +16,29 @@ SetPackageInfo( rec(
    FirstNames := "Joe",
    IsAuthor := true,
    IsMaintainer := true,
-   Email := Concatenation( [
+   Email := Concatenation([
     "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk"
-    ] ),
+]),
    WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
-   PostalAddress := Concatenation( [
+   PostalAddress := Concatenation([
     "School of Mathematics,\n",
     "Fry Building,\n",
     "Woodland Rd, Bristol,\n",
     "BS8 1UG"
-     ] ),
+]),
    Place := "Bristol",
    Institution := "University of Bristol"
-   )
-  ],
+)
+],
 
  Status := "dev",
 
  SourceRepository := rec(
   Type := "git",
   URL := "https://github.com/jw-allen/sbstrips"
-  ),
+),
 
- IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ IssueTrackerURL := Concatenation(~.SourceRepository.URL, "/issues"),
 
  PackageWWWHome := "https://jw-allen.github.io/sbstrips/",
 
@@ -46,15 +46,15 @@ SetPackageInfo( rec(
   ~.SourceRepository.URL,
   "/archive/",
   ~.Version
-  ),
+),
 
  ArchiveFormats := ".tar.gz",
 
  README_URL :=
-  Concatenation( ~.PackageWWWHome, "/README" ),
+  Concatenation(~.PackageWWWHome, "/README"),
 
  PackageInfoURL :=
-  Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+  Concatenation(~.PackageWWWHome, "/PackageInfo.g"),
 
  AbstractHTML :=
   "String modules for special biserial (SB) algebras are represented by \
@@ -76,20 +76,20 @@ their modules.",
    PDFFile := "doc/main.pdf",
    SixFile := "doc/manual.six",
    LongTitle := ~.Subtitle
-  ),
+),
 
  Dependencies := rec(
   GAP := ">=4.11",
   NeededOtherPackages := [
    ["qpa", "1.30"], ["GAPDoc", ">=1.6"]
-   ],
+],
   SuggestedOtherPackages := [],
   ExternalConditions := []
-  ),
+),
 
  AvailabilityTest := ReturnTrue,
 
  TestFile := "tst/testall.g",
 
- Keywords := [ "special biserial algebra", "string module", "syzygy" ]
-) );
+ Keywords := ["special biserial algebra", "string module", "syzygy"]
+));

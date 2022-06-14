@@ -1,1 +1,1 @@
-SetInfoLevel( InfoSBStrips, 1 );
+SetInfoLevel(InfoSBStrips, 1);

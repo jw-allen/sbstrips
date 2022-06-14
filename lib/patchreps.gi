@@ -1,15 +1,15 @@
 InstallMethod(
     PatchFamilyOfSBAlg,
     "for special biserial algebras",
-    [ IsSpecialBiserialAlgebra ],
-    function( sba )
+    [IsSpecialBiserialAlgebra],
+    function(sba)
         local
             fam;    # Family variable
 
-        if HasPatchFamilyOfSBAlg( sba ) then
-            return PatchFamilyOfSBAlg( sba );
+        if HasPatchFamilyOfSBAlg(sba) then
+            return PatchFamilyOfSBAlg(sba);
         else
-            fam := NewFamily( "PatchFamilyForSBAlg" );
+            fam := NewFamily("PatchFamilyForSBAlg");
             fam!.sb_alg := sba;
 
             return fam;
@@ -21,14 +21,14 @@ InstallOtherMethod(
     \=,
     "for patch reps",
     \=,
-    [ IsPatchRep, IsPatchRep ],
-    function( patch1, patch2 )
+    [IsPatchRep, IsPatchRep],
+    function(patch1, patch2)
         local
             tuple1, tuple2; # Data of <patch1> and <patch2>
 
         # Patches are equal iff they comprise the same data in the same places
-        tuple1 := [ patch1!.NW, patch1!.NE, patch1!.SW, patch1!.SE ];
-        tuple2 := [ patch2!.NW, patch2!.NE, patch2!.SW, patch2!.SE ];
+        tuple1 := [patch1!.NW, patch1!.NE, patch1!.SW, patch1!.SE];
+        tuple2 := [patch2!.NW, patch2!.NE, patch2!.SW, patch2!.SE];
 
         return tuple1 = tuple2;
     end
@@ -38,14 +38,14 @@ InstallOtherMethod(
     \<,
     "for patch reps",
     \=,
-    [ IsPatchRep, IsPatchRep ],
-    function( patch1, patch2 )
+    [IsPatchRep, IsPatchRep],
+    function(patch1, patch2)
         local
             tuple1, tuple2; # Data of <patch1> and <patch2>
 
         # Patches can be ordered lexicographically by their underlying data
-        tuple1 := [ patch1!.NW, patch1!.NE, patch1!.SW, patch1!.SE ];
-        tuple2 := [ patch2!.NW, patch2!.NE, patch2!.SW, patch2!.SE ];
+        tuple1 := [patch1!.NW, patch1!.NE, patch1!.SW, patch1!.SE];
+        tuple2 := [patch2!.NW, patch2!.NE, patch2!.SW, patch2!.SE];
 
         return tuple1 < tuple2;
     end
@@ -54,8 +54,8 @@ InstallOtherMethod(
 InstallMethod(
     PatchSetOfSBAlg,
     "for special biserial algebras",
-    [ IsSpecialBiserialAlgebra ],
-    function( sba )
+    [IsSpecialBiserialAlgebra],
+    function(sba)
         local
             a_seq, b_seq,   # Integer and bit sequences of <source_enc>
             a_i, b_i,       # <i>th terms of <a_seq> and <b_seq>
@@ -81,50 +81,50 @@ InstallMethod(
             type,           # Type variable
             zero_sy;        # Zero syllable of <sba>
 
-        if HasPatchSetOfSBAlg( sba ) then
-            return PatchSetOfSBAlg( sba );
+        if HasPatchSetOfSBAlg(sba) then
+            return PatchSetOfSBAlg(sba);
         else
             # Assign key variables
             type := NewType(
-             PatchFamilyOfSBAlg( sba ),
+             PatchFamilyOfSBAlg(sba),
              IsComponentObjectRep and IsPatchRep
-             );
+            );
 
-            oquiv := OverquiverOfSBAlg( sba );
-            overts := VerticesOfQuiver( oquiv );
-            zero_sy := ZeroSyllableOfSBAlg( sba );
+            oquiv := OverquiverOfSBAlg(sba);
+            overts := VerticesOfQuiver(oquiv);
+            zero_sy := ZeroSyllableOfSBAlg(sba);
 
-            source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
+            source_enc := SourceEncodingOfPermDataOfSBAlg(sba);
             a_seq := source_enc[1];
             b_seq := source_enc[2];
 
-            desc := DescentFunctionOfSBAlg( sba );
-            sy_set := SyllableSetOfSBAlg( sba );
+            desc := DescentFunctionOfSBAlg(sba);
+            sy_set := SyllableSetOfSBAlg(sba);
             proper_sylls := Filtered(
              sy_set,
-             x -> not ( IsZeroSyllable(x) or IsVirtualSyllable(x) )
-             );
+             x -> not (IsZeroSyllable(x) or IsVirtualSyllable(x))
+            );
 
             # Begin with empty patch set.
-            set := [ ];
+            set := [];
 
             # Create zero patch. This is the only patch to have both "northern"
             #  components feature <zero_sy>
 
             obj := rec(
              NW := zero_sy, NE := zero_sy, SW := zero_sy, SE := zero_sy
-             );
+            );
             ObjectifyWithAttributes(
              obj, type,
              IsZeroPatch, true,
              IsPatchOfStringProjective, false,
              IsPatchOfPinModule, false,
              IsVirtualPatch, false
-             );
-            SetZeroPatchOfSBAlg( sba, obj );
-            Add( set, obj );
+            );
+            SetZeroPatchOfSBAlg(sba, obj);
+            Add(set, obj);
 
-            Info( InfoSBStrips, 3, "Made zero patch" );
+            Info(InfoSBStrips, 3, "Made zero patch");
 
             # Create the "virtual" patches. These correspond to targets of
             #  (overquiver representatives of) components of commuativity
@@ -135,9 +135,9 @@ InstallMethod(
             #  syllable (ie, [i,0,1]) as southern component. On the other side,
             #  both components are <zero_sy>
 
-            for i in Filtered( overts, IsRepresentativeOfCommuRelTarget ) do
-                n1_sy := Syllabify( PathBySourceAndLength( i, 0 ), 0 );
-                s1_sy := Syllabify( PathBySourceAndLength( i, 0 ), 1 );
+            for i in Filtered(overts, IsRepresentativeOfCommuRelTarget) do
+                n1_sy := Syllabify(PathBySourceAndLength(i, 0), 0);
+                s1_sy := Syllabify(PathBySourceAndLength(i, 0), 1);
                 n2_sy := zero_sy;
                 s2_sy := zero_sy;
 
@@ -147,15 +147,15 @@ InstallMethod(
 
                 obj := rec(
                  NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                 );
+                );
                 ObjectifyWithAttributes(
                  obj, type,
                  IsZeroPatch, false,
                  IsPatchOfStringProjective, false,
                  IsPatchOfPinModule, false,
                  IsVirtualPatch, true
-                 );
-                Add( set, obj );
+                );
+                Add(set, obj);
 
                 # Create virtual patch that looks like
                 #    / zero_sy |  i,0,0  \
@@ -163,18 +163,18 @@ InstallMethod(
 
                 obj := rec(
                  NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
-                 );
+                );
                 ObjectifyWithAttributes(
                  obj, type,
                  IsZeroPatch, false,
                  IsPatchOfStringProjective, false,
                  IsPatchOfPinModule, false,
                  IsVirtualPatch, true
-                 );
-                Add( set, obj );
+                );
+                Add(set, obj);
             od;
 
-            Info( InfoSBStrips, 3, "Made virtual patches" );
+            Info(InfoSBStrips, 3, "Made virtual patches");
 
             # With the zero and virtual patches done, we now turn to patches
             #  corresponding to pin (= projective-injective nonuniserial)
@@ -190,48 +190,48 @@ InstallMethod(
             #  of 'pin boundaries'.
 
             for i in overts do
-                b_i := b_seq.( String( i ) );
+                b_i := b_seq.(String(i));
                 if b_i = 0 then
-                    a_i := a_seq.( String( i ) );
+                    a_i := a_seq.(String(i));
 
                     # (Normally we denote the exchange partner of <i> by
                     #  <i_dagger> or similar. Here, solely in order to save
                     #  space, we use <j>.)
-                    j := ExchangePartnerOfVertex( i );
-                    a_j := a_seq.( String( j ) );
+                    j := ExchangePartnerOfVertex(i);
+                    a_j := a_seq.(String(j));
 
                     n1_sy := Syllabify(
-                     PathBySourceAndLength( i, a_i - 1  ),
+                     PathBySourceAndLength(i, a_i - 1),
                      1
-                     );
+                    );
                     s1_sy := Syllabify(
-                     PathBySourceAndLength( 1RegQuivIntAct( i, -a_i ), 0 ),
+                     PathBySourceAndLength(1RegQuivIntAct(i, -a_i), 0),
                      0
-                     );
+                    );
                     n2_sy := Syllabify(
-                     PathBySourceAndLength( j, a_j - 1 ),
+                     PathBySourceAndLength(j, a_j - 1),
                      1
-                     );
+                    );
                     s2_sy := Syllabify(
-                     PathBySourceAndLength( 1RegQuivIntAct( j, -a_j ), 0 ),
+                     PathBySourceAndLength(1RegQuivIntAct(j, -a_j), 0),
                      0
-                     );
+                    );
 
                     obj := rec(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                     );
+                    );
                     ObjectifyWithAttributes(
                      obj, type,
                      IsZeroPatch, false,
                      IsPatchOfStringProjective, false,
                      IsPatchOfPinModule, true,
                      IsVirtualPatch, false
-                     );
-                    Add( set, obj );
+                    );
+                    Add(set, obj);
                 fi;
             od;
 
-            Info( InfoSBStrips, 3, "Made patches with two pin boundaries" );
+            Info(InfoSBStrips, 3, "Made patches with two pin boundaries");
 
             # Second, we create those featuring exactly one 'pin boundary'.
             #  These also deserve special treatment, as any southern entry on
@@ -248,115 +248,115 @@ InstallMethod(
             #  boundary' syllables
 
             for i in overts do
-                b_i := b_seq.( String( i ) );
+                b_i := b_seq.(String(i));
                 if b_i = 0 then
                     # Create syllables <n1_sy> and <s1_sy> to go on the 'pin'
                     #  boundary side
-                    a_i := a_seq.( String( i ) );
+                    a_i := a_seq.(String(i));
                     n1_sy := Syllabify(
-                     PathBySourceAndLength( i, a_i -1 ), 1
-                     );
+                     PathBySourceAndLength(i, a_i -1), 1
+                    );
                     s1_sy := zero_sy;
 
                     # Run through all syllables that can go in the northern
                     #  component on the other side. These will be exactly those
                     #  syllable satisfying <check>
-                    j := ExchangePartnerOfVertex( i );
-                    check := function( x )
+                    j := ExchangePartnerOfVertex(i);
+                    check := function(x)
                         return (
-                         ( SourceOfPath( UnderlyingPathOfSyllable( x ) ) = j )
+                         (SourceOfPath(UnderlyingPathOfSyllable(x)) = j)
                          and
-                         ( not IsPinBoundarySyllable( x ) )
-                         );
+                         (not IsPinBoundarySyllable(x))
+                        );
                     end;
 
                     # Create the relevant patches in turn. These have northern
                     #  entry some <n2_sy>, and southern entry and adjusted ver-
                     #  -sion of <desc(n2_sy)>.
-                    for n2_sy in Filtered( proper_sylls, check ) do
+                    for n2_sy in Filtered(proper_sylls, check) do
                         s2_sy := Syllabify(
-                         UnderlyingPathOfSyllable( desc( n2_sy ) ),
+                         UnderlyingPathOfSyllable(desc(n2_sy)),
                          1
-                         );
+                        );
 
                         obj := rec(
                          NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                         );
+                        );
                         ObjectifyWithAttributes(
                          obj, type,
                          IsZeroPatch, false,
                          IsPatchOfStringProjective, false,
                          IsPatchOfPinModule, true,
                          IsVirtualPatch, false
-                         );
-                        Add( set, obj );
+                        );
+                        Add(set, obj);
 
                         obj := rec(
                          NW := n2_sy, NE := n1_sy, SW := s2_sy, SE := s1_sy
-                         );
+                        );
                         ObjectifyWithAttributes(
                          obj, type,
                          IsZeroPatch, false,
                          IsPatchOfStringProjective, false,
                          IsPatchOfPinModule, true,
                          IsVirtualPatch, false
-                         );
-                        Add( set, obj );
+                        );
+                        Add(set, obj);
                     od;
                 fi;
             od;
 
-            Info( InfoSBStrips, 3, "Made patches with one pin boundary" );
+            Info(InfoSBStrips, 3, "Made patches with one pin boundary");
 
             # Third, we create the pin patches with no 'pin boundaries'. The
             #  southern entry on each side is just the descent-image of the
             #  northern entry above.
 
             for n1_sy in
-             Filtered( proper_sylls, x -> not IsPinBoundarySyllable(x) )
+             Filtered(proper_sylls, x -> not IsPinBoundarySyllable(x))
              do
-                s1_sy := desc( n1_sy );
-                i := SourceOfPath( UnderlyingPathOfSyllable( n1_sy ) );
-                b_i := b_seq.( String( i ) );
-                j := ExchangePartnerOfVertex( i );
+                s1_sy := desc(n1_sy);
+                i := SourceOfPath(UnderlyingPathOfSyllable(n1_sy));
+                b_i := b_seq.(String(i));
+                j := ExchangePartnerOfVertex(i);
 
-                check := function( x )
+                check := function(x)
                     local
                         source; # Source of underlying path of <x>
 
-                    source := SourceOfPath( UnderlyingPathOfSyllable( x ) );
+                    source := SourceOfPath(UnderlyingPathOfSyllable(x));
                     return (
-                     ( source = j )
+                     (source = j)
                      and
-                     ( not IsPinBoundarySyllable( x ) )
-                     );
+                     (not IsPinBoundarySyllable(x))
+                    );
                 end;
 
-                for n2_sy in Filtered( proper_sylls, check ) do
-                    s2_sy := desc( n2_sy );
+                for n2_sy in Filtered(proper_sylls, check) do
+                    s2_sy := desc(n2_sy);
 
                     obj := rec(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                     );
+                    );
                     ObjectifyWithAttributes(
                      obj, type,
                      IsZeroPatch, false,
-                     IsPatchOfStringProjective, ( b_i = 1 ),
-                     IsPatchOfPinModule, ( b_i = 0 ),
+                     IsPatchOfStringProjective, (b_i = 1),
+                     IsPatchOfPinModule, (b_i = 0),
                      IsVirtualPatch, false
-                     );
-                    Add( set, obj );
-                    Info( InfoSBStrips, 3, "made patchrep",
+                    );
+                    Add(set, obj);
+                    Info(InfoSBStrips, 3, "made patchrep",
                      "\n",
                      "\n#I  ", obj!.NW,
                      "\n#I    ", obj!.NE,
                      "\n#I  ", obj!.SW,
                      "\n#I    ", obj!.SE,
-                     "\n" );
+                     "\n");
                 od;
             od;
 
-            Info( InfoSBStrips, 3, "Made patches with no pin boundaries" );
+            Info(InfoSBStrips, 3, "Made patches with no pin boundaries");
 
             # Lastly, create the patches that have exactly one "northern" comp-
             #  -onent featuring <zero_sy>. These syllables can be constructed
@@ -367,20 +367,20 @@ InstallMethod(
             # {Is it possible to make this functionality part of the the
             #  previous step?}
 
-            is_triv := function( x )
+            is_triv := function(x)
                 local
                     path,   # Underlying path of <x>
                     stab;   # Stability term of <x>
-                path := UnderlyingPathOfSyllable( x );
-                stab := StabilityTermOfSyllable( x );
+                path := UnderlyingPathOfSyllable(x);
+                stab := StabilityTermOfSyllable(x);
 
-                return ( IsQuiverVertex( path ) and ( stab = 1 ) );
+                return (IsQuiverVertex(path) and (stab = 1));
             end;
 
             triv_list := [];
 
             for patch in set do
-                if is_triv( patch!.NW ) then
+                if is_triv(patch!.NW) then
                     n1_sy := zero_sy;
                     s1_sy := patch!.SW;
                     n2_sy := patch!.NE;
@@ -388,19 +388,19 @@ InstallMethod(
 
                     obj := rec(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                     );
+                    );
                     ObjectifyWithAttributes(
                      obj, type,
                      IsZeroPatch, false,
                      IsPatchOfStringProjective,
-                      IsPatchOfStringProjective( patch ),
-                     IsPatchOfPinModule, IsPatchOfPinModule( patch ),
+                      IsPatchOfStringProjective(patch),
+                     IsPatchOfPinModule, IsPatchOfPinModule(patch),
                      IsVirtualPatch, false
-                     );
-                    Add( triv_list, obj );
+                    );
+                    Add(triv_list, obj);
                 fi;
 
-                if is_triv( patch!.NE ) then
+                if is_triv(patch!.NE) then
                     n1_sy := patch!.NW;
                     s1_sy := patch!.SW;
                     n2_sy := zero_sy;
@@ -408,24 +408,24 @@ InstallMethod(
 
                     obj := rec(
                      NW := n1_sy, NE := n2_sy, SW := s1_sy, SE := s2_sy
-                     );
+                    );
                     ObjectifyWithAttributes(
                      obj, type,
                      IsZeroPatch, false,
                      IsPatchOfStringProjective,
-                      IsPatchOfStringProjective( patch ),
-                     IsPatchOfPinModule, IsPatchOfPinModule( patch ),
+                      IsPatchOfStringProjective(patch),
+                     IsPatchOfPinModule, IsPatchOfPinModule(patch),
                      IsVirtualPatch, false
-                     );
-                    Add( triv_list, obj );
+                    );
+                    Add(triv_list, obj);
                 fi;
             od;
 
-            Info( InfoSBStrips, 3, "Made \"replacement\" patches" );
+            Info(InfoSBStrips, 3, "Made \"replacement\" patches");
 
-            Append( set, triv_list );
+            Append(set, triv_list);
 
-            return Immutable( Set( set ) );
+            return Immutable(Set(set));
         fi;
     end
 );
@@ -433,24 +433,24 @@ InstallMethod(
 InstallMethod(
     Patchify,
     "for a list of 4 syllables",
-    function( f1, f2, f3, f4 )
-        return [ f1, f2, f3 ] = [ f2, f3, f4 ];
+    function(f1, f2, f3, f4)
+        return [f1, f2, f3] = [f2, f3, f4];
     end,
-    [ IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep ],
-    function( sy_NW, sy_NE, sy_SW, sy_SE )
+    [IsSyllableRep, IsSyllableRep, IsSyllableRep, IsSyllableRep],
+    function(sy_NW, sy_NE, sy_SW, sy_SE)
         local
             matches,    # List of patches matching this description
             patch_set,  # Patch set of <sba>
             sba;        # SB algebra of which <sy_NW> etc are syllables
 
-        sba := FamilyObj( sy_NW )!.sb_alg;
-        patch_set := PatchSetOfSBAlg( sba );
+        sba := FamilyObj(sy_NW)!.sb_alg;
+        patch_set := PatchSetOfSBAlg(sba);
         matches := Filtered(
          patch_set,
-         x -> [ x!.NW, x!.NE, x!.SW, x!.SE ] = [ sy_NW, sy_NE, sy_SW, sy_SE ]
-         );
-        if Length( matches ) <> 1 then
-            Error( "No patch matches that description!" );
+         x -> [x!.NW, x!.NE, x!.SW, x!.SE] = [sy_NW, sy_NE, sy_SW, sy_SE]
+        );
+        if Length(matches) <> 1 then
+            Error("No patch matches that description!");
         else
             return matches[1];
         fi;
@@ -460,13 +460,13 @@ InstallMethod(
 InstallMethod(
     ZeroPatchOfSBAlg,
     "for a special biserial algebra",
-    [ IsSpecialBiserialAlgebra ],
-    function( sba )
-        if HasZeroPatchOfSBAlg( sba ) then
-            return ZeroPatchOfSBAlg( sba );
+    [IsSpecialBiserialAlgebra],
+    function(sba)
+        if HasZeroPatchOfSBAlg(sba) then
+            return ZeroPatchOfSBAlg(sba);
         else
-            PatchSetOfSBAlg( sba );;
-            return ZeroPatchOfSBAlg( sba );
+            PatchSetOfSBAlg(sba);;
+            return ZeroPatchOfSBAlg(sba);
         fi;
     end
 );
@@ -474,24 +474,24 @@ InstallMethod(
 InstallMethod(
     ViewObj,
     "for patch reps",
-    [ IsPatchRep ],
-    function( patch )
+    [IsPatchRep],
+    function(patch)
         local
             ne, nw, se, sw; # Cardinal directions
 
-        if IsZeroPatch( patch ) then
-            Print( "<zero patch>" );
-        elif IsVirtualPatch( patch ) then
-            Print( "<virtual patch>" );
+        if IsZeroPatch(patch) then
+            Print("<zero patch>");
+        elif IsVirtualPatch(patch) then
+            Print("<virtual patch>");
         else
             nw := patch!.NW;
             ne := patch!.NE;
             sw := patch!.SW;
             se := patch!.SE;
 
-            Print( "/ ", nw, " | ", ne, " \\" );
-            Print( ", " );
-            Print( "\\ ", sw, " | ", se, " /" );
+            Print("/ ", nw, " | ", ne, " \\");
+            Print(", ");
+            Print("\\ ", sw, " | ", se, " /");
         fi;
     end
 );
@@ -499,26 +499,26 @@ InstallMethod(
 InstallMethod(
     String,
     "for patch reps",
-    [ IsPatchRep ],
-    function( patch )
+    [IsPatchRep],
+    function(patch)
         local
             ne, nw, se, sw; # Cardinal directions
 
-        if IsZeroPatch( patch ) then
-            PrintString( "<zero patch>" );
-        elif IsVirtualPatch( patch ) then
-            PrintString( "virtual patch>" );
+        if IsZeroPatch(patch) then
+            PrintString("<zero patch>");
+        elif IsVirtualPatch(patch) then
+            PrintString("virtual patch>");
         else
-            nw := String( patch!.NW );
-            ne := String( patch!.NE );
-            sw := String( patch!.SW );
-            se := String( patch!.SE );
+            nw := String(patch!.NW);
+            ne := String(patch!.NE);
+            sw := String(patch!.SW);
+            se := String(patch!.SE);
 
             # Despite escaping the backslashes below, these strings still
             #  produce double backslashes :(
             return Concatenation(
-             [ "/ ", nw, " | ", ne, " \\", ", " , "\\ ", sw, " | ", se, " /" ]
-             );
+             ["/ ", nw, " | ", ne, " \\", ", " , "\\ ", sw, " | ", se, " /"]
+            );
          fi;
     end
 );
@@ -526,53 +526,53 @@ InstallMethod(
 InstallMethod(
     Display,
     "for patch reps",
-    [ IsPatchRep ],
-    function( patch )
+    [IsPatchRep],
+    function(patch)
         local
             len_east, len_west, # Character length of strings of components
             ne, nw, se, sw;     # Cardinal directions
 
-        nw := String( patch!.NW );
-        ne := String( patch!.NE );
-        sw := String( patch!.SW );
-        se := String( patch!.SE );
+        nw := String(patch!.NW);
+        ne := String(patch!.NE);
+        sw := String(patch!.SW);
+        se := String(patch!.SE);
 
         # The output should look like
         #       / nw | ne \
         #       \ sw | se /
         #  with each syllable justified towards the centre
 
-        len_east := Maximum( List( [ ne, se ], Length ) );
-        len_west := Maximum( List( [ nw, sw ], Length ) );
+        len_east := Maximum(List([ne, se], Length));
+        len_west := Maximum(List([nw, sw], Length));
 
-        Print( "/ ",
-         PrintString( nw, len_west ), " | ", PrintString( ne, -len_east ),
-         " \\", "\n" );
-        Print( "\\ ",
-         PrintString( sw, len_west ), " | ", PrintString( se, -len_east ),
-         " /", "\n" );
+        Print("/ ",
+         PrintString(nw, len_west), " | ", PrintString(ne, -len_east),
+         " \\", "\n");
+        Print("\\ ",
+         PrintString(sw, len_west), " | ", PrintString(se, -len_east),
+         " /", "\n");
     end
 );
 
 InstallMethod(
     ReflectionOfPatch,
     "for a patch rep",
-    [ IsPatchRep ],
-    function( patch )
+    [IsPatchRep],
+    function(patch)
         local
             refl;   # Reflection of <patch>
 
-        if HasReflectionOfPatch( patch ) then
-            return ReflectionOfPatch( patch );
+        if HasReflectionOfPatch(patch) then
+            return ReflectionOfPatch(patch);
 
         # Reflection is an involution (on the patch set of an SB algebra) whose
         #  unique fixpoint is the zero patch
-        elif IsZeroPatch( patch ) then
+        elif IsZeroPatch(patch) then
             return patch;
         else
-            refl := Patchify( patch!.NE, patch!.NW, patch!.SE, patch!.SW );
+            refl := Patchify(patch!.NE, patch!.NW, patch!.SE, patch!.SW);
 
-            SetReflectionOfPatch( refl, patch );
+            SetReflectionOfPatch(refl, patch);
 
             return refl;
         fi;
@@ -583,21 +583,21 @@ InstallMethod(
     PatchifyByTop,
     "for two syllables",
     \=,
-    [ IsSyllableRep, IsSyllableRep ],
-    function( sy_NW, sy_NE )
+    [IsSyllableRep, IsSyllableRep],
+    function(sy_NW, sy_NE)
         local
             matches,    # List of patches matching this description
             patch_set,  # Patch set of <sba>
             sba;        # SB algebra of which <sy_NW> etc are syllables
 
-        sba := FamilyObj( sy_NW )!.sb_alg;
-        patch_set := PatchSetOfSBAlg( sba );
+        sba := FamilyObj(sy_NW)!.sb_alg;
+        patch_set := PatchSetOfSBAlg(sba);
         matches := Filtered(
          patch_set,
-         x -> [ x!.NW, x!.NE ] = [ sy_NW, sy_NE ]
-         );
-        if Length( matches ) <> 1 then
-            Error( "No patch matches that description!" );
+         x -> [x!.NW, x!.NE] = [sy_NW, sy_NE]
+        );
+        if Length(matches) <> 1 then
+            Error("No patch matches that description!");
         else
             return matches[1];
         fi;
@@ -608,8 +608,8 @@ InstallMethod(
     OverlapFunctionNC,
     "for two patches",
     \=,
-    [ IsPatchRep, IsPatchRep ],
-    function( patch1, patch2 )
-        return PatchifyByTop( patch1!.SE, patch2!.SW );
+    [IsPatchRep, IsPatchRep],
+    function(patch1, patch2)
+        return PatchifyByTop(patch1!.SE, patch2!.SW);
     end
 );

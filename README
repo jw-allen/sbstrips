@@ -36,7 +36,7 @@ have GAP installed.)
        called  sbstrips.
 
     3. Run GAP as normal and type
-            LoadPackage( "sbstrips" );
+            LoadPackage("sbstrips");
        at the GAP prompt (ie, when you see "gap>" in your terminal).
 
 +--+ Contents +---------------------------------------------------------------+

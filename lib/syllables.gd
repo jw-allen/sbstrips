@@ -1,20 +1,20 @@
-DeclareRepresentation( "IsSyllableRep", IsAttributeStoringRep,
- [ "path", "stability", "sb_alg" ] );
+DeclareRepresentation("IsSyllableRep", IsAttributeStoringRep,
+ ["path", "stability", "sb_alg"]);
 
-DeclareAttribute( "SyllableFamilyOfSBAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "SyllableSetOfSBAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("SyllableFamilyOfSBAlg", IsSpecialBiserialAlgebra);
+DeclareAttribute("SyllableSetOfSBAlg", IsSpecialBiserialAlgebra);
+DeclareAttribute("ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra);
 
-DeclareOperation( "Syllabify", [ IsPath, IsInt ] );
+DeclareOperation("Syllabify", [IsPath, IsInt]);
 
-DeclareOperation( "UnderlyingPathOfSyllable", [ IsSyllableRep ] );
-DeclareOperation( "StabilityTermOfSyllable", [ IsSyllableRep ] );
+DeclareOperation("UnderlyingPathOfSyllable", [IsSyllableRep]);
+DeclareOperation("StabilityTermOfSyllable", [IsSyllableRep]);
 
-DeclareProperty( "IsZeroSyllable", IsSyllableRep );
-DeclareProperty( "IsVirtualSyllable", IsSyllableRep );
-DeclareProperty( "IsStableSyllable", IsSyllableRep );
-DeclareProperty( "IsSyllableWithStableSource", IsSyllableRep );
-DeclareProperty( "IsUltimatelyDescentStableSyllable", IsSyllableRep );
+DeclareProperty("IsZeroSyllable", IsSyllableRep);
+DeclareProperty("IsVirtualSyllable", IsSyllableRep);
+DeclareProperty("IsStableSyllable", IsSyllableRep);
+DeclareProperty("IsSyllableWithStableSource", IsSyllableRep);
+DeclareProperty("IsUltimatelyDescentStableSyllable", IsSyllableRep);
 
 ##  <#GAPDoc Label="DocIsPinBoundarySyllable">
 ##    <ManSection>
@@ -33,7 +33,7 @@ DeclareProperty( "IsUltimatelyDescentStableSyllable", IsSyllableRep );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsPinBoundarySyllable", IsSyllableRep );
+DeclareProperty("IsPinBoundarySyllable", IsSyllableRep);
 
 ##  <#GAPDoc Label="DocIsStationarySyllable">
 ##    <ManSection>
@@ -48,14 +48,14 @@ DeclareProperty( "IsPinBoundarySyllable", IsSyllableRep );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsStationarySyllable", IsSyllableRep );
+DeclareProperty("IsStationarySyllable", IsSyllableRep);
 
-DeclareOperation( "SBAlgOfSyllable", [ IsSyllableRep ] );
+DeclareOperation("SBAlgOfSyllable", [IsSyllableRep]);
 
-DeclareAttribute( "DescentFunctionOfSBAlg", IsSpecialBiserialAlgebra );
-DeclareAttribute( "SidestepFunctionOfSBAlg", IsSpecialBiserialAlgebra );
+DeclareAttribute("DescentFunctionOfSBAlg", IsSpecialBiserialAlgebra);
+DeclareAttribute("SidestepFunctionOfSBAlg", IsSpecialBiserialAlgebra);
 
-DeclareOperation( "IsPeakCompatiblePairOfSyllables",
- [ IsSyllableRep, IsSyllableRep ] );
-DeclareOperation( "IsValleyCompatiblePairOfSyllables",
- [ IsSyllableRep, IsSyllableRep ] );
+DeclareOperation("IsPeakCompatiblePairOfSyllables",
+ [IsSyllableRep, IsSyllableRep]);
+DeclareOperation("IsValleyCompatiblePairOfSyllables",
+ [IsSyllableRep, IsSyllableRep]);

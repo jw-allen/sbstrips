@@ -425,7 +425,6 @@ InstallMethod(
     end
 );
 
-
 # Useful functions for QPA
 
 InstallMethod(

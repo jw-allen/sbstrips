@@ -47,7 +47,7 @@ DeclareAttribute( "ZeroStripOfSBAlg", IsSpecialBiserialAlgebra );
 ##        being intended for specifying those string( graph)s where all arrows
 ##        point in the same direction. This includes the vacuous case where the
 ##        string (graph) has no arrows.
-##        <P /> 
+##        <P />
 ##        For the first method, suppose you draw your string graph on the page
 ##        as a linear graph with some arrows pointing to the right (the
 ##        "positive" direction) and some to the left (the "negative"
@@ -94,7 +94,7 @@ DeclareOperation( "SBAlgOfStrip", [ IsStripRep ] );
 ##  <!--
 ##        <P />
 ##        Argument (second method): <A>list</A>, a list of strips
-##  -->    
+##  -->
 ##        <Br />
 ##      </Description>
 ##      <Returns>
@@ -123,7 +123,7 @@ DeclareAttribute( "SyzygyOfStrip", IsStripRep );
 ##      </Heading>
 ##
 ##      <Meth Name="NthSyzygyOfStrip" Label="for strips" Arg="strip, N"/>
-##  <!--    
+##  <!--
 ##      <Meth Name="NthSyzygyOfStrip" Label="for lists of strips"
 ##      Arg="list, N"/>
 ##  -->
@@ -273,7 +273,7 @@ DeclareAttribute( "SimpleStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##      <Returns>
 ##        a list <C>proj_list</C>, whose entry are either strips or the boolean
-##        &fail;. 
+##        &fail;.
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
@@ -300,7 +300,7 @@ DeclareAttribute( "IndecProjectiveStripsOfSBAlg", IsSpecialBiserialAlgebra );
 ##      </Description>
 ##      <Returns>
 ##        a list <C>inj_list</C>, whose entries are either strips or the
-##        boolean &fail;. 
+##        boolean &fail;.
 ##      </Returns>
 ##      <Description>
 ##        You will have specified <A>sba</A> to &GAP; via some quiver. The
@@ -432,7 +432,7 @@ DeclareOperation(
  "IsFiniteSyzygyTypeStripByNthSyzygy",
  [ IsStripRep, IsPosInt ]
  );
- 
+
 ##  <#GAPDoc Label="DocTestInjectiveStripsUpToNthSyzygy">
 ##    <ManSection>
 ##      <Func Name="TestInjectiveStripsUpToNthSyzygy" Arg="sba, N"/>
@@ -454,7 +454,7 @@ DeclareOperation(
 ##        <A>N</A>).
 ##        <P />
 ##
-##        <E>Author's note.</E> For every special biserial algebra the author 
+##        <E>Author's note.</E> For every special biserial algebra the author
 ##        has tested, this function returns true (for sufficiently large
 ##        <A>N</A>). It suggests  that the minimal injective cogenerator of a
 ##        SB algebra always has finite syzygy type. This condition implies many
@@ -720,7 +720,7 @@ DeclareOperation( "WithoutProjectiveStrips", [ IsList ] );
 ##      </Description>
 ##      <Returns>
 ##        &true;, if the delooping level of <A>strip</A> is at most <A>N</A>,
-##        and &false; otherwise. 
+##        and &false; otherwise.
 ##      </Returns>
 ##      <Description>
 ##        When &true;, &PACKAGENAME; will also print an Info message with the

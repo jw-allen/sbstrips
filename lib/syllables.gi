@@ -11,7 +11,7 @@ InstallMethod(
         else
             fam := NewFamily( "SyllableFamilyForSBAlg" );
             fam!.sb_alg := sba;
-            
+
             return fam;
         fi;
     end
@@ -44,19 +44,19 @@ InstallMethod(
             i1, i2,         # Sources of <path1> and <path2>
             len1, len2,     # Lengths of <path1> and <path2>
             path1, path2;   # Underlying paths of <sy1> and <sy2>
-           
+
         # The zero syllable is the <-minimal syllable
         if IsZeroSyllable( sy1 ) and ( not IsZeroSyllable(sy2) ) then
             return true;
         elif ( not IsZeroSyllable(sy1) ) and IsZeroSyllable( sy2 ) then
             return false;
-            
+
         # The order is strict, not reflexive
         elif sy1 = sy2 then
             return false;
-            
+
         # If all of the above fails, then we are dealing with distinct
-        #  syllables from the same SB algebra, neither of which are the zero 
+        #  syllables from the same SB algebra, neither of which are the zero
         #  syllable. In this case, we construct a tuple of data for each
         #  syllable and compare the tuples lexicographically.
         else
@@ -68,7 +68,7 @@ InstallMethod(
             len2 := LengthOfPath( path2 );
             ep1 := sy1!.stability;
             ep2 := sy2!.stability;
-            
+
             return [ len1, i1, ep1 ] < [ len2, i2, ep2 ];
         fi;
     end
@@ -102,7 +102,7 @@ InstallMethod(
              SyllableFamilyOfSBAlg( sba ),
              IsComponentObjectRep and IsSyllableRep
              );
-             
+
             set := Set( [ ] );
 
             # Create zero syllable
@@ -111,7 +111,7 @@ InstallMethod(
              stability := fail,
              sb_alg := sba
             );
-            
+
             ObjectifyWithAttributes(
              obj, type,
              IsZeroSyllable, true,
@@ -121,11 +121,11 @@ InstallMethod(
              IsUltimatelyDescentStableSyllable, false,
              IsStationarySyllable, false
             );
-            
+
             SetZeroSyllableOfSBAlg( sba, obj );
-            
+
             AddSet( set, obj );
-            
+
             # Create nonzero syllables
 
             # Nonzero syllables correspond to tuples [ i, l, ep ] satisfying
@@ -138,16 +138,16 @@ InstallMethod(
 
             source_enc := SourceEncodingOfPermDataOfSBAlg( sba );
             target_enc := TargetEncodingOfPermDataOfSBAlg( sba );
-            
+
             a_seq := source_enc[1];
             b_seq := source_enc[2];
             d_seq := target_enc[2];
-            
+
             for i in VerticesOfQuiver( oquiv ) do
                 a_i := a_seq.( String( i ) );
                 b_i := b_seq.( String( i ) );
                 d_i := d_seq.( String( i ) );
-                
+
                 for ep in [ 0, 1 ] do
                     l := 0;
                     while l + ep < a_i + b_i + ep do
@@ -172,7 +172,7 @@ InstallMethod(
                     od;
                 od;
             od;
-            
+
             MakeImmutable( set );
             return set;
         fi;
@@ -198,7 +198,7 @@ InstallMethod(
             oquiv,      # Quiver containing <path>
             sba,        # SB algebra of which <oquiv> is (hopefully) overquiver
             syll_set;   # Syllable family of <sba>
-        
+
         oquiv := QuiverContainingPath( path );
         if not IsOverquiver( oquiv ) then
             TryNextMethod();
@@ -298,7 +298,7 @@ InstallMethod(
     function( sy )
         local
             path;   # Underlying path of <sy>
-            
+
         if HasIsSyllableWithStableSource( sy ) then
             return IsSyllableWithStableSource( sy );
         elif IsZeroSyllable( sy ) then
@@ -406,40 +406,40 @@ InstallMethod(
                         i1 := SourceOfPath( path1 );
                         l1 := LengthOfPath( path1 );
                         ep1 := StabilityTermOfSyllable( sy );
-                        
+
                         # Obtain <i1>th terms in permissble data of <sba>
                         a_seq := SourceEncodingOfPermDataOfSBAlg( sba )[1];
                         b_seq := SourceEncodingOfPermDataOfSBAlg( sba )[2];
-                        
+
                         a_i1 := a_seq.( String( i1 ) );
                         b_i1 := b_seq.( String( i1 ) );
-                        
+
                         # Descent sends [ i1, l1, ep1 ] to
                         #  [ i1 - ( l1 + ep1 ),  a_i1 - ( l1 + ep1 ),  b_i1 ]
                         #  provided that this latter tuple is a syllable. We
                         #  calculate these three values -- respectively call
                         #  them <i2>, <l2> and <ep2> -- and verify that they
                         #  specify a syllable
-                        
+
                         i2 := 1RegQuivIntAct( i1, -(l1 + ep1) );
                         l2 := a_i1 - ( l1 + ep1 );
                         ep2 := b_i1;
-                        
+
                         a_i2 := a_seq.( String( i2 ) );
                         b_i2 := b_seq.( String( i2 ) );
-                        
+
                         if ( 0 < l2 + ep2 ) and
                          ( l2 + ep2 < a_i2 + b_i2 + ep2 ) then
                             path2 := PathBySourceAndLength( i2, l2 );
                             return Syllabify( path2, ep2 );
                         else
                             return ZeroSyllableOfSBAlg( sba );
-                        fi;                        
-                        
+                        fi;
+
                     fi;
                 fi;
             end;
-            
+
             return desc;
         fi;
     end
@@ -458,14 +458,14 @@ InstallMethod(
         else
             sidestep := function( sy )
                 local
-                    i, i_dagger;    # Vertex variable 
+                    i, i_dagger;    # Vertex variable
 
                 # Verify that input <sy> is a syllable of <sba>
                 if not IsSyllableRep( sy ) then
                     TryNextMethod();
                 elif not SBAlgOfSyllable( sy ) = sba then
                     return fail;
-                
+
                 # The zero syllable is a fixpoint of the function
                 elif IsZeroSyllable( sy ) then
                     return sy;
@@ -481,7 +481,7 @@ InstallMethod(
                      );
                 fi;
             end;
-            
+
             return sidestep;
         fi;
     end
@@ -538,11 +538,11 @@ InstallMethod(
             desc := DescentFunctionOfSBAlg( sba );
             zero_syll := ZeroSyllableOfSBAlg( sba );
             orbit := [ sy ];
-            
+
             # This property is constant along <desc>-orbits. So calculate the
             #  <desc>-orbit of <sy> until either you find a syllable for which
             #  this property has been set -- in which case you return that
-            #  answer -- or you find a repeat in the orbit. Remember that one 
+            #  answer -- or you find a repeat in the orbit. Remember that one
             #  of these possibilities is bound to happen because that there are
             #  only finitely many syllables for <sba>!
 
@@ -560,7 +560,7 @@ InstallMethod(
                     for s in Filtered( orbit, x -> x <> sy ) do
                         SetIsUltimatelyDescentStableSyllable( s, value );
                     od;
-                    
+
                     return value;
                 else
                     Add( orbit, next );
@@ -640,7 +640,7 @@ InstallMethod(
         else
             i1 := SourceOfPath( UnderlyingPathOfSyllable( sy1 ) );
             i2 := SourceOfPath( UnderlyingPathOfSyllable( sy2 ) );
-            
+
             return ( i1 = ExchangePartnerOfVertex( i2 ) );
         fi;
     end
@@ -701,12 +701,12 @@ InstallMethod(
     function( sy1, sy2 )
         local
             i1, i2; # Sources of underlying paths of <sy1>
-        
+
         # The underlying path of a virtual syllable is stationary (ie, a
         #  vertex), and so calling <SourceOfPath> would be redundant.
         i1 := UnderlyingPathOfSyllable( sy1 );
         i2 := UnderlyingPathOfSyllable( sy2 );
-        
+
         return ( i1 = ExchangePartnerOfVertex( i2 ) );
     end
 );
@@ -732,14 +732,14 @@ InstallMethod(
         #  one, and we reject them
         elif IsVirtualSyllable( sy1 ) or IsVirtualSyllable( sy2 ) then
             return false;
-            
+
         # If none of the above tests are satisfied, then <sy1> and <sy2> are
         #  "proper" syllables. In this case, we test that they are both stable
-        #  and that their targets are exchange partners. 
+        #  and that their targets are exchange partners.
         else
             i1 := TargetOfPath( UnderlyingPathOfSyllable( sy1 ) );
             i2 := TargetOfPath( UnderlyingPathOfSyllable( sy2 ) );
-            
+
             return
              ( i1 = ExchangePartnerOfVertex( i2 ) )
              and

@@ -1,4 +1,4 @@
-LoadPackage( "sbstrips" );
+LoadPackage("sbstrips");
 
 TestDirectory(
  DirectoriesPackageLibrary( "sbstrips", "tst" ),

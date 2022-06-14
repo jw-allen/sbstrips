@@ -27,18 +27,18 @@ This package is the implementation in GAP of (aspects of) that model.
 The SBStrips can be installed by following these steps (assuming you already
 have GAP installed.)
 
-    1. Download the archive file 
+    1. Download the archive file
             sbstrips/archive/v0.6.5.tar.gz
        from
             https://github.com/jw-allen/sbstrips/archive/v0.6.5.tar.gz
-        
+
     2. Unpack it into your  pkg  directory. It should create a subdirectory
        called  sbstrips.
-    
+
     3. Run GAP as normal and type
             LoadPackage( "sbstrips" );
        at the GAP prompt (ie, when you see "gap>" in your terminal).
-       
+
 +--+ Contents +---------------------------------------------------------------+
 This version of SBStrips includes the following files
 
@@ -48,30 +48,30 @@ This version of SBStrips includes the following files
     LICENSE
         Details of the GNU General Public Licence v2.0, under which this code
         is released
-        
+
     PackageInfo.g
         Meta-information about this package
-        
+
     makedocrel.g
         Code to (re)generate the documentation
-        
+
     README
         This file!
-        
+
     init.g
         Package initialisation
-        
+
     read.g
         Package initialisation
-        
+
     version
         The version number
-        
+
 +--+ Contact +----------------------------------------------------------------+
 If you use SBStrips at all then please let me know! You can reach me at:
 
     joe.allen [at] bristol [dot] ac [dot] uk
-    
+
 (My pronouns are he/him/his; please just call me Joe and not anything super
 formal like "Mr Allen".) I'd be very interested to hear of any applications
 you may find.

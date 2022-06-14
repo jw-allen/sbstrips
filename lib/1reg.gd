@@ -63,7 +63,7 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 ##      quiver. For this reason, it is more user-friendly.
 ##    </Description>
 ##  </ManSection>
-##  <#/GAPDoc>  
+##  <#/GAPDoc>
 DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 
 ##  <#GAPDoc Label="DocPathBySourceAndLength">
@@ -79,7 +79,7 @@ DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 ##      <A>len</A>.
 ##    </Returns>
 ##  </ManSection>
-##  <#/GAPDoc>  
+##  <#/GAPDoc>
 DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 
 ##  <#GAPDoc Label="DocPathByTargetAndLength">
@@ -95,7 +95,7 @@ DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 ##      <A>len</A>.
 ##    </Returns>
 ##  </ManSection>
-##  <#/GAPDoc>  
+##  <#/GAPDoc>
 DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 
 ##  <#GAPDoc Label="DocIs2RegQuiver">

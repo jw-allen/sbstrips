@@ -11,9 +11,9 @@ DeclareAttribute( "PermDataOfSBAlg", IsSpecialBiserialAlgebra );
 
 DeclareAttribute( "SourceEncodingOfPermDataOfSBAlg",
  IsSpecialBiserialAlgebra );
- 
+
 DeclareAttribute( "TargetEncodingOfPermDataOfSBAlg",
  IsSpecialBiserialAlgebra );
- 
+
 DeclareProperty( "IsRepresentativeOfCommuRelSource", IsQuiverVertex );
 DeclareProperty( "IsRepresentativeOfCommuRelTarget", IsQuiverVertex );

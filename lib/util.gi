@@ -6,22 +6,22 @@ InstallMethod(
     function( obj, func )
         local
             latest, # Last entry of <orbit>
-            orbit;  # Forward orbit sequence of <obj> under <func> 
+            orbit;  # Forward orbit sequence of <obj> under <func>
 
         orbit := [ obj ];
         while IsDuplicateFreeList( orbit ) do
             # Let <latest> be the final entry of <orbit>
             latest := orbit[ Length( orbit ) ];
-            
+
             # Apply <func> to <latest>; append this to <orbit>
             Add( orbit, func( latest ) );
-            
+
             # Repeat until <orbit> contains a duplicate entry. BE WARNED that
             #  this function does not check whether higher iterates of <func>
             #  are defined on <obj>, not does it check whether duplicates are
             #  guaranteed to arise!
         od;
-        
+
         return orbit;
     end
 );
@@ -36,7 +36,7 @@ InstallMethod(
 
         orbit := ForwardOrbitUnderFunctionNC( obj, func );
         latest := orbit[ Length( orbit ) ];
-        
+
         # If the <func>-orbit of <obj> ends in <fixpt>, then we call <obj>
         #  "transient with respect to <func>". Otherwise, it is "preperiodic
         #  with respect to <func>".
@@ -65,11 +65,11 @@ InstallMethod(
     #  the distinguished fixpoint <fixpt> of <func>: by fiat, we impose that
     #  <fixpt> is "transient with respect to <func>", as are all objects whose
     #  <func>-orbit contains (and therefore stabilises at) <fixpt>
-    
+
     local
         latest, # Last entry of <orbit>
         orbit;  # Forward orbit of <obj> under <func>
-    
+
     if IsTransientUnderFunctionNC( obj, func, fixpt ) then
         return false;
     else
@@ -89,7 +89,7 @@ InstallMethod(
         local
             mults,  # List of multiplicities
             objs;   # List of objects
-            
+
         if HasIsCollectedList( list ) then
             return IsCollectedList( list );
 
@@ -103,7 +103,7 @@ InstallMethod(
                 return false;
             else
                 mults := List( list, x -> x[2] );
-                
+
                 if not ( ForAll( mults, IsPosInt ) ) then
                     return false;
                 else
@@ -121,7 +121,7 @@ InstallMethod(
     function( clist )
         if not IsCollectedList( clist ) then
             TryNextMethod();
-            
+
         else
             return List( clist, x -> x[1] );
         fi;
@@ -135,19 +135,19 @@ InstallMethod(
     function( obj, clist )
         local
             j, k;   # Integer variables
-        
+
         if not IsCollectedList( clist ) then
             TryNextMethod();
-            
+
         else
             j := 0;
-            
+
             for k in [ 1 .. Length( clist ) ] do
                 if clist[k][1] = obj then
                     j := j + clist[k][2];
                 fi;
             od;
-            
+
             return j;
         fi;
     end
@@ -163,14 +163,14 @@ InstallMethod(
 
         if HasIsCollectedHomogeneousList( clist ) then
             return IsCollectedHomogeneousList( clist );
-            
+
         else
             if not IsCollectedList( clist ) then
                 return false;
-                
+
             else
                 objs := List( clist, x -> x[1] );
-                
+
                 return IsHomogeneousList( objs );
             fi;
         fi;
@@ -187,14 +187,14 @@ InstallMethod(
 
         if HasIsCollectedDuplicateFreeList( clist ) then
             return IsCollectedDuplicateFreeList( clist );
-            
+
         else
             if not IsCollectedList( clist ) then
                 return false;
-                
+
             else
                 objs := List( clist, x -> x[1] );
-                
+
                 return IsDuplicateFreeList( objs );
             fi;
         fi;
@@ -210,33 +210,33 @@ InstallMethod(
             list,   # List variable (for the better-collected version of
                     #  <clist>)
             j, k;   # Integer variables
-            
+
         if not IsCollectedList( clist ) then
             TryNextMethod();
-            
+
         elif IsCollectedDuplicateFreeList( clist ) then
             return clist;
-        
+
         else
             list := ShallowCopy( clist );
             k := 1;
-            
+
             while k <= Length( list ) do
                 j := 1;
-                
+
                 while k+j <= Length( list ) do
                     if list[k][1] = list[k+j][1] then
                         list[k][2] := list[k][2] + list[k+j][2];
                         Remove( list, k + j );
-                        
+
                     else
                         j := j + 1;
                     fi;
                 od;
-                
+
                 k := k + 1;
             od;
-            
+
             return list;
         fi;
     end
@@ -250,10 +250,10 @@ InstallMethod(
         local
             j, k,
             list;
-        
+
         if not IsCollectedList( clist ) then
             TryNextMethod();
-            
+
         else
             list := [];
             for k in [ 1 .. Length( clist ) ] do
@@ -261,7 +261,7 @@ InstallMethod(
                     Add( list, clist[k][1] );
                 od;
             od;
-            
+
             return list;
         fi;
     end
@@ -274,7 +274,7 @@ InstallMethod(
     function( clist )
         if not IsCollectedList( clist ) then
             TryNextMethod();
-            
+
         else
             return Sum( clist, x -> x[2] );
         fi;
@@ -289,18 +289,18 @@ InstallMethod(
         local
             new,    # List variable, for the output
             x;      # Variable, for entries of <clist>
-    
+
         if not IsCollectedList( clist ) then
             Error( "The first argument ", clist,
              " should be a collected list!" );
-             
+
         else
             new := ShallowCopy( clist );
-            
+
             for x in new do
                 x[1] := func( x[1] );
             od;
-        
+
             return new;
         fi;
     end
@@ -318,21 +318,21 @@ InstallMethod(
             image_clist,    # Collected image of <elt> in <func>
             list,           # List variable
             mult;           # Integer variable, for multiplicity of <elt>
-            
+
         if not IsCollectedList( clist ) then
             Error( "The first argument ", clist,
              " should be a collected list!" );
-             
+
         else
             # Tidy up <clist>
             clist := Recollected( clist );
-            
+
             list := [];
 
-            # Work entry-by-entry of <clist>            
+            # Work entry-by-entry of <clist>
             for k in [ 1 .. Length( clist ) ] do
                 entry := clist[k];
-                
+
                 # Say each entry of <clist> is
                 #       [ elt, mult ]
                 #  We calculate and <Collect> the <func>-image of <elt> and
@@ -341,21 +341,21 @@ InstallMethod(
                 elt := entry[1];
                 mult := entry[2];
                 image_clist := func( elt );
-                
+
                 if not IsCollectedList( image_clist ) then
                     image_clist := Collected( image_clist );
                 fi;
-                
+
                 for j in [ 1 .. Length( image_clist ) ] do
                     image_clist[j][2] := image_clist[j][2] * mult;
                 od;
-                
+
                 # We record this in collected list <syz_clist>
                 Append( list, image_clist );
             od;
-            
+
             # Once the collected syzygies for each entry of <clist> have been
-            #  calculated, we tidy up the answer            
+            #  calculated, we tidy up the answer
             return Recollected( list );
         fi;
     end
@@ -373,24 +373,24 @@ InstallMethod(
             mult_sublist, mult_superlist;
                         # Integer variable, giving the multiplicity of <elt> in
                         #  <sublist> and <superlist> respectively
-        
+
         if not IsCollectedList( sublist ) and IsCollectedList( superlist ) then
             TryNextMethod();
-            
+
         else
             elt_list := ElementsOfCollectedList( sublist );
-            
+
             for elt in elt_list do
                 mult_sublist :=
                  MultiplicityOfElementInCollectedList( elt, sublist );
                 mult_superlist :=
                  MultiplicityOfElementInCollectedList( elt, superlist );
-                
+
                 if mult_superlist < mult_sublist then
                     return false;
                 fi;
             od;
-            
+
             return true;
         fi;
     end
@@ -405,21 +405,21 @@ InstallMethod(
             k,          # Integer variable, indexing the entries of <clist>
             new_clist;  # List variable, storing the collected list to be
                         #  returned
-            
+
         if not IsCollectedList( clist ) then
             Error(
              "The first argument\n", clist, "\nis not a collected list!"
              );
-        
+
         else
             new_clist := [];
-            
+
             for k in [ 1 .. Length( clist ) ] do
                 if bool_func( clist[k][1] ) then
                     Add( new_clist, [ clist[k][1], clist[k][2] ] );
                 fi;
             od;
-            
+
             return Recollected( new_clist );
         fi;
     end
@@ -456,7 +456,7 @@ InstallMethod(
                 fi;
                 Add( output, String( walk[k] ) );
             od;
-            
+
             return Concatenation( output );
         fi;
     end
@@ -471,11 +471,11 @@ InstallMethod(
             1_alg,  # Multiplicative identity of <alg>
             arrs,   # Arrows of <quiv>
             quiv;   # Original quiver of <alg>
-        
+
         1_alg := One( alg );
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
         arrs := ArrowsOfQuiver( quiv );
-        
+
         return List( arrs, x -> x*1_alg );
     end
 );
@@ -489,11 +489,11 @@ InstallMethod(
             1_alg,  # Multiplicative identity of <alg>
             verts,  # Vertices of <quiv>
             quiv;   # Original quiver of <alg>
-        
+
         1_alg := One( alg );
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( alg ) );
         verts := VerticesOfQuiver( quiv );
-        
+
         return List( verts, x -> x*1_alg );
     end
 );
@@ -527,15 +527,15 @@ InstallMethod(
         local
             arrow,  # Arrow to add
             vertex; # Source vertex of <path>
-            
+
         if HasPathOneArrowLongerAtSource( path ) then
             return PathOneArrowLongerAtSource( path );
-            
+
         else
             vertex := SourceOfPath( path );
             if not ( InDegreeOfVertex( vertex ) = 1 ) then
                 return fail;
-                
+
             else
                 arrow := IncomingArrowsOfVertex( vertex )[1];
                 return arrow * path;
@@ -552,18 +552,18 @@ InstallMethod(
         local
             arrow,  # Arrow to add
             vertex; # Target vertex of <path>
-            
+
         if HasPathOneArrowLongerAtTarget( path ) then
             return PathOneArrowLongerAtTarget( path );
-            
+
         elif IsZeroPath( path ) then
             return fail;
-            
+
         else
             vertex := TargetOfPath( path );
             if not ( OutDegreeOfVertex( vertex ) = 1 ) then
                 return fail;
-                
+
             else
                 arrow := OutgoingArrowsOfVertex( vertex )[1];
                 return path * arrow;
@@ -581,19 +581,19 @@ InstallMethod(
             l,          # Length of <path>
             new_path,   # Appropriate subpath of <path>
             walk;       # Walk of path
-            
+
         if HasPathOneArrowShorterAtSource( path ) then
             return PathOneArrowShorterAtSource( path );
-            
+
         elif IsZeroPath( path ) then
             return fail;
-            
+
         elif LengthOfPath( path ) < 1 then
             return fail;
-            
+
         elif LengthOfPath( path ) = 1 then
             return TargetOfPath( path );
-            
+
         else
             walk := WalkOfPath( path );
             l := LengthOfPath( path );
@@ -612,19 +612,19 @@ InstallMethod(
             l,          # Length of <path>
             new_path,   # Appropriate subpath of <path>
             walk;       # Walk of path
-            
+
         if HasPathOneArrowShorterAtTarget( path ) then
             return PathOneArrowShorterAtTarget( path );
-            
+
         elif IsZeroPath( path ) then
             return fail;
-            
+
         elif LengthOfPath( path ) < 1 then
             return fail;
-            
+
         elif LengthOfPath( path ) = 1 then
             return SourceOfPath( path );
-            
+
         else
             walk := WalkOfPath( path );
             l := LengthOfPath( path );

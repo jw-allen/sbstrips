@@ -7,7 +7,7 @@ DeclareOperation( "ForwardOrbitUnderFunctionNC", [ IsObject, IsFunction ] );
 DeclareOperation( "IsTransientUnderFunctionNC",
  [ IsObject, IsFunction, IsObject ]
  );
- 
+
 DeclareOperation( "IsPreperiodicUnderFunctionNC",
  [ IsObject, IsFunction, IsObject ]
  );
@@ -149,7 +149,7 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##      <Description>
 ##        If <A>func</A> returns lists (perhaps because it implements a
 ##        "many-valued function"), consider using <Ref
-##        Oper="CollectedListElementwiseListValuedFunction"/> instead. 
+##        Oper="CollectedListElementwiseListValuedFunction"/> instead.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
@@ -205,7 +205,7 @@ DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
 ##        a nonnegative integer, namely the (total) multiplicity of <A>obj</A>
 ##        in <A>clist</A>.
 ##      </Returns>
-##    </ManSection>    
+##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation(
  "MultiplicityOfElementInCollectedList", [ IsObject, IsList ]
@@ -236,7 +236,7 @@ DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
 ##      </Description>
 ##      <Returns>
 ##        the collected sublist of <A>clist</A> featuring only those elements
-##        for which <A>prop</A> returns &true;. (Those elements appear in the 
+##        for which <A>prop</A> returns &true;. (Those elements appear in the
 ##        sublist with the same multiplicity as in <A>clist</A>.)
 ##      </Returns>
 ##      <Description>
@@ -284,7 +284,7 @@ DeclareOperation( "CollectedFiltered", [ IsList, IsFunction ] );
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the residues of the arrows in the defining quiver of <A>alg</A>, 
+##        the residues of the arrows in the defining quiver of <A>alg</A>,
 ##        listed together
 ##      </Returns>
 ##    </ManSection>
@@ -299,7 +299,7 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the residues of the vertices in the defining quiver of <A>alg</A>, 
+##        the residues of the vertices in the defining quiver of <A>alg</A>,
 ##        listed together
 ##      </Returns>
 ##    </ManSection>

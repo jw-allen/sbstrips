@@ -6,16 +6,16 @@ InstallMethod(
         local
             v,      # Vertex variable
             verts;  # Vertices of <quiver>
-        
+
         # Test vertex degrees
         verts := VerticesOfQuiver( quiver );
-		
+
         for v in verts do
             if InDegreeOfVertex( v ) <> 1 or OutDegreeOfVertex( v ) <> 1 then
                 return false;
             fi;
         od;
-		
+
         return true;
     end
 );
@@ -28,16 +28,16 @@ InstallMethod(
         local
             v,      # Vertex variable
             verts;  # Vertices of <quiver>
-        
+
         # Test vertex degrees
         verts := VerticesOfQuiver( quiver );
-		
+
         for v in verts do
             if InDegreeOfVertex( v ) <> 2 or OutDegreeOfVertex( v ) <> 2 then
                 return false;
             fi;
         od;
-		
+
         return true;
     end
 );
@@ -49,10 +49,10 @@ InstallMethod(
     function ( quiver )
         local
             func;	# Function variable
-			
+
         if Has1RegQuivIntActionFunction( quiver ) then
             return 1RegQuivIntActionFunction( quiver );
-		
+
         # Test input
         elif not Is1RegQuiver( quiver ) then
             Error( "The given quiver\n", quiver, "\nis not 1-regular!" );
@@ -66,7 +66,7 @@ InstallMethod(
                 local
                     k,	# Integer variable
                     y;	# Quiver generator variable
-					
+
                 # Test input
                 if not x in GeneratorsOfQuiver( quiver ) then
                     Error( "The first argument\n", x, "\nmust be a vertex or ",
@@ -78,30 +78,30 @@ InstallMethod(
                 else
                     y := x;
                     k := K;
-					
+
                     while k <> 0 do
                         if IsQuiverVertex( y ) and k < 0 then
                             y := TargetOfPath( OutgoingArrowsOfVertex(y)[1] );
                             k := k + 1;
-							
+
                         elif IsQuiverVertex( y ) and k > 0 then
                             y := SourceOfPath( IncomingArrowsOfVertex(y)[1] );
                             k := k - 1;
-							
+
                         elif IsArrow( y ) and k < 0 then
                             y := OutgoingArrowsOfVertex( TargetOfPath(y) )[1];
                             k := k + 1;
-							
+
                         elif IsArrow( y ) and k > 0 then
                             y := IncomingArrowsOfVertex( SourceOfPath(y) )[1];
                             k := k - 1;
                         fi;
                     od;
-					
+
                     return y;
                 fi;
             end;
-			
+
             return func;
         fi;
     end
@@ -115,13 +115,13 @@ InstallMethod(
         local
             func,   # Z-action function of <quiver>
             quiver; # Quiver to which <x> belongs
-			
+
         quiver := QuiverContainingPath( x );
-		
+
         # Test first argument <x>
         if not Is1RegQuiver( quiver ) then
             Error( "The given quiver\n", quiver, "\nis not 1-regular!" );
-			
+
         else
             # Apply appropriate Z-action function
             func := 1RegQuivIntActionFunction( quiver );

@@ -198,7 +198,7 @@ DeclareAttribute( "SBAlgOfOverquiver", IsQuiver );
 ##   This latter concatenation, which takes a path in <oquiv> as input and
 ##   gives a (possibly zero) path in <quiver> as output, is
 ##   <GroundPathOfOverquiverPathNC>. If you further view that resulting path in
-##   <quiver> as a path in <sba>, you've used <SBAlgResidueOfOverquiverPathNC>. 
+##   <quiver> as a path in <sba>, you've used <SBAlgResidueOfOverquiverPathNC>.
 DeclareGlobalFunction( "GroundPathOfOverquiverPathNC" );
 DeclareGlobalFunction( "SBAlgResidueOfOverquiverPathNC" );
 

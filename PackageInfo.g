@@ -1,15 +1,15 @@
 SetPackageInfo( rec(
 
  PackageName := "SBStrips",
- 
+
  Subtitle := "for syzygies of string modules over special biserial algebras",
- 
+
  Version := "v0.6.5",
- 
+
  Date := "24/02/2021",
- 
+
  License := "GPL-2.0-or-later",
- 
+
  Persons := [
   rec(
    LastName := "Allen",
@@ -17,7 +17,7 @@ SetPackageInfo( rec(
    IsAuthor := true,
    IsMaintainer := true,
    Email := Concatenation( [
-    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk" 
+    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk"
     ] ),
    WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
    PostalAddress := Concatenation( [
@@ -32,25 +32,25 @@ SetPackageInfo( rec(
   ],
 
  Status := "dev",
- 
- SourceRepository := rec( 
-  Type := "git", 
+
+ SourceRepository := rec(
+  Type := "git",
   URL := "https://github.com/jw-allen/sbstrips"
   ),
 
  IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
- 
+
  PackageWWWHome := "https://jw-allen.github.io/sbstrips/",
- 
+
  ArchiveURL := Concatenation(
   ~.SourceRepository.URL,
   "/archive/",
   ~.Version
   ),
-  
+
  ArchiveFormats := ".tar.gz",
 
- README_URL := 
+ README_URL :=
   Concatenation( ~.PackageWWWHome, "/README" ),
 
  PackageInfoURL :=
@@ -68,7 +68,7 @@ delooping level and weak periodicity.\n\n SBStrips also includes bookkeeping \
 functionality for multisets, which it calls collected lists, and it \
 integrates with (and depends on) the QPA package for quiver algebras and \
 their modules.",
- 
+
  PackageDoc := rec(
    BookName := "SBStrips",
    ArchiveURLSubset := ["doc"],

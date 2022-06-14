@@ -23,7 +23,7 @@ InstallMethod(
         elif not IsSpecialBiserialQuiver( ground_quiv ) then
             Error( "The given quiver\n", ground_quiv, "\nis not special ",
              "biserial (ie, some vertex has in- or outdegree exceeding 2)" );
-            
+
         elif not IsConnectedQuiver( ground_quiv ) then
             Error( "The given quiver\n", ground_quiv, "\nis not connected" );
 
@@ -33,9 +33,9 @@ InstallMethod(
             #  so then use the opposite quiver of <2reg> (so that
             #  <OppositeQuiver> and <2RegAugmentationOfQuiver> are compatible);
             #  if not then create a new quiver object.
-        
+
             ground_quiv_op := OppositeQuiver( ground_quiv );
-            
+
             if Has2RegAugmentationOfQuiver( ground_quiv_op ) then
                 # In this case, all of the hard work has gone into constructing
                 #  <2RegAugmentationOfQuiver( ground_quiv_op )>. We need only
@@ -43,7 +43,7 @@ InstallMethod(
                 new_quiv := OppositeQuiver(
                  2RegAugmentationOfQuiver( ground_quiv_op )
                  );
-                
+
                 # Make each vertex of <new_quiv> know the vertex of
                 #  <ground_quiv> it corresponds to
                 for v in VerticesOfQuiver( new_quiv ) do
@@ -51,7 +51,7 @@ InstallMethod(
                      OppositePath( v )!.2RegAugPathOf
                      );
                 od;
-                
+
                 # Make each vertex of <ground_quiv> know the vertex of
                 #  <new_quiv> it corresponds to
                 for v in VerticesOfQuiver( ground_quiv ) do
@@ -59,7 +59,7 @@ InstallMethod(
                      OppositePath( v )!.2RegAugPath
                      );
                 od;
-                
+
                 # Make each arrow of <new_quiv> know the arrow of <ground_quiv>
                 #  it corresponds to, if any. (Connect it to the zero path if
                 #  not.)
@@ -68,12 +68,12 @@ InstallMethod(
                         a!.2RegAugPathOf := OppositePath(
                          OppositePath( a )!.2RegAugPathOf
                         );
-                        
+
                     else
                         a!.2RegAugPathOf := Zero( ground_quiv );
                     fi;
                 od;
-                
+
                 # Make each arrow of <ground_quiv> know the arrow of <new_quiv>
                 #  it corresponds to
                 for a in ArrowsOfQuiver( ground_quiv ) do
@@ -81,12 +81,12 @@ InstallMethod(
                      OppositePath( a )!.2RegAugPath
                      );
                 od;
-                
-        
+
+
             else
                 # In this case, we have to do all the hard work. The first job
                 #  is to create the new quiver object <new_quiv>.
-                
+
                 # We Store data of <ground_quiv>
                 vert_data := List(
                     VerticesOfQuiver( ground_quiv ),
@@ -130,7 +130,7 @@ InstallMethod(
                     # Construct augmented quiver
                     new_quiv := Quiver( vert_data, arr_data );
                 od;
-                
+
                 # Now that we have a 2-regular augmentation, we make vertices
                 #  of <new_quiv> aware of their counterparts in <ground_quiv>,
                 #  and vice versa
@@ -160,7 +160,7 @@ InstallMethod(
                     k := k + 1;
                 od;
             fi;
-            
+
             # Make <new_quiv> remember it is a 2-regular augmentation (and of
             #  whom)
             SetIs2RegAugmentationOfQuiver( new_quiv, true );
@@ -242,7 +242,7 @@ InstallMethod(
 
         if HasRetractionOf2RegAugmentation( quiver ) then
             return RetractionOf2RegAugmentation( quiver );
-            
+
         # If the opposite quiver of <quiver> has a retraction map, then the
         #  hard work is already done. We need only "conjugate" by
         #  <OppositePath> (and add a few minor tweaks for dealing with zero
@@ -250,20 +250,20 @@ InstallMethod(
         elif HasRetractionOf2RegAugmentation( OppositeQuiver( quiver ) ) then
             orig_quiv := OriginalSBQuiverOf2RegAugmentation( quiver );
             ret := RetractionOf2RegAugmentation( OppositeQuiver( quiver ) );
-            
+
             func := function( path )
-            
+
                 if IsZeroPath( path ) then
                     return Zero( orig_quiv );
-                    
+
                 elif IsZeroPath( ret( OppositePath( path ) ) ) then
                     return Zero( orig_quiv );
-                    
+
                 else
                     return OppositePath( ret( OppositePath( path ) ) );
                 fi;
             end;
-            
+
             return func;
 
         # Test validity of <quiver>; if found wanting then return a function
@@ -329,14 +329,14 @@ InstallMethod(
 
         if HasCompatibleTrackPermutationOfSBAlg( sba ) then
             return CompatibleTrackPermutationOfSBAlg( sba );
-            
+
         elif
          HasCompatibleTrackPermutationOfSBAlg( OppositePathAlgebra( sba ) )
          then
             list := CompatibleTrackPermutationOfSBAlg(
              OppositePathAlgebra( sba )
              );
-             
+
             return Immutable(
              List(
               list,
@@ -384,7 +384,7 @@ InstallMethod(
                      );
                 fi;
             od;
-            
+
             Sort( list );
 
             return Immutable( list );
@@ -413,7 +413,7 @@ InstallMethod(
             part,           # Compatible track permutation of <sba>
             ret,            # Retraction of <2reg> to <ground_quiv>
             v;              # Vertex variable
-            
+
         if HasOverquiverOfSBAlg( sba ) then
             return OverquiverOfSBAlg( sba );
 
@@ -431,24 +431,24 @@ InstallMethod(
                 oquiv := OppositeQuiver(
                  OverquiverOfSBAlg( OppositePathAlgebra( sba ) )
                  );
-                 
+
                 2reg := OppositeQuiver( OppositeQuiver( oquiv )!.2Reg );
-            
+
                 # Loading <oquiv> with information is straightforward.
                 oquiv!.2Reg := 2reg;
-                
+
                 for v in VerticesOfQuiver( oquiv ) do
                     v!.LiftOf := OppositePath( OppositePath( v )!.LiftOf );
                 od;
-                
+
                 for a in ArrowsOfQuiver( oquiv ) do
                     a!.LiftOf := OppositePath( OppositePath( v )!.LiftOf );
                 od;
-                
+
                 Zero( oquiv )!.LiftOf := Zero( 2reg );
-                
+
             # In this case, we complete all the hard work.
-            else        
+            else
                 part := CompatibleTrackPermutationOfSBAlg( sba );
                 N := Length( part );
 
@@ -469,13 +469,13 @@ InstallMethod(
                 in_arr_pos := function( arr )
                     local
                         k;  #integer variable
-                        
+
                     k := 1;
                     for k in [ 1 .. Length( part ) ] do
-                    
+
                         if part[k][1] = arr then
                             return k;
-                            
+
                         else
                             k := k + 1;
                         fi;
@@ -486,13 +486,13 @@ InstallMethod(
                 out_arr_pos := function( arr )
                     local
                         k;  # integer variable
-                        
+
                     k := 1;
                     for k in [1..Length( part )] do
-                    
+
                         if part[k][2] = arr then
                             return k;
-                            
+
                         else
                             k := k + 1;
                         fi;
@@ -517,7 +517,7 @@ InstallMethod(
 
                 # Create overquiver <oquiv>.
                 oquiv := Quiver( N, arr_data );
-                
+
                 # Load vertices with data
                 k := 1;
                 overts := VerticesOfQuiver( oquiv );
@@ -533,7 +533,7 @@ InstallMethod(
                     oarrs[k]!.LiftOf := 2reg_arrs[k] ;
                     k := k+1;
                 od;
-                
+
                 # Load zero path with data
                     Zero( oquiv )!.LiftOf := Zero( 2reg );
 
@@ -541,7 +541,7 @@ InstallMethod(
                 SetIsOverquiver( oquiv, true );
                 SetSBAlgOfOverquiver( oquiv, sba );
                 oquiv!.2Reg := 2reg;
-                
+
                 # Create contraction function
                 ContractionOfOverquiver( oquiv );;
             fi;
@@ -559,10 +559,10 @@ InstallMethod(
     function( quiver )
         if HasIsOverquiver( quiver ) then
             return IsOverquiver( quiver );
-            
+
         elif HasIsOverquiver( OppositeQuiver( quiver ) ) then
             return IsOverquiver( OppositeQuiver( quiver ) );
-        
+
         else
             # Overquivers are exactly those quivers constructed using the
             #  <OverquiverOfSBAlg> command. Such quivers have this property set
@@ -586,20 +586,20 @@ InstallMethod(
 
         if HasContractionOfOverquiver( oquiv ) then
             return ContractionOfOverquiver( oquiv );
-            
+
         elif HasContractionOfOverquiver( OppositeQuiver( oquiv ) ) then
             contop := ContractionOfOverquiver( OppositeQuiver( oquiv ) );
             cont := function( path )
                 if IsZeroPath( path ) then
                     return path!.LiftOf;
-                
+
                 else
                     return OppositePath( contop( OppositePath( path ) ) );
                 fi;
             end;
-            
+
             return cont;
-            
+
         # Test input quiver
         elif not IsOverquiver( oquiv ) then
             Error( "The given quiver\n", oquiv, "\nis not an overquiver!" );
@@ -612,17 +612,17 @@ InstallMethod(
 
                 local
                     walk;   # List variable
-                    
+
                 # Test input path
                 if not path in oquiv then
                     Print( "The given path\n", path, "\ndoes not belong to the\
                      given overquiver\n", oquiv);
                     return fail;
-  
+
                 # Zero or stationary paths know the ground paths they lift
                 elif path = Zero( oquiv ) or IsQuiverVertex( path ) then
                     return path!.LiftOf;
-                    
+
                 # Paths of positive length lift the product of the paths lifted
                 #  by their constituent arrows
                 else
@@ -630,7 +630,7 @@ InstallMethod(
                     return Product( walk );
                 fi;
             end;
-            
+
             return cont;
         fi;
     end
@@ -646,16 +646,16 @@ InstallMethod(
 
         if HasSBAlgOfOverquiver( quiver ) then
             return SBAlgOfOverquiver( quiver );
-            
+
         elif HasSBAlgOfOverquiver( OppositeQuiver( quiver ) ) then
             sba_op := SBAlgOfOverquiver( OppositeQuiver( quiver ) );
-            
+
             if not ( sba_op = fail ) then
                 return OppositePathAlgebra( sba_op );
             else
                 return fail;
             fi;
-        
+
         elif not IsOverquiver( quiver ) then
             return fail;
         else
@@ -689,7 +689,7 @@ InstallMethod(
             else
                 cont := ContractionOfOverquiver( oquiv );
                 overts := VerticesOfQuiver( oquiv );
-                
+
                 # Search for the vertex <u>, distinct from <v>, that has the
                 #  same image in <cont> as <v> does
                 v_pos := Position( overts, v );
@@ -697,13 +697,13 @@ InstallMethod(
                 Unbind( images[ v_pos ] );
                 u_pos := Position( images, cont( v ) );
                 u := overts[ u_pos ];
-                
+
                 # <ExchangePartnerOfVertex> represents an involution and we're
                 #  about to say "<v> goes to <u>". While we're here, let's
                 #  commit to memory that "<u> goes to <v>".
-                
+
                 SetExchangePartnerOfVertex( u, v );
-                
+
                 return u;
             fi;
         fi;
@@ -720,16 +720,16 @@ InstallGlobalFunction(
             quiv,   # Original quiver of <sba>
             ret,    # Retraction of <2reg>
             sba;    # SB algebra of which <oquiv> is overquiver
-            
+
         oquiv := QuiverContainingPath( path );
         cont := ContractionOfOverquiver( oquiv );
-        
+
         sba := SBAlgOfOverquiver( oquiv );
-        
+
         quiv := QuiverOfPathAlgebra( OriginalPathAlgebra( sba ) );
         2reg := 2RegAugmentationOfQuiver( quiv );
         ret := RetractionOf2RegAugmentation( 2reg );
-        
+
         return ret( cont( path ) );
     end
 );
@@ -743,7 +743,7 @@ InstallGlobalFunction(
 
         oquiv := QuiverContainingPath( path );
         1_sba := One( SBAlgOfOverquiver( oquiv ) );
-        
+
         return GroundPathOfOverquiverPathNC( path ) * 1_sba;
     end
 );

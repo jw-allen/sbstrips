@@ -34,7 +34,7 @@ InstallMethod(
                 fi;
             end;
 
-            # Write logical disjunction of <ismonrel> and <iscommurel> 
+            # Write logical disjunction of <ismonrel> and <iscommurel>
             is2nomialgens := function( elt )
                 if ( ismonrel( elt ) or iscommurel( elt ) ) then
                     return true;
@@ -181,21 +181,21 @@ InstallMethod(
             in_pa := function( path )
                 return ElementOfPathAlgebra( pa, ret( cont( path ) ) );
             end;
-            
+
             lindep := LinDepOfSBAlg( sba );
             list := [];
             for v in VerticesOfQuiver( oquiv ) do
                 l := 0;
-                p := PathBySourceAndLength( v, l ); 
+                p := PathBySourceAndLength( v, l );
                 while not ( ( in_pa(p) in ideal ) or ( p in lindep ) ) do
                     Append( list, [ p ] );
                     l := l + 1;
                     p := PathBySourceAndLength( v, l );
                 od;
             od;
-            
+
             Sort( list );
-            
+
             # Return the resulting list (of paths in the overquiver)
             return Immutable( list );
         fi;
@@ -221,15 +221,15 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            a, b,           # 
-            a_data, b_data, # Information 
+            a, b,           #
+            a_data, b_data, # Information
             comp_sources,   #
             k,              # Integer variable
             lindep,         #
             linind,         #
             oquiv,          # Overquiver of <sba>
             overts,         # Vertices of <oquiv>
-            paths,          # List variable 
+            paths,          # List variable
             perm_data,      # Permissible data of <sba>
             pos,            #
             v;              # Vertex variable
@@ -251,17 +251,17 @@ InstallMethod(
                 v := overts[k];
                 if v in comp_sources then
                     pos := Position( comp_sources, v );
-                    a_data[k] := LengthOfPath( lindep[pos] ); 
+                    a_data[k] := LengthOfPath( lindep[pos] );
                     b_data[k] := 0;
                 else
                     paths := Filtered( linind, x -> SourceOfPath( x ) = v );
                     a_data[k] := Maximum( List( paths, LengthOfPath ) );
                 fi;
             od;
-            
+
             a := VISify( oquiv, a_data, "integer" );
             b := VISify( oquiv, b_data, "bit" );
-            
+
             return Immutable( [ a, b ] );
         fi;
     end
@@ -273,15 +273,15 @@ InstallMethod(
     [ IsSpecialBiserialAlgebra ],
     function( sba )
         local
-            c, d,           # 
-            c_data, d_data, # Information 
+            c, d,           #
+            c_data, d_data, # Information
             comp_targets,   #
             k,              # Integer variable
             lindep,         #
             linind,         #
             oquiv,          # Overquiver of <sba>
             overts,         # Vertices of <oquiv>
-            paths,          # List variable 
+            paths,          # List variable
             perm_data,      # Permissible data of <sba>
             pos,            #
             v;              # Vertex variable
@@ -303,17 +303,17 @@ InstallMethod(
                 v := overts[k];
                 if v in comp_targets then
                     pos := Position( comp_targets, v );
-                    c_data[k] := LengthOfPath( lindep[pos] ); 
+                    c_data[k] := LengthOfPath( lindep[pos] );
                     d_data[k] := 0;
                 else
                     paths := Filtered( linind, x -> TargetOfPath( x ) = v );
                     c_data[k] := Maximum( List( paths, LengthOfPath ) );
                 fi;
             od;
-            
+
             c := VISify( oquiv, c_data, "integer" );
             d := VISify( oquiv, d_data, "bit" );
-            
+
             return Immutable( [ c, d ] );
         fi;
     end

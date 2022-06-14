@@ -85,7 +85,7 @@ InstallMethod(
             Print( seqrep!.kind_of_seq, " " );
         fi;
         Print( "sequence indexed by vertices of " );
-        ViewObj( seqrep!.quiver ); 
+        ViewObj( seqrep!.quiver );
         Print( ">\n" );
         for x in seqrep!.indices do
             Print( "  ", x, " := ", seqrep!.terms.( x ) );
@@ -131,7 +131,7 @@ InstallMethod(
             Print( ", " );
             Print( "\"", seqrep!.kind_of_seq, "\"" );
         fi;
-        Print( " );" ); 
+        Print( " );" );
     end
 );
 

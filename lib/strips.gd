@@ -85,12 +85,12 @@ DeclareOperation("SBAlgOfStrip", [IsStripRep]);
 ##        SyzygyOfStrip
 ##      </Heading>
 ##
-##		<Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
+##      <Attr Name="SyzygyOfStrip" Label="for strips" Arg="strip"/>
 ##  <!--
-##		<Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
+##      <Attr Name="SyzygyOfStrip" Label="for lists of strips" Arg="list"/>
 ##  -->
 ##      <Description>
-##		  Argument: <A>strip</A>, a strip
+##        Argument: <A>strip</A>, a strip
 ##  <!--
 ##        <P />
 ##        Argument (second method): <A>list</A>, a list of strips
@@ -116,7 +116,7 @@ DeclareOperation("SBAlgOfStrip", [IsStripRep]);
 ##  <#/GAPDoc>
 DeclareAttribute("SyzygyOfStrip", IsStripRep);
 
-##	<#GAPDoc Label="DocNthSyzygyOfStrip">
+##  <#GAPDoc Label="DocNthSyzygyOfStrip">
 ##    <ManSection>
 ##      <Heading>
 ##        NthSyzygyOfStrip
@@ -155,13 +155,13 @@ DeclareAttribute("SyzygyOfStrip", IsStripRep);
 ##  <#/GAPDoc>
 DeclareOperation("NthSyzygyOfStrip", [IsStripRep, IsInt]);
 
-##	<#GAPDoc Label="DocCollectedSyzygyOfStrip">
-##	  <ManSection>
+##  <#GAPDoc Label="DocCollectedSyzygyOfStrip">
+##    <ManSection>
 ##      <Heading>
 ##        CollectedSyzygyOfStrip
 ##      </Heading>
 ##
-##		<Meth Name="CollectedSyzygyOfStrip" Label="for strips" Arg="strip"/>
+##      <Meth Name="CollectedSyzygyOfStrip" Label="for strips" Arg="strip"/>
 ##  <!--
 ##      <Meth Name="CollectedSyzygyOfStrip" Label="for (flat) lists of strips"
 ##      Arg="list"/>
@@ -174,7 +174,7 @@ DeclareOperation("NthSyzygyOfStrip", [IsStripRep, IsInt]);
 ##        <P />
 ##        Argument (second method): <A>list</A>, a (flat) list of strips
 ##        <P />
-##		  Argument (third method): <A>clist</A>, a collected list of strips
+##        Argument (third method): <A>clist</A>, a collected list of strips
 ##  -->
 ##        <Br />
 ##      </Description>
@@ -193,8 +193,8 @@ DeclareOperation("NthSyzygyOfStrip", [IsStripRep, IsInt]);
 ##        <P />
 ##  -->
 ##      </Description>
-##	  </ManSection>
-##	<#/GAPDoc>
+##    </ManSection>
+##  <#/GAPDoc>
 DeclareOperation("CollectedSyzygyOfStrip", [IsStripRep]);
 
 ##  <#GAPDoc Label="DocCollectedNthSyzygyOfStrip">

@@ -48,7 +48,7 @@ InstallMethod(
     [IsQuiver],
     function (quiver)
         local
-            func;	# Function variable
+            func; # Function variable
 
         if Has1RegQuivIntActionFunction(quiver) then
             return 1RegQuivIntActionFunction(quiver);
@@ -64,8 +64,8 @@ InstallMethod(
             #   --{a+1}--> vertex --{a}-->
             func := function(x, K)
                 local
-                    k,	# Integer variable
-                    y;	# Quiver generator variable
+                    k, # Integer variable
+                    y; # Quiver generator variable
 
                 # Test input
                 if not x in GeneratorsOfQuiver(quiver) then

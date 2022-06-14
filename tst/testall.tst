@@ -6,7 +6,7 @@ gap> START_TEST("sbstrips.tst");
 # Quiver algebra construction using  qpa .
 gap> quiv1 := Quiver(2,
 > [[1, 1, "a"], [1, 2, "b"], [2, 1, "c"], [2, 2, "d"]]
->);
+> );
 <quiver with 2 vertices and 4 arrows>
 gap> pa1 := PathAlgebra(Rationals, quiv1);
 <Rationals[<quiver with 2 vertices and 4 arrows>]>
@@ -192,7 +192,7 @@ gap> DeloopingLevelOfSBAlgIfAtMostN(alg2, 10);
 gap> for k in [1 .. 5] do
 >   Print(
 >     DeloopingLevelOfSBAlgIfAtMostN(SBStripsExampleAlgebra(k), 10)
->);
+>   );
 >   Print("\n");
 > od;
 #I  The quiver of this algebra has 2 vertices

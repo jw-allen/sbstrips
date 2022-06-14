@@ -347,8 +347,8 @@ InstallMethod(
             # A syllable with data [i, len, ep] is "pin boundary" iff b_i = 1
             #  and
             #       [len, ep] = [a_i - 1, 1],
-            #  ie, iff it's an unstable syllable that is the longest prefix of a
-            #  representative of a commutativity relation.
+            #  ie, iff it's an unstable syllable that is the longest prefix of
+            #  a representative of a commutativity relation.
 
             return ((b_i = 0) and (ep = 1) and (len + 1 = a_i));
         fi;

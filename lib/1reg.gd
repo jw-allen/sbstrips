@@ -126,8 +126,9 @@ DeclareProperty("Is2RegQuiver", IsQuiver);
 ##    <Description>
 ##      The vertices are named sequentially ("v1", "v2", ...) within each cycle
 ##      and then in order of the cycles as given by the cycle lengths
-##      The arrows ("a1", "a2", ...) are named such that their number corresponds
-##      to the number of their source (i.e. the source of "a3" is "v3").
+##      The arrows ("a1", "a2", ...) are named such that their number
+##      corresponds to the number of their source
+##      (i.e. the source of "a3" is "v3").
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>

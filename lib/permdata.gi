@@ -136,7 +136,9 @@ InstallMethod(
             for p in Flat(comps) do
                 walk := ShallowCopy(WalkOfPath(p));
                 for k in [1..Length(walk)] do
-                    walk[k] := First(oarrs, x -> (GroundPathOfOverquiverPathNC(x) = walk[k]));
+                    walk[k] := First(oarrs, function(x)
+                        return (GroundPathOfOverquiverPathNC(x) = walk[k]);
+                    end);
                 od;
                 Add(list, Product(walk));
             od;

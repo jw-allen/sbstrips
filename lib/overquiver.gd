@@ -191,7 +191,8 @@ DeclareAttribute("SBAlgOfOverquiver", IsQuiver);
 ##
 ##      {paths in <quiver>}  >--->  {paths in <2reg>}  <<-- {paths in <oquiv>}
 ##
-##   The (injective) lefthand map has a retraction (also called a left inverse).
+##   The (injective) lefthand map has a retraction (also called a left
+##   inverse).
 ##
 ##      {paths in <quiver>}  <----  {paths in <2reg>}  <<-- {paths in <oquiv>}
 ##

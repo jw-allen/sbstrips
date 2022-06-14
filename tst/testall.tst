@@ -218,52 +218,64 @@ gap> for k in [1 .. 5] do
 #I  and 4 arrows
 #I  Examining strip: (v1)^-1(a*b) (d*d*d)^-1(v2)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=3, at which point it has cardinality 5
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=3, at which point it has cardinality 5
 The given SB algebra has passed the test!
 #I  The quiver of this algebra has 3 vertices
 #I  and 3 arrows
 #I  Examining strip: (v1)^-1(a*b*c)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=0, at which point it has cardinality 1
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=0, at which point it has cardinality 1
 #I  Examining strip: (v2)^-1(b*c*a)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=0, at which point it has cardinality 1
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=0, at which point it has cardinality 1
 #I  Examining strip: (v3)^-1(c*a*b)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=0, at which point it has cardinality 1
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=0, at which point it has cardinality 1
 The given SB algebra has passed the test!
 #I  The quiver of this algebra has 4 vertices
 #I  and 8 arrows
 #I  Examining strip: (v1)^-1(a*b*c*d) (f*g*h*f*g*h)^-1(v1)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=7, at which point it has cardinality 14
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=7, at which point it has cardinality 14
 #I  Examining strip: (v2)^-1(b*c*d*a*b) (g*h*f*g*h*f*g)^-1(v2)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=6, at which point it has cardinality 13
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=6, at which point it has cardinality 13
 The given SB algebra has passed the test!
 #I  The quiver of this algebra has 8 vertices
 #I  and 16 arrows
 #I  Examining strip: (v7)^-1(n*o*p*a) (n*o*p)^-1(v7)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=8, at which point it has cardinality 21
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=8, at which point it has cardinality 21
 #I  Examining strip: (v1)^-1(b*c*d) (d*e*f)^-1(v2)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=8, at which point it has cardinality 22
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=8, at which point it has cardinality 22
 #I  Examining strip: (v4)^-1(f*g*h) (g*h*i*j)^-1(v3)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=9, at which point it has cardinality 16
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=9, at which point it has cardinality 16
 #I  Examining strip: (v4)^-1(h*i*j*k) (i*j*k*l*m)^-1(v5)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=8, at which point it has cardinality 16
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=8, at which point it has cardinality 16
 The given SB algebra has passed the test!
 #I  The quiver of this algebra has 4 vertices
 #I  and 8 arrows
 #I  Examining strip: (v1)^-1(a*b*c*d*a) (e*f*g*e*f*g*e)^-1(v1)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=6, at which point it has cardinality 13
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=6, at which point it has cardinality 13
 #I  Examining strip: (v3)^-1(c*d*a*b*c) (h*h*h*h*h)^-1(v4)
 #I  This strip has finite syzygy type.
-#I  The set of strings appearing as summands of its first N syzygies stabilizes at index N=4, at which point it has cardinality 12
+#I  The set of strings appearing as summands of its first N syzygies\
+stabilizes at index N=4, at which point it has cardinality 12
 The given SB algebra has passed the test!
 
 # How to turn a strip into a quiver representation

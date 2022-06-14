@@ -650,17 +650,19 @@ InstallMethod(
             quot;
 
         if not ForAll(parts, IsList) then
-            Error("The second argument\n", parts, "\nmust be a list of lists of vertices",
-             "of the quiver\n", quiver);
+            Error("The second argument\n", parts, "\nmust be a list of lists",
+             "of vertices of the quiver\n", quiver);
         elif Set(Flat(parts)) <> Set(VerticesOfQuiver(quiver)) then
-            Error("The second argument\n", parts, "\nmust include all vertices ",
-             "of the quiver\n", quiver);
+            Error("The second argument\n", parts, "\nmust be a list of lists",
+             "of vertices of the quiver\n", quiver);
         elif Length(Flat(parts)) <> NumberOfVertices(quiver) then
-            Error("The second argument\n", parts, "\nmust include all vertices ",
-             "of the quiver\n", quiver);
+            Error("The second argument\n", parts, "\nmust include all",
+             "vertices of the quiver\n", quiver);
         fi;
 
-        vertices := List([1..Length(parts)], i -> Concatenation("v", String(i)));
+        vertices := List([1..Length(parts)], function(i)
+            return Concatenation("v", String(i));
+        end);
 
         find_class := function(vertex)
             local i;
@@ -746,7 +748,13 @@ InstallMethod(
 
         vertices := List(VerticesOfQuiver(quiver), x -> String(x));
         arrows := Filtered(ArrowsOfQuiver(quiver), x -> fn(x));
-        arrows := List(arrows, x -> [String(SourceOfPath(x)), String(TargetOfPath(x)), String(x)]);
+        arrows := List(arrows, function(x)
+            return [
+                String(SourceOfPath(x)),
+                String(TargetOfPath(x)),
+                String(x)
+            ];
+        end);
 
         return Quiver(vertices, arrows);
     end

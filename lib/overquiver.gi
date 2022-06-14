@@ -203,10 +203,11 @@ InstallMethod(
             # When not already decided, print message and return <false>
             else
 
-                Print("The property <Is2RegAugmentationOfQuiver> only recognizes \
-                 2-regular augmentations constructed using the <2RegAugmentationOf\
-                 Quiver> operation.\n Contact the maintainer of the <sbstrips> \
-                 package if you believe there is an error here.\n");
+                Print("The property <Is2RegAugmentationOfQuiver> only\
+                  recognizes 2-regular augmentations constructed using the\
+                  <2RegAugmentationOfQuiver> operation.\n\
+                  Contact the maintainer of the <sbstrips> package if you\
+                  believe there is an error here.\n");
                 return false;
             fi;
         fi;

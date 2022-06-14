@@ -779,7 +779,8 @@ DeclareOperation(
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        &true; if <A>strip</A> represents a torsionless module, and &false; otherwise.
+##        &true; if <A>strip</A> represents a torsionless module,
+##        and &false; otherwise.
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>

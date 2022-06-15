@@ -465,7 +465,7 @@ InstallMethod(
         if HasZeroPatchOfSBAlg(sba) then
             return ZeroPatchOfSBAlg(sba);
         else
-            PatchSetOfSBAlg(sba);;
+            SetPatchSetOfSBAlg(sba, PatchSetOfSBAlg(sba));
             return ZeroPatchOfSBAlg(sba);
         fi;
     end

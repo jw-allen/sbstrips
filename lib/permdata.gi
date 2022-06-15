@@ -88,7 +88,7 @@ InstallMethod(
                     if elt in complist[k] then
                         found := true;
                     else
-                        k := k+1;
+                        k := k + 1;
                     fi;
                 od;
 
@@ -135,7 +135,7 @@ InstallMethod(
             list := [];
             for p in Flat(comps) do
                 walk := ShallowCopy(WalkOfPath(p));
-                for k in [1..Length(walk)] do
+                for k in [1 .. Length(walk)] do
                     walk[k] := First(oarrs, function(x)
                         return (GroundPathOfOverquiverPathNC(x) = walk[k]);
                     end);
@@ -246,10 +246,10 @@ InstallMethod(
 
             comp_sources := List(lindep, SourceOfPath);
 
-            a_data := List([1..Length(overts)], x -> 0);
-            b_data := List([1..Length(overts)], x -> 1);
+            a_data := List([1 .. Length(overts)], x -> 0);
+            b_data := List([1 .. Length(overts)], x -> 1);
 
-            for k in [1..Length(overts)] do
+            for k in [1 .. Length(overts)] do
                 v := overts[k];
                 if v in comp_sources then
                     pos := Position(comp_sources, v);
@@ -298,10 +298,10 @@ InstallMethod(
 
             comp_targets := List(lindep, TargetOfPath);
 
-            c_data := List([1..Length(overts)], x -> 0);
-            d_data := List([1..Length(overts)], x -> 1);
+            c_data := List([1 .. Length(overts)], x -> 0);
+            d_data := List([1 .. Length(overts)], x -> 1);
 
-            for k in [1..Length(overts)] do
+            for k in [1 .. Length(overts)] do
                 v := overts[k];
                 if v in comp_targets then
                     pos := Position(comp_targets, v);

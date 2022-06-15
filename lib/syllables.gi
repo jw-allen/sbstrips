@@ -575,7 +575,7 @@ InstallMethod(
 
             latest := orbit[Length(orbit)];
             tail_start := Position(orbit, latest);
-            tail := orbit{[tail_start..Length(orbit)]};
+            tail := orbit{[tail_start .. Length(orbit)]};
 
             return not (false in List(tail, IsStableSyllable));
         fi;

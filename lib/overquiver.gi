@@ -489,7 +489,7 @@ InstallMethod(
                         k;  # integer variable
 
                     k := 1;
-                    for k in [1..Length(part)] do
+                    for k in [1 .. Length(part)] do
 
                         if part[k][2] = arr then
                             return k;
@@ -532,7 +532,7 @@ InstallMethod(
                 oarrs := ArrowsOfQuiver(oquiv);
                 while k <= Length(oarrs) do
                     oarrs[k]!.LiftOf := 2reg_arrs[k] ;
-                    k := k+1;
+                    k := k + 1;
                 od;
 
                 # Load zero path with data

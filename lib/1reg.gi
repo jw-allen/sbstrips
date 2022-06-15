@@ -148,7 +148,7 @@ InstallMethod(
             return vert;
         else
             a := IncomingArrowsOfVertex(vert)[1];
-            walk := List([1..len], x -> 1RegQuivIntAct(a, -1*x));
+            walk := List([1 .. len], x -> 1RegQuivIntAct(a, -1 * x));
             return Product(walk);
         fi;
     end

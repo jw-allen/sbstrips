@@ -80,19 +80,19 @@ InstallMethod(
 
             # The syllables are in the odd positions of <data>; the orien-
             #  -tations in the even positions.
-            sy_list := data{Filtered([1..l], IsOddInt)};
-            ori_list := data{Filtered([1..l], IsEvenInt)};
+            sy_list := data{Filtered([1 .. l], IsOddInt)};
+            ori_list := data{Filtered([1 .. l], IsEvenInt)};
 
             # <sy_list> needs to be reversed individually and then interwoven
             #  with <ori_list>
             sy_list := Reversed(sy_list);
 
-            list := [1..l];
+            list := [1 .. l];
             for k in list do
                 if IsOddInt(k) then
-                    list[k] := sy_list[(k+1)/2];
+                    list[k] := sy_list[(k + 1) / 2];
                 elif IsEvenInt(k) then
-                    list[k] := ori_list[k/2];
+                    list[k] := ori_list[k / 2];
                 fi;
             od;
 
@@ -121,10 +121,10 @@ InstallOtherMethod(
             return false;
         else
             l := Length(data1);
-            sy_list1 := data1{Filtered([1..l], IsOddInt)};
-            ori_list1 := data1{Filtered([1..l], IsEvenInt)};
-            sy_list2 := data2{Filtered([1..l], IsOddInt)};
-            ori_list2 := data2{Filtered([1..l], IsEvenInt)};
+            sy_list1 := data1{Filtered([1 .. l], IsOddInt)};
+            ori_list1 := data1{Filtered([1 .. l], IsEvenInt)};
+            sy_list2 := data2{Filtered([1 .. l], IsOddInt)};
+            ori_list2 := data2{Filtered([1 .. l], IsEvenInt)};
 
             if (sy_list1 = sy_list2) and (ori_list1 = ori_list2) then
                 return true;
@@ -155,9 +155,9 @@ InstallGlobalFunction(
         sba := SBAlgOfSyllable(arg[1]);
 
         # This is an NC function, so we can assume that the arguments are
-        #      sy1, or1, sy2, or2, sy3, or3, ..., syN, orN
-        #  where [sy1, sy2, sy3, ..., syN] are alternately peak- and valley-
-        #  neighbour syllables and [or1, or2, or3, ..., orN] are alternately
+        #      sy1, or1, sy2, or2, sy3, or3, .. ., syN, orN
+        #  where [sy1, sy2, sy3, .. ., syN] are alternately peak- and valley-
+        #  neighbour syllables and [or1, or2, or3, .. ., orN] are alternately
         #  -1 and 1.
 
         # First, we normalize. This means putting a stationary trivial syllable
@@ -168,7 +168,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSBAlg(sba)(arg[1]);
             norm_arg := Concatenation([norm_sy, -1], arg);
 
-            Info(InfoSBStrips, 4, "Normalizing on left, calling again...");
+            Info(InfoSBStrips, 4, "Normalizing on left, calling again .. .");
 
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -178,7 +178,7 @@ InstallGlobalFunction(
             norm_sy := SidestepFunctionOfSBAlg(sba)(arg[len - 1]);
             norm_arg := Concatenation(arg, [norm_sy, 1]);
 
-            Info(InfoSBStrips, 4, "Normalizing on right, calling again...");
+            Info(InfoSBStrips, 4, "Normalizing on right, calling again .. .");
 
             return CallFuncList(
             StripifyFromSyllablesAndOrientationsNC,
@@ -188,7 +188,7 @@ InstallGlobalFunction(
 
         # Now we create the <IsStripRep> object.
 
-        Info(InfoSBStrips, 4, "no normalisation needed, creating object...");
+        Info(InfoSBStrips, 4, "no normalisation needed, creating object .. .");
 
         data := rec(data := arg);
         fam := StripFamilyOfSBAlg(sba);
@@ -247,7 +247,7 @@ InstallMethod(
         list := [];
 
         for k in Filtered([1 .. Length(data)], IsOddInt) do
-            Add(list, LengthOfPath(data[k]) * data[k+1]);
+            Add(list, LengthOfPath(data[k]) * data[k + 1]);
         od;
 
         # Pass arguments to <Stripify>
@@ -295,11 +295,11 @@ InstallMethod(
             Print("<zero strip>\n");
         else
             data := strip!.data;
-            for k in [1..Length(data)] do
+            for k in [1 .. Length(data)] do
                 if IsOddInt(k) then
-                    if data[k+1] = -1 then
+                    if data[k + 1] = -1 then
                         Print(data[k], "^-1");
-                    elif data[k+1] = 1 then
+                    elif data[k + 1] = 1 then
                         Print(data[k]);
                     fi;
                 fi;
@@ -335,15 +335,15 @@ InstallMethod(
             end;
 
             # Print the strip so it looks something like
-            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
+            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) .. . (pN)^-1(qN)
             data := strip!.data;
-            for k in [1..Length(data)] do
+            for k in [1 .. Length(data)] do
                 if IsOddInt(k) then
                     sy := data[k];
                     Print("(", as_quiv_path(sy), ")");
-                    if data[k+1] = -1 then
+                    if data[k + 1] = -1 then
                         Print("^-1");
-                    elif (data[k+1] = 1) and (IsBound(data[k+2])) then
+                    elif (data[k + 1] = 1) and (IsBound(data[k + 2])) then
                         Print(" ");
                     fi;
                 fi;
@@ -385,18 +385,18 @@ InstallMethod(
             string := "";
 
             # Print the strip so it looks something like
-            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) ... (pN)^-1(qN)
+            #      (p1)^-1(q1) (p2)^-1(q2) (p3)^-1(q3) .. . (pN)^-1(qN)
             data := strip!.data;
-            for k in [1..Length(data)] do
+            for k in [1 .. Length(data)] do
                 if IsOddInt(k) then
                     sy := data[k];
                     Append(
                      string,
                      Concatenation("(", String(as_quiv_path(sy)), ")")
                     );
-                    if data[k+1] = -1 then
+                    if data[k + 1] = -1 then
                         Append(string, "^-1");
-                    elif (data[k+1] = 1) and (IsBound(data[k+2])) then
+                    elif (data[k + 1] = 1) and (IsBound(data[k + 2])) then
                         Append(string, " ");
                     fi;
                 fi;
@@ -449,7 +449,7 @@ InstallMethod(
             # Consecutive entries alternate in sign iff their product is
             #  negative
             for m in [1 .. (Length(list) - 1)] do
-                if list[m] * list[m+1] >= 0 then
+                if list[m] * list[m + 1] >= 0 then
                     return false;
                 fi;
             od;
@@ -515,9 +515,9 @@ InstallMethod(
                 #  proceed case by case.
                 # In the first two cases, the strip begins with an immediate
                 #  alternation: ie
-                #       o --> o <--<--<-- ...
+                #       o --> o <--<--<-- .. .
                 #  or
-                #       o <-- o -->-->--> ...
+                #       o <-- o -->-->--> .. .
                 #  Here, the first syllable is really just <oarr>. (We already
                 #  know that this is a syllable, as <oarr> has a residue in
                 #  <sba>.)
@@ -533,9 +533,9 @@ InstallMethod(
 
                 # In the remaining two cases, <oarr> is the first or last arrow
                 #  of some longer equioriented interval in the string: ie
-                #       o --> -->-->--> ...
+                #       o --> -->-->--> .. .
                 #  or
-                #       o <-- <--<--<-- ...
+                #       o <-- <--<--<-- .. .
                 #  Here, we must verify that that equioriented interval is not
                 #  "too long". (The verifications are mutually dual.)
                 # If the verification passes, we create the syllable. This
@@ -547,8 +547,8 @@ InstallMethod(
                     a_i := a_seq.(String(i));
                     b_i := b_seq.(String(i));
 
-                    if r+1 < a_i + b_i then
-                        opath := PathBySourceAndLength(i, r+1);
+                    if r + 1 < a_i + b_i then
+                        opath := PathBySourceAndLength(i, r + 1);
 
                         if Length(int_list) = 1 then
                             syll := Syllabify(opath, 1);
@@ -574,8 +574,8 @@ InstallMethod(
                     c_i := c_seq.(String(i));
                     d_i := d_seq.(String(i));
 
-                    if r+1 < c_i + d_i then
-                        opath := PathByTargetAndLength(i, r+1);
+                    if r + 1 < c_i + d_i then
+                        opath := PathByTargetAndLength(i, r + 1);
                         syll := Syllabify(opath, 1);
                         Remove(int_list, 1);
                         i := ExchangePartnerOfVertex(SourceOfPath(opath));
@@ -615,7 +615,7 @@ InstallMethod(
                             );
 
                         else
-                            Error("The ", Ordinal(k+s), " entry of\n",
+                            Error("The ", Ordinal(k + s), " entry of\n",
                              int_list, "\ndoes not specify a syllable! ",
                              "(It is too long!)");
                         fi;
@@ -632,7 +632,7 @@ InstallMethod(
                             );
 
                         else
-                            Error("The ", Ordinal(k+s), " entry of\n",
+                            Error("The ", Ordinal(k + s), " entry of\n",
                              int_list, "\ndoes not specify a syllable! ",
                              "(It is too long!)");
                         fi;
@@ -743,7 +743,7 @@ InstallMethod(
             indices;    # Odd indices of <data>
 
         data := strip!.data;
-        indices := Filtered([1..Length(data)], IsOddInt);
+        indices := Filtered([1 .. Length(data)], IsOddInt);
         return data{indices};
     end
 );
@@ -798,10 +798,10 @@ InstallMethod(
             zero_patch := ZeroPatchOfSBAlg(sba);
             patch_list := [zero_patch];
 
-            indices := [1..Length(sy_list)];
+            indices := [1 .. Length(sy_list)];
             for k in indices do
                 if IsOddInt(k) then
-                    patch := PatchifyByTop(sy_list[k], sy_list[k+1]);
+                    patch := PatchifyByTop(sy_list[k], sy_list[k + 1]);
                     Add(patch_list, patch);
                 fi;
             od;
@@ -900,9 +900,9 @@ InstallMethod(
         else
             syz := strip;
             Info(InfoSBStrips, 2, "Examining strip: ", String(strip));
-            for k in [1..N] do
+            for k in [1 .. N] do
                 Info(InfoSBStrips, 2, "Calculated ", Ordinal(k),
-                 " syzygy...");
+                 " syzygy .. .");
                 syz := SyzygyOfStrip(syz);
             od;
 
@@ -929,9 +929,9 @@ InstallOtherMethod(
         else
             syz := list;
             Info(InfoSBStrips, 2, "Examining list of strips");
-            for k in [1..N] do
+            for k in [1 .. N] do
                 Info(InfoSBStrips, 2, "Calculated ", Ordinal(k),
-                 " syzygy...");
+                 " syzygy .. .");
                 syz := SyzygyOfStrip(syz);
             od;
 
@@ -1034,7 +1034,7 @@ InstallOtherMethod(
             return clist;
         else
             ans := clist;
-            for k in [1..N] do
+            for k in [1 .. N] do
                 ans := CollectedSyzygyOfStrip(ans);
             od;
 
@@ -1128,7 +1128,7 @@ InstallMethod(
 
             Apply(list, olift);
 
-            for k in [1..(Length(list))] do
+            for k in [1 .. (Length(list))] do
                 i := list[k][1];
                 j := list[k][2];
                 b_i := b_seq.(String(i));
@@ -1195,7 +1195,7 @@ InstallMethod(
 
             Apply(list, olift);
 
-            for k in [1..(Length(list))] do
+            for k in [1 .. (Length(list))] do
                 i := list[k][1];
                 j := list[k][2];
                 d_i := d_seq.(String(i));
@@ -1357,13 +1357,13 @@ InstallMethod(
                     # Write local function, whose input is a strip and whose
                     #  output is a list of strips one wider at the right than
                     #  the input. If the input looks like
-                    #     ...\/\/\
+                    #     .. .\/\/\
                     #  then this returns all strips looking like
-                    #     ...\/\/\/
+                    #     .. .\/\/\/
                     #  whereas if the input looks like
-                    #     .../\/\/
+                    #     .. ./\/\/
                     #  then this returns all strips looking like
-                    #     .../\/\/\.
+                    #     .. ./\/\/\.
 
                     longer_at_right := function(strip)
                         local
@@ -1910,13 +1910,13 @@ InstallMethod(
 
                 if entry[1] = arrow then
                     if entry[2] = 1 then
-                        r := vertex_multiplicity_up_to(source, k-1);
-                        c := vertex_multiplicity_up_to(target, k+1);
+                        r := vertex_multiplicity_up_to(source, k - 1);
+                        c := vertex_multiplicity_up_to(target, k + 1);
                         matrix[r][c] := one;
 
                     else
-                        r := vertex_multiplicity_up_to(source, k+1);
-                        c := vertex_multiplicity_up_to(target, k-1);
+                        r := vertex_multiplicity_up_to(source, k + 1);
+                        c := vertex_multiplicity_up_to(target, k - 1);
                         matrix[r][c] := one;
                     fi;
                 fi;
@@ -2195,7 +2195,7 @@ InstallMethod(
 
                     for r in [1 .. Length(arrow_mat)] do
                         for c in [1 .. Length(arrow_mat[r])] do
-                            mat[R+r][C+c] := arrow_mat[r][c];
+                            mat[R + r][C + c] := arrow_mat[r][c];
                         od;
                     od;
 
@@ -2335,7 +2335,7 @@ InstallMethod(
                         return OppositePath(elt);
 
                     elif elt in [1, -1] then
-                        return -1*elt;
+                        return -1 * elt;
                     fi;
                 end;
 
@@ -2344,10 +2344,10 @@ InstallMethod(
                 # Turn paths into syllables, taking into account whether they
                 #  should be boundary or not
                 for k in Filtered([1 .. Length(data)], IsOddInt) do
-                    if (k = 1) and data[k+1] = -1 then
+                    if (k = 1) and data[k + 1] = -1 then
                         data[k] := Syllabify(data[k], 1);
 
-                    elif (k = Length(data) - 1) and data[k+1] = 1 then
+                    elif (k = Length(data) - 1) and data[k + 1] = 1 then
                         data[k] := Syllabify(data[k], 1);
 
                     else
@@ -2399,7 +2399,7 @@ InstallMethod(
             while ForAny(data, is_stationary_func) do
                 is_stationary_results := List(data, is_stationary_func);
                 k := Position(is_stationary_results, true);
-                Remove(data, k+1);
+                Remove(data, k + 1);
                 Remove(data, k);
             od;
 
@@ -2618,11 +2618,11 @@ InstallMethod(
                 return zero_strip;
             fi;
 
-            for k in Filtered([1..Length(data)], IsOddInt) do
+            for k in Filtered([1 .. Length(data)], IsOddInt) do
                 if k = 1 and data[2] = -1 then
                     data[k] := Syllabify(data[k], 1);
                 elif
-                 k = (Length(data) - 1) and data[k+1] = 1
+                 k = (Length(data) - 1) and data[k + 1] = 1
                  then
                     data[k] := Syllabify(data[k], 1);
                 else
@@ -3220,10 +3220,10 @@ InstallMethod(
              WithoutProjectiveStrips(CollectedNthSyzygyOfStrip(strip, N));
 
             test_module := nth_syzygy;
-            for k in [1 .. N+1] do
+            for k in [1 .. N + 1] do
                 test_module := SuspensionOfStrip(test_module);
             od;
-            test_module := CollectedNthSyzygyOfStrip(test_module, N+1);
+            test_module := CollectedNthSyzygyOfStrip(test_module, N + 1);
             test_module := WithoutProjectiveStrips(test_module);
 
             return IsStripDirectSummand(nth_syzygy, test_module);

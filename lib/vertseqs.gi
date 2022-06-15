@@ -45,7 +45,7 @@ InstallMethod(
 
             term_rec := rec();
             k := 1;
-            for k in [1..Length(verts)] do
+            for k in [1 .. Length(verts)] do
                 term_rec.(String(verts[k])) := list[k];
             od;
 

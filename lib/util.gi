@@ -224,9 +224,9 @@ InstallMethod(
             while k <= Length(list) do
                 j := 1;
 
-                while k+j <= Length(list) do
-                    if list[k][1] = list[k+j][1] then
-                        list[k][2] := list[k][2] + list[k+j][2];
+                while k + j <= Length(list) do
+                    if list[k][1] = list[k + j][1] then
+                        list[k][2] := list[k][2] + list[k + j][2];
                         Remove(list, k + j);
 
                     else
@@ -443,13 +443,13 @@ InstallMethod(
             TryNextMethod();
 
         else
-            # The returned string should be like "a1*a2*a3*...*aN", where "a1"
+            # The returned string should be like "a1*a2*a3* .. .*aN", where "a1"
             #  etc are the constituent arrows of path (in order).
 
             walk := WalkOfPath(path);
             k := 1;
             output := [];
-            for k in [1..Length(walk)] do
+            for k in [1 .. Length(walk)] do
                 if k <> 1 then
                     Add(output, "*");
                 fi;
@@ -475,7 +475,7 @@ InstallMethod(
         quiv := QuiverOfPathAlgebra(OriginalPathAlgebra(alg));
         arrs := ArrowsOfQuiver(quiv);
 
-        return List(arrs, x -> x*1_alg);
+        return List(arrs, x -> x * 1_alg);
     end
 );
 
@@ -493,7 +493,7 @@ InstallMethod(
         quiv := QuiverOfPathAlgebra(OriginalPathAlgebra(alg));
         verts := VerticesOfQuiver(quiv);
 
-        return List(verts, x -> x*1_alg);
+        return List(verts, x -> x * 1_alg);
     end
 );
 
@@ -659,7 +659,7 @@ InstallMethod(
              "vertices of the quiver\n", quiver);
         fi;
 
-        vertices := List([1..Length(parts)], function(i)
+        vertices := List([1 .. Length(parts)], function(i)
             return Concatenation("v", String(i));
         end);
 

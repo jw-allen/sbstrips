@@ -544,7 +544,10 @@ InstallMethod(
                 oquiv!.2Reg := 2reg;
 
                 # Create contraction function
-                ContractionOfOverquiver(oquiv);;
+                SetContractionOfOverquiver(
+                    oquiv,
+                    ContractionOfOverquiver(oquiv)
+                );
             fi;
 
             # Return <oquiv>

@@ -11,7 +11,7 @@
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "Is1RegQuiver", IsQuiver );
+DeclareProperty("Is1RegQuiver", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivIntActionFunction">
 ##  <ManSection>
@@ -38,7 +38,7 @@ DeclareProperty( "Is1RegQuiver", IsQuiver );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
+DeclareAttribute("1RegQuivIntActionFunction", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivIntAct">
 ##  <ManSection>
@@ -63,8 +63,8 @@ DeclareAttribute( "1RegQuivIntActionFunction", IsQuiver );
 ##      quiver. For this reason, it is more user-friendly.
 ##    </Description>
 ##  </ManSection>
-##  <#/GAPDoc>  
-DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
+##  <#/GAPDoc>
+DeclareOperation("1RegQuivIntAct", [IsPath, IsInt]);
 
 ##  <#GAPDoc Label="DocPathBySourceAndLength">
 ##  <ManSection>
@@ -79,8 +79,8 @@ DeclareOperation( "1RegQuivIntAct", [ IsPath, IsInt ] );
 ##      <A>len</A>.
 ##    </Returns>
 ##  </ManSection>
-##  <#/GAPDoc>  
-DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
+##  <#/GAPDoc>
+DeclareOperation("PathBySourceAndLength", [IsQuiverVertex, IsInt]);
 
 ##  <#GAPDoc Label="DocPathByTargetAndLength">
 ##  <ManSection>
@@ -95,8 +95,8 @@ DeclareOperation( "PathBySourceAndLength", [ IsQuiverVertex, IsInt ] );
 ##      <A>len</A>.
 ##    </Returns>
 ##  </ManSection>
-##  <#/GAPDoc>  
-DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
+##  <#/GAPDoc>
+DeclareOperation("PathByTargetAndLength", [IsQuiverVertex, IsInt]);
 
 ##  <#GAPDoc Label="DocIs2RegQuiver">
 ##  <ManSection>
@@ -111,7 +111,7 @@ DeclareOperation( "PathByTargetAndLength", [ IsQuiverVertex, IsInt ] );
 ##    </Returns>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "Is2RegQuiver", IsQuiver );
+DeclareProperty("Is2RegQuiver", IsQuiver);
 
 ##  <#GAPDoc Label="Doc1RegQuivFromCycleLengths">
 ##  <ManSection>
@@ -126,9 +126,10 @@ DeclareProperty( "Is2RegQuiver", IsQuiver );
 ##    <Description>
 ##      The vertices are named sequentially ("v1", "v2", ...) within each cycle
 ##      and then in order of the cycles as given by the cycle lengths
-##      The arrows ("a1", "a2", ...) are named such that their number corresponds
-##      to the number of their source (i.e. the source of "a3" is "v3").
+##      The arrows ("a1", "a2", ...) are named such that their number
+##      corresponds to the number of their source
+##      (i.e. the source of "a3" is "v3").
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "1RegQuivFromCycleLengths", [ IsList ] );
+DeclareOperation("1RegQuivFromCycleLengths", [IsList]);

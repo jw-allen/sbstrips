@@ -1,6 +1,6 @@
 InstallGlobalFunction(
     MakeSBStripsDocumentation,
-    function( )
-        ReadPackage( "sbstrips", "makedocrel.g" );
+    function()
+        ReadPackage("sbstrips", "makedocrel.g");
     end
 );

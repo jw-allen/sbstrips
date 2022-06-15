@@ -12,4 +12,4 @@
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareInfoClass( "InfoSBStrips" );
+DeclareInfoClass("InfoSBStrips");

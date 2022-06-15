@@ -8,4 +8,4 @@
 ##      <K>QUIT</K>s out of &GAP;.
 ##    </Description>
 ##  <#/GAPDoc>
-DeclareGlobalFunction( "MakeSBStripsDocumentation" );
+DeclareGlobalFunction("MakeSBStripsDocumentation");

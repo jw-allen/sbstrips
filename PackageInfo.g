@@ -1,60 +1,60 @@
-SetPackageInfo( rec(
+SetPackageInfo(rec(
 
  PackageName := "SBStrips",
- 
+
  Subtitle := "for syzygies of string modules over special biserial algebras",
- 
+
  Version := "v0.6.5",
- 
+
  Date := "24/02/2021",
- 
+
  License := "GPL-2.0-or-later",
- 
+
  Persons := [
   rec(
    LastName := "Allen",
    FirstNames := "Joe",
    IsAuthor := true,
    IsMaintainer := true,
-   Email := Concatenation( [
-    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk" 
-    ] ),
+   Email := Concatenation([
+    "jo", "e.a", "llen", "@", "brist", "ol", ".", "ac", ".", "uk"
+]),
    WWWHome := "https://research-information.bris.ac.uk/en/persons/joe-allen",
-   PostalAddress := Concatenation( [
+   PostalAddress := Concatenation([
     "School of Mathematics,\n",
     "Fry Building,\n",
     "Woodland Rd, Bristol,\n",
     "BS8 1UG"
-     ] ),
+]),
    Place := "Bristol",
    Institution := "University of Bristol"
-   )
-  ],
+)
+],
 
  Status := "dev",
- 
- SourceRepository := rec( 
-  Type := "git", 
-  URL := "https://github.com/jw-allen/sbstrips"
-  ),
 
- IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
- 
+ SourceRepository := rec(
+  Type := "git",
+  URL := "https://github.com/jw-allen/sbstrips"
+),
+
+ IssueTrackerURL := Concatenation(~.SourceRepository.URL, "/issues"),
+
  PackageWWWHome := "https://jw-allen.github.io/sbstrips/",
- 
+
  ArchiveURL := Concatenation(
   ~.SourceRepository.URL,
   "/archive/",
   ~.Version
-  ),
-  
+),
+
  ArchiveFormats := ".tar.gz",
 
- README_URL := 
-  Concatenation( ~.PackageWWWHome, "/README" ),
+ README_URL :=
+  Concatenation(~.PackageWWWHome, "/README"),
 
  PackageInfoURL :=
-  Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+  Concatenation(~.PackageWWWHome, "/PackageInfo.g"),
 
  AbstractHTML :=
   "String modules for special biserial (SB) algebras are represented by \
@@ -68,7 +68,7 @@ delooping level and weak periodicity.\n\n SBStrips also includes bookkeeping \
 functionality for multisets, which it calls collected lists, and it \
 integrates with (and depends on) the QPA package for quiver algebras and \
 their modules.",
- 
+
  PackageDoc := rec(
    BookName := "SBStrips",
    ArchiveURLSubset := ["doc"],
@@ -76,20 +76,20 @@ their modules.",
    PDFFile := "doc/main.pdf",
    SixFile := "doc/manual.six",
    LongTitle := ~.Subtitle
-  ),
+),
 
  Dependencies := rec(
   GAP := ">=4.11",
   NeededOtherPackages := [
    ["qpa", "1.30"], ["GAPDoc", ">=1.6"]
-   ],
+],
   SuggestedOtherPackages := [],
   ExternalConditions := []
-  ),
+),
 
  AvailabilityTest := ReturnTrue,
 
  TestFile := "tst/testall.g",
 
- Keywords := [ "special biserial algebra", "string module", "syzygy" ]
-) );
+ Keywords := ["special biserial algebra", "string module", "syzygy"]
+));

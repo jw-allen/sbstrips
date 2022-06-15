@@ -2,19 +2,19 @@
 
 ##  For GAP
 
-DeclareOperation( "ForwardOrbitUnderFunctionNC", [ IsObject, IsFunction ] );
+DeclareOperation("ForwardOrbitUnderFunctionNC", [IsObject, IsFunction]);
 
-DeclareOperation( "IsTransientUnderFunctionNC",
- [ IsObject, IsFunction, IsObject ]
- );
- 
-DeclareOperation( "IsPreperiodicUnderFunctionNC",
- [ IsObject, IsFunction, IsObject ]
- );
+DeclareOperation("IsTransientUnderFunctionNC",
+ [IsObject, IsFunction, IsObject]
+);
 
-DeclareOperation( "IsPeriodicUnderFunctionNC",
- [ IsObject, IsFunction, IsObject ]
- );
+DeclareOperation("IsPreperiodicUnderFunctionNC",
+ [IsObject, IsFunction, IsObject]
+);
+
+DeclareOperation("IsPeriodicUnderFunctionNC",
+ [IsObject, IsFunction, IsObject]
+);
 
 ##  <#GAPDoc Label="DocIsCollectedList">
 ##    <ManSection>
@@ -41,7 +41,7 @@ DeclareOperation( "IsPeriodicUnderFunctionNC",
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsCollectedList", IsList );
+DeclareProperty("IsCollectedList", IsList);
 
 ##  <#GAPDoc Label="DocIsCollectedDuplicateFreeList">
 ##    <ManSection>
@@ -62,7 +62,7 @@ DeclareProperty( "IsCollectedList", IsList );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
+DeclareProperty("IsCollectedDuplicateFreeList", IsList);
 
 ##  <#GAPDoc Label="DocIsCollectedHomogeneousList">
 ##    <ManSection>
@@ -82,7 +82,7 @@ DeclareProperty( "IsCollectedDuplicateFreeList", IsList );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareProperty( "IsCollectedHomogeneousList", IsList );
+DeclareProperty("IsCollectedHomogeneousList", IsList);
 
 ##  <#GAPDoc Label="DocCollectedLength">
 ##    <ManSection>
@@ -96,7 +96,7 @@ DeclareProperty( "IsCollectedHomogeneousList", IsList );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "CollectedLength", IsList );
+DeclareAttribute("CollectedLength", IsList);
 
 ##  <#GAPDoc Label="DocRecollected">
 ##    <ManSection>
@@ -111,14 +111,14 @@ DeclareAttribute( "CollectedLength", IsList );
 ##      </Returns>
 ##      <Description>
 ##        If <A>clist</A> contains entries with matching first entries, say
-##        <C>[ obj, n ]</C> and <C>[ obj, m ]</C>, then it will combine them
-##        into a single entry <C>[ obj, n+m ]</C> with totalised multiplicity.
+##        <C>[obj, n]</C> and <C>[obj, m]</C>, then it will combine them
+##        into a single entry <C>[obj, n+m]</C> with totalised multiplicity.
 ##        This can be necessary when dealing with concatenations (see <Ref
 ##        Func="Concatenation" BookName="Reference"/>) of collected lists.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "Recollected", [ IsList ] );
+DeclareOperation("Recollected", [IsList]);
 
 ##  <#GAPDoc Label="DocUncollected">
 ##    <ManSection>
@@ -133,7 +133,7 @@ DeclareOperation( "Recollected", [ IsList ] );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "Uncollected", [ IsList ] );
+DeclareOperation("Uncollected", [IsList]);
 
 ##  <#GAPDoc Label="DocCollectedListElementwiseFunction">
 ##    <ManSection>
@@ -149,11 +149,11 @@ DeclareOperation( "Uncollected", [ IsList ] );
 ##      <Description>
 ##        If <A>func</A> returns lists (perhaps because it implements a
 ##        "many-valued function"), consider using <Ref
-##        Oper="CollectedListElementwiseListValuedFunction"/> instead. 
+##        Oper="CollectedListElementwiseListValuedFunction"/> instead.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
+DeclareOperation("CollectedListElementwiseFunction", [IsList, IsFunction]);
 
 ##  <#GAPDoc Label="DocCollectedListElementwiseListValuedFunction">
 ##    <ManSection>
@@ -177,8 +177,8 @@ DeclareOperation( "CollectedListElementwiseFunction", [ IsList, IsFunction ] );
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation(
- "CollectedListElementwiseListValuedFunction", [ IsList, IsFunction ]
- );
+ "CollectedListElementwiseListValuedFunction", [IsList, IsFunction]
+);
 
 ##  <#GAPDoc Label="DocElementsOfCollectedList">
 ##    <ManSection>
@@ -192,7 +192,7 @@ DeclareOperation(
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
+DeclareOperation("ElementsOfCollectedList", [IsList]);
 
 ##  <#GAPDoc Label="DocMultiplicityOfElementInCollectedList">
 ##    <ManSection>
@@ -205,11 +205,11 @@ DeclareOperation( "ElementsOfCollectedList", [ IsList ] );
 ##        a nonnegative integer, namely the (total) multiplicity of <A>obj</A>
 ##        in <A>clist</A>.
 ##      </Returns>
-##    </ManSection>    
+##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation(
- "MultiplicityOfElementInCollectedList", [ IsObject, IsList ]
- );
+ "MultiplicityOfElementInCollectedList", [IsObject, IsList]
+);
 
 ##  <#GAPDoc Label="DocIsCollectedSublist">
 ##    <ManSection>
@@ -225,7 +225,7 @@ DeclareOperation(
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
+DeclareOperation("IsCollectedSublist", [IsList, IsList]);
 
 ##  <#GAPDoc Label="DocCollectedFiltered">
 ##    <ManSection>
@@ -236,7 +236,7 @@ DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
 ##      </Description>
 ##      <Returns>
 ##        the collected sublist of <A>clist</A> featuring only those elements
-##        for which <A>prop</A> returns &true;. (Those elements appear in the 
+##        for which <A>prop</A> returns &true;. (Those elements appear in the
 ##        sublist with the same multiplicity as in <A>clist</A>.)
 ##      </Returns>
 ##      <Description>
@@ -245,7 +245,7 @@ DeclareOperation( "IsCollectedSublist", [ IsList, IsList ] );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "CollectedFiltered", [ IsList, IsFunction ] );
+DeclareOperation("CollectedFiltered", [IsList, IsFunction]);
 
 ##  For QPA
 
@@ -284,12 +284,12 @@ DeclareOperation( "CollectedFiltered", [ IsList, IsFunction ] );
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the residues of the arrows in the defining quiver of <A>alg</A>, 
+##        the residues of the arrows in the defining quiver of <A>alg</A>,
 ##        listed together
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
+DeclareOperation("ArrowsOfQuiverAlgebra", [IsQuiverAlgebra]);
 
 ##  <#GAPDoc Label="DocVerticesOfQuiverAlgebra">
 ##    <ManSection>
@@ -299,12 +299,12 @@ DeclareOperation( "ArrowsOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the residues of the vertices in the defining quiver of <A>alg</A>, 
+##        the residues of the vertices in the defining quiver of <A>alg</A>,
 ##        listed together
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "VerticesOfQuiverAlgebra", [ IsQuiverAlgebra ] );
+DeclareOperation("VerticesOfQuiverAlgebra", [IsQuiverAlgebra]);
 
 ##  <#GAPDoc Label="DocFieldOfQuiverAlgebra">
 ##    <ManSection>
@@ -318,7 +318,7 @@ DeclareOperation( "VerticesOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "FieldOfQuiverAlgebra", [ IsQuiverAlgebra ]  );
+DeclareOperation("FieldOfQuiverAlgebra", [IsQuiverAlgebra]);
 
 ##  <#GAPDoc Label="DocDefiningQuiverOfQuiverAlgebra">
 ##    <ManSection>
@@ -337,7 +337,7 @@ DeclareOperation( "FieldOfQuiverAlgebra", [ IsQuiverAlgebra ]  );
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "DefiningQuiverOfQuiverAlgebra", [ IsQuiverAlgebra ] );
+DeclareOperation("DefiningQuiverOfQuiverAlgebra", [IsQuiverAlgebra]);
 
 ##  <#GAPDoc Label="DocPathOneArrowDifferent">
 ##  <ManSection>
@@ -370,48 +370,49 @@ DeclareOperation( "DefiningQuiverOfQuiverAlgebra", [ IsQuiverAlgebra ] );
 ##    </Description>
 ##  </ManSection>
 ##  <#/GAPDoc>
-DeclareAttribute( "PathOneArrowLongerAtSource", IsPath );
-DeclareAttribute( "PathOneArrowLongerAtTarget", IsPath );
-DeclareAttribute( "PathOneArrowShorterAtSource", IsPath );
-DeclareAttribute( "PathOneArrowShorterAtTarget", IsPath );
+DeclareAttribute("PathOneArrowLongerAtSource", IsPath);
+DeclareAttribute("PathOneArrowLongerAtTarget", IsPath);
+DeclareAttribute("PathOneArrowShorterAtSource", IsPath);
+DeclareAttribute("PathOneArrowShorterAtTarget", IsPath);
 
 ##  <#GAPDoc Label="DocQuiverQuotient">
 ##    <ManSection>
 ##      <Oper Name="QuiverQuotient" Arg="quiver, parts"/>
 ##      <Description>
 ##        Arguments: <A>quiver</A>, a quiver;
-##                  <A>parts</A> a list where each entry is a sublist of the vertices
-##                  of <A>quiver</A>, and the union of the entries is a list of all vertices of
-##                  <A>quiver</A> (i.e. <A>parts</A> is a partition of the vertices
-##                  of <A>quiver</A>).
+##        <A>parts</A> a list where each entry is a sublist of the vertices
+##        of <A>quiver</A>, and the union of the entries is a list of all
+##        vertices of <A>quiver</A> (i.e. <A>parts</A> is a partition of the
+##        vertices of <A>quiver</A>).
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the quiver obtained from <A>quiver</A> when you identify all vertices in each entry
-##        of <A>parts</A>
+##        the quiver obtained from <A>quiver</A> when you identify all vertices
+##        in each entry of <A>parts</A>
 ##      </Returns>
 ##      <Description>
-##        Also attaches information about the quotient quiver to the input quiver.
+##        Also attaches information about the quotient quiver to the input
+##        quiver.
 ##      </Description>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "QuiverQuotient", [ IsQuiver, IsList ] );
-DeclareAttribute( "IsCoveringQuiver", IsQuiver );
-DeclareAttribute( "IsQuotientQuiver", IsQuiver );
+DeclareOperation("QuiverQuotient", [IsQuiver, IsList]);
+DeclareAttribute("IsCoveringQuiver", IsQuiver);
+DeclareAttribute("IsQuotientQuiver", IsQuiver);
 
 ##  <#GAPDoc Label="DocQuiverFilterArrows">
 ##    <ManSection>
 ##      <Oper Name="QuiverFilterArrows" Arg="quiver, fn"/>
 ##      <Description>
 ##        Arguments: <A>quiver</A>, a quiver;
-##                  <A>fn</A> a function that returns boolean values when evaluated on
-##                  arrows of <A>quiver</A>
+##        <A>fn</A> a function that returns boolean values when evaluated on
+##        arrows of <A>quiver</A>
 ##        <Br />
 ##      </Description>
 ##      <Returns>
-##        the quiver obtained from <A>quiver</A> when you remove all vertices that return
-##        <A>false</A> when we apply <A>fn</A> to it.
+##        the quiver obtained from <A>quiver</A> when you remove all vertices
+##        that return <A>false</A> when we apply <A>fn</A> to it.
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation( "QuiverFilterArrows", [ IsQuiver, IsFunction ] );
+DeclareOperation("QuiverFilterArrows", [IsQuiver, IsFunction]);

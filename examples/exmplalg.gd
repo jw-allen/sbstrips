@@ -1,1 +1,1 @@
-DeclareGlobalFunction( "SBStripsExampleAlgebra" );
+DeclareGlobalFunction("SBStripsExampleAlgebra");

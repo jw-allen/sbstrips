@@ -173,6 +173,13 @@ InstallMethod(
         else
             pa := OriginalPathAlgebra(sba);
             ideal := IdealOfQuotient(sba);
+
+            # IdealOfQuotient returns fail when sba is a path algebra
+            if ideal = fail then
+                # In these cases set ideal to be the zero ideal
+                ideal := Ideal(sba, [Zero(sba)]);
+            fi;
+
             2reg := 2RegAugmentationOfQuiver(QuiverOfPathAlgebra(pa));
             oquiv := OverquiverOfSBAlg(sba);
             cont := ContractionOfOverquiver(oquiv);

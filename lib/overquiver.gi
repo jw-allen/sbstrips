@@ -365,6 +365,12 @@ InstallMethod(
             list := [];
             ideal := IdealOfQuotient(sba);
 
+            # IdealOfQuotient returns fail when sba is a path algebra
+            if ideal = fail then
+                # In these cases set ideal to be the zero ideal
+                ideal := Ideal(sba, [Zero(sba)]);
+            fi;
+
             for v in VerticesOfQuiver(2reg) do
                 in1 := IncomingArrowsOfVertex(v)[1];
                 in2 := IncomingArrowsOfVertex(v)[2];

@@ -179,27 +179,25 @@ InstallMethod(
             fi;
 
             # Add relations of length two to make special biserial
-            f_p1 := OutgoingArrowsOfVertex(O.(String(pair[1])))[1];
-            f_p2 := OutgoingArrowsOfVertex(O.(String(pair[2])))[1];
+            f_p1 := IncomingArrowsOfVertex(O.(String(pair[1])))[1];
+            f_p2 := IncomingArrowsOfVertex(O.(String(pair[2])))[1];
+            s_p1 := OutgoingArrowsOfVertex(O.(String(pair[1])))[1];
+            s_p2 := OutgoingArrowsOfVertex(O.(String(pair[2])))[1];
 
-            n_p1 := find_inv_vertex(TargetOfPath(f_p1));
-            n_p2 := find_inv_vertex(TargetOfPath(f_p2));
-            s_p1 := OutgoingArrowsOfVertex(O.(String(n_p1)))[1];
-            s_p2 := OutgoingArrowsOfVertex(O.(String(n_p2)))[1];
+            if a.(String(pair[1])) <> 0
+              and a.(String(SourceOfPath(f_p2))) <> 0 then
+                u_p2 := over_to_under([f_p2, s_p1]);
+                a_p2 := ElementOfPathAlgebra(kQ, u_p2);
+                Add(relations, a_p2);
+            fi;
 
-            if a.(String(SourceOfPath(f_p1))) <> 0
-              and a.(String(n_p1)) <> 0 then
-                u_p1 := over_to_under([f_p1, s_p1]);
+            if a.(String(pair[2])) <> 0
+              and a.(String(SourceOfPath(f_p1))) <> 0 then
+                u_p1 := over_to_under([f_p1, s_p2]);
                 a_p1 := ElementOfPathAlgebra(kQ, u_p1);
                 Add(relations, a_p1);
             fi;
 
-            if a.(String(SourceOfPath(f_p2))) <> 0
-              and a.(String(n_p2)) <> 0 then
-                u_p2 := over_to_under([f_p2, s_p2]);
-                a_p2 := ElementOfPathAlgebra(kQ, u_p2);
-                Add(relations, a_p2);
-            fi;
         od;
 
         # Only quotient if there are relations

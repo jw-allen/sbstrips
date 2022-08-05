@@ -61,13 +61,9 @@ InstallMethod(
             fi;
         end);
 
-        # SetIs2RegAugmentationOfQuiver( 2reg, true );
-        # SetOriginalSBQuiverOf2RegAugmentation( 2reg, quiver );
-        # Set2RegAugmentationOfQuiver( quiver, 2reg );
-
         #TODO put this check behind an option
         if not IsConnectedQuiver(quiver) then
-            # Print("disconnected:\n",quiver,"\n");
+            # Print("quotient quiver is disconnected:\n", quiver, "\n");
             return fail;
         fi;
 
@@ -122,17 +118,15 @@ InstallMethod(
                 o_p,
                 u_p,
                 a_p;
-            if a.(String(vertex)) <> 0 then
-                t_p := PathBySourceAndLength(vertex, a.(String(vertex)));
-                if a.(String(TargetOfPath(t_p))) <> 0 then
-                    o_p := PathBySourceAndLength(vertex, a.(String(vertex))+1);
+            t_p := PathBySourceAndLength(vertex, a.(String(vertex)));
+            if a.(String(TargetOfPath(t_p))) <> 0 then
+                o_p := PathBySourceAndLength(vertex, a.(String(vertex))+1);
 
-                    u_p := over_to_under(o_p);
+                u_p := over_to_under(o_p);
 
-                    a_p := ElementOfPathAlgebra(kQ, u_p);
+                a_p := ElementOfPathAlgebra(kQ, u_p);
 
-                    Add(relations, a_p);
-                fi;
+                Add(relations, a_p);
             fi;
         end;
 
@@ -160,14 +154,10 @@ InstallMethod(
 
                 Add(relations, a_p1-a_p2);
             elif b.(String(pair[1])) = 1 and b.(String(pair[2])) = 1 then
-                if a.(String(pair[1])) = 0 and a.(String(pair[2])) = 0 then
-                    # Print("ERROR: The 'a' and 'b' sequences are incompatible\n");
-                    return fail;
-                fi;
                 addMonomialRelation(pair[1]);
                 addMonomialRelation(pair[2]);
             else
-                # Print("ERROR: The 'b' sequence is incompatible with vertex pairs\n");
+                Print("ERROR: The 'b' sequence is incompatible with vertex pairs\n");
                 return fail;
             fi;
 
@@ -193,11 +183,16 @@ InstallMethod(
             fi;
         od;
 
-        gb := GBNPGroebnerBasis(relations, kQ);
-        ideal := Ideal(kQ, gb);
-        GroebnerBasis(ideal, gb);
+        if Length(relations) > 0 then
+            gb := GBNPGroebnerBasis(relations, kQ);
+            ideal := Ideal(kQ, gb);
+            GroebnerBasis(ideal, gb);
 
-        algebra := kQ/ideal;
+            algebra := kQ/ideal;
+        else
+            algebra := kQ;
+        fi;
+
         if not IsSpecialBiserialAlgebra(algebra) then
             Print("\nERROR: not special biserial\n");
             Print(algebra,"\n");

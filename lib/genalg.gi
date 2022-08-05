@@ -69,6 +69,7 @@ InstallMethod(
 
         kQ := PathAlgebra(Rationals, quiver);
 
+        # Find the vertex paired to the input vertex
         find_inv_vertex := function(vertex)
             local p;
             for p in v_pairs do
@@ -81,6 +82,8 @@ InstallMethod(
             return fail;
         end;
 
+        # Convert a vertex, path or list of arrows in the overquiver to
+        # a path in the base quiver
         over_to_under := function(path)
             local
                 arrows,
@@ -112,6 +115,7 @@ InstallMethod(
 
         relations := [];
 
+        # Calculate and add a monomial relation starting at a given vertex
         addMonomialRelation := function(vertex)
             local
                 t_p,
@@ -119,6 +123,7 @@ InstallMethod(
                 u_p,
                 a_p;
             t_p := PathBySourceAndLength(vertex, a.(String(vertex)));
+            # Only add a relation if a long enough path exists
             if a.(String(TargetOfPath(t_p))) <> 0 then
                 o_p := PathBySourceAndLength(vertex, a.(String(vertex))+1);
 
@@ -131,10 +136,13 @@ InstallMethod(
         end;
 
         for pair in v_pairs do
-            # Add relations that determine the length of paths in the projectives.
+            # Add relations that determine the length of paths in the
+            # projectives
             if b.(String(pair[1])) = 0 and b.(String(pair[2])) = 0 then
                 if a.(String(pair[1])) <= 1 or a.(String(pair[2])) <= 1 then
-                    Print("ERROR: The 'a' and 'b' sequences are incompatible\n");
+                    Print(
+                        "ERROR: The 'a' and 'b' sequences are incompatible\n"
+                    );
                     return fail;
                 fi;
                 o_p1 := PathBySourceAndLength(pair[1], a.(String(pair[1])));
@@ -143,9 +151,15 @@ InstallMethod(
                 u_p1 := over_to_under(o_p1);
                 u_p2 := over_to_under(o_p2);
 
-                # Check if components of commutativity relation start and end at same point
-                if SourceOfPath(u_p1) <> SourceOfPath(u_p2) or TargetOfPath(u_p1) <> TargetOfPath(u_p2) or TargetOfPath(o_p1) = TargetOfPath(o_p2) then
-                    Print("ERROR: The 'a' and 'b' sequences are incompatible with the vertex pairs\n");
+                # Check if components of commutativity relation start and 
+                # end at the same point in the base quiver, but not overquiver
+                if SourceOfPath(u_p1) <> SourceOfPath(u_p2) 
+                  or TargetOfPath(u_p1) <> TargetOfPath(u_p2)
+                  or TargetOfPath(o_p1) = TargetOfPath(o_p2) then
+                    Print(
+                        "ERROR: The 'a' and 'b' sequences are incompatible ", 
+                        "with the vertex pairs\n"
+                    );
                     return fail;
                 fi;
 
@@ -157,7 +171,10 @@ InstallMethod(
                 addMonomialRelation(pair[1]);
                 addMonomialRelation(pair[2]);
             else
-                Print("ERROR: The 'b' sequence is incompatible with vertex pairs\n");
+                Print(
+                    "ERROR: The 'b' sequence is incompatible",
+                    "with vertex pairs\n"
+                );
                 return fail;
             fi;
 
@@ -170,19 +187,22 @@ InstallMethod(
             s_p1 := OutgoingArrowsOfVertex(O.(String(n_p1)))[1];
             s_p2 := OutgoingArrowsOfVertex(O.(String(n_p2)))[1];
 
-            if a.(String(SourceOfPath(f_p1))) <> 0 and a.(String(n_p1)) <> 0 then
+            if a.(String(SourceOfPath(f_p1))) <> 0
+              and a.(String(n_p1)) <> 0 then
                 u_p1 := over_to_under([f_p1, s_p1]);
                 a_p1 := ElementOfPathAlgebra(kQ, u_p1);
                 Add(relations, a_p1);
             fi;
 
-            if a.(String(SourceOfPath(f_p2))) <> 0 and a.(String(n_p2)) <> 0 then
+            if a.(String(SourceOfPath(f_p2))) <> 0
+              and a.(String(n_p2)) <> 0 then
                 u_p2 := over_to_under([f_p2, s_p2]);
                 a_p2 := ElementOfPathAlgebra(kQ, u_p2);
                 Add(relations, a_p2);
             fi;
         od;
 
+        # Only quotient if there are relations
         if Length(relations) > 0 then
             gb := GBNPGroebnerBasis(relations, kQ);
             ideal := Ideal(kQ, gb);

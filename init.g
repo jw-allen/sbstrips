@@ -9,6 +9,7 @@ ReadPackage("sbstrips", "lib/util.gd");
 ReadPackage("sbstrips", "lib/vertseqs.gd");
 
 # For dependency reasons, these must be read second
+ReadPackage("sbstrips", "lib/genalg.gd");
 ReadPackage("sbstrips", "lib/patchreps.gd");
 
 # Read examples

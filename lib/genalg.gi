@@ -172,7 +172,7 @@ InstallMethod(
                 addMonomialRelation(pair[2]);
             else
                 Print(
-                    "ERROR: The 'b' sequence is incompatible",
+                    "ERROR: The 'b' sequence is incompatible ",
                     "with vertex pairs\n"
                 );
                 return fail;

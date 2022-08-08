@@ -247,6 +247,8 @@ DeclareOperation("IsCollectedSublist", [IsList, IsList]);
 ##  <#/GAPDoc>
 DeclareOperation("CollectedFiltered", [IsList, IsFunction]);
 
+DeclareOperation("PairingsOfList", [IsList]);
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

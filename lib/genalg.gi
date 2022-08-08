@@ -223,3 +223,153 @@ InstallMethod(
         return algebra;
     end
 );
+
+# Creates an iterator of SBAlgs from an overquiver <O>, and the source data
+#  encoding <a> and <b>
+InstallMethod(
+    SBAlgsFromOverquiverAndSourceDataLists,
+    "for a 1-regular quiver, a list of positive integers and a binary list",
+    [IsQuiver, IsList, IsList],
+    function(overquiver, a, b)
+        local
+            a_vis,
+            b_vis,
+            add_pin_pairs,
+            add_remaining_pairs,
+            pairings,
+            alg,
+            alg_iter;
+
+        if not IsQuiver(overquiver) then
+            return fail;
+        fi;
+        if not (NumberOfVertices(overquiver) mod 2 = 0) then
+            return fail;
+        fi;
+
+        a_vis := VISify(overquiver, a);
+        b_vis := VISify(overquiver, b);
+
+        # Function to recursively pair all of the pin vertices (and the corresponding endpoints of their commutativity components)
+        add_pin_pairs := function(cur_pairs)
+            local
+                copy_pairs,
+                paired,
+                unpaired,
+                pin_verts,
+                new_pairs,
+                add_pair,
+                temp_pairs,
+                adding,
+                v1,
+                v2;
+
+            copy_pairs := ShallowCopy(cur_pairs);
+            paired := Union(copy_pairs);
+            unpaired := Filtered(VerticesOfQuiver(overquiver), v -> not v in paired);
+
+            pin_verts := Filtered(unpaired, v -> b_vis.(String(v)) = 0);
+            if Length(pin_verts) mod 2 = 1 then
+                Error("odd number of unpaired pin vertices");
+            fi;
+
+            new_pairs := [];
+
+            add_pair := function(v1, v2, pairs)
+                local u1, u2;
+                if v1 = v2 then
+                    return fail;
+                fi;
+                if v1 in Union(pairs) or v2 in Union(pairs) then
+                    if [v1,v2] in pairs or [v2,v1] in pairs then
+                        return pairs;
+                    else
+                        return fail;
+                    fi;
+                elif b_vis.(String(v1)) = 0 and b_vis.(String(v2)) = 0 then
+                    u1 := 1RegQuivIntAct(v1, -a_vis.(String(v1)));
+                    u2 := 1RegQuivIntAct(v2, -a_vis.(String(v2)));
+
+                    return add_pair(u1, u2, Concatenation(pairs,[[v1,v2]]));
+                elif b_vis.(String(v1)) = 1 and b_vis.(String(v2)) = 1 then
+                    return Concatenation(pairs,[[v1,v2]]);
+                else
+                    return fail;
+                fi;
+            end;
+
+            if Length(pin_verts) >= 2 then
+                v1 := pin_verts[1];
+                for v2 in pin_verts{[2..Length(pin_verts)]} do
+                    adding := add_pair(v1,v2, copy_pairs);
+                    if adding <> fail and Length(adding) > 0 then
+                        temp_pairs := adding;
+                        Append(new_pairs, add_pin_pairs(temp_pairs));
+                    fi;
+                od;
+                return new_pairs;
+            elif Length(pin_verts) = 0 then
+                return [cur_pairs];
+            fi;
+        end;
+
+        # Function to enumerate all possible pairings of remaining (non-pin) vertices
+        add_remaining_pairs := function(cur_pairs)
+            local
+                copy_pairs,
+                paired,
+                unpaired,
+                rem,
+                output;
+
+            copy_pairs := ShallowCopy(cur_pairs);
+            paired := Union(copy_pairs);
+            unpaired := Filtered(VerticesOfQuiver(overquiver), v -> not v in paired);
+
+            if Length(unpaired) = 0 then
+                return [cur_pairs];
+            else
+                rem := PairingsOfList(unpaired);
+
+                return List(rem, x -> Concatenation(cur_pairs, x));
+            fi;
+        end;
+
+        pairings := add_pin_pairs([]);
+        pairings := List(pairings, x -> add_remaining_pairs(x));
+        pairings := Concatenation(pairings);
+
+        # TODO implement checks for "canonical ordering" of choices of
+        # additional edges when not 2-regular
+
+        alg_iter := IteratorByFunctions( rec(
+            pair_iter := Iterator(pairings),
+
+            NextIterator := function(iter)
+                local
+                    alg,
+                    pairing,
+                    O;
+
+                alg := fail;
+
+                while alg = fail and not IsDoneIterator(iter!.pair_iter) do
+                    pairing := NextIterator(iter!.pair_iter);
+                    alg := SBAlgFromSourceData(overquiver, pairing, a_vis, b_vis);
+                od;
+
+                # Will only return 'fail' if there are no further pairings
+                # to check
+                return alg;
+            end,
+            IsDoneIterator := function(iter)
+                return IsDoneIterator(iter!.pair_iter);
+            end,
+            ShallowCopy := iter -> rec(
+                pair_iter := ShallowCopy(iter!.pair_iter)
+            )
+        ) );
+
+        return alg_iter;
+    end
+);

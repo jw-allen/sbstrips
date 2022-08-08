@@ -380,5 +380,26 @@ true
 gap> Is2RegQuiver(Q2reg3);
 true
 
+# Generate a special biserial algebra (success)
+gap> O := 1RegQuivFromCycleLengths([3, 1]);
+<quiver with 4 vertices and 4 arrows>
+gap> pairs := [[O.v1, O.v2], [O.v3, O.v4]];
+[ [ v1, v2 ], [ v3, v4 ] ]
+gap> a_vis := VISify(O, [3, 3, 2, 3], "integer");
+<vertex-indexed integer sequence>
+gap> b_vis := VISify(O, [0, 0, 1, 1], "bit");
+<vertex-indexed bit sequence>
+gap> alg := SBAlgFromSourceData(O, pairs, a_vis, b_vis);
+<Rationals[<quiver with 2 vertices and 4 arrows>]/
+<two-sided ideal in <Rationals[<quiver with 2 vertices and 4 arrows>]>,
+  (7 generators)>>
+
+# Generate a special biserial algebra (failure)
+gap> pairs := [[O.v1, O.v3], [O.v2, O.v4]];
+[ [ v1, v3 ], [ v2, v4 ] ]
+gap> alg := SBAlgFromSourceData(O, pairs, a_vis, b_vis);
+ERROR: The 'b' sequence is incompatible with vertex pairs
+fail
+
 # End test
 gap> STOP_TEST("sbstrips.tst");

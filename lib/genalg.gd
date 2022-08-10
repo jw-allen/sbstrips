@@ -32,3 +32,20 @@ DeclareOperation("SBAlgFromSourceData", [IsQuiver, IsList, IsVertexIndexedSequen
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation("SBAlgsFromOverquiverAndSourceDataLists", [IsQuiver, IsList, IsList]);
+
+##  <#GAPDoc Label="DocSBAlgsFromCyclesAndRadLength">
+##    <ManSection>
+##      <Oper Name="SBAlgsFromCyclesAndRadLength" Arg="cycle_lengths, rad_len"/>
+##      <Description>
+##        Arguments: <A>cycle_lengths</A>, a list of positive integers; and
+##          <A>rad_len</A>, a positive integer
+##        <Br />
+##      </Description>
+##      <Returns>
+##        an iterator of special biserial algebras with an overquiver having
+##        the given cycle lengths, and with the specified radical length
+##        NOTE: may include repeats, and final entry could be 'fail'
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation("SBAlgsFromCyclesAndRadLength", [IsList, IsPosInt]);

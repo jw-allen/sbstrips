@@ -49,3 +49,20 @@ DeclareOperation("SBAlgsFromOverquiverAndSourceDataLists", [IsQuiver, IsList, Is
 ##    </ManSection>
 ##  <#/GAPDoc>
 DeclareOperation("SBAlgsFromCyclesAndRadLength", [IsList, IsPosInt]);
+
+##  <#GAPDoc Label="DocSBAlgsFromNumVerticesAndRadLength">
+##    <ManSection>
+##      <Oper Name="SBAlgsFromNumVerticesAndRadLength" Arg="num_vertices, rad_len"/>
+##      <Description>
+##        Arguments: <A>num_vertices</A>, a positive integer; and
+##          <A>rad_len</A>, a positive integer
+##        <Br />
+##      </Description>
+##      <Returns>
+##        an iterator of special biserial algebras with the given number of
+##        vertices, and with the specified radical length
+##        NOTE: may include repeats, and final entry could be 'fail'
+##      </Returns>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation("SBAlgsFromNumVerticesAndRadLength", [IsPosInt, IsPosInt]);

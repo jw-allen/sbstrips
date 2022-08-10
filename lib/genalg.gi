@@ -577,3 +577,67 @@ InstallMethod(
         return alg_iter;
     end
 );
+
+# A wrapper function for SBAlgsFromCyclesAndRadLength that checks for all
+# possible combinations of cycle lengths
+InstallMethod(
+    SBAlgsFromNumVerticesAndRadLength,
+    "for two positive integers",
+    [IsPosInt, IsPosInt],
+    function(num_vertices, rad_len)
+        local
+            partitions,
+            alg_iter,
+            cycle_lengths;
+
+        partitions := Partitions(2 * num_vertices);
+
+        #TODO put this behind an option for being connected
+        if num_vertices > 1 then
+            partitions := Filtered(partitions, x -> (Number(x, y -> y=1) <= Sum(List(x, y -> Maximum(y-2,0)))+2));
+        fi;
+
+        alg_iter := IteratorByFunctions( rec(
+            sub_iter := Iterator([]),
+            par_list := partitions,
+            par_indx := 0,
+
+
+            NextIterator := function(iter)
+                local val;
+                # If finished current sub_iter
+                while IsDoneIterator(iter!.sub_iter) do
+                    # Calculate new sub_iter from the next entry in par_list
+                    iter!.par_indx := iter!.par_indx + 1;
+                    iter!.sub_iter := SBAlgsFromCyclesAndRadLength(iter!.par_list[iter!.par_indx], rad_len);
+                od;
+
+                val := fail;
+                while val = fail do
+                    if not IsDoneIterator(iter!.sub_iter) then
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
+                    fi;
+                    if iter!.par_indx < Length(iter!.par_list) then
+                        iter!.par_indx := iter!.par_indx + 1;
+                        iter!.sub_iter := SBAlgsFromCyclesAndRadLength(iter!.par_list[iter!.par_indx], rad_len);
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
+                    fi;
+                    break;
+                od;
+
+                return val;
+            end,
+            IsDoneIterator := function(iter)
+                return IsDoneIterator(iter!.sub_iter) and iter!.par_indx >= Length(iter!.par_list);
+            end,
+            ShallowCopy := iter -> rec(
+                sub_iter := ShallowCopy(iter!.sub_iter),
+                par_list := ShallowCopy(iter!.par_list),
+                par_indx := ShallowCopy(iter!.par_indx)
+            )
+        ) );
+        return alg_iter;
+    end
+);

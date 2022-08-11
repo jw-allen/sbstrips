@@ -1,9 +1,12 @@
-# Creates a SBAlg from an overquiver <O>, a list of pairs of vertices that will be
-#  identified <v_pairs>, and the source data encoding <a> and <b>
+# Creates a SBAlg from an overquiver <O>, a list of pairs of vertices that will
+#  be identified <v_pairs>, and the source data encoding <a> and <b>
 InstallMethod(
     SBAlgFromSourceData,
     "for a 1-regular quiver, a vertex pairing, a VIS of positive integers and a binary VIS",
-    [IsQuiver, IsList, IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep],
+    [
+        IsQuiver, IsList,
+        IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep
+    ],
     function(O, v_pairs, a, b)
         local
             quiver,
@@ -54,7 +57,8 @@ InstallMethod(
         fi;
 
         quiver := QuiverFilterArrows(2reg, function(x)
-            if a.(String(SourceOfPath(O.(String(x))))) = 0 and b.(String(SourceOfPath(O.(String(x))))) = 1 then
+            if a.(String(SourceOfPath(O.(String(x))))) = 0
+              and b.(String(SourceOfPath(O.(String(x))))) = 1 then
                 return false;
             else
                 return true;
@@ -102,7 +106,9 @@ InstallMethod(
             end;
 
             if IsQuiverVertex(path) then
-                return quiver.(Concatenation("v", String(find_class(path))));
+                return quiver.(
+                  Concatenation("v", String(find_class(path)))
+                );
             elif IsPath(path) then
                 path := WalkOfPath(path);
             elif not IsList(path) or not ForAll(path, IsArrow) then
@@ -221,5 +227,455 @@ InstallMethod(
         fi;
 
         return algebra;
+    end
+);
+
+# Creates an iterator of SBAlgs from an overquiver <O>, and the source data
+#  encoding <a> and <b>
+InstallMethod(
+    SBAlgsFromOverquiverAndSourceDataLists,
+    "for a 1-regular quiver, a list of positive integers and a binary list",
+    [IsQuiver, IsList, IsList],
+    function(overquiver, a, b)
+        local
+            a_vis,
+            b_vis,
+            add_pin_pairs,
+            add_remaining_pairs,
+            pairings,
+            alg,
+            alg_iter;
+
+        if not IsQuiver(overquiver) then
+            return fail;
+        fi;
+        if not (NumberOfVertices(overquiver) mod 2 = 0) then
+            return fail;
+        fi;
+
+        a_vis := VISify(overquiver, a);
+        b_vis := VISify(overquiver, b);
+
+        # Function to recursively pair all of the pin vertices 
+        # (and the corresponding endpoints of their commutativity components)
+        add_pin_pairs := function(cur_pairs)
+            local
+                copy_pairs,
+                paired,
+                unpaired,
+                pin_verts,
+                new_pairs,
+                add_pair,
+                temp_pairs,
+                adding,
+                v1,
+                v2;
+
+            copy_pairs := ShallowCopy(cur_pairs);
+            paired := Union(copy_pairs);
+            unpaired := Filtered(
+                VerticesOfQuiver(overquiver),
+                v -> not v in paired
+            );
+
+            pin_verts := Filtered(unpaired, v -> b_vis.(String(v)) = 0);
+            if Length(pin_verts) mod 2 = 1 then
+                Error("odd number of unpaired pin vertices");
+            fi;
+
+            new_pairs := [];
+
+            add_pair := function(v1, v2, pairs)
+                local u1, u2;
+                if v1 = v2 then
+                    return fail;
+                fi;
+                if v1 in Union(pairs) or v2 in Union(pairs) then
+                    if [v1,v2] in pairs or [v2,v1] in pairs then
+                        return pairs;
+                    else
+                        return fail;
+                    fi;
+                elif b_vis.(String(v1)) = 0 and b_vis.(String(v2)) = 0 then
+                    u1 := 1RegQuivIntAct(v1, -a_vis.(String(v1)));
+                    u2 := 1RegQuivIntAct(v2, -a_vis.(String(v2)));
+
+                    return add_pair(u1, u2, Concatenation(pairs,[[v1,v2]]));
+                elif b_vis.(String(v1)) = 1 and b_vis.(String(v2)) = 1 then
+                    return Concatenation(pairs,[[v1,v2]]);
+                else
+                    return fail;
+                fi;
+            end;
+
+            if Length(pin_verts) >= 2 then
+                v1 := pin_verts[1];
+                for v2 in pin_verts{[2..Length(pin_verts)]} do
+                    adding := add_pair(v1,v2, copy_pairs);
+                    if adding <> fail and Length(adding) > 0 then
+                        temp_pairs := adding;
+                        Append(new_pairs, add_pin_pairs(temp_pairs));
+                    fi;
+                od;
+                return new_pairs;
+            elif Length(pin_verts) = 0 then
+                return [cur_pairs];
+            fi;
+        end;
+
+        # Function to enumerate all possible pairings of remaining
+        # (non-pin) vertices
+        add_remaining_pairs := function(cur_pairs)
+            local
+                copy_pairs,
+                paired,
+                unpaired,
+                rem,
+                output;
+
+            copy_pairs := ShallowCopy(cur_pairs);
+            paired := Union(copy_pairs);
+            unpaired := Filtered(
+                VerticesOfQuiver(overquiver),
+                v -> not v in paired
+            );
+
+            if Length(unpaired) = 0 then
+                return [cur_pairs];
+            else
+                rem := PairingsOfList(unpaired);
+
+                return List(rem, x -> Concatenation(cur_pairs, x));
+            fi;
+        end;
+
+        pairings := add_pin_pairs([]);
+        pairings := List(pairings, x -> add_remaining_pairs(x));
+        pairings := Concatenation(pairings);
+
+        # TODO implement checks for "canonical ordering" of choices of
+        # additional edges when not 2-regular
+
+        alg_iter := IteratorByFunctions( rec(
+            pair_iter := Iterator(pairings),
+
+            NextIterator := function(iter)
+                local
+                    alg,
+                    pairing;
+
+                alg := fail;
+
+                while alg = fail and not IsDoneIterator(iter!.pair_iter) do
+                    pairing := NextIterator(iter!.pair_iter);
+                    alg := SBAlgFromSourceData(
+                        overquiver, pairing, a_vis, b_vis
+                    );
+                od;
+
+                # Will only return 'fail' if there are no further pairings
+                # to check
+                return alg;
+            end,
+            IsDoneIterator := function(iter)
+                return IsDoneIterator(iter!.pair_iter);
+            end,
+            ShallowCopy := iter -> rec(
+                pair_iter := ShallowCopy(iter!.pair_iter)
+            )
+        ) );
+
+        return alg_iter;
+    end
+);
+
+# A wrapper function for SBAlgsFromOverquiverAndSourceDataLists that checks all
+# possibly valid "source data encodings" for a given radical length
+InstallMethod(
+    SBAlgsFromCyclesAndRadLength,
+    "for a list of positive integers and a positive integer",
+    [IsList, IsPosInt],
+    function(cycle_lengths, rad_len)
+        local
+            validASeq,
+            genCycleWithMax,
+            allSourceDataLists,
+            O,
+            sDataLists,
+            sData,
+            alg_iter,
+            i;
+
+        validASeq := function(x, cycle_lengths)
+            local
+                i,
+                cycles,
+                l,
+                c;
+            i := 0;
+            cycles := [];
+            for l in cycle_lengths do
+                Add(cycles, x{[i+1..i+l]});
+                i := i + l;
+            od;
+            for c in cycles do
+                if c[1] <> Maximum(c) then
+                    # ... the first value in a cycle is not the maximal one
+                    #     (this removes most rotationally equivalent lists)
+                    return false;
+                fi;
+                for i in [2..Length(c)] do
+                    if c[i] < c[i-1]-1 then
+                        # ... the length decreases too quickly
+                        return false;
+                    fi;
+                od;
+            od;
+            return true;
+        end;
+
+        genCycleWithMax := function(len, max)
+            local
+                seqs,
+                index,
+                x_seq,
+                x_cnt;
+
+            seqs := Tuples([0..max], len-1);
+            seqs := Reversed(seqs);
+            seqs := Filtered(seqs, function(s)
+                local pos;
+                pos := Position(s, max);
+                if pos <> fail and pos > len/2 then
+                    return false;
+                fi;
+                return true;
+            end);
+            seqs := List(seqs, s -> Concatenation([max],s));
+            seqs := Filtered(seqs, s -> validASeq(s,[len]));
+
+            # filter rotationally equivalent
+            index := 1;
+            while index <= Length(seqs) do
+                x_seq := seqs[index];
+                x_cnt := Set(Collected(x_seq));
+                if ForAny([1..index-1],
+                    function(j)
+                        local
+                            y_seq,
+                            p;
+                        y_seq := seqs[j];
+                        if x_cnt = Set(Collected(y_seq)) then
+                            for p in Positions(y_seq, Maximum(y_seq)) do
+                                if x_seq{[1..len-p+1]} = y_seq{[p..len]}
+                                  and x_seq{[len-p+2..len]} = y_seq{[1..p-1]}
+                                  then
+                                    return true;
+                                fi;
+                            od;
+                        fi;
+                        return false;
+                    end
+                ) then
+                    Remove(seqs, index);
+                else
+                    index := index + 1;
+                fi;
+            od;
+
+            return seqs;
+        end;
+
+        # Generates a list of all possibly valid "source data encodings" with 
+        # radical length <rad_len> on an overquiver with cycle lengths 
+        # <cycle_lengths>
+        allSourceDataLists := function(cycle_lengths, rad_len)
+            local
+                cycle_maxs,
+                cycle_max,
+                cycle_seqs,
+                cur_len,
+                cur_max,
+                a_seqs,
+                b_seqs,
+                paired,
+                i,
+                new_seqs;
+
+            cycle_maxs := Tuples([0..rad_len-1], Length(cycle_lengths));
+            cycle_maxs := Filtered(cycle_maxs, x -> Maximum(x)=rad_len-1);
+
+            # Generate all possible a sequences
+            a_seqs := [];
+            for cycle_max in cycle_maxs do
+                cycle_seqs := [];
+                for i in [1..Length(cycle_max)] do
+                    cur_len := cycle_lengths[i];
+                    cur_max := cycle_max[i];
+                    Add(cycle_seqs, genCycleWithMax(cur_len, cur_max));
+                od;
+                cycle_seqs := Cartesian(cycle_seqs);
+                new_seqs := List(cycle_seqs, x->Concatenation(x));
+                Append(a_seqs, new_seqs);
+            od;
+
+            # Remove sequence if invalid
+            a_seqs := Filtered(a_seqs, x -> validASeq(x, cycle_lengths));
+            a_seqs := Filtered(a_seqs, x -> x <> fail);
+
+            # Allow all binary tuples
+            b_seqs := Tuples([0,1], Sum(cycle_lengths));
+            # Remove tuples where the number of 1s is odd
+            b_seqs := Filtered(b_seqs, x -> Sum(x) mod 2 = 0);
+
+            # Create all pairs of sequences for a and b
+            paired := Cartesian(a_seqs, b_seqs);
+            # Remove pair if ...
+            paired := Filtered(paired, 
+                function(x)
+                    local
+                        i;
+                    for i in [1..Length(x[1])] do
+                        if x[1][i] <= 1 and x[2][i] = 0 then
+                            # ... there is a vertex which should be "pin" 
+                            # and "length zero or one"
+                            return false;
+                        fi;
+                    od;
+                    return true;
+                end
+            );
+
+            return paired;
+        end;
+
+        O := 1RegQuivFromCycleLengths(cycle_lengths);
+        sDataLists := allSourceDataLists(cycle_lengths, rad_len);
+
+        alg_iter := IteratorByFunctions( rec(
+            sub_iter := Iterator([]),
+            dat_iter := Iterator(sDataLists),
+
+            NextIterator := function(iter)
+                local val;
+
+                # If finished current sub_iter
+                while IsDoneIterator(iter!.sub_iter) do
+                    if IsDoneIterator(iter!.dat_iter) then
+                        return fail;
+                    fi;
+                    # Save next source data
+                    sData := NextIterator(iter!.dat_iter);
+
+                    # Calculate new sub_iter from the source data
+                    iter!.sub_iter := Iterator(
+                        SBAlgsFromOverquiverAndSourceDataLists(
+                            O, sData[1], sData[2]
+                        )
+                    );
+                od;
+                val := NextIterator(iter!.sub_iter);
+
+                while val = fail and not IsDoneIterator(iter!.sub_iter) do
+                    sData := NextIterator(iter!.dat_iter);
+                    iter!.sub_iter := Iterator(
+                        SBAlgsFromOverquiverAndSourceDataLists(
+                            O, sData[1], sData[2]
+                        )
+                    );
+                    val := NextIterator(iter!.sub_iter);
+                od;
+
+                return val;
+            end,
+            IsDoneIterator := function(iter)
+                return IsDoneIterator(iter!.sub_iter) 
+                  and IsDoneIterator(iter!.dat_iter);
+            end,
+            ShallowCopy := iter -> rec(
+                sub_iter := ShallowCopy(iter!.sub_iter),
+                dat_iter := ShallowCopy(iter!.dat_iter)
+            )
+        ) );
+
+        return alg_iter;
+    end
+);
+
+# A wrapper function for SBAlgsFromCyclesAndRadLength that checks for all
+# possible combinations of cycle lengths
+InstallMethod(
+    SBAlgsFromNumVerticesAndRadLength,
+    "for two positive integers",
+    [IsPosInt, IsPosInt],
+    function(num_vertices, rad_len)
+        local
+            partitions,
+            alg_iter,
+            cycle_lengths;
+
+        partitions := Partitions(2 * num_vertices);
+
+        #TODO put this behind an option for being connected
+        if num_vertices > 1 then
+            partitions := Filtered(
+                partitions,
+                function(x)
+                    local max_leaf;
+                    max_leaf := Sum(List(x, y -> Maximum(y-2, 0))) + 2;
+                    return Number(x, y -> y=1) <= max_leaf;
+                end
+            );
+        fi;
+
+        alg_iter := IteratorByFunctions( rec(
+            sub_iter := Iterator([]),
+            par_list := partitions,
+            par_indx := 0,
+
+
+            NextIterator := function(iter)
+                local val;
+                # If finished current sub_iter
+                while IsDoneIterator(iter!.sub_iter) do
+                    # Calculate new sub_iter from the next entry in par_list
+                    iter!.par_indx := iter!.par_indx + 1;
+                    iter!.sub_iter := SBAlgsFromCyclesAndRadLength(
+                        iter!.par_list[iter!.par_indx],
+                        rad_len
+                    );
+                od;
+
+                val := fail;
+                while val = fail do
+                    if not IsDoneIterator(iter!.sub_iter) then
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
+                    fi;
+                    if iter!.par_indx < Length(iter!.par_list) then
+                        iter!.par_indx := iter!.par_indx + 1;
+                        iter!.sub_iter := SBAlgsFromCyclesAndRadLength(
+                            iter!.par_list[iter!.par_indx],
+                            rad_len
+                        );
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
+                    fi;
+                    break;
+                od;
+
+                return val;
+            end,
+            IsDoneIterator := function(iter)
+                return IsDoneIterator(iter!.sub_iter)
+                    and iter!.par_indx >= Length(iter!.par_list);
+            end,
+            ShallowCopy := iter -> rec(
+                sub_iter := ShallowCopy(iter!.sub_iter),
+                par_list := ShallowCopy(iter!.par_list),
+                par_indx := ShallowCopy(iter!.par_indx)
+            )
+        ) );
+        return alg_iter;
     end
 );

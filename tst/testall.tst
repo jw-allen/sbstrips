@@ -401,5 +401,17 @@ gap> alg := SBAlgFromSourceData(O, pairs, a_vis, b_vis);
 ERROR: The 'b' sequence is incompatible with vertex pairs
 fail
 
+# Check number of algebras created from a given cycle and radical length
+gap> ForAll(
+>   [3..20],
+>   function(rad)
+>       local algs;
+>       algs := List(SBAlgsFromCyclesAndRadLength([2], rad));
+>       algs := Filtered(algs, a -> a <> fail);
+>       return Length(algs) = 3;
+>   end
+> );
+true
+
 # End test
 gap> STOP_TEST("sbstrips.tst");

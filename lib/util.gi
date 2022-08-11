@@ -425,6 +425,39 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    PairingsOfList,
+    "for a list",
+    [IsList],
+    function(list)
+        local
+            pairings,
+            p1,
+            sublist,
+            newpairs,
+            i;
+        if not (Length(list) mod 2 = 0) then
+            return fail;
+        fi;
+        pairings := [];
+        if Length(list) > 2 then
+            for i in [2..Length(list)] do
+                p1 := [list[1], list[i]];
+                sublist := list{Concatenation([2..i-1],[i+1..Length(list)])};
+                # Display(p1);
+                # Display(sublist);
+
+                newpairs := List(PairingsOfList(sublist), p2 -> Concatenation([p1],p2));
+
+                Append(pairings, newpairs);
+            od;
+        elif Length(list) = 2 then
+            return [[list]];
+        fi;
+        return pairings;
+    end
+);
+
 # Useful functions for QPA
 
 InstallMethod(

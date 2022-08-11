@@ -1,9 +1,12 @@
-# Creates a SBAlg from an overquiver <O>, a list of pairs of vertices that will be
-#  identified <v_pairs>, and the source data encoding <a> and <b>
+# Creates a SBAlg from an overquiver <O>, a list of pairs of vertices that will
+#  be identified <v_pairs>, and the source data encoding <a> and <b>
 InstallMethod(
     SBAlgFromSourceData,
     "for a 1-regular quiver, a vertex pairing, a VIS of positive integers and a binary VIS",
-    [IsQuiver, IsList, IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep],
+    [
+        IsQuiver, IsList,
+        IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep
+    ],
     function(O, v_pairs, a, b)
         local
             quiver,
@@ -54,7 +57,8 @@ InstallMethod(
         fi;
 
         quiver := QuiverFilterArrows(2reg, function(x)
-            if a.(String(SourceOfPath(O.(String(x))))) = 0 and b.(String(SourceOfPath(O.(String(x))))) = 1 then
+            if a.(String(SourceOfPath(O.(String(x))))) = 0
+              and b.(String(SourceOfPath(O.(String(x))))) = 1 then
                 return false;
             else
                 return true;
@@ -102,7 +106,9 @@ InstallMethod(
             end;
 
             if IsQuiverVertex(path) then
-                return quiver.(Concatenation("v", String(find_class(path))));
+                return quiver.(
+                  Concatenation("v", String(find_class(path)))
+                );
             elif IsPath(path) then
                 path := WalkOfPath(path);
             elif not IsList(path) or not ForAll(path, IsArrow) then
@@ -250,7 +256,8 @@ InstallMethod(
         a_vis := VISify(overquiver, a);
         b_vis := VISify(overquiver, b);
 
-        # Function to recursively pair all of the pin vertices (and the corresponding endpoints of their commutativity components)
+        # Function to recursively pair all of the pin vertices 
+        # (and the corresponding endpoints of their commutativity components)
         add_pin_pairs := function(cur_pairs)
             local
                 copy_pairs,
@@ -266,7 +273,10 @@ InstallMethod(
 
             copy_pairs := ShallowCopy(cur_pairs);
             paired := Union(copy_pairs);
-            unpaired := Filtered(VerticesOfQuiver(overquiver), v -> not v in paired);
+            unpaired := Filtered(
+                VerticesOfQuiver(overquiver),
+                v -> not v in paired
+            );
 
             pin_verts := Filtered(unpaired, v -> b_vis.(String(v)) = 0);
             if Length(pin_verts) mod 2 = 1 then
@@ -313,7 +323,8 @@ InstallMethod(
             fi;
         end;
 
-        # Function to enumerate all possible pairings of remaining (non-pin) vertices
+        # Function to enumerate all possible pairings of remaining
+        # (non-pin) vertices
         add_remaining_pairs := function(cur_pairs)
             local
                 copy_pairs,
@@ -324,7 +335,10 @@ InstallMethod(
 
             copy_pairs := ShallowCopy(cur_pairs);
             paired := Union(copy_pairs);
-            unpaired := Filtered(VerticesOfQuiver(overquiver), v -> not v in paired);
+            unpaired := Filtered(
+                VerticesOfQuiver(overquiver),
+                v -> not v in paired
+            );
 
             if Length(unpaired) = 0 then
                 return [cur_pairs];
@@ -348,14 +362,15 @@ InstallMethod(
             NextIterator := function(iter)
                 local
                     alg,
-                    pairing,
-                    O;
+                    pairing;
 
                 alg := fail;
 
                 while alg = fail and not IsDoneIterator(iter!.pair_iter) do
                     pairing := NextIterator(iter!.pair_iter);
-                    alg := SBAlgFromSourceData(overquiver, pairing, a_vis, b_vis);
+                    alg := SBAlgFromSourceData(
+                        overquiver, pairing, a_vis, b_vis
+                    );
                 od;
 
                 # Will only return 'fail' if there are no further pairings
@@ -374,8 +389,8 @@ InstallMethod(
     end
 );
 
-# A wrapper function for SBAlgsFromOverquiverAndSourceDataLists that checks all possibly
-# valid "source data encodings" for a given radical length
+# A wrapper function for SBAlgsFromOverquiverAndSourceDataLists that checks all
+# possibly valid "source data encodings" for a given radical length
 InstallMethod(
     SBAlgsFromCyclesAndRadLength,
     "for a list of positive integers and a positive integer",
@@ -453,7 +468,8 @@ InstallMethod(
                         if x_cnt = Set(Collected(y_seq)) then
                             for p in Positions(y_seq, Maximum(y_seq)) do
                                 if x_seq{[1..len-p+1]} = y_seq{[p..len]}
-                                    and x_seq{[len-p+2..len]} = y_seq{[1..p-1]} then
+                                  and x_seq{[len-p+2..len]} = y_seq{[1..p-1]}
+                                  then
                                     return true;
                                 fi;
                             od;
@@ -470,8 +486,9 @@ InstallMethod(
             return seqs;
         end;
 
-        # Generates a list of all possibly valid "source data encodings" with radical length <rad_len>
-        # on an overquiver with cycle lengths <cycle_lengths>
+        # Generates a list of all possibly valid "source data encodings" with 
+        # radical length <rad_len> on an overquiver with cycle lengths 
+        # <cycle_lengths>
         allSourceDataLists := function(cycle_lengths, rad_len)
             local
                 cycle_maxs,
@@ -520,7 +537,8 @@ InstallMethod(
                         i;
                     for i in [1..Length(x[1])] do
                         if x[1][i] <= 1 and x[2][i] = 0 then
-                            # ... there is a vertex which should be "pin" and "length zero or one"
+                            # ... there is a vertex which should be "pin" 
+                            # and "length zero or one"
                             return false;
                         fi;
                     od;
@@ -548,25 +566,31 @@ InstallMethod(
                     fi;
                     # Save next source data
                     sData := NextIterator(iter!.dat_iter);
-                    #TODO remove
-                    # Display(cycle_lengths);
-                    # Display(sData);
 
                     # Calculate new sub_iter from the source data
-                    iter!.sub_iter := Iterator(SBAlgsFromOverquiverAndSourceDataLists(O, sData[1], sData[2]));
+                    iter!.sub_iter := Iterator(
+                        SBAlgsFromOverquiverAndSourceDataLists(
+                            O, sData[1], sData[2]
+                        )
+                    );
                 od;
                 val := NextIterator(iter!.sub_iter);
 
                 while val = fail and not IsDoneIterator(iter!.sub_iter) do
                     sData := NextIterator(iter!.dat_iter);
-                    iter!.sub_iter := Iterator(SBAlgsFromOverquiverAndSourceDataLists(O, sData[1], sData[2]));
+                    iter!.sub_iter := Iterator(
+                        SBAlgsFromOverquiverAndSourceDataLists(
+                            O, sData[1], sData[2]
+                        )
+                    );
                     val := NextIterator(iter!.sub_iter);
                 od;
 
                 return val;
             end,
             IsDoneIterator := function(iter)
-                return IsDoneIterator(iter!.sub_iter) and IsDoneIterator(iter!.dat_iter);
+                return IsDoneIterator(iter!.sub_iter) 
+                  and IsDoneIterator(iter!.dat_iter);
             end,
             ShallowCopy := iter -> rec(
                 sub_iter := ShallowCopy(iter!.sub_iter),
@@ -594,7 +618,14 @@ InstallMethod(
 
         #TODO put this behind an option for being connected
         if num_vertices > 1 then
-            partitions := Filtered(partitions, x -> (Number(x, y -> y=1) <= Sum(List(x, y -> Maximum(y-2,0)))+2));
+            partitions := Filtered(
+                partitions,
+                function(x)
+                    local max_leaf;
+                    max_leaf := Sum(List(x, y -> Maximum(y-2, 0))) + 2;
+                    return Number(x, y -> y=1) <= max_leaf;
+                end
+            );
         fi;
 
         alg_iter := IteratorByFunctions( rec(
@@ -609,7 +640,10 @@ InstallMethod(
                 while IsDoneIterator(iter!.sub_iter) do
                     # Calculate new sub_iter from the next entry in par_list
                     iter!.par_indx := iter!.par_indx + 1;
-                    iter!.sub_iter := SBAlgsFromCyclesAndRadLength(iter!.par_list[iter!.par_indx], rad_len);
+                    iter!.sub_iter := SBAlgsFromCyclesAndRadLength(
+                        iter!.par_list[iter!.par_indx],
+                        rad_len
+                    );
                 od;
 
                 val := fail;
@@ -620,7 +654,10 @@ InstallMethod(
                     fi;
                     if iter!.par_indx < Length(iter!.par_list) then
                         iter!.par_indx := iter!.par_indx + 1;
-                        iter!.sub_iter := SBAlgsFromCyclesAndRadLength(iter!.par_list[iter!.par_indx], rad_len);
+                        iter!.sub_iter := SBAlgsFromCyclesAndRadLength(
+                            iter!.par_list[iter!.par_indx],
+                            rad_len
+                        );
                         val := NextIterator(iter!.sub_iter);
                         continue;
                     fi;
@@ -630,7 +667,8 @@ InstallMethod(
                 return val;
             end,
             IsDoneIterator := function(iter)
-                return IsDoneIterator(iter!.sub_iter) and iter!.par_indx >= Length(iter!.par_list);
+                return IsDoneIterator(iter!.sub_iter)
+                    and iter!.par_indx >= Length(iter!.par_list);
             end,
             ShallowCopy := iter -> rec(
                 sub_iter := ShallowCopy(iter!.sub_iter),

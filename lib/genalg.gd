@@ -13,7 +13,10 @@
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation("SBAlgFromSourceData", [IsQuiver, IsList, IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep]);
+DeclareOperation(
+    "SBAlgFromSourceData",
+    [IsQuiver, IsList, IsVertexIndexedSequenceRep, IsVertexIndexedSequenceRep]
+);
 
 ##  <#GAPDoc Label="DocSBAlgsFromOverquiverAndSourceDataLists">
 ##    <ManSection>
@@ -31,7 +34,10 @@ DeclareOperation("SBAlgFromSourceData", [IsQuiver, IsList, IsVertexIndexedSequen
 ##      </Returns>
 ##    </ManSection>
 ##  <#/GAPDoc>
-DeclareOperation("SBAlgsFromOverquiverAndSourceDataLists", [IsQuiver, IsList, IsList]);
+DeclareOperation(
+    "SBAlgsFromOverquiverAndSourceDataLists",
+    [IsQuiver, IsList, IsList]
+);
 
 ##  <#GAPDoc Label="DocSBAlgsFromCyclesAndRadLength">
 ##    <ManSection>

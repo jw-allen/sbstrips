@@ -1,6 +1,6 @@
 +--------------------------------------------------------+--------------------+
 |                                                        | Copyright (C) 2021 |
-|                   SBStrips  (v0.6.5)                   |          Joe Allen |
+|                   SBStrips  (v0.7.0)                   |          Joe Allen |
 |                                                        |       [he/him/his] |
 +--------------------------------------------------------+--------------------+
 
@@ -28,9 +28,9 @@ The SBStrips can be installed by following these steps (assuming you already
 have GAP installed.)
 
     1. Download the archive file
-            sbstrips/archive/v0.6.5.tar.gz
+            sbstrips/archive/v0.7.0.tar.gz
        from
-            https://github.com/jw-allen/sbstrips/archive/v0.6.5.tar.gz
+            https://github.com/jw-allen/sbstrips/archive/v0.7.0.tar.gz
 
     2. Unpack it into your  pkg  directory. It should create a subdirectory
        called  sbstrips.

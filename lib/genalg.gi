@@ -559,31 +559,23 @@ InstallMethod(
             NextIterator := function(iter)
                 local val;
 
-                # If finished current sub_iter
-                while IsDoneIterator(iter!.sub_iter) do
-                    if IsDoneIterator(iter!.dat_iter) then
-                        return fail;
+                val := fail;
+                while val = fail do
+                    if not IsDoneIterator(iter!.sub_iter) then
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
                     fi;
-                    # Save next source data
-                    sData := NextIterator(iter!.dat_iter);
-
-                    # Calculate new sub_iter from the source data
-                    iter!.sub_iter := Iterator(
-                        SBAlgsFromOverquiverAndSourceDataLists(
-                            O, sData[1], sData[2]
-                        )
-                    );
-                od;
-                val := NextIterator(iter!.sub_iter);
-
-                while val = fail and not IsDoneIterator(iter!.sub_iter) do
-                    sData := NextIterator(iter!.dat_iter);
-                    iter!.sub_iter := Iterator(
-                        SBAlgsFromOverquiverAndSourceDataLists(
-                            O, sData[1], sData[2]
-                        )
-                    );
-                    val := NextIterator(iter!.sub_iter);
+                    if not IsDoneIterator(iter!.dat_iter) then
+                        sData := NextIterator(iter!.dat_iter);
+                        iter!.sub_iter := Iterator(
+                            SBAlgsFromOverquiverAndSourceDataLists(
+                                O, sData[1], sData[2]
+                            )
+                        );
+                        val := NextIterator(iter!.sub_iter);
+                        continue;
+                    fi;
+                    break;
                 od;
 
                 return val;
@@ -636,15 +628,6 @@ InstallMethod(
 
             NextIterator := function(iter)
                 local val;
-                # If finished current sub_iter
-                while IsDoneIterator(iter!.sub_iter) do
-                    # Calculate new sub_iter from the next entry in par_list
-                    iter!.par_indx := iter!.par_indx + 1;
-                    iter!.sub_iter := SBAlgsFromCyclesAndRadLength(
-                        iter!.par_list[iter!.par_indx],
-                        rad_len
-                    );
-                od;
 
                 val := fail;
                 while val = fail do

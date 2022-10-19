@@ -8,6 +8,7 @@ DeclareAttribute("ZeroSyllableOfSBAlg", IsSpecialBiserialAlgebra);
 DeclareOperation("Syllabify", [IsPath, IsInt]);
 
 DeclareOperation("UnderlyingPathOfSyllable", [IsSyllableRep]);
+DeclareOperation("CompressionOfSyllable", [IsSyllableRep]);
 DeclareOperation("StabilityTermOfSyllable", [IsSyllableRep]);
 
 DeclareProperty("IsZeroSyllable", IsSyllableRep);

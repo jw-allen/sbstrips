@@ -3220,9 +3220,9 @@ InstallMethod(
              WithoutProjectiveStrips(CollectedNthSyzygyOfStrip(strip, N));
 
             test_module := nth_syzygy;
-            for k in [1 .. N + 1] do
-                test_module := SuspensionOfStrip(test_module);
-            od;
+            test_module := TrOfStrip(test_module);
+            test_module := CollectedNthSyzygyOfStrip(test_module, N + 1);
+            test_module := TrOfStrip(test_module);
             test_module := CollectedNthSyzygyOfStrip(test_module, N + 1);
             test_module := WithoutProjectiveStrips(test_module);
 

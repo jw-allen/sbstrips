@@ -295,7 +295,7 @@ InstallMethod(
              " should be a collected list!");
 
         else
-            new := ShallowCopy(clist);
+            new := List(clist, entry -> ShallowCopy(entry));
 
             for x in new do
                 x[1] := func(x[1]);

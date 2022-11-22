@@ -296,6 +296,33 @@ InstallMethod(
 );
 
 InstallMethod(
+    SourceOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return SourceOfPath(CompressionOfSyllable(sy));
+    end
+);
+
+InstallMethod(
+    TargetOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return TargetOfPath(CompressionOfSyllable(sy));
+    end
+);
+
+InstallMethod(
+    LengthOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return LengthOfPath(CompressionOfSyllable(sy));
+    end
+);
+
+InstallMethod(
     IsStableSyllable,
     "for syllables",
     [IsSyllableRep],

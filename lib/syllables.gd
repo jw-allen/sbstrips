@@ -11,6 +11,10 @@ DeclareOperation("UnderlyingPathOfSyllable", [IsSyllableRep]);
 DeclareOperation("CompressionOfSyllable", [IsSyllableRep]);
 DeclareOperation("StabilityTermOfSyllable", [IsSyllableRep]);
 
+DeclareOperation("SourceOfSyllable", [IsSyllableRep]);
+DeclareOperation("TargetOfSyllable", [IsSyllableRep]);
+DeclareOperation("LengthOfSyllable", [IsSyllableRep]);
+
 DeclareProperty("IsZeroSyllable", IsSyllableRep);
 DeclareProperty("IsVirtualSyllable", IsSyllableRep);
 DeclareProperty("IsStableSyllable", IsSyllableRep);

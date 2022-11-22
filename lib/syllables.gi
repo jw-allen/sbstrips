@@ -270,11 +270,55 @@ InstallMethod(
 );
 
 InstallMethod(
+    CompressionOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        local s, l;
+
+        if IsZeroSyllable(sy) then
+            return sy!.path;
+        else
+            s := SourceOfPath(sy!.path);
+            l := LengthOfPath(sy!.path) + sy!.stability;
+            return PathBySourceAndLength(s, l);
+        fi;
+    end
+);
+
+InstallMethod(
     StabilityTermOfSyllable,
     "for syllables",
     [IsSyllableRep],
     function(sy)
         return sy!.stability;
+    end
+);
+
+InstallMethod(
+    SourceOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return SourceOfPath(CompressionOfSyllable(sy));
+    end
+);
+
+InstallMethod(
+    TargetOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return TargetOfPath(CompressionOfSyllable(sy));
+    end
+);
+
+InstallMethod(
+    LengthOfSyllable,
+    "for syllables",
+    [IsSyllableRep],
+    function(sy)
+        return LengthOfPath(CompressionOfSyllable(sy));
     end
 );
 

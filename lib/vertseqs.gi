@@ -93,6 +93,7 @@ InstallMethod(
                 Print(",\n");
             fi;
         od;
+        Print("\n");
     end
 );
 

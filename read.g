@@ -1,4 +1,5 @@
 ReadPackage("sbstrips", "lib/1reg.gi");
+ReadPackage("sbstrips", "lib/belts.gi");
 ReadPackage("sbstrips", "lib/genalg.gi");
 ReadPackage("sbstrips", "lib/info.gi");
 ReadPackage("sbstrips", "lib/makedoc.gi");

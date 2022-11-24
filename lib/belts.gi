@@ -1199,335 +1199,286 @@ RedispatchOnCondition(
 
 # -----------------------------------------------------------------------------
 
-# InstallMethod(
-#     ModuleDataOfStrip,
-#     "for a strip-rep",
-#     [IsStripRep],
-#     function(strip)
-#         local
-#             data,       # Syllable and orientation list in <strip>
-#             dim_vector, # Dimension vector of the output module
-#             expand_last_syll, expand_neg_syll, expand_pos_syll,
-#                         # Local functions which turn syllables into "expanded
-#                         #  walks"
-#             expanded,   # Total expanded walk of strip
-#             field,      # Ground field of <sba>
-#             gens,       # Arrow-indexed list of matrices corresponding to the
-#                         #  <field>-linear maps described by <strip>
-#             is_nonnull_mat,
-#                         # Local function, to be used to filter out matrices of
-#                         #  zeroes from output
-#             L_data, L_expanded,
-#                         # Integer variable (for the lengths of <data> and
-#                         #  <expanded> respectively)
-#             m,          # Integer variable (for the even indices of <data>)
-#             matrix_of_arrow,
-#                         # Local function which turns an arrow of <quiv> into
-#                         #  a matrix representing a linear map, as specified by
-#                         #  <expanded>
-#             one,        # Multiplicative identity of <field>
-#             quiv,       # Ground quiver of <sba>
-#             sba,        # SB algebra to which <strip> belongs
-#             vertex_multiplicity_up_to,
-#                         # Local function which counts the number of times a
-#                         #  vertex appears in <expanded> before a given index
-#             zero;       # Additive identity of <field>
-#
-#         sba := FamilyObj(strip)!.sb_alg;
-#         quiv := QuiverOfPathAlgebra(OriginalPathAlgebra(sba));
-#
-#         field := FieldOfQuiverAlgebra(sba);
-#         one := One(field);
-#         zero := Zero(field);
-#
-#         # Test that input is a "proper" strip
-#         if IsZeroStrip(strip) then
-#             return ZeroModule(sba);
-#
-#         elif IsVirtualStripRep(strip) then
-#             Error("Virtual strips do not represent modules!");
-#         fi;
-#
-#         # Otherwise, our first (real) step is to unpack the data of <strip>. We
-#         #  unpack it into a list whose entries are alternately (i) vertices of
-#         #  the ground quiver and (ii) lists of the form [arr, N] for <arr> an
-#         #  arrow of the ground quiver and <N> either 1 or -1. From this
-#         #  "expanded walk" <expanded>, creating the associated string module is
-#         #  straightforward.
-#         #
-#         # The "expanded walk" of a given positive syllable
-#         #
-#         #          A      B       C
-#         #       i --> ii --> iii --> iv
-#         #
-#         #  looks like
-#         #
-#         #       [i, [A,1], ii, [B,1], iii, [C,1]]
-#         #
-#         #  (notice there's no iv!) while the "expanded walk" of a negative
-#         #  syllable
-#         #
-#         #           C       B      A
-#         #       iv <-- iii <-- ii <-- i
-#         #
-#         #  looks like
-#         #
-#         #       [iv, [C,-1], iii, [B,-1], ii, [A,-1]]
-#         #  (notice there's no i!). These are respectively calculated using the
-#         #  functions <expand_pos_syll> and <expand_neg_syll>.
-#         #
-#         # Once the "expanded walk" of each syllable is concatenated, there then
-#         #  needs to be a "rounding off": that is, we add on the iv or the i, as
-#         #  appropriate. This is what <expand_last_syll> does.
-#
-#         expand_last_syll := function(syll, N)
-#             local
-#                 opath,  # Underlying path (in the overquiver) of <syll>
-#                 path;   # Ground path represented by <opath>
-#
-#             opath := UnderlyingPathOfSyllable(syll);
-#             path := GroundPathOfOverquiverPathNC(opath);
-#
-#             if N = 1 then
-#                 return [TargetOfPath(path)];
-#
-#             else
-#                 return [SourceOfPath(path)];
-#             fi;
-#         end;
-#
-#         expand_neg_syll := function(syll)
-#             local
-#                 a,          # Arrow variable (for entries of <walk>)
-#                 exp_walk,   # "Expanded" version of <walk>
-#                 k,          # Integer variable (indexing the entries of <walk>
-#                 opath,      # Underlying path (in the overquiver) of <syll>
-#                 path,       # Ground path represented by <opath>
-#                 walk;       # Walk of <path>
-#
-#             opath := UnderlyingPathOfSyllable(syll);
-#             path := GroundPathOfOverquiverPathNC(opath);
-#             walk := WalkOfPath(path);
-#             exp_walk := [];
-#
-#             # Note that if <walk> is a stationary path, then the following FOR
-#             #  loop is null
-#             for k in [1 .. Length(WalkOfPath(path))] do
-#                 a := walk[k];
-#                 Add(exp_walk, [a, -1]);
-#                 Add(exp_walk, TargetOfPath(a));
-#             od;
-#
-#             # If <walk> is a stationary path, then <ex_walk> has length 1 and
-#             #  so equals its reverse
-#             return Reversed(exp_walk);
-#         end;
-#
-#         expand_pos_syll := function(syll)
-#             local
-#                 a,          # Arrow variable (for entries of <walk>)
-#                 exp_walk,   # "Expanded" version of <walk>
-#                 k,          # Integer variable (indexing the entries of <walk>
-#                 opath,      # Underlying path (in the overquiver) of <syll>
-#                 path,       # Ground path represented by <opath>
-#                 walk;       # Walk of <path>
-#
-#             opath := UnderlyingPathOfSyllable(syll);
-#             path := GroundPathOfOverquiverPathNC(opath);
-#             walk := WalkOfPath(path);
-#             exp_walk := [];
-#
-#             # Note that if <walk> is a stationary path, then the following FOR
-#             #  loop is null
-#             for k in [1 .. Length(WalkOfPath(path))] do
-#                 a := walk[k];
-#                 Add(exp_walk, SourceOfPath(a));
-#                 Add(exp_walk, [a, 1]);
-#             od;
-#
-#             return exp_walk;
-#         end;
-#
-#         data := strip!.data;
-#         L_data := Length(data);
-#         expanded := [];
-#
-#         for m in Filtered([1 .. L_data], IsEvenInt) do
-#             if data[m] = -1 then
-#                 Append(expanded, expand_neg_syll(data[m-1]));
-#
-#             else
-#                 Append(expanded, expand_pos_syll(data[m-1]));
-#             fi;
-#         od;
-#
-#         Append(
-#          expanded,
-#          CallFuncList(expand_last_syll, data{[L_data - 1, L_data]})
-#         );
-#
-#         # Now, the "expanded walk" is finished. From it, we obtain the
-#         #  dimension vector and matrices of the desired quiver representation.
-#
-#         # The entries of <expanded> at odd indices constitute a basis for the
-#         #  resulting module. Therefore, the dimension of the vector space at a
-#         #  given vertex <v> is the number of times <v> appears in <expanded>.
-#         #
-#         # The basis of the resulting module is the coproduct (ie, disjoint
-#         #  union) of the bases at each vertex, but note that we take the basis
-#         #  vectors of the module in the order they appear in <expanded>. When
-#         #  determining which basis vector is sent by a linear map to which
-#         #  other vector (or rather, concretely, in which position of the
-#         #  associated matrix to place a <one>), we need to know how many other
-#         #  basis vector of *that vertex space* have appeared in the order be-
-#         #  -fore it.
-#
-#         vertex_multiplicity_up_to := function(vertex, index)
-#             return Number(
-#              expanded{[1 .. index]},
-#              x -> x = vertex
-#             );
-#         end;
-#
-#         L_expanded := Length(expanded);
-#
-#         dim_vector := List(
-#          VerticesOfQuiver(quiv),
-#          v -> vertex_multiplicity_up_to(v, L_expanded)
-#         );
-#
-#         matrix_of_arrow := function(arrow)
-#             local
-#                 c, r,   # Integer variables (respectively for the column and
-#                         #  row index of <mat> that needs a <one>
-#                 C, R,   # Integer variables (respectively for the number of
-#                         #  columns and rows <matrix> must have)
-#                 entry,  # Variable (for the entries of <expanded> at odd
-#                         #  indices)
-#                 matrix, # Matrix variable, for the matrix of the linear map
-#                         # associated to <arrow>
-#                 k,      # Integer variable (for the odd indices of <expanded>)
-#                 source, # Source of <arrow>
-#                 target; # Target of <arrow>
-#
-#             source := SourceOfPath(arrow);
-#             target := TargetOfPath(arrow);
-#
-#             R := vertex_multiplicity_up_to(source, L_expanded);
-#             C := vertex_multiplicity_up_to(target, L_expanded);
-#
-#             matrix := NullMat(R, C, field);
-#
-#             for k in Filtered([1 .. L_expanded], IsEvenInt) do
-#                 entry := expanded[k];
-#
-#                 if entry[1] = arrow then
-#                     if entry[2] = 1 then
-#                         r := vertex_multiplicity_up_to(source, k - 1);
-#                         c := vertex_multiplicity_up_to(target, k + 1);
-#                         matrix[r][c] := one;
-#
-#                     else
-#                         r := vertex_multiplicity_up_to(source, k + 1);
-#                         c := vertex_multiplicity_up_to(target, k - 1);
-#                         matrix[r][c] := one;
-#                     fi;
-#                 fi;
-#             od;
-#
-#             return matrix;
-#         end;
-#
-#         # We only need to tell GAP about matrices of nonzero linear maps. The
-#         #  following function can detect them.
-#         is_nonnull_mat := function(mat)
-#             return not ForAll(Flat(mat), x -> x = zero);
-#         end;
-#
-#         # We find the nonzero matrices and tell them to GAP.
-#         gens := List(
-#          Filtered(
-#           ArrowsOfQuiver(quiv),
-#           x -> is_nonnull_mat(matrix_of_arrow(x))
-#          ),
-#          x -> [String(x), matrix_of_arrow(x)]
-#         );
-#
-#         return Immutable([sba, dim_vector, gens]);
-#     end
-# );
-#
-# InstallMethod(
-#     ModuleOfStrip,
-#     "for strip-reps",
-#     [IsStripRep],
-#     function(strip)
-#         local
-#             get_sba,    # Local function that obtains <sba> from <strip>
-#             sba;        # SB algebra to which <strip> belongs
-#
-#         if IsZeroStrip(strip) then
-#             # Accessing the components of <strip> is naughty, and may be
-#             #  impacted by future changes to how this information is stored.
-#             #  To minimise possible impact, I concentrate all the naughty
-#             #  access into one local function.
-#
-#             get_sba := function(s)
-#                 return FamilyObj(s)!.sb_alg;
-#             end;
-#
-#             sba := get_sba(strip);
-#
-#             return ZeroModule(sba);
-#
-#         else
-#             return CallFuncList(
-#              RightModuleOverPathAlgebra,
-#              ModuleDataOfStrip(strip)
-#             );
-#         fi;
-#      end
-# );
-#
-# InstallOtherMethod(
-#     ModuleOfStrip,
-#     "for (flat) lists of strips",
-#     [IsList],
-#     function(list)
-#
-#         if not (ForAll(list, IsStripRep)) then
-#             TryNextMethod();
-#
-#         else
-#             return List(list, ModuleOfStrip);
-#
-#         fi;
-#     end
-# );
-#
-# InstallOtherMethod(
-#     ModuleOfStrip,
-#     "for collected lists of strips",
-#     [IsList],
-#     function(clist)
-#         local
-#             elts;   # Variable, for elements of <clist>
-#
-#         if not IsCollectedList(clist) then
-#             TryNextMethod();
-#
-#         else
-#             elts := List(clist, x -> x[1]);
-#             if not ForAll(elts, IsStripRep) then
-#                 TryNextMethod();
-#
-#             else
-#                 return
-#                  CollectedListElementwiseFunction(clist, ModuleOfStrip);
-#             fi;
-#         fi;
-#     end
-# );
+InstallMethod(
+    ModuleDataOfBelt,
+    "for a belt-rep",
+    [IsBeltRep],
+    function(belt)
+        local
+            data,       # Syllable and orientation list in <belt>
+            dim_vector, # Dimension vector of the output module
+            expand_neg_syll, expand_pos_syll,
+                        # Local functions which turn syllables into "expanded
+                        #  walks"
+            expanded,   # Total expanded walk of belt
+            field,      # Ground field of <sba>
+            gens,       # Arrow-indexed list of matrices corresponding to the
+                        #  <field>-linear maps described by <belt>
+            is_nonnull_mat,
+                        # Local function, to be used to filter out matrices of
+                        #  zeroes from output
+            L_data, L_expanded,
+                        # Integer variable (for the lengths of <data> and
+                        #  <expanded> respectively)
+            m,          # Integer variable (for the even indices of <data>)
+            matrix_of_arrow,
+                        # Local function which turns an arrow of <quiv> into
+                        #  a matrix representing a linear map, as specified by
+                        #  <expanded>
+            one,        # Multiplicative identity of <field>
+            quiv,       # Ground quiver of <sba>
+            sba,        # SB algebra to which <belt> belongs
+            vertex_multiplicity_up_to,
+                        # Local function which counts the number of times a
+                        #  vertex appears in <expanded> before a given index
+            zero;       # Additive identity of <field>
+
+        sba := FamilyObj(belt)!.sb_alg;
+        quiv := QuiverOfPathAlgebra(OriginalPathAlgebra(sba));
+
+        field := FieldOfQuiverAlgebra(sba);
+        one := One(field);
+        zero := Zero(field);
+
+        # Our first step is to unpack the data of <belt>. We
+        #  unpack it into a list whose entries are alternately (i) vertices of
+        #  the ground quiver and (ii) lists of the form [arr, N] for <arr> an
+        #  arrow of the ground quiver and <N> either 1 or -1. From this
+        #  "expanded walk" <expanded>, creating the associated string module is
+        #  straightforward.
+        #
+        # The "expanded walk" of a given positive syllable
+        #
+        #          A      B       C
+        #       i --> ii --> iii --> iv
+        #
+        #  looks like
+        #
+        #       [i, [A,1], ii, [B,1], iii, [C,1]]
+        #
+        #  (notice there's no iv!) while the "expanded walk" of a negative
+        #  syllable
+        #
+        #           C       B      A
+        #       iv <-- iii <-- ii <-- i
+        #
+        #  looks like
+        #
+        #       [iv, [C,-1], iii, [B,-1], ii, [A,-1]]
+        #  (notice there's no i!). These are respectively calculated using the
+        #  functions <expand_pos_syll> and <expand_neg_syll>.
+
+        expand_neg_syll := function(syll)
+            local
+                a,          # Arrow variable (for entries of <walk>)
+                exp_walk,   # "Expanded" version of <walk>
+                k,          # Integer variable (indexing the entries of <walk>
+                opath,      # Underlying path (in the overquiver) of <syll>
+                path,       # Ground path represented by <opath>
+                walk;       # Walk of <path>
+
+            opath := UnderlyingPathOfSyllable(syll);
+            path := GroundPathOfOverquiverPathNC(opath);
+            walk := WalkOfPath(path);
+            exp_walk := [];
+
+            # Note that if <walk> is a stationary path, then the following FOR
+            #  loop is null
+            for k in [1 .. Length(WalkOfPath(path))] do
+                a := walk[k];
+                Add(exp_walk, [a, -1]);
+                Add(exp_walk, TargetOfPath(a));
+            od;
+
+            # If <walk> is a stationary path, then <ex_walk> has length 1 and
+            #  so equals its reverse
+            return Reversed(exp_walk);
+        end;
+
+        expand_pos_syll := function(syll)
+            local
+                a,          # Arrow variable (for entries of <walk>)
+                exp_walk,   # "Expanded" version of <walk>
+                k,          # Integer variable (indexing the entries of <walk>
+                opath,      # Underlying path (in the overquiver) of <syll>
+                path,       # Ground path represented by <opath>
+                walk;       # Walk of <path>
+
+            opath := UnderlyingPathOfSyllable(syll);
+            path := GroundPathOfOverquiverPathNC(opath);
+            walk := WalkOfPath(path);
+            exp_walk := [];
+
+            # Note that if <walk> is a stationary path, then the following FOR
+            #  loop is null
+            for k in [1 .. Length(WalkOfPath(path))] do
+                a := walk[k];
+                Add(exp_walk, SourceOfPath(a));
+                Add(exp_walk, [a, 1]);
+            od;
+
+            return exp_walk;
+        end;
+
+        data := belt!.data;
+        L_data := Length(data);
+        expanded := [];
+
+        for m in Filtered([1 .. L_data], IsEvenInt) do
+            if data[m] = -1 then
+                Append(expanded, expand_neg_syll(data[m-1]));
+
+            else
+                Append(expanded, expand_pos_syll(data[m-1]));
+            fi;
+        od;
+
+        # Now, the "expanded walk" is finished. From it, we obtain the
+        #  dimension vector and matrices of the desired quiver representation.
+
+        # The entries of <expanded> at odd indices constitute a basis for the
+        #  resulting module. Therefore, the dimension of the vector space at a
+        #  given vertex <v> is the number of times <v> appears in <expanded>.
+        #
+        # The basis of the resulting module is the coproduct (ie, disjoint
+        #  union) of the bases at each vertex, but note that we take the basis
+        #  vectors of the module in the order they appear in <expanded>. When
+        #  determining which basis vector is sent by a linear map to which
+        #  other vector (or rather, concretely, in which position of the
+        #  associated matrix to place a <one>), we need to know how many other
+        #  basis vector of *that vertex space* have appeared in the order be-
+        #  -fore it.
+
+        vertex_multiplicity_up_to := function(vertex, index)
+            return Number(
+             expanded{[1 .. index]},
+             x -> x = vertex
+            );
+        end;
+
+        L_expanded := Length(expanded);
+
+        dim_vector := List(
+         VerticesOfQuiver(quiv),
+         v -> vertex_multiplicity_up_to(v, L_expanded)
+        );
+
+        matrix_of_arrow := function(arrow)
+            local
+                c, r,   # Integer variables (respectively for the column and
+                        #  row index of <mat> that needs a <one>
+                C, R,   # Integer variables (respectively for the number of
+                        #  columns and rows <matrix> must have)
+                entry,  # Variable (for the entries of <expanded> at odd
+                        #  indices)
+                matrix, # Matrix variable, for the matrix of the linear map
+                        # associated to <arrow>
+                k,      # Integer variable (for the odd indices of <expanded>)
+                source, # Source of <arrow>
+                target; # Target of <arrow>
+
+            source := SourceOfPath(arrow);
+            target := TargetOfPath(arrow);
+
+            R := vertex_multiplicity_up_to(source, L_expanded);
+            C := vertex_multiplicity_up_to(target, L_expanded);
+
+            matrix := NullMat(R, C, field);
+
+            for k in Filtered([1 .. L_expanded], IsEvenInt) do
+                entry := expanded[k];
+
+                if entry[1] = arrow then
+                    # Define adjacent indices to the left and right
+                    k_p := k - 1;
+                    k_n := (k mod L_expanded) + 1;
+
+                    if entry[2] = 1 then
+                        r := vertex_multiplicity_up_to(source, k_p);
+                        c := vertex_multiplicity_up_to(target, k_n);
+                        matrix[r][c] := one;
+
+                    else
+                        r := vertex_multiplicity_up_to(source, k_n);
+                        c := vertex_multiplicity_up_to(target, k_p);
+                        matrix[r][c] := one;
+                    fi;
+                fi;
+            od;
+
+            return matrix;
+        end;
+
+        # We only need to tell GAP about matrices of nonzero linear maps. The
+        #  following function can detect them.
+        is_nonnull_mat := function(mat)
+            return not ForAll(Flat(mat), x -> x = zero);
+        end;
+
+        # We find the nonzero matrices and tell them to GAP.
+        gens := List(
+         Filtered(
+          ArrowsOfQuiver(quiv),
+          x -> is_nonnull_mat(matrix_of_arrow(x))
+         ),
+         x -> [String(x), matrix_of_arrow(x)]
+        );
+
+        return Immutable([sba, dim_vector, gens]);
+    end
+);
+
+InstallMethod(
+    ModuleOfBelt,
+    "for belt-reps",
+    [IsBeltRep],
+    function(belt)
+        return CallFuncList(
+         RightModuleOverPathAlgebra,
+         ModuleDataOfBelt(belt)
+        );
+     end
+);
+
+InstallOtherMethod(
+    ModuleOfBelt,
+    "for (flat) lists of belts",
+    [IsList],
+    function(list)
+
+        if not (ForAll(list, IsBeltRep)) then
+            TryNextMethod();
+
+        else
+            return List(list, ModuleOfBelt);
+
+        fi;
+    end
+);
+
+InstallOtherMethod(
+    ModuleOfBelt,
+    "for collected lists of belts",
+    [IsList],
+    function(clist)
+        local
+            elts;   # Variable, for elements of <clist>
+
+        if not IsCollectedList(clist) then
+            TryNextMethod();
+
+        else
+            elts := List(clist, x -> x[1]);
+            if not ForAll(elts, IsBeltRep) then
+                TryNextMethod();
+
+            else
+                return
+                 CollectedListElementwiseFunction(clist, ModuleOfBelt);
+            fi;
+        fi;
+    end
+);
 
 # -----------------------------------------------------------------------------
 

@@ -10,7 +10,11 @@ DeclareOperation("DefiningDataOfBeltNC", [IsBeltRep]);
 
 DeclareAttribute("BeltFamilyOfSBAlg", IsSpecialBiserialAlgebra);
 
-## TODO redo this for belts
+## TODO redo all documentation for belts
+## TODO redo all documentation for belts
+## TODO redo all documentation for belts
+## TODO redo all documentation for belts
+
 ##  <#GAPDoc Label="DocBeltify">
 ##    <ManSection>
 ##      <Heading>
@@ -324,72 +328,72 @@ DeclareOperation("WidthNBeltsOfSBAlg", [IsInt, IsSpecialBiserialAlgebra]);
 #  [IsStripRep, IsPosInt]
 # );
 #
-# ##  <#GAPDoc Label="DocModuleOfStrip">
-# ##    <ManSection>
-# ##      <Meth Name="ModuleOfStrip" Arg="strip"/>
-# ##  <!--
-# ##      <Meth Name="ModuleOfStrip" Arg="list"
-# ##      Label="for a (flat) list of strips"/>
-# ##      <Meth Name="ModuleOfStrip" Arg="clist"
-# ##      Label="for a collected list of strips"/>
-# ##  -->
-# ##      <Description>
-# ##        Argument: a strip <A>strip</A>.
-# ##  <!--
-# ##        <P />
-# ##        Argument (second method): a list <A>list</A> of strips.
-# ##        <P />
-# ##        Argument (third method): a collected list <A>clist</A> of strips.
-# ##  -->
-# ##        <Br />
-# ##      </Description>
-# ##      <Returns>
-# ##        a right module for the SB algebra over which <A>strip</A> is defined,
-# ##        or a list or collected list of the modules associated to the strips
-# ##        in <A>list</A> or <A>clist</A> respectively.
-# ##      </Returns>
-# ##      <Description>
-# ##        This operation returns the string module corresponding to the strip
-# ##        <A>strip</A>. More specifically, it gives that module as a quiver,
-# ##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
-# ##        Label="with dimension vector" BookName="QPA"/>.
-# ##  <!--
-# ##        <P />
-# ##        The second and third methods apply the first method to
-# ##        each strip in <A>list</A> or in <A>clist</A> respectively, returning
-# ##        a list or collected list of modules as befits.
-# ##  -->
-# ##      </Description>
-# ##    </ManSection>
-# ##  <#/GAPDoc>
-# DeclareOperation("ModuleDataOfStrip", [IsStripRep]);
-# DeclareOperation("ModuleOfStrip", [IsStripRep]);
-#
-# ##  <#GAPDoc Label="DocDirectSumModuleOfListOfStrips">
-# ##    <ManSection>
-# ##      <Meth Name="DirectSumModuleOfListOfStrips"
-# ##      Label="for a (flat) list of strips" Arg="list"/>
-# ##      <Meth Name="DirectSumModuleOfListOfStrips"
-# ##      Label="for a collected list of strips" Arg="clist"/>
-# ##      <Description>
-# ##        Argument (first method): <A>list</A>, a list of strips
-# ##        <P />
-# ##        Argument (second method): <A>clist</A>, a collected list of strips
-# ##        <Br />
-# ##      </Description>
-# ##      <Returns>
-# ##        the quiver representation corresponding to the direct sum of
-# ##        <M>A</M>-modules whose indecomposable direct summands are specified
-# ##        by <A>list</A> or <A>clist</A>.
-# ##      </Returns>
-# ##      <Description>
-# ##        The methods for this operation make the obvious requirement that all
-# ##        strips present belong to the the same SB algebra.
-# ##      </Description>
-# ##    </ManSection>
-# ##  <#/GAPDoc>
-# DeclareOperation("DirectSumModuleDataOfListOfStrips", [IsList]);
-# DeclareOperation("DirectSumModuleOfListOfStrips", [IsList]);
+##  <#GAPDoc Label="DocModuleOfStrip">
+##    <ManSection>
+##      <Meth Name="ModuleOfStrip" Arg="strip"/>
+##  <!--
+##      <Meth Name="ModuleOfStrip" Arg="list"
+##      Label="for a (flat) list of strips"/>
+##      <Meth Name="ModuleOfStrip" Arg="clist"
+##      Label="for a collected list of strips"/>
+##  -->
+##      <Description>
+##        Argument: a strip <A>strip</A>.
+##  <!--
+##        <P />
+##        Argument (second method): a list <A>list</A> of strips.
+##        <P />
+##        Argument (third method): a collected list <A>clist</A> of strips.
+##  -->
+##        <Br />
+##      </Description>
+##      <Returns>
+##        a right module for the SB algebra over which <A>strip</A> is defined,
+##        or a list or collected list of the modules associated to the strips
+##        in <A>list</A> or <A>clist</A> respectively.
+##      </Returns>
+##      <Description>
+##        This operation returns the string module corresponding to the strip
+##        <A>strip</A>. More specifically, it gives that module as a quiver,
+##        ultimately using <Ref Oper="RightModuleOverPathAlgebra"
+##        Label="with dimension vector" BookName="QPA"/>.
+##  <!--
+##        <P />
+##        The second and third methods apply the first method to
+##        each strip in <A>list</A> or in <A>clist</A> respectively, returning
+##        a list or collected list of modules as befits.
+##  -->
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation("ModuleDataOfBelt", [IsBeltRep]);
+DeclareOperation("ModuleOfBelt", [IsBeltRep]);
+
+##  <#GAPDoc Label="DocDirectSumModuleOfListOfBelts">
+##    <ManSection>
+##      <Meth Name="DirectSumModuleOfListOfBelts"
+##      Label="for a (flat) list of strips" Arg="list"/>
+##      <Meth Name="DirectSumModuleOfListOfBelts"
+##      Label="for a collected list of strips" Arg="clist"/>
+##      <Description>
+##        Argument (first method): <A>list</A>, a list of strips
+##        <P />
+##        Argument (second method): <A>clist</A>, a collected list of strips
+##        <Br />
+##      </Description>
+##      <Returns>
+##        the quiver representation corresponding to the direct sum of
+##        <M>A</M>-modules whose indecomposable direct summands are specified
+##        by <A>list</A> or <A>clist</A>.
+##      </Returns>
+##      <Description>
+##        The methods for this operation make the obvious requirement that all
+##        strips present belong to the the same SB algebra.
+##      </Description>
+##    </ManSection>
+##  <#/GAPDoc>
+DeclareOperation("DirectSumModuleDataOfListOfBelts", [IsList]);
+DeclareOperation("DirectSumModuleOfListOfBelts", [IsList]);
 #
 # ##  <#GAPDoc Label="DocVectorSpaceDualOfStrip"/>
 # ##    <ManSection>

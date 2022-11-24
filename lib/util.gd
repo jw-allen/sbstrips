@@ -249,6 +249,8 @@ DeclareOperation("CollectedFiltered", [IsList, IsFunction]);
 
 DeclareOperation("PairingsOfList", [IsList]);
 
+DeclareOperation("RotationOfList", [IsList, IsInt]);
+
 ##  For QPA
 
 ##  <#GAPDoc Label="DocStringMethodForPaths">

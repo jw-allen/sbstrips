@@ -458,6 +458,19 @@ InstallMethod(
     end
 );
 
+InstallMethod(
+    RotationOfList,
+    "for a list and an integer",
+    [IsList, IsInt],
+    function(list, shift)
+        local
+            l, s;
+        l := Length(list);
+        s := shift mod l;
+        return Concatenation(list{[s+1 .. l]}, list{[1 .. s]});
+    end
+);
+
 # Useful functions for QPA
 
 InstallMethod(
